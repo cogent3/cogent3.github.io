@@ -22,3 +22,12 @@ help:
 livehtml:
 	sphinx-autobuild -b html $(ALLSPHINXOPTS) "$(SOURCEDIR)" $(BUILDDIR)/html
 
+html:
+	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) _build/html
+	@echo
+	@echo "Build finished. The HTML pages are in _build/html."
+	-rm -rf draw/
+
+github:
+	@make html
+	@cp -a _build/html/. ../docs
