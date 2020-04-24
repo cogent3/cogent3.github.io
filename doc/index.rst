@@ -1,6 +1,6 @@
-###########################################
-Making Sense from Sequence With ``cogent3``
-###########################################
+##########################
+Making Sense from Sequence
+##########################
 
 ``cogent3`` is a mature python library for analysis of biological sequence data. We endeavour to provide a first-class experience within Jupyter notebooks, but the algorithms also support parallel execution on compute systems with 1000's of processors.
 
