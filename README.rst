@@ -1,4 +1,4 @@
 cogent3.github.io
 #################
 
-Stay Tuned -- contents for cogent3.org is coming!
+This repo contains the top-level documentation for cogent.org
