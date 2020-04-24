@@ -45,6 +45,7 @@ html_theme_options = {
         ("Install", "install"),
         ("Docs", "https://cogent3.readthedocs.io", True),
         ("Code", "https://github.com/cogent3/cogent3", True),
+        ("Gallery", "https://cogent3.org/cogent3/draw/index.html", True),
         ("Projects Using", "projects"),
         (
             "Code of Conduct",
@@ -59,13 +60,12 @@ html_theme_options = {
     "bootstrap_version": "3",
 }
 
-
 todo_include_todos = True
 todo_emit_warnings = True
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ["_static"]
+# html_static_path = ["_static"]
 
 # sidebar_collapse = False
