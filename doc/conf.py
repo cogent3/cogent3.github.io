@@ -46,7 +46,7 @@ html_theme_options = {
     "navbar_site_name": "Site",
     "navbar_links": [
         ("Install", "install"),
-        ("Docs", "https://cogent3.readthedocs.io", True),
+        ("Docs", "https://cogent3.org/cogent3", True),
         ("Code", "https://github.com/cogent3/cogent3", True),
         ("Gallery", "https://cogent3.org/cogent3/draw/index.html", True),
         ("Projects Using", "projects"),
