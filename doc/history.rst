@@ -2,7 +2,7 @@
 Project History
 ***************
 
-``cogent3`` is a descendant of PyCogent_. While there is much in common with PyCogent, the amount of change has been substantial, motivating a new name ``cogent3``. This name has been chosen because ``cogent`` was always the import name (dating back to PyEvolve :cite:`2004.Butterfield.000`) and it's Python 3 only.
+``cogent3`` is a descendant of PyCogent. While there is much in common with PyCogent, the amount of change has been substantial, motivating a new name ``cogent3``. This name has been chosen because ``cogent`` was always the import name (dating back to PyEvolve :cite:`2004.Butterfield.000`) and it's Python 3 only.
 
 Given this history, we are grateful to the multitude of individuals who have made contributions over the years. These individuals are explicitly acknowledged in all the files they contributed to and were co-authors on the original PyEvolve :cite:`2004.Butterfield.000` and PyCogent :cite:`2007.Knight.000` publications.
 
