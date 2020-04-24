@@ -1,7 +1,7 @@
 import sphinx_bootstrap_theme
 
 project = "cogent3"
-copyright = "2020, Gavin Huttley"
+copyright = "2020, cogent3 Team"
 author = "Gavin Huttley"
 
 # The full version, including alpha/beta/rc tags
