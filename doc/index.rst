@@ -12,7 +12,7 @@ Making Sense from Sequence
 
 **Anyone who wants to undertake exploratory genomic data analysis**
 
-Beyond our novel methods, ``cogent3`` provides an extensive suite of capabilities for manipulating and analysing sequence data. For instance, the ability to `read standard biological data formats <https://cogent3.org/cogent3/cookbook/manipulating_biological_data.html>`_, manipulate sequences `by their annotations <https://cogent3.org/cogent3/examples/seq_features.html>`_, to perform multiple sequence alignment (`app docs`_) using any of our substitution models, `phylogenetic reconstruction <http://cogent3.org/cogent3/examples/index.html#phylogenetic-reconstruction>`_ and tree manipulation, manipulation of `tabular data <http://cogent3.org/cogent3/cookbook/tables.html>`_, visualisation of phylogenies (`image gallery`_) and much more.
+Beyond our novel methods, ``cogent3`` provides an extensive suite of capabilities for manipulating and analysing sequence data. For instance, the ability to `read standard biological data formats <https://cogent3.org/cogent3/cookbook/manipulating_biological_data.html>`_, manipulate sequences `by their annotations <https://cogent3.org/cogent3/examples/seq_features.html>`_, to perform multiple sequence alignment (`app docs`_) using any of our substitution models, `phylogenetic reconstruction <https://cogent3.org/cogent3/examples/index.html#phylogenetic-reconstruction>`_ and tree manipulation, manipulation of `tabular data <https://cogent3.org/cogent3/cookbook/tables.html>`_, visualisation of phylogenies (`image gallery`_) and much more.
 
 **Anyone looking for a functional programming style approach to genomic data analysis**
 
@@ -22,8 +22,10 @@ Our ``cogent3.app`` module (`app docs`_) provides a very different approach to u
     :hidden:
     :maxdepth: 1
 
-    Documentation Release <https://github.com/cogent3/>
-    Documentation Development <https://github.com/cogent3/cetest>
+    install
+    Documentation <https://cogent3.org/cogent3>
+    projects
+    What About PyCogent? <https://cogent3.org/cogent3/pycogent.html>
     history
 
 ------
@@ -35,4 +37,4 @@ Our ``cogent3.app`` module (`app docs`_) provides a very different approach to u
     :style: unsrt
 
 .. _`app docs`: https://cogent3.org/cogent3/app/index.html
-.. _`image gallery`: http://cogent3.org/cogent3/draw/index.html
+.. _`image gallery`: https://cogent3.org/cogent3/draw/index.html
