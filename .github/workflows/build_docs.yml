@@ -17,27 +17,27 @@ jobs:
            repository: cogent3/cogent3
            path: c3src
            ref: develop
-
-      - name: Move source docs into place
-      - shell: bash -l {0}
+      
+      - shell: bash
         run: |
           mv c3src/doc c3org/doc/doc
+          ls
 
       - name: Make conda environment
-      - uses: goanpeca/setup-miniconda@v1
+        uses: goanpeca/setup-miniconda@v1
         with:
            activate-environment: cogent3
            environment-file: c3org/doc/gh-environment.yml
            python-version: 3.8
 
-      - shell: bash -l {0}
+      - shell: bash
         run: |
           conda activate cogent3
           conda info
           conda list
 
       - name: Build docs
-        shell: bash -l {0}
+        shell: bash
         working-directory: c3org/doc/
         run: |
           conda activate cogent3
