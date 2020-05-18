@@ -31,3 +31,8 @@ html:
 github:
 	@make html
 	@cp -a $(BUILDDIR)/html/. ../docs
+
+clean:
+	-rm -rf $(BUILDDIR)/*
+	-rm -rf doc/draw/
+	
