@@ -22,15 +22,24 @@ Our ``cogent3.app`` module (`app docs`_) provides a very different approach to u
     :hidden:
     :maxdepth: 1
 
-    install
-    Documentation <https://cogent3.org/cogent3>
-    projects
-    What About PyCogent? <https://cogent3.org/cogent3/pycogent.html>
+    doc/install
+    doc/index
+    doc/draw/index
+    general
+
+.. toctree::
+    :hidden:
+    :maxdepth: 1
+
     history
+    pycogent
+    projects
+    doc/licenses
+
 
 ------
 
-.. rubric:: References
+.. rubric:: Citations
 
 .. bibliography:: cogent3.bib
     :filter: docname in docnames
