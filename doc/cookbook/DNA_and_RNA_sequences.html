@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Sequence &#8212; cogent3 2020.4 documentation</title>
+    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/gallery-dataframe.css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="../../_static/require.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Protein sequences" href="protein_sequences.html" />
+    <link rel="prev" title="Sequence Collections and Alignments" href="alignments.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../../_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../index.html">
+          cogent3</a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html"><code class="docutils literal notranslate"><span class="pre">cogent3</span></code> Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../draw/index.html">Image Gallery</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../history.html">Project History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../projects.html">Projects using <code class="docutils literal notranslate"><span class="pre">cogent3</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../licenses.html">License</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">Sequence</span></code></a><ul>
+<li><a class="reference internal" href="#dna-and-rna-sequences">DNA and RNA sequences</a><ul>
+<li><a class="reference internal" href="#creating-a-dna-sequence-from-a-string">Creating a DNA sequence from a string</a></li>
+<li><a class="reference internal" href="#creating-a-rna-sequence-from-a-string">Creating a RNA sequence from a string</a></li>
+<li><a class="reference internal" href="#converting-to-fasta-format">Converting to FASTA format</a></li>
+<li><a class="reference internal" href="#convert-a-rna-sequence-to-fasta-format">Convert a RNA sequence to FASTA format</a></li>
+<li><a class="reference internal" href="#creating-a-named-sequence">Creating a named sequence</a></li>
+<li><a class="reference internal" href="#setting-or-changing-the-name-of-a-sequence">Setting or changing the name of a sequence</a></li>
+<li><a class="reference internal" href="#complementing-a-dna-sequence">Complementing a DNA sequence</a></li>
+<li><a class="reference internal" href="#reverse-complementing-a-dna-sequence">Reverse complementing a DNA sequence</a></li>
+<li><a class="reference internal" href="#translate-a-dnasequence-to-protein">Translate a <code class="docutils literal notranslate"><span class="pre">DnaSequence</span></code> to protein</a></li>
+<li><a class="reference internal" href="#converting-a-dna-sequence-to-rna">Converting a DNA sequence to RNA</a></li>
+<li><a class="reference internal" href="#convert-an-rna-sequence-to-dna">Convert an RNA sequence to DNA</a></li>
+<li><a class="reference internal" href="#testing-complementarity">Testing complementarity</a></li>
+<li><a class="reference internal" href="#joining-two-dna-sequences">Joining two DNA sequences</a></li>
+<li><a class="reference internal" href="#slicing-dna-sequences">Slicing DNA sequences</a></li>
+<li><a class="reference internal" href="#getting-3rd-positions-from-codons">Getting 3rd positions from codons</a></li>
+<li><a class="reference internal" href="#getting-1st-and-2nd-positions-from-codons">Getting 1st and 2nd positions from codons</a></li>
+<li><a class="reference internal" href="#return-a-randomized-version-of-the-sequence">Return a randomized version of the sequence</a></li>
+<li><a class="reference internal" href="#remove-gaps-from-a-sequence">Remove gaps from a sequence</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="alignments.html" title="Previous Chapter: Sequence Collections and Alignments"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Sequence Coll...</span>
+    </a>
+  </li>
+  <li>
+    <a href="protein_sequences.html" title="Next Chapter: Protein sequences"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Protein sequences &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <div class="section" id="sequence">
+<span id="dna-rna-seqs"></span><h1><code class="docutils literal notranslate"><span class="pre">Sequence</span></code><a class="headerlink" href="#sequence" title="Permalink to this headline">¶</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">Sequence</span></code> object contains classes that represent biological sequence data. These provide generic biological sequence manipulation functions, plus functions that are critical for the <code class="docutils literal notranslate"><span class="pre">evolve</span></code> module calculations.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not import sequence classes directly! It is expected that you will access them through <code class="docutils literal notranslate"><span class="pre">MolType</span></code> objects. The molecular types can be accessed via the <code class="docutils literal notranslate"><span class="pre">cogent3.get_moltype()</span></code> function. Sequence classes depend on information from the <code class="docutils literal notranslate"><span class="pre">MolType</span></code> that is <strong>only</strong> available after <code class="docutils literal notranslate"><span class="pre">MolType</span></code> has been imported. Sequences are intended to be immutable. This is not enforced by the code for performance reasons, but don’t alter the <code class="docutils literal notranslate"><span class="pre">MolType</span></code> or the sequence data after creation.</p>
+</div>
+<div class="section" id="dna-and-rna-sequences">
+<h2>DNA and RNA sequences<a class="headerlink" href="#dna-and-rna-sequences" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="creating-a-dna-sequence-from-a-string">
+<h3>Creating a DNA sequence from a string<a class="headerlink" href="#creating-a-dna-sequence-from-a-string" title="Permalink to this headline">¶</a></h3>
+<p>All sequence and alignment objects have a molecular type, or <code class="docutils literal notranslate"><span class="pre">MolType</span></code> which provides key properties for validating sequence characters. Here we use the <code class="docutils literal notranslate"><span class="pre">DNA</span></code> <code class="docutils literal notranslate"><span class="pre">MolType</span></code> to create a DNA sequence.</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">DNA</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_seq</span> <span class="o">=</span> <span class="n">DNA</span><span class="o">.</span><span class="n">make_seq</span><span class="p">(</span><span class="s2">&quot;AGTACACTGGT&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_seq</span>
+<span class="go">DnaSequence(AGTACAC... 11)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">my_seq</span><span class="p">)</span>
+<span class="go">AGTACACTGGT</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">my_seq</span><span class="p">)</span>
+<span class="go">&#39;AGTACACTGGT&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-a-rna-sequence-from-a-string">
+<h3>Creating a RNA sequence from a string<a class="headerlink" href="#creating-a-rna-sequence-from-a-string" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">RNA</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rnaseq</span> <span class="o">=</span> <span class="n">RNA</span><span class="o">.</span><span class="n">make_seq</span><span class="p">(</span><span class="s1">&#39;ACGUACGUACGUACGU&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="converting-to-fasta-format">
+<h3>Converting to FASTA format<a class="headerlink" href="#converting-to-fasta-format" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">DNA</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_seq</span> <span class="o">=</span> <span class="n">DNA</span><span class="o">.</span><span class="n">make_seq</span><span class="p">(</span><span class="s1">&#39;AGTACACTGGT&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">my_seq</span><span class="o">.</span><span class="n">to_fasta</span><span class="p">())</span>
+<span class="go">&gt;0</span>
+<span class="go">AGTACACTGGT</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="convert-a-rna-sequence-to-fasta-format">
+<h3>Convert a RNA sequence to FASTA format<a class="headerlink" href="#convert-a-rna-sequence-to-fasta-format" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">RNA</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rnaseq</span> <span class="o">=</span> <span class="n">RNA</span><span class="o">.</span><span class="n">make_seq</span><span class="p">(</span><span class="s1">&#39;ACGUACGUACGUACGU&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rnaseq</span><span class="o">.</span><span class="n">to_fasta</span><span class="p">()</span>
+<span class="go">&#39;&gt;0\nACGUACGUACGUACGU\n&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-a-named-sequence">
+<h3>Creating a named sequence<a class="headerlink" href="#creating-a-named-sequence" title="Permalink to this headline">¶</a></h3>
+<p>You can also use a convenience <code class="docutils literal notranslate"><span class="pre">make_seq()</span></code> function, providing the moltype as a string.</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_seq</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_seq</span> <span class="o">=</span> <span class="n">make_seq</span><span class="p">(</span><span class="s1">&#39;AGTACACTGGT&#39;</span><span class="p">,</span><span class="s1">&#39;my_gene&#39;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_seq</span>
+<span class="go">DnaSequence(AGTACAC... 11)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">my_seq</span><span class="p">)</span>
+<span class="go">&lt;class &#39;cogent3.core.sequence.DnaSequence&#39;&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="setting-or-changing-the-name-of-a-sequence">
+<h3>Setting or changing the name of a sequence<a class="headerlink" href="#setting-or-changing-the-name-of-a-sequence" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_seq</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_seq</span> <span class="o">=</span> <span class="n">make_seq</span><span class="p">(</span><span class="s1">&#39;AGTACACTGGT&#39;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_seq</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;my_gene&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">my_seq</span><span class="o">.</span><span class="n">to_fasta</span><span class="p">())</span>
+<span class="go">&gt;my_gene</span>
+<span class="go">AGTACACTGGT</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="complementing-a-dna-sequence">
+<h3>Complementing a DNA sequence<a class="headerlink" href="#complementing-a-dna-sequence" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">DNA</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_seq</span> <span class="o">=</span> <span class="n">DNA</span><span class="o">.</span><span class="n">make_seq</span><span class="p">(</span><span class="s2">&quot;AGTACACTGGT&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">my_seq</span><span class="o">.</span><span class="n">complement</span><span class="p">())</span>
+<span class="go">TCATGTGACCA</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reverse-complementing-a-dna-sequence">
+<h3>Reverse complementing a DNA sequence<a class="headerlink" href="#reverse-complementing-a-dna-sequence" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">my_seq</span><span class="o">.</span><span class="n">rc</span><span class="p">())</span>
+<span class="go">ACCAGTGTACT</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">rc</span></code> method name is easier to type</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">my_seq</span><span class="o">.</span><span class="n">rc</span><span class="p">())</span>
+<span class="go">ACCAGTGTACT</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="translate-a-dnasequence-to-protein">
+<span id="translation"></span><h3>Translate a <code class="docutils literal notranslate"><span class="pre">DnaSequence</span></code> to protein<a class="headerlink" href="#translate-a-dnasequence-to-protein" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">DNA</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_seq</span> <span class="o">=</span> <span class="n">DNA</span><span class="o">.</span><span class="n">make_seq</span><span class="p">(</span><span class="s1">&#39;GCTTGGGAAAGTCAAATGGAA&#39;</span><span class="p">,</span><span class="s1">&#39;protein-X&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pep</span> <span class="o">=</span> <span class="n">my_seq</span><span class="o">.</span><span class="n">get_translation</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">pep</span><span class="p">)</span>
+<span class="go">&lt;class &#39;cogent3.core.sequence.ProteinSequence&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">pep</span><span class="o">.</span><span class="n">to_fasta</span><span class="p">())</span>
+<span class="go">&gt;protein-X</span>
+<span class="go">AWESQME</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="converting-a-dna-sequence-to-rna">
+<h3>Converting a DNA sequence to RNA<a class="headerlink" href="#converting-a-dna-sequence-to-rna" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">DNA</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_seq</span> <span class="o">=</span> <span class="n">DNA</span><span class="o">.</span><span class="n">make_seq</span><span class="p">(</span><span class="s1">&#39;ACGTACGTACGTACGT&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">my_seq</span><span class="o">.</span><span class="n">to_rna</span><span class="p">())</span>
+<span class="go">ACGUACGUACGUACGU</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="convert-an-rna-sequence-to-dna">
+<h3>Convert an RNA sequence to DNA<a class="headerlink" href="#convert-an-rna-sequence-to-dna" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="go"> &gt;&gt;&gt; from cogent3 import RNA</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rnaseq</span> <span class="o">=</span> <span class="n">RNA</span><span class="o">.</span><span class="n">make_seq</span><span class="p">(</span><span class="s1">&#39;ACGUACGUACGUACGU&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">rnaseq</span><span class="o">.</span><span class="n">to_dna</span><span class="p">())</span>
+<span class="go">ACGTACGTACGTACGT</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="testing-complementarity">
+<h3>Testing complementarity<a class="headerlink" href="#testing-complementarity" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">DNA</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">DNA</span><span class="o">.</span><span class="n">make_seq</span><span class="p">(</span><span class="s2">&quot;AGTACACTGGT&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">can_pair</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">complement</span><span class="p">())</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">can_pair</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">rc</span><span class="p">())</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="joining-two-dna-sequences">
+<h3>Joining two DNA sequences<a class="headerlink" href="#joining-two-dna-sequences" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">DNA</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_seq</span> <span class="o">=</span> <span class="n">DNA</span><span class="o">.</span><span class="n">make_seq</span><span class="p">(</span><span class="s2">&quot;AGTACACTGGT&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">extra_seq</span> <span class="o">=</span> <span class="n">DNA</span><span class="o">.</span><span class="n">make_seq</span><span class="p">(</span><span class="s2">&quot;CTGAC&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">long_seq</span> <span class="o">=</span> <span class="n">my_seq</span> <span class="o">+</span> <span class="n">extra_seq</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">long_seq</span>
+<span class="go">DnaSequence(AGTACAC... 16)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">long_seq</span><span class="p">)</span>
+<span class="go">&#39;AGTACACTGGTCTGAC&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="slicing-dna-sequences">
+<h3>Slicing DNA sequences<a class="headerlink" href="#slicing-dna-sequences" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_seq</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
+<span class="go">DnaSequence(GTACA)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="getting-3rd-positions-from-codons">
+<h3>Getting 3rd positions from codons<a class="headerlink" href="#getting-3rd-positions-from-codons" title="Permalink to this headline">¶</a></h3>
+<p>The easiest approach is to work off the <code class="docutils literal notranslate"><span class="pre">cogent3</span></code> <code class="docutils literal notranslate"><span class="pre">ArrayAlignment</span></code> object.</p>
+<p>We’ll do this by specifying the position indices of interest, creating a sequence <code class="docutils literal notranslate"><span class="pre">Feature</span></code> and using that to extract the positions.</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">DNA</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">seq</span> <span class="o">=</span> <span class="n">DNA</span><span class="o">.</span><span class="n">make_array_seq</span><span class="p">(</span><span class="s1">&#39;ATGATGATGATG&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pos3</span> <span class="o">=</span> <span class="n">seq</span><span class="p">[</span><span class="mi">2</span><span class="p">::</span><span class="mi">3</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="nb">str</span><span class="p">(</span><span class="n">pos3</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;GGGG&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="getting-1st-and-2nd-positions-from-codons">
+<h3>Getting 1st and 2nd positions from codons<a class="headerlink" href="#getting-1st-and-2nd-positions-from-codons" title="Permalink to this headline">¶</a></h3>
+<p>In this instance we can use the annotatable sequence classes.</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">DNA</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">seq</span> <span class="o">=</span> <span class="n">DNA</span><span class="o">.</span><span class="n">make_seq</span><span class="p">(</span><span class="s1">&#39;ATGATGATGATG&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">indices</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">seq</span><span class="p">))[::</span><span class="mi">3</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pos12</span> <span class="o">=</span> <span class="n">seq</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="s1">&#39;pos12&#39;</span><span class="p">,</span> <span class="s1">&#39;pos12&#39;</span><span class="p">,</span> <span class="n">indices</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pos12</span> <span class="o">=</span> <span class="n">pos12</span><span class="o">.</span><span class="n">get_slice</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="nb">str</span><span class="p">(</span><span class="n">pos12</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;ATATATAT&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="return-a-randomized-version-of-the-sequence">
+<h3>Return a randomized version of the sequence<a class="headerlink" href="#return-a-randomized-version-of-the-sequence" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="n">rnaseq</span><span class="o">.</span><span class="n">shuffle</span><span class="p">()</span>
+<span class="n">ACAACUGGCUCUGAUG</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="remove-gaps-from-a-sequence">
+<h3>Remove gaps from a sequence<a class="headerlink" href="#remove-gaps-from-a-sequence" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="go"> &gt;&gt;&gt; from cogent3 import RNA</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">RNA</span><span class="o">.</span><span class="n">make_seq</span><span class="p">(</span><span class="s1">&#39;--AUUAUGCUAU-UAu--&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">degap</span><span class="p">())</span>
+<span class="go">AUUAUGCUAUUAU</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2020, cogent3 Team.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

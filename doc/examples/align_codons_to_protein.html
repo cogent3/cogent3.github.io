@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Map protein alignment gaps to DNA alignment gaps &#8212; cogent3 2020.4 documentation</title>
+    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/gallery-binder.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/gallery-dataframe.css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="../../_static/require.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Data Manipulation using Table" href="handling_tabular_data.html" />
+    <link rel="prev" title="Getting the reverse complement" href="reverse_complement.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../../_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../index.html">
+          cogent3</a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html"><code class="docutils literal notranslate"><span class="pre">cogent3</span></code> Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../draw/index.html">Image Gallery</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../history.html">Project History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../projects.html">Projects using <code class="docutils literal notranslate"><span class="pre">cogent3</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../licenses.html">License</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Map protein alignment gaps to DNA alignment gaps</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="reverse_complement.html" title="Previous Chapter: Getting the reverse complement"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Getting the r...</span>
+    </a>
+  </li>
+  <li>
+    <a href="handling_tabular_data.html" title="Next Chapter: Data Manipulation using Table"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Data Manipula... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <div class="section" id="map-protein-alignment-gaps-to-dna-alignment-gaps">
+<h1>Map protein alignment gaps to DNA alignment gaps<a class="headerlink" href="#map-protein-alignment-gaps-to-dna-alignment-gaps" title="Permalink to this headline">¶</a></h1>
+<p><em>Section author: Gavin Huttley</em></p>
+<p>Although Cogent3 provides a means for directly aligning codon sequences, you may want to use a different approach based on the translate-align-introduce gaps into the original paradigm. After you’ve translated your codon sequences, and aligned the resulting amino acid sequences, you want to introduce the gaps from the aligned protein sequences back into the original codon sequences. Here’s how.</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_unaligned_seqs</span><span class="p">,</span> <span class="n">make_aligned_seqs</span>
+</pre></div>
+</div>
+<p>First I’m going to construct an artificial example, using the seqs dict as a means to get the data into the Alignment object. The basic idea, however, is that you should already have a set of DNA sequences that are in frame (i.e. position 0 is the 1st codon position), you’ve translated those sequences and aligned these translated sequences. The result is an alignment of aa sequences and a set of unaligned DNA sequences from which the aa seqs were derived. If your sequences are not in frame you can adjust it by either slicing, or adding N’s to the beginning of the raw string.</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">seqs</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span><span class="s1">&#39;hum&#39;</span><span class="p">:</span> <span class="s1">&#39;AAGCAGATCCAGGAAAGCAGCGAGAATGGCAGCCTGGCCGCGCGCCAGGAGAGGCAGGCCCAGGTCAACCTCACT&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="s1">&#39;mus&#39;</span><span class="p">:</span> <span class="s1">&#39;AAGCAGATCCAGGAGAGCGGCGAGAGCGGCAGCCTGGCCGCGCGGCAGGAGAGGCAGGCCCAAGTCAACCTCACG&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="s1">&#39;rat&#39;</span><span class="p">:</span> <span class="s1">&#39;CTGAACAAGCAGCCACTTTCAAACAAGAAA&#39;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unaligned_DNA</span> <span class="o">=</span> <span class="n">make_unaligned_seqs</span><span class="p">(</span><span class="n">seqs</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">unaligned_DNA</span><span class="o">.</span><span class="n">to_fasta</span><span class="p">())</span>  
+<span class="go">&gt;hum</span>
+<span class="go">AAGCAGATCCAGGAAAGCAGCGAGAATGGCAGCCTGGCCGCGCGCCAGGAGAGGCAGGCCCAGGTCAACCTCACT</span>
+<span class="go">&gt;mus</span>
+<span class="go">AAGCAGATCCAGGAGAGCGGCGAGAGCGGCAGCCTGGCCGCGCGGCAGGAGAGGCAGGCCCAAGTCAACCTCACG</span>
+<span class="go">&gt;rat</span>
+<span class="go">CTGAACAAGCAGCCACTTTCAAACAAGAAA</span>
+</pre></div>
+</div>
+<p>In order to ensure the alignment algorithm preserves the coding frame, we align the translation of the sequences. We need to translate them first, but note that because the seqs are unaligned they we have to set <code class="docutils literal notranslate"><span class="pre">aligned=False</span></code>, or we’ll get an error.</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">unaligned_aa</span> <span class="o">=</span> <span class="n">unaligned_DNA</span><span class="o">.</span><span class="n">get_translation</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">unaligned_aa</span><span class="o">.</span><span class="n">to_fasta</span><span class="p">())</span>  
+<span class="go">&gt;hum</span>
+<span class="go">KQIQESSENGSLAARQERQAQVNLT</span>
+<span class="go">&gt;mus</span>
+<span class="go">KQIQESGESGSLAARQERQAQVNLT</span>
+<span class="go">&gt;rat</span>
+<span class="go">LNKQPLSNKK</span>
+</pre></div>
+</div>
+<p>The translated seqs can then be written to file, using the method <code class="docutils literal notranslate"><span class="pre">write</span></code>. That file then serves as input for an alignment program. The resulting alignment file can be read back in. (We won’t write to file in this example.) For this example we will specify the aligned sequences in the dict, rather than from file.</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">aligned_aa_seqs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;hum&#39;</span><span class="p">:</span> <span class="s1">&#39;KQIQESSENGSLAARQERQAQVNLT&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="s1">&#39;mus&#39;</span><span class="p">:</span> <span class="s1">&#39;KQIQESGESGSLAARQERQAQVNLT&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="s1">&#39;rat&#39;</span><span class="p">:</span> <span class="s1">&#39;LNKQ------PLS---------NKK&#39;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aligned_aa</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span><span class="n">aligned_aa_seqs</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;protein&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aligned_DNA</span> <span class="o">=</span> <span class="n">aligned_aa</span><span class="o">.</span><span class="n">replace_seqs</span><span class="p">(</span><span class="n">unaligned_DNA</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Just to be sure, we’ll check that the DNA sequence has gaps in the right place.</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">aligned_DNA</span><span class="p">)</span>  
+<span class="go">&gt;hum</span>
+<span class="go">AAGCAGATCCAGGAAAGCAGCGAGAATGGCAGCCTGGCCGCGCGCCAGGAGAGGCAGGCCCAGGTCAACCTCACT</span>
+<span class="go">&gt;rat</span>
+<span class="go">CTGAACAAGCAG------------------CCACTTTCA---------------------------AACAAGAAA</span>
+<span class="go">&gt;mus</span>
+<span class="go">AAGCAGATCCAGGAGAGCGGCGAGAGCGGCAGCCTGGCCGCGCGGCAGGAGAGGCAGGCCCAAGTCAACCTCACG</span>
+</pre></div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2020, cogent3 Team.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
