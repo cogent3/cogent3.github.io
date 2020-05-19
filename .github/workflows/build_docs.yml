@@ -21,7 +21,8 @@ jobs:
       - shell: bash -l {0}
         run: |
           mv c3src/doc c3org/doc/doc
-          ls
+          ls c3org/
+          ls c3org/doc/
 
       - name: Make conda environment
         uses: goanpeca/setup-miniconda@v1
@@ -42,10 +43,12 @@ jobs:
         run: |
           conda activate cogent3
           make github
+          ls
+          ls ../docs
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: c3org/docs
+          publish_dir: ./docs
           publish_branch: master
