@@ -63,9 +63,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../draw/index.html">Image Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../general.html">Posting Bugs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../general.html#citation">Citation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../general.html#support">Support</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../history.html">Project History</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pycogent.html">How does <code class="docutils literal notranslate"><span class="pre">cogent3</span></code> relate to PyCogent?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../projects.html">Projects using <code class="docutils literal notranslate"><span class="pre">cogent3</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../licenses.html">License</a></li>
 </ul>
@@ -82,6 +86,13 @@
       role="menu"
       aria-labelledby="dLabelLocalToc"><ul>
 <li><a class="reference internal" href="#">Tabular data</a><ul>
+<li><a class="reference internal" href="#loading-a-csv-file">Loading a csv file</a></li>
+<li><a class="reference internal" href="#loading-delimited-specifying-the-format">Loading delimited specifying the format</a></li>
+<li><a class="reference internal" href="#make-a-table-from-header-and-rows">Make a table from header and rows</a></li>
+<li><a class="reference internal" href="#make-a-table-from-a-dict">Make a table from a <code class="docutils literal notranslate"><span class="pre">dict</span></code></a></li>
+<li><a class="reference internal" href="#specify-the-column-order-when-creating-from-a-dict">Specify the column order when creating from a <code class="docutils literal notranslate"><span class="pre">dict</span></code>.</a></li>
+<li><a class="reference internal" href="#create-the-table-with-an-index">Create the table with an index</a></li>
+<li><a class="reference internal" href="#create-a-table-from-a-pandas-data-frame">Create a table from a <code class="docutils literal notranslate"><span class="pre">pandas</span></code> data frame</a><ul>
 <li><a class="reference internal" href="#load-a-table-from-file">Load a table from file</a></li>
 <li><a class="reference internal" href="#load-a-table-from-a-csv-tsv-or-other-delimited-file-type">Load a table from a csv, tsv or other delimited file type</a></li>
 <li><a class="reference internal" href="#create-a-table-from-header-and-rows">Create a table from header and rows</a></li>
@@ -127,6 +138,8 @@
 <li><a class="reference internal" href="#writing-delimited-formats">Writing delimited formats</a></li>
 <li><a class="reference internal" href="#writing-latex-format">Writing latex format</a></li>
 <li><a class="reference internal" href="#writing-bedgraph-format">Writing bedGraph format</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -183,15 +196,137 @@
 <p class="admonition-title">Note</p>
 <p><code class="docutils literal notranslate"><span class="pre">Table</span></code> can be interconverted from a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>.</p>
 </div>
+<div class="section" id="loading-a-csv-file">
+<h2>Loading a csv file<a class="headerlink" href="#loading-a-csv-file" title="Permalink to this headline">¶</a></h2>
+<p>We load a tab separated data file using the <code class="docutils literal notranslate"><span class="pre">load_table()</span></code> function. The format is inferred from the filename suffix.</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+<span class="go">====================================</span>
+<span class="go">    Locus    Region            Ratio</span>
+<span class="go">------------------------------------</span>
+<span class="go">NP_003077       Con           2.5386</span>
+<span class="go">NP_004893       Con      121351.4264</span>
+<span class="go">NP_005079       Con     9516594.9789</span>
+<span class="go">NP_005500    NonCon           0.0000</span>
+<span class="go">NP_055852    NonCon    10933217.7090</span>
+<span class="go">------------------------------------</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The known filename suffixes are <code class="docutils literal notranslate"><span class="pre">.csv</span></code>, <code class="docutils literal notranslate"><span class="pre">.tsv</span></code> and <code class="docutils literal notranslate"><span class="pre">.pkl</span></code> or <code class="docutils literal notranslate"><span class="pre">.pickle</span></code> (Python’s pickle format).</p>
+</div>
+</div>
+<div class="section" id="loading-delimited-specifying-the-format">
+<h2>Loading delimited specifying the format<a class="headerlink" href="#loading-delimited-specifying-the-format" title="Permalink to this headline">¶</a></h2>
+<p>Although unecessary in this case, it’s possible to override the suffix by specifying the delimiter using the <code class="docutils literal notranslate"><span class="pre">seq</span></code> argument.</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+<span class="go">====================================</span>
+<span class="go">    Locus    Region            Ratio</span>
+<span class="go">------------------------------------</span>
+<span class="go">NP_003077       Con           2.5386</span>
+<span class="go">NP_004893       Con      121351.4264</span>
+<span class="go">NP_005079       Con     9516594.9789</span>
+<span class="go">NP_005500    NonCon           0.0000</span>
+<span class="go">NP_055852    NonCon    10933217.7090</span>
+<span class="go">------------------------------------</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="make-a-table-from-header-and-rows">
+<h2>Make a table from header and rows<a class="headerlink" href="#make-a-table-from-header-and-rows" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">header</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rows</span> <span class="o">=</span> <span class="p">[</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">12</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="n">rows</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+<span class="go">=============</span>
+<span class="go">A     B     C</span>
+<span class="go">-------------</span>
+<span class="go">0     1     2</span>
+<span class="go">3     4     5</span>
+<span class="go">6     7     8</span>
+<span class="go">9    10    11</span>
+<span class="go">-------------</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="make-a-table-from-a-dict">
+<h2>Make a table from a <code class="docutils literal notranslate"><span class="pre">dict</span></code><a class="headerlink" href="#make-a-table-from-a-dict" title="Permalink to this headline">¶</a></h2>
+<p>For a <code class="docutils literal notranslate"><span class="pre">dict</span></code> with key’s as column headers.</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="n">B</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="n">C</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+<span class="go">===========</span>
+<span class="go">A    B    C</span>
+<span class="go">-----------</span>
+<span class="go">0    1    2</span>
+<span class="go">3    4    5</span>
+<span class="go">6    7    8</span>
+<span class="go">-----------</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="specify-the-column-order-when-creating-from-a-dict">
+<h2>Specify the column order when creating from a <code class="docutils literal notranslate"><span class="pre">dict</span></code>.<a class="headerlink" href="#specify-the-column-order-when-creating-from-a-dict" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+<span class="go">===========</span>
+<span class="go">C    A    B</span>
+<span class="go">-----------</span>
+<span class="go">2    0    1</span>
+<span class="go">5    3    4</span>
+<span class="go">8    6    7</span>
+<span class="go">-----------</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-the-table-with-an-index">
+<h2>Create the table with an index<a class="headerlink" href="#create-the-table-with-an-index" title="Permalink to this headline">¶</a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">Table</span></code> can be indexed like a dict if you designate a column as the index (and that column has a unique value for every row).</p>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s2">&quot;Locus&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="s2">&quot;NP_055852&quot;</span><span class="p">])</span>
+<span class="go">====================================</span>
+<span class="go">    Locus    Region            Ratio</span>
+<span class="go">------------------------------------</span>
+<span class="go">NP_055852    NonCon    10933217.7090</span>
+<span class="go">------------------------------------</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">table</span><span class="p">[</span><span class="s2">&quot;NP_055852&quot;</span><span class="p">,</span> <span class="s2">&quot;Region&quot;</span><span class="p">]</span>
+<span class="go">&#39;NonCon&#39;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">index</span></code> argument also applies when using <code class="docutils literal notranslate"><span class="pre">make_table()</span></code>.</p>
+</div>
+</div>
+<div class="section" id="create-a-table-from-a-pandas-data-frame">
+<h2>Create a table from a <code class="docutils literal notranslate"><span class="pre">pandas</span></code> data frame<a class="headerlink" href="#create-a-table-from-a-pandas-data-frame" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">DataFrame</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">]],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">data_frame</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+<span class="go">======</span>
+<span class="go">a    b</span>
+<span class="go">------</span>
+<span class="go">0    1</span>
+<span class="go">3    7</span>
+<span class="go">------</span>
+</pre></div>
+</div>
 <div class="section" id="load-a-table-from-file">
-<h2>Load a table from file<a class="headerlink" href="#load-a-table-from-file" title="Permalink to this headline">¶</a></h2>
+<h3>Load a table from file<a class="headerlink" href="#load-a-table-from-file" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="load-a-table-from-a-csv-tsv-or-other-delimited-file-type">
-<h2>Load a table from a csv, tsv or other delimited file type<a class="headerlink" href="#load-a-table-from-a-csv-tsv-or-other-delimited-file-type" title="Permalink to this headline">¶</a></h2>
+<h3>Load a table from a csv, tsv or other delimited file type<a class="headerlink" href="#load-a-table-from-a-csv-tsv-or-other-delimited-file-type" title="Permalink to this headline">¶</a></h3>
 <p>If the filename ends with <code class="docutils literal notranslate"><span class="pre">csv</span></code> or <code class="docutils literal notranslate"><span class="pre">tsv</span></code>, <code class="docutils literal notranslate"><span class="pre">load_table</span></code> gueses the delimiter as <code class="docutils literal notranslate"><span class="pre">&quot;,&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;\t&quot;</span></code> respectively. If the delimiter character is different from the file suffix, or just different, you specify it using the <code class="docutils literal notranslate"><span class="pre">sep</span></code> argument.</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -199,7 +334,7 @@
 </div>
 </div>
 <div class="section" id="create-a-table-from-header-and-rows">
-<h2>Create a table from header and rows<a class="headerlink" href="#create-a-table-from-header-and-rows" title="Permalink to this headline">¶</a></h2>
+<h3>Create a table from header and rows<a class="headerlink" href="#create-a-table-from-header-and-rows" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">]])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">table</span>
@@ -214,7 +349,7 @@
 </div>
 </div>
 <div class="section" id="create-a-table-from-dict">
-<h2>Create a table from dict<a class="headerlink" href="#create-a-table-from-dict" title="Permalink to this headline">¶</a></h2>
+<h3>Create a table from dict<a class="headerlink" href="#create-a-table-from-dict" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">make_table()</span></code> is the utility function for creating <code class="docutils literal notranslate"><span class="pre">Table</span></code> objects from standard python objects.</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">])</span>
@@ -231,7 +366,7 @@
 </div>
 </div>
 <div class="section" id="create-a-table-from-a-pandas-dataframe">
-<h2>Create a table from a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code><a class="headerlink" href="#create-a-table-from-a-pandas-dataframe" title="Permalink to this headline">¶</a></h2>
+<h3>Create a table from a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code><a class="headerlink" href="#create-a-table-from-a-pandas-dataframe" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">DataFrame</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">])</span>
@@ -249,7 +384,7 @@
 </div>
 </div>
 <div class="section" id="adding-a-new-column">
-<h2>Adding a new column<a class="headerlink" href="#adding-a-new-column" title="Permalink to this headline">¶</a></h2>
+<h3>Adding a new column<a class="headerlink" href="#adding-a-new-column" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">table</span>
@@ -270,7 +405,7 @@
 </div>
 </div>
 <div class="section" id="iterating-over-table-rows">
-<h2>Iterating over table rows<a class="headerlink" href="#iterating-over-table-rows" title="Permalink to this headline">¶</a></h2>
+<h3>Iterating over table rows<a class="headerlink" href="#iterating-over-table-rows" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">Table</span></code> is a row oriented object. Iterating on the table returns each row as a new <code class="docutils literal notranslate"><span class="pre">Table</span></code> instance.</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
@@ -297,7 +432,7 @@
 </div>
 </div>
 <div class="section" id="iterating-over-table-columns">
-<h2>Iterating over table columns<a class="headerlink" href="#iterating-over-table-columns" title="Permalink to this headline">¶</a></h2>
+<h3>Iterating over table columns<a class="headerlink" href="#iterating-over-table-columns" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">Table.columns</span></code> attribute is a <code class="docutils literal notranslate"><span class="pre">Columns</span></code> instance, an object with <code class="docutils literal notranslate"><span class="pre">dict</span></code> attributes.</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
@@ -318,7 +453,7 @@
 </div>
 </div>
 <div class="section" id="table-slicing-using-column-names">
-<h2>Table slicing using column names<a class="headerlink" href="#table-slicing-using-column-names" title="Permalink to this headline">¶</a></h2>
+<h3>Table slicing using column names<a class="headerlink" href="#table-slicing-using-column-names" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span> <span class="p">:</span><span class="s1">&#39;Region&#39;</span><span class="p">])</span>
 <span class="go">=========</span>
@@ -331,7 +466,7 @@
 </div>
 </div>
 <div class="section" id="table-slicing-using-column-indices">
-<h2>Table slicing using column indices<a class="headerlink" href="#table-slicing-using-column-indices" title="Permalink to this headline">¶</a></h2>
+<h3>Table slicing using column indices<a class="headerlink" href="#table-slicing-using-column-indices" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">[:</span><span class="mi">2</span><span class="p">,:</span> <span class="mi">1</span><span class="p">])</span>
 <span class="go">=========</span>
@@ -344,7 +479,7 @@
 </div>
 </div>
 <div class="section" id="changing-displayed-numerical-precision">
-<h2>Changing displayed numerical precision<a class="headerlink" href="#changing-displayed-numerical-precision" title="Permalink to this headline">¶</a></h2>
+<h3>Changing displayed numerical precision<a class="headerlink" href="#changing-displayed-numerical-precision" title="Permalink to this headline">¶</a></h3>
 <p>We change the <code class="docutils literal notranslate"><span class="pre">Ratio</span></code> column to using scientific notation.</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
@@ -363,7 +498,7 @@
 </div>
 </div>
 <div class="section" id="change-digits-or-column-spacing">
-<h2>Change digits or column spacing<a class="headerlink" href="#change-digits-or-column-spacing" title="Permalink to this headline">¶</a></h2>
+<h3>Change digits or column spacing<a class="headerlink" href="#change-digits-or-column-spacing" title="Permalink to this headline">¶</a></h3>
 <p>This can be done on table loading,</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s1">&#39;data/stats.tsv&#39;</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
@@ -394,7 +529,7 @@
 </div>
 </div>
 <div class="section" id="changing-column-headings">
-<h2>Changing column headings<a class="headerlink" href="#changing-column-headings" title="Permalink to this headline">¶</a></h2>
+<h3>Changing column headings<a class="headerlink" href="#changing-column-headings" title="Permalink to this headline">¶</a></h3>
 <p>The table <code class="docutils literal notranslate"><span class="pre">header</span></code> is immutable. Changing column headings is done as follows.</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
@@ -406,7 +541,7 @@
 </div>
 </div>
 <div class="section" id="id1">
-<h2>Adding a new column<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h3>Adding a new column<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">table</span>
@@ -427,7 +562,7 @@
 </div>
 </div>
 <div class="section" id="create-a-new-column-from-existing-ones">
-<h2>Create a new column from existing ones<a class="headerlink" href="#create-a-new-column-from-existing-ones" title="Permalink to this headline">¶</a></h2>
+<h3>Create a new column from existing ones<a class="headerlink" href="#create-a-new-column-from-existing-ones" title="Permalink to this headline">¶</a></h3>
 <p>This can be used to take a single, or multiple columns and generate a new column of values. Here we’ll take 2 columns and return True/False based on a condition.</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">with_new_column</span><span class="p">(</span><span class="s1">&#39;LargeCon&#39;</span><span class="p">,</span>
@@ -447,7 +582,7 @@
 </div>
 </div>
 <div class="section" id="get-table-data-as-a-numpy-array">
-<h2>Get table data as a numpy array<a class="headerlink" href="#get-table-data-as-a-numpy-array" title="Permalink to this headline">¶</a></h2>
+<h3>Get table data as a numpy array<a class="headerlink" href="#get-table-data-as-a-numpy-array" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">table</span><span class="o">.</span><span class="n">array</span>
 <span class="go">array([[&#39;NP_003077&#39;, &#39;Con&#39;, 2.5386013224378985],</span>
@@ -459,7 +594,7 @@
 </div>
 </div>
 <div class="section" id="get-a-table-column-as-a-list">
-<h2>Get a table column as a list<a class="headerlink" href="#get-a-table-column-as-a-list" title="Permalink to this headline">¶</a></h2>
+<h3>Get a table column as a list<a class="headerlink" href="#get-a-table-column-as-a-list" title="Permalink to this headline">¶</a></h3>
 <p>Via the <code class="docutils literal notranslate"><span class="pre">Table.tolist()</span></code> method.</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">locus</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">tolist</span><span class="p">(</span><span class="s2">&quot;Locus&quot;</span><span class="p">)</span>
@@ -474,7 +609,7 @@
 </div>
 </div>
 <div class="section" id="get-multiple-table-columns-as-a-list">
-<h2>Get multiple table columns as a list<a class="headerlink" href="#get-multiple-table-columns-as-a-list" title="Permalink to this headline">¶</a></h2>
+<h3>Get multiple table columns as a list<a class="headerlink" href="#get-multiple-table-columns-as-a-list" title="Permalink to this headline">¶</a></h3>
 <p>This returns a row oriented list.</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rows</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">tolist</span><span class="p">([</span><span class="s2">&quot;Region&quot;</span><span class="p">,</span> <span class="s2">&quot;Locus&quot;</span><span class="p">])</span>
@@ -488,7 +623,7 @@
 </div>
 </div>
 <div class="section" id="get-the-table-as-a-row-oriented-dict">
-<h2>Get the table as a row oriented <code class="docutils literal notranslate"><span class="pre">dict</span></code><a class="headerlink" href="#get-the-table-as-a-row-oriented-dict" title="Permalink to this headline">¶</a></h2>
+<h3>Get the table as a row oriented <code class="docutils literal notranslate"><span class="pre">dict</span></code><a class="headerlink" href="#get-the-table-as-a-row-oriented-dict" title="Permalink to this headline">¶</a></h3>
 <p>Keys in the resulting dict are the row indices, the value is a dict of column name, value pairs.</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">table</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
@@ -497,7 +632,7 @@
 </div>
 </div>
 <div class="section" id="get-the-table-as-a-column-oriented-dict">
-<h2>Get the table as a column oriented <code class="docutils literal notranslate"><span class="pre">dict</span></code><a class="headerlink" href="#get-the-table-as-a-column-oriented-dict" title="Permalink to this headline">¶</a></h2>
+<h3>Get the table as a column oriented <code class="docutils literal notranslate"><span class="pre">dict</span></code><a class="headerlink" href="#get-the-table-as-a-column-oriented-dict" title="Permalink to this headline">¶</a></h3>
 <p>Keys in the resulting dict are the column names, the value is a list.</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
@@ -506,7 +641,7 @@
 </div>
 </div>
 <div class="section" id="get-the-table-as-a-pandas-dataframe">
-<h2>Get the table as a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code><a class="headerlink" href="#get-the-table-as-a-pandas-dataframe" title="Permalink to this headline">¶</a></h2>
+<h3>Get the table as a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code><a class="headerlink" href="#get-the-table-as-a-pandas-dataframe" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">df</span>
@@ -524,7 +659,7 @@
 </div>
 </div>
 <div class="section" id="appending-tables">
-<h2>Appending tables<a class="headerlink" href="#appending-tables" title="Permalink to this headline">¶</a></h2>
+<h3>Appending tables<a class="headerlink" href="#appending-tables" title="Permalink to this headline">¶</a></h3>
 <p>Can be done without specifying a new column. Here we simply use the same table data.</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table1</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">table2</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
@@ -573,7 +708,7 @@
 </div>
 </div>
 <div class="section" id="summing-a-single-column">
-<h2>Summing a single column<a class="headerlink" href="#summing-a-single-column" title="Permalink to this headline">¶</a></h2>
+<h3>Summing a single column<a class="headerlink" href="#summing-a-single-column" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">table</span><span class="o">.</span><span class="n">summed</span><span class="p">(</span><span class="s1">&#39;Ratio&#39;</span><span class="p">)</span>
 <span class="go">20571166.652...</span>
@@ -586,7 +721,7 @@
 </div>
 </div>
 <div class="section" id="summing-multiple-columns-or-rows-strictly-numerical-data">
-<h2>Summing multiple columns or rows - strictly numerical data<a class="headerlink" href="#summing-multiple-columns-or-rows-strictly-numerical-data" title="Permalink to this headline">¶</a></h2>
+<h3>Summing multiple columns or rows - strictly numerical data<a class="headerlink" href="#summing-multiple-columns-or-rows-strictly-numerical-data" title="Permalink to this headline">¶</a></h3>
 <p>We define a strictly numerical table,</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">all_numeric</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
@@ -614,7 +749,7 @@
 </div>
 </div>
 <div class="section" id="summing-multiple-columns-or-rows-with-mixed-non-numeric-numeric-data">
-<h2>Summing multiple columns or rows with mixed non-numeric/numeric data<a class="headerlink" href="#summing-multiple-columns-or-rows-with-mixed-non-numeric-numeric-data" title="Permalink to this headline">¶</a></h2>
+<h3>Summing multiple columns or rows with mixed non-numeric/numeric data<a class="headerlink" href="#summing-multiple-columns-or-rows-with-mixed-non-numeric-numeric-data" title="Permalink to this headline">¶</a></h3>
 <p>We define a table with mixed data, like a distance matrix.</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mixed</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="p">[[</span><span class="s1">&#39;*&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
 <span class="gp">... </span>                                                <span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="s1">&#39;*&#39;</span><span class="p">]])</span>
@@ -640,7 +775,7 @@
 </div>
 </div>
 <div class="section" id="filtering-table-rows">
-<h2>Filtering table rows<a class="headerlink" href="#filtering-table-rows" title="Permalink to this headline">¶</a></h2>
+<h3>Filtering table rows<a class="headerlink" href="#filtering-table-rows" title="Permalink to this headline">¶</a></h3>
 <p>We can do this by providing a reference to an external function</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sub_table</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">filtered</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mf">10.0</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;Ratio&#39;</span><span class="p">)</span>
@@ -676,7 +811,7 @@
 </div>
 </div>
 <div class="section" id="filtering-table-columns">
-<h2>Filtering table columns<a class="headerlink" href="#filtering-table-columns" title="Permalink to this headline">¶</a></h2>
+<h3>Filtering table columns<a class="headerlink" href="#filtering-table-columns" title="Permalink to this headline">¶</a></h3>
 <p>We select only columns that have a sum &gt; 20 from the <code class="docutils literal notranslate"><span class="pre">all_numeric</span></code> table constructed above.</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">big_numeric</span> <span class="o">=</span> <span class="n">all_numeric</span><span class="o">.</span><span class="n">filtered_by_column</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">20</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">big_numeric</span><span class="p">)</span>
@@ -692,7 +827,7 @@
 </div>
 </div>
 <div class="section" id="standard-sorting">
-<h2>Standard sorting<a class="headerlink" href="#standard-sorting" title="Permalink to this headline">¶</a></h2>
+<h3>Standard sorting<a class="headerlink" href="#standard-sorting" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">sorted</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">&#39;Ratio&#39;</span><span class="p">))</span>
 <span class="go">====================================</span>
@@ -708,7 +843,7 @@
 </div>
 </div>
 <div class="section" id="reverse-sorting">
-<h2>Reverse sorting<a class="headerlink" href="#reverse-sorting" title="Permalink to this headline">¶</a></h2>
+<h3>Reverse sorting<a class="headerlink" href="#reverse-sorting" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">sorted</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">&#39;Ratio&#39;</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="s1">&#39;Ratio&#39;</span><span class="p">))</span>
 <span class="go">====================================</span>
 <span class="go">    Locus    Region            Ratio</span>
@@ -723,7 +858,7 @@
 </div>
 </div>
 <div class="section" id="sorting-involving-multiple-columns-one-reversed">
-<h2>Sorting involving multiple columns, one reversed<a class="headerlink" href="#sorting-involving-multiple-columns-one-reversed" title="Permalink to this headline">¶</a></h2>
+<h3>Sorting involving multiple columns, one reversed<a class="headerlink" href="#sorting-involving-multiple-columns-one-reversed" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">sorted</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Region&#39;</span><span class="p">,</span> <span class="s1">&#39;Ratio&#39;</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="s1">&#39;Ratio&#39;</span><span class="p">))</span>
 <span class="go">====================================</span>
 <span class="go">    Locus    Region            Ratio</span>
@@ -738,7 +873,7 @@
 </div>
 </div>
 <div class="section" id="getting-raw-data-for-a-single-column">
-<h2>Getting raw data for a single column<a class="headerlink" href="#getting-raw-data-for-a-single-column" title="Permalink to this headline">¶</a></h2>
+<h3>Getting raw data for a single column<a class="headerlink" href="#getting-raw-data-for-a-single-column" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">raw</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">tolist</span><span class="p">(</span><span class="s1">&#39;Region&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span>
@@ -747,7 +882,7 @@
 </div>
 </div>
 <div class="section" id="getting-raw-data-for-multiple-columns">
-<h2>Getting raw data for multiple columns<a class="headerlink" href="#getting-raw-data-for-multiple-columns" title="Permalink to this headline">¶</a></h2>
+<h3>Getting raw data for multiple columns<a class="headerlink" href="#getting-raw-data-for-multiple-columns" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">raw</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">tolist</span><span class="p">([</span><span class="s1">&#39;Locus&#39;</span><span class="p">,</span> <span class="s1">&#39;Region&#39;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span>
@@ -756,21 +891,21 @@
 </div>
 </div>
 <div class="section" id="getting-distinct-values">
-<h2>Getting distinct values<a class="headerlink" href="#getting-distinct-values" title="Permalink to this headline">¶</a></h2>
+<h3>Getting distinct values<a class="headerlink" href="#getting-distinct-values" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">table</span><span class="o">.</span><span class="n">distinct_values</span><span class="p">(</span><span class="s1">&#39;Region&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;NonCon&#39;</span><span class="p">,</span> <span class="s1">&#39;Con&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="counting-occurrences-of-values">
-<h2>Counting occurrences of values<a class="headerlink" href="#counting-occurrences-of-values" title="Permalink to this headline">¶</a></h2>
+<h3>Counting occurrences of values<a class="headerlink" href="#counting-occurrences-of-values" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">assert</span> <span class="n">table</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;Region == &#39;NonCon&#39; and Ratio &gt; 1&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="joining-or-merging-tables">
-<h2>Joining or merging tables<a class="headerlink" href="#joining-or-merging-tables" title="Permalink to this headline">¶</a></h2>
+<h3>Joining or merging tables<a class="headerlink" href="#joining-or-merging-tables" title="Permalink to this headline">¶</a></h3>
 <p>We do a standard inner join here for a restricted subset. We must specify the columns that will be used for the join. Here we just use <code class="docutils literal notranslate"><span class="pre">Locus</span></code>.</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rows</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;NP_004893&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;NP_005079&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
 <span class="gp">... </span>        <span class="p">[</span><span class="s1">&#39;NP_005500&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;NP_055852&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">]]</span>
@@ -798,7 +933,7 @@
 </div>
 </div>
 <div class="section" id="specify-markdown-as-the-str-format">
-<h2>Specify markdown as the <code class="docutils literal notranslate"><span class="pre">str()</span></code> format<a class="headerlink" href="#specify-markdown-as-the-str-format" title="Permalink to this headline">¶</a></h2>
+<h3>Specify markdown as the <code class="docutils literal notranslate"><span class="pre">str()</span></code> format<a class="headerlink" href="#specify-markdown-as-the-str-format" title="Permalink to this headline">¶</a></h3>
 <p>Using the method provides finer control over formatting.</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;md&quot;</span><span class="p">)</span>
@@ -814,7 +949,7 @@
 </div>
 </div>
 <div class="section" id="specify-latex-as-the-str-format">
-<h2>Specify latex as the <code class="docutils literal notranslate"><span class="pre">str()</span></code> format<a class="headerlink" href="#specify-latex-as-the-str-format" title="Permalink to this headline">¶</a></h2>
+<h3>Specify latex as the <code class="docutils literal notranslate"><span class="pre">str()</span></code> format<a class="headerlink" href="#specify-latex-as-the-str-format" title="Permalink to this headline">¶</a></h3>
 <p>Using the method provides finer control over formatting.</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;tex&quot;</span><span class="p">)</span>
@@ -831,7 +966,7 @@
 </div>
 </div>
 <div class="section" id="get-a-table-as-a-markdown-formatted-string">
-<h2>Get a table as a markdown formatted string<a class="headerlink" href="#get-a-table-as-a-markdown-formatted-string" title="Permalink to this headline">¶</a></h2>
+<h3>Get a table as a markdown formatted string<a class="headerlink" href="#get-a-table-as-a-markdown-formatted-string" title="Permalink to this headline">¶</a></h3>
 <p>We use the <code class="docutils literal notranslate"><span class="pre">justify</span></code> argument to indicate the column justification.</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">to_markdown</span><span class="p">(</span><span class="n">justify</span><span class="o">=</span><span class="s2">&quot;ccr&quot;</span><span class="p">))</span>
@@ -846,7 +981,7 @@
 </div>
 </div>
 <div class="section" id="get-a-table-as-a-latex-formatted-string">
-<h2>Get a table as a latex formatted string<a class="headerlink" href="#get-a-table-as-a-latex-formatted-string" title="Permalink to this headline">¶</a></h2>
+<h3>Get a table as a latex formatted string<a class="headerlink" href="#get-a-table-as-a-latex-formatted-string" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Some stats.&quot;</span><span class="p">,</span>
 <span class="gp">... </span>                   <span class="n">legend</span><span class="o">=</span><span class="s2">&quot;Derived from something.&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">to_latex</span><span class="p">(</span><span class="n">justify</span><span class="o">=</span><span class="s2">&quot;ccr&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;tab:table1&quot;</span><span class="p">))</span>
@@ -857,7 +992,7 @@
 </div>
 </div>
 <div class="section" id="get-a-table-as-a-restructured-text-csv-table">
-<h2>Get a table as a restructured text csv-table<a class="headerlink" href="#get-a-table-as-a-restructured-text-csv-table" title="Permalink to this headline">¶</a></h2>
+<h3>Get a table as a restructured text csv-table<a class="headerlink" href="#get-a-table-as-a-restructured-text-csv-table" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Some stats.&quot;</span><span class="p">,</span>
 <span class="gp">... </span>                   <span class="n">legend</span><span class="o">=</span><span class="s2">&quot;Derived from something.&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">to_rst</span><span class="p">(</span><span class="n">csv_table</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
@@ -869,7 +1004,7 @@
 </div>
 </div>
 <div class="section" id="get-a-table-as-a-restructured-text-grid-table">
-<h2>Get a table as a restructured text grid table<a class="headerlink" href="#get-a-table-as-a-restructured-text-grid-table" title="Permalink to this headline">¶</a></h2>
+<h3>Get a table as a restructured text grid table<a class="headerlink" href="#get-a-table-as-a-restructured-text-grid-table" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Some stats.&quot;</span><span class="p">,</span>
 <span class="gp">... </span>                   <span class="n">legend</span><span class="o">=</span><span class="s2">&quot;Derived from something.&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">to_rst</span><span class="p">())</span>
@@ -884,7 +1019,7 @@
 </div>
 </div>
 <div class="section" id="what-formats-can-be-written">
-<h2>What formats can be written?<a class="headerlink" href="#what-formats-can-be-written" title="Permalink to this headline">¶</a></h2>
+<h3>What formats can be written?<a class="headerlink" href="#what-formats-can-be-written" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3.format.table</span> <span class="kn">import</span> <span class="n">known_formats</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">known_formats</span>
 <span class="go">(&#39;bedgraph&#39;, &#39;phylip&#39;, &#39;rest&#39;, &#39;rst&#39;, &#39;markdown&#39;, &#39;md&#39;, &#39;latex&#39;, &#39;tex&#39;, &#39;html&#39;, &#39;simple&#39;, &#39;csv&#39;, &#39;tsv&#39;)</span>
@@ -892,14 +1027,14 @@
 </div>
 </div>
 <div class="section" id="writing-delimited-formats">
-<h2>Writing delimited formats<a class="headerlink" href="#writing-delimited-formats" title="Permalink to this headline">¶</a></h2>
+<h3>Writing delimited formats<a class="headerlink" href="#writing-delimited-formats" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">table</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;stats_tab.txt&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="writing-latex-format">
-<h2>Writing latex format<a class="headerlink" href="#writing-latex-format" title="Permalink to this headline">¶</a></h2>
+<h3>Writing latex format<a class="headerlink" href="#writing-latex-format" title="Permalink to this headline">¶</a></h3>
 <p>It is also possible to specify column alignment, table caption and other arguments.</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;latex&#39;</span><span class="p">))</span>
@@ -922,7 +1057,7 @@
 </div>
 </div>
 <div class="section" id="writing-bedgraph-format">
-<h2>Writing bedGraph format<a class="headerlink" href="#writing-bedgraph-format" title="Permalink to this headline">¶</a></h2>
+<h3>Writing bedGraph format<a class="headerlink" href="#writing-bedgraph-format" title="Permalink to this headline">¶</a></h3>
 <p>This format allows display of annotation tracks on genome browsers.</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rows</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mf">1.123</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mi">102</span><span class="p">,</span> <span class="mf">1.123</span><span class="p">],</span>
 <span class="gp">... </span>        <span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="mi">102</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mf">1.123</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">104</span><span class="p">,</span> <span class="mf">1.123</span><span class="p">],</span>
@@ -960,6 +1095,7 @@
 <span class="go">1   100     118     1.00</span>
 <span class="go">1   118     161     2.00</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
