@@ -18,7 +18,7 @@ jobs:
            path: c3src
            ref: develop
       
-      - shell: bash
+      - shell: bash -l {0}
         run: |
           mv c3src/doc c3org/doc/doc
           ls
@@ -30,14 +30,14 @@ jobs:
            environment-file: c3org/doc/gh-environment.yml
            python-version: 3.8
 
-      - shell: bash
+      - shell: bash -l {0}
         run: |
           conda activate cogent3
           conda info
           conda list
 
       - name: Build docs
-        shell: bash
+        shell: bash -l {0}
         working-directory: c3org/doc/
         run: |
           conda activate cogent3
