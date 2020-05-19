@@ -17,12 +17,10 @@ jobs:
            repository: cogent3/cogent3
            path: c3src
            ref: develop
-      
+
       - shell: bash -l {0}
         run: |
           mv c3src/doc c3org/doc/doc
-          ls c3org/
-          ls c3org/doc/
 
       - name: Make conda environment
         uses: goanpeca/setup-miniconda@v1
@@ -43,8 +41,6 @@ jobs:
         run: |
           conda activate cogent3
           make github
-          ls
-          ls ../docs
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
