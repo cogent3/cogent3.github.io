@@ -4,6 +4,8 @@ import shutil
 import sys
 from glob import glob
 
+# sphinx_navtree
+# html_theme = "sphinx_rtd_theme"
 import sphinx_bootstrap_theme
 
 project = "cogent3"
@@ -45,6 +47,19 @@ extensions = [
 
 html_theme = "bootstrap"
 html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
+html_theme_options = {
+    "navbar_site_name": "Site",
+    "navbar_links": [
+        ("Install", "doc/install", False),
+        ("Docs", "doc/index", False),
+        ("Gallery", "doc/draw/index.html", True),
+    ],
+    # "navbar_class": "navbar navbar",
+    "navbar_fixed_top": "true",
+    "source_link_position": "skipped",
+    "bootswatch_theme": "Cerulean",
+    "bootstrap_version": "3",
+}
 
 
 # todo_include_todos=True # to expose the TODOs, uncomment this line
