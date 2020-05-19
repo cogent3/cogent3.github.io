@@ -54,10 +54,10 @@ html_theme_options = {
         ("Docs", "doc/index", False),
         ("Gallery", "doc/draw/index.html", True),
     ],
-    "navbar_class": "navbar navbar",
+    # "navbar_class": "navbar navbar",
     "navbar_fixed_top": "true",
     "source_link_position": "skipped",
-    "bootswatch_theme": "Cerulean",
+    # "bootswatch_theme": "Cerulean",
     "bootstrap_version": "3",
 }
 
