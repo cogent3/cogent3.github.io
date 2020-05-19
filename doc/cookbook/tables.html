@@ -97,8 +97,6 @@
 <li><a class="reference internal" href="#specify-the-column-order-when-creating-from-a-dict">Specify the column order when creating from a <code class="docutils literal notranslate"><span class="pre">dict</span></code>.</a></li>
 <li><a class="reference internal" href="#create-the-table-with-an-index">Create the table with an index</a></li>
 <li><a class="reference internal" href="#create-a-table-from-a-pandas-data-frame">Create a table from a <code class="docutils literal notranslate"><span class="pre">pandas</span></code> data frame</a><ul>
-<li><a class="reference internal" href="#load-a-table-from-file">Load a table from file</a></li>
-<li><a class="reference internal" href="#load-a-table-from-a-csv-tsv-or-other-delimited-file-type">Load a table from a csv, tsv or other delimited file type</a></li>
 <li><a class="reference internal" href="#create-a-table-from-header-and-rows">Create a table from header and rows</a></li>
 <li><a class="reference internal" href="#create-a-table-from-dict">Create a table from dict</a></li>
 <li><a class="reference internal" href="#create-a-table-from-a-pandas-dataframe">Create a table from a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code></a></li>
@@ -200,7 +198,7 @@
 </div>
 <div class="section" id="loading-a-csv-file">
 <h2>Loading a csv file<a class="headerlink" href="#loading-a-csv-file" title="Permalink to this headline">¶</a></h2>
-<p>We load a tab separated data file using the <code class="docutils literal notranslate"><span class="pre">load_table()</span></code> function. The format is inferred from the filename suffix.</p>
+<p>We load a tab separated data file using the <code class="docutils literal notranslate"><span class="pre">load_table()</span></code> function. The format is inferred from the filename suffix and you will note, in this case, it’s not actually a <cite>csv</cite> file.</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
@@ -222,7 +220,7 @@
 </div>
 <div class="section" id="loading-delimited-specifying-the-format">
 <h2>Loading delimited specifying the format<a class="headerlink" href="#loading-delimited-specifying-the-format" title="Permalink to this headline">¶</a></h2>
-<p>Although unecessary in this case, it’s possible to override the suffix by specifying the delimiter using the <code class="docutils literal notranslate"><span class="pre">seq</span></code> argument.</p>
+<p>Although unecessary in this case, it’s possible to override the suffix by specifying the delimiter using the <code class="docutils literal notranslate"><span class="pre">sep</span></code> argument.</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
@@ -319,21 +317,6 @@
 <span class="go">3    7</span>
 <span class="go">------</span>
 </pre></div>
-</div>
-<div class="section" id="load-a-table-from-file">
-<h3>Load a table from file<a class="headerlink" href="#load-a-table-from-file" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="load-a-table-from-a-csv-tsv-or-other-delimited-file-type">
-<h3>Load a table from a csv, tsv or other delimited file type<a class="headerlink" href="#load-a-table-from-a-csv-tsv-or-other-delimited-file-type" title="Permalink to this headline">¶</a></h3>
-<p>If the filename ends with <code class="docutils literal notranslate"><span class="pre">csv</span></code> or <code class="docutils literal notranslate"><span class="pre">tsv</span></code>, <code class="docutils literal notranslate"><span class="pre">load_table</span></code> gueses the delimiter as <code class="docutils literal notranslate"><span class="pre">&quot;,&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;\t&quot;</span></code> respectively. If the delimiter character is different from the file suffix, or just different, you specify it using the <code class="docutils literal notranslate"><span class="pre">sep</span></code> argument.</p>
-<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
 </div>
 <div class="section" id="create-a-table-from-header-and-rows">
 <h3>Create a table from header and rows<a class="headerlink" href="#create-a-table-from-header-and-rows" title="Permalink to this headline">¶</a></h3>
