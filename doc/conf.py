@@ -33,6 +33,7 @@ numpydoc_class_members_toctree = False
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    "jupyter_sphinx",
     "numpydoc",
     "sphinx.ext.todo",
     "sphinx.ext.doctest",
@@ -42,6 +43,7 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",
     "sphinxcontrib.bibtex",
+    "sphinx_panels",
 ]
 
 
