@@ -3,6 +3,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loading a csv file &#8212; cogent3 2020.4 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -15,9 +16,8 @@
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="../../_static/require.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
 <meta charset='utf-8'>
@@ -89,11 +89,20 @@
       aria-labelledby="dLabelLocalToc"><ul>
 <li><a class="reference internal" href="#">Loading a csv file</a></li>
 <li><a class="reference internal" href="#loading-delimited-specifying-the-format">Loading delimited specifying the format</a></li>
+<li><a class="reference internal" href="#loading-a-set-number-of-lines-from-a-file">Loading a set number of lines from a file</a></li>
+<li><a class="reference internal" href="#selectively-loading-parts-of-a-big-file">Selectively loading parts of a big file</a></li>
+<li><a class="reference internal" href="#loading-only-some-columns">Loading only some columns</a></li>
+<li><a class="reference internal" href="#load-raw-data-as-a-list-of-lists-of-strings">Load raw data as a list of lists of strings</a></li>
 <li><a class="reference internal" href="#make-a-table-from-header-and-rows">Make a table from header and rows</a></li>
 <li><a class="reference internal" href="#make-a-table-from-a-dict">Make a table from a <code class="docutils literal notranslate"><span class="pre">dict</span></code></a></li>
 <li><a class="reference internal" href="#specify-the-column-order-when-creating-from-a-dict">Specify the column order when creating from a <code class="docutils literal notranslate"><span class="pre">dict</span></code>.</a></li>
 <li><a class="reference internal" href="#create-the-table-with-an-index">Create the table with an index</a></li>
-<li><a class="reference internal" href="#create-a-table-from-a-pandas-data-frame">Create a table from a <code class="docutils literal notranslate"><span class="pre">pandas</span></code> data frame</a></li>
+<li><a class="reference internal" href="#create-a-table-from-a-pandas-dataframe">Create a table from a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code></a></li>
+<li><a class="reference internal" href="#create-a-table-from-header-and-rows">Create a table from header and rows</a></li>
+<li><a class="reference internal" href="#create-a-table-from-dict">Create a table from dict</a></li>
+<li><a class="reference internal" href="#create-a-table-from-a-2d-dict">Create a table from a 2D dict</a></li>
+<li><a class="reference internal" href="#create-a-table-that-has-complex-python-objects-as-elements">Create a table that has complex python objects as elements</a></li>
+<li><a class="reference internal" href="#create-an-empty-table">Create an empty table</a></li>
 </ul>
 </ul>
 </li>
@@ -130,125 +139,84 @@
   <div class="section" id="loading-a-csv-file">
 <h1>Loading a csv file<a class="headerlink" href="#loading-a-csv-file" title="Permalink to this headline">¶</a></h1>
 <p>We load a tab separated data file using the <code class="docutils literal notranslate"><span class="pre">load_table()</span></code> function. The format is inferred from the filename suffix and you will note, in this case, it’s not actually a <cite>csv</cite> file.</p>
-<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
-<span class="go">====================================</span>
-<span class="go">    Locus    Region            Ratio</span>
-<span class="go">------------------------------------</span>
-<span class="go">NP_003077       Con           2.5386</span>
-<span class="go">NP_004893       Con      121351.4264</span>
-<span class="go">NP_005079       Con     9516594.9789</span>
-<span class="go">NP_005500    NonCon           0.0000</span>
-<span class="go">NP_055852    NonCon    10933217.7090</span>
-<span class="go">------------------------------------</span>
-</pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The known filename suffixes for reading are <code class="docutils literal notranslate"><span class="pre">.csv</span></code>, <code class="docutils literal notranslate"><span class="pre">.tsv</span></code> and <code class="docutils literal notranslate"><span class="pre">.pkl</span></code> or <code class="docutils literal notranslate"><span class="pre">.pickle</span></code> (Python’s pickle format).</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The known filename suffixes are <code class="docutils literal notranslate"><span class="pre">.csv</span></code>, <code class="docutils literal notranslate"><span class="pre">.tsv</span></code> and <code class="docutils literal notranslate"><span class="pre">.pkl</span></code> or <code class="docutils literal notranslate"><span class="pre">.pickle</span></code> (Python’s pickle format).</p>
+<p>If you invoke the static column types argument, i.e.``load_table(…, static_column_types=True)`` and the column data are not static, those columns will be left as a string type.</p>
 </div>
 </div>
 <div class="section" id="loading-delimited-specifying-the-format">
 <h1>Loading delimited specifying the format<a class="headerlink" href="#loading-delimited-specifying-the-format" title="Permalink to this headline">¶</a></h1>
-<p>Although unecessary in this case, it’s possible to override the suffix by specifying the delimiter using the <code class="docutils literal notranslate"><span class="pre">sep</span></code> argument.</p>
-<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
-<span class="go">====================================</span>
-<span class="go">    Locus    Region            Ratio</span>
-<span class="go">------------------------------------</span>
-<span class="go">NP_003077       Con           2.5386</span>
-<span class="go">NP_004893       Con      121351.4264</span>
-<span class="go">NP_005079       Con     9516594.9789</span>
-<span class="go">NP_005500    NonCon           0.0000</span>
-<span class="go">NP_055852    NonCon    10933217.7090</span>
-<span class="go">------------------------------------</span>
-</pre></div>
+<p>Although unnecessary in this case, it’s possible to override the suffix by specifying the delimiter using the <code class="docutils literal notranslate"><span class="pre">sep</span></code> argument.</p>
+</div>
+<div class="section" id="loading-a-set-number-of-lines-from-a-file">
+<h1>Loading a set number of lines from a file<a class="headerlink" href="#loading-a-set-number-of-lines-from-a-file" title="Permalink to this headline">¶</a></h1>
+<p>If you only want a subset of the contents of a file, use the <code class="docutils literal notranslate"><span class="pre">FilteringParser</span></code>. This allows skipping certain lines by using a callback function. We illustrate this with <code class="docutils literal notranslate"><span class="pre">stats.tsv</span></code>, skipping any rows with <code class="docutils literal notranslate"><span class="pre">&quot;Ratio&quot;</span></code> &gt; 10.</p>
+</div>
+<div class="section" id="selectively-loading-parts-of-a-big-file">
+<h1>Selectively loading parts of a big file<a class="headerlink" href="#selectively-loading-parts-of-a-big-file" title="Permalink to this headline">¶</a></h1>
+<p>If you only want a subset of the contents of a file, use the <code class="docutils literal notranslate"><span class="pre">FilteringParser</span></code>. This allows skipping certain lines by using a callback function. We illustrate this with <code class="docutils literal notranslate"><span class="pre">stats.tsv</span></code>, skipping any rows with <code class="docutils literal notranslate"><span class="pre">&quot;Ratio&quot;</span></code> &gt; 10.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can also <code class="docutils literal notranslate"><span class="pre">negate</span></code> a condition, which is useful if the condition is complex.</p>
+</div>
+</div>
+<div class="section" id="loading-only-some-columns">
+<h1>Loading only some columns<a class="headerlink" href="#loading-only-some-columns" title="Permalink to this headline">¶</a></h1>
+<p>Specify the columns by their names.</p>
+<p>Or, by their index.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">negate</span></code> argument does not affect the columns evaluated.</p>
+</div>
+</div>
+<div class="section" id="load-raw-data-as-a-list-of-lists-of-strings">
+<h1>Load raw data as a list of lists of strings<a class="headerlink" href="#load-raw-data-as-a-list-of-lists-of-strings" title="Permalink to this headline">¶</a></h1>
+<p>We just use <code class="docutils literal notranslate"><span class="pre">FilteringParser</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The individual elements are still <code class="docutils literal notranslate"><span class="pre">str</span></code>.</p>
 </div>
 </div>
 <div class="section" id="make-a-table-from-header-and-rows">
 <h1>Make a table from header and rows<a class="headerlink" href="#make-a-table-from-header-and-rows" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">header</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">rows</span> <span class="o">=</span> <span class="p">[</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">12</span><span class="p">)]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="n">rows</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
-<span class="go">=============</span>
-<span class="go">A     B     C</span>
-<span class="go">-------------</span>
-<span class="go">0     1     2</span>
-<span class="go">3     4     5</span>
-<span class="go">6     7     8</span>
-<span class="go">9    10    11</span>
-<span class="go">-------------</span>
-</pre></div>
-</div>
 </div>
 <div class="section" id="make-a-table-from-a-dict">
 <h1>Make a table from a <code class="docutils literal notranslate"><span class="pre">dict</span></code><a class="headerlink" href="#make-a-table-from-a-dict" title="Permalink to this headline">¶</a></h1>
 <p>For a <code class="docutils literal notranslate"><span class="pre">dict</span></code> with key’s as column headers.</p>
-<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="n">B</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="n">C</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
-<span class="go">===========</span>
-<span class="go">A    B    C</span>
-<span class="go">-----------</span>
-<span class="go">0    1    2</span>
-<span class="go">3    4    5</span>
-<span class="go">6    7    8</span>
-<span class="go">-----------</span>
-</pre></div>
-</div>
 </div>
 <div class="section" id="specify-the-column-order-when-creating-from-a-dict">
 <h1>Specify the column order when creating from a <code class="docutils literal notranslate"><span class="pre">dict</span></code>.<a class="headerlink" href="#specify-the-column-order-when-creating-from-a-dict" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
-<span class="go">===========</span>
-<span class="go">C    A    B</span>
-<span class="go">-----------</span>
-<span class="go">2    0    1</span>
-<span class="go">5    3    4</span>
-<span class="go">8    6    7</span>
-<span class="go">-----------</span>
-</pre></div>
-</div>
 </div>
 <div class="section" id="create-the-table-with-an-index">
 <h1>Create the table with an index<a class="headerlink" href="#create-the-table-with-an-index" title="Permalink to this headline">¶</a></h1>
 <p>A <code class="docutils literal notranslate"><span class="pre">Table</span></code> can be indexed like a dict if you designate a column as the index (and that column has a unique value for every row).</p>
-<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s2">&quot;Locus&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="s2">&quot;NP_055852&quot;</span><span class="p">])</span>
-<span class="go">====================================</span>
-<span class="go">    Locus    Region            Ratio</span>
-<span class="go">------------------------------------</span>
-<span class="go">NP_055852    NonCon    10933217.7090</span>
-<span class="go">------------------------------------</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">table</span><span class="p">[</span><span class="s2">&quot;NP_055852&quot;</span><span class="p">,</span> <span class="s2">&quot;Region&quot;</span><span class="p">]</span>
-<span class="go">&#39;NonCon&#39;</span>
-</pre></div>
-</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">index</span></code> argument also applies when using <code class="docutils literal notranslate"><span class="pre">make_table()</span></code>.</p>
 </div>
 </div>
-<div class="section" id="create-a-table-from-a-pandas-data-frame">
-<h1>Create a table from a <code class="docutils literal notranslate"><span class="pre">pandas</span></code> data frame<a class="headerlink" href="#create-a-table-from-a-pandas-data-frame" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">DataFrame</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">]],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">data_frame</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
-<span class="go">======</span>
-<span class="go">a    b</span>
-<span class="go">------</span>
-<span class="go">0    1</span>
-<span class="go">3    7</span>
-<span class="go">------</span>
-</pre></div>
+<div class="section" id="create-a-table-from-a-pandas-dataframe">
+<h1>Create a table from a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code><a class="headerlink" href="#create-a-table-from-a-pandas-dataframe" title="Permalink to this headline">¶</a></h1>
 </div>
+<div class="section" id="create-a-table-from-header-and-rows">
+<h1>Create a table from header and rows<a class="headerlink" href="#create-a-table-from-header-and-rows" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="create-a-table-from-dict">
+<h1>Create a table from dict<a class="headerlink" href="#create-a-table-from-dict" title="Permalink to this headline">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">make_table()</span></code> is the utility function for creating <code class="docutils literal notranslate"><span class="pre">Table</span></code> objects from standard python objects.</p>
+</div>
+<div class="section" id="create-a-table-from-a-2d-dict">
+<h1>Create a table from a 2D dict<a class="headerlink" href="#create-a-table-from-a-2d-dict" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="create-a-table-that-has-complex-python-objects-as-elements">
+<h1>Create a table that has complex python objects as elements<a class="headerlink" href="#create-a-table-that-has-complex-python-objects-as-elements" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="create-an-empty-table">
+<h1>Create an empty table<a class="headerlink" href="#create-an-empty-table" title="Permalink to this headline">¶</a></h1>
 </div>
 
 
@@ -264,7 +232,7 @@
     </p>
     <p>
         &copy; Copyright 2020, cogent3 Team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.1.1.<br/>
     </p>
   </div>
 </footer>

@@ -3,6 +3,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The simplest script &#8212; cogent3 2020.4 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -15,13 +16,10 @@
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="../../_static/require.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Performing a relative rate test" href="relative_rate.html" />
-    <link rel="prev" title="Estimating periodic signals" href="period_estimation.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -63,9 +61,9 @@
      href="../../index.html">Site <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
       role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul class="current">
+      aria-labelledby="dLabelGlobalToc"><ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../draw/index.html">Image Gallery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../general.html">Posting Bugs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../general.html#citation">Citation</a></li>
@@ -98,14 +96,6 @@
             
               
                 
-  <li>
-    <a href="period_estimation.html" title="Previous Chapter: Estimating periodic signals"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Estimating pe...</span>
-    </a>
-  </li>
-  <li>
-    <a href="relative_rate.html" title="Next Chapter: Performing a relative rate test"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Performing a ... &raquo;</span>
-    </a>
-  </li>
               
             
             
@@ -134,38 +124,7 @@
   <div class="section" id="the-simplest-script">
 <h1>The simplest script<a class="headerlink" href="#the-simplest-script" title="Permalink to this headline">¶</a></h1>
 <p><em>Section author: Gavin Huttley</em></p>
-<p>This is just about the simplest possible <code class="docutils literal notranslate"><span class="pre">cogent3</span></code> script for evolutionary modelling. We use a canned nucleotide substitution model (the <code class="docutils literal notranslate"><span class="pre">HKY85</span></code> model) on just three primate species. As there is only one unrooted tree possible, the sequence names are all that’s required to make the tree.</p>
-<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3.evolve.models</span> <span class="kn">import</span> <span class="n">HKY85</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span><span class="p">,</span> <span class="n">make_tree</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">HKY85</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">aln</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/primate_cdx2_promoter.fasta&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">make_tree</span><span class="p">(</span><span class="n">tip_names</span><span class="o">=</span><span class="n">aln</span><span class="o">.</span><span class="n">names</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">lf</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">lf</span><span class="o">.</span><span class="n">set_alignment</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">lf</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lf</span><span class="p">)</span>
-<span class="go">Likelihood function statistics</span>
-<span class="go">log-likelihood = -2494.9537</span>
-<span class="go">number of free parameters = 4</span>
-<span class="go">======</span>
-<span class="go"> kappa</span>
-<span class="go">------</span>
-<span class="go">5.9589</span>
-<span class="go">------</span>
-<span class="go">===========================</span>
-<span class="go">   edge    parent    length</span>
-<span class="go">---------------------------</span>
-<span class="go">  human      root    0.0040</span>
-<span class="go">macaque      root    0.0384</span>
-<span class="go">  chimp      root    0.0061</span>
-<span class="go">---------------------------</span>
-<span class="go">====================================</span>
-<span class="go">     A         C         G         T</span>
-<span class="go">------------------------------------</span>
-<span class="go">0.2439    0.2581    0.2428    0.2552</span>
-<span class="go">------------------------------------</span>
-</pre></div>
-</div>
+<p>We use a canned nucleotide substitution model (the <code class="docutils literal notranslate"><span class="pre">HKY85</span></code> model) on just three primate species. As there is only one unrooted tree possible, the sequence names are all that’s required to make the tree.</p>
 </div>
 
 
@@ -181,7 +140,7 @@
     </p>
     <p>
         &copy; Copyright 2020, cogent3 Team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.1.1.<br/>
     </p>
   </div>
 </footer>

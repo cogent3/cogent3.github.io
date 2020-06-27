@@ -3,6 +3,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Make a neighbor joining tree &#8212; cogent3 2020.4 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -15,13 +16,10 @@
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="../../_static/require.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Make a UPGMA cluster" href="calculate_UPGMA_cluster.html" />
-    <link rel="prev" title="Calculate pairwise distances between sequences" href="calculate_pairwise_distances.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -63,9 +61,9 @@
      href="../../index.html">Site <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
       role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul class="current">
+      aria-labelledby="dLabelGlobalToc"><ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../draw/index.html">Image Gallery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../general.html">Posting Bugs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../general.html#citation">Citation</a></li>
@@ -98,14 +96,6 @@
             
               
                 
-  <li>
-    <a href="calculate_pairwise_distances.html" title="Previous Chapter: Calculate pairwise distances between sequences"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Calculate pai...</span>
-    </a>
-  </li>
-  <li>
-    <a href="calculate_UPGMA_cluster.html" title="Next Chapter: Make a UPGMA cluster"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">Make a UPGMA cluster &raquo;</span>
-    </a>
-  </li>
               
             
             
@@ -135,44 +125,11 @@
 <h1>Make a neighbor joining tree<a class="headerlink" href="#make-a-neighbor-joining-tree" title="Permalink to this headline">¶</a></h1>
 <p><em>Section author: Gavin Huttley</em></p>
 <p>An example of how to calculate the pairwise distances for a set of sequences.</p>
-<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3.evolve</span> <span class="kn">import</span> <span class="n">distance</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3.phylo</span> <span class="kn">import</span> <span class="n">nj</span>
-</pre></div>
-</div>
 <p>Import a substitution model (or create your own)</p>
-<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3.evolve.models</span> <span class="kn">import</span> <span class="n">HKY85</span>
-</pre></div>
-</div>
 <p>Load the alignment.</p>
-<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">al</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/long_testseqs.fasta&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
 <p>Create a pairwise distances object calculator for the alignment, providing a substitution model instance.</p>
-<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">distance</span><span class="o">.</span><span class="n">EstimateDistances</span><span class="p">(</span><span class="n">al</span><span class="p">,</span> <span class="n">submodel</span><span class="o">=</span><span class="n">HKY85</span><span class="p">())</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</pre></div>
-</div>
 <p>Now use this matrix to build a neighbour joining tree.</p>
-<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mytree</span> <span class="o">=</span> <span class="n">nj</span><span class="o">.</span><span class="n">nj</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">get_pairwise_distances</span><span class="p">())</span>
-</pre></div>
-</div>
-<p>We can visualise this tree by <code class="docutils literal notranslate"><span class="pre">print</span> <span class="pre">mytree.ascii_art()</span></code>, which generates the equivalent of:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>                    <span class="o">/-</span><span class="n">Human</span>
-          <span class="o">/</span><span class="n">edge</span><span class="o">.</span><span class="mi">0</span><span class="o">--|</span>
-         <span class="o">|</span>          \<span class="o">-</span><span class="n">HowlerMon</span>
-         <span class="o">|</span>
-<span class="o">-</span><span class="n">root</span><span class="o">----|</span>          <span class="o">/-</span><span class="n">NineBande</span>
-         <span class="o">|-</span><span class="n">edge</span><span class="o">.</span><span class="mi">1</span><span class="o">--|</span>
-         <span class="o">|</span>          \<span class="o">-</span><span class="n">DogFaced</span>
-         <span class="o">|</span>
-          \<span class="o">-</span><span class="n">Mouse</span>
-</pre></div>
-</div>
 <p>We can save this tree to file.</p>
-<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mytree</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;test_nj.tree&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
 </div>
 
 
@@ -188,7 +145,7 @@
     </p>
     <p>
         &copy; Copyright 2020, cogent3 Team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.1.1.<br/>
     </p>
   </div>
 </footer>

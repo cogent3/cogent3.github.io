@@ -3,6 +3,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ArrayAlignment &#8212; cogent3 2020.4 documentation</title>
     <link rel="stylesheet" href="../../../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
@@ -15,13 +16,10 @@
     <script src="../../../../_static/doctools.js"></script>
     <script src="../../../../_static/language_data.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="../../../../_static/require.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
-    <link rel="next" title="sequence" href="../../sequence/sequence.html" />
-    <link rel="prev" title="Alignment" href="cogent3.core.alignment.Alignment.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -63,9 +61,9 @@
      href="../../../../index.html">Site <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
       role="menu"
-      aria-labelledby="dLabelGlobalToc"><ul class="current">
+      aria-labelledby="dLabelGlobalToc"><ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../draw/index.html">Image Gallery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../general.html">Posting Bugs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../general.html#citation">Citation</a></li>
@@ -98,14 +96,6 @@
             
               
                 
-  <li>
-    <a href="cogent3.core.alignment.Alignment.html" title="Previous Chapter: Alignment"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Alignment</span>
-    </a>
-  </li>
-  <li>
-    <a href="../../sequence/sequence.html" title="Next Chapter: sequence"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">sequence &raquo;</span>
-    </a>
-  </li>
               
             
             
@@ -236,7 +226,7 @@ them, primarily for efficiency.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.ArrayAlignment.deepcopy" title="cogent3.core.alignment.ArrayAlignment.deepcopy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">deepcopy</span></code></a>(self[, sliced])</p></td>
 <td><p>Returns deep copy of self.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.ArrayAlignment.degap" title="cogent3.core.alignment.ArrayAlignment.degap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">degap</span></code></a>(self, \*\*kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.ArrayAlignment.degap" title="cogent3.core.alignment.ArrayAlignment.degap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">degap</span></code></a>(self, **kwargs)</p></td>
 <td><p>Returns copy in which sequences have no gaps.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.ArrayAlignment.distance_matrix" title="cogent3.core.alignment.ArrayAlignment.distance_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">distance_matrix</span></code></a>(self[, calc, show_progress, …])</p></td>
@@ -715,7 +705,7 @@ motif columns</p>
 
 <dl class="py method">
 <dt id="cogent3.core.alignment.ArrayAlignment.degap">
-<code class="sig-name descname">degap</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">\*\*kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.alignment.ArrayAlignment.degap" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">degap</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.alignment.ArrayAlignment.degap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns copy in which sequences have no gaps.</p>
 </dd></dl>
 
@@ -805,7 +795,7 @@ this avoids unnecessary calculations.</p>
 
 <dl class="py method">
 <dt id="cogent3.core.alignment.ArrayAlignment.filtered">
-<code class="sig-name descname">filtered</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">predicate</em>, <em class="sig-param">motif_length=1</em>, <em class="sig-param">drop_remainder=True</em>, <em class="sig-param">\*\*kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.alignment.ArrayAlignment.filtered" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">filtered</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">predicate</span></em>, <em class="sig-param"><span class="n">motif_length</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">drop_remainder</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.alignment.ArrayAlignment.filtered" title="Permalink to this definition">¶</a></dt>
 <dd><p>The alignment positions where predicate(column) is true.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -960,7 +950,7 @@ otherwise the string is used</p>
 
 <dl class="py method">
 <dt id="cogent3.core.alignment.ArrayAlignment.get_similar">
-<code class="sig-name descname">get_similar</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">target</em>, <em class="sig-param">min_similarity=0.0</em>, <em class="sig-param">max_similarity=1.0</em>, <em class="sig-param">metric=&lt;cogent3.util.transform.for_seq object at 0x119617970&gt;</em>, <em class="sig-param">transform=None</em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.alignment.ArrayAlignment.get_similar" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_similar</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">target</em>, <em class="sig-param">min_similarity=0.0</em>, <em class="sig-param">max_similarity=1.0</em>, <em class="sig-param">metric=&lt;cogent3.util.transform.for_seq object at 0x7fb59eaf2e50&gt;</em>, <em class="sig-param">transform=None</em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.alignment.ArrayAlignment.get_similar" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns new Alignment containing sequences similar to target.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1009,7 +999,7 @@ original alignment.</p>
 
 <dl class="py method">
 <dt id="cogent3.core.alignment.ArrayAlignment.get_translation">
-<code class="sig-name descname">get_translation</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">gc=None</em>, <em class="sig-param">incomplete_ok=False</em>, <em class="sig-param">\*\*kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.alignment.ArrayAlignment.get_translation" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_translation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">gc</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">incomplete_ok</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.alignment.ArrayAlignment.get_translation" title="Permalink to this definition">¶</a></dt>
 <dd><p>translate from nucleic acid to protein</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1250,7 +1240,7 @@ Default is 0.</p>
 
 <dl class="py method">
 <dt id="cogent3.core.alignment.ArrayAlignment.pad_seqs">
-<code class="sig-name descname">pad_seqs</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">pad_length=None</em>, <em class="sig-param">\*\*kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.alignment.ArrayAlignment.pad_seqs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">pad_seqs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">pad_length</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.alignment.ArrayAlignment.pad_seqs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns copy in which sequences are padded to same length.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1385,7 +1375,7 @@ in self). If False, seqs must be the same lengths.</p>
 
 <dl class="py method">
 <dt id="cogent3.core.alignment.ArrayAlignment.sample">
-<code class="sig-name descname">sample</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">n=None</em>, <em class="sig-param">with_replacement=False</em>, <em class="sig-param">motif_length=1</em>, <em class="sig-param">randint=&lt;built-in method randint of numpy.random.mtrand.RandomState object at 0x1183e7640&gt;</em>, <em class="sig-param">permutation=&lt;built-in method permutation of numpy.random.mtrand.RandomState object at 0x1183e7640&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.alignment.ArrayAlignment.sample" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">sample</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">n=None</em>, <em class="sig-param">with_replacement=False</em>, <em class="sig-param">motif_length=1</em>, <em class="sig-param">randint=&lt;built-in method randint of numpy.random.mtrand.RandomState object at 0x7fb59dabb740&gt;</em>, <em class="sig-param">permutation=&lt;built-in method permutation of numpy.random.mtrand.RandomState object at 0x7fb59dabb740&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.alignment.ArrayAlignment.sample" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns random sample of positions from self, e.g. to bootstrap.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters</dt>
@@ -1503,7 +1493,7 @@ can be specified.</p>
 
 <dl class="py method">
 <dt id="cogent3.core.alignment.ArrayAlignment.take_seqs">
-<code class="sig-name descname">take_seqs</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">seqs</em>, <em class="sig-param">negate=False</em>, <em class="sig-param">\*\*kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.alignment.ArrayAlignment.take_seqs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">take_seqs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">seqs</span></em>, <em class="sig-param"><span class="n">negate</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.alignment.ArrayAlignment.take_seqs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns new Alignment containing only specified seqs.</p>
 <p>Note that the seqs in the new alignment will be references to the
 same objects as the seqs in the old alignment.</p>
@@ -1511,7 +1501,7 @@ same objects as the seqs in the old alignment.</p>
 
 <dl class="py method">
 <dt id="cogent3.core.alignment.ArrayAlignment.take_seqs_if">
-<code class="sig-name descname">take_seqs_if</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">f</em>, <em class="sig-param">negate=False</em>, <em class="sig-param">\*\*kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.alignment.ArrayAlignment.take_seqs_if" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">take_seqs_if</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">f</span></em>, <em class="sig-param"><span class="n">negate</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.alignment.ArrayAlignment.take_seqs_if" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns new Alignment containing seqs where f(row) is True.</p>
 <p>Note that the seqs in the new Alignment are the same objects as the
 seqs in the old Alignment, not copies.</p>
@@ -1672,55 +1662,55 @@ Alignment class. Conversion to ArrayAlignment loses annotations.</p>
 <dt>
 <code class="sig-name descname">ArrayAlignment.trim_stop_codons(self, gc=Standard Nuclear</code></dt>
 <dt>
-<code class="sig-name descname">======================================================</code></dt>
+<code class="sig-name descname">ArrayAlignment.trim_stop_codons======================================================</code></dt>
 <dt>
-<code class="sig-name descname">aa    IUPAC code                     codons</code></dt>
+<code class="sig-name descname">ArrayAlignment.trim_stop_codons           aa    IUPAC code                     codons</code></dt>
 <dt>
-<code class="sig-name descname">------------------------------------------------------</code></dt>
+<code class="sig-name descname">ArrayAlignment.trim_stop_codons------------------------------------------------------</code></dt>
 <dt>
-<code class="sig-name descname">Alanine             A            GCT,GCC,GCA,GCG</code></dt>
+<code class="sig-name descname">ArrayAlignment.trim_stop_codons      Alanine             A            GCT,GCC,GCA,GCG</code></dt>
 <dt>
-<code class="sig-name descname">Cysteine             C                    TGT,TGC</code></dt>
+<code class="sig-name descname">ArrayAlignment.trim_stop_codons     Cysteine             C                    TGT,TGC</code></dt>
 <dt>
-<code class="sig-name descname">Aspartic Acid             D                    GAT,GAC</code></dt>
+<code class="sig-name descname">ArrayAlignment.trim_stop_codonsAspartic Acid             D                    GAT,GAC</code></dt>
 <dt>
-<code class="sig-name descname">Glutamic Acid             E                    GAA,GAG</code></dt>
+<code class="sig-name descname">ArrayAlignment.trim_stop_codonsGlutamic Acid             E                    GAA,GAG</code></dt>
 <dt>
-<code class="sig-name descname">Phenylalanine             F                    TTT,TTC</code></dt>
+<code class="sig-name descname">ArrayAlignment.trim_stop_codonsPhenylalanine             F                    TTT,TTC</code></dt>
 <dt>
-<code class="sig-name descname">Glycine             G            GGT,GGC,GGA,GGG</code></dt>
+<code class="sig-name descname">ArrayAlignment.trim_stop_codons      Glycine             G            GGT,GGC,GGA,GGG</code></dt>
 <dt>
-<code class="sig-name descname">Histidine             H                    CAT,CAC</code></dt>
+<code class="sig-name descname">ArrayAlignment.trim_stop_codons    Histidine             H                    CAT,CAC</code></dt>
 <dt>
-<code class="sig-name descname">Isoleucine             I                ATT,ATC,ATA</code></dt>
+<code class="sig-name descname">ArrayAlignment.trim_stop_codons   Isoleucine             I                ATT,ATC,ATA</code></dt>
 <dt>
-<code class="sig-name descname">Lysine             K                    AAA,AAG</code></dt>
+<code class="sig-name descname">ArrayAlignment.trim_stop_codons       Lysine             K                    AAA,AAG</code></dt>
 <dt>
-<code class="sig-name descname">Leucine             L    TTA,TTG,CTT,CTC,CTA,CTG</code></dt>
+<code class="sig-name descname">ArrayAlignment.trim_stop_codons      Leucine             L    TTA,TTG,CTT,CTC,CTA,CTG</code></dt>
 <dt>
-<code class="sig-name descname">Methionine             M                        ATG</code></dt>
+<code class="sig-name descname">ArrayAlignment.trim_stop_codons   Methionine             M                        ATG</code></dt>
 <dt>
-<code class="sig-name descname">Asparagine             N                    AAT,AAC</code></dt>
+<code class="sig-name descname">ArrayAlignment.trim_stop_codons   Asparagine             N                    AAT,AAC</code></dt>
 <dt>
-<code class="sig-name descname">Proline             P            CCT,CCC,CCA,CCG</code></dt>
+<code class="sig-name descname">ArrayAlignment.trim_stop_codons      Proline             P            CCT,CCC,CCA,CCG</code></dt>
 <dt>
-<code class="sig-name descname">Glutamine             Q                    CAA,CAG</code></dt>
+<code class="sig-name descname">ArrayAlignment.trim_stop_codons    Glutamine             Q                    CAA,CAG</code></dt>
 <dt>
-<code class="sig-name descname">Arginine             R    CGT,CGC,CGA,CGG,AGA,AGG</code></dt>
+<code class="sig-name descname">ArrayAlignment.trim_stop_codons     Arginine             R    CGT,CGC,CGA,CGG,AGA,AGG</code></dt>
 <dt>
-<code class="sig-name descname">Serine             S    TCT,TCC,TCA,TCG,AGT,AGC</code></dt>
+<code class="sig-name descname">ArrayAlignment.trim_stop_codons       Serine             S    TCT,TCC,TCA,TCG,AGT,AGC</code></dt>
 <dt>
-<code class="sig-name descname">Threonine             T            ACT,ACC,ACA,ACG</code></dt>
+<code class="sig-name descname">ArrayAlignment.trim_stop_codons    Threonine             T            ACT,ACC,ACA,ACG</code></dt>
 <dt>
-<code class="sig-name descname">Valine             V            GTT,GTC,GTA,GTG</code></dt>
+<code class="sig-name descname">ArrayAlignment.trim_stop_codons       Valine             V            GTT,GTC,GTA,GTG</code></dt>
 <dt>
-<code class="sig-name descname">Tryptophan             W                        TGG</code></dt>
+<code class="sig-name descname">ArrayAlignment.trim_stop_codons   Tryptophan             W                        TGG</code></dt>
 <dt>
-<code class="sig-name descname">Tyrosine             Y                    TAT,TAC</code></dt>
+<code class="sig-name descname">ArrayAlignment.trim_stop_codons     Tyrosine             Y                    TAT,TAC</code></dt>
 <dt>
-<code class="sig-name descname">STOP             \*                TAA,TAG,TGA</code></dt>
+<code class="sig-name descname">ArrayAlignment.trim_stop_codons         STOP             *                TAA,TAG,TGA</code></dt>
 <dt>
-<code class="sig-name descname">------------------------------------------------------, allow_partial=False, \*\*kwargs)</code></dt>
+<code class="sig-name descname">ArrayAlignment.trim_stop_codons------------------------------------------------------, allow_partial=False, **kwargs)</code></dt>
 <dd><p>Removes any terminal stop codons from the sequences</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1760,7 +1750,7 @@ alignment programs when aligned sequences have different ends.</p>
 
 <dl class="py method">
 <dt id="cogent3.core.alignment.ArrayAlignment.write">
-<code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param">self</em>, <em class="sig-param">filename=None</em>, <em class="sig-param">format=None</em>, <em class="sig-param">\*\*kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.alignment.ArrayAlignment.write" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">filename</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">format</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.alignment.ArrayAlignment.write" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write the alignment to a file, preserving order of sequences.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1794,7 +1784,7 @@ suffix.</p>
     </p>
     <p>
         &copy; Copyright 2020, cogent3 Team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.1.1.<br/>
     </p>
   </div>
 </footer>

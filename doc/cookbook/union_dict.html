@@ -3,6 +3,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UnionDict – a dict with set like operations and keys as attributes &#8212; cogent3 2020.4 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -15,9 +16,8 @@
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="../../_static/require.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
 <meta charset='utf-8'>
@@ -132,49 +132,15 @@
 <div class="section" id="accessing-elements-of-a-uniondict">
 <h2>Accessing elements of a <code class="docutils literal notranslate"><span class="pre">UnionDict</span></code><a class="headerlink" href="#accessing-elements-of-a-uniondict" title="Permalink to this headline">¶</a></h2>
 <p>Keys in a <code class="docutils literal notranslate"><span class="pre">UnionDict</span></code> can be accessed like attributes</p>
-<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3.util.union_dict</span> <span class="kn">import</span> <span class="n">UnionDict</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">UnionDict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">25</span><span class="p">]})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">a</span>
-<span class="go">2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span>
-<span class="go">2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">d</span>
-<span class="go">[25]</span>
-</pre></div>
-</div>
 </div>
 <div class="section" id="updating-a-uniondict">
 <h2>Updating a <code class="docutils literal notranslate"><span class="pre">UnionDict</span></code><a class="headerlink" href="#updating-a-uniondict" title="Permalink to this headline">¶</a></h2>
 <p>If you use the <code class="docutils literal notranslate"><span class="pre">|</span></code> bitwise operator to compare two dicts and the left one is a <code class="docutils literal notranslate"><span class="pre">UnionDict</span></code>, a union operation is performed.</p>
-<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3.util.union_dict</span> <span class="kn">import</span> <span class="n">UnionDict</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">UnionDict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">25</span><span class="p">]})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">b</span> <span class="o">|=</span> <span class="p">{</span><span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">b</span>
-<span class="go">{&#39;c&#39;: 24, &#39;d&#39;: 25}</span>
-</pre></div>
-</div>
 <p>This can also be done using the <code class="docutils literal notranslate"><span class="pre">union</span></code> method.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">union</span><span class="p">({</span><span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">25</span><span class="p">]})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">b</span>
-<span class="go">{&#39;c&#39;: 24, &#39;d&#39;: [25]}</span>
-</pre></div>
-</div>
 </div>
 <div class="section" id="accessing-a-non-existent-uniondict-key">
 <h2>Accessing a non-existent <code class="docutils literal notranslate"><span class="pre">UnionDict</span></code> key<a class="headerlink" href="#accessing-a-non-existent-uniondict-key" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cogent3.util.union_dict</span> <span class="kn">import</span> <span class="n">UnionDict</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">UnionDict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">25</span><span class="p">]})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;k&quot;</span><span class="p">]</span>
-<span class="gt">Traceback (most recent call last):</span>
-<span class="gr">KeyError</span>: <span class="n">&#39;k&#39;</span>
-</pre></div>
-</div>
 <p>But if accessing as an attribute, you get an attribute error.</p>
-<div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">k</span>
-<span class="gt">Traceback (most recent call last):</span>
-<span class="gr">AttributeError</span>: <span class="n">&#39;k&#39; not a key or attribute</span>
-</pre></div>
-</div>
 </div>
 </div>
 
@@ -191,7 +157,7 @@
     </p>
     <p>
         &copy; Copyright 2020, cogent3 Team.<br/>
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.3.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.1.1.<br/>
     </p>
   </div>
 </footer>
