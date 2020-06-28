@@ -7,6 +7,9 @@
     <title>Genetic distance calculation &#8212; cogent3 2020.4 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-dataframe.css" />
@@ -15,6 +18,8 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="../../_static/require.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
@@ -127,25 +132,492 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="genetic-distance-calculation">
+  <div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="section" id="genetic-distance-calculation">
 <h1>Genetic distance calculation<a class="headerlink" href="#genetic-distance-calculation" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="fast-pairwise-distance-estimation">
 <h2>Fast pairwise distance estimation<a class="headerlink" href="#fast-pairwise-distance-estimation" title="Permalink to this headline">¶</a></h2>
 <p>For a limited number of evolutionary models a fast implementation is
 available.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">available_distances</span>
+
+<span class="n">available_distances</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Specify a pairwise genetic distance calculator using 'Abbreviation' (case insensitive).</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>Abbreviation</th>
+<th>Suitable for moltype</th>
+</thead>
+<tbody>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">paralinear</td>
+<td>dna, rna, protein</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">logdet</td>
+<td>dna, rna, protein</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">jc69</td>
+<td>dna, rna</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">tn93</td>
+<td>dna, rna</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">hamming</td>
+<td>dna, rna, protein, text</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">percent</td>
+<td>dna, rna, protein, text</td>
+</tr>
+</tbody>
+</table>
+<p>
+6 rows x 2 columns</p></div></div>
+</div>
 </div>
 <div class="section" id="computing-genetic-distances-using-the-alignment-object">
 <h2>Computing genetic distances using the <code class="docutils literal notranslate"><span class="pre">Alignment</span></code> object<a class="headerlink" href="#computing-genetic-distances-using-the-alignment-object" title="Permalink to this headline">¶</a></h2>
 <p>Abbreviations listed from <code class="docutils literal notranslate"><span class="pre">available_distances()</span></code> can be used as values for the <code class="docutils literal notranslate"><span class="pre">distance_matrix(calc=&lt;abbreviation&gt;)</span></code>.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
+
+<span class="n">aln</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/primate_brca1.fasta&quot;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+<span class="n">dists</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">distance_matrix</span><span class="p">(</span><span class="n">calc</span><span class="o">=</span><span class="s2">&quot;tn93&quot;</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">dists</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th></th>
+<th>Chimpanzee</th>
+<th>Galago</th>
+<th>Gorilla</th>
+<th>HowlerMon</th>
+<th>Human</th>
+<th>Orangutan</th>
+<th>Rhesus</th>
+</thead>
+<tbody>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">Chimpanzee</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.192</td>
+<td style="font-family: monospace !important;">0.005</td>
+<td style="font-family: monospace !important;">0.070</td>
+<td style="font-family: monospace !important;">0.009</td>
+<td style="font-family: monospace !important;">0.014</td>
+<td style="font-family: monospace !important;">0.040</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">Galago</td>
+<td style="font-family: monospace !important;">0.192</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.192</td>
+<td style="font-family: monospace !important;">0.216</td>
+<td style="font-family: monospace !important;">0.196</td>
+<td style="font-family: monospace !important;">0.194</td>
+<td style="font-family: monospace !important;">0.196</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">Gorilla</td>
+<td style="font-family: monospace !important;">0.005</td>
+<td style="font-family: monospace !important;">0.192</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.070</td>
+<td style="font-family: monospace !important;">0.009</td>
+<td style="font-family: monospace !important;">0.014</td>
+<td style="font-family: monospace !important;">0.039</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">HowlerMon</td>
+<td style="font-family: monospace !important;">0.070</td>
+<td style="font-family: monospace !important;">0.216</td>
+<td style="font-family: monospace !important;">0.070</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.074</td>
+<td style="font-family: monospace !important;">0.072</td>
+<td style="font-family: monospace !important;">0.074</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">Human</td>
+<td style="font-family: monospace !important;">0.009</td>
+<td style="font-family: monospace !important;">0.196</td>
+<td style="font-family: monospace !important;">0.009</td>
+<td style="font-family: monospace !important;">0.074</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.017</td>
+<td style="font-family: monospace !important;">0.042</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">Orangutan</td>
+<td style="font-family: monospace !important;">0.014</td>
+<td style="font-family: monospace !important;">0.194</td>
+<td style="font-family: monospace !important;">0.014</td>
+<td style="font-family: monospace !important;">0.072</td>
+<td style="font-family: monospace !important;">0.017</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.041</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">Rhesus</td>
+<td style="font-family: monospace !important;">0.040</td>
+<td style="font-family: monospace !important;">0.196</td>
+<td style="font-family: monospace !important;">0.039</td>
+<td style="font-family: monospace !important;">0.074</td>
+<td style="font-family: monospace !important;">0.042</td>
+<td style="font-family: monospace !important;">0.041</td>
+<td style="font-family: monospace !important;">0.000</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</div>
 </div>
 <div class="section" id="using-the-distance-calculator-directly">
 <h2>Using the distance calculator directly<a class="headerlink" href="#using-the-distance-calculator-directly" title="Permalink to this headline">¶</a></h2>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span><span class="p">,</span> <span class="n">get_distance_calculator</span>
+
+<span class="n">aln</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/primate_brca1.fasta&quot;</span><span class="p">)</span>
+<span class="n">dist_calc</span> <span class="o">=</span> <span class="n">get_distance_calculator</span><span class="p">(</span><span class="s2">&quot;tn93&quot;</span><span class="p">,</span> <span class="n">alignment</span><span class="o">=</span><span class="n">aln</span><span class="p">)</span>
+<span class="n">dist_calc</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;cogent3.evolve.fast_distance.TN93Pair at 0x7ff066288c70&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dist_calc</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">dists</span> <span class="o">=</span> <span class="n">dist_calc</span><span class="o">.</span><span class="n">get_pairwise_distances</span><span class="p">()</span>
+<span class="n">dists</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th></th>
+<th>Chimpanzee</th>
+<th>Galago</th>
+<th>Gorilla</th>
+<th>HowlerMon</th>
+<th>Human</th>
+<th>Orangutan</th>
+<th>Rhesus</th>
+</thead>
+<tbody>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">Chimpanzee</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.192</td>
+<td style="font-family: monospace !important;">0.005</td>
+<td style="font-family: monospace !important;">0.070</td>
+<td style="font-family: monospace !important;">0.009</td>
+<td style="font-family: monospace !important;">0.014</td>
+<td style="font-family: monospace !important;">0.040</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">Galago</td>
+<td style="font-family: monospace !important;">0.192</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.192</td>
+<td style="font-family: monospace !important;">0.216</td>
+<td style="font-family: monospace !important;">0.196</td>
+<td style="font-family: monospace !important;">0.194</td>
+<td style="font-family: monospace !important;">0.196</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">Gorilla</td>
+<td style="font-family: monospace !important;">0.005</td>
+<td style="font-family: monospace !important;">0.192</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.070</td>
+<td style="font-family: monospace !important;">0.009</td>
+<td style="font-family: monospace !important;">0.014</td>
+<td style="font-family: monospace !important;">0.039</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">HowlerMon</td>
+<td style="font-family: monospace !important;">0.070</td>
+<td style="font-family: monospace !important;">0.216</td>
+<td style="font-family: monospace !important;">0.070</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.074</td>
+<td style="font-family: monospace !important;">0.072</td>
+<td style="font-family: monospace !important;">0.074</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">Human</td>
+<td style="font-family: monospace !important;">0.009</td>
+<td style="font-family: monospace !important;">0.196</td>
+<td style="font-family: monospace !important;">0.009</td>
+<td style="font-family: monospace !important;">0.074</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.017</td>
+<td style="font-family: monospace !important;">0.042</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">Orangutan</td>
+<td style="font-family: monospace !important;">0.014</td>
+<td style="font-family: monospace !important;">0.194</td>
+<td style="font-family: monospace !important;">0.014</td>
+<td style="font-family: monospace !important;">0.072</td>
+<td style="font-family: monospace !important;">0.017</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.041</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">Rhesus</td>
+<td style="font-family: monospace !important;">0.040</td>
+<td style="font-family: monospace !important;">0.196</td>
+<td style="font-family: monospace !important;">0.039</td>
+<td style="font-family: monospace !important;">0.074</td>
+<td style="font-family: monospace !important;">0.042</td>
+<td style="font-family: monospace !important;">0.041</td>
+<td style="font-family: monospace !important;">0.000</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</div>
 <p>The distance calculation object can provide more information. For instance, the standard errors.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dist_calc</span><span class="o">.</span><span class="n">stderr</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Standard Error of Pairwise Distances</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>Seq1 \ Seq2</th>
+<th>Galago</th>
+<th>HowlerMon</th>
+<th>Rhesus</th>
+<th>Orangutan</th>
+<th>Gorilla</th>
+<th>Human</th>
+<th>Chimpanzee</th>
+</thead>
+<tbody>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">Galago</td>
+<td style="font-family: monospace !important;">0</td>
+<td style="font-family: monospace !important;">0.0103</td>
+<td style="font-family: monospace !important;">0.0096</td>
+<td style="font-family: monospace !important;">0.0095</td>
+<td style="font-family: monospace !important;">0.0095</td>
+<td style="font-family: monospace !important;">0.0096</td>
+<td style="font-family: monospace !important;">0.0095</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">HowlerMon</td>
+<td style="font-family: monospace !important;">0.0103</td>
+<td style="font-family: monospace !important;">0</td>
+<td style="font-family: monospace !important;">0.0054</td>
+<td style="font-family: monospace !important;">0.0053</td>
+<td style="font-family: monospace !important;">0.0053</td>
+<td style="font-family: monospace !important;">0.0054</td>
+<td style="font-family: monospace !important;">0.0053</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">Rhesus</td>
+<td style="font-family: monospace !important;">0.0096</td>
+<td style="font-family: monospace !important;">0.0054</td>
+<td style="font-family: monospace !important;">0</td>
+<td style="font-family: monospace !important;">0.0039</td>
+<td style="font-family: monospace !important;">0.0039</td>
+<td style="font-family: monospace !important;">0.0040</td>
+<td style="font-family: monospace !important;">0.0039</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">Orangutan</td>
+<td style="font-family: monospace !important;">0.0095</td>
+<td style="font-family: monospace !important;">0.0053</td>
+<td style="font-family: monospace !important;">0.0039</td>
+<td style="font-family: monospace !important;">0</td>
+<td style="font-family: monospace !important;">0.0022</td>
+<td style="font-family: monospace !important;">0.0025</td>
+<td style="font-family: monospace !important;">0.0023</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">Gorilla</td>
+<td style="font-family: monospace !important;">0.0095</td>
+<td style="font-family: monospace !important;">0.0053</td>
+<td style="font-family: monospace !important;">0.0039</td>
+<td style="font-family: monospace !important;">0.0022</td>
+<td style="font-family: monospace !important;">0</td>
+<td style="font-family: monospace !important;">0.0018</td>
+<td style="font-family: monospace !important;">0.0014</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">Human</td>
+<td style="font-family: monospace !important;">0.0096</td>
+<td style="font-family: monospace !important;">0.0054</td>
+<td style="font-family: monospace !important;">0.0040</td>
+<td style="font-family: monospace !important;">0.0025</td>
+<td style="font-family: monospace !important;">0.0018</td>
+<td style="font-family: monospace !important;">0</td>
+<td style="font-family: monospace !important;">0.0018</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">Chimpanzee</td>
+<td style="font-family: monospace !important;">0.0095</td>
+<td style="font-family: monospace !important;">0.0053</td>
+<td style="font-family: monospace !important;">0.0039</td>
+<td style="font-family: monospace !important;">0.0023</td>
+<td style="font-family: monospace !important;">0.0014</td>
+<td style="font-family: monospace !important;">0.0018</td>
+<td style="font-family: monospace !important;">0</td>
+</tr>
+</tbody>
+</table>
+<p>
+7 rows x 8 columns</p></div></div>
+</div>
 </div>
 <div class="section" id="likelihood-based-pairwise-distance-estimation">
 <h2>Likelihood based pairwise distance estimation<a class="headerlink" href="#likelihood-based-pairwise-distance-estimation" title="Permalink to this headline">¶</a></h2>
 <p>The standard <code class="docutils literal notranslate"><span class="pre">cogent3</span></code> likelihood function can also be used to estimate distances. Because these require numerical optimisation they can be significantly slower than the fast estimation approach above.</p>
 <p>The following will use the F81 nucleotide substitution model and perform numerical optimisation.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span><span class="p">,</span> <span class="n">get_model</span>
+<span class="kn">from</span> <span class="nn">cogent3.evolve</span> <span class="kn">import</span> <span class="n">distance</span>
+
+<span class="n">aln</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/primate_brca1.fasta&quot;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">distance</span><span class="o">.</span><span class="n">EstimateDistances</span><span class="p">(</span><span class="n">aln</span><span class="p">,</span> <span class="n">submodel</span><span class="o">=</span><span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;F81&quot;</span><span class="p">))</span>
+<span class="n">d</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">dists</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">get_pairwise_distances</span><span class="p">()</span>
+<span class="n">dists</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th></th>
+<th>Chimpanzee</th>
+<th>Galago</th>
+<th>Gorilla</th>
+<th>HowlerMon</th>
+<th>Human</th>
+<th>Orangutan</th>
+<th>Rhesus</th>
+</thead>
+<tbody>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">Chimpanzee</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.189</td>
+<td style="font-family: monospace !important;">0.005</td>
+<td style="font-family: monospace !important;">0.070</td>
+<td style="font-family: monospace !important;">0.009</td>
+<td style="font-family: monospace !important;">0.014</td>
+<td style="font-family: monospace !important;">0.039</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">Galago</td>
+<td style="font-family: monospace !important;">0.189</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.189</td>
+<td style="font-family: monospace !important;">0.211</td>
+<td style="font-family: monospace !important;">0.193</td>
+<td style="font-family: monospace !important;">0.192</td>
+<td style="font-family: monospace !important;">0.193</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">Gorilla</td>
+<td style="font-family: monospace !important;">0.005</td>
+<td style="font-family: monospace !important;">0.189</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.069</td>
+<td style="font-family: monospace !important;">0.009</td>
+<td style="font-family: monospace !important;">0.014</td>
+<td style="font-family: monospace !important;">0.039</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">HowlerMon</td>
+<td style="font-family: monospace !important;">0.070</td>
+<td style="font-family: monospace !important;">0.211</td>
+<td style="font-family: monospace !important;">0.069</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.073</td>
+<td style="font-family: monospace !important;">0.071</td>
+<td style="font-family: monospace !important;">0.073</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">Human</td>
+<td style="font-family: monospace !important;">0.009</td>
+<td style="font-family: monospace !important;">0.193</td>
+<td style="font-family: monospace !important;">0.009</td>
+<td style="font-family: monospace !important;">0.073</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.017</td>
+<td style="font-family: monospace !important;">0.042</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">Orangutan</td>
+<td style="font-family: monospace !important;">0.014</td>
+<td style="font-family: monospace !important;">0.192</td>
+<td style="font-family: monospace !important;">0.014</td>
+<td style="font-family: monospace !important;">0.071</td>
+<td style="font-family: monospace !important;">0.017</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.041</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">Rhesus</td>
+<td style="font-family: monospace !important;">0.039</td>
+<td style="font-family: monospace !important;">0.193</td>
+<td style="font-family: monospace !important;">0.039</td>
+<td style="font-family: monospace !important;">0.073</td>
+<td style="font-family: monospace !important;">0.042</td>
+<td style="font-family: monospace !important;">0.041</td>
+<td style="font-family: monospace !important;">0.000</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</div>
 </div>
 </div>
 

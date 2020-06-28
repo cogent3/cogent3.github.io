@@ -7,6 +7,9 @@
     <title>Likelihood analysis of multiple loci &#8212; cogent3 2020.4 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-dataframe.css" />
@@ -15,6 +18,8 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="../../_static/require.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
@@ -121,13 +126,231 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="likelihood-analysis-of-multiple-loci">
+  <div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="section" id="likelihood-analysis-of-multiple-loci">
 <h1>Likelihood analysis of multiple loci<a class="headerlink" href="#likelihood-analysis-of-multiple-loci" title="Permalink to this headline">¶</a></h1>
 <p><em>Section author: Gavin Huttley</em></p>
 <p>We want to know whether an exchangeability parameter is different between alignments. We will specify a null model, under which each alignment get’s it’s own motif probabilities and all alignments share branch lengths and the exchangeability parameter kappa (the transition / transversion ratio). We’ll split the example alignment into two-pieces.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span><span class="p">,</span> <span class="n">make_tree</span><span class="p">,</span> <span class="n">make_table</span>
+<span class="kn">from</span> <span class="nn">cogent3.evolve.models</span> <span class="kn">import</span> <span class="n">HKY85</span>
+<span class="kn">from</span> <span class="nn">cogent3.recalculation.scope</span> <span class="kn">import</span> <span class="n">EACH</span><span class="p">,</span> <span class="n">ALL</span>
+<span class="kn">from</span> <span class="nn">cogent3.maths.stats</span> <span class="kn">import</span> <span class="n">chisqprob</span>
+
+<span class="n">aln</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/long_testseqs.fasta&quot;</span><span class="p">)</span>
+<span class="n">half</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+<span class="n">aln1</span> <span class="o">=</span> <span class="n">aln</span><span class="p">[:</span><span class="n">half</span><span class="p">]</span>
+<span class="n">aln2</span> <span class="o">=</span> <span class="n">aln</span><span class="p">[</span><span class="n">half</span><span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>We provide names for those alignments, then construct the tree, model instances.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">loci_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;1st-half&quot;</span><span class="p">,</span> <span class="s2">&quot;2nd-half&quot;</span><span class="p">]</span>
+<span class="n">loci</span> <span class="o">=</span> <span class="p">[</span><span class="n">aln1</span><span class="p">,</span> <span class="n">aln2</span><span class="p">]</span>
+<span class="n">tree</span> <span class="o">=</span> <span class="n">make_tree</span><span class="p">(</span><span class="n">tip_names</span><span class="o">=</span><span class="n">aln</span><span class="o">.</span><span class="n">names</span><span class="p">)</span>
+<span class="n">mod</span> <span class="o">=</span> <span class="n">HKY85</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>To make a likelihood function with multiple alignments we provide the list of loci names. We can then specify a parameter (other than length) to be the same across the loci (using the imported <code class="docutils literal notranslate"><span class="pre">ALL</span></code>) or different for each locus (using <code class="docutils literal notranslate"><span class="pre">EACH</span></code>). We conduct a LR test as before.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lf</span> <span class="o">=</span> <span class="n">mod</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">loci</span><span class="o">=</span><span class="n">loci_names</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span><span class="s2">&quot;length&quot;</span><span class="p">,</span> <span class="n">is_independent</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span><span class="s2">&quot;kappa&quot;</span><span class="p">,</span> <span class="n">loci</span><span class="o">=</span><span class="n">ALL</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">set_alignment</span><span class="p">(</span><span class="n">loci</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">lf</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><h4>Likelihood function statistics</h4>
+<p>log-likelihood = -9168.3331</p>
+<p>number of free parameters = 2</p>
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Global params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>kappa</th>
+<th>length</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">3.98</td>
+<td style="font-family: monospace !important;">0.13</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Locus motif params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>locus</th>
+<th>A</th>
+<th>C</th>
+<th>G</th>
+<th>T</th>
+</thead>
+<tbody>
+<tr>
+<td>1st-half</td>
+<td style="font-family: monospace !important;">0.38</td>
+<td style="font-family: monospace !important;">0.18</td>
+<td style="font-family: monospace !important;">0.21</td>
+<td style="font-family: monospace !important;">0.22</td>
+</tr>
+<tr>
+<td>2nd-half</td>
+<td style="font-family: monospace !important;">0.35</td>
+<td style="font-family: monospace !important;">0.19</td>
+<td style="font-family: monospace !important;">0.22</td>
+<td style="font-family: monospace !important;">0.24</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">all_lnL</span> <span class="o">=</span> <span class="n">lf</span><span class="o">.</span><span class="n">lnL</span>
+<span class="n">all_nfp</span> <span class="o">=</span> <span class="n">lf</span><span class="o">.</span><span class="n">nfp</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span><span class="s2">&quot;kappa&quot;</span><span class="p">,</span> <span class="n">loci</span><span class="o">=</span><span class="n">EACH</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">lf</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><h4>Likelihood function statistics</h4>
+<p>log-likelihood = -9167.5373</p>
+<p>number of free parameters = 3</p>
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Global params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>length</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.13</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Locus params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>locus</th>
+<th>kappa</th>
+</thead>
+<tbody>
+<tr>
+<td>1st-half</td>
+<td style="font-family: monospace !important;">4.33</td>
+</tr>
+<tr>
+<td>2nd-half</td>
+<td style="font-family: monospace !important;">3.74</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Locus motif params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>locus</th>
+<th>A</th>
+<th>C</th>
+<th>G</th>
+<th>T</th>
+</thead>
+<tbody>
+<tr>
+<td>1st-half</td>
+<td style="font-family: monospace !important;">0.38</td>
+<td style="font-family: monospace !important;">0.18</td>
+<td style="font-family: monospace !important;">0.21</td>
+<td style="font-family: monospace !important;">0.22</td>
+</tr>
+<tr>
+<td>2nd-half</td>
+<td style="font-family: monospace !important;">0.35</td>
+<td style="font-family: monospace !important;">0.19</td>
+<td style="font-family: monospace !important;">0.22</td>
+<td style="font-family: monospace !important;">0.24</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">each_lnL</span> <span class="o">=</span> <span class="n">lf</span><span class="o">.</span><span class="n">lnL</span>
+<span class="n">each_nfp</span> <span class="o">=</span> <span class="n">lf</span><span class="o">.</span><span class="n">nfp</span>
+<span class="n">LR</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">each_lnL</span> <span class="o">-</span> <span class="n">all_lnL</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">each_nfp</span> <span class="o">-</span> <span class="n">all_nfp</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>Just to pretty up the result display, I’ll print(a table consisting of the test statistics created on the fly.)</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make_table</span><span class="p">(</span>
+    <span class="n">header</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;LR&quot;</span><span class="p">,</span> <span class="s2">&quot;df&quot;</span><span class="p">,</span> <span class="s2">&quot;p&quot;</span><span class="p">],</span> <span class="n">rows</span><span class="o">=</span><span class="p">[[</span><span class="n">LR</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">chisqprob</span><span class="p">(</span><span class="n">LR</span><span class="p">,</span> <span class="n">df</span><span class="p">)]],</span> <span class="n">digits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>LR</th>
+<th>df</th>
+<th>p</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">1.59</td>
+<td style="font-family: monospace !important;">1</td>
+<td style="font-family: monospace !important;">0.21</td>
+</tr>
+</tbody>
+</table>
+<p>
+1 rows x 3 columns</p></div></div>
+</div>
 </div>
 
 

@@ -7,6 +7,9 @@
     <title>What apps are there? &#8212; cogent3 2020.4 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-dataframe.css" />
@@ -15,6 +18,8 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="../../_static/require.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
@@ -125,6 +130,396 @@
 <h1>What apps are there?<a class="headerlink" href="#what-apps-are-there" title="Permalink to this headline">¶</a></h1>
 <p>Apps perform functions ranging from multiple sequence alignment (e.g. <code class="docutils literal notranslate"><span class="pre">progressive_align</span></code>), to excluding alignment columns containing non-nucleotide characters (e.g. <code class="docutils literal notranslate"><span class="pre">omit_degenerates</span></code>) to performing maximum-likelihood evolutionary analyses (e.g. <code class="docutils literal notranslate"><span class="pre">model</span></code>).</p>
 <p>Apps that are identified as “composable” (with a value of <code class="docutils literal notranslate"><span class="pre">True</span></code> under that column) can be combined into a single function by addition.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">available_apps</span>
+
+<span class="n">available_apps</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>module</th>
+<th>name</th>
+<th>composable</th>
+<th>doc</th>
+<th>inputs</th>
+<th>outputs</th>
+<th>data type</th>
+</thead>
+<tbody>
+<tr>
+<td>cogent3.app.align</td>
+<td>align_to_ref</td>
+<td>True</td>
+<td>Aligns to a reference seq, no gaps in the reference.
+    Returns an Alignment object.</td>
+<td>sequences</td>
+<td>aligned, serialisable</td>
+<td>SequenceCollection</td>
+</tr>
+<tr>
+<td>cogent3.app.align</td>
+<td>progressive_align</td>
+<td>True</td>
+<td>Progressive multiple sequence alignment via any cogent3 model.
+     Returns an Alignment object.</td>
+<td>sequences</td>
+<td>aligned, serialisable</td>
+<td>SequenceCollection</td>
+</tr>
+<tr>
+<td>cogent3.app.dist</td>
+<td>fast_slow_dist</td>
+<td>True</td>
+<td>Pairwise distance calculation. Uses fast (but less
+    numerically robust) approach where possible, slow (robust)
+    approach when not. Returns a DistanceMatrix.</td>
+<td>aligned</td>
+<td>pairwise_distances, serialisable</td>
+<td>ArrayAlignment, Alignment</td>
+</tr>
+<tr>
+<td>cogent3.app.evo</td>
+<td>ancestral_states</td>
+<td>True</td>
+<td>Computes ancestral state probabilities from a model result. Returns a dict
+    with a DictArray for each node.</td>
+<td>model_result</td>
+<td>result, tabular_result, serialisable</td>
+<td>model_result</td>
+</tr>
+<tr>
+<td>cogent3.app.evo</td>
+<td>bootstrap</td>
+<td>True</td>
+<td>Parametric bootstrap for a provided hypothesis. Returns a bootstrap_result.</td>
+<td>aligned</td>
+<td>result, bootstrap_result, serialisable</td>
+<td>ArrayAlignment, Alignment</td>
+</tr>
+<tr>
+<td>cogent3.app.evo</td>
+<td>hypothesis</td>
+<td>True</td>
+<td>Specify a hypothesis through defining two models. Returns a
+    hypothesis_result.</td>
+<td>aligned, serialisable</td>
+<td>result, hypothesis_result, serialisable</td>
+<td>ArrayAlignment, Alignment</td>
+</tr>
+<tr>
+<td>cogent3.app.evo</td>
+<td>model</td>
+<td>True</td>
+<td>Define a substitution model + tree for maximum likelihood evaluation.
+    Returns model_result.</td>
+<td>aligned, serialisable</td>
+<td>result, model_result, serialisable</td>
+<td>ArrayAlignment, Alignment</td>
+</tr>
+<tr>
+<td>cogent3.app.evo</td>
+<td>natsel_neutral</td>
+<td>True</td>
+<td>Test of selective neutrality by assessing whether omega equals 1.
+    Under the alternate, there is one omega for all branches and all sites.</td>
+<td>aligned, serialisable</td>
+<td>result, hypothesis_result, serialisable</td>
+<td>ArrayAlignment, Alignment</td>
+</tr>
+<tr>
+<td>cogent3.app.evo</td>
+<td>natsel_sitehet</td>
+<td>True</td>
+<td>Test for site-heterogeneity in omega. Under null, there are 2 site-classes,
+    omega &lt; 1 and omega = 1. Under the alternate, an additional site-class of
+    omega &gt; 1 is added.</td>
+<td>aligned, serialisable</td>
+<td>result, hypothesis_result, serialisable</td>
+<td>ArrayAlignment, Alignment</td>
+</tr>
+<tr>
+<td>cogent3.app.evo</td>
+<td>natsel_timehet</td>
+<td>True</td>
+<td>The branch heterogeneity hypothesis test for natural selection.
+    Tests for whether a single omega for all branches is sufficient against the
+    alternate that a user specified subset of branches have a distinct value
+    (or values) of omega.</td>
+<td>aligned, serialisable</td>
+<td>result, hypothesis_result, serialisable</td>
+<td>ArrayAlignment, Alignment</td>
+</tr>
+<tr>
+<td>cogent3.app.evo</td>
+<td>natsel_zhang</td>
+<td>True</td>
+<td>The branch by site-class hypothesis test for natural selection of
+    Zhang et al MBE 22: 2472-2479.
+
+    Note: Our implementation is not as parametrically succinct as that of
+    Zhang et al, we have 1 additional bin probability.</td>
+<td>aligned, serialisable</td>
+<td>result, hypothesis_result, serialisable</td>
+<td>ArrayAlignment, Alignment</td>
+</tr>
+<tr>
+<td>cogent3.app.evo</td>
+<td>tabulate_stats</td>
+<td>True</td>
+<td>Extracts all model statistics from model_result as Table.</td>
+<td>model_result, serialisable</td>
+<td>result, tabular_result, serialisable</td>
+<td>model_result</td>
+</tr>
+<tr>
+<td>cogent3.app.io</td>
+<td>load_aligned</td>
+<td>True</td>
+<td>Loads aligned sequences. Returns an Alignment object.</td>
+<td></td>
+<td>aligned, serialisable</td>
+<td>DataStoreMember, str, Path</td>
+</tr>
+<tr>
+<td>cogent3.app.io</td>
+<td>load_db</td>
+<td>True</td>
+<td>Loads json serialised cogent3 objects from a TinyDB file. 
+    Returns whatever object type was stored.</td>
+<td></td>
+<td>serialisable</td>
+<td></td>
+</tr>
+<tr>
+<td>cogent3.app.io</td>
+<td>load_json</td>
+<td>True</td>
+<td>Loads json serialised cogent3 objects from a json file. 
+    Returns whatever object type was stored.</td>
+<td></td>
+<td>serialisable</td>
+<td></td>
+</tr>
+<tr>
+<td>cogent3.app.io</td>
+<td>load_tabular</td>
+<td>True</td>
+<td>Loads delimited data. Returns a Table.</td>
+<td></td>
+<td>tabular, serialisable</td>
+<td>DataStoreMember, str, Path</td>
+</tr>
+<tr>
+<td>cogent3.app.io</td>
+<td>load_unaligned</td>
+<td>True</td>
+<td>Loads unaligned sequences. Returns a SequenceCollection.</td>
+<td></td>
+<td>sequences, serialisable</td>
+<td>DataStoreMember, str, Path</td>
+</tr>
+<tr>
+<td>cogent3.app.io</td>
+<td>write_db</td>
+<td>True</td>
+<td>Writes json serialised objects to a TinyDB instance.</td>
+<td>serialisable</td>
+<td>identifier, serialisable</td>
+<td></td>
+</tr>
+<tr>
+<td>cogent3.app.io</td>
+<td>write_json</td>
+<td>True</td>
+<td>Writes json serialised objects to individual json files.</td>
+<td>serialisable</td>
+<td>identifier, serialisable</td>
+<td></td>
+</tr>
+<tr>
+<td>cogent3.app.io</td>
+<td>write_seqs</td>
+<td>True</td>
+<td>Writes sequences to text files in standard format.</td>
+<td>sequences, aligned</td>
+<td>sequences, aligned, identifier</td>
+<td>ArrayAlignment, Alignment, SequenceCollection</td>
+</tr>
+<tr>
+<td>cogent3.app.io</td>
+<td>write_tabular</td>
+<td>True</td>
+<td>writes tabular data</td>
+<td>tabular_result, tabular</td>
+<td>identifier</td>
+<td>Table, DictArray, DistanceMatrix</td>
+</tr>
+<tr>
+<td>cogent3.app.sample</td>
+<td>concat</td>
+<td>False</td>
+<td>Creates a concatenated alignment from a series. Returns an Alignment.</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>cogent3.app.sample</td>
+<td>fixed_length</td>
+<td>True</td>
+<td>Sample an alignment to a fixed length. Returns an Alignment of the 
+    specified length, or NotCompleted if alignment too short.</td>
+<td>aligned, serialisable</td>
+<td>aligned, serialisable</td>
+<td>ArrayAlignment, Alignment</td>
+</tr>
+<tr>
+<td>cogent3.app.sample</td>
+<td>min_length</td>
+<td>True</td>
+<td>Filters sequence collections / alignments by length. Returns the 
+    data if it satisfies the condition, NotCompleted otherwise.</td>
+<td>sequences, aligned, serialisable</td>
+<td>sequences, aligned, serialisable</td>
+<td>ArrayAlignment, Alignment, SequenceCollection</td>
+</tr>
+<tr>
+<td>cogent3.app.sample</td>
+<td>omit_bad_seqs</td>
+<td>True</td>
+<td>Eliminates sequences from Alignment based on gap fraction, unique gaps.
+    Returns modified alignment.</td>
+<td>aligned, serialisable</td>
+<td>aligned, serialisable</td>
+<td>ArrayAlignment, Alignment</td>
+</tr>
+<tr>
+<td>cogent3.app.sample</td>
+<td>omit_degenerates</td>
+<td>True</td>
+<td>Excludes alignment columns with degenerate conditions. Can accomodate
+    reading frame. Returns modified Alignment.</td>
+<td>aligned, serialisable</td>
+<td>aligned, serialisable</td>
+<td>ArrayAlignment, Alignment</td>
+</tr>
+<tr>
+<td>cogent3.app.sample</td>
+<td>omit_duplicated</td>
+<td>True</td>
+<td>Removes redundant sequences, recording dropped sequences in
+    seqs.info.dropped. Returns sequence collection with only unique sequences.</td>
+<td>sequences, serialisable, aligned</td>
+<td>sequences, serialisable, aligned</td>
+<td>ArrayAlignment, Alignment, SequenceCollection</td>
+</tr>
+<tr>
+<td>cogent3.app.sample</td>
+<td>omit_gap_pos</td>
+<td>True</td>
+<td>Excludes gapped alignment columns meeting a threshold. Can accomodate
+    reading frame. Returns modified Alignment.</td>
+<td>aligned, serialisable</td>
+<td>aligned, serialisable</td>
+<td>ArrayAlignment, Alignment</td>
+</tr>
+<tr>
+<td>cogent3.app.sample</td>
+<td>take_codon_positions</td>
+<td>True</td>
+<td>Extracts the specified codon position(s) from an alignment. 
+    Returns an Alignment.</td>
+<td>aligned, serialisable</td>
+<td>aligned, serialisable</td>
+<td>ArrayAlignment, Alignment</td>
+</tr>
+<tr>
+<td>cogent3.app.sample</td>
+<td>take_named_seqs</td>
+<td>True</td>
+<td>Extracts (or everything but) named sequences. Returns a filtered
+    sequences, alignment that satisified the condition, NotCompleted otherwise.</td>
+<td>sequences, aligned, serialisable</td>
+<td>sequences, aligned, serialisable</td>
+<td>ArrayAlignment, Alignment, SequenceCollection</td>
+</tr>
+<tr>
+<td>cogent3.app.sample</td>
+<td>trim_stop_codons</td>
+<td>True</td>
+<td>Removes terminal stop codons. Returns sequences / alignment.</td>
+<td>sequences, aligned, serialisable</td>
+<td>sequences, aligned, serialisable</td>
+<td>ArrayAlignment, Alignment, SequenceCollection</td>
+</tr>
+<tr>
+<td>cogent3.app.translate</td>
+<td>select_translatable</td>
+<td>True</td>
+<td>Identifies most likely reading frame. Returns modified sequences / alignment,
+    if it could be resolved, NotCompleted otherwise.</td>
+<td>sequences, aligned</td>
+<td>sequences</td>
+<td>ArrayAlignment, Alignment, SequenceCollection</td>
+</tr>
+<tr>
+<td>cogent3.app.translate</td>
+<td>translate_seqs</td>
+<td>True</td>
+<td>Translates sequences, assumes in correct reading frame.</td>
+<td>sequences, aligned</td>
+<td>sequences, aligned</td>
+<td>ArrayAlignment, Alignment, SequenceCollection</td>
+</tr>
+<tr>
+<td>cogent3.app.tree</td>
+<td>quick_tree</td>
+<td>True</td>
+<td>Neighbour Joining tree based on pairwise distances.</td>
+<td>pairwise_distances</td>
+<td>tree, serialisable</td>
+<td>DistanceMatrix</td>
+</tr>
+<tr>
+<td>cogent3.app.tree</td>
+<td>scale_branches</td>
+<td>True</td>
+<td>Transforms tree branch lengths from nucleotide to codon, or the converse.
+    Returns a Tree.</td>
+<td>tree</td>
+<td>tree, serialisable</td>
+<td>PhyloNode, TreeNode</td>
+</tr>
+<tr>
+<td>cogent3.app.tree</td>
+<td>uniformize_tree</td>
+<td>True</td>
+<td>Standardises the orientation of unrooted trees. Returns a Tree.</td>
+<td>tree</td>
+<td>tree, serialisable</td>
+<td>PhyloNode, TreeNode</td>
+</tr>
+<tr>
+<td>cogent3.app.composable</td>
+<td>user_function</td>
+<td>True</td>
+<td>wrapper class for user specified function</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>
+37 rows x 7 columns</p></div></div>
+</div>
 </div>
 
 

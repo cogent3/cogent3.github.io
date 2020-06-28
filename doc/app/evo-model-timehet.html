@@ -7,6 +7,9 @@
     <title>Specifying a non-stationary model with time-heterogeneous parameters &#8212; cogent3 2020.4 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-dataframe.css" />
@@ -15,6 +18,8 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="../../_static/require.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
@@ -124,16 +129,322 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="specifying-a-non-stationary-model-with-time-heterogeneous-parameters">
+  <div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="section" id="specifying-a-non-stationary-model-with-time-heterogeneous-parameters">
 <h1>Specifying a non-stationary model with time-heterogeneous parameters<a class="headerlink" href="#specifying-a-non-stationary-model-with-time-heterogeneous-parameters" title="Permalink to this headline">¶</a></h1>
 <p>A model is considered time-heterogeneous if rate matrix terms differ between edges on a tree.</p>
 <p>In this example, we load the and display our sample primate tree, highlighting the edge sets that will be assigned different rate matrices.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_tree</span>
+<span class="kn">from</span> <span class="nn">cogent3.app</span> <span class="kn">import</span> <span class="n">io</span><span class="p">,</span> <span class="n">evo</span>
+
+<span class="n">tree</span> <span class="o">=</span> <span class="n">load_tree</span><span class="p">(</span><span class="s2">&quot;data/primate_brca1.tree&quot;</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">get_figure</span><span class="p">(</span><span class="n">contemporaneous</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">style_edges</span><span class="p">(</span>
+    <span class="s2">&quot;Human&quot;</span><span class="p">,</span> <span class="n">tip2</span><span class="o">=</span><span class="s2">&quot;Orangutan&quot;</span><span class="p">,</span> <span class="n">outgroup</span><span class="o">=</span><span class="s2">&quot;Galago&quot;</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <div class="section" id="specify-a-distinct-rate-matrix-for-the-great-apes">
 <h2>Specify a distinct rate matrix for the great apes<a class="headerlink" href="#specify-a-distinct-rate-matrix-for-the-great-apes" title="Permalink to this headline">¶</a></h2>
 <p>As illustrated above, this is done by specifying the names of two “ingroup” tips (their last common ancestor is the ancestor of all edges of interest) and an “outgroup” tip. We can define the clade by Orangutan and one of Human, Chimpanzee or Gorilla. Any tip not a member of the clade outside suffices as an outgroup.</p>
 <p>To construct a <code class="docutils literal notranslate"><span class="pre">model</span></code> with this information, we create a dictionary that we assign to the <code class="docutils literal notranslate"><span class="pre">time_het</span></code> argument as follows.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">time_het</span> <span class="o">=</span> <span class="n">evo</span><span class="o">.</span><span class="n">model</span><span class="p">(</span>
+    <span class="s2">&quot;GN&quot;</span><span class="p">,</span>
+    <span class="n">tree</span><span class="o">=</span><span class="n">tree</span><span class="p">,</span>
+    <span class="n">time_het</span><span class="o">=</span><span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">tip_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Human&quot;</span><span class="p">,</span> <span class="s2">&quot;Orangutan&quot;</span><span class="p">],</span> <span class="n">outgroup_name</span><span class="o">=</span><span class="s2">&quot;Galago&quot;</span><span class="p">)],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>The outcome of this setting to <code class="docutils literal notranslate"><span class="pre">model</span></code> is that the black edges will share one rate matrix, the red edges another. We fit the model to the sample data set.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">reader</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">load_aligned</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;fasta&quot;</span><span class="p">)</span>
+<span class="n">aln</span> <span class="o">=</span> <span class="n">reader</span><span class="p">(</span><span class="s2">&quot;data/primate_brca1.fasta&quot;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">time_het</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>Examining the fitted likelihood function, the rate parameters differ between the edge sets.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="o">.</span><span class="n">lf</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><h4>Likelihood function statistics</h4>
+<p>log-likelihood = -6982.2248</p>
+<p>number of free parameters = 36</p>
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Edge params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>edge</th>
+<th>parent</th>
+<th>length</th>
+<th>A&gt;C</th>
+<th>A&gt;G</th>
+<th>A&gt;T</th>
+<th>C&gt;A</th>
+<th>C&gt;G</th>
+<th>C&gt;T</th>
+</thead>
+<tbody>
+<tr>
+<td>Galago</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.1730</td>
+<td style="font-family: monospace !important;">1.0064</td>
+<td style="font-family: monospace !important;">3.7858</td>
+<td style="font-family: monospace !important;">1.0385</td>
+<td style="font-family: monospace !important;">1.7266</td>
+<td style="font-family: monospace !important;">2.3267</td>
+<td style="font-family: monospace !important;">6.3443</td>
+</tr>
+<tr>
+<td>HowlerMon</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.0451</td>
+<td style="font-family: monospace !important;">1.0064</td>
+<td style="font-family: monospace !important;">3.7858</td>
+<td style="font-family: monospace !important;">1.0385</td>
+<td style="font-family: monospace !important;">1.7266</td>
+<td style="font-family: monospace !important;">2.3267</td>
+<td style="font-family: monospace !important;">6.3443</td>
+</tr>
+<tr>
+<td>Rhesus</td>
+<td>edge.3</td>
+<td style="font-family: monospace !important;">0.0215</td>
+<td style="font-family: monospace !important;">1.0064</td>
+<td style="font-family: monospace !important;">3.7858</td>
+<td style="font-family: monospace !important;">1.0385</td>
+<td style="font-family: monospace !important;">1.7266</td>
+<td style="font-family: monospace !important;">2.3267</td>
+<td style="font-family: monospace !important;">6.3443</td>
+</tr>
+<tr>
+<td>Orangutan</td>
+<td>edge.2</td>
+<td style="font-family: monospace !important;">0.0077</td>
+<td style="font-family: monospace !important;">0.2103</td>
+<td style="font-family: monospace !important;">3.5001</td>
+<td style="font-family: monospace !important;">0.2093</td>
+<td style="font-family: monospace !important;">0.9011</td>
+<td style="font-family: monospace !important;">1.3531</td>
+<td style="font-family: monospace !important;">4.9554</td>
+</tr>
+<tr>
+<td>Gorilla</td>
+<td>edge.1</td>
+<td style="font-family: monospace !important;">0.0025</td>
+<td style="font-family: monospace !important;">0.2103</td>
+<td style="font-family: monospace !important;">3.5001</td>
+<td style="font-family: monospace !important;">0.2093</td>
+<td style="font-family: monospace !important;">0.9011</td>
+<td style="font-family: monospace !important;">1.3531</td>
+<td style="font-family: monospace !important;">4.9554</td>
+</tr>
+<tr>
+<td>Human</td>
+<td>edge.0</td>
+<td style="font-family: monospace !important;">0.0061</td>
+<td style="font-family: monospace !important;">0.2103</td>
+<td style="font-family: monospace !important;">3.5001</td>
+<td style="font-family: monospace !important;">0.2093</td>
+<td style="font-family: monospace !important;">0.9011</td>
+<td style="font-family: monospace !important;">1.3531</td>
+<td style="font-family: monospace !important;">4.9554</td>
+</tr>
+<tr>
+<td>Chimpanzee</td>
+<td>edge.0</td>
+<td style="font-family: monospace !important;">0.0028</td>
+<td style="font-family: monospace !important;">0.2103</td>
+<td style="font-family: monospace !important;">3.5001</td>
+<td style="font-family: monospace !important;">0.2093</td>
+<td style="font-family: monospace !important;">0.9011</td>
+<td style="font-family: monospace !important;">1.3531</td>
+<td style="font-family: monospace !important;">4.9554</td>
+</tr>
+<tr>
+<td>edge.0</td>
+<td>edge.1</td>
+<td style="font-family: monospace !important;">0.0000</td>
+<td style="font-family: monospace !important;">0.2103</td>
+<td style="font-family: monospace !important;">3.5001</td>
+<td style="font-family: monospace !important;">0.2093</td>
+<td style="font-family: monospace !important;">0.9011</td>
+<td style="font-family: monospace !important;">1.3531</td>
+<td style="font-family: monospace !important;">4.9554</td>
+</tr>
+<tr>
+<td>edge.1</td>
+<td>edge.2</td>
+<td style="font-family: monospace !important;">0.0034</td>
+<td style="font-family: monospace !important;">0.2103</td>
+<td style="font-family: monospace !important;">3.5001</td>
+<td style="font-family: monospace !important;">0.2093</td>
+<td style="font-family: monospace !important;">0.9011</td>
+<td style="font-family: monospace !important;">1.3531</td>
+<td style="font-family: monospace !important;">4.9554</td>
+</tr>
+<tr>
+<td>edge.2</td>
+<td>edge.3</td>
+<td style="font-family: monospace !important;">0.0121</td>
+<td style="font-family: monospace !important;">1.0064</td>
+<td style="font-family: monospace !important;">3.7858</td>
+<td style="font-family: monospace !important;">1.0385</td>
+<td style="font-family: monospace !important;">1.7266</td>
+<td style="font-family: monospace !important;">2.3267</td>
+<td style="font-family: monospace !important;">6.3443</td>
+</tr>
+<tr>
+<td>edge.3</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.0076</td>
+<td style="font-family: monospace !important;">1.0064</td>
+<td style="font-family: monospace !important;">3.7858</td>
+<td style="font-family: monospace !important;">1.0385</td>
+<td style="font-family: monospace !important;">1.7266</td>
+<td style="font-family: monospace !important;">2.3267</td>
+<td style="font-family: monospace !important;">6.3443</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>G&gt;A</th>
+<th>G&gt;C</th>
+<th>G&gt;T</th>
+<th>T&gt;A</th>
+<th>T&gt;C</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">9.0145</td>
+<td style="font-family: monospace !important;">1.2462</td>
+<td style="font-family: monospace !important;">0.7647</td>
+<td style="font-family: monospace !important;">1.4577</td>
+<td style="font-family: monospace !important;">3.5709</td>
+</tr>
+<tr>
+<td style="font-family: monospace !important;">9.0145</td>
+<td style="font-family: monospace !important;">1.2462</td>
+<td style="font-family: monospace !important;">0.7647</td>
+<td style="font-family: monospace !important;">1.4577</td>
+<td style="font-family: monospace !important;">3.5709</td>
+</tr>
+<tr>
+<td style="font-family: monospace !important;">9.0145</td>
+<td style="font-family: monospace !important;">1.2462</td>
+<td style="font-family: monospace !important;">0.7647</td>
+<td style="font-family: monospace !important;">1.4577</td>
+<td style="font-family: monospace !important;">3.5709</td>
+</tr>
+<tr>
+<td style="font-family: monospace !important;">4.6218</td>
+<td style="font-family: monospace !important;">1.1147</td>
+<td style="font-family: monospace !important;">0.0000</td>
+<td style="font-family: monospace !important;">0.3394</td>
+<td style="font-family: monospace !important;">2.9905</td>
+</tr>
+<tr>
+<td style="font-family: monospace !important;">4.6218</td>
+<td style="font-family: monospace !important;">1.1147</td>
+<td style="font-family: monospace !important;">0.0000</td>
+<td style="font-family: monospace !important;">0.3394</td>
+<td style="font-family: monospace !important;">2.9905</td>
+</tr>
+<tr>
+<td style="font-family: monospace !important;">4.6218</td>
+<td style="font-family: monospace !important;">1.1147</td>
+<td style="font-family: monospace !important;">0.0000</td>
+<td style="font-family: monospace !important;">0.3394</td>
+<td style="font-family: monospace !important;">2.9905</td>
+</tr>
+<tr>
+<td style="font-family: monospace !important;">4.6218</td>
+<td style="font-family: monospace !important;">1.1147</td>
+<td style="font-family: monospace !important;">0.0000</td>
+<td style="font-family: monospace !important;">0.3394</td>
+<td style="font-family: monospace !important;">2.9905</td>
+</tr>
+<tr>
+<td style="font-family: monospace !important;">4.6218</td>
+<td style="font-family: monospace !important;">1.1147</td>
+<td style="font-family: monospace !important;">0.0000</td>
+<td style="font-family: monospace !important;">0.3394</td>
+<td style="font-family: monospace !important;">2.9905</td>
+</tr>
+<tr>
+<td style="font-family: monospace !important;">4.6218</td>
+<td style="font-family: monospace !important;">1.1147</td>
+<td style="font-family: monospace !important;">0.0000</td>
+<td style="font-family: monospace !important;">0.3394</td>
+<td style="font-family: monospace !important;">2.9905</td>
+</tr>
+<tr>
+<td style="font-family: monospace !important;">9.0145</td>
+<td style="font-family: monospace !important;">1.2462</td>
+<td style="font-family: monospace !important;">0.7647</td>
+<td style="font-family: monospace !important;">1.4577</td>
+<td style="font-family: monospace !important;">3.5709</td>
+</tr>
+<tr>
+<td style="font-family: monospace !important;">9.0145</td>
+<td style="font-family: monospace !important;">1.2462</td>
+<td style="font-family: monospace !important;">0.7647</td>
+<td style="font-family: monospace !important;">1.4577</td>
+<td style="font-family: monospace !important;">3.5709</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Motif params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>A</th>
+<th>C</th>
+<th>G</th>
+<th>T</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.3754</td>
+<td style="font-family: monospace !important;">0.1768</td>
+<td style="font-family: monospace !important;">0.2080</td>
+<td style="font-family: monospace !important;">0.2398</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</div>
 </div>
 </div>
 

@@ -7,6 +7,9 @@
     <title>Apply a non-stationary nucleotide model to an alignment with a tree &#8212; cogent3 2020.4 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-dataframe.css" />
@@ -15,6 +18,8 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="../../_static/require.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
@@ -126,21 +131,253 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="apply-a-non-stationary-nucleotide-model-to-an-alignment-with-a-tree">
+  <div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="section" id="apply-a-non-stationary-nucleotide-model-to-an-alignment-with-a-tree">
 <h1>Apply a non-stationary nucleotide model to an alignment with a tree<a class="headerlink" href="#apply-a-non-stationary-nucleotide-model-to-an-alignment-with-a-tree" title="Permalink to this headline">¶</a></h1>
 <p>We analyse an alignment with sequences from 6 primates.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.app</span> <span class="kn">import</span> <span class="n">io</span>
+
+<span class="n">reader</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">load_aligned</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;fasta&quot;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+<span class="n">aln</span> <span class="o">=</span> <span class="n">reader</span><span class="p">(</span><span class="s2">&quot;data/primate_brca1.fasta&quot;</span><span class="p">)</span>
+<span class="n">aln</span><span class="o">.</span><span class="n">names</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[&#39;Chimpanzee&#39;,
+ &#39;Galago&#39;,
+ &#39;Gorilla&#39;,
+ &#39;HowlerMon&#39;,
+ &#39;Human&#39;,
+ &#39;Orangutan&#39;,
+ &#39;Rhesus&#39;]
+</pre></div>
+</div>
+</div>
+</div>
 <div class="section" id="specify-the-tree-via-a-tree-instance">
 <h2>Specify the tree via a tree instance<a class="headerlink" href="#specify-the-tree-via-a-tree-instance" title="Permalink to this headline">¶</a></h2>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_tree</span>
+<span class="kn">from</span> <span class="nn">cogent3.app</span> <span class="kn">import</span> <span class="n">evo</span>
+
+<span class="n">tree</span> <span class="o">=</span> <span class="n">load_tree</span><span class="p">(</span><span class="s2">&quot;data/primate_brca1.tree&quot;</span><span class="p">)</span>
+<span class="n">gn</span> <span class="o">=</span> <span class="n">evo</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="s2">&quot;GN&quot;</span><span class="p">,</span> <span class="n">tree</span><span class="o">=</span><span class="n">tree</span><span class="p">)</span>
+<span class="n">gn</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>model(type=&#39;model&#39;, sm=&#39;GN&#39;, tree=&#39;root&#39;, name=None, sm_args=None, lf_args=None, time_het=None, param_rules=None, opt_args=None, split_codons=False, show_progress=False, verbose=False)
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="specify-the-tree-via-a-path">
 <h2>Specify the tree via a path.<a class="headerlink" href="#specify-the-tree-via-a-path" title="Permalink to this headline">¶</a></h2>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gn</span> <span class="o">=</span> <span class="n">evo</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="s2">&quot;GN&quot;</span><span class="p">,</span> <span class="n">tree</span><span class="o">=</span><span class="s2">&quot;data/primate_brca1.tree&quot;</span><span class="p">)</span>
+<span class="n">gn</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>model(type=&#39;model&#39;, sm=&#39;GN&#39;, tree=&#39;data/primate_brca1.tree&#39;, name=None, sm_args=None, lf_args=None, time_het=None, param_rules=None, opt_args=None, split_codons=False, show_progress=False, verbose=False)
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="apply-the-model-to-an-alignment">
 <h2>Apply the model to an alignment<a class="headerlink" href="#apply-the-model-to-an-alignment" title="Permalink to this headline">¶</a></h2>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fitted</span> <span class="o">=</span> <span class="n">gn</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
+<span class="n">fitted</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">GN</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>key</th>
+<th>lnL</th>
+<th>nfp</th>
+<th>DLC</th>
+<th>unique_Q</th>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td style="font-family: monospace !important;">-6987.8834</td>
+<td style="font-family: monospace !important;">25</td>
+<td>True</td>
+<td>True</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</div>
 <p>In the above, no value is shown for <code class="docutils literal notranslate"><span class="pre">unique_Q</span></code>. This can happen because of numerical precision issues.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>in the display of the <code class="docutils literal notranslate"><span class="pre">lf</span></code> below, the “length” parameter is not the ENS. It is, instead, just a scalar.</p>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fitted</span><span class="o">.</span><span class="n">lf</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><h4>Likelihood function statistics</h4>
+<p>log-likelihood = -6987.8834</p>
+<p>number of free parameters = 25</p>
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Global params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>A&gt;C</th>
+<th>A&gt;G</th>
+<th>A&gt;T</th>
+<th>C&gt;A</th>
+<th>C&gt;G</th>
+<th>C&gt;T</th>
+<th>G&gt;A</th>
+<th>G&gt;C</th>
+<th>G&gt;T</th>
+<th>T&gt;A</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.8700</td>
+<td style="font-family: monospace !important;">3.6668</td>
+<td style="font-family: monospace !important;">0.9110</td>
+<td style="font-family: monospace !important;">1.5924</td>
+<td style="font-family: monospace !important;">2.1264</td>
+<td style="font-family: monospace !important;">6.0321</td>
+<td style="font-family: monospace !important;">8.2175</td>
+<td style="font-family: monospace !important;">1.2288</td>
+<td style="font-family: monospace !important;">0.6294</td>
+<td style="font-family: monospace !important;">1.2498</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>T&gt;C</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">3.4134</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Edge params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>edge</th>
+<th>parent</th>
+<th>length</th>
+</thead>
+<tbody>
+<tr>
+<td>Galago</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.1735</td>
+</tr>
+<tr>
+<td>HowlerMon</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.0450</td>
+</tr>
+<tr>
+<td>Rhesus</td>
+<td>edge.3</td>
+<td style="font-family: monospace !important;">0.0215</td>
+</tr>
+<tr>
+<td>Orangutan</td>
+<td>edge.2</td>
+<td style="font-family: monospace !important;">0.0078</td>
+</tr>
+<tr>
+<td>Gorilla</td>
+<td>edge.1</td>
+<td style="font-family: monospace !important;">0.0025</td>
+</tr>
+<tr>
+<td>Human</td>
+<td>edge.0</td>
+<td style="font-family: monospace !important;">0.0061</td>
+</tr>
+<tr>
+<td>Chimpanzee</td>
+<td>edge.0</td>
+<td style="font-family: monospace !important;">0.0028</td>
+</tr>
+<tr>
+<td>edge.0</td>
+<td>edge.1</td>
+<td style="font-family: monospace !important;">0.0000</td>
+</tr>
+<tr>
+<td>edge.1</td>
+<td>edge.2</td>
+<td style="font-family: monospace !important;">0.0033</td>
+</tr>
+<tr>
+<td>edge.2</td>
+<td>edge.3</td>
+<td style="font-family: monospace !important;">0.0121</td>
+</tr>
+<tr>
+<td>edge.3</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.0077</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Motif params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>A</th>
+<th>C</th>
+<th>G</th>
+<th>T</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.3756</td>
+<td style="font-family: monospace !important;">0.1768</td>
+<td style="font-family: monospace !important;">0.2078</td>
+<td style="font-family: monospace !important;">0.2398</td>
+</tr>
+</tbody>
+</table>
+</div></div>
 </div>
 </div>
 </div>

@@ -7,6 +7,9 @@
     <title>Applying a time-reversible nucleotide model &#8212; cogent3 2020.4 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-dataframe.css" />
@@ -15,6 +18,8 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="../../_static/require.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
@@ -124,12 +129,254 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="applying-a-time-reversible-nucleotide-model">
+  <div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="section" id="applying-a-time-reversible-nucleotide-model">
 <h1>Applying a time-reversible nucleotide model<a class="headerlink" href="#applying-a-time-reversible-nucleotide-model" title="Permalink to this headline">¶</a></h1>
 <p>We display the available set of nucleotide substitution models.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">available_models</span>
+
+<span class="n">available_models</span><span class="p">(</span><span class="s2">&quot;nucleotide&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Specify a model using 'Abbreviation' (case sensitive).</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>Model Type</th>
+<th>Abbreviation</th>
+<th>Description</th>
+</thead>
+<tbody>
+<tr>
+<td>nucleotide</td>
+<td>JC69</td>
+<td>Jukes and Cantor's 1969 model</td>
+</tr>
+<tr>
+<td>nucleotide</td>
+<td>K80</td>
+<td>Kimura 1980</td>
+</tr>
+<tr>
+<td>nucleotide</td>
+<td>F81</td>
+<td>Felsenstein's 1981 model</td>
+</tr>
+<tr>
+<td>nucleotide</td>
+<td>HKY85</td>
+<td>Hasegawa, Kishino and Yanamo 1985 model</td>
+</tr>
+<tr>
+<td>nucleotide</td>
+<td>TN93</td>
+<td>Tamura and Nei 1993 model</td>
+</tr>
+<tr>
+<td>nucleotide</td>
+<td>GTR</td>
+<td>General Time Reversible nucleotide substitution model.</td>
+</tr>
+<tr>
+<td>nucleotide</td>
+<td>ssGN</td>
+<td>strand-symmetric general Markov nucleotide (non-stationary, non-reversible). Kaehler, 2017, Journal of Theoretical Biology 420: 144–51</td>
+</tr>
+<tr>
+<td>nucleotide</td>
+<td>GN</td>
+<td>General Markov Nucleotide (non-stationary, non-reversible). Kaehler, Yap, Zhang, Huttley, 2015, Sys Biol 64 (2): 281–93</td>
+</tr>
+<tr>
+<td>nucleotide</td>
+<td>BH</td>
+<td>Barry and Hartigan Discrete Time substitution model Barry and Hartigan 1987. Biometrics 43: 261–76.</td>
+</tr>
+<tr>
+<td>nucleotide</td>
+<td>DT</td>
+<td>Discrete Time substitution model (non-stationary, non-reversible). motif_length=2 makes this a dinucleotide model, motif_length=3 a trinucleotide model.</td>
+</tr>
+</tbody>
+</table>
+<p>
+10 rows x 3 columns</p></div></div>
+</div>
 <div class="section" id="using-the-gtr-model">
 <h2>Using the GTR model<a class="headerlink" href="#using-the-gtr-model" title="Permalink to this headline">¶</a></h2>
 <p>We specify the general time-reversible model (<a class="reference external" href="https://www.ncbi.nlm.nih.gov/pubmed/6429346">Lanave et al</a>) by its abbreviation. By default, this model does not optimise the codon frequencies but uses the average estimated from the alignment. We configure the model to optimise the root motif probabilities.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.app</span> <span class="kn">import</span> <span class="n">io</span><span class="p">,</span> <span class="n">evo</span>
+
+<span class="n">loader</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">load_aligned</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;fasta&quot;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+<span class="n">aln</span> <span class="o">=</span> <span class="n">loader</span><span class="p">(</span><span class="s2">&quot;data/primate_brca1.fasta&quot;</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">evo</span><span class="o">.</span><span class="n">model</span><span class="p">(</span>
+    <span class="s2">&quot;GTR&quot;</span><span class="p">,</span> <span class="n">tree</span><span class="o">=</span><span class="s2">&quot;data/primate_brca1.tree&quot;</span><span class="p">,</span> <span class="n">sm_args</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">optimise_motif_probs</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
+<span class="n">result</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">GTR</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>key</th>
+<th>lnL</th>
+<th>nfp</th>
+<th>DLC</th>
+<th>unique_Q</th>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td style="font-family: monospace !important;">-6992.5741</td>
+<td style="font-family: monospace !important;">19</td>
+<td>True</td>
+<td>True</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="o">.</span><span class="n">lf</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><h4>Likelihood function statistics</h4>
+<p>log-likelihood = -6992.5741</p>
+<p>number of free parameters = 19</p>
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Global params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>A/C</th>
+<th>A/G</th>
+<th>A/T</th>
+<th>C/G</th>
+<th>C/T</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">1.2296</td>
+<td style="font-family: monospace !important;">5.2478</td>
+<td style="font-family: monospace !important;">0.9472</td>
+<td style="font-family: monospace !important;">2.3389</td>
+<td style="font-family: monospace !important;">5.9666</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Edge params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>edge</th>
+<th>parent</th>
+<th>length</th>
+</thead>
+<tbody>
+<tr>
+<td>Galago</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.1727</td>
+</tr>
+<tr>
+<td>HowlerMon</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.0448</td>
+</tr>
+<tr>
+<td>Rhesus</td>
+<td>edge.3</td>
+<td style="font-family: monospace !important;">0.0215</td>
+</tr>
+<tr>
+<td>Orangutan</td>
+<td>edge.2</td>
+<td style="font-family: monospace !important;">0.0077</td>
+</tr>
+<tr>
+<td>Gorilla</td>
+<td>edge.1</td>
+<td style="font-family: monospace !important;">0.0025</td>
+</tr>
+<tr>
+<td>Human</td>
+<td>edge.0</td>
+<td style="font-family: monospace !important;">0.0060</td>
+</tr>
+<tr>
+<td>Chimpanzee</td>
+<td>edge.0</td>
+<td style="font-family: monospace !important;">0.0028</td>
+</tr>
+<tr>
+<td>edge.0</td>
+<td>edge.1</td>
+<td style="font-family: monospace !important;">0.0000</td>
+</tr>
+<tr>
+<td>edge.1</td>
+<td>edge.2</td>
+<td style="font-family: monospace !important;">0.0034</td>
+</tr>
+<tr>
+<td>edge.2</td>
+<td>edge.3</td>
+<td style="font-family: monospace !important;">0.0119</td>
+</tr>
+<tr>
+<td>edge.3</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.0076</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Motif params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>A</th>
+<th>C</th>
+<th>G</th>
+<th>T</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.3792</td>
+<td style="font-family: monospace !important;">0.1719</td>
+<td style="font-family: monospace !important;">0.2066</td>
+<td style="font-family: monospace !important;">0.2423</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</div>
 </div>
 </div>
 

@@ -7,6 +7,9 @@
     <title>Using codon models &#8212; cogent3 2020.4 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-dataframe.css" />
@@ -15,6 +18,8 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="../../_static/require.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
@@ -127,7 +132,11 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="using-codon-models">
+  <div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="section" id="using-codon-models">
 <h1>Using codon models<a class="headerlink" href="#using-codon-models" title="Permalink to this headline">¶</a></h1>
 <p><em>Section author: Gavin Huttley</em></p>
 <p>The basic paradigm for evolutionary modelling is:</p>
@@ -154,17 +163,336 @@
 </ul>
 <p>In the following I will construct GTR variants of i and iv and a HKY variant of iii.</p>
 <p>We import these explicitly from the <code class="docutils literal notranslate"><span class="pre">cogent3.evolve.models</span></code> module.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.evolve.models</span> <span class="kn">import</span> <span class="n">get_model</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>These are functions and calling them returns the indicated substitution model with default behaviour of recoding gap characters into N’s.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tf</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;GY94&quot;</span><span class="p">)</span>
+<span class="n">nf</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;MG94GTR&quot;</span><span class="p">)</span>
+<span class="n">cnf</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;CNFGTR&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>In the following demonstration I will use only the CNF form (<code class="docutils literal notranslate"><span class="pre">cnf</span></code>).</p>
 <p>For our example we load a sample alignment and tree as per usual. To reduce the computational overhead for this example we will limit the number of sampled taxa.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span><span class="p">,</span> <span class="n">load_tree</span>
+
+<span class="n">aln</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/primate_brca1.fasta&quot;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+<span class="n">tree</span> <span class="o">=</span> <span class="n">load_tree</span><span class="p">(</span><span class="s2">&quot;data/primate_brca1.tree&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 </div>
 <div class="section" id="standard-test-of-neutrality">
 <h2>Standard test of neutrality<a class="headerlink" href="#standard-test-of-neutrality" title="Permalink to this headline">¶</a></h2>
 <p>We construct a likelihood function and constrain omega parameter (the ratio of nonsynonymous to synonymous substitutions) to equal 1. We also set some display formatting parameters.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lf</span> <span class="o">=</span> <span class="n">cnf</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span><span class="s2">&quot;omega&quot;</span><span class="p">,</span> <span class="n">is_constant</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>We then provide an alignment and optimise the model. In the current case we just use the local optimiser (hiding progress to keep this document succinct). We then print(the results.)</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>I’m going to specify a set of conditions that will be used for all optimiser steps. For those new to python, one can construct a dictionary with the following form <code class="docutils literal notranslate"><span class="pre">{'argument_name':</span> <span class="pre">argument_value}</span></code>, or alternatively <code class="docutils literal notranslate"><span class="pre">dict(argument_name=argument_value)</span></code>. I’m doing the latter. This dictionary is then passed to functions/methods by prefacing it with <code class="docutils literal notranslate"><span class="pre">**</span></code>.</p>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">optimiser_args</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+    <span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_restarts</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">set_alignment</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="o">**</span><span class="n">optimiser_args</span><span class="p">)</span>
+<span class="n">lf</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><h4>Likelihood function statistics</h4>
+<p>log-likelihood = -6767.0980</p>
+<p>number of free parameters = 16</p>
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Global params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>A/C</th>
+<th>A/G</th>
+<th>A/T</th>
+<th>C/G</th>
+<th>C/T</th>
+<th>omega</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">1.10</td>
+<td style="font-family: monospace !important;">4.07</td>
+<td style="font-family: monospace !important;">0.84</td>
+<td style="font-family: monospace !important;">1.95</td>
+<td style="font-family: monospace !important;">4.58</td>
+<td style="font-family: monospace !important;">1.00</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Edge params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>edge</th>
+<th>parent</th>
+<th>length</th>
+</thead>
+<tbody>
+<tr>
+<td>Galago</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.53</td>
+</tr>
+<tr>
+<td>HowlerMon</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.14</td>
+</tr>
+<tr>
+<td>Rhesus</td>
+<td>edge.3</td>
+<td style="font-family: monospace !important;">0.07</td>
+</tr>
+<tr>
+<td>Orangutan</td>
+<td>edge.2</td>
+<td style="font-family: monospace !important;">0.02</td>
+</tr>
+<tr>
+<td>Gorilla</td>
+<td>edge.1</td>
+<td style="font-family: monospace !important;">0.01</td>
+</tr>
+<tr>
+<td>Human</td>
+<td>edge.0</td>
+<td style="font-family: monospace !important;">0.02</td>
+</tr>
+<tr>
+<td>Chimpanzee</td>
+<td>edge.0</td>
+<td style="font-family: monospace !important;">0.01</td>
+</tr>
+<tr>
+<td>edge.0</td>
+<td>edge.1</td>
+<td style="font-family: monospace !important;">0.00</td>
+</tr>
+<tr>
+<td>edge.1</td>
+<td>edge.2</td>
+<td style="font-family: monospace !important;">0.01</td>
+</tr>
+<tr>
+<td>edge.2</td>
+<td>edge.3</td>
+<td style="font-family: monospace !important;">0.04</td>
+</tr>
+<tr>
+<td>edge.3</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.02</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Motif params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>AAA</th>
+<th>AAC</th>
+<th>AAG</th>
+<th>AAT</th>
+<th>ACA</th>
+<th>ACC</th>
+<th>ACG</th>
+<th>ACT</th>
+<th>AGA</th>
+<th>AGC</th>
+<th>AGG</th>
+<th>AGT</th>
+<th>ATA</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.06</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.03</td>
+<td style="font-family: monospace !important;">0.06</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.00</td>
+<td style="font-family: monospace !important;">0.00</td>
+<td style="font-family: monospace !important;">0.03</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.03</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.04</td>
+<td style="font-family: monospace !important;">0.02</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>ATC</th>
+<th>ATG</th>
+<th>ATT</th>
+<th>CAA</th>
+<th>CAC</th>
+<th>CAG</th>
+<th>CAT</th>
+<th>CCA</th>
+<th>CCC</th>
+<th>CCG</th>
+<th>CCT</th>
+<th>CGA</th>
+<th>CGC</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.00</td>
+<td style="font-family: monospace !important;">0.03</td>
+<td style="font-family: monospace !important;">0.00</td>
+<td style="font-family: monospace !important;">0.00</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>CGG</th>
+<th>CGT</th>
+<th>CTA</th>
+<th>CTC</th>
+<th>CTG</th>
+<th>CTT</th>
+<th>GAA</th>
+<th>GAC</th>
+<th>GAG</th>
+<th>GAT</th>
+<th>GCA</th>
+<th>GCC</th>
+<th>GCG</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.00</td>
+<td style="font-family: monospace !important;">0.00</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.08</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.03</td>
+<td style="font-family: monospace !important;">0.03</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.00</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>GCT</th>
+<th>GGA</th>
+<th>GGC</th>
+<th>GGG</th>
+<th>GGT</th>
+<th>GTA</th>
+<th>GTC</th>
+<th>GTG</th>
+<th>GTT</th>
+<th>TAC</th>
+<th>TAT</th>
+<th>TCA</th>
+<th>TCC</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.00</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.01</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>TCG</th>
+<th>TCT</th>
+<th>TGC</th>
+<th>TGG</th>
+<th>TGT</th>
+<th>TTA</th>
+<th>TTC</th>
+<th>TTG</th>
+<th>TTT</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.00</td>
+<td style="font-family: monospace !important;">0.03</td>
+<td style="font-family: monospace !important;">0.00</td>
+<td style="font-family: monospace !important;">0.00</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.02</td>
+</tr>
+</tbody>
+</table>
+</div></div>
 </div>
 <p>In the above output, the first table shows the maximum likelihood estimates (MLEs) for the substitution model parameters that are ‘global’ in scope. For instance, the <code class="docutils literal notranslate"><span class="pre">C/T=4.58</span></code> MLE indicates that the relative rate of substitutions between C and T is nearly 5 times the background substitution rate.</p>
 <p>The above function has been fit using the default counting procedure for estimating the motif frequencies, i.e. codon frequencies are estimated as the average of the observed codon frequencies. If you wanted to numerically optimise the motif probabilities, then modify the likelihood function creation line to</p>
@@ -172,21 +500,729 @@
 </pre></div>
 </div>
 <p>We can then free up the omega parameter, but before we do that we’ll store the log-likelihood and number of free parameters for the current model form for reuse later.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">neutral_lnL</span> <span class="o">=</span> <span class="n">lf</span><span class="o">.</span><span class="n">get_log_likelihood</span><span class="p">()</span>
+<span class="n">neutral_nfp</span> <span class="o">=</span> <span class="n">lf</span><span class="o">.</span><span class="n">get_num_free_params</span><span class="p">()</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span><span class="s2">&quot;omega&quot;</span><span class="p">,</span> <span class="n">is_constant</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="o">**</span><span class="n">optimiser_args</span><span class="p">)</span>
+<span class="n">non_neutral_lnL</span> <span class="o">=</span> <span class="n">lf</span><span class="o">.</span><span class="n">get_log_likelihood</span><span class="p">()</span>
+<span class="n">non_neutral_nfp</span> <span class="o">=</span> <span class="n">lf</span><span class="o">.</span><span class="n">get_num_free_params</span><span class="p">()</span>
+<span class="n">lf</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><h4>Likelihood function statistics</h4>
+<p>log-likelihood = -6762.5761</p>
+<p>number of free parameters = 17</p>
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Global params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>A/C</th>
+<th>A/G</th>
+<th>A/T</th>
+<th>C/G</th>
+<th>C/T</th>
+<th>omega</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">1.08</td>
+<td style="font-family: monospace !important;">3.86</td>
+<td style="font-family: monospace !important;">0.78</td>
+<td style="font-family: monospace !important;">1.96</td>
+<td style="font-family: monospace !important;">4.08</td>
+<td style="font-family: monospace !important;">0.75</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Edge params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>edge</th>
+<th>parent</th>
+<th>length</th>
+</thead>
+<tbody>
+<tr>
+<td>Galago</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.53</td>
+</tr>
+<tr>
+<td>HowlerMon</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.14</td>
+</tr>
+<tr>
+<td>Rhesus</td>
+<td>edge.3</td>
+<td style="font-family: monospace !important;">0.07</td>
+</tr>
+<tr>
+<td>Orangutan</td>
+<td>edge.2</td>
+<td style="font-family: monospace !important;">0.02</td>
+</tr>
+<tr>
+<td>Gorilla</td>
+<td>edge.1</td>
+<td style="font-family: monospace !important;">0.01</td>
+</tr>
+<tr>
+<td>Human</td>
+<td>edge.0</td>
+<td style="font-family: monospace !important;">0.02</td>
+</tr>
+<tr>
+<td>Chimpanzee</td>
+<td>edge.0</td>
+<td style="font-family: monospace !important;">0.01</td>
+</tr>
+<tr>
+<td>edge.0</td>
+<td>edge.1</td>
+<td style="font-family: monospace !important;">0.00</td>
+</tr>
+<tr>
+<td>edge.1</td>
+<td>edge.2</td>
+<td style="font-family: monospace !important;">0.01</td>
+</tr>
+<tr>
+<td>edge.2</td>
+<td>edge.3</td>
+<td style="font-family: monospace !important;">0.03</td>
+</tr>
+<tr>
+<td>edge.3</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.02</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Motif params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>AAA</th>
+<th>AAC</th>
+<th>AAG</th>
+<th>AAT</th>
+<th>ACA</th>
+<th>ACC</th>
+<th>ACG</th>
+<th>ACT</th>
+<th>AGA</th>
+<th>AGC</th>
+<th>AGG</th>
+<th>AGT</th>
+<th>ATA</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.06</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.03</td>
+<td style="font-family: monospace !important;">0.06</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.00</td>
+<td style="font-family: monospace !important;">0.00</td>
+<td style="font-family: monospace !important;">0.03</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.03</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.04</td>
+<td style="font-family: monospace !important;">0.02</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>ATC</th>
+<th>ATG</th>
+<th>ATT</th>
+<th>CAA</th>
+<th>CAC</th>
+<th>CAG</th>
+<th>CAT</th>
+<th>CCA</th>
+<th>CCC</th>
+<th>CCG</th>
+<th>CCT</th>
+<th>CGA</th>
+<th>CGC</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.00</td>
+<td style="font-family: monospace !important;">0.03</td>
+<td style="font-family: monospace !important;">0.00</td>
+<td style="font-family: monospace !important;">0.00</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>CGG</th>
+<th>CGT</th>
+<th>CTA</th>
+<th>CTC</th>
+<th>CTG</th>
+<th>CTT</th>
+<th>GAA</th>
+<th>GAC</th>
+<th>GAG</th>
+<th>GAT</th>
+<th>GCA</th>
+<th>GCC</th>
+<th>GCG</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.00</td>
+<td style="font-family: monospace !important;">0.00</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.08</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.03</td>
+<td style="font-family: monospace !important;">0.03</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.00</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>GCT</th>
+<th>GGA</th>
+<th>GGC</th>
+<th>GGG</th>
+<th>GGT</th>
+<th>GTA</th>
+<th>GTC</th>
+<th>GTG</th>
+<th>GTT</th>
+<th>TAC</th>
+<th>TAT</th>
+<th>TCA</th>
+<th>TCC</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.00</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.01</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>TCG</th>
+<th>TCT</th>
+<th>TGC</th>
+<th>TGG</th>
+<th>TGT</th>
+<th>TTA</th>
+<th>TTC</th>
+<th>TTG</th>
+<th>TTT</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.00</td>
+<td style="font-family: monospace !important;">0.03</td>
+<td style="font-family: monospace !important;">0.00</td>
+<td style="font-family: monospace !important;">0.00</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.02</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</div>
 <p>We then conduct a likelihood ratio test whether the MLE of omega significantly improves the fit over the constraint it equals 1. We import the convenience function from the <code class="docutils literal notranslate"><span class="pre">cogent3</span></code> stats module.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.stats</span> <span class="kn">import</span> <span class="n">chisqprob</span>
+
+<span class="n">LR</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">non_neutral_lnL</span> <span class="o">-</span> <span class="n">neutral_lnL</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">non_neutral_nfp</span> <span class="o">-</span> <span class="n">neutral_nfp</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">chisqprob</span><span class="p">(</span><span class="n">LR</span><span class="p">,</span> <span class="n">df</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>0.0026357631766956453
+</pre></div>
+</div>
+</div>
+</div>
 <p>Not surprisingly, this is significant. We then ask whether the Human and Chimpanzee edges have a value of omega that is significantly different from the rest of the tree.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span>
+    <span class="s2">&quot;omega&quot;</span><span class="p">,</span> <span class="n">tip_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Chimpanzee&quot;</span><span class="p">,</span> <span class="s2">&quot;Human&quot;</span><span class="p">],</span> <span class="n">outgroup_name</span><span class="o">=</span><span class="s2">&quot;Galago&quot;</span><span class="p">,</span> <span class="n">clade</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="o">**</span><span class="n">optimiser_args</span><span class="p">)</span>
+<span class="n">lf</span>
+<span class="n">chimp_human_clade_lnL</span> <span class="o">=</span> <span class="n">lf</span><span class="o">.</span><span class="n">get_log_likelihood</span><span class="p">()</span>
+<span class="n">chimp_human_clade_nfp</span> <span class="o">=</span> <span class="n">lf</span><span class="o">.</span><span class="n">get_num_free_params</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">LR</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">chimp_human_clade_lnL</span> <span class="o">-</span> <span class="n">non_neutral_lnL</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">chimp_human_clade_nfp</span> <span class="o">-</span> <span class="n">non_neutral_nfp</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">chisqprob</span><span class="p">(</span><span class="n">LR</span><span class="p">,</span> <span class="n">df</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>0.02842632489806704
+</pre></div>
+</div>
+</div>
+</div>
 <p>This is basically a replication of the original Huttley et al (2000) result for <em>BRCA1</em>.</p>
 </div>
 <div class="section" id="rate-heterogeneity-model-variants">
 <h2>Rate-heterogeneity model variants<a class="headerlink" href="#rate-heterogeneity-model-variants" title="Permalink to this headline">¶</a></h2>
 <p>It is also possible to specify rate-heterogeneity variants of these models. In the first instance we’ll create a likelihood function where these rate-classes are global across the entire tree. Because fitting these models can be time consuming I’m going to recreate the non-neutral likelihood function from above first, fit it, and then construct the rate-heterogeneity likelihood function. By doing this I can ensure that the richer model starts with parameter values that produce a log-likelihood the same as the null model, ensuring the subsequent optimisation step improves the likelihood over the null.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lf</span> <span class="o">=</span> <span class="n">cnf</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">set_alignment</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="o">**</span><span class="n">optimiser_args</span><span class="p">)</span>
+<span class="n">non_neutral_lnL</span> <span class="o">=</span> <span class="n">lf</span><span class="o">.</span><span class="n">get_log_likelihood</span><span class="p">()</span>
+<span class="n">non_neutral_nfp</span> <span class="o">=</span> <span class="n">lf</span><span class="o">.</span><span class="n">get_num_free_params</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>Now, we have a null model which we know (from having fit it above) has a MLE &lt; 1. We will construct a rate-heterogeneity model with just 2 rate-classes (neutral and adaptive) that are separated by the boundary of omega=1. These rate-classes are specified as discrete bins in Cogent3 and the model configuration steps for a bin or bins are done using the <code class="docutils literal notranslate"><span class="pre">set_param_rule</span></code> method. To ensure the alternate model starts with a likelihood at least as good as the previous we need to make the probability of the neutral site-class bin ~= 1 (these are referenced by the <code class="docutils literal notranslate"><span class="pre">bprobs</span></code> parameter type) and assign the null model omega MLE to this class.</p>
 <p>To get all the parameter MLEs (branch lengths, GTR terms, etc ..) into the alternate model we get an annotated tree from the null model which will have these values associated with it.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">annot_tree</span> <span class="o">=</span> <span class="n">lf</span><span class="o">.</span><span class="n">get_annotated_tree</span><span class="p">()</span>
+<span class="n">omega_mle</span> <span class="o">=</span> <span class="n">lf</span><span class="o">.</span><span class="n">get_param_value</span><span class="p">(</span><span class="s2">&quot;omega&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>We can then construct a new likelihood function, specifying the rate-class properties.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rate_lf</span> <span class="o">=</span> <span class="n">cnf</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span>
+    <span class="n">annot_tree</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;neutral&quot;</span><span class="p">,</span> <span class="s2">&quot;adaptive&quot;</span><span class="p">],</span> <span class="n">digits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="mi">3</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>We define a very small value (<code class="docutils literal notranslate"><span class="pre">epsilon</span></code>) that is used to specify the starting values.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">epsilon</span> <span class="o">=</span> <span class="mf">1e-6</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>We now provide starting parameter values for <code class="docutils literal notranslate"><span class="pre">omega</span></code> for the two bins, setting the boundary</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rate_lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span><span class="s2">&quot;omega&quot;</span><span class="p">,</span> <span class="nb">bin</span><span class="o">=</span><span class="s2">&quot;neutral&quot;</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="n">omega_mle</span><span class="p">)</span>
+<span class="n">rate_lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span>
+    <span class="s2">&quot;omega&quot;</span><span class="p">,</span> <span class="nb">bin</span><span class="o">=</span><span class="s2">&quot;adaptive&quot;</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="mi">1</span> <span class="o">+</span> <span class="n">epsilon</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">epsilon</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>and provide the starting values for the bin probabilities (<code class="docutils literal notranslate"><span class="pre">bprobs</span></code>).</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rate_lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span><span class="s2">&quot;bprobs&quot;</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span> <span class="o">-</span> <span class="n">epsilon</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>The above statement essentially assigns a probability of nearly 1 to the ‘neutral’ bin. We now set the alignment and fit the model.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rate_lf</span><span class="o">.</span><span class="n">set_alignment</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
+<span class="n">rate_lf</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="o">**</span><span class="n">optimiser_args</span><span class="p">)</span>
+<span class="n">rate_lnL</span> <span class="o">=</span> <span class="n">rate_lf</span><span class="o">.</span><span class="n">get_log_likelihood</span><span class="p">()</span>
+<span class="n">rate_nfp</span> <span class="o">=</span> <span class="n">rate_lf</span><span class="o">.</span><span class="n">get_num_free_params</span><span class="p">()</span>
+<span class="n">LR</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">rate_lnL</span> <span class="o">-</span> <span class="n">non_neutral_lnL</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">rate_nfp</span> <span class="o">-</span> <span class="n">non_neutral_nfp</span>
+<span class="n">rate_lf</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><h4>Likelihood function statistics</h4>
+<p>log-likelihood = -6755.4520</p>
+<p>number of free parameters = 19</p>
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Global params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>A/C</th>
+<th>A/G</th>
+<th>A/T</th>
+<th>C/G</th>
+<th>C/T</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">1.07</td>
+<td style="font-family: monospace !important;">3.96</td>
+<td style="font-family: monospace !important;">0.78</td>
+<td style="font-family: monospace !important;">1.96</td>
+<td style="font-family: monospace !important;">4.20</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Bin params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>bin</th>
+<th>bprobs</th>
+<th>omega</th>
+</thead>
+<tbody>
+<tr>
+<td>neutral</td>
+<td style="font-family: monospace !important;">0.14</td>
+<td style="font-family: monospace !important;">0.01</td>
+</tr>
+<tr>
+<td>adaptive</td>
+<td style="font-family: monospace !important;">0.86</td>
+<td style="font-family: monospace !important;">1.17</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Edge params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>edge</th>
+<th>parent</th>
+<th>length</th>
+</thead>
+<tbody>
+<tr>
+<td>Galago</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.56</td>
+</tr>
+<tr>
+<td>HowlerMon</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.14</td>
+</tr>
+<tr>
+<td>Rhesus</td>
+<td>edge.3</td>
+<td style="font-family: monospace !important;">0.07</td>
+</tr>
+<tr>
+<td>Orangutan</td>
+<td>edge.2</td>
+<td style="font-family: monospace !important;">0.02</td>
+</tr>
+<tr>
+<td>Gorilla</td>
+<td>edge.1</td>
+<td style="font-family: monospace !important;">0.01</td>
+</tr>
+<tr>
+<td>Human</td>
+<td>edge.0</td>
+<td style="font-family: monospace !important;">0.02</td>
+</tr>
+<tr>
+<td>Chimpanzee</td>
+<td>edge.0</td>
+<td style="font-family: monospace !important;">0.01</td>
+</tr>
+<tr>
+<td>edge.0</td>
+<td>edge.1</td>
+<td style="font-family: monospace !important;">0.00</td>
+</tr>
+<tr>
+<td>edge.1</td>
+<td>edge.2</td>
+<td style="font-family: monospace !important;">0.01</td>
+</tr>
+<tr>
+<td>edge.2</td>
+<td>edge.3</td>
+<td style="font-family: monospace !important;">0.03</td>
+</tr>
+<tr>
+<td>edge.3</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.02</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Motif params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>AAA</th>
+<th>AAC</th>
+<th>AAG</th>
+<th>AAT</th>
+<th>ACA</th>
+<th>ACC</th>
+<th>ACG</th>
+<th>ACT</th>
+<th>AGA</th>
+<th>AGC</th>
+<th>AGG</th>
+<th>AGT</th>
+<th>ATA</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.06</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.03</td>
+<td style="font-family: monospace !important;">0.06</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.00</td>
+<td style="font-family: monospace !important;">0.00</td>
+<td style="font-family: monospace !important;">0.03</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.03</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.04</td>
+<td style="font-family: monospace !important;">0.02</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>ATC</th>
+<th>ATG</th>
+<th>ATT</th>
+<th>CAA</th>
+<th>CAC</th>
+<th>CAG</th>
+<th>CAT</th>
+<th>CCA</th>
+<th>CCC</th>
+<th>CCG</th>
+<th>CCT</th>
+<th>CGA</th>
+<th>CGC</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.00</td>
+<td style="font-family: monospace !important;">0.03</td>
+<td style="font-family: monospace !important;">0.00</td>
+<td style="font-family: monospace !important;">0.00</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>CGG</th>
+<th>CGT</th>
+<th>CTA</th>
+<th>CTC</th>
+<th>CTG</th>
+<th>CTT</th>
+<th>GAA</th>
+<th>GAC</th>
+<th>GAG</th>
+<th>GAT</th>
+<th>GCA</th>
+<th>GCC</th>
+<th>GCG</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.00</td>
+<td style="font-family: monospace !important;">0.00</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.08</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.03</td>
+<td style="font-family: monospace !important;">0.03</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.00</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>GCT</th>
+<th>GGA</th>
+<th>GGC</th>
+<th>GGG</th>
+<th>GGT</th>
+<th>GTA</th>
+<th>GTC</th>
+<th>GTG</th>
+<th>GTT</th>
+<th>TAC</th>
+<th>TAT</th>
+<th>TCA</th>
+<th>TCC</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.00</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.01</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>TCG</th>
+<th>TCT</th>
+<th>TGC</th>
+<th>TGG</th>
+<th>TGT</th>
+<th>TTA</th>
+<th>TTC</th>
+<th>TTG</th>
+<th>TTT</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.00</td>
+<td style="font-family: monospace !important;">0.03</td>
+<td style="font-family: monospace !important;">0.00</td>
+<td style="font-family: monospace !important;">0.00</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.01</td>
+<td style="font-family: monospace !important;">0.02</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">chisqprob</span><span class="p">(</span><span class="n">LR</span><span class="p">,</span> <span class="n">df</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>0.0008054431244063214
+</pre></div>
+</div>
+</div>
+</div>
 <p>We can get the posterior probabilities of site-classifications out of this model as</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pp</span> <span class="o">=</span> <span class="n">rate_lf</span><span class="o">.</span><span class="n">get_bin_probs</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>This is a <code class="docutils literal notranslate"><span class="pre">DictArray</span></code> class which stores the probabilities as a <code class="docutils literal notranslate"><span class="pre">numpy.array</span></code>.</p>
 </div>
 <div class="section" id="mixing-branch-and-site-heterogeneity">
@@ -234,13 +1270,134 @@
 <p>Our implementation is not as parametrically succinct as that of Zhang et al, we have 1 additional bin probability.</p>
 </div>
 <p>After Zhang et al, we first define a null model that has 2 rate classes ‘0’ and ‘1’. We also get all the MLEs out using <code class="docutils literal notranslate"><span class="pre">get_statistics</span></code>, just printing out the bin parameters table in the current case.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rate_lf</span> <span class="o">=</span> <span class="n">cnf</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">],</span> <span class="n">digits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">rate_lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span><span class="s2">&quot;omega&quot;</span><span class="p">,</span> <span class="nb">bin</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">epsilon</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="mi">1</span> <span class="o">-</span> <span class="n">epsilon</span><span class="p">)</span>
+<span class="n">rate_lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span><span class="s2">&quot;omega&quot;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="n">is_constant</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">rate_lf</span><span class="o">.</span><span class="n">set_alignment</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
+<span class="n">rate_lf</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="o">**</span><span class="n">optimiser_args</span><span class="p">)</span>
+<span class="n">tables</span> <span class="o">=</span> <span class="n">rate_lf</span><span class="o">.</span><span class="n">get_statistics</span><span class="p">(</span><span class="n">with_titles</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="n">tables</span><span class="p">:</span>
+    <span class="k">if</span> <span class="s2">&quot;bin&quot;</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">title</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>bin params
+====================
+bin   bprobs   omega
+--------------------
+  0     0.11    0.00
+  1     0.89    1.00
+--------------------
+</pre></div>
+</div>
+</div>
+</div>
 <p>We’re also going to use the MLEs from the <code class="docutils literal notranslate"><span class="pre">rate_lf</span></code> model, since that nests within the more complex branch by rate-class model. This is unfortunately quite ugly compared with just using the annotated tree approach described above. It is currently necessary, however, due to a bug in constructing annotated trees for models with binned parameters.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">globals</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tables</span> <span class="k">if</span> <span class="s2">&quot;global&quot;</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">title</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">globals</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="nb">globals</span><span class="o">.</span><span class="n">header</span><span class="p">,</span> <span class="nb">globals</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="n">bin_params</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tables</span> <span class="k">if</span> <span class="s2">&quot;bin&quot;</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">title</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">rate_class_omegas</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">bin_params</span><span class="o">.</span><span class="n">tolist</span><span class="p">([</span><span class="s2">&quot;bin&quot;</span><span class="p">,</span> <span class="s2">&quot;omega&quot;</span><span class="p">]))</span>
+<span class="n">rate_class_probs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">bin_params</span><span class="o">.</span><span class="n">tolist</span><span class="p">([</span><span class="s2">&quot;bin&quot;</span><span class="p">,</span> <span class="s2">&quot;bprobs&quot;</span><span class="p">]))</span>
+<span class="n">lengths</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tables</span> <span class="k">if</span> <span class="s2">&quot;edge&quot;</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">title</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">lengths</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">lengths</span><span class="o">.</span><span class="n">tolist</span><span class="p">([</span><span class="s2">&quot;edge&quot;</span><span class="p">,</span> <span class="s2">&quot;length&quot;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>We now create the more complex model,</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rate_branch_lf</span> <span class="o">=</span> <span class="n">cnf</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span>
+    <span class="n">tree</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2a&quot;</span><span class="p">,</span> <span class="s2">&quot;2b&quot;</span><span class="p">],</span> <span class="n">digits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="mi">3</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>and set from the nested null model the branch lengths,</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">branch</span><span class="p">,</span> <span class="n">length</span> <span class="ow">in</span> <span class="n">lengths</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">rate_branch_lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span><span class="s2">&quot;length&quot;</span><span class="p">,</span> <span class="n">edge</span><span class="o">=</span><span class="n">branch</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="n">length</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>GTR term MLES,</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">param</span><span class="p">,</span> <span class="n">mle</span> <span class="ow">in</span> <span class="nb">globals</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">rate_branch_lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="n">mle</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>binned parameter values,</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rate_branch_lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span>
+    <span class="s2">&quot;omega&quot;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;2a&quot;</span><span class="p">],</span> <span class="n">upper</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="n">rate_class_omegas</span><span class="p">[</span><span class="s2">&quot;0&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">rate_branch_lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span>
+    <span class="s2">&quot;omega&quot;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2b&quot;</span><span class="p">],</span> <span class="n">is_constant</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">1.0</span>
+<span class="p">)</span>
+<span class="n">rate_branch_lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span>
+    <span class="s2">&quot;omega&quot;</span><span class="p">,</span>
+    <span class="n">bins</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;2a&quot;</span><span class="p">,</span> <span class="s2">&quot;2b&quot;</span><span class="p">],</span>
+    <span class="n">edges</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Chimpanzee&quot;</span><span class="p">,</span> <span class="s2">&quot;Human&quot;</span><span class="p">],</span>
+    <span class="n">init</span><span class="o">=</span><span class="mi">99</span><span class="p">,</span>
+    <span class="n">lower</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">upper</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span>
+    <span class="n">is_constant</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>and the bin probabilities.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rate_branch_lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span>
+    <span class="s2">&quot;bprobs&quot;</span><span class="p">,</span>
+    <span class="n">init</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">rate_class_probs</span><span class="p">[</span><span class="s2">&quot;0&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">epsilon</span><span class="p">,</span>
+        <span class="n">rate_class_probs</span><span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">epsilon</span><span class="p">,</span>
+        <span class="n">epsilon</span><span class="p">,</span>
+        <span class="n">epsilon</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>The result of these steps is to create a rate/branch model with initial parameter values that result in likelihood the same as the null.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rate_branch_lf</span><span class="o">.</span><span class="n">set_alignment</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rate_branch_lf</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="o">**</span><span class="n">optimiser_args</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">rate_branch_lf</span><span class="p">)</span>
 <span class="n">Likelihood</span> <span class="n">function</span> <span class="n">statistics</span>

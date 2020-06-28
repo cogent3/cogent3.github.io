@@ -7,6 +7,9 @@
     <title>Translate DNA sequences &#8212; cogent3 2020.4 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-dataframe.css" />
@@ -15,6 +18,8 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="../../_static/require.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
@@ -136,42 +141,268 @@
       
   <div class="section" id="translate-dna-sequences">
 <h1>Translate DNA sequences<a class="headerlink" href="#translate-dna-sequences" title="Permalink to this headline">¶</a></h1>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">get_code</span>
+
+<span class="n">standard_code</span> <span class="o">=</span> <span class="n">get_code</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">standard_code</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;TTTGCAAAC&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>&#39;FAN&#39;
+</pre></div>
+</div>
+</div>
+</div>
 <p>Conversion to a <code class="docutils literal notranslate"><span class="pre">ProteinSequence</span></code> from a <code class="docutils literal notranslate"><span class="pre">DnaSequence</span></code> is shown in <a class="reference internal" href="DNA_and_RNA_sequences.html#translation"><span class="std std-ref">Translate a DnaSequence to protein</span></a>.</p>
 </div>
 <div class="section" id="translate-all-six-frames">
 <h1>Translate all six frames<a class="headerlink" href="#translate-all-six-frames" title="Permalink to this headline">¶</a></h1>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_seq</span><span class="p">,</span> <span class="n">get_code</span>
+
+<span class="n">standard_code</span> <span class="o">=</span> <span class="n">get_code</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">seq</span> <span class="o">=</span> <span class="n">make_seq</span><span class="p">(</span><span class="s2">&quot;ATGCTAACATAAA&quot;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+<span class="n">translations</span> <span class="o">=</span> <span class="n">standard_code</span><span class="o">.</span><span class="n">sixframes</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">translations</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[&#39;MLT*&#39;, &#39;C*HK&#39;, &#39;ANI&#39;, &#39;FMLA&#39;, &#39;LC*H&#39;, &#39;YVS&#39;]
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="find-out-how-many-stops-in-a-frame">
 <h1>Find out how many stops in a frame<a class="headerlink" href="#find-out-how-many-stops-in-a-frame" title="Permalink to this headline">¶</a></h1>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_seq</span><span class="p">,</span> <span class="n">get_code</span>
+
+<span class="n">standard_code</span> <span class="o">=</span> <span class="n">get_code</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">seq</span> <span class="o">=</span> <span class="n">make_seq</span><span class="p">(</span><span class="s2">&quot;ATGCTAACATAAA&quot;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+<span class="n">stops_frame1</span> <span class="o">=</span> <span class="n">standard_code</span><span class="o">.</span><span class="n">get_stop_indices</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">stops_frame1</span>
+<span class="n">stop_index</span> <span class="o">=</span> <span class="n">stops_frame1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">seq</span><span class="p">[</span><span class="n">stop_index</span> <span class="p">:</span> <span class="n">stop_index</span> <span class="o">+</span> <span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>DnaSequence(TAA)
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="translate-a-codon">
 <h1>Translate a codon<a class="headerlink" href="#translate-a-codon" title="Permalink to this headline">¶</a></h1>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_seq</span><span class="p">,</span> <span class="n">get_code</span>
+
+<span class="n">standard_code</span> <span class="o">=</span> <span class="n">get_code</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">standard_code</span><span class="p">[</span><span class="s2">&quot;TTT&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>&#39;F&#39;
+</pre></div>
+</div>
+</div>
+</div>
 <p>or get the codons for a single amino acid</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">standard_code</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[&#39;GCT&#39;, &#39;GCC&#39;, &#39;GCA&#39;, &#39;GCG&#39;]
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="look-up-the-amino-acid-corresponding-to-a-single-codon">
 <h1>Look up the amino acid corresponding to a single codon<a class="headerlink" href="#look-up-the-amino-acid-corresponding-to-a-single-codon" title="Permalink to this headline">¶</a></h1>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">get_code</span>
+
+<span class="n">standard_code</span> <span class="o">=</span> <span class="n">get_code</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">standard_code</span><span class="p">[</span><span class="s2">&quot;TTT&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>&#39;F&#39;
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="get-all-the-codons-for-one-amino-acid">
 <h1>Get all the codons for one amino acid<a class="headerlink" href="#get-all-the-codons-for-one-amino-acid" title="Permalink to this headline">¶</a></h1>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">get_code</span>
+
+<span class="n">standard_code</span> <span class="o">=</span> <span class="n">get_code</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">standard_code</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[&#39;GCT&#39;, &#39;GCC&#39;, &#39;GCA&#39;, &#39;GCG&#39;]
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="get-all-the-codons-for-a-group-of-amino-acids">
 <h1>Get all the codons for a group of amino acids<a class="headerlink" href="#get-all-the-codons-for-a-group-of-amino-acids" title="Permalink to this headline">¶</a></h1>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">targets</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">]</span>
+<span class="n">codons</span> <span class="o">=</span> <span class="p">[</span><span class="n">standard_code</span><span class="p">[</span><span class="n">aa</span><span class="p">]</span> <span class="k">for</span> <span class="n">aa</span> <span class="ow">in</span> <span class="n">targets</span><span class="p">]</span>
+<span class="n">codons</span>
+<span class="n">flat_list</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">codons</span><span class="p">,</span> <span class="p">[])</span>
+<span class="n">flat_list</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[&#39;GCT&#39;, &#39;GCC&#39;, &#39;GCA&#39;, &#39;GCG&#39;, &#39;TGT&#39;, &#39;TGC&#39;]
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="converting-the-codonalphabet-to-codon-series">
 <h1>Converting the <code class="docutils literal notranslate"><span class="pre">CodonAlphabet</span></code> to codon series<a class="headerlink" href="#converting-the-codonalphabet-to-codon-series" title="Permalink to this headline">¶</a></h1>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_seq</span>
+
+<span class="n">my_seq</span> <span class="o">=</span> <span class="n">make_seq</span><span class="p">(</span><span class="s2">&quot;AGTACACTGGTT&quot;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+<span class="nb">sorted</span><span class="p">(</span><span class="n">my_seq</span><span class="o">.</span><span class="n">codon_alphabet</span><span class="p">())</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">my_seq</span><span class="o">.</span><span class="n">codon_alphabet</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>61
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="obtaining-the-codons-from-a-dnasequence-object">
 <h1>Obtaining the codons from a <code class="docutils literal notranslate"><span class="pre">DnaSequence</span></code> object<a class="headerlink" href="#obtaining-the-codons-from-a-dnasequence-object" title="Permalink to this headline">¶</a></h1>
 <p>Use the method <code class="docutils literal notranslate"><span class="pre">get_in_motif_size</span></code></p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_seq</span>
+
+<span class="n">my_seq</span> <span class="o">=</span> <span class="n">make_seq</span><span class="p">(</span><span class="s2">&quot;ATGCACTGGTAA&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;my_gene&quot;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+<span class="n">codons</span> <span class="o">=</span> <span class="n">my_seq</span><span class="o">.</span><span class="n">get_in_motif_size</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">codons</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[&#39;ATG&#39;, &#39;CAC&#39;, &#39;TGG&#39;, &#39;TAA&#39;]
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="translating-a-dna-sequence-with-a-terminating-stop-codon">
 <h1>Translating a DNA sequence with a terminating stop codon<a class="headerlink" href="#translating-a-dna-sequence-with-a-terminating-stop-codon" title="Permalink to this headline">¶</a></h1>
 <p>You can’t translate a sequence that contains a stop codon.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pep</span> <span class="o">=</span> <span class="n">my_seq</span><span class="o">.</span><span class="n">get_translation</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AlphabetError</span><span class="g g-Whitespace">                             </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">78926</span><span class="n">fb55d34</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">pep</span> <span class="o">=</span> <span class="n">my_seq</span><span class="o">.</span><span class="n">get_translation</span><span class="p">()</span>
+
+<span class="nn">/usr/local/miniconda/envs/cogent3/lib/python3.8/site-packages/cogent3/core/sequence.py</span> in <span class="ni">get_translation</span><span class="nt">(self, gc, incomplete_ok)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1200</span>             <span class="n">orig_codon</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_seq</span><span class="p">[</span><span class="n">posn</span> <span class="p">:</span> <span class="n">posn</span> <span class="o">+</span> <span class="mi">3</span><span class="p">]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1201</span>             <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1202</span>                 <span class="n">resolved</span> <span class="o">=</span> <span class="n">codon_alphabet</span><span class="o">.</span><span class="n">resolve_ambiguity</span><span class="p">(</span><span class="n">orig_codon</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1203</span>             <span class="k">except</span> <span class="n">AlphabetError</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1204</span>                 <span class="k">if</span> <span class="ow">not</span> <span class="n">incomplete_ok</span> <span class="ow">or</span> <span class="s2">&quot;-&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">orig_codon</span><span class="p">:</span>
+
+<span class="nn">/usr/local/miniconda/envs/cogent3/lib/python3.8/site-packages/cogent3/core/alphabet.py</span> in <span class="ni">resolve_ambiguity</span><span class="nt">(self, ambig_motif)</span>
+<span class="g g-Whitespace">    </span><span class="mi">718</span> 
+<span class="g g-Whitespace">    </span><span class="mi">719</span>         <span class="k">if</span> <span class="ow">not</span> <span class="n">motif_set</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">720</span>             <span class="k">raise</span> <span class="n">AlphabetError</span><span class="p">(</span><span class="n">ambig_motif</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">721</span> 
+<span class="g g-Whitespace">    </span><span class="mi">722</span>         <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">motif_set</span><span class="p">)</span>
+
+<span class="ne">AlphabetError</span>: TAA
+</pre></div>
+</div>
+</div>
+</div>
 <div class="section" id="by-removing-the-trailing-stop-codon-first">
 <h2>By removing the trailing stop codon first<a class="headerlink" href="#by-removing-the-trailing-stop-codon-first" title="Permalink to this headline">¶</a></h2>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_seq</span>
+
+<span class="n">my_seq</span> <span class="o">=</span> <span class="n">make_seq</span><span class="p">(</span><span class="s2">&quot;ATGCACTGGTAA&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;my_gene&quot;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+<span class="n">seq</span> <span class="o">=</span> <span class="n">my_seq</span><span class="o">.</span><span class="n">trim_stop_codon</span><span class="p">()</span>
+<span class="n">pep</span> <span class="o">=</span> <span class="n">seq</span><span class="o">.</span><span class="n">get_translation</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pep</span><span class="o">.</span><span class="n">to_fasta</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">pep</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;my_gene
+MHW
+
+&lt;class &#39;cogent3.core.sequence.ProteinSequence&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="by-slicing-the-dnasequence-first">
 <h2>By slicing the <code class="docutils literal notranslate"><span class="pre">DnaSequence</span></code> first<a class="headerlink" href="#by-slicing-the-dnasequence-first" title="Permalink to this headline">¶</a></h2>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_seq</span>
+
+<span class="n">my_seq</span> <span class="o">=</span> <span class="n">make_seq</span><span class="p">(</span><span class="s2">&quot;CAAATGTATTAA&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;my_gene&quot;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+<span class="n">pep</span> <span class="o">=</span> <span class="n">my_seq</span><span class="p">[:</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">get_translation</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pep</span><span class="o">.</span><span class="n">to_fasta</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;my_gene
+QMY
+
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 

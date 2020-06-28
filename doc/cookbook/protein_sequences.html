@@ -7,6 +7,9 @@
     <title>Protein sequences &#8212; cogent3 2020.4 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-dataframe.css" />
@@ -15,6 +18,8 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="../../_static/require.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
@@ -126,17 +131,62 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="protein-sequences">
+  <div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="section" id="protein-sequences">
 <h1>Protein sequences<a class="headerlink" href="#protein-sequences" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="creating-a-proteinsequence-with-a-name">
 <h2>Creating a ProteinSequence with a name<a class="headerlink" href="#creating-a-proteinsequence-with-a-name" title="Permalink to this headline">¶</a></h2>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">PROTEIN</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">PROTEIN</span><span class="o">.</span><span class="n">make_seq</span><span class="p">(</span><span class="s2">&quot;THISISAPRQTEIN&quot;</span><span class="p">,</span> <span class="s2">&quot;myProtein&quot;</span><span class="p">)</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>&#39;THISISAPRQTEIN&#39;
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="converting-a-dna-sequence-string-to-protein-sequence-string">
 <h2>Converting a DNA sequence string to protein sequence string<a class="headerlink" href="#converting-a-dna-sequence-string-to-protein-sequence-string" title="Permalink to this headline">¶</a></h2>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.core.genetic_code</span> <span class="kn">import</span> <span class="n">DEFAULT</span> <span class="k">as</span> <span class="n">standard_code</span>
+
+<span class="n">standard_code</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;TTTGCAAAC&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>&#39;FAN&#39;
+</pre></div>
+</div>
+</div>
+</div>
 <p>Conversion to a <code class="docutils literal notranslate"><span class="pre">ProteinSequence</span></code> from a <code class="docutils literal notranslate"><span class="pre">DnaSequence</span></code> is shown in <a class="reference internal" href="DNA_and_RNA_sequences.html#translation"><span class="std std-ref">Translate a DnaSequence to protein</span></a>.</p>
 </div>
 <div class="section" id="loading-protein-sequences-from-a-phylip-file">
 <h2>Loading protein sequences from a Phylip file<a class="headerlink" href="#loading-protein-sequences-from-a-phylip-file" title="Permalink to this headline">¶</a></h2>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
+
+<span class="n">seq</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/abglobin_aa.phylip&quot;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;protein&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 </div>
 </div>
 

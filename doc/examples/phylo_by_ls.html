@@ -7,6 +7,9 @@
     <title>Phylogenetic reconstruction by least squares &#8212; cogent3 2020.4 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-dataframe.css" />
@@ -15,6 +18,8 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="../../_static/require.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
@@ -127,41 +132,209 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="phylogenetic-reconstruction-by-least-squares">
+  <div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="section" id="phylogenetic-reconstruction-by-least-squares">
 <h1>Phylogenetic reconstruction by least squares<a class="headerlink" href="#phylogenetic-reconstruction-by-least-squares" title="Permalink to this headline">¶</a></h1>
 <p><em>Section author: Gavin Huttley</em></p>
 <p>We will load some pre-computed pairwise distance data. To see how that data was computed see the <a class="reference internal" href="calculate_pairwise_distances.html#calculating-pairwise-distances"><span class="std std-ref">Calculate pairwise distances between sequences</span></a> example. That data is saved in a format called <code class="docutils literal notranslate"><span class="pre">pickle</span></code> which is native to python. As per usual, we import the basic components we need.</p>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">from</span> <span class="nn">cogent3.phylo</span> <span class="kn">import</span> <span class="n">least_squares</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>Now load the distance data.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;dists_for_phylo.pickle&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">dists</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>If there are extremely small distances, they can cause an error in the least squares calculation. Since such estimates are between extremely closely related sequences we could simply drop all distances for one of the sequences. We won’t do that here, we’ll leave that as exercise.</p>
 <p>We make the ls calculator.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ls</span> <span class="o">=</span> <span class="n">least_squares</span><span class="o">.</span><span class="n">WLS</span><span class="p">(</span><span class="n">dists</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>We also add tests that pass in a <code class="docutils literal notranslate"><span class="pre">cogent3.evolve.fast_distance.DistanceMatrix</span></code> and a pairwise distance dict.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ls_distance_matrix</span> <span class="o">=</span> <span class="n">least_squares</span><span class="o">.</span><span class="n">WLS</span><span class="p">(</span><span class="n">DistanceMatrix</span><span class="p">(</span><span class="n">dists</span><span class="p">))</span>
+<span class="n">ls_pairwise_matrix</span> <span class="o">=</span> <span class="n">least_squares</span><span class="o">.</span><span class="n">WLS</span><span class="p">(</span><span class="n">dists</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>We will search tree space for the collection of best trees using the advanced stepwise addition algorithm (hereafter <em>asaa</em>).</p>
 <div class="section" id="look-for-the-single-best-tree">
 <h2>Look for the single best tree<a class="headerlink" href="#look-for-the-single-best-tree" title="Permalink to this headline">¶</a></h2>
 <p>In this use case we are after just 1 tree. We specify up to what taxa size all possible trees for the sample will be computed. Here we are specifying <code class="docutils literal notranslate"><span class="pre">a=5</span></code>. This means 5 sequences will be picked randomly and all possible trees relating them will be evaluated. <code class="docutils literal notranslate"><span class="pre">k=1</span></code> means only the best tree will be kept at the end of each such round of evaluation. For every remaining sequence it is grafted onto every possible branch of this tree. The best <code class="docutils literal notranslate"><span class="pre">k</span></code> results are then taken to the next round, when another sequence is randomly selected for addition. This proceeds until all sequences have been added. The result with following arguments is a single wls score and a single <code class="docutils literal notranslate"><span class="pre">Tree</span></code> which can be saved etc ..</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">score</span><span class="p">,</span> <span class="n">tree</span> <span class="o">=</span> <span class="n">ls</span><span class="o">.</span><span class="n">trex</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="mf">1e-4</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>We won’t display this tree, because we are doing more below.</p>
 </div>
 <div class="section" id="a-more-rigorous-tree-space-search">
 <h2>A more rigorous tree space search<a class="headerlink" href="#a-more-rigorous-tree-space-search" title="Permalink to this headline">¶</a></h2>
 <p>We change the settings, so we keep more trees and then look at the distribution of the statistics for the last collection of trees. We could also change <code class="docutils literal notranslate"><span class="pre">a</span></code> to be larger, but in the current case we just adjust <code class="docutils literal notranslate"><span class="pre">k</span></code>. We also set the argument <code class="docutils literal notranslate"><span class="pre">return_all=True</span></code>, the effect of which is to return the complete set of saved trees. These, and their support statistic, can then be inspected.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">trees</span> <span class="o">=</span> <span class="n">ls</span><span class="o">.</span><span class="n">trex</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">return_all</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>Remember the sum-of-squares statistic will be smaller for ‘good’ trees. The order of the trees returned is from good to bad. The number of returned <code class="docutils literal notranslate"><span class="pre">trees</span></code> is the same as the number requested to be retained at each step.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">trees</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>5
+</pre></div>
+</div>
+</div>
+</div>
 <p>Lets inspect the resulting statistics. First, the object <code class="docutils literal notranslate"><span class="pre">trees</span></code> is a list of <code class="docutils literal notranslate"><span class="pre">(wls,</span> <span class="pre">Tree)</span></code> tuples. We will therefore loop over the list to generate a separate list of just the wls statistics. The following syntax is called a list comprehension - basically just a very succinct <code class="docutils literal notranslate"><span class="pre">for</span></code> loop.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wls_stats</span> <span class="o">=</span> <span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">tree</span> <span class="ow">in</span> <span class="n">trees</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>The <code class="docutils literal notranslate"><span class="pre">wls_stats</span></code> is a list which, if printed, looks like</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mf">1.3308768548934439e-05</span><span class="p">,</span> <span class="mf">0.0015588630350439783</span><span class="p">,</span><span class="o">...</span>
 </pre></div>
 </div>
 <p>From this you’ll see that the first 5 results are very similar to each other and would probably reasonably be considered equivalently supported topologies. I’ll just print(the first two of the these trees after balancing them (in order to make their representations as equal as possible).)</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">t1</span> <span class="o">=</span> <span class="n">trees</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">balanced</span><span class="p">()</span>
+<span class="n">t2</span> <span class="o">=</span> <span class="n">trees</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">balanced</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t1</span><span class="o">.</span><span class="n">ascii_art</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>          /-Mouse
+         |
+         |          /-DogFaced
+-root----|-edge.0--|
+         |          \-NineBande
+         |
+         |          /-HowlerMon
+          \edge.1--|
+                    \-Human
+</pre></div>
+</div>
+</div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">t2</span><span class="o">.</span><span class="n">ascii_art</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>          /-DogFaced
+         |
+         |          /-Mouse
+-root----|-edge.0--|
+         |          \-NineBande
+         |
+         |          /-HowlerMon
+          \edge.1--|
+                    \-Human
+</pre></div>
+</div>
+</div>
+</div>
 <p>You can see the difference involves the Jackrabbit, TreeShrew, Gorilla, Rat clade.</p>
 </div>
 <div class="section" id="assessing-the-fit-for-a-pre-specified-tree-topology">
 <h2>Assessing the fit for a pre-specified tree topology<a class="headerlink" href="#assessing-the-fit-for-a-pre-specified-tree-topology" title="Permalink to this headline">¶</a></h2>
 <p>In some instances we may have a tree from the literature or elsewhere whose fit to the data we seek to evaluate. In this case I’m going load a tree as follows.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_tree</span>
+
+<span class="n">query_tree</span> <span class="o">=</span> <span class="n">make_tree</span><span class="p">(</span>
+    <span class="s2">&quot;((Human:.2,DogFaced:.2):.3,(NineBande:.1, Mouse:.5):.2,HowlerMon:.1)&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>We now just use the <code class="docutils literal notranslate"><span class="pre">ls</span></code> object created above. The following evaluates the query using it’s associated branch lengths, returning only the wls statistic.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ls</span><span class="o">.</span><span class="n">evaluate_tree</span><span class="p">(</span><span class="n">query_tree</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>2.8938102255982163
+</pre></div>
+</div>
+</div>
+</div>
 <p>We can also evaluate just the tree’s topology, returning both the wls statistic and the tree with best fit branch lengths.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wls</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">ls</span><span class="o">.</span><span class="n">evaluate_topology</span><span class="p">(</span><span class="n">query_tree</span><span class="p">)</span>
+<span class="k">assert</span> <span class="s2">&quot;</span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">wls</span> <span class="o">==</span> <span class="s2">&quot;0.0084&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 </div>
 <div class="section" id="using-maximum-likelihood-for-measuring-tree-fit">
 <h2>Using maximum likelihood for measuring tree fit<a class="headerlink" href="#using-maximum-likelihood-for-measuring-tree-fit" title="Permalink to this headline">¶</a></h2>
 <p>This is a much slower algorithm and the interface largely mirrors that for the above. The difference is you import <code class="docutils literal notranslate"><span class="pre">maximum_likelihood</span></code> instead of <code class="docutils literal notranslate"><span class="pre">least_squares</span></code>, and use the <code class="docutils literal notranslate"><span class="pre">ML</span></code> instead of <code class="docutils literal notranslate"><span class="pre">WLS</span></code> classes. The <code class="docutils literal notranslate"><span class="pre">ML</span></code> class requires a substitution model (like a HKY85 for DNA or JTT92 for protein), and an alignment. It also optionally takes a distance matrix, such as that used here, computed for the same sequences. These distances are then used to obtain estimates of branch lengths by the WLS method for each evaluated tree topology which are then used as starting values for the likelihood optimisation.</p>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
 </div>
 </div>
 

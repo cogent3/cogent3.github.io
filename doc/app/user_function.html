@@ -7,6 +7,9 @@
     <title>Custom composable apps &#8212; cogent3 2020.4 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-dataframe.css" />
@@ -15,6 +18,8 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="../../_static/require.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
@@ -143,9 +148,127 @@
 <div class="section" id="a-simple-example">
 <h2>A simple example<a class="headerlink" href="#a-simple-example" title="Permalink to this headline">¶</a></h2>
 <p>We make a very simple function <code class="docutils literal notranslate"><span class="pre">first4</span></code>, that returns the first 4 elements of an alignment.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">first4</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">val</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>Now we define a <code class="docutils literal notranslate"><span class="pre">user_function</span></code> instance that takes and returns an <code class="docutils literal notranslate"><span class="pre">ALIGNED_TYPE</span></code>.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.app.composable</span> <span class="kn">import</span> <span class="n">user_function</span><span class="p">,</span> <span class="n">ALIGNED_TYPE</span>
+
+<span class="n">just4</span> <span class="o">=</span> <span class="n">user_function</span><span class="p">(</span>
+    <span class="n">first4</span><span class="p">,</span>
+    <span class="n">input_types</span><span class="o">=</span><span class="n">ALIGNED_TYPE</span><span class="p">,</span>
+    <span class="n">output_types</span><span class="o">=</span><span class="n">ALIGNED_TYPE</span><span class="p">,</span>
+    <span class="n">data_types</span><span class="o">=</span><span class="s2">&quot;Alignment&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>The <code class="docutils literal notranslate"><span class="pre">repr()</span></code> of your <code class="docutils literal notranslate"><span class="pre">user_function</span></code> instance indicates the wrapped function and the module it’s in.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">just4</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>user_function(name=&#39;first4&#39;, module=&#39;__main__&#39;)
+</pre></div>
+</div>
+</div>
+</div>
 <p>You use it like all composable apps which we demonstrate using a small sample alignment.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span>
+
+<span class="n">aln</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s2">&quot;GCAAGCGTTTAT&quot;</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="s2">&quot;GCTTTTGTCAAT&quot;</span><span class="p">),</span> <span class="n">array_align</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">just4</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
+<span class="n">result</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+td { border: none !important; text-align: left !important; }
+.label { font-size: 12pt ; text-align: right !important; color: black !important; }
+.a_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.b_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.c_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.d_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.e_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.f_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.g_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.h_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.i_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.j_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.k_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.l_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.m_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.n_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.o_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.p_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.q_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.r_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.s_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.t_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.u_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.v_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.w_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.x_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.y_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.z_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.A_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.B_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.C_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.D_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.E_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.F_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.G_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.H_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.I_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.J_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.K_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.L_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.M_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.N_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.O_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.P_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.Q_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.R_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.S_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.T_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.U_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.V_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.W_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.X_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.Y_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.Z_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.terminal_ambig_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.ambig_text{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+</style>
+<body>
+<table>
+<tr style="background-color:rgba(161, 195, 209, 0.5);"><td></td><td><b>0</b></td></tr>
+<tr><td class="label">b</td><td><span class="G_text">G</span><span class="C_text">C</span><span class="T_text">T</span><span class="T_text">T</span></td></tr>
+<tr><td class="label">a</td><td><span class="G_text">.</span><span class="C_text">.</span><span class="A_text">A</span><span class="A_text">A</span></td></tr>
+</table>
+<p><i>2 x 4 text alignment</i></p>
+</body></div></div>
+</div>
 </div>
 <div class="section" id="renaming-sequences">
 <h2>Renaming sequences<a class="headerlink" href="#renaming-sequences" title="Permalink to this headline">¶</a></h2>
@@ -154,10 +277,87 @@
 <p class="admonition-title">Note</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">SERIALISABLE_TYPE</span></code> indicates the data has the ability to be converted to <code class="docutils literal notranslate"><span class="pre">json</span></code>.</p>
 </div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.app.composable</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">user_function</span><span class="p">,</span>
+    <span class="n">ALIGNED_TYPE</span><span class="p">,</span>
+    <span class="n">SEQUENCE_TYPE</span><span class="p">,</span>
+    <span class="n">SERIALISABLE_TYPE</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">renamer</span><span class="p">(</span><span class="n">aln</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;upper case names&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">aln</span><span class="o">.</span><span class="n">rename_seqs</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+
+<span class="n">rename_seqs</span> <span class="o">=</span> <span class="n">user_function</span><span class="p">(</span>
+    <span class="n">renamer</span><span class="p">,</span>
+    <span class="n">input_types</span><span class="o">=</span><span class="p">(</span><span class="n">ALIGNED_TYPE</span><span class="p">,</span> <span class="n">SEQUENCE_TYPE</span><span class="p">),</span>
+    <span class="n">output_types</span><span class="o">=</span><span class="n">SERIALISABLE_TYPE</span><span class="p">,</span>
+    <span class="n">data_types</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;SequenceCollection&quot;</span><span class="p">,</span> <span class="s2">&quot;Alignment&quot;</span><span class="p">,</span> <span class="s2">&quot;ArrayAlignment&quot;</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">rename_seqs</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
+<span class="n">result</span><span class="o">.</span><span class="n">names</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[&#39;A&#39;, &#39;B&#39;]
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="a-user-function-for-with-a-different-output-type">
 <h2>A user function for with a different output type<a class="headerlink" href="#a-user-function-for-with-a-different-output-type" title="Permalink to this headline">¶</a></h2>
 <p>In this example, we make an function that returns <code class="docutils literal notranslate"><span class="pre">DistanceMatrix</span></code> of an alignment.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.app.composable</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">user_function</span><span class="p">,</span>
+    <span class="n">ALIGNED_TYPE</span><span class="p">,</span>
+    <span class="n">PAIRWISE_DISTANCE_TYPE</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">_get_dist</span><span class="p">(</span><span class="n">aln</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">aln</span><span class="o">.</span><span class="n">distance_matrix</span><span class="p">(</span><span class="n">calc</span><span class="o">=</span><span class="s2">&quot;hamming&quot;</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">get_dist</span> <span class="o">=</span> <span class="n">user_function</span><span class="p">(</span>
+    <span class="n">_get_dist</span><span class="p">,</span>
+    <span class="n">input_types</span><span class="o">=</span><span class="n">ALIGNED_TYPE</span><span class="p">,</span>
+    <span class="n">output_types</span><span class="o">=</span><span class="n">PAIRWISE_DISTANCE_TYPE</span><span class="p">,</span>
+    <span class="n">data_types</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Alignment&quot;</span><span class="p">,</span> <span class="s2">&quot;ArrayAlignment&quot;</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">get_dist</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
+<span class="n">result</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th></th>
+<th>a</th>
+<th>b</th>
+</thead>
+<tbody>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">a</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">6.000</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">b</td>
+<td style="font-family: monospace !important;">6.000</td>
+<td style="font-family: monospace !important;">0.000</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</div>
 </div>
 </div>
 

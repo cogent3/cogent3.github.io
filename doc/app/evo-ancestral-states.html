@@ -7,6 +7,9 @@
     <title>Reconstructing ancestral states &#8212; cogent3 2020.4 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-dataframe.css" />
@@ -15,6 +18,8 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="../../_static/require.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
@@ -124,14 +129,155 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="reconstructing-ancestral-states">
+  <div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="section" id="reconstructing-ancestral-states">
 <h1>Reconstructing ancestral states<a class="headerlink" href="#reconstructing-ancestral-states" title="Permalink to this headline">¶</a></h1>
 <p>This app takes a <code class="docutils literal notranslate"><span class="pre">model_result</span></code> and returns a <code class="docutils literal notranslate"><span class="pre">tabular_result</span></code> consisting of the posterior probabilities of ancestral states for each node of a tree. These probabilities are computed using the marginal reconstruction algorithm.</p>
 <p>We first fit a model to the sample data.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.app</span> <span class="kn">import</span> <span class="n">io</span><span class="p">,</span> <span class="n">evo</span>
+
+<span class="n">reader</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">load_aligned</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;fasta&quot;</span><span class="p">)</span>
+<span class="n">aln</span> <span class="o">=</span> <span class="n">reader</span><span class="p">(</span><span class="s2">&quot;data/primate_brca1.fasta&quot;</span><span class="p">)</span>
+<span class="n">gn</span> <span class="o">=</span> <span class="n">evo</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="s2">&quot;GN&quot;</span><span class="p">,</span> <span class="n">tree</span><span class="o">=</span><span class="s2">&quot;data/primate_brca1.tree&quot;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">gn</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <div class="section" id="define-the-ancestral-states-app">
 <h2>Define the <code class="docutils literal notranslate"><span class="pre">ancestral_states</span></code> app<a class="headerlink" href="#define-the-ancestral-states-app" title="Permalink to this headline">¶</a></h2>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">reconstuctor</span> <span class="o">=</span> <span class="n">evo</span><span class="o">.</span><span class="n">ancestral_states</span><span class="p">()</span>
+<span class="n">states_result</span> <span class="o">=</span> <span class="n">reconstuctor</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="n">states_result</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>5x tabular_result(&#39;edge.0&#39;: DictArray, &#39;edge.1&#39;: DictArray, &#39;edge.2&#39;: DictArray, &#39;edge.3&#39;: DictArray)
+</pre></div>
+</div>
+</div>
+</div>
 <p>The <code class="docutils literal notranslate"><span class="pre">tabular_result</span></code> is keyed by the node name. Each value is a <code class="docutils literal notranslate"><span class="pre">DictArray</span></code>, with header corresponding to the states and rows corresponding to alignment position.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">states_result</span><span class="p">[</span><span class="s2">&quot;edge.0&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th></th>
+<th>T</th>
+<th>C</th>
+<th>A</th>
+<th>G</th>
+</thead>
+<tbody>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">0</td>
+<td style="font-family: monospace !important;">1.000</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.000</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">1</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">1.000</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">2</td>
+<td style="font-family: monospace !important;">1.000</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.000</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">3</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">1.000</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">4</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">1.000</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">2809</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">1.000</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">2810</td>
+<td style="font-family: monospace !important;">1.000</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.000</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">2811</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">1.000</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">2812</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">1.000</td>
+<td style="font-family: monospace !important;">0.000</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">2813</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">1.000</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</div>
 <p>If not included in the newick tree file, the internal node names are automatically generated open loading. You can establish what those are by interrogating the tree bound to the likelihood function object. (If you move your mouse cursor over the nodes, their names will appear as hover text.)</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">get_figure</span><span class="p">(</span><span class="n">contemporaneous</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 </div>
 </div>
 

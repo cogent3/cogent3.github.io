@@ -7,6 +7,9 @@
     <title>Applying a discrete-time, non-stationary nucleotide model &#8212; cogent3 2020.4 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-dataframe.css" />
@@ -15,6 +18,8 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="../../_static/require.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
@@ -125,20 +130,290 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="applying-a-discrete-time-non-stationary-nucleotide-model">
+  <div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="section" id="applying-a-discrete-time-non-stationary-nucleotide-model">
 <h1>Applying a discrete-time, non-stationary nucleotide model<a class="headerlink" href="#applying-a-discrete-time-non-stationary-nucleotide-model" title="Permalink to this headline">¶</a></h1>
 <p>We fit a discrete-time Markov nucleotide model. This corresponds to a Barry and Hartigan 1987 model.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.app</span> <span class="kn">import</span> <span class="n">io</span><span class="p">,</span> <span class="n">evo</span>
+
+<span class="n">loader</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">load_aligned</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;fasta&quot;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+<span class="n">aln</span> <span class="o">=</span> <span class="n">loader</span><span class="p">(</span><span class="s2">&quot;data/primate_brca1.fasta&quot;</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">evo</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="s2">&quot;BH&quot;</span><span class="p">,</span> <span class="n">tree</span><span class="o">=</span><span class="s2">&quot;data/primate_brca1.tree&quot;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
+<span class="n">result</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">BH</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>key</th>
+<th>lnL</th>
+<th>nfp</th>
+<th>DLC</th>
+<th>unique_Q</th>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td style="font-family: monospace !important;">-6941.4684</td>
+<td style="font-family: monospace !important;">135</td>
+<td>True</td>
+<td>True</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</div>
 <p><strong>NOTE:</strong> DLC stands for diagonal largest in column and the value is a
 check on the identifiability of the model. <code class="docutils literal notranslate"><span class="pre">unique_Q</span></code> is not
 applicable to a discrete-time model and so remains as <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
 <p>Looking at the likelihood function, you will</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="o">.</span><span class="n">lf</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><h4>Likelihood function statistics</h4>
+<p>log-likelihood = -6941.4684</p>
+<p>number of free parameters = 135</p>
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Edge motif motif2 params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>edge</th>
+<th>motif</th>
+<th>motif2</th>
+<th>psubs</th>
+</thead>
+<tbody>
+<tr>
+<td>Galago</td>
+<td>T</td>
+<td>T</td>
+<td style="font-family: monospace !important;">0.8751</td>
+</tr>
+<tr>
+<td>Galago</td>
+<td>T</td>
+<td>C</td>
+<td style="font-family: monospace !important;">0.0649</td>
+</tr>
+<tr>
+<td>Galago</td>
+<td>T</td>
+<td>A</td>
+<td style="font-family: monospace !important;">0.0409</td>
+</tr>
+<tr>
+<td>Galago</td>
+<td>T</td>
+<td>G</td>
+<td style="font-family: monospace !important;">0.0192</td>
+</tr>
+<tr>
+<td>Galago</td>
+<td>C</td>
+<td>T</td>
+<td style="font-family: monospace !important;">0.1126</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<td>edge.3</td>
+<td>A</td>
+<td>G</td>
+<td style="font-family: monospace !important;">0.0055</td>
+</tr>
+<tr>
+<td>edge.3</td>
+<td>G</td>
+<td>T</td>
+<td style="font-family: monospace !important;">0.0000</td>
+</tr>
+<tr>
+<td>edge.3</td>
+<td>G</td>
+<td>C</td>
+<td style="font-family: monospace !important;">0.0011</td>
+</tr>
+<tr>
+<td>edge.3</td>
+<td>G</td>
+<td>A</td>
+<td style="font-family: monospace !important;">0.0039</td>
+</tr>
+<tr>
+<td>edge.3</td>
+<td>G</td>
+<td>G</td>
+<td style="font-family: monospace !important;">0.9950</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Motif params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>A</th>
+<th>C</th>
+<th>G</th>
+<th>T</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.3774</td>
+<td style="font-family: monospace !important;">0.1763</td>
+<td style="font-family: monospace !important;">0.2058</td>
+<td style="font-family: monospace !important;">0.2404</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</div>
 <div class="section" id="get-a-tree-with-branch-lengths-as-paralinear">
 <h2>Get a tree with branch lengths as paralinear<a class="headerlink" href="#get-a-tree-with-branch-lengths-as-paralinear" title="Permalink to this headline">¶</a></h2>
 <p>This is the only possible length metric for a discrete-time process.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tree</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">tree</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">get_figure</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">scale_bar</span> <span class="o">=</span> <span class="s2">&quot;top right&quot;</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 </div>
 <div class="section" id="getting-parameter-estimates">
 <h2>Getting parameter estimates<a class="headerlink" href="#getting-parameter-estimates" title="Permalink to this headline">¶</a></h2>
 <p>For a discrete-time model, aside from the root motif probabilities, everything is edge specific. But note that the <code class="docutils literal notranslate"><span class="pre">tabular_result</span></code> has different keys from the continuous-time case, as demonstrated below.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tabulator</span> <span class="o">=</span> <span class="n">evo</span><span class="o">.</span><span class="n">tabulate_stats</span><span class="p">()</span>
+<span class="n">stats</span> <span class="o">=</span> <span class="n">tabulator</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="n">stats</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>2x tabular_result(&#39;edge motif motif2 params&#39;: Table, &#39;motif params&#39;: Table)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">stats</span><span class="p">[</span><span class="s2">&quot;edge motif motif2 params&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">edge motif motif2 params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>edge</th>
+<th>motif</th>
+<th>motif2</th>
+<th>psubs</th>
+</thead>
+<tbody>
+<tr>
+<td>Galago</td>
+<td>T</td>
+<td>T</td>
+<td style="font-family: monospace !important;">0.8751</td>
+</tr>
+<tr>
+<td>Galago</td>
+<td>T</td>
+<td>C</td>
+<td style="font-family: monospace !important;">0.0649</td>
+</tr>
+<tr>
+<td>Galago</td>
+<td>T</td>
+<td>A</td>
+<td style="font-family: monospace !important;">0.0409</td>
+</tr>
+<tr>
+<td>Galago</td>
+<td>T</td>
+<td>G</td>
+<td style="font-family: monospace !important;">0.0192</td>
+</tr>
+<tr>
+<td>Galago</td>
+<td>C</td>
+<td>T</td>
+<td style="font-family: monospace !important;">0.1126</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<td>edge.3</td>
+<td>A</td>
+<td>G</td>
+<td style="font-family: monospace !important;">0.0055</td>
+</tr>
+<tr>
+<td>edge.3</td>
+<td>G</td>
+<td>T</td>
+<td style="font-family: monospace !important;">0.0000</td>
+</tr>
+<tr>
+<td>edge.3</td>
+<td>G</td>
+<td>C</td>
+<td style="font-family: monospace !important;">0.0011</td>
+</tr>
+<tr>
+<td>edge.3</td>
+<td>G</td>
+<td>A</td>
+<td style="font-family: monospace !important;">0.0039</td>
+</tr>
+<tr>
+<td>edge.3</td>
+<td>G</td>
+<td>G</td>
+<td style="font-family: monospace !important;">0.9950</td>
+</tr>
+</tbody>
+</table>
+<p>
+176 rows x 4 columns</p></div></div>
+</div>
 </div>
 </div>
 

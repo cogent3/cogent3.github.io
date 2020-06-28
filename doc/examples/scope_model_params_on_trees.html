@@ -7,6 +7,9 @@
     <title>Allowing substitution model parameters to differ between branches &#8212; cogent3 2020.4 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-dataframe.css" />
@@ -15,6 +18,8 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="../../_static/require.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
@@ -128,13 +133,61 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="allowing-substitution-model-parameters-to-differ-between-branches">
+  <div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="section" id="allowing-substitution-model-parameters-to-differ-between-branches">
 <span id="scope-params-on-trees"></span><h1>Allowing substitution model parameters to differ between branches<a class="headerlink" href="#allowing-substitution-model-parameters-to-differ-between-branches" title="Permalink to this headline">¶</a></h1>
 <p><em>Section author: Gavin Huttley</em></p>
 <p>A common task concerns assessing how substitution model exchangeability parameters differ between evolutionary lineages. This is most commonly of interest for the case of testing for natural selection. Here I’ll demonstrate the different ways of scoping parameters across trees for the codon model case and how these can be used for evolutionary modelling.</p>
 <p>We start with the standard imports, plus using a canned codon substitution model and then load the sample data set.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span><span class="p">,</span> <span class="n">load_tree</span>
+<span class="kn">from</span> <span class="nn">cogent3.evolve.models</span> <span class="kn">import</span> <span class="n">MG94HKY</span>
+
+<span class="n">aln</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/long_testseqs.fasta&quot;</span><span class="p">)</span>
+<span class="n">tree</span> <span class="o">=</span> <span class="n">load_tree</span><span class="p">(</span><span class="s2">&quot;data/test.tree&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>We construct the substitution model and likelihood function and set the alignment.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sm</span> <span class="o">=</span> <span class="n">MG94HKY</span><span class="p">()</span>
+<span class="n">lf</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">set_alignment</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>At this point we have a likelihood function with two exchangeability parameters from the substitution model (<code class="docutils literal notranslate"><span class="pre">kappa</span></code> the transition/transversion ratio; <code class="docutils literal notranslate"><span class="pre">omega</span></code> the nonsynonymous/synonymous ratio) plus branch lengths for all tree edges. To facilitate subsequent discussion I now display the tree</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">ascii_art</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>                              /-Human
+                    /edge.0--|
+          /edge.1--|          \-HowlerMon
+         |         |
+         |          \-Mouse
+-root----|
+         |--NineBande
+         |
+          \-DogFaced
+</pre></div>
+</div>
+</div>
+</div>
 <p>In order to scope a parameter on a tree (meaning specifying a subset of edges for which the parameter is to be treated differently to the remainder of the tree) requires uniquely identifying the edges. We do this using the following arguments to the likelihood function <code class="docutils literal notranslate"><span class="pre">set_param_rule</span></code> method:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">tip_names</span></code>: the name of two tips</p></li>
@@ -146,6 +199,117 @@
 <div class="section" id="specifying-a-clade">
 <h2>Specifying a clade<a class="headerlink" href="#specifying-a-clade" title="Permalink to this headline">¶</a></h2>
 <p>I’m going to cause <code class="docutils literal notranslate"><span class="pre">omega</span></code> to attain a different value for all branches aside from the primate clade and stem (<code class="docutils literal notranslate"><span class="pre">HowlerMon</span></code>, <code class="docutils literal notranslate"><span class="pre">Human</span></code>, <code class="docutils literal notranslate"><span class="pre">edge.0</span></code>).</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span>
+    <span class="s2">&quot;omega&quot;</span><span class="p">,</span>
+    <span class="n">tip_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;DogFaced&quot;</span><span class="p">,</span> <span class="s2">&quot;Mouse&quot;</span><span class="p">],</span>
+    <span class="n">outgroup_name</span><span class="o">=</span><span class="s2">&quot;Human&quot;</span><span class="p">,</span>
+    <span class="n">init</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span>
+    <span class="n">clade</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">lf</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><h4>Likelihood function statistics</h4>
+<p>log-likelihood = -9489.9506</p>
+<p>number of free parameters = 10</p>
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Global params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>kappa</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">1.00</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Edge params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>edge</th>
+<th>parent</th>
+<th>length</th>
+<th>omega</th>
+</thead>
+<tbody>
+<tr>
+<td>Human</td>
+<td>edge.0</td>
+<td style="font-family: monospace !important;">0.03</td>
+<td style="font-family: monospace !important;">1.00</td>
+</tr>
+<tr>
+<td>HowlerMon</td>
+<td>edge.0</td>
+<td style="font-family: monospace !important;">0.04</td>
+<td style="font-family: monospace !important;">1.00</td>
+</tr>
+<tr>
+<td>edge.0</td>
+<td>edge.1</td>
+<td style="font-family: monospace !important;">0.04</td>
+<td style="font-family: monospace !important;">1.00</td>
+</tr>
+<tr>
+<td>Mouse</td>
+<td>edge.1</td>
+<td style="font-family: monospace !important;">0.28</td>
+<td style="font-family: monospace !important;">2.00</td>
+</tr>
+<tr>
+<td>edge.1</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">2.00</td>
+</tr>
+<tr>
+<td>NineBande</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.09</td>
+<td style="font-family: monospace !important;">2.00</td>
+</tr>
+<tr>
+<td>DogFaced</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.11</td>
+<td style="font-family: monospace !important;">2.00</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Motif params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>A</th>
+<th>C</th>
+<th>G</th>
+<th>T</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.37</td>
+<td style="font-family: monospace !important;">0.19</td>
+<td style="font-family: monospace !important;">0.21</td>
+<td style="font-family: monospace !important;">0.23</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</div>
 <p>As you can see <code class="docutils literal notranslate"><span class="pre">omega</span></code> for the primate edges I listed above have the default parameter value (1.0), while the others have what I’ve assigned. In fact, you could omit the <code class="docutils literal notranslate"><span class="pre">clade</span></code> argument as this is the default, but I think for readability of scripts it’s best to be explicit.</p>
 </div>
 <div class="section" id="specifying-a-stem">
@@ -155,10 +319,239 @@
 <p class="admonition-title">Note</p>
 <p>I need to reset the <code class="docutils literal notranslate"><span class="pre">lf</span></code> so all edges have the default value again. I’ll show this only for this example, but rest assured I’m doing it for all others too.</p>
 </div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span><span class="s2">&quot;omega&quot;</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span>
+    <span class="s2">&quot;omega&quot;</span><span class="p">,</span>
+    <span class="n">tip_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Human&quot;</span><span class="p">,</span> <span class="s2">&quot;HowlerMon&quot;</span><span class="p">],</span>
+    <span class="n">outgroup_name</span><span class="o">=</span><span class="s2">&quot;Mouse&quot;</span><span class="p">,</span>
+    <span class="n">init</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span>
+    <span class="n">stem</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">clade</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">lf</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><h4>Likelihood function statistics</h4>
+<p>log-likelihood = -9424.8896</p>
+<p>number of free parameters = 10</p>
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Global params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>kappa</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">1.00</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Edge params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>edge</th>
+<th>parent</th>
+<th>length</th>
+<th>omega</th>
+</thead>
+<tbody>
+<tr>
+<td>Human</td>
+<td>edge.0</td>
+<td style="font-family: monospace !important;">0.03</td>
+<td style="font-family: monospace !important;">1.00</td>
+</tr>
+<tr>
+<td>HowlerMon</td>
+<td>edge.0</td>
+<td style="font-family: monospace !important;">0.04</td>
+<td style="font-family: monospace !important;">1.00</td>
+</tr>
+<tr>
+<td>edge.0</td>
+<td>edge.1</td>
+<td style="font-family: monospace !important;">0.04</td>
+<td style="font-family: monospace !important;">2.00</td>
+</tr>
+<tr>
+<td>Mouse</td>
+<td>edge.1</td>
+<td style="font-family: monospace !important;">0.28</td>
+<td style="font-family: monospace !important;">1.00</td>
+</tr>
+<tr>
+<td>edge.1</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">1.00</td>
+</tr>
+<tr>
+<td>NineBande</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.09</td>
+<td style="font-family: monospace !important;">1.00</td>
+</tr>
+<tr>
+<td>DogFaced</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.11</td>
+<td style="font-family: monospace !important;">1.00</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Motif params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>A</th>
+<th>C</th>
+<th>G</th>
+<th>T</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.37</td>
+<td style="font-family: monospace !important;">0.19</td>
+<td style="font-family: monospace !important;">0.21</td>
+<td style="font-family: monospace !important;">0.23</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</div>
 </div>
 <div class="section" id="specifying-clade-and-stem">
 <h2>Specifying clade and stem<a class="headerlink" href="#specifying-clade-and-stem" title="Permalink to this headline">¶</a></h2>
 <p>I’ll specify that both the primates and their stem are to be considered.</p>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span>
+    <span class="s2">&quot;omega&quot;</span><span class="p">,</span>
+    <span class="n">tip_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Human&quot;</span><span class="p">,</span> <span class="s2">&quot;HowlerMon&quot;</span><span class="p">],</span>
+    <span class="n">outgroup_name</span><span class="o">=</span><span class="s2">&quot;Mouse&quot;</span><span class="p">,</span>
+    <span class="n">init</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span>
+    <span class="n">stem</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">clade</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">lf</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><h4>Likelihood function statistics</h4>
+<p>log-likelihood = -9442.4271</p>
+<p>number of free parameters = 10</p>
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Global params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>kappa</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">1.00</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Edge params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>edge</th>
+<th>parent</th>
+<th>length</th>
+<th>omega</th>
+</thead>
+<tbody>
+<tr>
+<td>Human</td>
+<td>edge.0</td>
+<td style="font-family: monospace !important;">0.03</td>
+<td style="font-family: monospace !important;">2.00</td>
+</tr>
+<tr>
+<td>HowlerMon</td>
+<td>edge.0</td>
+<td style="font-family: monospace !important;">0.04</td>
+<td style="font-family: monospace !important;">2.00</td>
+</tr>
+<tr>
+<td>edge.0</td>
+<td>edge.1</td>
+<td style="font-family: monospace !important;">0.04</td>
+<td style="font-family: monospace !important;">2.00</td>
+</tr>
+<tr>
+<td>Mouse</td>
+<td>edge.1</td>
+<td style="font-family: monospace !important;">0.28</td>
+<td style="font-family: monospace !important;">1.00</td>
+</tr>
+<tr>
+<td>edge.1</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.02</td>
+<td style="font-family: monospace !important;">1.00</td>
+</tr>
+<tr>
+<td>NineBande</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.09</td>
+<td style="font-family: monospace !important;">1.00</td>
+</tr>
+<tr>
+<td>DogFaced</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.11</td>
+<td style="font-family: monospace !important;">1.00</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Motif params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>A</th>
+<th>C</th>
+<th>G</th>
+<th>T</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.37</td>
+<td style="font-family: monospace !important;">0.19</td>
+<td style="font-family: monospace !important;">0.21</td>
+<td style="font-family: monospace !important;">0.23</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</div>
 </div>
 <div class="section" id="alternate-arguments-for-specifying-edges">
 <h2>Alternate arguments for specifying edges<a class="headerlink" href="#alternate-arguments-for-specifying-edges" title="Permalink to this headline">¶</a></h2>
@@ -210,9 +603,456 @@
 <p class="admonition-title">Note</p>
 <p>here I’m specifying a constant value for the parameter and so I <strong>must</strong> use the argument <code class="docutils literal notranslate"><span class="pre">value</span></code> to set it. This not to be confused with the argument <code class="docutils literal notranslate"><span class="pre">init</span></code> that is used for providing initial (starting) values for fitting.</p>
 </div>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span>
+    <span class="s2">&quot;omega&quot;</span><span class="p">,</span>
+    <span class="n">tip_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Human&quot;</span><span class="p">,</span> <span class="s2">&quot;HowlerMon&quot;</span><span class="p">],</span>
+    <span class="n">outgroup_name</span><span class="o">=</span><span class="s2">&quot;Mouse&quot;</span><span class="p">,</span>
+    <span class="n">clade</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">value</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">is_constant</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">lf</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><h4>Likelihood function statistics</h4>
+<p>log-likelihood = -8640.9290</p>
+<p>number of free parameters = 9</p>
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Global params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>kappa</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">3.87</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Edge params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>edge</th>
+<th>parent</th>
+<th>length</th>
+<th>omega</th>
+</thead>
+<tbody>
+<tr>
+<td>Human</td>
+<td>edge.0</td>
+<td style="font-family: monospace !important;">0.09</td>
+<td style="font-family: monospace !important;">1.00</td>
+</tr>
+<tr>
+<td>HowlerMon</td>
+<td>edge.0</td>
+<td style="font-family: monospace !important;">0.12</td>
+<td style="font-family: monospace !important;">1.00</td>
+</tr>
+<tr>
+<td>edge.0</td>
+<td>edge.1</td>
+<td style="font-family: monospace !important;">0.12</td>
+<td style="font-family: monospace !important;">0.92</td>
+</tr>
+<tr>
+<td>Mouse</td>
+<td>edge.1</td>
+<td style="font-family: monospace !important;">0.84</td>
+<td style="font-family: monospace !important;">0.92</td>
+</tr>
+<tr>
+<td>edge.1</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.06</td>
+<td style="font-family: monospace !important;">0.92</td>
+</tr>
+<tr>
+<td>NineBande</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.28</td>
+<td style="font-family: monospace !important;">0.92</td>
+</tr>
+<tr>
+<td>DogFaced</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.34</td>
+<td style="font-family: monospace !important;">0.92</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Motif params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>A</th>
+<th>C</th>
+<th>G</th>
+<th>T</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.37</td>
+<td style="font-family: monospace !important;">0.19</td>
+<td style="font-family: monospace !important;">0.21</td>
+<td style="font-family: monospace !important;">0.23</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</div>
 <p>I’ll now free up <code class="docutils literal notranslate"><span class="pre">omega</span></code> on the primate clade, but making it a single value shared by all primate lineages.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span>
+    <span class="s2">&quot;omega&quot;</span><span class="p">,</span>
+    <span class="n">tip_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Human&quot;</span><span class="p">,</span> <span class="s2">&quot;HowlerMon&quot;</span><span class="p">],</span>
+    <span class="n">outgroup_name</span><span class="o">=</span><span class="s2">&quot;Mouse&quot;</span><span class="p">,</span>
+    <span class="n">clade</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">is_constant</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">lf</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><h4>Likelihood function statistics</h4>
+<p>log-likelihood = -8639.7171</p>
+<p>number of free parameters = 10</p>
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Global params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>kappa</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">3.85</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Edge params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>edge</th>
+<th>parent</th>
+<th>length</th>
+<th>omega</th>
+</thead>
+<tbody>
+<tr>
+<td>Human</td>
+<td>edge.0</td>
+<td style="font-family: monospace !important;">0.09</td>
+<td style="font-family: monospace !important;">0.77</td>
+</tr>
+<tr>
+<td>HowlerMon</td>
+<td>edge.0</td>
+<td style="font-family: monospace !important;">0.12</td>
+<td style="font-family: monospace !important;">0.77</td>
+</tr>
+<tr>
+<td>edge.0</td>
+<td>edge.1</td>
+<td style="font-family: monospace !important;">0.12</td>
+<td style="font-family: monospace !important;">0.92</td>
+</tr>
+<tr>
+<td>Mouse</td>
+<td>edge.1</td>
+<td style="font-family: monospace !important;">0.84</td>
+<td style="font-family: monospace !important;">0.92</td>
+</tr>
+<tr>
+<td>edge.1</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.06</td>
+<td style="font-family: monospace !important;">0.92</td>
+</tr>
+<tr>
+<td>NineBande</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.28</td>
+<td style="font-family: monospace !important;">0.92</td>
+</tr>
+<tr>
+<td>DogFaced</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.34</td>
+<td style="font-family: monospace !important;">0.92</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Motif params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>A</th>
+<th>C</th>
+<th>G</th>
+<th>T</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.37</td>
+<td style="font-family: monospace !important;">0.19</td>
+<td style="font-family: monospace !important;">0.21</td>
+<td style="font-family: monospace !important;">0.23</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</div>
 <p>Finally I’ll allow all primate edges to have different values of <code class="docutils literal notranslate"><span class="pre">omega</span></code>.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span>
+    <span class="s2">&quot;omega&quot;</span><span class="p">,</span>
+    <span class="n">tip_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Human&quot;</span><span class="p">,</span> <span class="s2">&quot;HowlerMon&quot;</span><span class="p">],</span>
+    <span class="n">outgroup_name</span><span class="o">=</span><span class="s2">&quot;Mouse&quot;</span><span class="p">,</span>
+    <span class="n">clade</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">is_independent</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">lf</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><h4>Likelihood function statistics</h4>
+<p>log-likelihood = -8638.9572</p>
+<p>number of free parameters = 11</p>
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Global params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>kappa</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">3.85</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Edge params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>edge</th>
+<th>parent</th>
+<th>length</th>
+<th>omega</th>
+</thead>
+<tbody>
+<tr>
+<td>Human</td>
+<td>edge.0</td>
+<td style="font-family: monospace !important;">0.09</td>
+<td style="font-family: monospace !important;">0.59</td>
+</tr>
+<tr>
+<td>HowlerMon</td>
+<td>edge.0</td>
+<td style="font-family: monospace !important;">0.12</td>
+<td style="font-family: monospace !important;">0.95</td>
+</tr>
+<tr>
+<td>edge.0</td>
+<td>edge.1</td>
+<td style="font-family: monospace !important;">0.12</td>
+<td style="font-family: monospace !important;">0.92</td>
+</tr>
+<tr>
+<td>Mouse</td>
+<td>edge.1</td>
+<td style="font-family: monospace !important;">0.84</td>
+<td style="font-family: monospace !important;">0.92</td>
+</tr>
+<tr>
+<td>edge.1</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.06</td>
+<td style="font-family: monospace !important;">0.92</td>
+</tr>
+<tr>
+<td>NineBande</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.28</td>
+<td style="font-family: monospace !important;">0.92</td>
+</tr>
+<tr>
+<td>DogFaced</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.34</td>
+<td style="font-family: monospace !important;">0.92</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Motif params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>A</th>
+<th>C</th>
+<th>G</th>
+<th>T</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.37</td>
+<td style="font-family: monospace !important;">0.19</td>
+<td style="font-family: monospace !important;">0.21</td>
+<td style="font-family: monospace !important;">0.23</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</div>
 <p>We now allow <code class="docutils literal notranslate"><span class="pre">omega</span></code> to be different on all edges.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span><span class="s2">&quot;omega&quot;</span><span class="p">,</span> <span class="n">is_independent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">lf</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><h4>Likelihood function statistics</h4>
+<p>log-likelihood = -8636.1383</p>
+<p>number of free parameters = 15</p>
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Global params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>kappa</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">3.85</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Edge params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>edge</th>
+<th>parent</th>
+<th>length</th>
+<th>omega</th>
+</thead>
+<tbody>
+<tr>
+<td>Human</td>
+<td>edge.0</td>
+<td style="font-family: monospace !important;">0.09</td>
+<td style="font-family: monospace !important;">0.59</td>
+</tr>
+<tr>
+<td>HowlerMon</td>
+<td>edge.0</td>
+<td style="font-family: monospace !important;">0.12</td>
+<td style="font-family: monospace !important;">0.95</td>
+</tr>
+<tr>
+<td>edge.0</td>
+<td>edge.1</td>
+<td style="font-family: monospace !important;">0.12</td>
+<td style="font-family: monospace !important;">1.13</td>
+</tr>
+<tr>
+<td>Mouse</td>
+<td>edge.1</td>
+<td style="font-family: monospace !important;">0.84</td>
+<td style="font-family: monospace !important;">0.92</td>
+</tr>
+<tr>
+<td>edge.1</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.06</td>
+<td style="font-family: monospace !important;">0.38</td>
+</tr>
+<tr>
+<td>NineBande</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.28</td>
+<td style="font-family: monospace !important;">1.27</td>
+</tr>
+<tr>
+<td>DogFaced</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.34</td>
+<td style="font-family: monospace !important;">0.84</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Motif params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>A</th>
+<th>C</th>
+<th>G</th>
+<th>T</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.37</td>
+<td style="font-family: monospace !important;">0.19</td>
+<td style="font-family: monospace !important;">0.21</td>
+<td style="font-family: monospace !important;">0.23</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</div>
 </div>
 </div>
 

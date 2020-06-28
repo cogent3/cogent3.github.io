@@ -7,6 +7,9 @@
     <title>Map protein alignment gaps to DNA alignment gaps &#8212; cogent3 2020.4 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-dataframe.css" />
@@ -15,6 +18,8 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="../../_static/require.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
@@ -125,9 +130,97 @@
 <h1>Map protein alignment gaps to DNA alignment gaps<a class="headerlink" href="#map-protein-alignment-gaps-to-dna-alignment-gaps" title="Permalink to this headline">¶</a></h1>
 <p><em>Section author: Gavin Huttley</em></p>
 <p>Although Cogent3 provides a means for directly aligning codon sequences, you may want to use a different approach based on the translate-align-introduce gaps into the original paradigm. After you’ve translated your codon sequences, and aligned the resulting amino acid sequences, you want to introduce the gaps from the aligned protein sequences back into the original codon sequences. Here’s how.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_unaligned_seqs</span><span class="p">,</span> <span class="n">make_aligned_seqs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>First I’m going to construct an artificial example, using the seqs dict as a means to get the data into the Alignment object. The basic idea, however, is that you should already have a set of DNA sequences that are in frame (i.e. position 0 is the 1st codon position), you’ve translated those sequences and aligned these translated sequences. The result is an alignment of aa sequences and a set of unaligned DNA sequences from which the aa seqs were derived. If your sequences are not in frame you can adjust it by either slicing, or adding N’s to the beginning of the raw string.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">seqs</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;hum&quot;</span><span class="p">:</span> <span class="s2">&quot;AAGCAGATCCAGGAAAGCAGCGAGAATGGCAGCCTGGCCGCGCGCCAGGAGAGGCAGGCCCAGGTCAACCTCACT&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;mus&quot;</span><span class="p">:</span> <span class="s2">&quot;AAGCAGATCCAGGAGAGCGGCGAGAGCGGCAGCCTGGCCGCGCGGCAGGAGAGGCAGGCCCAAGTCAACCTCACG&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;rat&quot;</span><span class="p">:</span> <span class="s2">&quot;CTGAACAAGCAGCCACTTTCAAACAAGAAA&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">unaligned_DNA</span> <span class="o">=</span> <span class="n">make_unaligned_seqs</span><span class="p">(</span><span class="n">seqs</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">unaligned_DNA</span><span class="o">.</span><span class="n">to_fasta</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;hum
+AAGCAGATCCAGGAAAGCAGCGAGAATGGCAGCCTGGCCGCGCGCCAGGAGAGGCAGGCC
+CAGGTCAACCTCACT
+&gt;mus
+AAGCAGATCCAGGAGAGCGGCGAGAGCGGCAGCCTGGCCGCGCGGCAGGAGAGGCAGGCC
+CAAGTCAACCTCACG
+&gt;rat
+CTGAACAAGCAGCCACTTTCAAACAAGAAA
+
+</pre></div>
+</div>
+</div>
+</div>
 <p>In order to ensure the alignment algorithm preserves the coding frame, we align the translation of the sequences. We need to translate them first, but note that because the seqs are unaligned they we have to set <code class="docutils literal notranslate"><span class="pre">aligned=False</span></code>, or we’ll get an error.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">unaligned_aa</span> <span class="o">=</span> <span class="n">unaligned_DNA</span><span class="o">.</span><span class="n">get_translation</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">unaligned_aa</span><span class="o">.</span><span class="n">to_fasta</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;hum
+KQIQESSENGSLAARQERQAQVNLT
+&gt;mus
+KQIQESGESGSLAARQERQAQVNLT
+&gt;rat
+LNKQPLSNKK
+
+</pre></div>
+</div>
+</div>
+</div>
 <p>The translated seqs can then be written to file, using the method <code class="docutils literal notranslate"><span class="pre">write</span></code>. That file then serves as input for an alignment program. The resulting alignment file can be read back in. (We won’t write to file in this example.) For this example we will specify the aligned sequences in the dict, rather than from file.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aligned_aa_seqs</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;hum&quot;</span><span class="p">:</span> <span class="s2">&quot;KQIQESSENGSLAARQERQAQVNLT&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;mus&quot;</span><span class="p">:</span> <span class="s2">&quot;KQIQESGESGSLAARQERQAQVNLT&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;rat&quot;</span><span class="p">:</span> <span class="s2">&quot;LNKQ------PLS---------NKK&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">aligned_aa</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span><span class="n">aligned_aa_seqs</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;protein&quot;</span><span class="p">)</span>
+<span class="n">aligned_DNA</span> <span class="o">=</span> <span class="n">aligned_aa</span><span class="o">.</span><span class="n">replace_seqs</span><span class="p">(</span><span class="n">unaligned_DNA</span><span class="p">)</span>
+<span class="n">aligned_DNA</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+td { border: none !important; text-align: left !important; }
+.label { font-size: 12pt ; text-align: right !important; color: black !important; }
+.T_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: blue; }
+.C_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.A_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: #FF0102; }
+.G_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: green; }
+.terminal_ambig_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: gray; }
+.ambig_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: gray; }
+</style>
+<body>
+<table>
+<tr style="background-color:rgba(161, 195, 209, 0.5);"><td></td><td><b>0</b></td></tr>
+<tr><td class="label">mus</td><td><span class="A_dna">A</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="C_dna">C</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="C_dna">C</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="C_dna">C</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="C_dna">C</span></td></tr>
+<tr><td class="label">hum</td><td><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">A</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">A</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="C_dna">C</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="C_dna">.</span></td></tr>
+<tr><td class="label">rat</td><td><span class="C_dna">C</span><span class="T_dna">T</span><span class="G_dna">.</span><span class="A_dna">A</span><span class="A_dna">.</span><span class="C_dna">C</span><span class="A_dna">.</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="C_dna">C</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="C_dna">.</span><span class="A_dna">A</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span></td></tr>
+</table>
+<p><i>3 x 75 (truncated to 3 x 60) dna alignment</i></p>
+</body></div></div>
+</div>
 </div>
 
 

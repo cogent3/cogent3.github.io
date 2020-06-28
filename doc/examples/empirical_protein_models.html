@@ -7,6 +7,9 @@
     <title>Use an empirical protein substitution model &#8212; cogent3 2020.4 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-dataframe.css" />
@@ -15,6 +18,8 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="../../_static/require.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
@@ -121,16 +126,201 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="use-an-empirical-protein-substitution-model">
+  <div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="section" id="use-an-empirical-protein-substitution-model">
 <h1>Use an empirical protein substitution model<a class="headerlink" href="#use-an-empirical-protein-substitution-model" title="Permalink to this headline">¶</a></h1>
 <p><em>Section author: Gavin Huttley</em></p>
 <p>This file contains an example of importing an empirically determined protein substitution matrix such as Dayhoff et al 1978 and using it to create a substitution model. The globin alignment is from the PAML distribution.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span><span class="p">,</span> <span class="n">make_tree</span>
+<span class="kn">from</span> <span class="nn">cogent3.evolve.substitution_model</span> <span class="kn">import</span> <span class="n">EmpiricalProteinMatrix</span>
+<span class="kn">from</span> <span class="nn">cogent3.parse.paml_matrix</span> <span class="kn">import</span> <span class="n">PamlMatrixParser</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>Make a tree object.  In this case from a string.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">treestring</span> <span class="o">=</span> <span class="s2">&quot;(((rabbit,rat),human),goat-cow,marsupial);&quot;</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">make_tree</span><span class="p">(</span><span class="n">treestring</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>Import the alignment, explicitly setting the <code class="docutils literal notranslate"><span class="pre">moltype</span></code> to be protein</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">al</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/abglobin_aa.phylip&quot;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;protein&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>Open the file that contains the empirical matrix and parse the matrix and frequencies.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">matrix_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data/dayhoff.dat&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>The <code class="docutils literal notranslate"><span class="pre">PamlMatrixParser</span></code> will import the matrix and frequency from files designed for Yang’s PAML package.  This format is the lower half of the matrix in three letter amino acid name order white space delineated followed by motif frequencies in the same order.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">empirical_matrix</span><span class="p">,</span> <span class="n">empirical_frequencies</span> <span class="o">=</span> <span class="n">PamlMatrixParser</span><span class="p">(</span><span class="n">matrix_file</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>Create an Empirical Protein Matrix Substitution model object.  This will take the unscaled empirical matrix and use it and the motif frequencies to create a scaled Q matrix.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sm</span> <span class="o">=</span> <span class="n">EmpiricalProteinMatrix</span><span class="p">(</span><span class="n">empirical_matrix</span><span class="p">,</span> <span class="n">empirical_frequencies</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>Make a parameter controller, likelihood function object and optimise.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lf</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">set_alignment</span><span class="p">(</span><span class="n">al</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">lf</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><h4>Likelihood function statistics</h4>
+<p>log-likelihood = -1706.2489</p>
+<p>number of free parameters = 7</p>
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Edge params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>edge</th>
+<th>parent</th>
+<th>length</th>
+</thead>
+<tbody>
+<tr>
+<td>rabbit</td>
+<td>edge.0</td>
+<td style="font-family: monospace !important;">0.0785</td>
+</tr>
+<tr>
+<td>rat</td>
+<td>edge.0</td>
+<td style="font-family: monospace !important;">0.1750</td>
+</tr>
+<tr>
+<td>edge.0</td>
+<td>edge.1</td>
+<td style="font-family: monospace !important;">0.0324</td>
+</tr>
+<tr>
+<td>human</td>
+<td>edge.1</td>
+<td style="font-family: monospace !important;">0.0545</td>
+</tr>
+<tr>
+<td>edge.1</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.0269</td>
+</tr>
+<tr>
+<td>goat-cow</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.0972</td>
+</tr>
+<tr>
+<td>marsupial</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.2424</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Motif params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>A</th>
+<th>C</th>
+<th>D</th>
+<th>E</th>
+<th>F</th>
+<th>G</th>
+<th>H</th>
+<th>I</th>
+<th>K</th>
+<th>L</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.0871</td>
+<td style="font-family: monospace !important;">0.0335</td>
+<td style="font-family: monospace !important;">0.0469</td>
+<td style="font-family: monospace !important;">0.0495</td>
+<td style="font-family: monospace !important;">0.0398</td>
+<td style="font-family: monospace !important;">0.0886</td>
+<td style="font-family: monospace !important;">0.0336</td>
+<td style="font-family: monospace !important;">0.0369</td>
+<td style="font-family: monospace !important;">0.0805</td>
+<td style="font-family: monospace !important;">0.0854</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>M</th>
+<th>N</th>
+<th>P</th>
+<th>Q</th>
+<th>R</th>
+<th>S</th>
+<th>T</th>
+<th>V</th>
+<th>W</th>
+<th>Y</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.0148</td>
+<td style="font-family: monospace !important;">0.0404</td>
+<td style="font-family: monospace !important;">0.0507</td>
+<td style="font-family: monospace !important;">0.0383</td>
+<td style="font-family: monospace !important;">0.0409</td>
+<td style="font-family: monospace !important;">0.0696</td>
+<td style="font-family: monospace !important;">0.0585</td>
+<td style="font-family: monospace !important;">0.0647</td>
+<td style="font-family: monospace !important;">0.0105</td>
+<td style="font-family: monospace !important;">0.0299</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</div>
 </div>
 
 

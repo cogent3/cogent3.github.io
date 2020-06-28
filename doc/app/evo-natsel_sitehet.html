@@ -7,6 +7,9 @@
     <title>natsel_sitehet – a test of site heterogeneity &#8212; cogent3 2020.4 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-dataframe.css" />
@@ -15,6 +18,8 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="../../_static/require.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
@@ -124,15 +129,544 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="natsel-sitehet-a-test-of-site-heterogeneity">
+  <div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="section" id="natsel-sitehet-a-test-of-site-heterogeneity">
 <h1><code class="docutils literal notranslate"><span class="pre">natsel_sitehet</span></code> – a test of site heterogeneity<a class="headerlink" href="#natsel-sitehet-a-test-of-site-heterogeneity" title="Permalink to this headline">¶</a></h1>
 <p>This app evaluates evidence for whether sites differ in their mode of
 natural selection (<a class="reference external" href="https://www.ncbi.nlm.nih.gov/pubmed/9539414">Nielsen and Yang
 1998</a>).</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.app</span> <span class="kn">import</span> <span class="n">io</span><span class="p">,</span> <span class="n">evo</span>
+
+<span class="n">loader</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">load_aligned</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;fasta&quot;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+<span class="n">aln</span> <span class="o">=</span> <span class="n">loader</span><span class="p">(</span><span class="s2">&quot;data/primate_brca1.fasta&quot;</span><span class="p">)</span>
+
+<span class="n">sites_differ</span> <span class="o">=</span> <span class="n">evo</span><span class="o">.</span><span class="n">natsel_sitehet</span><span class="p">(</span>
+    <span class="s2">&quot;GNC&quot;</span><span class="p">,</span> <span class="n">tree</span><span class="o">=</span><span class="s2">&quot;data/primate_brca1.tree&quot;</span><span class="p">,</span> <span class="n">optimise_motif_probs</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">sites_differ</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
+<span class="n">result</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Statistics</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>LR</th>
+<th>df</th>
+<th>pvalue</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">1.4048</td>
+<td style="font-family: monospace !important;">2</td>
+<td style="font-family: monospace !important;">0.4954</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>hypothesis</th>
+<th>key</th>
+<th>lnL</th>
+<th>nfp</th>
+<th>DLC</th>
+<th>unique_Q</th>
+</thead>
+<tbody>
+<tr>
+<td>null</td>
+<td>'GNC-null'</td>
+<td style="font-family: monospace !important;">-6708.3119</td>
+<td style="font-family: monospace !important;">24</td>
+<td>True</td>
+<td>True</td>
+</tr>
+<tr>
+<td>alt</td>
+<td>'GNC-alt'</td>
+<td style="font-family: monospace !important;">-6707.6095</td>
+<td style="font-family: monospace !important;">26</td>
+<td>True</td>
+<td>True</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</div>
 <p>The models have been constructed such that site-class bins have names indicating the mode of natural selection: -ve is purifying (omega&lt;1); neutral (omega=1); and +ve is positive natural selection (omega&gt;1). The two parameters of interest relating to these are the <code class="docutils literal notranslate"><span class="pre">bprobs</span></code> (the maximum likelihood estimate of the frequency of the site-class) and the corresponding value of omega.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="o">.</span><span class="n">alt</span><span class="o">.</span><span class="n">lf</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><h4>Likelihood function statistics</h4>
+<p>log-likelihood = -6707.6095</p>
+<p>number of free parameters = 26</p>
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Global params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>A&gt;C</th>
+<th>A&gt;G</th>
+<th>A&gt;T</th>
+<th>C&gt;A</th>
+<th>C&gt;G</th>
+<th>C&gt;T</th>
+<th>G&gt;A</th>
+<th>G&gt;C</th>
+<th>G&gt;T</th>
+<th>T&gt;A</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.8530</td>
+<td style="font-family: monospace !important;">3.5646</td>
+<td style="font-family: monospace !important;">0.9734</td>
+<td style="font-family: monospace !important;">1.6404</td>
+<td style="font-family: monospace !important;">2.1801</td>
+<td style="font-family: monospace !important;">6.3218</td>
+<td style="font-family: monospace !important;">8.0814</td>
+<td style="font-family: monospace !important;">1.2347</td>
+<td style="font-family: monospace !important;">0.7829</td>
+<td style="font-family: monospace !important;">1.2798</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>T&gt;C</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">3.0292</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Bin params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>bin</th>
+<th>bprobs</th>
+<th>omega</th>
+</thead>
+<tbody>
+<tr>
+<td>-ve</td>
+<td style="font-family: monospace !important;">0.1043</td>
+<td style="font-family: monospace !important;">0.0000</td>
+</tr>
+<tr>
+<td>neutral</td>
+<td style="font-family: monospace !important;">0.8052</td>
+<td style="font-family: monospace !important;">1.0000</td>
+</tr>
+<tr>
+<td>+ve</td>
+<td style="font-family: monospace !important;">0.0905</td>
+<td style="font-family: monospace !important;">20.0000</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Edge params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>edge</th>
+<th>parent</th>
+<th>length</th>
+</thead>
+<tbody>
+<tr>
+<td>Galago</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.5463</td>
+</tr>
+<tr>
+<td>HowlerMon</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.1364</td>
+</tr>
+<tr>
+<td>Rhesus</td>
+<td>edge.3</td>
+<td style="font-family: monospace !important;">0.0649</td>
+</tr>
+<tr>
+<td>Orangutan</td>
+<td>edge.2</td>
+<td style="font-family: monospace !important;">0.0235</td>
+</tr>
+<tr>
+<td>Gorilla</td>
+<td>edge.1</td>
+<td style="font-family: monospace !important;">0.0075</td>
+</tr>
+<tr>
+<td>Human</td>
+<td>edge.0</td>
+<td style="font-family: monospace !important;">0.0182</td>
+</tr>
+<tr>
+<td>Chimpanzee</td>
+<td>edge.0</td>
+<td style="font-family: monospace !important;">0.0085</td>
+</tr>
+<tr>
+<td>edge.0</td>
+<td>edge.1</td>
+<td style="font-family: monospace !important;">0.0000</td>
+</tr>
+<tr>
+<td>edge.1</td>
+<td>edge.2</td>
+<td style="font-family: monospace !important;">0.0099</td>
+</tr>
+<tr>
+<td>edge.2</td>
+<td>edge.3</td>
+<td style="font-family: monospace !important;">0.0364</td>
+</tr>
+<tr>
+<td>edge.3</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.0233</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Motif params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>AAA</th>
+<th>AAC</th>
+<th>AAG</th>
+<th>AAT</th>
+<th>ACA</th>
+<th>ACC</th>
+<th>ACG</th>
+<th>ACT</th>
+<th>AGA</th>
+<th>AGC</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.0556</td>
+<td style="font-family: monospace !important;">0.0235</td>
+<td style="font-family: monospace !important;">0.0344</td>
+<td style="font-family: monospace !important;">0.0556</td>
+<td style="font-family: monospace !important;">0.0228</td>
+<td style="font-family: monospace !important;">0.0046</td>
+<td style="font-family: monospace !important;">0.0008</td>
+<td style="font-family: monospace !important;">0.0289</td>
+<td style="font-family: monospace !important;">0.0231</td>
+<td style="font-family: monospace !important;">0.0286</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>AGG</th>
+<th>AGT</th>
+<th>ATA</th>
+<th>ATC</th>
+<th>ATG</th>
+<th>ATT</th>
+<th>CAA</th>
+<th>CAC</th>
+<th>CAG</th>
+<th>CAT</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.0140</td>
+<td style="font-family: monospace !important;">0.0381</td>
+<td style="font-family: monospace !important;">0.0186</td>
+<td style="font-family: monospace !important;">0.0070</td>
+<td style="font-family: monospace !important;">0.0128</td>
+<td style="font-family: monospace !important;">0.0192</td>
+<td style="font-family: monospace !important;">0.0196</td>
+<td style="font-family: monospace !important;">0.0052</td>
+<td style="font-family: monospace !important;">0.0238</td>
+<td style="font-family: monospace !important;">0.0221</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>CCA</th>
+<th>CCC</th>
+<th>CCG</th>
+<th>CCT</th>
+<th>CGA</th>
+<th>CGC</th>
+<th>CGG</th>
+<th>CGT</th>
+<th>CTA</th>
+<th>CTC</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.0195</td>
+<td style="font-family: monospace !important;">0.0062</td>
+<td style="font-family: monospace !important;">0.0006</td>
+<td style="font-family: monospace !important;">0.0263</td>
+<td style="font-family: monospace !important;">0.0011</td>
+<td style="font-family: monospace !important;">0.0009</td>
+<td style="font-family: monospace !important;">0.0023</td>
+<td style="font-family: monospace !important;">0.0032</td>
+<td style="font-family: monospace !important;">0.0137</td>
+<td style="font-family: monospace !important;">0.0078</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>CTG</th>
+<th>CTT</th>
+<th>GAA</th>
+<th>GAC</th>
+<th>GAG</th>
+<th>GAT</th>
+<th>GCA</th>
+<th>GCC</th>
+<th>GCG</th>
+<th>GCT</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.0125</td>
+<td style="font-family: monospace !important;">0.0105</td>
+<td style="font-family: monospace !important;">0.0755</td>
+<td style="font-family: monospace !important;">0.0105</td>
+<td style="font-family: monospace !important;">0.0303</td>
+<td style="font-family: monospace !important;">0.0315</td>
+<td style="font-family: monospace !important;">0.0158</td>
+<td style="font-family: monospace !important;">0.0096</td>
+<td style="font-family: monospace !important;">0.0014</td>
+<td style="font-family: monospace !important;">0.0137</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>GGA</th>
+<th>GGC</th>
+<th>GGG</th>
+<th>GGT</th>
+<th>GTA</th>
+<th>GTC</th>
+<th>GTG</th>
+<th>GTT</th>
+<th>TAC</th>
+<th>TAT</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.0161</td>
+<td style="font-family: monospace !important;">0.0090</td>
+<td style="font-family: monospace !important;">0.0067</td>
+<td style="font-family: monospace !important;">0.0133</td>
+<td style="font-family: monospace !important;">0.0148</td>
+<td style="font-family: monospace !important;">0.0070</td>
+<td style="font-family: monospace !important;">0.0069</td>
+<td style="font-family: monospace !important;">0.0213</td>
+<td style="font-family: monospace !important;">0.0023</td>
+<td style="font-family: monospace !important;">0.0101</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>TCA</th>
+<th>TCC</th>
+<th>TCG</th>
+<th>TCT</th>
+<th>TGC</th>
+<th>TGG</th>
+<th>TGT</th>
+<th>TTA</th>
+<th>TTC</th>
+<th>TTG</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.0221</td>
+<td style="font-family: monospace !important;">0.0082</td>
+<td style="font-family: monospace !important;">0.0015</td>
+<td style="font-family: monospace !important;">0.0251</td>
+<td style="font-family: monospace !important;">0.0018</td>
+<td style="font-family: monospace !important;">0.0040</td>
+<td style="font-family: monospace !important;">0.0201</td>
+<td style="font-family: monospace !important;">0.0212</td>
+<td style="font-family: monospace !important;">0.0078</td>
+<td style="font-family: monospace !important;">0.0108</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>TTT</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.0187</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</div>
 <div class="section" id="getting-the-individual-site-posterior-probabilities">
 <h2>Getting the individual site posterior probabilities<a class="headerlink" href="#getting-the-individual-site-posterior-probabilities" title="Permalink to this headline">¶</a></h2>
 <p>I’m just displaying the posterior-probabilities from the first 20 positions only.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bprobs</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">alt</span><span class="o">.</span><span class="n">lf</span><span class="o">.</span><span class="n">get_bin_probs</span><span class="p">()</span>
+<span class="n">bprobs</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">20</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th></th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+</thead>
+<tbody>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">-ve</td>
+<td style="font-family: monospace !important;">0.149</td>
+<td style="font-family: monospace !important;">0.084</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.131</td>
+<td style="font-family: monospace !important;">0.115</td>
+<td style="font-family: monospace !important;">0.157</td>
+<td style="font-family: monospace !important;">0.084</td>
+<td style="font-family: monospace !important;">0.119</td>
+<td style="font-family: monospace !important;">0.102</td>
+<td style="font-family: monospace !important;">0.080</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">neutral</td>
+<td style="font-family: monospace !important;">0.773</td>
+<td style="font-family: monospace !important;">0.813</td>
+<td style="font-family: monospace !important;">0.864</td>
+<td style="font-family: monospace !important;">0.785</td>
+<td style="font-family: monospace !important;">0.796</td>
+<td style="font-family: monospace !important;">0.767</td>
+<td style="font-family: monospace !important;">0.812</td>
+<td style="font-family: monospace !important;">0.793</td>
+<td style="font-family: monospace !important;">0.803</td>
+<td style="font-family: monospace !important;">0.814</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">+ve</td>
+<td style="font-family: monospace !important;">0.078</td>
+<td style="font-family: monospace !important;">0.103</td>
+<td style="font-family: monospace !important;">0.136</td>
+<td style="font-family: monospace !important;">0.084</td>
+<td style="font-family: monospace !important;">0.089</td>
+<td style="font-family: monospace !important;">0.076</td>
+<td style="font-family: monospace !important;">0.103</td>
+<td style="font-family: monospace !important;">0.088</td>
+<td style="font-family: monospace !important;">0.095</td>
+<td style="font-family: monospace !important;">0.106</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>10</th>
+<th>11</th>
+<th>12</th>
+<th>13</th>
+<th>14</th>
+<th>15</th>
+<th>16</th>
+<th>17</th>
+<th>18</th>
+<th>19</th>
+</thead>
+<tbody>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">0.076</td>
+<td style="font-family: monospace !important;">0.157</td>
+<td style="font-family: monospace !important;">0.094</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.156</td>
+<td style="font-family: monospace !important;">0.517</td>
+<td style="font-family: monospace !important;">0.080</td>
+<td style="font-family: monospace !important;">0.070</td>
+<td style="font-family: monospace !important;">0.115</td>
+<td style="font-family: monospace !important;">0.122</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">0.816</td>
+<td style="font-family: monospace !important;">0.767</td>
+<td style="font-family: monospace !important;">0.807</td>
+<td style="font-family: monospace !important;">0.865</td>
+<td style="font-family: monospace !important;">0.767</td>
+<td style="font-family: monospace !important;">0.482</td>
+<td style="font-family: monospace !important;">0.814</td>
+<td style="font-family: monospace !important;">0.820</td>
+<td style="font-family: monospace !important;">0.796</td>
+<td style="font-family: monospace !important;">0.791</td>
+</tr>
+<tr>
+<td style="background: rgba(161, 195, 209, 0.25); font-weight: 600;">0.108</td>
+<td style="font-family: monospace !important;">0.076</td>
+<td style="font-family: monospace !important;">0.099</td>
+<td style="font-family: monospace !important;">0.135</td>
+<td style="font-family: monospace !important;">0.077</td>
+<td style="font-family: monospace !important;">0.000</td>
+<td style="font-family: monospace !important;">0.106</td>
+<td style="font-family: monospace !important;">0.111</td>
+<td style="font-family: monospace !important;">0.089</td>
+<td style="font-family: monospace !important;">0.087</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</div>
 </div>
 </div>
 

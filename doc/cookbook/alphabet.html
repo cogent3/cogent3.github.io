@@ -7,6 +7,9 @@
     <title>Alphabets &#8212; cogent3 2020.4 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-dataframe.css" />
@@ -15,6 +18,8 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="../../_static/require.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
@@ -132,18 +137,102 @@
 <div class="section" id="alphabet-and-moltype">
 <h2><code class="docutils literal notranslate"><span class="pre">Alphabet</span></code> and <code class="docutils literal notranslate"><span class="pre">MolType</span></code><a class="headerlink" href="#alphabet-and-moltype" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">MolType</span></code> instances have an <code class="docutils literal notranslate"><span class="pre">Alphabet</span></code>.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">DNA</span><span class="p">,</span> <span class="n">PROTEIN</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">DNA</span><span class="o">.</span><span class="n">alphabet</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">PROTEIN</span><span class="o">.</span><span class="n">alphabet</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>(&#39;T&#39;, &#39;C&#39;, &#39;A&#39;, &#39;G&#39;)
+(&#39;A&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;, &#39;G&#39;, &#39;H&#39;, &#39;I&#39;, &#39;K&#39;, &#39;L&#39;, &#39;M&#39;, &#39;N&#39;, &#39;P&#39;, &#39;Q&#39;, &#39;R&#39;, &#39;S&#39;, &#39;T&#39;, &#39;U&#39;, &#39;V&#39;, &#39;W&#39;, &#39;Y&#39;)
+</pre></div>
+</div>
+</div>
+</div>
 <p><code class="docutils literal notranslate"><span class="pre">Alphabet</span></code> instances have a <code class="docutils literal notranslate"><span class="pre">MolType</span></code>.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PROTEIN</span><span class="o">.</span><span class="n">alphabet</span><span class="o">.</span><span class="n">moltype</span> <span class="o">==</span> <span class="n">PROTEIN</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="creating-tuple-alphabets">
 <h2>Creating tuple alphabets<a class="headerlink" href="#creating-tuple-alphabets" title="Permalink to this headline">¶</a></h2>
 <p>You can create a tuple alphabet of, for example, dinucleotides or trinucleotides.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dinuc_alphabet</span> <span class="o">=</span> <span class="n">DNA</span><span class="o">.</span><span class="n">alphabet</span><span class="o">.</span><span class="n">get_word_alphabet</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dinuc_alphabet</span><span class="p">)</span>
+<span class="n">trinuc_alphabet</span> <span class="o">=</span> <span class="n">DNA</span><span class="o">.</span><span class="n">alphabet</span><span class="o">.</span><span class="n">get_word_alphabet</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">trinuc_alphabet</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>(&#39;TT&#39;, &#39;CT&#39;, &#39;AT&#39;, &#39;GT&#39;, &#39;TC&#39;, &#39;CC&#39;, &#39;AC&#39;, &#39;GC&#39;, &#39;TA&#39;, &#39;CA&#39;, &#39;AA&#39;, &#39;GA&#39;, &#39;TG&#39;, &#39;CG&#39;, &#39;AG&#39;, &#39;GG&#39;)
+(&#39;TTT&#39;, &#39;CTT&#39;, &#39;ATT&#39;, &#39;GTT&#39;, &#39;TCT&#39;, &#39;CCT&#39;, &#39;ACT&#39;, &#39;GCT&#39;, &#39;TAT&#39;, &#39;CAT&#39;, &#39;AAT&#39;, &#39;GAT&#39;, &#39;TGT&#39;, &#39;CGT&#39;, &#39;AGT&#39;, &#39;GGT&#39;, &#39;TTC&#39;, &#39;CTC&#39;, &#39;ATC&#39;, &#39;GTC&#39;, &#39;TCC&#39;, &#39;CCC&#39;, &#39;ACC&#39;, &#39;GCC&#39;, &#39;TAC&#39;, &#39;CAC&#39;, &#39;AAC&#39;, &#39;GAC&#39;, &#39;TGC&#39;, &#39;CGC&#39;, &#39;AGC&#39;, &#39;GGC&#39;, &#39;TTA&#39;, &#39;CTA&#39;, &#39;ATA&#39;, &#39;GTA&#39;, &#39;TCA&#39;, &#39;CCA&#39;, &#39;ACA&#39;, &#39;GCA&#39;, &#39;TAA&#39;, &#39;CAA&#39;, &#39;AAA&#39;, &#39;GAA&#39;, &#39;TGA&#39;, &#39;CGA&#39;, &#39;AGA&#39;, &#39;GGA&#39;, &#39;TTG&#39;, &#39;CTG&#39;, &#39;ATG&#39;, &#39;GTG&#39;, &#39;TCG&#39;, &#39;CCG&#39;, &#39;ACG&#39;, &#39;GCG&#39;, &#39;TAG&#39;, &#39;CAG&#39;, &#39;AAG&#39;, &#39;GAG&#39;, &#39;TGG&#39;, &#39;CGG&#39;, &#39;AGG&#39;, &#39;GGG&#39;)
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="convert-a-sequence-into-integers">
 <h2>Convert a sequence into integers<a class="headerlink" href="#convert-a-sequence-into-integers" title="Permalink to this headline">¶</a></h2>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">seq</span> <span class="o">=</span> <span class="s2">&quot;TAGT&quot;</span>
+<span class="n">indices</span> <span class="o">=</span> <span class="n">DNA</span><span class="o">.</span><span class="n">alphabet</span><span class="o">.</span><span class="n">to_indices</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
+<span class="n">indices</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[0, 2, 3, 0]
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="convert-integers-to-a-sequence">
 <h2>Convert integers to a sequence<a class="headerlink" href="#convert-integers-to-a-sequence" title="Permalink to this headline">¶</a></h2>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">seq</span> <span class="o">=</span> <span class="n">DNA</span><span class="o">.</span><span class="n">alphabet</span><span class="o">.</span><span class="n">from_indices</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">seq</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[&#39;T&#39;, &#39;A&#39;, &#39;G&#39;, &#39;T&#39;]
+</pre></div>
+</div>
+</div>
+</div>
 <p>or</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">seq</span> <span class="o">=</span> <span class="n">DNA</span><span class="o">.</span><span class="n">alphabet</span><span class="o">.</span><span class="n">from_ordinals_to_seq</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">seq</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>DnaSequence(TAGT)
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 

@@ -7,6 +7,9 @@
     <title>Manipulation of Tree Node Objects &#8212; cogent3 2020.4 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-dataframe.css" />
@@ -15,6 +18,8 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="../../_static/require.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
@@ -126,6 +131,17 @@
 <h1>Manipulation of Tree Node Objects<a class="headerlink" href="#manipulation-of-tree-node-objects" title="Permalink to this headline">¶</a></h1>
 <p><em>Section author: Tony Walters</em></p>
 <p>Examples of how to initialize and manipulate various tree node objects.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.core.tree</span> <span class="kn">import</span> <span class="n">PhyloNode</span>
+<span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_tree</span><span class="p">,</span> <span class="n">make_tree</span>
+<span class="kn">from</span> <span class="nn">cogent3.parse.tree</span> <span class="kn">import</span> <span class="n">DndParser</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>The general method to initialize a tree is <code class="docutils literal notranslate"><span class="pre">load_tree</span></code>, however, for exceptionally large trees or if one needs to specify the node objects (<code class="docutils literal notranslate"><span class="pre">TreeNode</span></code>, <code class="docutils literal notranslate"><span class="pre">PhyloNode</span></code>, or <code class="docutils literal notranslate"><span class="pre">RangeNode</span></code>), <code class="docutils literal notranslate"><span class="pre">DndParser</span></code> should be used.  <code class="docutils literal notranslate"><span class="pre">load_tree</span></code> uses <code class="docutils literal notranslate"><span class="pre">PhyloNode</span></code> objects by default.</p>
 <p>The basic properties of the tree node objects are:</p>
 <ul class="simple">
@@ -134,26 +150,239 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">RangeNode</span></code> objects contain evolution simulation methods in addition to the standard features of a <code class="docutils literal notranslate"><span class="pre">PhyloNode</span></code>.</p></li>
 </ul>
 <p>The following demonstrates the two methods for initializing a phylogenetic tree object.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">simple_tree_string</span> <span class="o">=</span> <span class="s2">&quot;(B:0.2,(C:0.3,D:0.4)E:0.5)F;&quot;</span>
+<span class="n">complex_tree_string</span> <span class="o">=</span> <span class="s2">&quot;(((363564 AB294167.1 Alkalibacterium putridalgicola:0.0028006,55874 AB083411.1 Marinilactibacillus psychrotolerans:0.0022089):0.40998,(15050 Y10772.1 Facklamia hominis:0.32304,(132509 AY707780.1 Aerococcus viridans:0.58815,((143063 AY879307.1 Abiotrophia defectiva:0.5807,83619 AB042060.1 Bacillus schlegelii:0.23569):0.03586,169722 AB275483.1 Fibrobacter succinogenes:0.38272):0.06516):0.03492):0.14265):0.63594,(3589 M62687.1 Fibrobacter intestinalis:0.65866,314063 CP001146.1 Dictyoglomus thermophilum:0.38791):0.32147,276579 EU652053.1 Thermus scotoductus:0.57336);&quot;</span>
+<span class="n">simple_tree</span> <span class="o">=</span> <span class="n">make_tree</span><span class="p">(</span><span class="n">simple_tree_string</span><span class="p">)</span>
+<span class="n">complex_tree</span> <span class="o">=</span> <span class="n">DndParser</span><span class="p">(</span><span class="n">complex_tree_string</span><span class="p">,</span> <span class="n">PhyloNode</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>Now to displaying, creating, deleting, and inserting a node in simple_tree.  Note that simple_tree has three tips, one internal node ‘E’, and the root ‘F.’  For this example, we will create a node named ‘A’, with a distance of 0.1, delete the node ‘C’ through its parent, the internal node ‘E’, and finally we will insert ‘A’ where ‘C’ once was.</p>
 <p>Display the original tree.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">simple_tree</span><span class="o">.</span><span class="n">ascii_art</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>          /-B
+-F-------|
+         |          /-C
+          \E-------|
+                    \-D
+</pre></div>
+</div>
+</div>
+</div>
 <p>Create a new node object.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A_node</span> <span class="o">=</span> <span class="n">PhyloNode</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="n">Length</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>Display the children of the root node, one of which is the parent of the tip we wish to alter.  To add or remove a node, we need to use the parent of the target node, which in this case is the internal node ‘E.’</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">simple_tree</span><span class="o">.</span><span class="n">children</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[Tree(&quot;B;&quot;), Tree(&quot;(C,D)E;&quot;)]
+</pre></div>
+</div>
+</div>
+</div>
 <p>Remove the ‘C’ tip.  <strong>Note:</strong> <code class="docutils literal notranslate"><span class="pre">remove()</span></code> and <code class="docutils literal notranslate"><span class="pre">remove_node()</span></code> return ‘True’ if a node is removed, ‘False’ if they cannot remove a node.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">simple_tree</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
 <p>Insert the new ‘A’ tip where ‘C’ was previously.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">simple_tree</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">A_node</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>Finally, display the modified tree.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">simple_tree</span><span class="o">.</span><span class="n">ascii_art</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>          /-B
+-F-------|
+         |          /-A
+          \E-------|
+                    \-D
+</pre></div>
+</div>
+</div>
+</div>
 <p>When deleting tree nodes, it is often desirable to clean up any unbranched internal nodes that may have resulted from removal of tips.  For example, if we wanted to delete the node ‘A’ that was previously added, the resulting tree would have an unbranched internal node ‘E.’</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">simple_tree</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">simple_tree</span><span class="o">.</span><span class="n">ascii_art</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>          /-B
+-F-------|
+          \E------- /-D
+</pre></div>
+</div>
+</div>
+</div>
 <p>With the <code class="docutils literal notranslate"><span class="pre">prune()</span></code> method, internal nodes with only a single branch are removed.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">simple_tree</span><span class="o">.</span><span class="n">prune</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">simple_tree</span><span class="o">.</span><span class="n">ascii_art</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>          /-B
+-F-------|
+          \-D
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="an-example-of-conditional-tree-node-modifications">
 <h1>An Example of Conditional Tree Node Modifications<a class="headerlink" href="#an-example-of-conditional-tree-node-modifications" title="Permalink to this headline">¶</a></h1>
 <p>Now to look at the more complex and realistic tree.  In complex_tree, there are no internal nodes or a defined root.  In order to display this tree in a more succinct manner, we can rename these tips to only contain the genus and species names.  To step through the tips only, we can use the <code class="docutils literal notranslate"><span class="pre">iter_tips()</span></code> iterator, and rename each node.  The <code class="docutils literal notranslate"><span class="pre">ascii_art()</span></code> function, by default, will attempt to display internal nodes; this can be suppressed by the parameter <code class="docutils literal notranslate"><span class="pre">show_internal=False</span></code>.</p>
 <p>First, let’s split the ungainly name string for each tip and only preserve the genus and species component, separated by a space.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">complex_tree</span><span class="o">.</span><span class="n">iter_tips</span><span class="p">():</span>
+    <span class="n">n</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">n</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>Now we display the tree with <code class="docutils literal notranslate"><span class="pre">ascii_art()</span></code>.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">complex_tree</span><span class="o">.</span><span class="n">ascii_art</span><span class="p">(</span><span class="n">show_internal</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>                              /-Alkalibacterium putridalgicola
+                    /--------|
+                   |          \-Marinilactibacillus psychrotolerans
+          /--------|
+         |         |          /-Facklamia hominis
+         |         |         |
+         |          \--------|          /-Aerococcus viridans
+         |                   |         |
+         |                    \--------|                    /-Abiotrophia defectiva
+         |                             |          /--------|
+---------|                              \--------|          \-Bacillus schlegelii
+         |                                       |
+         |                                        \-Fibrobacter succinogenes
+         |
+         |          /-Fibrobacter intestinalis
+         |---------|
+         |          \-Dictyoglomus thermophilum
+         |
+          \-Thermus scotoductus
+</pre></div>
+</div>
+</div>
+</div>
 <p>For another example of manipulating a phylogenetic tree, let us suppose that we want to remove any species in the tree that are not closely related to <em>Aerococcus viridans</em>.  To do this, we will delete any nodes that have a greater phylogenetic distance than 1.8 from <em>Aerococcus viridans</em>.  The best method to remove a large number of nodes from a tree is to first create a list of nodes to delete, followed by the actual removal process.  It is important that the <code class="docutils literal notranslate"><span class="pre">prune()</span></code> function be called after deletion of each node to ensure that internal nodes whose tips are deleted are removed instead of becoming tips.  Alternatively, one could test for internal nodes whose children are deleted in the procedure and flag these nodes to be deleted as well.</p>
 <p>First, generate a list of tip nodes.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tips</span> <span class="o">=</span> <span class="n">complex_tree</span><span class="o">.</span><span class="n">tips</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>Next, iterate through this list, compare the distances to <em>Aerococcus</em>, and append to the deletion list if greater than 1.8.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tips_to_delete</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">AEROCOCCUS_INDEX</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">tips</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">tips</span><span class="p">[</span><span class="n">AEROCOCCUS_INDEX</span><span class="p">]</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1.8</span><span class="p">:</span>
+        <span class="n">tips_to_delete</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>Now for the actual deletion process.  We can simply use the parent of each node in the deletion list to remove itself.  Pruning is necessary to prevent internal nodes from being left as tips.  <strong>Note:</strong> <code class="docutils literal notranslate"><span class="pre">remove()</span></code> and <code class="docutils literal notranslate"><span class="pre">remove_node()</span></code> return ‘True’ if a node is successfully removed, ‘False’ otherwise.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">tips_to_delete</span><span class="p">:</span>
+    <span class="n">n</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">complex_tree</span><span class="o">.</span><span class="n">prune</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>Finally, print the modified <code class="docutils literal notranslate"><span class="pre">complex_tree</span></code>.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">complex_tree</span><span class="o">.</span><span class="n">ascii_art</span><span class="p">(</span><span class="n">show_internal</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>                              /-Alkalibacterium putridalgicola
+                    /--------|
+                   |          \-Marinilactibacillus psychrotolerans
+--------- /--------|
+                   |          /-Facklamia hominis
+                   |         |
+                    \--------|          /-Aerococcus viridans
+                             |         |
+                              \--------|                    /-Abiotrophia defectiva
+                                       |          /--------|
+                                        \--------|          \-Bacillus schlegelii
+                                                 |
+                                                  \-Fibrobacter succinogenes
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 
 

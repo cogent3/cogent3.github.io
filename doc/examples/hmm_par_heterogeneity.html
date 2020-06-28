@@ -7,6 +7,9 @@
     <title>Evaluate process heterogeneity using a Hidden Markov Model &#8212; cogent3 2020.4 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-dataframe.css" />
@@ -15,6 +18,8 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="../../_static/require.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
@@ -127,31 +132,503 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="evaluate-process-heterogeneity-using-a-hidden-markov-model">
+  <div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="section" id="evaluate-process-heterogeneity-using-a-hidden-markov-model">
 <span id="rate-heterogeneity-hmm"></span><h1>Evaluate process heterogeneity using a Hidden Markov Model<a class="headerlink" href="#evaluate-process-heterogeneity-using-a-hidden-markov-model" title="Permalink to this headline">¶</a></h1>
 <p><em>Section author: Gavin Huttley</em></p>
 <p>The existence of rate heterogeneity in the evolution of biological sequences is well known. Typically such an evolutionary property is evaluated using so-called site-heterogeneity models. These models postulate the existence of discrete classes of sites, where sites within a class evolve according to a specific rate that is distinct from the rates of the other classes. These models retain the assumption that alignment columns evolve independently. One can naturally ask the question of whether rate classes occur randomly throughout the sequence or whether they are in fact auto-correlated - meaning sites of a class tend to cluster together. Because we do not have, <em>a priori</em>, a basis for classifying the sites the models are specified such that each column can belong to any of the designated site classes and the likelihood is computed across all possible classifications. Post numerical optimisation we can calculate the posterior probability a site column belongs to a specific site class. In <code class="docutils literal notranslate"><span class="pre">cogent3</span></code>, site classes are referred to as <code class="docutils literal notranslate"><span class="pre">bins</span></code> and so we refer to bin probabilities etc…</p>
 <p>To illustrate how to evaluate these hypotheses formally we specify 3 nested hypotheses: (i) Ho: no rate heterogeneity; (ii) Ha(1): two classes of sites - fast and slow, but independent sites; (iii) Ha(2): fast and slowly evolving sites are auto-correlated (meaning a sites class is correlated with that of its’ immediate neighbours).</p>
 <p>It is also possible to apply these models to different types of changes and we illustrate this with a single parameterisation at the end.</p>
 <p>First import standard components necessary for all of the following calculations. As the likelihood ratio tests (LRT) involve nested hypotheses we will employ the chi-square approximation for assessing statistical significance.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.evolve.substitution_model</span> <span class="kn">import</span> <span class="n">TimeReversibleNucleotide</span><span class="p">,</span> <span class="n">predicate</span>
+<span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span><span class="p">,</span> <span class="n">load_tree</span>
+<span class="kn">from</span> <span class="nn">cogent3.maths.stats</span> <span class="kn">import</span> <span class="n">chisqprob</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>Load the alignment and tree.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aln</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/long_testseqs.fasta&quot;</span><span class="p">)</span>
+<span class="n">tree</span> <span class="o">=</span> <span class="n">load_tree</span><span class="p">(</span><span class="s2">&quot;data/test.tree&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <div class="section" id="model-ho-no-rate-heterogeneity">
 <h2>Model Ho: no rate heterogeneity<a class="headerlink" href="#model-ho-no-rate-heterogeneity" title="Permalink to this headline">¶</a></h2>
 <p>We define a HKY model of nucleotide substitution, which has a transition parameter. This is defined using the <code class="docutils literal notranslate"><span class="pre">MotifChange</span></code> class, by specifying a transition as <strong>not</strong> a transversion (<code class="docutils literal notranslate"><span class="pre">~MotifChange('R','Y')</span></code>).</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">MotifChange</span> <span class="o">=</span> <span class="n">predicate</span><span class="o">.</span><span class="n">MotifChange</span>
+<span class="n">treat_gap</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">recode_gaps</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">model_gaps</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">kappa</span> <span class="o">=</span> <span class="p">(</span><span class="o">~</span><span class="n">MotifChange</span><span class="p">(</span><span class="s2">&quot;R&quot;</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">aliased</span><span class="p">(</span><span class="s2">&quot;kappa&quot;</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">TimeReversibleNucleotide</span><span class="p">(</span><span class="n">predicates</span><span class="o">=</span><span class="p">[</span><span class="n">kappa</span><span class="p">],</span> <span class="o">**</span><span class="n">treat_gap</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>We specify a null model with no bins, and optimise it.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lf_one</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">lf_one</span><span class="o">.</span><span class="n">set_alignment</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
+<span class="n">lf_one</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">lnL_one</span> <span class="o">=</span> <span class="n">lf_one</span><span class="o">.</span><span class="n">get_log_likelihood</span><span class="p">()</span>
+<span class="n">df_one</span> <span class="o">=</span> <span class="n">lf_one</span><span class="o">.</span><span class="n">get_num_free_params</span><span class="p">()</span>
+<span class="n">lf_one</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><h4>Likelihood function statistics</h4>
+<p>log-likelihood = -8750.5889</p>
+<p>number of free parameters = 8</p>
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Global params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>kappa</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">4.10</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Edge params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>edge</th>
+<th>parent</th>
+<th>length</th>
+</thead>
+<tbody>
+<tr>
+<td>Human</td>
+<td>edge.0</td>
+<td style="font-family: monospace !important;">0.03</td>
+</tr>
+<tr>
+<td>HowlerMon</td>
+<td>edge.0</td>
+<td style="font-family: monospace !important;">0.04</td>
+</tr>
+<tr>
+<td>edge.0</td>
+<td>edge.1</td>
+<td style="font-family: monospace !important;">0.04</td>
+</tr>
+<tr>
+<td>Mouse</td>
+<td>edge.1</td>
+<td style="font-family: monospace !important;">0.28</td>
+</tr>
+<tr>
+<td>edge.1</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.02</td>
+</tr>
+<tr>
+<td>NineBande</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.09</td>
+</tr>
+<tr>
+<td>DogFaced</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.11</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Motif params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>A</th>
+<th>C</th>
+<th>G</th>
+<th>T</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.37</td>
+<td style="font-family: monospace !important;">0.19</td>
+<td style="font-family: monospace !important;">0.21</td>
+<td style="font-family: monospace !important;">0.23</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</div>
 </div>
 <div class="section" id="model-ha-1-two-classes-of-gamma-distributed-but-independent-sites">
 <h2>Model Ha(1): two classes of gamma distributed but independent sites<a class="headerlink" href="#model-ha-1-two-classes-of-gamma-distributed-but-independent-sites" title="Permalink to this headline">¶</a></h2>
 <p>Our next hypothesis is that there are two rate classes, or bins, with rates gamma distributed. We will restrict the bin probabilities to be equal.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bin_submod</span> <span class="o">=</span> <span class="n">TimeReversibleNucleotide</span><span class="p">(</span>
+    <span class="n">predicates</span><span class="o">=</span><span class="p">[</span><span class="n">kappa</span><span class="p">],</span> <span class="n">ordered_param</span><span class="o">=</span><span class="s2">&quot;rate&quot;</span><span class="p">,</span> <span class="n">distribution</span><span class="o">=</span><span class="s2">&quot;gamma&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">treat_gap</span>
+<span class="p">)</span>
+<span class="n">lf_bins</span> <span class="o">=</span> <span class="n">bin_submod</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span>
+    <span class="n">tree</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sites_independent</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="mi">3</span>
+<span class="p">)</span>
+<span class="n">lf_bins</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span><span class="s2">&quot;bprobs&quot;</span><span class="p">,</span> <span class="n">is_constant</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">lf_bins</span><span class="o">.</span><span class="n">set_alignment</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
+<span class="n">lf_bins</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">lnL_bins</span> <span class="o">=</span> <span class="n">lf_bins</span><span class="o">.</span><span class="n">get_log_likelihood</span><span class="p">()</span>
+<span class="n">df_bins</span> <span class="o">=</span> <span class="n">lf_bins</span><span class="o">.</span><span class="n">get_num_free_params</span><span class="p">()</span>
+<span class="k">assert</span> <span class="n">df_bins</span> <span class="o">==</span> <span class="mi">9</span>
+<span class="n">lf_bins</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><h4>Likelihood function statistics</h4>
+<p>log-likelihood = -8739.0900</p>
+<p>number of free parameters = 9</p>
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Global params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>kappa</th>
+<th>rate_shape</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">4.38</td>
+<td style="font-family: monospace !important;">1.26</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Bin params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>bin</th>
+<th>bprobs</th>
+<th>rate</th>
+</thead>
+<tbody>
+<tr>
+<td>bin0</td>
+<td style="font-family: monospace !important;">0.50</td>
+<td style="font-family: monospace !important;">0.41</td>
+</tr>
+<tr>
+<td>bin1</td>
+<td style="font-family: monospace !important;">0.50</td>
+<td style="font-family: monospace !important;">1.59</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Edge params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>edge</th>
+<th>parent</th>
+<th>length</th>
+</thead>
+<tbody>
+<tr>
+<td>Human</td>
+<td>edge.0</td>
+<td style="font-family: monospace !important;">0.03</td>
+</tr>
+<tr>
+<td>HowlerMon</td>
+<td>edge.0</td>
+<td style="font-family: monospace !important;">0.04</td>
+</tr>
+<tr>
+<td>edge.0</td>
+<td>edge.1</td>
+<td style="font-family: monospace !important;">0.04</td>
+</tr>
+<tr>
+<td>Mouse</td>
+<td>edge.1</td>
+<td style="font-family: monospace !important;">0.31</td>
+</tr>
+<tr>
+<td>edge.1</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.02</td>
+</tr>
+<tr>
+<td>NineBande</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.10</td>
+</tr>
+<tr>
+<td>DogFaced</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.12</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Motif params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>A</th>
+<th>C</th>
+<th>G</th>
+<th>T</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.37</td>
+<td style="font-family: monospace !important;">0.19</td>
+<td style="font-family: monospace !important;">0.21</td>
+<td style="font-family: monospace !important;">0.23</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</div>
 </div>
 <div class="section" id="model-ha-2-fast-and-slowly-evolving-sites-are-auto-correlated">
 <h2>Model Ha(2): fast and slowly evolving sites are auto-correlated<a class="headerlink" href="#model-ha-2-fast-and-slowly-evolving-sites-are-auto-correlated" title="Permalink to this headline">¶</a></h2>
 <p>We then specify a model with switches for changing between site-classes, the HMM part. The setup is almost identical to that for above with the sole difference being setting the <code class="docutils literal notranslate"><span class="pre">sites_independent=False</span></code>.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lf_patches</span> <span class="o">=</span> <span class="n">bin_submod</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span>
+    <span class="n">tree</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sites_independent</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="mi">3</span>
+<span class="p">)</span>
+<span class="n">lf_patches</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span><span class="s2">&quot;bprobs&quot;</span><span class="p">,</span> <span class="n">is_constant</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">lf_patches</span><span class="o">.</span><span class="n">set_alignment</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
+<span class="n">lf_patches</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">lnL_patches</span> <span class="o">=</span> <span class="n">lf_patches</span><span class="o">.</span><span class="n">get_log_likelihood</span><span class="p">()</span>
+<span class="n">df_patches</span> <span class="o">=</span> <span class="n">lf_patches</span><span class="o">.</span><span class="n">get_num_free_params</span><span class="p">()</span>
+<span class="n">lf_patches</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><h4>Likelihood function statistics</h4>
+<p>log-likelihood = -8728.1367</p>
+<p>number of free parameters = 10</p>
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Global params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>bin_switch</th>
+<th>kappa</th>
+<th>rate_shape</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.56</td>
+<td style="font-family: monospace !important;">4.42</td>
+<td style="font-family: monospace !important;">1.16</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Bin params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>bin</th>
+<th>bprobs</th>
+<th>rate</th>
+</thead>
+<tbody>
+<tr>
+<td>bin0</td>
+<td style="font-family: monospace !important;">0.50</td>
+<td style="font-family: monospace !important;">0.39</td>
+</tr>
+<tr>
+<td>bin1</td>
+<td style="font-family: monospace !important;">0.50</td>
+<td style="font-family: monospace !important;">1.61</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Edge params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>edge</th>
+<th>parent</th>
+<th>length</th>
+</thead>
+<tbody>
+<tr>
+<td>Human</td>
+<td>edge.0</td>
+<td style="font-family: monospace !important;">0.03</td>
+</tr>
+<tr>
+<td>HowlerMon</td>
+<td>edge.0</td>
+<td style="font-family: monospace !important;">0.04</td>
+</tr>
+<tr>
+<td>edge.0</td>
+<td>edge.1</td>
+<td style="font-family: monospace !important;">0.04</td>
+</tr>
+<tr>
+<td>Mouse</td>
+<td>edge.1</td>
+<td style="font-family: monospace !important;">0.31</td>
+</tr>
+<tr>
+<td>edge.1</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.02</td>
+</tr>
+<tr>
+<td>NineBande</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.10</td>
+</tr>
+<tr>
+<td>DogFaced</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.12</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Motif params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>A</th>
+<th>C</th>
+<th>G</th>
+<th>T</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.37</td>
+<td style="font-family: monospace !important;">0.19</td>
+<td style="font-family: monospace !important;">0.21</td>
+<td style="font-family: monospace !important;">0.23</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</div>
 <p>We use the following short function to compute the LR test statistic.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">LR</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">alt</span><span class="p">,</span> <span class="n">null</span><span class="p">:</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">alt</span> <span class="o">-</span> <span class="n">null</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>We conduct the test between the sequentially nested models.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lr</span> <span class="o">=</span> <span class="n">LR</span><span class="p">(</span><span class="n">lnL_bins</span><span class="p">,</span> <span class="n">lnL_one</span><span class="p">)</span>
+<span class="n">lr</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>22.99788343956243
+</pre></div>
+</div>
+</div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">chisqprob</span><span class="p">(</span><span class="n">lr</span><span class="p">,</span> <span class="n">df_patches</span> <span class="o">-</span> <span class="n">df_bins</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>0.0000
+</pre></div>
+</div>
+</div>
+</div>
 <p>The stationary bin probabilities are labelled as <code class="docutils literal notranslate"><span class="pre">bprobs</span></code> and can be obtained as follows.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bprobs</span> <span class="o">=</span> <span class="n">lf_patches</span><span class="o">.</span><span class="n">get_param_value</span><span class="p">(</span><span class="s2">&quot;bprobs&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%.1f</span><span class="s2"> : </span><span class="si">%.1f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">bprobs</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>0.5 : 0.5
+</pre></div>
+</div>
+</div>
+</div>
 <p>Of greater interest here (given the model was set up so the bin probabilities were equal, i.e. <code class="docutils literal notranslate"><span class="pre">is_constant=True</span></code>) are the posterior probabilities as those allow classification of sites. The result is a <code class="docutils literal notranslate"><span class="pre">DictArray</span></code> class instance, which behaves like a dictionary.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pp</span> <span class="o">=</span> <span class="n">lf_patches</span><span class="o">.</span><span class="n">get_bin_probs</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>If we want to know the posterior probability the 21st position belongs to <code class="docutils literal notranslate"><span class="pre">bin0</span></code>, we can determine it as:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">pp</span><span class="p">[</span><span class="s2">&quot;bin0&quot;</span><span class="p">][</span><span class="mi">20</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>0.8034881154224306
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="a-model-with-patches-of-kappa">
 <h2>A model with patches of <code class="docutils literal notranslate"><span class="pre">kappa</span></code><a class="headerlink" href="#a-model-with-patches-of-kappa" title="Permalink to this headline">¶</a></h2>
@@ -160,9 +637,170 @@
 <p class="admonition-title">Todo</p>
 <p><strong>FOR RELEASE</strong> did we fix this silliness of requiring a formattedy.array?</p>
 </div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">array</span>
+
+<span class="n">single_kappa</span> <span class="o">=</span> <span class="n">lf_one</span><span class="o">.</span><span class="n">get_param_value</span><span class="p">(</span><span class="s2">&quot;kappa&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>We then construct the substitution model in a different way to that when evaluating generic rate heterogeneity (above).</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">kappa_bin_submod</span> <span class="o">=</span> <span class="n">TimeReversibleNucleotide</span><span class="p">(</span><span class="n">predicates</span><span class="o">=</span><span class="p">[</span><span class="n">kappa</span><span class="p">],</span> <span class="o">**</span><span class="n">treat_gap</span><span class="p">)</span>
+<span class="n">lf_kappa</span> <span class="o">=</span> <span class="n">kappa_bin_submod</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span>
+    <span class="n">tree</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;slow&quot;</span><span class="p">,</span> <span class="s2">&quot;fast&quot;</span><span class="p">],</span> <span class="n">sites_independent</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="mi">3</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>To improve the likelihood fitting it is desirable to set starting values in the model that result in it’s initial likelihood being that of the null model (or as close as possible). To do this, we’re going to define an arbitrarily small value (<code class="docutils literal notranslate"><span class="pre">epsilon</span></code>) which we use to provide the starting value to the two bins as slightly smaller/greater than <code class="docutils literal notranslate"><span class="pre">single_kappa</span></code> for the slow/fast bins respectively. At the same time we set the upper/lower bin boundaries.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">epsilon</span> <span class="o">=</span> <span class="mf">1e-6</span>
+<span class="n">lf_kappa</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span>
+    <span class="n">kappa</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="n">single_kappa</span> <span class="o">-</span> <span class="n">epsilon</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="n">single_kappa</span><span class="p">,</span> <span class="nb">bin</span><span class="o">=</span><span class="s2">&quot;slow&quot;</span>
+<span class="p">)</span>
+<span class="n">lf_kappa</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span>
+    <span class="n">kappa</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="n">single_kappa</span> <span class="o">+</span> <span class="n">epsilon</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="n">single_kappa</span><span class="p">,</span> <span class="nb">bin</span><span class="o">=</span><span class="s2">&quot;fast&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>We then illustrate how to adjust the bin probabilities, here doing it so that one of them is nearly 1, the other nearly 0. This ensures the likelihood will be near identical to that of <code class="docutils literal notranslate"><span class="pre">lf_one</span></code> and as a result the optimisation step will actually improve fit over the simpler model.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lf_kappa</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span><span class="s2">&quot;bprobs&quot;</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">epsilon</span><span class="p">,</span> <span class="mf">0.0</span> <span class="o">+</span> <span class="n">epsilon</span><span class="p">]))</span>
+<span class="n">lf_kappa</span><span class="o">.</span><span class="n">set_alignment</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
+<span class="n">lf_kappa</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">lf_kappa</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><h4>Likelihood function statistics</h4>
+<p>log-likelihood = -8749.8958</p>
+<p>number of free parameters = 11</p>
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Global params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>bin_switch</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">1.0</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Bin params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>bin</th>
+<th>bprobs</th>
+<th>kappa</th>
+</thead>
+<tbody>
+<tr>
+<td>slow</td>
+<td style="font-family: monospace !important;">1.0</td>
+<td style="font-family: monospace !important;">4.1</td>
+</tr>
+<tr>
+<td>fast</td>
+<td style="font-family: monospace !important;">0.0</td>
+<td style="font-family: monospace !important;">4.1</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Edge params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>edge</th>
+<th>parent</th>
+<th>length</th>
+</thead>
+<tbody>
+<tr>
+<td>Human</td>
+<td>edge.0</td>
+<td style="font-family: monospace !important;">0.0</td>
+</tr>
+<tr>
+<td>HowlerMon</td>
+<td>edge.0</td>
+<td style="font-family: monospace !important;">0.0</td>
+</tr>
+<tr>
+<td>edge.0</td>
+<td>edge.1</td>
+<td style="font-family: monospace !important;">0.0</td>
+</tr>
+<tr>
+<td>Mouse</td>
+<td>edge.1</td>
+<td style="font-family: monospace !important;">0.3</td>
+</tr>
+<tr>
+<td>edge.1</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.0</td>
+</tr>
+<tr>
+<td>NineBande</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.1</td>
+</tr>
+<tr>
+<td>DogFaced</td>
+<td>root</td>
+<td style="font-family: monospace !important;">0.1</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Motif params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>A</th>
+<th>C</th>
+<th>G</th>
+<th>T</th>
+</thead>
+<tbody>
+<tr>
+<td style="font-family: monospace !important;">0.4</td>
+<td style="font-family: monospace !important;">0.2</td>
+<td style="font-family: monospace !important;">0.2</td>
+<td style="font-family: monospace !important;">0.2</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</div>
 </div>
 </div>
 

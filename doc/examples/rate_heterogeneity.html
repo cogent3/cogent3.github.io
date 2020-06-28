@@ -7,6 +7,9 @@
     <title>Analysis of rate heterogeneity &#8212; cogent3 2020.4 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-dataframe.css" />
@@ -15,6 +18,8 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="../../_static/require.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
@@ -121,14 +126,107 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="analysis-of-rate-heterogeneity">
+  <div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="section" id="analysis-of-rate-heterogeneity">
 <span id="rate-heterogeneity"></span><h1>Analysis of rate heterogeneity<a class="headerlink" href="#analysis-of-rate-heterogeneity" title="Permalink to this headline">¶</a></h1>
 <p><em>Section author: Gavin Huttley</em></p>
 <p>A simple example for analyses involving rate heterogeneity among sites. In this case we will simulate an alignment with two rate categories and then try to recover the rates from the alignment.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.evolve.substitution_model</span> <span class="kn">import</span> <span class="n">TimeReversibleNucleotide</span>
+<span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_tree</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>Make an alignment with equal split between rates 0.6 and 0.2, and then concatenate them to create a new alignment.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">TimeReversibleNucleotide</span><span class="p">(</span><span class="n">equal_motif_probs</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">tree</span> <span class="o">=</span> <span class="n">load_tree</span><span class="p">(</span><span class="s2">&quot;data/test.tree&quot;</span><span class="p">)</span>
+<span class="n">lf</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span><span class="s2">&quot;length&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">is_constant</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">aln1</span> <span class="o">=</span> <span class="n">lf</span><span class="o">.</span><span class="n">simulate_alignment</span><span class="p">(</span><span class="n">sequence_length</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span><span class="s2">&quot;length&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">is_constant</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">aln2</span> <span class="o">=</span> <span class="n">lf</span><span class="o">.</span><span class="n">simulate_alignment</span><span class="p">(</span><span class="n">sequence_length</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+<span class="n">aln3</span> <span class="o">=</span> <span class="n">aln1</span> <span class="o">+</span> <span class="n">aln2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>Start from scratch, optimising only rates and the rate probability ratio.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">TimeReversibleNucleotide</span><span class="p">(</span>
+    <span class="n">equal_motif_probs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ordered_param</span><span class="o">=</span><span class="s2">&quot;rate&quot;</span><span class="p">,</span> <span class="n">distribution</span><span class="o">=</span><span class="s2">&quot;free&quot;</span>
+<span class="p">)</span>
+<span class="n">lf</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">set_alignment</span><span class="p">(</span><span class="n">aln3</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_restarts</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>We want to know the bin probabilities and the posterior probabilities.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bprobs</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">lf</span><span class="o">.</span><span class="n">get_statistics</span><span class="p">()</span> <span class="k">if</span> <span class="s2">&quot;bin&quot;</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">title</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">bprobs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">bin params</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>bin</th>
+<th>bprobs</th>
+<th>rate</th>
+</thead>
+<tbody>
+<tr>
+<td>bin0</td>
+<td style="font-family: monospace !important;">0.43</td>
+<td style="font-family: monospace !important;">0.47</td>
+</tr>
+<tr>
+<td>bin1</td>
+<td style="font-family: monospace !important;">0.57</td>
+<td style="font-family: monospace !important;">1.40</td>
+</tr>
+</tbody>
+</table>
+<p>
+2 rows x 3 columns</p></div></div>
+</div>
 <p>We’ll now use a gamma distribution on the sample alignment, specifying the number of bins as 4. We specify that the bins have equal density using the <code class="docutils literal notranslate"><span class="pre">lf.set_param_rule('bprobs',</span> <span class="pre">is_constant=True)</span></code> command.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">TimeReversibleNucleotide</span><span class="p">(</span>
+    <span class="n">equal_motif_probs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ordered_param</span><span class="o">=</span><span class="s2">&quot;rate&quot;</span><span class="p">,</span> <span class="n">distribution</span><span class="o">=</span><span class="s2">&quot;gamma&quot;</span>
+<span class="p">)</span>
+<span class="n">lf</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span><span class="s2">&quot;bprobs&quot;</span><span class="p">,</span> <span class="n">is_constant</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">set_alignment</span><span class="p">(</span><span class="n">aln3</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_restarts</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 </div>
 
 

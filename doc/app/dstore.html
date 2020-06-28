@@ -7,6 +7,9 @@
     <title>Specifying data for analysis &#8212; cogent3 2020.4 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-dataframe.css" />
@@ -15,6 +18,8 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="../../_static/require.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
@@ -133,7 +138,11 @@
   <div class="row">
     <div class="body col-md-12 content" role="main">
       
-  <div class="section" id="specifying-data-for-analysis">
+  <div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="section" id="specifying-data-for-analysis">
 <h1>Specifying data for analysis<a class="headerlink" href="#specifying-data-for-analysis" title="Permalink to this headline">¶</a></h1>
 <p>We introduce the concept of a “data store”. This represents the data record(s) that you want to analyse. It can be a single file, a directory of files, a zipped directory of files or a single <code class="docutils literal notranslate"><span class="pre">tinydb</span></code> file containing multiple data records.</p>
 <p>We represent this concept by a <code class="docutils literal notranslate"><span class="pre">DataStore</span></code> class. There are different flavours of these:</p>
@@ -146,20 +155,105 @@
 <div class="section" id="a-read-only-data-store">
 <h2>A read only data store<a class="headerlink" href="#a-read-only-data-store" title="Permalink to this headline">¶</a></h2>
 <p>To create one of these, you provide a <code class="docutils literal notranslate"><span class="pre">path</span></code> AND a <code class="docutils literal notranslate"><span class="pre">suffix</span></code> of the files within the directory / zip that you will be analysing. (If the path ends with <code class="docutils literal notranslate"><span class="pre">.tinydb</span></code>, no file suffix is required.)</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.app.io</span> <span class="kn">import</span> <span class="n">get_data_store</span>
+
+<span class="n">dstore</span> <span class="o">=</span> <span class="n">get_data_store</span><span class="p">(</span><span class="s2">&quot;data/raw.zip&quot;</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;fa*&quot;</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">dstore</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>5x member ReadOnlyZippedDataStore(source=&#39;/Users/runner/runners/2.263.0/work/cogent3.github.io/cogent3.github.io/c3org/doc/doc/data/raw.zip&#39;, members=[&#39;/Users/runner/runners/2.263.0/work/cogent3.github.io/cogent3.github.io/c3org/doc/doc/data/raw/ENSG00000157184.fa&#39;, &#39;/Users/runner/runners/2.263.0/work/cogent3.github.io/cogent3.github.io/c3org/doc/doc/data/raw/ENSG00000131791.fa&#39;, &#39;/Users/runner/runners/2.263.0/work/cogent3.github.io/cogent3.github.io/c3org/doc/doc/data/raw/ENSG00000127054.fa&#39;...)
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="data-store-members">
 <h2>Data store “members”<a class="headerlink" href="#data-store-members" title="Permalink to this headline">¶</a></h2>
 <p>These are able to read their own raw data.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">dstore</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">m</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>&#39;/Users/runner/runners/2.263.0/work/cogent3.github.io/cogent3.github.io/c3org/doc/doc/data/raw/ENSG00000157184.fa&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">read</span><span class="p">()[:</span><span class="mi">20</span><span class="p">]</span>  <span class="c1"># truncating</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>&#39;&gt;Human\nATGGTGCCCCGCC&#39;
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="showing-the-last-few-members">
 <h2>Showing the last few members<a class="headerlink" href="#showing-the-last-few-members" title="Permalink to this headline">¶</a></h2>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">head()</span></code> method to see the first few.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dstore</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[&#39;/Users/runner/runners/2.263.0/work/cogent3.github.io/cogent3.github.io/c3org/doc/doc/data/raw/ENSG00000157184.fa&#39;,
+ &#39;/Users/runner/runners/2.263.0/work/cogent3.github.io/cogent3.github.io/c3org/doc/doc/data/raw/ENSG00000131791.fa&#39;,
+ &#39;/Users/runner/runners/2.263.0/work/cogent3.github.io/cogent3.github.io/c3org/doc/doc/data/raw/ENSG00000127054.fa&#39;,
+ &#39;/Users/runner/runners/2.263.0/work/cogent3.github.io/cogent3.github.io/c3org/doc/doc/data/raw/ENSG00000067704.fa&#39;,
+ &#39;/Users/runner/runners/2.263.0/work/cogent3.github.io/cogent3.github.io/c3org/doc/doc/data/raw/ENSG00000182004.fa&#39;]
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="filtering-a-data-store-for-specific-members">
 <h2>Filtering a data store for specific members<a class="headerlink" href="#filtering-a-data-store-for-specific-members" title="Permalink to this headline">¶</a></h2>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dstore</span><span class="o">.</span><span class="n">filtered</span><span class="p">(</span><span class="s2">&quot;*ENSG00000067704*&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[&#39;/Users/runner/runners/2.263.0/work/cogent3.github.io/cogent3.github.io/c3org/doc/doc/data/raw/ENSG00000067704.fa&#39;]
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="looping-over-a-data-store">
 <h2>Looping over a data store<a class="headerlink" href="#looping-over-a-data-store" title="Permalink to this headline">¶</a></h2>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">dstore</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>/Users/runner/runners/2.263.0/work/cogent3.github.io/cogent3.github.io/c3org/doc/doc/data/raw/ENSG00000157184.fa
+/Users/runner/runners/2.263.0/work/cogent3.github.io/cogent3.github.io/c3org/doc/doc/data/raw/ENSG00000131791.fa
+/Users/runner/runners/2.263.0/work/cogent3.github.io/cogent3.github.io/c3org/doc/doc/data/raw/ENSG00000127054.fa
+/Users/runner/runners/2.263.0/work/cogent3.github.io/cogent3.github.io/c3org/doc/doc/data/raw/ENSG00000067704.fa
+/Users/runner/runners/2.263.0/work/cogent3.github.io/cogent3.github.io/c3org/doc/doc/data/raw/ENSG00000182004.fa
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="making-a-writeable-data-store">
 <h2>Making a writeable data store<a class="headerlink" href="#making-a-writeable-data-store" title="Permalink to this headline">¶</a></h2>
@@ -170,12 +264,115 @@
 <p>When you specify a TinyDB data store as your output (by using <code class="docutils literal notranslate"><span class="pre">io.write_db()</span></code>), you get additional features that are useful for dissecting the results of an analysis.</p>
 <p>One important issue to note is the process which creates a TinyDB “locks” the file. If that process exits unnaturally (e.g. the run that was producing it was interrupted) then the file may remain in a locked state. If the db is in this state, <code class="docutils literal notranslate"><span class="pre">cogent3</span></code> will not modify it unless you explicitly unlock it.</p>
 <p>This is represented in the display as shown below.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dstore</span> <span class="o">=</span> <span class="n">get_data_store</span><span class="p">(</span><span class="s2">&quot;data/demo-locked.tinydb&quot;</span><span class="p">)</span>
+<span class="n">dstore</span><span class="o">.</span><span class="n">describe</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">Unlocked db store.</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>record type</th>
+<th>number</th>
+</thead>
+<tbody>
+<tr>
+<td>completed</td>
+<td style="font-family: monospace !important;">175</td>
+</tr>
+<tr>
+<td>incomplete</td>
+<td style="font-family: monospace !important;">0</td>
+</tr>
+<tr>
+<td>logs</td>
+<td style="font-family: monospace !important;">1</td>
+</tr>
+</tbody>
+</table>
+<p>
+3 rows x 2 columns</p></div></div>
+</div>
 <p>To unlock, you execute the following:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dstore</span><span class="o">.</span><span class="n">unlock</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <div class="section" id="interrogating-run-logs">
 <h3>Interrogating run logs<a class="headerlink" href="#interrogating-run-logs" title="Permalink to this headline">¶</a></h3>
 <p>If you use the <code class="docutils literal notranslate"><span class="pre">apply_to(logger=true)</span></code> method, a <code class="docutils literal notranslate"><span class="pre">scitrack</span></code> logfile will be included in the data store. This includes useful information regarding the run conditions that produced the contents of the data store.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dstore</span><span class="o">.</span><span class="n">summary_logs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table>
+<style>
+tr:last-child {border-bottom: 1px solid #000;} tr > th {text-align: center !important;} tr > td {text-align: left !important;}
+</style>
+<caption style="color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); align=top;"><span style="font-weight: bold;">summary of log files</span><span></span></caption>
+<thead style="background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;">
+<th>time</th>
+<th>name</th>
+<th>python version</th>
+<th>who</th>
+<th>command</th>
+<th>composable</th>
+</thead>
+<tbody>
+<tr>
+<td>2019-07-24 14:42:56</td>
+<td>load_unaligned-progressive_align-write_db-pid8650.log</td>
+<td>3.7.3</td>
+<td>gavin</td>
+<td>/Users/gavin/miniconda3/envs/c3dev/lib/python3.7/site-packages/ipykernel_launcher.py -f /Users/gavin/Library/Jupyter/runtime/kernel-5eb93aeb-f6e0-493e-85d1-d62895201ae2.json</td>
+<td>load_unaligned(type='sequences', moltype='dna', format='fasta') + progressive_align(type='sequences', model='HKY85', gc=None, param_vals={'kappa': 3}, guide_tree=None, unique_guides=False, indel_length=0.1, indel_rate=1e-10) + write_db(type='output', data_path='../data/aligned-nt.tinydb', name_callback=None, create=True, if_exists='overwrite', suffix='json')</td>
+</tr>
+</tbody>
+</table>
+<p>
+1 rows x 6 columns</p></div></div>
+</div>
 <p>Log files can be accessed vial a special attribute.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dstore</span><span class="o">.</span><span class="n">logs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[&#39;load_unaligned-progressive_align-write_db-pid8650.log&#39;]
+</pre></div>
+</div>
+</div>
+</div>
 <p>Each element in that list is a <code class="docutils literal notranslate"><span class="pre">DataStoreMember</span></code> which you can use to get the data contents.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">dstore</span><span class="o">.</span><span class="n">logs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">read</span><span class="p">()[:</span><span class="mi">225</span><span class="p">])</span>  <span class="c1"># truncated for clarity</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2019-07-24 14:42:56	Eratosthenes.local:8650	INFO	system_details : system=Darwin Kernel Version 18.6.0: Thu Apr 25 23:16:27 PDT 2019; root:xnu-4903.261.4~2/RELEASE_X86_64
+2019-07-24 14:42:56	Eratosthenes.local:8650	INFO	python
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>

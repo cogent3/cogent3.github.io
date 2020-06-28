@@ -7,6 +7,9 @@
     <title>Useful Utilities &#8212; cogent3 2020.4 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-dataframe.css" />
@@ -15,6 +18,8 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="../../_static/require.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
@@ -153,22 +158,196 @@
 <div class="section" id="accessing-elements-of-a-uniondict">
 <h3>Accessing elements of a <code class="docutils literal notranslate"><span class="pre">UnionDict</span></code><a class="headerlink" href="#accessing-elements-of-a-uniondict" title="Permalink to this headline">¶</a></h3>
 <p>Keys in a <code class="docutils literal notranslate"><span class="pre">UnionDict</span></code> can be accessed like attributes</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.union_dict</span> <span class="kn">import</span> <span class="n">UnionDict</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">UnionDict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">25</span><span class="p">]})</span>
+<span class="n">data</span><span class="o">.</span><span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">d</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[25]
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="updating-a-uniondict">
 <h3>Updating a <code class="docutils literal notranslate"><span class="pre">UnionDict</span></code><a class="headerlink" href="#updating-a-uniondict" title="Permalink to this headline">¶</a></h3>
 <p>If you use the <code class="docutils literal notranslate"><span class="pre">|</span></code> bitwise operator to compare two dicts and the left one is a <code class="docutils literal notranslate"><span class="pre">UnionDict</span></code>, a union operation is performed.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.union_dict</span> <span class="kn">import</span> <span class="n">UnionDict</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">UnionDict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">25</span><span class="p">]})</span>
+<span class="n">data</span><span class="o">.</span><span class="n">b</span> <span class="o">|=</span> <span class="p">{</span><span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">}</span>
+<span class="n">data</span><span class="o">.</span><span class="n">b</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;c&#39;: 24, &#39;d&#39;: 25}
+</pre></div>
+</div>
+</div>
+</div>
 <p>This can also be done using the <code class="docutils literal notranslate"><span class="pre">union</span></code> method.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">union</span><span class="p">({</span><span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">25</span><span class="p">]})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">b</span>
+<span class="p">{</span><span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">25</span><span class="p">]}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;c&#39;: 24, &#39;d&#39;: [25]}
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="accessing-a-non-existent-uniondict-key">
 <h3>Accessing a non-existent <code class="docutils literal notranslate"><span class="pre">UnionDict</span></code> key<a class="headerlink" href="#accessing-a-non-existent-uniondict-key" title="Permalink to this headline">¶</a></h3>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.union_dict</span> <span class="kn">import</span> <span class="n">UnionDict</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">UnionDict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">25</span><span class="p">]})</span>
+<span class="n">data</span><span class="p">[</span><span class="s2">&quot;k&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">7</span><span class="o">-</span><span class="n">da404bc5c17b</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> 
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">data</span> <span class="o">=</span> <span class="n">UnionDict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">25</span><span class="p">]})</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;k&quot;</span><span class="p">]</span>
+
+<span class="ne">KeyError</span>: &#39;k&#39;
+</pre></div>
+</div>
+</div>
+</div>
 <p>But if accessing as an attribute, you get an attribute error.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">k</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="nn">/usr/local/miniconda/envs/cogent3/lib/python3.8/site-packages/cogent3/util/union_dict.py</span> in <span class="ni">__getattr__</span><span class="nt">(self, item)</span>
+<span class="g g-Whitespace">     </span><span class="mi">46</span>         <span class="k">try</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">47</span>             <span class="n">result</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__getattr__</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">48</span>         <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+
+<span class="ne">AttributeError</span>: &#39;super&#39; object has no attribute &#39;__getattr__&#39;
+
+<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
+
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">8</span><span class="o">-</span><span class="mi">83</span><span class="n">abd37abe10</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">data</span><span class="o">.</span><span class="n">k</span>
+
+<span class="nn">/usr/local/miniconda/envs/cogent3/lib/python3.8/site-packages/cogent3/util/union_dict.py</span> in <span class="ni">__getattr__</span><span class="nt">(self, item)</span>
+<span class="g g-Whitespace">     </span><span class="mi">47</span>             <span class="n">result</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__getattr__</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">48</span>         <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">49</span>             <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">item</span><span class="si">}</span><span class="s2">&#39; not a key or attribute&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">50</span> 
+<span class="g g-Whitespace">     </span><span class="mi">51</span>     <span class="k">def</span> <span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+
+<span class="ne">AttributeError</span>: &#39;k&#39; not a key or attribute
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="using-cogent3-s-optimisers-for-your-own-functions">
 <h2>Using Cogent3’s optimisers for your own functions<a class="headerlink" href="#using-cogent3-s-optimisers-for-your-own-functions" title="Permalink to this headline">¶</a></h2>
 <p>You have a function that you want to maximise/minimise. The parameters in your function may be bounded (must lie in a specific interval) or not. The <code class="docutils literal notranslate"><span class="pre">cogent3</span></code> optimisers can be applied to these cases. The <code class="docutils literal notranslate"><span class="pre">Powell</span></code> (a local optimiser) and <code class="docutils literal notranslate"><span class="pre">SimulatedAnnealing</span></code> (a global optimiser) classes in particular have had their interfaces standardised for such use cases. We demonstrate for a very simple function below.</p>
 <p>We write a simple factory function that uses a provided value for omega to compute the squared deviation from an estimate, then use it to create our optimisable function.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
+
+<span class="k">def</span> <span class="nf">DiffOmega</span><span class="p">(</span><span class="n">omega</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">omega_from_S</span><span class="p">(</span><span class="n">S</span><span class="p">):</span>
+        <span class="n">omega_est</span> <span class="o">=</span> <span class="n">S</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">numpy</span><span class="o">.</span><span class="n">e</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">S</span><span class="p">))</span>
+        <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">omega</span> <span class="o">-</span> <span class="n">omega_est</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+
+    <span class="k">return</span> <span class="n">omega_from_S</span>
+
+<span class="n">omega</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">DiffOmega</span><span class="p">(</span><span class="n">omega</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>We then import the minimise function and use it to minimise the function, obtaining the fit statistic and the associated estimate of S. Note that we provide lower and upper bounds (which are optional) and an initial guess for our parameter of interest (<code class="docutils literal notranslate"><span class="pre">S</span></code>).</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.optimisers</span> <span class="kn">import</span> <span class="n">minimise</span><span class="p">,</span> <span class="n">maximise</span>
+
+<span class="n">S</span> <span class="o">=</span> <span class="n">minimise</span><span class="p">(</span>
+    <span class="n">f</span><span class="p">,</span>  <span class="c1"># the function</span>
+    <span class="n">xinit</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>  <span class="c1"># the initial value</span>
+    <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span>  <span class="c1"># [lower,upper] bounds for the parameter</span>
+    <span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># just local optimisation, not Simulated Annealing</span>
+    <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="k">assert</span> <span class="mf">0.0</span> <span class="o">&lt;=</span> <span class="n">f</span><span class="p">(</span><span class="n">S</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-6</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;S=</span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">S</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>S=-3.6150
+</pre></div>
+</div>
+</div>
+</div>
 <p>The minimise and maximise functions can also handle multidimensional optimisations, just make xinit (and the bounds) lists rather than scalar values.</p>
 </div>
 <div class="section" id="miscellaneous-functions">
@@ -176,51 +355,490 @@
 <div class="section" id="force-a-variable-to-be-iterable">
 <span id="index-0"></span><h3>Force a variable to be iterable<a class="headerlink" href="#force-a-variable-to-be-iterable" title="Permalink to this headline">¶</a></h3>
 <p>This support method will force a variable to be an iterable, allowing you to guarantee that the variable will be safe for use in, say, a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.misc</span> <span class="kn">import</span> <span class="n">iterable</span>
+
+<span class="n">my_var</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">my_var</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;will not work&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">iterable</span><span class="p">(</span><span class="n">my_var</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="n">ff9de6c6eae0</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> 
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">my_var</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">my_var</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;will not work&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> 
+
+<span class="ne">TypeError</span>: &#39;int&#39; object is not iterable
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="curry-a-function">
 <h3>Curry a function<a class="headerlink" href="#curry-a-function" title="Permalink to this headline">¶</a></h3>
 <p>curry(f,x)(y) = f(x,y) or = lambda y: f(x,y). This was modified from the Python Cookbook. Docstrings are also carried over.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.misc</span> <span class="kn">import</span> <span class="n">curry</span>
+
+<span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Some function&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+
+<span class="n">bar</span> <span class="o">=</span> <span class="n">curry</span><span class="p">(</span><span class="n">foo</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">bar</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
+<span class="n">bar</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span> curry(foo,5)
+== curried from foo ==
+ Some function
+</pre></div>
+</div>
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>15
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="test-to-see-if-an-object-is-iterable">
 <h3>Test to see if an object is iterable<a class="headerlink" href="#test-to-see-if-an-object-is-iterable" title="Permalink to this headline">¶</a></h3>
 <p>Perform a simple test to see if an object supports iteration</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.misc</span> <span class="kn">import</span> <span class="n">is_iterable</span>
+
+<span class="n">can_iter</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">cannot_iter</span> <span class="o">=</span> <span class="mf">1.234</span>
+<span class="n">is_iterable</span><span class="p">(</span><span class="n">can_iter</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">is_iterable</span><span class="p">(</span><span class="n">cannot_iter</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="test-to-see-if-an-object-is-a-single-char">
 <h3>Test to see if an object is a single char<a class="headerlink" href="#test-to-see-if-an-object-is-a-single-char" title="Permalink to this headline">¶</a></h3>
 <p>Perform a simple test to see if an object is a single character</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.misc</span> <span class="kn">import</span> <span class="n">is_char</span>
+
+<span class="k">class</span> <span class="nc">foo</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="n">is_char</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">is_char</span><span class="p">(</span><span class="s2">&quot;ab&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">is_char</span><span class="p">(</span><span class="n">foo</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="flatten-a-deeply-nested-iterable">
 <h3>Flatten a deeply nested iterable<a class="headerlink" href="#flatten-a-deeply-nested-iterable" title="Permalink to this headline">¶</a></h3>
 <p>To flatten a deeply nested iterable, use <code class="docutils literal notranslate"><span class="pre">recursive_flatten</span></code>. This method supports multiple levels of nesting, and multiple iterable types</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.misc</span> <span class="kn">import</span> <span class="n">recursive_flatten</span>
+
+<span class="n">l</span> <span class="o">=</span> <span class="p">[[[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="s2">&quot;abcde&quot;</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">recursive_flatten</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[1, 2, &#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;, 5, 6, 7, 8, 9, 10]
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="test-to-determine-if-list-of-tuple">
 <h3>Test to determine if <code class="docutils literal notranslate"><span class="pre">list</span></code> of <code class="docutils literal notranslate"><span class="pre">tuple</span></code><a class="headerlink" href="#test-to-determine-if-list-of-tuple" title="Permalink to this headline">¶</a></h3>
 <p>Perform a simple check to see if an object is not a list or a tuple</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.misc</span> <span class="kn">import</span> <span class="n">not_list_tuple</span>
+
+<span class="n">not_list_tuple</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">not_list_tuple</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">not_list_tuple</span><span class="p">(</span><span class="s2">&quot;ab&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="create-a-case-insensitive-iterable">
 <h3>Create a case-insensitive iterable<a class="headerlink" href="#create-a-case-insensitive-iterable" title="Permalink to this headline">¶</a></h3>
 <p>Create a case-insensitive object, for instance, if you want the key ‘a’ and ‘A’ to point to the same item in a dict</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.misc</span> <span class="kn">import</span> <span class="n">add_lowercase</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">42</span><span class="p">:</span> <span class="s2">&quot;life&quot;</span><span class="p">}</span>
+<span class="n">add_lowercase</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;A&#39;: 5, &#39;B&#39;: 6, &#39;C&#39;: 7, &#39;foo&#39;: 8, 42: &#39;life&#39;, &#39;a&#39;: 5, &#39;b&#39;: 6, &#39;c&#39;: 7}
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="construct-a-distance-matrix-lookup-function">
 <h3>Construct a distance matrix lookup function<a class="headerlink" href="#construct-a-distance-matrix-lookup-function" title="Permalink to this headline">¶</a></h3>
 <p>Automatically construct a distance matrix lookup function. This is useful for maintaining flexibility about whether a function is being computed or if a lookup is being used</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.misc</span> <span class="kn">import</span> <span class="n">DistanceFromMatrix</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">array</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]])</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">DistanceFromMatrix</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="n">f</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>6
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="check-class-types">
 <h3>Check class types<a class="headerlink" href="#check-class-types" title="Permalink to this headline">¶</a></h3>
 <p>Check an object against base classes or derived classes to see if it is acceptable</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.misc</span> <span class="kn">import</span> <span class="n">ClassChecker</span>
+
+<span class="k">class</span> <span class="nc">not_okay</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="n">no</span> <span class="o">=</span> <span class="n">not_okay</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">okay</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="n">o</span> <span class="o">=</span> <span class="n">okay</span><span class="p">()</span>
+
+<span class="k">class</span> <span class="nc">my_dict</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="n">md</span> <span class="o">=</span> <span class="n">my_dict</span><span class="p">()</span>
+<span class="n">cc</span> <span class="o">=</span> <span class="n">ClassChecker</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">okay</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span>
+<span class="n">o</span> <span class="ow">in</span> <span class="n">cc</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">no</span> <span class="ow">in</span> <span class="n">cc</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">5</span> <span class="ow">in</span> <span class="n">cc</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">}</span> <span class="ow">in</span> <span class="n">cc</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;asasas&quot;</span> <span class="ow">in</span> <span class="n">cc</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">md</span> <span class="ow">in</span> <span class="n">cc</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="delegate-to-a-separate-object">
 <h3>Delegate to a separate object<a class="headerlink" href="#delegate-to-a-separate-object" title="Permalink to this headline">¶</a></h3>
 <p>Delegate object method calls, properties and variables to the appropriate object. Useful to combine multiple objects together while assuring that the calls will go to the correct object.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.misc</span> <span class="kn">import</span> <span class="n">Delegator</span>
+
+<span class="k">class</span> <span class="nc">ListAndString</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">Delegator</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
+        <span class="n">Delegator</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+<span class="n">ls</span> <span class="o">=</span> <span class="n">ListAndString</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">&quot;ab_cd&quot;</span><span class="p">)</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">ls</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ls</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ls</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>&#39;AB_CD&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ls</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[&#39;ab&#39;, &#39;cd&#39;]
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="wrap-a-function-to-hide-from-a-class">
 <h3>Wrap a function to hide from a class<a class="headerlink" href="#wrap-a-function-to-hide-from-a-class" title="Permalink to this headline">¶</a></h3>
 <p>Wrap a function to hide it from a class so that it isn’t a method.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.misc</span> <span class="kn">import</span> <span class="n">FunctionWrapper</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">FunctionWrapper</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="n">f</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;cogent3.util.misc.FunctionWrapper at 0x7fb2faf2f370&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>&#39;123&#39;
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="construct-a-constrained-container">
 <h3>Construct a constrained container<a class="headerlink" href="#construct-a-constrained-container" title="Permalink to this headline">¶</a></h3>
 <p>Wrap a container with a constraint. This is useful for enforcing that the data contained is valid within a defined context. Cogent3 provides a base <code class="docutils literal notranslate"><span class="pre">ConstrainedContainer</span></code> which can be used to construct user-defined constrained objects. Cogent3 also provides <code class="docutils literal notranslate"><span class="pre">ConstrainedString</span></code>, <code class="docutils literal notranslate"><span class="pre">ConstrainedList</span></code>, and <code class="docutils literal notranslate"><span class="pre">ConstrainedDict</span></code>. These provided types fully cover the builtin types while staying integrated with the <code class="docutils literal notranslate"><span class="pre">ConstrainedContainer</span></code>.</p>
 <p>Here is a light example of the <code class="docutils literal notranslate"><span class="pre">ConstrainedDict</span></code></p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.misc</span> <span class="kn">import</span> <span class="n">ConstrainedDict</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">ConstrainedDict</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">},</span> <span class="n">constraint</span><span class="o">=</span><span class="s2">&quot;abc&quot;</span><span class="p">)</span>
+<span class="n">d</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;a&#39;: 1, &#39;b&#39;: 2, &#39;c&#39;: 3}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;d&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ConstraintError</span><span class="g g-Whitespace">                           </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">39</span><span class="o">-</span><span class="mi">3718</span><span class="n">f5e31c87</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;d&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="nn">/usr/local/miniconda/envs/cogent3/lib/python3.8/site-packages/cogent3/util/misc.py</span> in <span class="ni">__setitem__</span><span class="nt">(self, key, value)</span>
+<span class="g g-Whitespace">    </span><span class="mi">788</span>         <span class="sd">&quot;&quot;&quot;Sets self[key] to value if value in constraint.&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">789</span>         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">item_is_valid</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">790</span>             <span class="k">raise</span> <span class="n">ConstraintError</span><span class="p">(</span>
+<span class="nn">    791                 &quot;Item &#39;%s&#39; not</span> in <span class="ni">constraint &#39;%s&#39;&quot; % </span><span class="nt">(key, self.constraint)</span>
+<span class="g g-Whitespace">    </span><span class="mi">792</span>             <span class="p">)</span>
+
+<span class="ne">ConstraintError</span>: Item &#39;d&#39; not in constraint &#39;abc&#39;
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>

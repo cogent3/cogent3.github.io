@@ -7,6 +7,9 @@
     <title>Perform a coevolutionary analysis on biological sequence alignments &#8212; cogent3 2020.4 documentation</title>
     <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-binder.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/gallery-dataframe.css" />
@@ -15,6 +18,8 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="../../_static/require.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
@@ -126,13 +131,163 @@
 <p><em>Section author: Greg Caporaso</em></p>
 <p>This document describes how to perform a coevolutionary analysis on a <code class="docutils literal notranslate"><span class="pre">ArrayAlignment</span></code> object. Coevolutionary analyses identify correlated substitution patterns between <code class="docutils literal notranslate"><span class="pre">ArrayAlignment</span></code> positions (columns). Several coevolution detection methods are currently provided via the Cogent3 coevolution module. <code class="docutils literal notranslate"><span class="pre">ArrayAlignment</span></code> objects must always be used as input to these functions.</p>
 <p>Before using an alignment in a coevolutionary analysis, you should be confident in the alignment. Poorly aligned sequences can yield very misleading results. There can be no ambiguous residue/base codes (e.g., B/Z/X in protein alignments) – while some of the algorithms could tolerate them (e.g. Mutual Information), others which rely on information such as background residue frequencies (e.g. Statistical Coupling Analysis) cannot handle them. Some recoded amino acid alphabets will also not handle ambiguous residues. The best strategy is just to exclude ambiguous codes all together. To test for invalid characters before starting an analysis you can do the following:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span>
+<span class="kn">from</span> <span class="nn">cogent3.core.alignment</span> <span class="kn">import</span> <span class="n">ArrayAlignment</span>
+<span class="kn">from</span> <span class="nn">cogent3.evolve.coevolution</span> <span class="kn">import</span> <span class="n">validate_alignment</span>
+
+<span class="n">aln</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span>
+    <span class="p">{</span><span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="s2">&quot;GAA&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">:</span> <span class="s2">&quot;CTA&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">:</span> <span class="s2">&quot;CTC&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">:</span> <span class="s2">&quot;-TC&quot;</span><span class="p">},</span>
+    <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;protein&quot;</span><span class="p">,</span>
+    <span class="n">array_align</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">validate_alignment</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>To run a coevolutionary analysis, first create a <code class="docutils literal notranslate"><span class="pre">ArrayAlignment</span></code>:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span>
+<span class="kn">from</span> <span class="nn">cogent3.core.alignment</span> <span class="kn">import</span> <span class="n">ArrayAlignment</span>
+
+<span class="n">aln</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span>
+    <span class="p">{</span><span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="s2">&quot;AAA&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">:</span> <span class="s2">&quot;CTA&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">:</span> <span class="s2">&quot;CTC&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">:</span> <span class="s2">&quot;-TC&quot;</span><span class="p">},</span>
+    <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;protein&quot;</span><span class="p">,</span>
+    <span class="n">array_align</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
 <p>Perform a coevolutionary analysis on a pair of positions in the alignment using mutual information (<code class="docutils literal notranslate"><span class="pre">mi</span></code>):</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.evolve.coevolution</span> <span class="kn">import</span> <span class="n">coevolve_pair_functions</span><span class="p">,</span> <span class="n">coevolve_pair</span>
+
+<span class="n">coevolve_pair</span><span class="p">(</span><span class="n">coevolve_pair_functions</span><span class="p">[</span><span class="s2">&quot;mi&quot;</span><span class="p">],</span> <span class="n">aln</span><span class="p">,</span> <span class="n">pos1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">pos2</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>0.31127812445913294
+</pre></div>
+</div>
+</div>
+</div>
 <p>Perform a coevolutionary analysis on a pair of positions in the alignment using statistical coupling analysis (<code class="docutils literal notranslate"><span class="pre">sca</span></code>):</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.evolve.coevolution</span> <span class="kn">import</span> <span class="n">coevolve_pair_functions</span><span class="p">,</span> <span class="n">coevolve_pair</span>
+
+<span class="n">coevolve_pair</span><span class="p">(</span><span class="n">coevolve_pair_functions</span><span class="p">[</span><span class="s2">&quot;sca&quot;</span><span class="p">],</span> <span class="n">aln</span><span class="p">,</span> <span class="n">pos1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">pos2</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">cutoff</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>0.980536895536287
+</pre></div>
+</div>
+</div>
+</div>
 <p>Perform a coevolutionary analysis on one position and all other positions in the alignment using mutual information (<code class="docutils literal notranslate"><span class="pre">mi</span></code>):</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.evolve.coevolution</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">coevolve_position_functions</span><span class="p">,</span>
+    <span class="n">coevolve_position</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">coevolve_position</span><span class="p">(</span><span class="n">coevolve_position_functions</span><span class="p">[</span><span class="s2">&quot;mi&quot;</span><span class="p">],</span> <span class="n">aln</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([       nan, 0.81127812, 0.31127812])
+</pre></div>
+</div>
+</div>
+</div>
 <p>Perform a coevolutionary analysis on all pairs of positions in the alignment using mutual information (<code class="docutils literal notranslate"><span class="pre">mi</span></code>):</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.evolve.coevolution</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">coevolve_alignment_functions</span><span class="p">,</span>
+    <span class="n">coevolve_alignment</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">coevolve_alignment</span><span class="p">(</span><span class="n">coevolve_alignment_functions</span><span class="p">[</span><span class="s2">&quot;mi&quot;</span><span class="p">],</span> <span class="n">aln</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[       nan,        nan,        nan],
+       [       nan, 0.81127812, 0.31127812],
+       [       nan, 0.31127812, 1.        ]])
+</pre></div>
+</div>
+</div>
+</div>
 <p>View the available algorithms for computing coevolution values:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">coevolve_pair_functions</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>dict_keys([&#39;mi&#39;, &#39;nmi&#39;, &#39;rmi&#39;, &#39;sca&#39;, &#39;an&#39;])
+</pre></div>
+</div>
+</div>
+</div>
 <p>Perform an intermolecular coevolutionary analysis using mutual information (<code class="docutils literal notranslate"><span class="pre">mi</span></code>). Note that there are strict requirements on the sequence identifiers for intermolecular analyses, and some important considerations involved in preparing alignments for these analyses. See the coevolve_alignments docstring (i.e., <code class="docutils literal notranslate"><span class="pre">help(coevolve_alignments)</span></code> from the python interpreter) for information. Briefly, sequence identifiers are split on <code class="docutils literal notranslate"><span class="pre">+</span></code> symbols. The ids before the + must match perfectly between the two alignments as these are used to match the sequences between alignments. In the following example, these are common species names: human, chicken, echidna, and pig. The text after the <code class="docutils literal notranslate"><span class="pre">+</span></code> can be anything, and should probably be the original database identifiers of the sequences.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.evolve.coevolution</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">coevolve_alignment_functions</span><span class="p">,</span>
+    <span class="n">coevolve_alignments</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">aln1</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;human+protein1&quot;</span><span class="p">:</span> <span class="s2">&quot;AAA&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;pig+protein1&quot;</span><span class="p">:</span> <span class="s2">&quot;CTA&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;chicken+protein1&quot;</span><span class="p">:</span> <span class="s2">&quot;CTC&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;echidna+weird_db_identifier&quot;</span><span class="p">:</span> <span class="s2">&quot;-TC&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;protein&quot;</span><span class="p">,</span>
+    <span class="n">array_align</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">aln2</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;pig+protein2&quot;</span><span class="p">:</span> <span class="s2">&quot;AAAY&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;chicken+protein2&quot;</span><span class="p">:</span> <span class="s2">&quot;CTAY&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;echidna+protein2&quot;</span><span class="p">:</span> <span class="s2">&quot;CTCF&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;human+protein2&quot;</span><span class="p">:</span> <span class="s2">&quot;-TCF&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;protein&quot;</span><span class="p">,</span>
+    <span class="n">array_align</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">coevolve_alignments</span><span class="p">(</span><span class="n">coevolve_alignment_functions</span><span class="p">[</span><span class="s2">&quot;mi&quot;</span><span class="p">],</span> <span class="n">aln1</span><span class="p">,</span> <span class="n">aln2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[       nan,        nan,        nan],
+       [       nan, 0.12255625, 0.31127812],
+       [       nan, 0.31127812, 0.        ],
+       [       nan, 0.31127812, 0.        ]])
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 
 
