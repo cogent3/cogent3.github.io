@@ -61,7 +61,6 @@ html_theme_options = {
                 ("Citation", "general.html"),
                 ("Support", "general.html"),
                 ("History", "history.html"),
-                ("PyCogent", "pycogent.html"),
                 ("Projects", "projects.html"),
                 ("License", "doc/licenses.html"),
             ],
