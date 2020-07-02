@@ -5,8 +5,6 @@ import sys
 from glob import glob
 
 # sphinx_navtree
-# html_theme = "sphinx_rtd_theme"
-import sphinx_bootstrap_theme
 
 project = "cogent3"
 copyright = "2020, cogent3 Team"
@@ -47,20 +45,29 @@ extensions = [
 ]
 
 
-html_theme = "bootstrap"
-html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
+html_theme = "sphinx_docs_theme"
+html_theme_path = [
+    "_theme",
+]
 html_theme_options = {
-    "navbar_site_name": "Site",
     "navbar_links": [
-        ("Install", "doc/install", False),
-        ("Docs", "doc/index", False),
-        ("Gallery", "doc/draw/index.html", True),
+        ("Install", "doc/install.html"),
+        ("Gallery", "doc/draw/index.html"),
+        ("Docs", "doc/index.html"),
+        (
+            "Site",
+            [
+                ("Posting Bugs", "general.html"),
+                ("Citation", "general.html"),
+                ("Support", "general.html"),
+                ("History", "history.html"),
+                ("PyCogent", "pycogent.html"),
+                ("Projects", "projects.html"),
+                ("License", "doc/licenses.html"),
+            ],
+        ),
     ],
-    "navbar_class": "navbar navbar-inverse",
-    "navbar_fixed_top": "true",
-    "source_link_position": "skipped",
-    # "bootswatch_theme": "Cerulean",
-    "bootstrap_version": "3",
+    "years": "2020, cogent3 Team",
 }
 
 
@@ -91,7 +98,7 @@ show_authors = True
 
 pygments_style = "sphinx"
 
-todo_include_todos = True
+todo_include_todos = False
 todo_emit_warnings = True
 
 sidebar_collapse = False

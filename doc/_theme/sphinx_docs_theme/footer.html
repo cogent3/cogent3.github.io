@@ -1,0 +1,45 @@
+<footer class="footer w-100 pt-2 border-top bg-light">
+    <div id="footer-nav" class="bg-light container">
+        <div id="navbar-footer" class="row">
+            {% if theme_general_info_links %}
+            <div class="col">
+                <dl class="text-center mb-1">
+                    <dt class="border-bottom">General Info</dt>
+                    {% for link in theme_general_info_links %}
+                    <dd><a href="{{ pathto(link[1], 1) }}">{{ link[0] }}</a></dd>
+                    {% endfor %}
+                </dl>
+            </div>
+            {% endif %}
+            <div class="col">
+                <dl class="text-center mb-1">
+                    {% if theme_scm_name and theme_scm_url %}
+                    <dt class="border-bottom">Code</dt>
+                    <dd><a id="scm-link" href="{{ theme_scm_url }}" class="link-noted">SCM <span class="note">{{ theme_scm_name }}</span></a></dd>
+                    {% endif %}
+                    {% if theme_ci_name and theme_ci_url %}
+                    <dd><a id="ci-link" href="{{ theme_ci_url }}" class="link-noted">CI <span class="note">{{ theme_ci_name }}</span></a></dd>
+                    {% endif %}
+                    {% if theme_issues_name and theme_issues_url %}
+                    <dd><a id="issues-link" href="{{ theme_issues_url }}" class="link-noted">Issues <span class="note">{{ theme_issues_name }}</span></a></dd>
+                    {% endif %}
+                </dl>
+            </div>
+            {% if theme_releases_repos %}
+            <div class="col">
+                <dl class="text-center mb-1">
+                    <dt class="border-bottom">Releases</dt>
+                    {% for repo in theme_releases_repos %}
+                    <dd><a href="{{ repo[1] }}">{{ repo[0] }}</a></dd>
+                    {% endfor %}
+                </dl>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <div id="footer-info" class="bg-light pl-2 pb-1 w-100">
+        <div><span class="fa fa-copyright"></span>{% if theme_years %}{{ theme_years }}{% endif %}
+        <a id="author-link" href="{{ theme_author_url }}">{{ theme_author_name }}</a> {% if theme_license_name and theme_license_url %}- <a id="license-link" href="{{ theme_license_url }}">{{ theme_license_name }} License</a>{% endif %}</div>
+        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> {{ sphinx_version }} and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
+    </div>
+</footer>

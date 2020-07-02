@@ -1,0 +1,47 @@
+<nav id="navbar-main" class="navbar navbar-expand navbar-light bg-light">
+    <a class="navbar-brand" href="{{ pathto('./index.html', 1) }}">{{ project }}</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-main-menu" aria-controls="navbar-main" aria-expanded="false" aria-label="Toggle navigation">
+       <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar-main-menu" class="collapse navbar-collapse">
+        <small class="navbar-text"><span id="navbar-version">{{ version }}</span>{% if theme_publish_date %} <time>{{ theme_publish_date }}{% endif %}</time></small>
+        <div class="ml-auto d-flex align-items-center row">
+            {% if theme_scm_url and theme_scm_name|string() == 'Github' %}
+            <div class="col-sm">
+               <a href="{{ theme_scm_url }}" title="GitHub" aria-label="GitHub"><span class="fa fa-github pl-1" aria-hidden="true"></span><span class="d-none d-sm-block d-md-none">
+                  Github</span></a>
+            </div>
+            {% endif %}
+            {% if theme_navbar_links %}
+            <div class="col-sm">
+                <ul class="navbar-nav">
+                    {% for link_group in theme_navbar_links %}
+                    {% if link_group[1] is iterable and link_group[1] is not string %}
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" id="examplesDropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ link_group[0] }}</a>
+                        <div class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="examplesDropdown">
+                            {% for link in link_group[1] %}
+                            <a href="{{ pathto(link[1], 1) }}" class="dropdown-item" title="{{ link[0] }}">{{ link[0] }}</a>
+                            {% endfor %}
+                        </div>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a href="{{ pathto(link_group[1], 1) }}" class="nav-link" title="{{ link_group[0] }}">{{ link_group[0] }}</a>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            <div role="search">
+                <form id="Search-form" class="wy-form" action="{{ pathto('search') }}" method="get">
+                    <input type="text" name="q" placeholder="{{ _('Search docs') }}" />
+                    <input type="hidden" name="check_keywords" value="yes" />
+                    <input type="hidden" name="area" value="default" />
+                </form>
+            </div>
+        </div>
+    </div>
+</nav>
