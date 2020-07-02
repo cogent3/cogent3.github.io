@@ -54,6 +54,7 @@ html_theme_options = {
         ("Install", "doc/install.html"),
         ("Gallery", "doc/draw/index.html"),
         ("Docs", "doc/index.html"),
+        ("GitHub", "https://github.com/cogent3/cogent3"),
         (
             "Site",
             [
@@ -67,6 +68,7 @@ html_theme_options = {
         ),
     ],
     "years": "2020, cogent3 Team",
+    "navigation_depth": 6,
 }
 
 
