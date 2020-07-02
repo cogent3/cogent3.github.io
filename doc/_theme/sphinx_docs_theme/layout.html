@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+{% include "head.html" %}
+<!-- CSS -->
+{%- for css in css_files %}
+{%- if css|attr("rel") %}
+<link rel="{{ css.rel }}" href="{{ pathto(css.filename, 1) }}" type="text/css"{% if css.title is not none %} title="{{ css.title }}"{% endif %} />
+{%- else %}
+<link rel="stylesheet" href="{{ pathto(css, 1) }}" type="text/css" />
+{%- endif %}
+{%- endfor %}
+
+{%- for cssfile in extra_css_files %}
+<link rel="stylesheet" href="{{ pathto(cssfile, 1) }}" type="text/css" />
+{%- endfor %}
+
+<link rel="stylesheet" href="{{ pathto('./_static/lib/bootswatch/litera/bootstrap.min.css', 1) }}">
+<link rel="stylesheet" href="{{ pathto('./_static/lib/font-awesome/css/font-awesome.min.css', 1) }}">
+<link rel="stylesheet" href="{{ pathto('./_static/lib/highlight/styles/default.css', 1) }}">
+
+<!-- Docs Template style -->
+<link rel="stylesheet" href="{{ pathto('./_static/pygments.css', 1) }}">
+<link rel="stylesheet" href="{{ pathto('./_static/css/common.css', 1) }}">
+<link rel="stylesheet" href="{{ pathto('./_static/css/link.css', 1) }}">
+<link rel="stylesheet" href="{{ pathto('./_static/css/custom.css', 1) }}">
+
+<!-- JavaScript -->
+{% block scripts %}
+<script type="text/javascript" id="documentation_options" data-url_root="{{ pathto('', 1) }}" src="{{ pathto('_static/documentation_options.js', 1) }}"></script>
+<script src="{{ pathto('./_static/lib/jquery/jquery.min.js', 1) }}"></script>
+<script src="{{ pathto('./_static/lib/bootstrap/js/bootstrap.min.js', 1) }}"></script>
+<script src="{{ pathto('./_static/lib/highlight/highlight.pack.js', 1) }}"></script>
+<script src="{{ pathto('./_static/js/initializeHighlight.js', 1) }}"></script>
+{%- for scriptfile in script_files %}
+{{ js_tag(scriptfile) }}
+{%- endfor %}
+<script src="{{ pathto('./_static/js/custom.js', 1) }}"></script>
+{% endblock %}
+</head>
+<body class="d-flex flex-column">
+<header>
+    {% include "navbar.html" %}
+</header>
+{% if meta is defined and meta is not none and 'excludenav' not in meta %}
+<nav class="side-nav">
+    <div class="side-nav-container">
+        {% block navigation %}
+        <div class="side-nav-menu hidden">
+        {% block menu %}
+            {% set global_toc = toctree(maxdepth=theme_navigation_depth|int,
+                                        collapse=theme_collapse_navigation|tobool,
+                                        includehidden=theme_includehidden|tobool,
+                                        titles_only=theme_titles_only|tobool) %}
+            {{ global_toc }}
+        {% endblock %}
+        </div>
+        {% endblock %}
+    </div>
+</nav>
+{% endif %}
+<section id="main-section" class="container flex-grow-1 {{ 'has-nav' if meta is defined and meta is not none and 'excludenav' not in meta }}">
+    {% block body %}{% endblock %}
+</section>
+{% block footer %}
+{% include "footer.html" %}
+{% endblock %}
+</body>
+</html>
