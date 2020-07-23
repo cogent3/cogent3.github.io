@@ -173,3 +173,7 @@ latex_documents = [
 ]
 
 html_show_sourcelink = False
+
+
+def setup(app):
+    app.add_js_file("plotly-latest.min.js")
