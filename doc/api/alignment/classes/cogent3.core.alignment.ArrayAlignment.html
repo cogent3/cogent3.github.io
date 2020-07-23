@@ -60,6 +60,7 @@
 <script src="../../../../_static/underscore.js"></script>
 <script src="../../../../_static/doctools.js"></script>
 <script src="../../../../_static/language_data.js"></script>
+<script src="../../../../_static/plotly-latest.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
 <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
 <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="../../../../_static/require.js"></script>
@@ -900,10 +901,10 @@ them, primarily for efficiency.</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.ArrayAlignment.alignment_quality" title="cogent3.core.alignment.ArrayAlignment.alignment_quality"><code class="xref py py-obj docutils literal notranslate"><span class="pre">alignment_quality</span></code></a>([equifreq_mprobs])</p></td>
 <td><p>Computes the alignment quality for an alignment based on eq.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.ArrayAlignment.apply_pssm" title="cogent3.core.alignment.ArrayAlignment.apply_pssm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply_pssm</span></code></a>(**kw)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.ArrayAlignment.apply_pssm" title="cogent3.core.alignment.ArrayAlignment.apply_pssm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply_pssm</span></code></a>([pssm, path, background, …])</p></td>
 <td><p>scores sequences using the specified pssm</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.ArrayAlignment.coevolution" title="cogent3.core.alignment.ArrayAlignment.coevolution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">coevolution</span></code></a>(**kw)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.ArrayAlignment.coevolution" title="cogent3.core.alignment.ArrayAlignment.coevolution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">coevolution</span></code></a>([method, segments, drawable, …])</p></td>
 <td><p>performs pairwise coevolution measurement</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.ArrayAlignment.copy" title="cogent3.core.alignment.ArrayAlignment.copy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy</span></code></a>()</p></td>
@@ -1035,7 +1036,7 @@ them, primarily for efficiency.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.ArrayAlignment.probs_per_seq" title="cogent3.core.alignment.ArrayAlignment.probs_per_seq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">probs_per_seq</span></code></a>([motif_length, …])</p></td>
 <td><p>return MotifFreqsArray per sequence</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.ArrayAlignment.quick_tree" title="cogent3.core.alignment.ArrayAlignment.quick_tree"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quick_tree</span></code></a>(**kw)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.ArrayAlignment.quick_tree" title="cogent3.core.alignment.ArrayAlignment.quick_tree"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quick_tree</span></code></a>([calc, bootstrap, drop_invalid, …])</p></td>
 <td><p>Returns pairwise distances between sequences.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.ArrayAlignment.rc" title="cogent3.core.alignment.ArrayAlignment.rc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rc</span></code></a>()</p></td>
@@ -1231,7 +1232,7 @@ of the observed alignment column freqs versus the expected.</p>
 
 <dl class="py method">
 <dt id="cogent3.core.alignment.ArrayAlignment.apply_pssm">
-<code class="sig-name descname">apply_pssm</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kw</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.alignment.ArrayAlignment.apply_pssm" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">apply_pssm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pssm</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">path</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">background</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">pseudocount</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">names</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">ui</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.alignment.ArrayAlignment.apply_pssm" title="Permalink to this definition">¶</a></dt>
 <dd><p>scores sequences using the specified pssm</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1257,7 +1258,7 @@ matching the format).</p>
 
 <dl class="py method">
 <dt id="cogent3.core.alignment.ArrayAlignment.coevolution">
-<code class="sig-name descname">coevolution</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kw</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.alignment.ArrayAlignment.coevolution" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">coevolution</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">'nmi'</span></em>, <em class="sig-param"><span class="n">segments</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">drawable</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">show_progress</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">ui</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.alignment.ArrayAlignment.coevolution" title="Permalink to this definition">¶</a></dt>
 <dd><p>performs pairwise coevolution measurement</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1990,7 +1991,7 @@ from the seq moltype are included. No expansion of those is attempted.</p>
 
 <dl class="py method">
 <dt id="cogent3.core.alignment.ArrayAlignment.quick_tree">
-<code class="sig-name descname">quick_tree</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kw</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.alignment.ArrayAlignment.quick_tree" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">quick_tree</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">calc</span><span class="o">=</span><span class="default_value">'percent'</span></em>, <em class="sig-param"><span class="n">bootstrap</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">drop_invalid</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">show_progress</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">ui</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.alignment.ArrayAlignment.quick_tree" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns pairwise distances between sequences.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -2442,7 +2443,7 @@ suffix.</p>
     <div id="footer-info" class="bg-light pl-2 pb-1 w-100">
         <div><span class="fa fa-copyright"></span>2020, cogent3 Team
         <a id="author-link" href=""></a> </div>
-        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.1.1 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
+        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.1.2 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
     </div>
 </footer>
 
