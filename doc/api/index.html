@@ -33,6 +33,7 @@
 <![endif]-->
 <!-- CSS -->
 <link rel="stylesheet" href="../../_static/jupyter-sphinx.css" type="text/css" />
+<link rel="stylesheet" href="../../_static/thebelab.css" type="text/css" />
 <link rel="stylesheet" href="../../_static/sphinx-dropdown.css" type="text/css" />
 <link rel="stylesheet" href="../../_static/panels-bootstrap.min.css" type="text/css" />
 <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
@@ -60,6 +61,7 @@
 <script src="../../_static/underscore.js"></script>
 <script src="../../_static/doctools.js"></script>
 <script src="../../_static/language_data.js"></script>
+<script src="../../_static/thebelab-helper.js"></script>
 <script src="../../_static/plotly-latest.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
 <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
@@ -700,7 +702,37 @@
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#objects-for-the-major-data-types">Objects for the major data types</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#utility-functions-for">Utility Functions For</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#loading-data-from-file">Loading data from file</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="__init__/cogent3.__init__.load_unaligned_seqs.html">load_unaligned_seqs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="__init__/cogent3.__init__.load_aligned_seqs.html">load_aligned_seqs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="__init__/cogent3.__init__.load_table.html">load_table</a></li>
+<li class="toctree-l5"><a class="reference internal" href="__init__/cogent3.__init__.load_tree.html">load_tree</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#making-cogent3-types-from-standard-python-types">Making cogent3 types from standard Python types</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="__init__/cogent3.__init__.make_aligned_seqs.html">make_aligned_seqs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="__init__/cogent3.__init__.make_unaligned_seqs.html">make_unaligned_seqs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="__init__/cogent3.__init__.make_seq.html">make_seq</a></li>
+<li class="toctree-l5"><a class="reference internal" href="__init__/cogent3.__init__.make_table.html">make_table</a></li>
+<li class="toctree-l5"><a class="reference internal" href="__init__/cogent3.__init__.make_tree.html">make_tree</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#getting-commonly-used-cogent3-types">Getting commonly used cogent3 types</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="__init__/cogent3.__init__.get_code.html">get_code</a></li>
+<li class="toctree-l5"><a class="reference internal" href="__init__/cogent3.__init__.get_moltype.html">get_moltype</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#displaying-cogent3-builtins">Displaying cogent3 builtins</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="__init__/cogent3.__init__.available_codes.html">available_codes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="__init__/cogent3.__init__.available_moltypes.html">available_moltypes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="__init__/cogent3.__init__.available_models.html">available_models</a></li>
+<li class="toctree-l5"><a class="reference internal" href="__init__/cogent3.__init__.available_apps.html">available_apps</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#the-major-cogent3-data-types">The Major cogent3 Data Types</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="alignment/alignment.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">alignment</span></code></a><ul>
 <li class="toctree-l5"><a class="reference internal" href="alignment/classes/cogent3.core.alignment.SequenceCollection.html">SequenceCollection</a></li>
 <li class="toctree-l5"><a class="reference internal" href="alignment/classes/cogent3.core.alignment.Alignment.html">Alignment</a></li>
@@ -825,8 +857,70 @@
     
   <div class="section" id="api">
 <h1>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="objects-for-the-major-data-types">
-<h2>Objects for the major data types<a class="headerlink" href="#objects-for-the-major-data-types" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="utility-functions-for">
+<h2>Utility Functions For<a class="headerlink" href="#utility-functions-for" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="loading-data-from-file">
+<h3>Loading data from file<a class="headerlink" href="#loading-data-from-file" title="Permalink to this headline">¶</a></h3>
+<p>These are all top level imports. For example,</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_unaligned_seqs</span>
+</pre></div>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="__init__/cogent3.__init__.load_unaligned_seqs.html">load_unaligned_seqs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="__init__/cogent3.__init__.load_aligned_seqs.html">load_aligned_seqs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="__init__/cogent3.__init__.load_table.html">load_table</a></li>
+<li class="toctree-l1"><a class="reference internal" href="__init__/cogent3.__init__.load_tree.html">load_tree</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="making-cogent3-types-from-standard-python-types">
+<h3>Making cogent3 types from standard Python types<a class="headerlink" href="#making-cogent3-types-from-standard-python-types" title="Permalink to this headline">¶</a></h3>
+<p>These are all top level imports. For example,</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_unaligned_seqs</span>
+</pre></div>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="__init__/cogent3.__init__.make_aligned_seqs.html">make_aligned_seqs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="__init__/cogent3.__init__.make_unaligned_seqs.html">make_unaligned_seqs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="__init__/cogent3.__init__.make_seq.html">make_seq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="__init__/cogent3.__init__.make_table.html">make_table</a></li>
+<li class="toctree-l1"><a class="reference internal" href="__init__/cogent3.__init__.make_tree.html">make_tree</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="getting-commonly-used-cogent3-types">
+<h3>Getting commonly used cogent3 types<a class="headerlink" href="#getting-commonly-used-cogent3-types" title="Permalink to this headline">¶</a></h3>
+<p>These are all top level imports. For example,</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">get_code</span>
+</pre></div>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="__init__/cogent3.__init__.get_code.html">get_code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="__init__/cogent3.__init__.get_moltype.html">get_moltype</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="displaying-cogent3-builtins">
+<h3>Displaying cogent3 builtins<a class="headerlink" href="#displaying-cogent3-builtins" title="Permalink to this headline">¶</a></h3>
+<p>These are all top level imports. For example,</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">get_code</span>
+</pre></div>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="__init__/cogent3.__init__.available_codes.html">available_codes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="__init__/cogent3.__init__.available_moltypes.html">available_moltypes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="__init__/cogent3.__init__.available_models.html">available_models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="__init__/cogent3.__init__.available_apps.html">available_apps</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="the-major-cogent3-data-types">
+<h2>The Major cogent3 Data Types<a class="headerlink" href="#the-major-cogent3-data-types" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="alignment/alignment.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">alignment</span></code></a></li>
@@ -858,7 +952,7 @@
     <div id="footer-info" class="bg-light pl-2 pb-1 w-100">
         <div><span class="fa fa-copyright"></span>2020, cogent3 Team
         <a id="author-link" href=""></a> </div>
-        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.1.2 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
+        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.2.1 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
     </div>
 </footer>
 

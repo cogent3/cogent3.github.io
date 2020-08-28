@@ -33,6 +33,7 @@
 <![endif]-->
 <!-- CSS -->
 <link rel="stylesheet" href="../../_static/jupyter-sphinx.css" type="text/css" />
+<link rel="stylesheet" href="../../_static/thebelab.css" type="text/css" />
 <link rel="stylesheet" href="../../_static/sphinx-dropdown.css" type="text/css" />
 <link rel="stylesheet" href="../../_static/panels-bootstrap.min.css" type="text/css" />
 <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
@@ -60,6 +61,7 @@
 <script src="../../_static/underscore.js"></script>
 <script src="../../_static/doctools.js"></script>
 <script src="../../_static/language_data.js"></script>
+<script src="../../_static/thebelab-helper.js"></script>
 <script src="../../_static/plotly-latest.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
 <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
@@ -700,7 +702,37 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api/index.html">API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../api/index.html#objects-for-the-major-data-types">Objects for the major data types</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/index.html#utility-functions-for">Utility Functions For</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/index.html#loading-data-from-file">Loading data from file</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_unaligned_seqs.html">load_unaligned_seqs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_aligned_seqs.html">load_aligned_seqs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_table.html">load_table</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_tree.html">load_tree</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../api/index.html#making-cogent3-types-from-standard-python-types">Making cogent3 types from standard Python types</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_aligned_seqs.html">make_aligned_seqs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_unaligned_seqs.html">make_unaligned_seqs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_seq.html">make_seq</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_table.html">make_table</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_tree.html">make_tree</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../api/index.html#getting-commonly-used-cogent3-types">Getting commonly used cogent3 types</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.get_code.html">get_code</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.get_moltype.html">get_moltype</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../api/index.html#displaying-cogent3-builtins">Displaying cogent3 builtins</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_codes.html">available_codes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_moltypes.html">available_moltypes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_models.html">available_models</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_apps.html">available_apps</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api/index.html#the-major-cogent3-data-types">The Major cogent3 Data Types</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../api/alignment/alignment.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">alignment</span></code></a><ul>
 <li class="toctree-l5"><a class="reference internal" href="../api/alignment/classes/cogent3.core.alignment.SequenceCollection.html">SequenceCollection</a></li>
 <li class="toctree-l5"><a class="reference internal" href="../api/alignment/classes/cogent3.core.alignment.Alignment.html">Alignment</a></li>
@@ -836,11 +868,13 @@
 <p>First import standard components necessary for all of the following calculations. As the likelihood ratio tests (LRT) involve nested hypotheses we will employ the chi-square approximation for assessing statistical significance.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.evolve.substitution_model</span> <span class="kn">import</span> <span class="n">TimeReversibleNucleotide</span><span class="p">,</span> <span class="n">predicate</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.evolve.substitution_model</span> <span class="kn">import</span> <span class="n">TimeReversibleNucleotide</span><span class="p">,</span> <span class="n">predicate</span>
 <span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span><span class="p">,</span> <span class="n">load_tree</span>
 <span class="kn">from</span> <span class="nn">cogent3.maths.stats</span> <span class="kn">import</span> <span class="n">chisqprob</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -848,10 +882,11 @@
 <p>Load the alignment and tree.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aln</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/long_testseqs.fasta&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">aln</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/long_testseqs.fasta&quot;</span><span class="p">)</span>
 <span class="n">tree</span> <span class="o">=</span> <span class="n">load_tree</span><span class="p">(</span><span class="s2">&quot;data/test.tree&quot;</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -861,12 +896,15 @@
 <p>We define a HKY model of nucleotide substitution, which has a transition parameter. This is defined using the <code class="docutils literal notranslate"><span class="pre">MotifChange</span></code> class, by specifying a transition as <strong>not</strong> a transversion (<code class="docutils literal notranslate"><span class="pre">~MotifChange('R','Y')</span></code>).</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">MotifChange</span> <span class="o">=</span> <span class="n">predicate</span><span class="o">.</span><span class="n">MotifChange</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">MotifChange</span> <span class="o">=</span> <span class="n">predicate</span><span class="o">.</span><span class="n">MotifChange</span>
 <span class="n">treat_gap</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">recode_gaps</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">model_gaps</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">kappa</span> <span class="o">=</span> <span class="p">(</span><span class="o">~</span><span class="n">MotifChange</span><span class="p">(</span><span class="s2">&quot;R&quot;</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">aliased</span><span class="p">(</span><span class="s2">&quot;kappa&quot;</span><span class="p">)</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">TimeReversibleNucleotide</span><span class="p">(</span><span class="n">predicates</span><span class="o">=</span><span class="p">[</span><span class="n">kappa</span><span class="p">],</span> <span class="o">**</span><span class="n">treat_gap</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -874,14 +912,19 @@
 <p>We specify a null model with no bins, and optimise it.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lf_one</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">lf_one</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">lf_one</span><span class="o">.</span><span class="n">set_alignment</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
 <span class="n">lf_one</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">lnL_one</span> <span class="o">=</span> <span class="n">lf_one</span><span class="o">.</span><span class="n">get_log_likelihood</span><span class="p">()</span>
 <span class="n">df_one</span> <span class="o">=</span> <span class="n">lf_one</span><span class="o">.</span><span class="n">get_num_free_params</span><span class="p">()</span>
 <span class="n">lf_one</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><h4>Likelihood function statistics</h4>
@@ -1009,7 +1052,19 @@
 <p>Our next hypothesis is that there are two rate classes, or bins, with rates gamma distributed. We will restrict the bin probabilities to be equal.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bin_submod</span> <span class="o">=</span> <span class="n">TimeReversibleNucleotide</span><span class="p">(</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">bin_submod</span> <span class="o">=</span> <span class="n">TimeReversibleNucleotide</span><span class="p">(</span>
     <span class="n">predicates</span><span class="o">=</span><span class="p">[</span><span class="n">kappa</span><span class="p">],</span> <span class="n">ordered_param</span><span class="o">=</span><span class="s2">&quot;rate&quot;</span><span class="p">,</span> <span class="n">distribution</span><span class="o">=</span><span class="s2">&quot;gamma&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">treat_gap</span>
 <span class="p">)</span>
 <span class="n">lf_bins</span> <span class="o">=</span> <span class="n">bin_submod</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span>
@@ -1023,7 +1078,7 @@
 <span class="k">assert</span> <span class="n">df_bins</span> <span class="o">==</span> <span class="mi">9</span>
 <span class="n">lf_bins</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><h4>Likelihood function statistics</h4>
@@ -1187,7 +1242,15 @@
 <p>We then specify a model with switches for changing between site-classes, the HMM part. The setup is almost identical to that for above with the sole difference being setting the <code class="docutils literal notranslate"><span class="pre">sites_independent=False</span></code>.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lf_patches</span> <span class="o">=</span> <span class="n">bin_submod</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">lf_patches</span> <span class="o">=</span> <span class="n">bin_submod</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span>
     <span class="n">tree</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sites_independent</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="mi">3</span>
 <span class="p">)</span>
 <span class="n">lf_patches</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span><span class="s2">&quot;bprobs&quot;</span><span class="p">,</span> <span class="n">is_constant</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1197,7 +1260,7 @@
 <span class="n">df_patches</span> <span class="o">=</span> <span class="n">lf_patches</span><span class="o">.</span><span class="n">get_num_free_params</span><span class="p">()</span>
 <span class="n">lf_patches</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><h4>Likelihood function statistics</h4>
@@ -1360,9 +1423,9 @@
 <p>We use the following short function to compute the LR test statistic.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">LR</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">alt</span><span class="p">,</span> <span class="n">null</span><span class="p">:</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">alt</span> <span class="o">-</span> <span class="n">null</span><span class="p">)</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">LR</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">alt</span><span class="p">,</span> <span class="n">null</span><span class="p">:</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">alt</span> <span class="o">-</span> <span class="n">null</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -1370,10 +1433,11 @@
 <p>We conduct the test between the sequentially nested models.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lr</span> <span class="o">=</span> <span class="n">LR</span><span class="p">(</span><span class="n">lnL_bins</span><span class="p">,</span> <span class="n">lnL_one</span><span class="p">)</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">lr</span> <span class="o">=</span> <span class="n">LR</span><span class="p">(</span><span class="n">lnL_bins</span><span class="p">,</span> <span class="n">lnL_one</span><span class="p">)</span>
 <span class="n">lr</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>22.99788343956243
@@ -1383,9 +1447,9 @@
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">chisqprob</span><span class="p">(</span><span class="n">lr</span><span class="p">,</span> <span class="n">df_patches</span> <span class="o">-</span> <span class="n">df_bins</span><span class="p">))</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">chisqprob</span><span class="p">(</span><span class="n">lr</span><span class="p">,</span> <span class="n">df_patches</span> <span class="o">-</span> <span class="n">df_bins</span><span class="p">))</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>0.0000
@@ -1396,10 +1460,11 @@
 <p>The stationary bin probabilities are labelled as <code class="docutils literal notranslate"><span class="pre">bprobs</span></code> and can be obtained as follows.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bprobs</span> <span class="o">=</span> <span class="n">lf_patches</span><span class="o">.</span><span class="n">get_param_value</span><span class="p">(</span><span class="s2">&quot;bprobs&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">bprobs</span> <span class="o">=</span> <span class="n">lf_patches</span><span class="o">.</span><span class="n">get_param_value</span><span class="p">(</span><span class="s2">&quot;bprobs&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%.1f</span><span class="s2"> : </span><span class="si">%.1f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">bprobs</span><span class="p">))</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>0.5 : 0.5
@@ -1410,9 +1475,9 @@
 <p>Of greater interest here (given the model was set up so the bin probabilities were equal, i.e. <code class="docutils literal notranslate"><span class="pre">is_constant=True</span></code>) are the posterior probabilities as those allow classification of sites. The result is a <code class="docutils literal notranslate"><span class="pre">DictArray</span></code> class instance, which behaves like a dictionary.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pp</span> <span class="o">=</span> <span class="n">lf_patches</span><span class="o">.</span><span class="n">get_bin_probs</span><span class="p">()</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pp</span> <span class="o">=</span> <span class="n">lf_patches</span><span class="o">.</span><span class="n">get_bin_probs</span><span class="p">()</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -1420,9 +1485,9 @@
 <p>If we want to know the posterior probability the 21st position belongs to <code class="docutils literal notranslate"><span class="pre">bin0</span></code>, we can determine it as:</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">pp</span><span class="p">[</span><span class="s2">&quot;bin0&quot;</span><span class="p">][</span><span class="mi">20</span><span class="p">])</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">pp</span><span class="p">[</span><span class="s2">&quot;bin0&quot;</span><span class="p">][</span><span class="mi">20</span><span class="p">])</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>0.8034881154224306
@@ -1436,11 +1501,13 @@
 <p>In this example we model sequence evolution where there are 2 classes of sites distinguished by their <code class="docutils literal notranslate"><span class="pre">kappa</span></code> parameters. We need to know what value of <code class="docutils literal notranslate"><span class="pre">kappa</span></code> to specify the delineation of the bin boundaries. We can determine this from the null model (<code class="docutils literal notranslate"><span class="pre">lf_one</span></code>). For this use case, we also need to use a <code class="docutils literal notranslate"><span class="pre">numpy.array</span></code>, so we’ll import that.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">array</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">array</span>
 
 <span class="n">single_kappa</span> <span class="o">=</span> <span class="n">lf_one</span><span class="o">.</span><span class="n">get_param_value</span><span class="p">(</span><span class="s2">&quot;kappa&quot;</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -1448,12 +1515,15 @@
 <p>We then construct the substitution model in a different way to that when evaluating generic rate heterogeneity (above).</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">kappa_bin_submod</span> <span class="o">=</span> <span class="n">TimeReversibleNucleotide</span><span class="p">(</span><span class="n">predicates</span><span class="o">=</span><span class="p">[</span><span class="n">kappa</span><span class="p">],</span> <span class="o">**</span><span class="n">treat_gap</span><span class="p">)</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">kappa_bin_submod</span> <span class="o">=</span> <span class="n">TimeReversibleNucleotide</span><span class="p">(</span><span class="n">predicates</span><span class="o">=</span><span class="p">[</span><span class="n">kappa</span><span class="p">],</span> <span class="o">**</span><span class="n">treat_gap</span><span class="p">)</span>
 <span class="n">lf_kappa</span> <span class="o">=</span> <span class="n">kappa_bin_submod</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span>
     <span class="n">tree</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;slow&quot;</span><span class="p">,</span> <span class="s2">&quot;fast&quot;</span><span class="p">],</span> <span class="n">sites_independent</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="mi">3</span>
 <span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -1461,7 +1531,13 @@
 <p>To improve the likelihood fitting it is desirable to set starting values in the model that result in it’s initial likelihood being that of the null model (or as close as possible). To do this, we’re going to define an arbitrarily small value (<code class="docutils literal notranslate"><span class="pre">epsilon</span></code>) which we use to provide the starting value to the two bins as slightly smaller/greater than <code class="docutils literal notranslate"><span class="pre">single_kappa</span></code> for the slow/fast bins respectively. At the same time we set the upper/lower bin boundaries.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">epsilon</span> <span class="o">=</span> <span class="mf">1e-6</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">epsilon</span> <span class="o">=</span> <span class="mf">1e-6</span>
 <span class="n">lf_kappa</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span>
     <span class="n">kappa</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="n">single_kappa</span> <span class="o">-</span> <span class="n">epsilon</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="n">single_kappa</span><span class="p">,</span> <span class="nb">bin</span><span class="o">=</span><span class="s2">&quot;slow&quot;</span>
 <span class="p">)</span>
@@ -1469,7 +1545,7 @@
     <span class="n">kappa</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="n">single_kappa</span> <span class="o">+</span> <span class="n">epsilon</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="n">single_kappa</span><span class="p">,</span> <span class="nb">bin</span><span class="o">=</span><span class="s2">&quot;fast&quot;</span>
 <span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -1477,12 +1553,15 @@
 <p>We then illustrate how to adjust the bin probabilities, here doing it so that one of them is nearly 1, the other nearly 0. This ensures the likelihood will be near identical to that of <code class="docutils literal notranslate"><span class="pre">lf_one</span></code> and as a result the optimisation step will actually improve fit over the simpler model.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lf_kappa</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span><span class="s2">&quot;bprobs&quot;</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">epsilon</span><span class="p">,</span> <span class="mf">0.0</span> <span class="o">+</span> <span class="n">epsilon</span><span class="p">]))</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">lf_kappa</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span><span class="s2">&quot;bprobs&quot;</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">epsilon</span><span class="p">,</span> <span class="mf">0.0</span> <span class="o">+</span> <span class="n">epsilon</span><span class="p">]))</span>
 <span class="n">lf_kappa</span><span class="o">.</span><span class="n">set_alignment</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
 <span class="n">lf_kappa</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">lf_kappa</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><h4>Likelihood function statistics</h4>
@@ -1661,7 +1740,7 @@
     <div id="footer-info" class="bg-light pl-2 pb-1 w-100">
         <div><span class="fa fa-copyright"></span>2020, cogent3 Team
         <a id="author-link" href=""></a> </div>
-        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.1.2 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
+        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.2.1 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
     </div>
 </footer>
 

@@ -33,6 +33,7 @@
 <![endif]-->
 <!-- CSS -->
 <link rel="stylesheet" href="../../_static/jupyter-sphinx.css" type="text/css" />
+<link rel="stylesheet" href="../../_static/thebelab.css" type="text/css" />
 <link rel="stylesheet" href="../../_static/sphinx-dropdown.css" type="text/css" />
 <link rel="stylesheet" href="../../_static/panels-bootstrap.min.css" type="text/css" />
 <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
@@ -60,6 +61,7 @@
 <script src="../../_static/underscore.js"></script>
 <script src="../../_static/doctools.js"></script>
 <script src="../../_static/language_data.js"></script>
+<script src="../../_static/thebelab-helper.js"></script>
 <script src="../../_static/plotly-latest.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
 <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
@@ -700,7 +702,37 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api/index.html">API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../api/index.html#objects-for-the-major-data-types">Objects for the major data types</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/index.html#utility-functions-for">Utility Functions For</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/index.html#loading-data-from-file">Loading data from file</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_unaligned_seqs.html">load_unaligned_seqs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_aligned_seqs.html">load_aligned_seqs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_table.html">load_table</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_tree.html">load_tree</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../api/index.html#making-cogent3-types-from-standard-python-types">Making cogent3 types from standard Python types</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_aligned_seqs.html">make_aligned_seqs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_unaligned_seqs.html">make_unaligned_seqs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_seq.html">make_seq</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_table.html">make_table</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_tree.html">make_tree</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../api/index.html#getting-commonly-used-cogent3-types">Getting commonly used cogent3 types</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.get_code.html">get_code</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.get_moltype.html">get_moltype</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../api/index.html#displaying-cogent3-builtins">Displaying cogent3 builtins</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_codes.html">available_codes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_moltypes.html">available_moltypes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_models.html">available_models</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_apps.html">available_apps</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api/index.html#the-major-cogent3-data-types">The Major cogent3 Data Types</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../api/alignment/alignment.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">alignment</span></code></a><ul>
 <li class="toctree-l5"><a class="reference internal" href="../api/alignment/classes/cogent3.core.alignment.SequenceCollection.html">SequenceCollection</a></li>
 <li class="toctree-l5"><a class="reference internal" href="../api/alignment/classes/cogent3.core.alignment.Alignment.html">Alignment</a></li>
@@ -842,7 +874,13 @@
 <h3>Constructing a <code class="docutils literal notranslate"><span class="pre">SequenceCollection</span></code> or <code class="docutils literal notranslate"><span class="pre">Alignment</span></code> object from strings<a class="headerlink" href="#constructing-a-sequencecollection-or-alignment-object-from-strings" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span><span class="p">,</span> <span class="n">make_unaligned_seqs</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span><span class="p">,</span> <span class="n">make_unaligned_seqs</span>
 
 <span class="n">dna</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;seq1&quot;</span><span class="p">:</span> <span class="s2">&quot;ATGACC&quot;</span><span class="p">,</span> <span class="s2">&quot;seq2&quot;</span><span class="p">:</span> <span class="s2">&quot;ATCGCC&quot;</span><span class="p">}</span>
 <span class="n">seqs</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">dna</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
@@ -850,7 +888,7 @@
 <span class="n">seqs</span> <span class="o">=</span> <span class="n">make_unaligned_seqs</span><span class="p">(</span><span class="n">dna</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">seqs</span><span class="p">))</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;cogent3.core.alignment.ArrayAlignment&#39;&gt;
@@ -864,14 +902,19 @@
 <h3>Constructing a <code class="docutils literal notranslate"><span class="pre">ArrayAlignment</span></code> using <code class="docutils literal notranslate"><span class="pre">make_aligned_seqs</span></code><a class="headerlink" href="#constructing-a-arrayalignment-using-make-aligned-seqs" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span>
 
 <span class="n">dna</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;seq1&quot;</span><span class="p">:</span> <span class="s2">&quot;ATGACC&quot;</span><span class="p">,</span> <span class="s2">&quot;seq2&quot;</span><span class="p">:</span> <span class="s2">&quot;ATCGCC&quot;</span><span class="p">}</span>
 <span class="n">seqs</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">dna</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">,</span> <span class="n">array_align</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">seqs</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">seqs</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;cogent3.core.alignment.ArrayAlignment&#39;&gt;
@@ -889,12 +932,15 @@ ATCGCC
 <h3>Converting a <code class="docutils literal notranslate"><span class="pre">SequenceCollection</span></code> to FASTA format<a class="headerlink" href="#converting-a-sequencecollection-to-fasta-format" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_unaligned_seqs</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_unaligned_seqs</span>
 
 <span class="n">seqs</span> <span class="o">=</span> <span class="n">load_unaligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/test.paml&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">seqs</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;NineBande
@@ -922,7 +968,18 @@ GCAAGGAGCCAGCAGAACAGATGGGTTGAAACTAAGGAAACATGTAATGATAGGCAGACT
 <p><code class="docutils literal notranslate"><span class="pre">add_seqs</span></code> without additional parameters will append the sequences to the end of the collection/alignment.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span>
 
 <span class="n">aln</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span>
     <span class="p">[(</span><span class="s2">&quot;seq1&quot;</span><span class="p">,</span> <span class="s2">&quot;ATGAA------&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;seq2&quot;</span><span class="p">,</span> <span class="s2">&quot;ATG-AGTGATG&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;seq3&quot;</span><span class="p">,</span> <span class="s2">&quot;AT--AG-GATG&quot;</span><span class="p">)],</span>
@@ -935,7 +992,7 @@ GCAAGGAGCCAGCAGAACAGATGGGTTGAAACTAAGGAAACATGTAATGATAGGCAGACT
 <span class="n">new_aln</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">add_seqs</span><span class="p">(</span><span class="n">new_seqs</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">new_aln</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;seq1
@@ -970,12 +1027,15 @@ ATGCC------
 <p>Sequences can be inserted into an alignment at the specified position using either the <code class="docutils literal notranslate"><span class="pre">before_name</span></code> or <code class="docutils literal notranslate"><span class="pre">after_name</span></code> arguments.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">new_aln</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">add_seqs</span><span class="p">(</span><span class="n">new_seqs</span><span class="p">,</span> <span class="n">before_name</span><span class="o">=</span><span class="s2">&quot;seq2&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">new_aln</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">add_seqs</span><span class="p">(</span><span class="n">new_seqs</span><span class="p">,</span> <span class="n">before_name</span><span class="o">=</span><span class="s2">&quot;seq2&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">new_aln</span><span class="p">)</span>
 <span class="n">new_aln</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">add_seqs</span><span class="p">(</span><span class="n">new_seqs</span><span class="p">,</span> <span class="n">after_name</span><span class="o">=</span><span class="s2">&quot;seq2&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">new_aln</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;seq1
@@ -1010,7 +1070,18 @@ AT--AG-GATG
 <p>Already aligned sequences can be added to an existing <code class="docutils literal notranslate"><span class="pre">Alignment</span></code> object and aligned at the same time using the <code class="docutils literal notranslate"><span class="pre">add_from_ref_aln</span></code> method. The alignment is performed based on their alignment to a reference sequence (which must be present in both alignments). The method assumes the first sequence in <code class="docutils literal notranslate"><span class="pre">ref_aln.names[0]</span></code> is the reference.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span>
 
 <span class="n">aln</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span>
     <span class="p">[(</span><span class="s2">&quot;seq1&quot;</span><span class="p">,</span> <span class="s2">&quot;ATGAA------&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;seq2&quot;</span><span class="p">,</span> <span class="s2">&quot;ATG-AGTGATG&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;seq3&quot;</span><span class="p">,</span> <span class="s2">&quot;AT--AG-GATG&quot;</span><span class="p">)],</span>
@@ -1023,7 +1094,7 @@ AT--AG-GATG
 <span class="n">new_aln</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">add_from_ref_aln</span><span class="p">(</span><span class="n">ref_aln</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">new_aln</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;seq1
@@ -1050,7 +1121,14 @@ AT--GC-TGGG
 <h4>Removing all columns with gaps in a named sequence<a class="headerlink" href="#removing-all-columns-with-gaps-in-a-named-sequence" title="Permalink to this headline">¶</a></h4>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span>
 
 <span class="n">aln</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span>
     <span class="p">[(</span><span class="s2">&quot;seq1&quot;</span><span class="p">,</span> <span class="s2">&quot;ATGAA---TG-&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;seq2&quot;</span><span class="p">,</span> <span class="s2">&quot;ATG-AGTGATG&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;seq3&quot;</span><span class="p">,</span> <span class="s2">&quot;AT--AG-GATG&quot;</span><span class="p">)],</span>
@@ -1059,7 +1137,7 @@ AT--GC-TGGG
 <span class="n">new_aln</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">get_degapped_relative_to</span><span class="p">(</span><span class="s2">&quot;seq1&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">new_aln</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;seq1
@@ -1083,7 +1161,17 @@ AT--AAT
 <p>Using the <code class="docutils literal notranslate"><span class="pre">get_seq</span></code> method allows for extracting an unaligned sequence from a collection or alignment by name.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span>
 
 <span class="n">aln</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span>
     <span class="p">[(</span><span class="s2">&quot;seq1&quot;</span><span class="p">,</span> <span class="s2">&quot;ATGAA------&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;seq2&quot;</span><span class="p">,</span> <span class="s2">&quot;ATG-AGTGATG&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;seq3&quot;</span><span class="p">,</span> <span class="s2">&quot;AT--AG-GATG&quot;</span><span class="p">)],</span>
@@ -1095,7 +1183,7 @@ AT--AAT
 <span class="nb">type</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
 <span class="n">seq</span><span class="o">.</span><span class="n">is_gapped</span><span class="p">()</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>False
@@ -1106,11 +1194,13 @@ AT--AAT
 <p>Alternatively, if you want to extract the aligned (i.e., gapped) sequence from an alignment, you can use <code class="docutils literal notranslate"><span class="pre">get_gapped_seq</span></code>.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">seq</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">get_gapped_seq</span><span class="p">(</span><span class="s2">&quot;seq1&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">seq</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">get_gapped_seq</span><span class="p">(</span><span class="s2">&quot;seq1&quot;</span><span class="p">)</span>
 <span class="n">seq</span><span class="o">.</span><span class="n">is_gapped</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>ATGAA------
@@ -1121,10 +1211,11 @@ AT--AAT
 <p>To see the names of the sequences in a sequence collection, you can use either the <code class="docutils literal notranslate"><span class="pre">Names</span></code> attribute or <code class="docutils literal notranslate"><span class="pre">get_seq_names</span></code> method.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aln</span><span class="o">.</span><span class="n">names</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">aln</span><span class="o">.</span><span class="n">names</span>
 <span class="n">aln</span><span class="o">.</span><span class="n">names</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[&#39;seq1&#39;, &#39;seq2&#39;, &#39;seq3&#39;]
@@ -1138,7 +1229,17 @@ AT--AAT
 <p>The usual approach is to access a <code class="docutils literal notranslate"><span class="pre">SequenceCollection</span></code> or <code class="docutils literal notranslate"><span class="pre">Alignment</span></code> object as a dictionary, obtaining the individual sequences using the titles as “keys” (above).  However, one can also iterate through the collection like a list.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_unaligned_seqs</span><span class="p">,</span> <span class="n">load_aligned_seqs</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_unaligned_seqs</span><span class="p">,</span> <span class="n">load_aligned_seqs</span>
 
 <span class="n">fn</span> <span class="o">=</span> <span class="s2">&quot;data/long_testseqs.fasta&quot;</span>
 <span class="n">seqs</span> <span class="o">=</span> <span class="n">load_unaligned_seqs</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
@@ -1150,7 +1251,7 @@ AT--AAT
 <span class="n">aln</span><span class="o">.</span><span class="n">seqs</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">24</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">aln</span><span class="o">.</span><span class="n">seqs</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">24</span><span class="p">])</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>TGTGGCACAAATACTCATGCCAGC
@@ -1163,14 +1264,19 @@ AT--AAT
 <h3>Getting a subset of sequences from the alignment<a class="headerlink" href="#getting-a-subset-of-sequences-from-the-alignment" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
 
 <span class="n">aln</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/test.paml&quot;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
 <span class="n">aln</span><span class="o">.</span><span class="n">names</span>
 <span class="n">new</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">take_seqs</span><span class="p">([</span><span class="s2">&quot;Human&quot;</span><span class="p">,</span> <span class="s2">&quot;HowlerMon&quot;</span><span class="p">])</span>
 <span class="n">new</span><span class="o">.</span><span class="n">names</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[&#39;Human&#39;, &#39;HowlerMon&#39;]
@@ -1181,14 +1287,19 @@ AT--AAT
 <p>Note, if you set <code class="docutils literal notranslate"><span class="pre">array_align=False</span></code>, then the subset contain references to the original sequences, not copies.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
 
 <span class="n">aln</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/test.paml&quot;</span><span class="p">,</span> <span class="n">array_align</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
 <span class="n">seq</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">get_seq</span><span class="p">(</span><span class="s2">&quot;Human&quot;</span><span class="p">)</span>
 <span class="n">new</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">take_seqs</span><span class="p">([</span><span class="s2">&quot;Human&quot;</span><span class="p">,</span> <span class="s2">&quot;HowlerMon&quot;</span><span class="p">])</span>
 <span class="nb">id</span><span class="p">(</span><span class="n">new</span><span class="o">.</span><span class="n">get_seq</span><span class="p">(</span><span class="s2">&quot;Human&quot;</span><span class="p">))</span> <span class="o">==</span> <span class="nb">id</span><span class="p">(</span><span class="n">aln</span><span class="o">.</span><span class="n">get_seq</span><span class="p">(</span><span class="s2">&quot;Human&quot;</span><span class="p">))</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>True
@@ -1204,7 +1315,14 @@ AT--AAT
 <h3>Creating an <code class="docutils literal notranslate"><span class="pre">Alignment</span></code> object from a <code class="docutils literal notranslate"><span class="pre">SequenceCollection</span></code><a class="headerlink" href="#creating-an-alignment-object-from-a-sequencecollection" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_unaligned_seqs</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_unaligned_seqs</span>
 <span class="kn">from</span> <span class="nn">cogent3.core.alignment</span> <span class="kn">import</span> <span class="n">Alignment</span>
 
 <span class="n">seq</span> <span class="o">=</span> <span class="n">load_unaligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/test.paml&quot;</span><span class="p">)</span>
@@ -1213,7 +1331,7 @@ AT--AAT
 <span class="n">fasta_2</span> <span class="o">=</span> <span class="n">aln</span>
 <span class="k">assert</span> <span class="n">fasta_1</span> <span class="o">==</span> <span class="n">fasta_2</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -1224,14 +1342,19 @@ AT--AAT
 <p>This is useful if you’ve loaded a sequence alignment without specifying the moltype and later need to convert it.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span>
 
 <span class="n">data</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;ACG---&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;CCTGGG&quot;</span><span class="p">)]</span>
 <span class="n">aln</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
 <span class="n">dna</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">to_dna</span><span class="p">()</span>
 <span class="n">dna</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -1239,7 +1362,7 @@ AT--AAT
 .c3align tr:not(.num_row) td span {margin: 0 2px;}
 .c3align tr:nth-child(even) {background: #f7f7f7;}
 .c3align .num_row {background-color:rgba(161, 195, 209, 0.5) !important; border-top: solid 1px black; }
-.c3align .label { font-size: 12pt ; text-align: right !important; color: black !important; padding: 0 4px; }
+.c3align .label { font-size: 12pt ; text-align: right !important; color: black !important; padding: 0 4px; display: table-cell !important; font-weight: normal !important; }
 .c3align .T_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: blue; }
 .c3align .C_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
 .c3align .A_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: #FF0102; }
@@ -1259,14 +1382,19 @@ AT--AAT
 <p>To RNA</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span>
 
 <span class="n">data</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;ACG---&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;CCUGGG&quot;</span><span class="p">)]</span>
 <span class="n">aln</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
 <span class="n">rna</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">to_rna</span><span class="p">()</span>
 <span class="n">rna</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -1274,7 +1402,7 @@ AT--AAT
 .c3align tr:not(.num_row) td span {margin: 0 2px;}
 .c3align tr:nth-child(even) {background: #f7f7f7;}
 .c3align .num_row {background-color:rgba(161, 195, 209, 0.5) !important; border-top: solid 1px black; }
-.c3align .label { font-size: 12pt ; text-align: right !important; color: black !important; padding: 0 4px; }
+.c3align .label { font-size: 12pt ; text-align: right !important; color: black !important; padding: 0 4px; display: table-cell !important; font-weight: normal !important; }
 .c3align .U_rna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: blue; }
 .c3align .C_rna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
 .c3align .A_rna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: #FF0102; }
@@ -1294,14 +1422,19 @@ AT--AAT
 <p>To PROTEIN</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span>
 
 <span class="n">data</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;TYV&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;TE-&quot;</span><span class="p">)]</span>
 <span class="n">aln</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
 <span class="n">prot</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">to_protein</span><span class="p">()</span>
 <span class="n">prot</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -1309,7 +1442,7 @@ AT--AAT
 .c3align tr:not(.num_row) td span {margin: 0 2px;}
 .c3align tr:nth-child(even) {background: #f7f7f7;}
 .c3align .num_row {background-color:rgba(161, 195, 209, 0.5) !important; border-top: solid 1px black; }
-.c3align .label { font-size: 12pt ; text-align: right !important; color: black !important; padding: 0 4px; }
+.c3align .label { font-size: 12pt ; text-align: right !important; color: black !important; padding: 0 4px; display: table-cell !important; font-weight: normal !important; }
 .c3align .A_protein{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: #009999; }
 .c3align .C_protein{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: orange; }
 .c3align .D_protein{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: blue; }
@@ -1351,13 +1484,17 @@ AT--AAT
 <p>This necessarily returns a <code class="docutils literal notranslate"><span class="pre">SequenceCollection</span></code>.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
 
 <span class="n">aln</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/primate_cdx2_promoter.fasta&quot;</span><span class="p">)</span>
 <span class="n">degapped</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">degap</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">degapped</span><span class="p">))</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;cogent3.core.alignment.SequenceCollection&#39;&gt;
@@ -1372,13 +1509,17 @@ AT--AAT
 <p>Both collection and alignment objects have a <code class="docutils literal notranslate"><span class="pre">write</span></code> method. The output format is inferred from the filename suffix,</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span>
 
 <span class="n">dna</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;seq1&quot;</span><span class="p">:</span> <span class="s2">&quot;ATGACC&quot;</span><span class="p">,</span> <span class="s2">&quot;seq2&quot;</span><span class="p">:</span> <span class="s2">&quot;ATCGCC&quot;</span><span class="p">}</span>
 <span class="n">aln</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">dna</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
 <span class="n">aln</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;sample.fasta&quot;</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -1386,20 +1527,22 @@ AT--AAT
 <p>or by the <code class="docutils literal notranslate"><span class="pre">format</span></code> argument.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aln</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;sample&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;fasta&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">aln</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;sample&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;fasta&quot;</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 </div>
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.misc</span> <span class="kn">import</span> <span class="n">remove_files</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.misc</span> <span class="kn">import</span> <span class="n">remove_files</span>
 
 <span class="n">remove_files</span><span class="p">([</span><span class="s2">&quot;sample&quot;</span><span class="p">,</span> <span class="s2">&quot;sample.fasta&quot;</span><span class="p">],</span> <span class="n">error_on_missing</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -1409,14 +1552,19 @@ AT--AAT
 <h3>Converting an alignment to FASTA format<a class="headerlink" href="#converting-an-alignment-to-fasta-format" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
 <span class="kn">from</span> <span class="nn">cogent3.core.alignment</span> <span class="kn">import</span> <span class="n">Alignment</span>
 
 <span class="n">seq</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/long_testseqs.fasta&quot;</span><span class="p">)</span>
 <span class="n">aln</span> <span class="o">=</span> <span class="n">Alignment</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
 <span class="n">fasta_align</span> <span class="o">=</span> <span class="n">aln</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -1426,7 +1574,13 @@ AT--AAT
 <h3>Converting an alignment into Phylip format<a class="headerlink" href="#converting-an-alignment-into-phylip-format" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
 <span class="kn">from</span> <span class="nn">cogent3.core.alignment</span> <span class="kn">import</span> <span class="n">Alignment</span>
 
 <span class="n">seq</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/test.paml&quot;</span><span class="p">)</span>
@@ -1434,7 +1588,7 @@ AT--AAT
 <span class="n">got</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">to_phylip</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">got</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>5  60
@@ -1453,14 +1607,19 @@ DogFaced  GCAAGGAGCCAGCAGAACAGATGGGTTGAAACTAAGGAAACATGTAATGATAGGCAGACT
 <h3>Converting an alignment to a list of strings<a class="headerlink" href="#converting-an-alignment-to-a-list-of-strings" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
 <span class="kn">from</span> <span class="nn">cogent3.core.alignment</span> <span class="kn">import</span> <span class="n">Alignment</span>
 
 <span class="n">seq</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/test.paml&quot;</span><span class="p">)</span>
 <span class="n">aln</span> <span class="o">=</span> <span class="n">Alignment</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
 <span class="n">string_list</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -1474,13 +1633,17 @@ DogFaced  GCAAGGAGCCAGCAGAACAGATGGGTTGAAACTAAGGAAACATGTAATGATAGGCAGACT
 <p>An <code class="docutils literal notranslate"><span class="pre">Alignment</span></code> can be sliced</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
 
 <span class="n">fn</span> <span class="o">=</span> <span class="s2">&quot;data/long_testseqs.fasta&quot;</span>
 <span class="n">aln</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">aln</span><span class="p">[:</span><span class="mi">24</span><span class="p">])</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;Human
@@ -1503,13 +1666,17 @@ TGTGGCACAAATACTCATGCCAAC
 <p>but a <code class="docutils literal notranslate"><span class="pre">SequenceCollection</span></code> cannot be sliced</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_unaligned_seqs</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_unaligned_seqs</span>
 
 <span class="n">fn</span> <span class="o">=</span> <span class="s2">&quot;data/long_testseqs.fasta&quot;</span>
 <span class="n">seqs</span> <span class="o">=</span> <span class="n">load_unaligned_seqs</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">seqs</span><span class="p">[:</span><span class="mi">24</span><span class="p">])</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
@@ -1529,12 +1696,15 @@ TGTGGCACAAATACTCATGCCAAC
 <h3>Getting a single column from an alignment<a class="headerlink" href="#getting-a-single-column-from-an-alignment" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
 
 <span class="n">seq</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/test.paml&quot;</span><span class="p">)</span>
 <span class="n">column_four</span> <span class="o">=</span> <span class="n">aln</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -1544,12 +1714,15 @@ TGTGGCACAAATACTCATGCCAAC
 <h3>Getting a region of contiguous columns<a class="headerlink" href="#getting-a-region-of-contiguous-columns" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
 
 <span class="n">aln</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/long_testseqs.fasta&quot;</span><span class="p">)</span>
 <span class="n">region</span> <span class="o">=</span> <span class="n">aln</span><span class="p">[</span><span class="mi">50</span><span class="p">:</span><span class="mi">70</span><span class="p">]</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -1559,14 +1732,19 @@ TGTGGCACAAATACTCATGCCAAC
 <h3>Iterating over alignment positions<a class="headerlink" href="#iterating-over-alignment-positions" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
 
 <span class="n">aln</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/primate_cdx2_promoter.fasta&quot;</span><span class="p">)</span>
 <span class="n">col</span> <span class="o">=</span> <span class="n">aln</span><span class="p">[</span><span class="mi">113</span><span class="p">:</span><span class="mi">115</span><span class="p">]</span><span class="o">.</span><span class="n">iter_positions</span><span class="p">()</span>
 <span class="nb">type</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
 <span class="nb">list</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[[ByteSequence(A), ByteSequence(A), ByteSequence(A)],
@@ -1581,7 +1759,17 @@ TGTGGCACAAATACTCATGCCAAC
 <p>We’ll do this by specifying the position indices of interest, creating a sequence <code class="docutils literal notranslate"><span class="pre">Feature</span></code> and using that to extract the positions.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span>
 
 <span class="n">aln</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span>
     <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;seq1&quot;</span><span class="p">:</span> <span class="s2">&quot;ATGATGATG---&quot;</span><span class="p">,</span> <span class="s2">&quot;seq2&quot;</span><span class="p">:</span> <span class="s2">&quot;ATGATGATGATG&quot;</span><span class="p">},</span> <span class="n">array_align</span><span class="o">=</span><span class="kc">False</span>
@@ -1593,7 +1781,7 @@ TGTGGCACAAATACTCATGCCAAC
 <span class="n">pos3</span> <span class="o">=</span> <span class="n">pos3</span><span class="o">.</span><span class="n">get_slice</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">pos3</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;seq1
@@ -1611,7 +1799,13 @@ GGGG
 <p>We can use more conventional slice notation in this instance. Note, because Python counts from 0, the 3rd position starts at index 2.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span>
 
 <span class="n">aln</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span>
     <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;seq1&quot;</span><span class="p">:</span> <span class="s2">&quot;ATGATGATG---&quot;</span><span class="p">,</span> <span class="s2">&quot;seq2&quot;</span><span class="p">:</span> <span class="s2">&quot;ATGATGATGATG&quot;</span><span class="p">},</span> <span class="n">array_align</span><span class="o">=</span><span class="kc">True</span>
@@ -1619,7 +1813,7 @@ GGGG
 <span class="n">pos3</span> <span class="o">=</span> <span class="n">aln</span><span class="p">[</span><span class="mi">2</span><span class="p">::</span><span class="mi">3</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">pos3</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;seq1
@@ -1639,7 +1833,14 @@ GGGG
 <p>For evolutionary analyses that use codon models we need to exclude terminating stop codons. For the case where the sequences are all of length divisible by 3.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span>
 
 <span class="n">aln</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span>
     <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;seq1&quot;</span><span class="p">:</span> <span class="s2">&quot;ACGTAA---&quot;</span><span class="p">,</span> <span class="s2">&quot;seq2&quot;</span><span class="p">:</span> <span class="s2">&quot;ACGACA---&quot;</span><span class="p">,</span> <span class="s2">&quot;seq3&quot;</span><span class="p">:</span> <span class="s2">&quot;ACGCAATGA&quot;</span><span class="p">},</span>
@@ -1648,7 +1849,7 @@ GGGG
 <span class="n">new</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">trim_stop_codons</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;seq1
@@ -1665,7 +1866,16 @@ ACGCAA
 <p>If the alignment contains sequences not divisible by 3, use the <code class="docutils literal notranslate"><span class="pre">allow_partial</span></code> argument.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aln</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">aln</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span>
     <span class="n">data</span><span class="o">=</span><span class="p">{</span>
         <span class="s2">&quot;seq1&quot;</span><span class="p">:</span> <span class="s2">&quot;ACGTAA---&quot;</span><span class="p">,</span>
         <span class="s2">&quot;seq2&quot;</span><span class="p">:</span> <span class="s2">&quot;ACGAC----&quot;</span><span class="p">,</span>  <span class="c1"># terminal codon incomplete</span>
@@ -1676,7 +1886,7 @@ ACGCAA
 <span class="n">new</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">trim_stop_codons</span><span class="p">(</span><span class="n">allow_partial</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;seq1
@@ -1696,7 +1906,16 @@ ACGCAA
 <p>We sometimes want to eliminate ambiguous or gap data from our alignments. We show how to exclude alignment columns by the characters they contain. In the first instance we do this just for single nucleotide columns, then for trinucleotides (equivalent for handling codons). Both are done using the <code class="docutils literal notranslate"><span class="pre">no_degenerates</span></code> method.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span>
 
 <span class="n">aln</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span>
     <span class="n">data</span><span class="o">=</span><span class="p">[</span>
@@ -1707,7 +1926,7 @@ ACGCAA
     <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -1715,10 +1934,11 @@ ACGCAA
 <p>We apply to nucleotides,</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nucs</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">no_degenerates</span><span class="p">()</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">nucs</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">no_degenerates</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">nucs</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;seq1
@@ -1735,10 +1955,11 @@ ATGAAGGG
 <p>Applying the same filter to trinucleotides (specified by setting <code class="docutils literal notranslate"><span class="pre">motif_length=3</span></code>).</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">trinucs</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">no_degenerates</span><span class="p">(</span><span class="n">motif_length</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">trinucs</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">no_degenerates</span><span class="p">(</span><span class="n">motif_length</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">trinucs</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;seq1
@@ -1757,14 +1978,19 @@ ATGAAG
 <h4>Getting all variable positions from an alignment<a class="headerlink" href="#getting-all-variable-positions-from-an-alignment" title="Permalink to this headline">¶</a></h4>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
 
 <span class="n">aln</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/long_testseqs.fasta&quot;</span><span class="p">)</span>
 <span class="n">pos</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">variable_positions</span><span class="p">()</span>
 <span class="n">just_variable_aln</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">take_positions</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">just_variable_aln</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;Human
@@ -1787,14 +2013,19 @@ AAACAAAATA
 <h4>Getting all constant positions from an alignment<a class="headerlink" href="#getting-all-constant-positions-from-an-alignment" title="Permalink to this headline">¶</a></h4>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
 
 <span class="n">aln</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/long_testseqs.fasta&quot;</span><span class="p">)</span>
 <span class="n">pos</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">variable_positions</span><span class="p">()</span>
 <span class="n">just_constant_aln</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">take_positions</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">negate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">just_constant_aln</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;Human
@@ -1818,7 +2049,13 @@ TGTGGCACAA
 <p>This is done using the <code class="docutils literal notranslate"><span class="pre">filtered</span></code> method using the <code class="docutils literal notranslate"><span class="pre">motif_length</span></code> argument. We demonstrate this first for the <code class="docutils literal notranslate"><span class="pre">ArrayAlignment</span></code>.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
 
 <span class="n">aln</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/long_testseqs.fasta&quot;</span><span class="p">)</span>
 <span class="n">variable_codons</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">filtered</span><span class="p">(</span>
@@ -1826,7 +2063,7 @@ TGTGGCACAA
 <span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">just_variable_aln</span><span class="p">[:</span><span class="mi">9</span><span class="p">])</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;Human
@@ -1847,11 +2084,13 @@ AAACAAAAT
 <p>Then for the standard <code class="docutils literal notranslate"><span class="pre">Alignment</span></code> by first converting the <code class="docutils literal notranslate"><span class="pre">ArrayAlignment</span></code>.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aln</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">to_type</span><span class="p">(</span><span class="n">array_align</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">aln</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">to_type</span><span class="p">(</span><span class="n">array_align</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">variable_codons</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">filtered</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="n">motif_length</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">just_variable_aln</span><span class="p">[:</span><span class="mi">9</span><span class="p">])</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;Human
@@ -1878,12 +2117,15 @@ AAACAAAAT
 <p>You can use <code class="docutils literal notranslate"><span class="pre">take_seqs</span></code> to extract some sequences by sequence identifier from an alignment to a new alignment object:</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
 
 <span class="n">aln</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/long_testseqs.fasta&quot;</span><span class="p">)</span>
 <span class="n">aln</span><span class="o">.</span><span class="n">take_seqs</span><span class="p">([</span><span class="s2">&quot;Human&quot;</span><span class="p">,</span> <span class="s2">&quot;Mouse&quot;</span><span class="p">])</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -1891,7 +2133,7 @@ AAACAAAAT
 .c3align tr:not(.num_row) td span {margin: 0 2px;}
 .c3align tr:nth-child(even) {background: #f7f7f7;}
 .c3align .num_row {background-color:rgba(161, 195, 209, 0.5) !important; border-top: solid 1px black; }
-.c3align .label { font-size: 12pt ; text-align: right !important; color: black !important; padding: 0 4px; }
+.c3align .label { font-size: 12pt ; text-align: right !important; color: black !important; padding: 0 4px; display: table-cell !important; font-weight: normal !important; }
 .c3align ._bytes{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
 .c3align ._bytes{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
 .c3align ._bytes{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
@@ -2164,9 +2406,9 @@ _bytes{font-family: "Lucida Console",monospace !important; font-size: 12pt !impo
 <p>Alternatively, you can extract only the sequences which are not specified by passing <code class="docutils literal notranslate"><span class="pre">negate=True</span></code>:</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aln</span><span class="o">.</span><span class="n">take_seqs</span><span class="p">([</span><span class="s2">&quot;Human&quot;</span><span class="p">,</span> <span class="s2">&quot;Mouse&quot;</span><span class="p">],</span> <span class="n">negate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">aln</span><span class="o">.</span><span class="n">take_seqs</span><span class="p">([</span><span class="s2">&quot;Human&quot;</span><span class="p">,</span> <span class="s2">&quot;Mouse&quot;</span><span class="p">],</span> <span class="n">negate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -2174,7 +2416,7 @@ _bytes{font-family: "Lucida Console",monospace !important; font-size: 12pt !impo
 .c3align tr:not(.num_row) td span {margin: 0 2px;}
 .c3align tr:nth-child(even) {background: #f7f7f7;}
 .c3align .num_row {background-color:rgba(161, 195, 209, 0.5) !important; border-top: solid 1px black; }
-.c3align .label { font-size: 12pt ; text-align: right !important; color: black !important; padding: 0 4px; }
+.c3align .label { font-size: 12pt ; text-align: right !important; color: black !important; padding: 0 4px; display: table-cell !important; font-weight: normal !important; }
 .c3align ._bytes{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
 .c3align ._bytes{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
 .c3align ._bytes{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
@@ -2451,7 +2693,21 @@ _bytes{font-family: "Lucida Console",monospace !important; font-size: 12pt !impo
 <p>You can use <code class="docutils literal notranslate"><span class="pre">take_seqs_if</span></code> to extract sequences into a new alignment object based on whether an arbitrary function applied to the sequence evaluates to True. For example, to extract sequences which don’t contain any N bases you could do the following:</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span>
 
 <span class="n">aln</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span>
     <span class="n">data</span><span class="o">=</span><span class="p">[</span>
@@ -2467,7 +2723,7 @@ _bytes{font-family: "Lucida Console",monospace !important; font-size: 12pt !impo
 
 <span class="n">aln</span><span class="o">.</span><span class="n">take_seqs_if</span><span class="p">(</span><span class="n">no_N_chars</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -2475,7 +2731,7 @@ _bytes{font-family: "Lucida Console",monospace !important; font-size: 12pt !impo
 .c3align tr:not(.num_row) td span {margin: 0 2px;}
 .c3align tr:nth-child(even) {background: #f7f7f7;}
 .c3align .num_row {background-color:rgba(161, 195, 209, 0.5) !important; border-top: solid 1px black; }
-.c3align .label { font-size: 12pt ; text-align: right !important; color: black !important; padding: 0 4px; }
+.c3align .label { font-size: 12pt ; text-align: right !important; color: black !important; padding: 0 4px; display: table-cell !important; font-weight: normal !important; }
 .c3align .T_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: blue; }
 .c3align .C_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
 .c3align .A_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: #FF0102; }
@@ -2495,9 +2751,9 @@ _bytes{font-family: "Lucida Console",monospace !important; font-size: 12pt !impo
 <p>You can additionally get the sequences where the provided function evaluates to False:</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aln</span><span class="o">.</span><span class="n">take_seqs_if</span><span class="p">(</span><span class="n">no_N_chars</span><span class="p">,</span> <span class="n">negate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">aln</span><span class="o">.</span><span class="n">take_seqs_if</span><span class="p">(</span><span class="n">no_N_chars</span><span class="p">,</span> <span class="n">negate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -2505,7 +2761,7 @@ _bytes{font-family: "Lucida Console",monospace !important; font-size: 12pt !impo
 .c3align tr:not(.num_row) td span {margin: 0 2px;}
 .c3align tr:nth-child(even) {background: #f7f7f7;}
 .c3align .num_row {background-color:rgba(161, 195, 209, 0.5) !important; border-top: solid 1px black; }
-.c3align .label { font-size: 12pt ; text-align: right !important; color: black !important; padding: 0 4px; }
+.c3align .label { font-size: 12pt ; text-align: right !important; color: black !important; padding: 0 4px; display: table-cell !important; font-weight: normal !important; }
 .c3align .T_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: blue; }
 .c3align .C_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
 .c3align .A_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: #FF0102; }
@@ -2531,7 +2787,22 @@ _bytes{font-family: "Lucida Console",monospace !important; font-size: 12pt !impo
 <p>We state the motif length we want and whether to allow gap or ambiguous characters. The latter only has meaning for IPUAC character sets (the DNA, RNA or PROTEIN moltypes). We illustrate this for the DNA moltype with motif lengths of 1 and 3.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span>
 
 <span class="n">aln</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span>
     <span class="n">data</span><span class="o">=</span><span class="p">[</span>
@@ -2548,7 +2819,7 @@ _bytes{font-family: "Lucida Console",monospace !important; font-size: 12pt !impo
 <span class="n">counts</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">counts</span><span class="p">(</span><span class="n">include_ambiguity</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>==================
@@ -2580,13 +2851,17 @@ AAA    AAC    AAG    AAT    ACA    ACC    ACG    ACT    AGA    AGC    AGG    AGT
 <p>The method <code class="docutils literal notranslate"><span class="pre">get_motif_probs</span></code> of <code class="docutils literal notranslate"><span class="pre">Alignment</span></code> objects returns the probabilities for all motifs of a given length. For individual nucleotides:</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
 
 <span class="n">aln</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/primate_cdx2_promoter.fasta&quot;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
 <span class="n">motif_probs</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">get_motif_probs</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">motif_probs</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;T&#39;: 0.25520602569782896, &#39;C&#39;: 0.25808595480726626, &#39;A&#39;: 0.24390784226849802, &#39;G&#39;: 0.24280017722640673}
@@ -2597,7 +2872,13 @@ AAA    AAC    AAG    AAT    ACA    ACC    ACG    ACT    AGA    AGC    AGG    AGT
 <p>For dinucleotides or longer, we need to pass in an <code class="docutils literal notranslate"><span class="pre">Alphabet</span></code> with the appropriate word length. Here is an example with trinucleotides:</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span><span class="p">,</span> <span class="n">DNA</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span><span class="p">,</span> <span class="n">DNA</span>
 
 <span class="n">trinuc_alphabet</span> <span class="o">=</span> <span class="n">DNA</span><span class="o">.</span><span class="n">alphabet</span><span class="o">.</span><span class="n">get_word_alphabet</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">aln</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/primate_cdx2_promoter.fasta&quot;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
@@ -2605,10 +2886,13 @@ AAA    AAC    AAG    AAT    ACA    ACC    ACG    ACT    AGA    AGC    AGG    AGT
 <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">motif_probs</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">motif_probs</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">  </span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">motif_probs</span><span class="p">[</span><span class="n">m</span><span class="p">]))</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>CAG  0.037
+</pre></div>
+</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>
 CCT  0.034
 CGC  0.030
 TCT  0.029
@@ -2680,13 +2964,17 @@ ACA  0.002
 <p>Some calculations in <code class="docutils literal notranslate"><span class="pre">cogent3</span></code> require all non-zero values in the motif probabilities, in which case we use a pseudo-count. We illustrate that here with a simple example where T is missing. Without the pseudo-count, the frequency of T is 0.0, with the pseudo-count defined as 1e-6 then the frequency of T will be slightly less than 1e-6.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aln</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;AACAAC&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;AAGAAG&quot;</span><span class="p">)],</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">aln</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;AACAAC&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;AAGAAG&quot;</span><span class="p">)],</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
 <span class="n">motif_probs</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">get_motif_probs</span><span class="p">()</span>
 <span class="k">assert</span> <span class="n">motif_probs</span><span class="p">[</span><span class="s2">&quot;T&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mf">0.0</span>
 <span class="n">motif_probs</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">get_motif_probs</span><span class="p">(</span><span class="n">pseudocount</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">)</span>
 <span class="k">assert</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">motif_probs</span><span class="p">[</span><span class="s2">&quot;T&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mf">1e-6</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -2695,13 +2983,17 @@ ACA  0.002
 <p>We then create a dinucleotide <code class="docutils literal notranslate"><span class="pre">Alphabet</span></code> object and use this to get dinucleotide probabilities. These frequencies are determined by breaking each aligned sequence up into non-overlapping dinucleotides and then doing a count. The expected value for the ‘AA’ dinucleotide in this case will be 2/8 = 0.25.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">seqs</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;AACGTAAG&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;AACGTAAG&quot;</span><span class="p">)]</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">seqs</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;AACGTAAG&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;AACGTAAG&quot;</span><span class="p">)]</span>
 <span class="n">aln</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">seqs</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
 <span class="n">dinuc_alphabet</span> <span class="o">=</span> <span class="n">DNA</span><span class="o">.</span><span class="n">alphabet</span><span class="o">.</span><span class="n">get_word_alphabet</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">motif_probs</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">get_motif_probs</span><span class="p">(</span><span class="n">alphabet</span><span class="o">=</span><span class="n">dinuc_alphabet</span><span class="p">)</span>
 <span class="k">assert</span> <span class="n">motif_probs</span><span class="p">[</span><span class="s2">&quot;AA&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mf">0.25</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -2709,14 +3001,19 @@ ACA  0.002
 <p>What about counting the total incidence of dinucleotides including those not in-frame?  A naive application of the Python string object’s count method will not work as desired either because it “returns the number of non-overlapping occurrences”.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">seqs</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;my_seq&quot;</span><span class="p">,</span> <span class="s2">&quot;AAAGTAAG&quot;</span><span class="p">)]</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">seqs</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;my_seq&quot;</span><span class="p">,</span> <span class="s2">&quot;AAAGTAAG&quot;</span><span class="p">)]</span>
 <span class="n">aln</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">seqs</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
 <span class="n">my_seq</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">get_seq</span><span class="p">(</span><span class="s2">&quot;my_seq&quot;</span><span class="p">)</span>
 <span class="n">my_seq</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;AA&quot;</span><span class="p">)</span>
 <span class="s2">&quot;AAA&quot;</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;AA&quot;</span><span class="p">)</span>
 <span class="s2">&quot;AAAA&quot;</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;AA&quot;</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>2
@@ -2727,14 +3024,19 @@ ACA  0.002
 <p>To count all occurrences of a given dinucleotide in a DNA sequence, one could use a standard Python approach such as list comprehension:</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_seq</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_seq</span>
 
 <span class="n">seq</span> <span class="o">=</span> <span class="n">make_seq</span><span class="p">(</span><span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">,</span> <span class="n">seq</span><span class="o">=</span><span class="s2">&quot;AAAGTAAG&quot;</span><span class="p">)</span>
 <span class="n">seq</span>
 <span class="n">di_nucs</span> <span class="o">=</span> <span class="p">[</span><span class="n">seq</span><span class="p">[</span><span class="n">i</span> <span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)]</span>
 <span class="nb">sum</span><span class="p">([</span><span class="n">nn</span> <span class="o">==</span> <span class="s2">&quot;AA&quot;</span> <span class="k">for</span> <span class="n">nn</span> <span class="ow">in</span> <span class="n">di_nucs</span><span class="p">])</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>3
@@ -2749,7 +3051,14 @@ ACA  0.002
 <h4>Filtering extracted columns for the gap character<a class="headerlink" href="#filtering-extracted-columns-for-the-gap-character" title="Permalink to this headline">¶</a></h4>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
 
 <span class="n">aln</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/primate_cdx2_promoter.fasta&quot;</span><span class="p">)</span>
 <span class="n">col</span> <span class="o">=</span> <span class="n">aln</span><span class="p">[</span><span class="mi">113</span><span class="p">:</span><span class="mi">115</span><span class="p">]</span><span class="o">.</span><span class="n">iter_positions</span><span class="p">()</span>
@@ -2758,7 +3067,7 @@ ACA  0.002
 <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">==</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">c1</span><span class="p">))</span>
 <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">==</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">c2</span><span class="p">))</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[ByteSequence(-), ByteSequence(-)]
@@ -2771,7 +3080,13 @@ ACA  0.002
 <h4>Calculating the gap fraction<a class="headerlink" href="#calculating-the-gap-fraction" title="Permalink to this headline">¶</a></h4>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
 
 <span class="n">aln</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/primate_cdx2_promoter.fasta&quot;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">aln</span><span class="p">[</span><span class="mi">113</span><span class="p">:</span><span class="mi">150</span><span class="p">]</span><span class="o">.</span><span class="n">iter_positions</span><span class="p">():</span>
@@ -2779,7 +3094,7 @@ ACA  0.002
     <span class="n">gap_fraction</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ungapped</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">gap_fraction</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>0.0
@@ -2829,7 +3144,17 @@ ACA  0.002
 <p>It’s often important to know how an alignment position relates to a position in one or more of the sequences in the alignment. The <code class="docutils literal notranslate"><span class="pre">gap_maps</span></code> method of the individual sequences is useful for this. To get a map of sequence to alignment positions for a specific sequence in your alignment, do the following:</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span>
 
 <span class="n">aln</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span>
     <span class="n">data</span><span class="o">=</span><span class="p">[</span>
@@ -2841,7 +3166,7 @@ ACA  0.002
 <span class="p">)</span>
 <span class="n">seq_to_aln_map</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">get_gapped_seq</span><span class="p">(</span><span class="s2">&quot;seq1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">gap_maps</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -2849,10 +3174,11 @@ ACA  0.002
 <p>It’s now possible to look up positions in the <code class="docutils literal notranslate"><span class="pre">seq1</span></code>, and find out what they map to in the alignment:</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">seq_to_aln_map</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">seq_to_aln_map</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
 <span class="n">seq_to_aln_map</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>9
@@ -2864,11 +3190,13 @@ ACA  0.002
 <p>Notice that we grabbed the first result from the call to <code class="docutils literal notranslate"><span class="pre">gap_maps</span></code>. This is the sequence position to alignment position map. The second value returned is the alignment position to sequence position map, so if you want to find out what sequence positions the alignment positions correspond to (opposed to what alignment positions the sequence positions correspond to) for a given sequence, you would take the following steps:</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aln_to_seq_map</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">get_gapped_seq</span><span class="p">(</span><span class="s2">&quot;seq1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">gap_maps</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">aln_to_seq_map</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">get_gapped_seq</span><span class="p">(</span><span class="s2">&quot;seq1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">gap_maps</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">aln_to_seq_map</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
 <span class="n">aln_to_seq_map</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>7
@@ -2879,9 +3207,9 @@ ACA  0.002
 <p>If an alignment position is a gap, and therefore has no corresponding sequence position, you’ll get a <code class="docutils literal notranslate"><span class="pre">KeyError</span></code>.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">seq_pos</span> <span class="o">=</span> <span class="n">aln_to_seq_map</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">seq_pos</span> <span class="o">=</span> <span class="n">aln_to_seq_map</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
@@ -2908,7 +3236,15 @@ ACA  0.002
 <p>The <code class="docutils literal notranslate"><span class="pre">omit_gap_runs</span></code> method can be applied to remove long stretches of gaps in an alignment. In the following example, we remove sequences that have more than two adjacent gaps anywhere in the aligned sequence.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aln</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">aln</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span>
     <span class="n">data</span><span class="o">=</span><span class="p">[</span>
         <span class="p">(</span><span class="s2">&quot;seq1&quot;</span><span class="p">,</span> <span class="s2">&quot;ATGAA---TG-&quot;</span><span class="p">),</span>
         <span class="p">(</span><span class="s2">&quot;seq2&quot;</span><span class="p">,</span> <span class="s2">&quot;ATG-AGTGATG&quot;</span><span class="p">),</span>
@@ -2918,7 +3254,7 @@ ACA  0.002
 <span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">aln</span><span class="o">.</span><span class="n">omit_gap_runs</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;seq2
@@ -2933,7 +3269,15 @@ AT--AG-GATG
 <p>If instead, we just wanted to remove positions from the alignment which are gaps in more than a certain percentage of the sequences, we could use the <code class="docutils literal notranslate"><span class="pre">omit_gap_pos</span></code> function. For example:</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aln</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">aln</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span>
     <span class="n">data</span><span class="o">=</span><span class="p">[</span>
         <span class="p">(</span><span class="s2">&quot;seq1&quot;</span><span class="p">,</span> <span class="s2">&quot;ATGAA---TG-&quot;</span><span class="p">),</span>
         <span class="p">(</span><span class="s2">&quot;seq2&quot;</span><span class="p">,</span> <span class="s2">&quot;ATG-AGTGATG&quot;</span><span class="p">),</span>
@@ -2943,7 +3287,7 @@ AT--AG-GATG
 <span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">aln</span><span class="o">.</span><span class="n">omit_gap_pos</span><span class="p">(</span><span class="mf">0.40</span><span class="p">))</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;seq1
@@ -2960,7 +3304,16 @@ AT-AGGATG
 <p>If you wanted to remove sequences which contain more than a certain percent gap characters, you could use the <code class="docutils literal notranslate"><span class="pre">omit_gap_seqs</span></code> method. This is commonly applied to filter partial sequences from an alignment.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aln</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">aln</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span>
     <span class="n">data</span><span class="o">=</span><span class="p">[</span>
         <span class="p">(</span><span class="s2">&quot;seq1&quot;</span><span class="p">,</span> <span class="s2">&quot;ATGAA------&quot;</span><span class="p">),</span>
         <span class="p">(</span><span class="s2">&quot;seq2&quot;</span><span class="p">,</span> <span class="s2">&quot;ATG-AGTGATG&quot;</span><span class="p">),</span>
@@ -2971,7 +3324,7 @@ AT-AGGATG
 <span class="n">filtered_aln</span> <span class="o">=</span> <span class="n">aln</span><span class="o">.</span><span class="n">omit_gap_seqs</span><span class="p">(</span><span class="mf">0.50</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">filtered_aln</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;seq2
@@ -2986,9 +3339,9 @@ AT--AG-GATG
 <p>Note that following this call to <code class="docutils literal notranslate"><span class="pre">omit_gap_seqs</span></code>, the 4th column of <code class="docutils literal notranslate"><span class="pre">filtered_aln</span></code> is 100% gaps. This is generally not desirable, so a call to <code class="docutils literal notranslate"><span class="pre">omit_gap_seqs</span></code> is frequently followed with a call to <code class="docutils literal notranslate"><span class="pre">omit_gap_pos</span></code> with no parameters – this defaults to removing positions which are all gaps:</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">filtered_aln</span><span class="o">.</span><span class="n">omit_gap_pos</span><span class="p">())</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">filtered_aln</span><span class="o">.</span><span class="n">omit_gap_pos</span><span class="p">())</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;seq2
@@ -3025,7 +3378,7 @@ AT-AG-GATG
     <div id="footer-info" class="bg-light pl-2 pb-1 w-100">
         <div><span class="fa fa-copyright"></span>2020, cogent3 Team
         <a id="author-link" href=""></a> </div>
-        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.1.2 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
+        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.2.1 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
     </div>
 </footer>
 

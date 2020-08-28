@@ -33,6 +33,7 @@
 <![endif]-->
 <!-- CSS -->
 <link rel="stylesheet" href="../../_static/jupyter-sphinx.css" type="text/css" />
+<link rel="stylesheet" href="../../_static/thebelab.css" type="text/css" />
 <link rel="stylesheet" href="../../_static/sphinx-dropdown.css" type="text/css" />
 <link rel="stylesheet" href="../../_static/panels-bootstrap.min.css" type="text/css" />
 <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
@@ -60,6 +61,7 @@
 <script src="../../_static/underscore.js"></script>
 <script src="../../_static/doctools.js"></script>
 <script src="../../_static/language_data.js"></script>
+<script src="../../_static/thebelab-helper.js"></script>
 <script src="../../_static/plotly-latest.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
 <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
@@ -700,7 +702,37 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api/index.html">API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../api/index.html#objects-for-the-major-data-types">Objects for the major data types</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/index.html#utility-functions-for">Utility Functions For</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/index.html#loading-data-from-file">Loading data from file</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_unaligned_seqs.html">load_unaligned_seqs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_aligned_seqs.html">load_aligned_seqs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_table.html">load_table</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_tree.html">load_tree</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../api/index.html#making-cogent3-types-from-standard-python-types">Making cogent3 types from standard Python types</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_aligned_seqs.html">make_aligned_seqs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_unaligned_seqs.html">make_unaligned_seqs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_seq.html">make_seq</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_table.html">make_table</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_tree.html">make_tree</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../api/index.html#getting-commonly-used-cogent3-types">Getting commonly used cogent3 types</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.get_code.html">get_code</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.get_moltype.html">get_moltype</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../api/index.html#displaying-cogent3-builtins">Displaying cogent3 builtins</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_codes.html">available_codes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_moltypes.html">available_moltypes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_models.html">available_models</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_apps.html">available_apps</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api/index.html#the-major-cogent3-data-types">The Major cogent3 Data Types</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../api/alignment/alignment.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">alignment</span></code></a><ul>
 <li class="toctree-l5"><a class="reference internal" href="../api/alignment/classes/cogent3.core.alignment.SequenceCollection.html">SequenceCollection</a></li>
 <li class="toctree-l5"><a class="reference internal" href="../api/alignment/classes/cogent3.core.alignment.Alignment.html">Alignment</a></li>
@@ -843,7 +875,13 @@
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
 
 <span class="n">t</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
 <span class="n">n</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
@@ -851,7 +889,7 @@
 <span class="n">nse</span> <span class="o">=</span> <span class="n">nse</span><span class="p">[:</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)]</span>
 <span class="n">sig</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">nse</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -861,13 +899,17 @@
 <p>We now use the discrete Fourier transform to estimate periodicity in this signal. Given we set the period to equal 10, we expect the maximum power for that index.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.period</span> <span class="kn">import</span> <span class="n">dft</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.period</span> <span class="kn">import</span> <span class="n">dft</span>
 
 <span class="n">pwr</span><span class="p">,</span> <span class="n">period</span> <span class="o">=</span> <span class="n">dft</span><span class="p">(</span><span class="n">sig</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">pwr</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[  2.           2.04081633   2.08333333   2.12765957   2.17391304
@@ -912,11 +954,13 @@
 <p>The power (<code class="docutils literal notranslate"><span class="pre">pwr</span></code>) is returned as an array of complex numbers, so we convert into real numbers using <code class="docutils literal notranslate"><span class="pre">abs</span></code>. We then zip the power and corresponding periods and sort to identify the period with maximum signal.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pwr</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">pwr</span><span class="p">)</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pwr</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">pwr</span><span class="p">)</span>
 <span class="n">max_pwr</span><span class="p">,</span> <span class="n">max_period</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">pwr</span><span class="p">,</span> <span class="n">period</span><span class="p">))[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">max_pwr</span><span class="p">,</span> <span class="n">max_period</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>50.768593471914606 10.0
@@ -930,13 +974,17 @@
 <p>We now use auto-correlation.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.period</span> <span class="kn">import</span> <span class="n">auto_corr</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.period</span> <span class="kn">import</span> <span class="n">auto_corr</span>
 
 <span class="n">pwr</span><span class="p">,</span> <span class="n">period</span> <span class="o">=</span> <span class="n">auto_corr</span><span class="p">(</span><span class="n">sig</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">pwr</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[ 2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25
@@ -976,10 +1024,11 @@
 <p>We then zip the power and corresponding periods and sort to identify the period with maximum signal.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">max_pwr</span><span class="p">,</span> <span class="n">max_period</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">pwr</span><span class="p">,</span> <span class="n">period</span><span class="p">))[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">max_pwr</span><span class="p">,</span> <span class="n">max_period</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">pwr</span><span class="p">,</span> <span class="n">period</span><span class="p">))[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">max_pwr</span><span class="p">,</span> <span class="n">max_period</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>46.791730073275666 10
@@ -994,13 +1043,17 @@
 <p>We create a sequence as just a string</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="p">(</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="p">(</span>
     <span class="s2">&quot;ATCGTTGGGACCGGTTCAAGTTTTGGAACTCGCAAGGGGTGAATGGTCTTCGTCTAACGCTGG&quot;</span>
     <span class="s2">&quot;GGAACCCTGAATCGTTGTAACGCTGGGGTCTTTAACCGTTCTAATTTAACGCTGGGGGGTTCT&quot;</span>
     <span class="s2">&quot;AATTTTTAACCGCGGAATTGCGTC&quot;</span>
 <span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -1008,14 +1061,19 @@
 <p>We then specify the motifs whose occurrences will be converted into 1, with all other motifs converted into 0. As we might want to do this in batches for many sequences we use a factory function.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.stats.period</span> <span class="kn">import</span> <span class="n">SeqToSymbols</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.stats.period</span> <span class="kn">import</span> <span class="n">SeqToSymbols</span>
 
 <span class="n">seq_to_symbols</span> <span class="o">=</span> <span class="n">SeqToSymbols</span><span class="p">([</span><span class="s2">&quot;AA&quot;</span><span class="p">,</span> <span class="s2">&quot;TT&quot;</span><span class="p">,</span> <span class="s2">&quot;AT&quot;</span><span class="p">])</span>
 <span class="n">symbols</span> <span class="o">=</span> <span class="n">seq_to_symbols</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 <span class="nb">len</span><span class="p">(</span><span class="n">symbols</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 <span class="n">symbols</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1,
@@ -1032,12 +1090,15 @@
 <p>We then estimate the integer discrete Fourier transform for the full data. To do this, we need to pass in the symbols from full conversion of the sequence. The returned values are the powers and periods.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.period</span> <span class="kn">import</span> <span class="n">ipdft</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.period</span> <span class="kn">import</span> <span class="n">ipdft</span>
 
 <span class="n">powers</span><span class="p">,</span> <span class="n">periods</span> <span class="o">=</span> <span class="n">ipdft</span><span class="p">(</span><span class="n">symbols</span><span class="p">)</span>
 <span class="n">powers</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([3.22082108e-14, 4.00000000e+00, 9.48683298e+00, 6.74585634e+00,
@@ -1083,9 +1144,9 @@
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">periods</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">periods</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,
@@ -1107,12 +1168,15 @@
 <p>We can also compute the auto-correlation statistic, and the hybrid (which combines IPDFT and auto-correlation).</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.period</span> <span class="kn">import</span> <span class="n">auto_corr</span><span class="p">,</span> <span class="n">hybrid</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.period</span> <span class="kn">import</span> <span class="n">auto_corr</span><span class="p">,</span> <span class="n">hybrid</span>
 
 <span class="n">powers</span><span class="p">,</span> <span class="n">periods</span> <span class="o">=</span> <span class="n">auto_corr</span><span class="p">(</span><span class="n">symbols</span><span class="p">)</span>
 <span class="n">powers</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([11.,  9., 11.,  9.,  6.,  9.,  7.,  7.,  5.,  6., 11.,  9.,  9.,
@@ -1133,9 +1197,9 @@
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">periods</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">periods</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,
@@ -1156,10 +1220,11 @@
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">powers</span><span class="p">,</span> <span class="n">periods</span> <span class="o">=</span> <span class="n">hybrid</span><span class="p">(</span><span class="n">symbols</span><span class="p">)</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">powers</span><span class="p">,</span> <span class="n">periods</span> <span class="o">=</span> <span class="n">hybrid</span><span class="p">(</span><span class="n">symbols</span><span class="p">)</span>
 <span class="n">powers</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([3.54290319e-13, 3.60000000e+01, 1.04355163e+02, 6.07127071e+01,
@@ -1205,9 +1270,9 @@
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">periods</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">periods</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,
@@ -1235,12 +1300,15 @@
 <p>We just use <code class="docutils literal notranslate"><span class="pre">sig</span></code> created above. The Goertzel algorithm gives the same result as the <code class="docutils literal notranslate"><span class="pre">dft</span></code>.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.period</span> <span class="kn">import</span> <span class="n">goertzel</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.period</span> <span class="kn">import</span> <span class="n">goertzel</span>
 
 <span class="n">pwr</span> <span class="o">=</span> <span class="n">goertzel</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">pwr</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>50.76859347191462
@@ -1254,12 +1322,15 @@
 <p>We use the symbols from the above example. For the <code class="docutils literal notranslate"><span class="pre">ipdft</span></code>, <code class="docutils literal notranslate"><span class="pre">auto_corr</span></code> and <code class="docutils literal notranslate"><span class="pre">hybrid</span></code> functions we just need to identify the array index containing the period of interest and slice the corresponding value from the returned powers. The reported periods start at <code class="docutils literal notranslate"><span class="pre">llim</span></code>, which defaults to 2, but indexes start at 0, the index for a period-5 is simply 5-<code class="docutils literal notranslate"><span class="pre">llim</span></code>.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">powers</span><span class="p">,</span> <span class="n">periods</span> <span class="o">=</span> <span class="n">auto_corr</span><span class="p">(</span><span class="n">symbols</span><span class="p">)</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">powers</span><span class="p">,</span> <span class="n">periods</span> <span class="o">=</span> <span class="n">auto_corr</span><span class="p">(</span><span class="n">symbols</span><span class="p">)</span>
 <span class="n">llim</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="n">period5</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">-</span> <span class="n">llim</span>
 <span class="n">periods</span><span class="p">[</span><span class="n">period5</span><span class="p">]</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>5
@@ -1269,9 +1340,9 @@
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">powers</span><span class="p">[</span><span class="n">period5</span><span class="p">]</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">powers</span><span class="p">[</span><span class="n">period5</span><span class="p">]</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>9.0
@@ -1282,7 +1353,14 @@
 <p>For Fourier techniques, we can compute the power for a specific period more efficiently using Goertzel algorithm.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.period</span> <span class="kn">import</span> <span class="n">goertzel</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.period</span> <span class="kn">import</span> <span class="n">goertzel</span>
 
 <span class="n">period</span> <span class="o">=</span> <span class="mi">4</span>
 <span class="n">power</span> <span class="o">=</span> <span class="n">goertzel</span><span class="p">(</span><span class="n">symbols</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
@@ -1291,7 +1369,7 @@
 <span class="nb">round</span><span class="p">(</span><span class="n">power</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> <span class="o">==</span> <span class="nb">round</span><span class="p">(</span><span class="n">ipdft_power</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
 <span class="n">power</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>9.486832980505154
@@ -1302,10 +1380,11 @@
 <p>It’s also possible to specify a period to the stand-alone functions. As per the <code class="docutils literal notranslate"><span class="pre">goertzel</span></code> function, just the power is returned.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">power</span> <span class="o">=</span> <span class="n">hybrid</span><span class="p">(</span><span class="n">symbols</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="n">period</span><span class="p">)</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">power</span> <span class="o">=</span> <span class="n">hybrid</span><span class="p">(</span><span class="n">symbols</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="n">period</span><span class="p">)</span>
 <span class="n">power</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>104.35516278555667
@@ -1322,11 +1401,13 @@
 <p>We use the signal provided above. Because significance testing is being done using a resampling approach, we define a calculator which precomputes some values to improve compute performance. For a continuous signal, we’ll use the Goertzel algorithm.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.period</span> <span class="kn">import</span> <span class="n">Goertzel</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.period</span> <span class="kn">import</span> <span class="n">Goertzel</span>
 
 <span class="n">goertzel_calc</span> <span class="o">=</span> <span class="n">Goertzel</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sig</span><span class="p">),</span> <span class="n">period</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -1334,7 +1415,13 @@
 <p>Having defined this, we then just pass this calculator to the <code class="docutils literal notranslate"><span class="pre">blockwise_bootstrap</span></code> function. The other critical settings are the <code class="docutils literal notranslate"><span class="pre">block_size</span></code> which specifies the size of segments of contiguous sequence positions to use for sampling and <code class="docutils literal notranslate"><span class="pre">num_reps</span></code> which is the number of permuted replicate sequences to generate.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.stats.period</span> <span class="kn">import</span> <span class="n">blockwise_bootstrap</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.stats.period</span> <span class="kn">import</span> <span class="n">blockwise_bootstrap</span>
 
 <span class="n">obs_stat</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">blockwise_bootstrap</span><span class="p">(</span>
     <span class="n">sig</span><span class="p">,</span> <span class="n">calc</span><span class="o">=</span><span class="n">goertzel_calc</span><span class="p">,</span> <span class="n">block_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">num_reps</span><span class="o">=</span><span class="mi">1000</span>
@@ -1342,7 +1429,7 @@
 <span class="nb">print</span><span class="p">(</span><span class="n">obs_stat</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>50.76859347191462
@@ -1359,11 +1446,13 @@
 <p>The very notion of permutation testing for periods, applied to a genome, requires the compute performance be as quick as possible. This means providing as much information up front as possible. We have made the implementation flexible by not assuming how the user will convert sequences to symbols. It’s also the case that numerous windows of exactly the same size are being assessed. Accordingly, we use a class to construct a fixed signal length evaluator. We do this for the hybrid metric first.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.period</span> <span class="kn">import</span> <span class="n">Hybrid</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.period</span> <span class="kn">import</span> <span class="n">Hybrid</span>
 
 <span class="n">hybrid_calculator</span> <span class="o">=</span> <span class="n">Hybrid</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">period</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -1375,11 +1464,13 @@
 <p>We then construct a seq-to-symbol convertor.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.stats.period</span> <span class="kn">import</span> <span class="n">SeqToSymbols</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.stats.period</span> <span class="kn">import</span> <span class="n">SeqToSymbols</span>
 
 <span class="n">seq_to_symbols</span> <span class="o">=</span> <span class="n">SeqToSymbols</span><span class="p">([</span><span class="s2">&quot;AA&quot;</span><span class="p">,</span> <span class="s2">&quot;TT&quot;</span><span class="p">,</span> <span class="s2">&quot;AT&quot;</span><span class="p">],</span> <span class="n">length</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -1387,7 +1478,17 @@
 <p>The rest is as per the analysis using <code class="docutils literal notranslate"><span class="pre">Goertzel</span></code> above.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.stats.period</span> <span class="kn">import</span> <span class="n">blockwise_bootstrap</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.stats.period</span> <span class="kn">import</span> <span class="n">blockwise_bootstrap</span>
 
 <span class="n">stat</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">blockwise_bootstrap</span><span class="p">(</span>
     <span class="n">s</span><span class="p">,</span>
@@ -1399,7 +1500,7 @@
 <span class="nb">print</span><span class="p">(</span><span class="n">stat</span><span class="p">)</span>
 <span class="n">p</span> <span class="o">&lt;</span> <span class="mf">0.1</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>104.35516278555667
@@ -1435,7 +1536,7 @@
     <div id="footer-info" class="bg-light pl-2 pb-1 w-100">
         <div><span class="fa fa-copyright"></span>2020, cogent3 Team
         <a id="author-link" href=""></a> </div>
-        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.1.2 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
+        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.2.1 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
     </div>
 </footer>
 

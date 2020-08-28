@@ -33,6 +33,7 @@
 <![endif]-->
 <!-- CSS -->
 <link rel="stylesheet" href="../../../../_static/jupyter-sphinx.css" type="text/css" />
+<link rel="stylesheet" href="../../../../_static/thebelab.css" type="text/css" />
 <link rel="stylesheet" href="../../../../_static/sphinx-dropdown.css" type="text/css" />
 <link rel="stylesheet" href="../../../../_static/panels-bootstrap.min.css" type="text/css" />
 <link rel="stylesheet" href="../../../../_static/gallery.css" type="text/css" />
@@ -60,6 +61,7 @@
 <script src="../../../../_static/underscore.js"></script>
 <script src="../../../../_static/doctools.js"></script>
 <script src="../../../../_static/language_data.js"></script>
+<script src="../../../../_static/thebelab-helper.js"></script>
 <script src="../../../../_static/plotly-latest.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
 <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
@@ -700,7 +702,37 @@
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="../../index.html">API</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="../../index.html#objects-for-the-major-data-types">Objects for the major data types</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../index.html#utility-functions-for">Utility Functions For</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../index.html#loading-data-from-file">Loading data from file</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../__init__/cogent3.__init__.load_unaligned_seqs.html">load_unaligned_seqs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../__init__/cogent3.__init__.load_aligned_seqs.html">load_aligned_seqs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../__init__/cogent3.__init__.load_table.html">load_table</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../__init__/cogent3.__init__.load_tree.html">load_tree</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../index.html#making-cogent3-types-from-standard-python-types">Making cogent3 types from standard Python types</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../__init__/cogent3.__init__.make_aligned_seqs.html">make_aligned_seqs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../__init__/cogent3.__init__.make_unaligned_seqs.html">make_unaligned_seqs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../__init__/cogent3.__init__.make_seq.html">make_seq</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../__init__/cogent3.__init__.make_table.html">make_table</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../__init__/cogent3.__init__.make_tree.html">make_tree</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../index.html#getting-commonly-used-cogent3-types">Getting commonly used cogent3 types</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../__init__/cogent3.__init__.get_code.html">get_code</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../__init__/cogent3.__init__.get_moltype.html">get_moltype</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../index.html#displaying-cogent3-builtins">Displaying cogent3 builtins</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../__init__/cogent3.__init__.available_codes.html">available_codes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../__init__/cogent3.__init__.available_moltypes.html">available_moltypes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../__init__/cogent3.__init__.available_models.html">available_models</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../__init__/cogent3.__init__.available_apps.html">available_apps</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html#the-major-cogent3-data-types">The Major cogent3 Data Types</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="../../alignment/alignment.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">alignment</span></code></a><ul>
 <li class="toctree-l5"><a class="reference internal" href="../../alignment/classes/cogent3.core.alignment.SequenceCollection.html">SequenceCollection</a></li>
 <li class="toctree-l5"><a class="reference internal" href="../../alignment/classes/cogent3.core.alignment.Alignment.html">Alignment</a></li>
@@ -827,7 +859,7 @@
 <h1>ProteinSequence<a class="headerlink" href="#proteinsequence" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="cogent3.core.sequence.ProteinSequence">
-<em class="property">class </em><code class="sig-prename descclassname">cogent3.core.sequence.</code><code class="sig-name descname">ProteinSequence</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">seq</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">info</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">check</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">preserve_case</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">gaps_allowed</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">wildcards_allowed</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.sequence.ProteinSequence" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-name descname">ProteinSequence</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">seq</span><span class="o">=</span><span class="default_value">''</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">info</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">check</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">preserve_case</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">gaps_allowed</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">wildcards_allowed</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.sequence.ProteinSequence" title="Permalink to this definition">¶</a></dt>
 <dd><p>Holds the standard Protein sequence.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes</dt>
@@ -1018,22 +1050,25 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.sequence.ProteinSequence.to_fasta" title="cogent3.core.sequence.ProteinSequence.to_fasta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_fasta</span></code></a>([make_seqlabel, block_size])</p></td>
 <td><p>Return string of self in FASTA format, no trailing newline</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.sequence.ProteinSequence.to_json" title="cogent3.core.sequence.ProteinSequence.to_json"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_json</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.sequence.ProteinSequence.to_html" title="cogent3.core.sequence.ProteinSequence.to_html"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_html</span></code></a>([interleave_len, limit, colors, …])</p></td>
+<td><p>returns html with embedded styles for sequence colouring</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.sequence.ProteinSequence.to_json" title="cogent3.core.sequence.ProteinSequence.to_json"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_json</span></code></a>()</p></td>
 <td><p>returns a json formatted string</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.sequence.ProteinSequence.to_moltype" title="cogent3.core.sequence.ProteinSequence.to_moltype"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_moltype</span></code></a>(moltype)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.sequence.ProteinSequence.to_moltype" title="cogent3.core.sequence.ProteinSequence.to_moltype"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_moltype</span></code></a>(moltype)</p></td>
 <td><p>returns copy of self with moltype seq</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.sequence.ProteinSequence.to_rich_dict" title="cogent3.core.sequence.ProteinSequence.to_rich_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_rich_dict</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.sequence.ProteinSequence.to_rich_dict" title="cogent3.core.sequence.ProteinSequence.to_rich_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_rich_dict</span></code></a>()</p></td>
 <td><p>returns {‘name’: name, ‘seq’: sequence, ‘moltype’: moltype.label}</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.sequence.ProteinSequence.translate" title="cogent3.core.sequence.ProteinSequence.translate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">translate</span></code></a>(*args, **kwargs)</p></td>
-<td><p>translate() delegates to self._seq.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.sequence.ProteinSequence.translate" title="cogent3.core.sequence.ProteinSequence.translate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">translate</span></code></a>(*args, **kwargs)</p></td>
+<td><p>returns the result of call str.translate</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.sequence.ProteinSequence.with_masked_annotations" title="cogent3.core.sequence.ProteinSequence.with_masked_annotations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">with_masked_annotations</span></code></a>(annot_types[, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.sequence.ProteinSequence.with_masked_annotations" title="cogent3.core.sequence.ProteinSequence.with_masked_annotations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">with_masked_annotations</span></code></a>(annot_types[, …])</p></td>
 <td><p>returns a sequence with annot_types regions replaced by mask_char if shadow is False, otherwise all other regions are masked.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.sequence.ProteinSequence.with_termini_unknown" title="cogent3.core.sequence.ProteinSequence.with_termini_unknown"><code class="xref py py-obj docutils literal notranslate"><span class="pre">with_termini_unknown</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.sequence.ProteinSequence.with_termini_unknown" title="cogent3.core.sequence.ProteinSequence.with_termini_unknown"><code class="xref py py-obj docutils literal notranslate"><span class="pre">with_termini_unknown</span></code></a>()</p></td>
 <td><p>Returns copy of sequence with terminal gaps remapped as missing.</p></td>
 </tr>
 </tbody>
@@ -1711,6 +1746,36 @@ returns a label str</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="cogent3.core.sequence.ProteinSequence.to_html">
+<code class="sig-name descname">to_html</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">interleave_len</span><span class="o">=</span><span class="default_value">60</span></em>, <em class="sig-param"><span class="n">limit</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">colors</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">font_size</span><span class="o">=</span><span class="default_value">12</span></em>, <em class="sig-param"><span class="n">font_family</span><span class="o">=</span><span class="default_value">'Lucida Console'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.sequence.ProteinSequence.to_html" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns html with embedded styles for sequence colouring</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>interleave_len</strong></dt><dd><p>maximum number of printed bases, defaults to
+alignment length</p>
+</dd>
+<dt><strong>limit</strong></dt><dd><p>truncate alignment to this length</p>
+</dd>
+<dt><strong>colors</strong></dt><dd><p>{character
+moltype.</p>
+</dd>
+<dt><strong>font_size</strong></dt><dd><p>in points. Affects labels and sequence and line spacing
+(proportional to value)</p>
+</dd>
+<dt><strong>font_family</strong></dt><dd><p>string denoting font family</p>
+</dd>
+<dt><strong>To display in jupyter notebook:</strong></dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="kn">import</span> <span class="n">HTML</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">HTML</span><span class="p">(</span><span class="n">aln</span><span class="o">.</span><span class="n">to_html</span><span class="p">())</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="cogent3.core.sequence.ProteinSequence.to_json">
 <code class="sig-name descname">to_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.sequence.ProteinSequence.to_json" title="Permalink to this definition">¶</a></dt>
 <dd><p>returns a json formatted string</p>
@@ -1739,7 +1804,10 @@ returns a label str</p>
 <dl class="py method">
 <dt id="cogent3.core.sequence.ProteinSequence.translate">
 <code class="sig-name descname">translate</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.sequence.ProteinSequence.translate" title="Permalink to this definition">¶</a></dt>
-<dd><p>translate() delegates to self._seq.</p>
+<dd><p>returns the result of call str.translate</p>
+<p class="rubric">Notes</p>
+<p>This is a string method, nothing to do with translating into a
+protein sequence.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -1795,7 +1863,7 @@ the annotated regions</p>
     <div id="footer-info" class="bg-light pl-2 pb-1 w-100">
         <div><span class="fa fa-copyright"></span>2020, cogent3 Team
         <a id="author-link" href=""></a> </div>
-        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.1.2 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
+        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.2.1 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
     </div>
 </footer>
 
