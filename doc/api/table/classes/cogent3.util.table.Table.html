@@ -499,6 +499,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../../../cookbook/tables.html#get-the-table-as-a-row-oriented-dict">Get the table as a row oriented <code class="docutils literal notranslate"><span class="pre">dict</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../cookbook/tables.html#get-the-table-as-a-column-oriented-dict">Get the table as a column oriented <code class="docutils literal notranslate"><span class="pre">dict</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../cookbook/tables.html#get-the-table-as-a-pandas-dataframe">Get the table as a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../cookbook/tables.html#get-a-table-of-counts-as-a-contingency-table">Get a table of counts as a contingency table</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../cookbook/tables.html#appending-tables">Appending tables</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../cookbook/tables.html#summing-a-single-column">Summing a single column</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../cookbook/tables.html#summing-multiple-columns-or-rows-strictly-numerical-data">Summing multiple columns or rows - strictly numerical data</a></li>
@@ -747,6 +748,7 @@
 </li>
 <li class="toctree-l4 current"><a class="reference internal" href="../table.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">table</span></code></a><ul class="current">
 <li class="toctree-l5 current"><a class="current reference internal" href="#">Table</a></li>
+<li class="toctree-l5"><a class="reference internal" href="cogent3.util.table.Columns.html">Columns</a></li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="../../tree/tree.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tree</span></code></a><ul>
@@ -907,8 +909,8 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#cogent3.util.table.Table.format_column" title="cogent3.util.table.Table.format_column"><code class="xref py py-obj docutils literal notranslate"><span class="pre">format_column</span></code></a>(column_head, format_template)</p></td>
 <td><p>Provide a formatting template for a named column.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.util.table.Table.get_columns" title="cogent3.util.table.Table.get_columns"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_columns</span></code></a>(columns)</p></td>
-<td><p>Return a Table with just columns</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.util.table.Table.get_columns" title="cogent3.util.table.Table.get_columns"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_columns</span></code></a>(columns[, with_index])</p></td>
+<td><p>select columns from self with index_name unless excluded</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#cogent3.util.table.Table.get_row_indices" title="cogent3.util.table.Table.get_row_indices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_row_indices</span></code></a>(callback, columns[, negate])</p></td>
 <td><p>returns boolean array of callback values given columns</p></td>
@@ -943,49 +945,52 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#cogent3.util.table.Table.tail" title="cogent3.util.table.Table.tail"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tail</span></code></a>([nrows])</p></td>
 <td><p>displays bottom nrows</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.util.table.Table.to_csv" title="cogent3.util.table.Table.to_csv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_csv</span></code></a>([with_title, with_legend])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.util.table.Table.to_contingency" title="cogent3.util.table.Table.to_contingency"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_contingency</span></code></a>(columns)</p></td>
+<td><p>construct object that can be used for statistical tests</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.util.table.Table.to_csv" title="cogent3.util.table.Table.to_csv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_csv</span></code></a>([with_title, with_legend])</p></td>
 <td><p>return table formatted as comma separated values</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.util.table.Table.to_dataframe" title="cogent3.util.table.Table.to_dataframe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dataframe</span></code></a>([categories])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.util.table.Table.to_dataframe" title="cogent3.util.table.Table.to_dataframe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dataframe</span></code></a>([categories])</p></td>
 <td><p>returns pandas DataFrame instance</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.util.table.Table.to_dict" title="cogent3.util.table.Table.to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code></a>([flatten])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.util.table.Table.to_dict" title="cogent3.util.table.Table.to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code></a>([flatten])</p></td>
 <td><p>returns data as a dict</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.util.table.Table.to_latex" title="cogent3.util.table.Table.to_latex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_latex</span></code></a>([concat_title_legend, justify, …])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.util.table.Table.to_latex" title="cogent3.util.table.Table.to_latex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_latex</span></code></a>([concat_title_legend, justify, …])</p></td>
 <td><p>Returns the text a LaTeX table.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.util.table.Table.to_markdown" title="cogent3.util.table.Table.to_markdown"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_markdown</span></code></a>([space, justify])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.util.table.Table.to_markdown" title="cogent3.util.table.Table.to_markdown"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_markdown</span></code></a>([space, justify])</p></td>
 <td><p>returns markdown formatted table</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.util.table.Table.to_plotly" title="cogent3.util.table.Table.to_plotly"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_plotly</span></code></a>([width, font_size, layout])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.util.table.Table.to_plotly" title="cogent3.util.table.Table.to_plotly"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_plotly</span></code></a>([width, font_size, layout])</p></td>
 <td><p>returns a Plotly Table</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.util.table.Table.to_rich_html" title="cogent3.util.table.Table.to_rich_html"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_rich_html</span></code></a>([row_cell_func, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.util.table.Table.to_rich_html" title="cogent3.util.table.Table.to_rich_html"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_rich_html</span></code></a>([row_cell_func, …])</p></td>
 <td><p>returns just the table as html.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.util.table.Table.to_rst" title="cogent3.util.table.Table.to_rst"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_rst</span></code></a>([csv_table])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.util.table.Table.to_rst" title="cogent3.util.table.Table.to_rst"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_rst</span></code></a>([csv_table])</p></td>
 <td><p>returns rst formatted table</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.util.table.Table.to_string" title="cogent3.util.table.Table.to_string"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_string</span></code></a>([format, borders, sep, center, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.util.table.Table.to_string" title="cogent3.util.table.Table.to_string"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_string</span></code></a>([format, borders, sep, center, …])</p></td>
 <td><p>Return the table as a formatted string.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.util.table.Table.to_tsv" title="cogent3.util.table.Table.to_tsv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_tsv</span></code></a>([with_title, with_legend])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.util.table.Table.to_tsv" title="cogent3.util.table.Table.to_tsv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_tsv</span></code></a>([with_title, with_legend])</p></td>
 <td><p>return table formatted as tab separated values</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.util.table.Table.tolist" title="cogent3.util.table.Table.tolist"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tolist</span></code></a>([columns])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.util.table.Table.tolist" title="cogent3.util.table.Table.tolist"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tolist</span></code></a>([columns])</p></td>
 <td><p>Returns raw data as a list</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.util.table.Table.transposed" title="cogent3.util.table.Table.transposed"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transposed</span></code></a>(new_column_name[, select_as_header])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.util.table.Table.transposed" title="cogent3.util.table.Table.transposed"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transposed</span></code></a>(new_column_name[, select_as_header])</p></td>
 <td><p>returns the transposed table.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.util.table.Table.with_new_column" title="cogent3.util.table.Table.with_new_column"><code class="xref py py-obj docutils literal notranslate"><span class="pre">with_new_column</span></code></a>(new_column, callback[, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.util.table.Table.with_new_column" title="cogent3.util.table.Table.with_new_column"><code class="xref py py-obj docutils literal notranslate"><span class="pre">with_new_column</span></code></a>(new_column, callback[, …])</p></td>
 <td><p>Returns new table with an additional column, computed using callback.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.util.table.Table.with_new_header" title="cogent3.util.table.Table.with_new_header"><code class="xref py py-obj docutils literal notranslate"><span class="pre">with_new_header</span></code></a>(old, new, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.util.table.Table.with_new_header" title="cogent3.util.table.Table.with_new_header"><code class="xref py py-obj docutils literal notranslate"><span class="pre">with_new_header</span></code></a>(old, new, **kwargs)</p></td>
 <td><p>returns a new Table with old header labels replaced by new</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.util.table.Table.write" title="cogent3.util.table.Table.write"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write</span></code></a>(filename[, mode, writer, format, sep, …])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.util.table.Table.write" title="cogent3.util.table.Table.write"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write</span></code></a>(filename[, mode, writer, format, sep, …])</p></td>
 <td><p>Write table to filename in the specified format.</p></td>
 </tr>
 </tbody>
@@ -1143,8 +1148,23 @@ True/False, or a string representing valid python code to be evaluated.</p>
 
 <dl class="py method">
 <dt id="cogent3.util.table.Table.get_columns">
-<code class="sig-name descname">get_columns</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">columns</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.util.table.Table.get_columns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a Table with just columns</p>
+<code class="sig-name descname">get_columns</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">columns</span></em>, <em class="sig-param"><span class="n">with_index</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.util.table.Table.get_columns" title="Permalink to this definition">¶</a></dt>
+<dd><p>select columns from self with index_name unless excluded</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>columns</strong><span class="classifier">string or sequence of strings</span></dt><dd><p>names of columns</p>
+</dd>
+<dt><strong>with_index</strong><span class="classifier">bool</span></dt><dd><p>If index_name is set, includes with columns.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>Table</dt><dd></dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -1332,6 +1352,31 @@ False, returns the row sum.</p>
 <dt id="cogent3.util.table.Table.title">
 <em class="property">property </em><code class="sig-name descname">title</code><a class="headerlink" href="#cogent3.util.table.Table.title" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="py method">
+<dt id="cogent3.util.table.Table.to_contingency">
+<code class="sig-name descname">to_contingency</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">columns</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.util.table.Table.to_contingency" title="Permalink to this definition">¶</a></dt>
+<dd><p>construct object that can be used for statistical tests</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>columns</strong></dt><dd><p>columns to include. These correspond to contingency column
+labels. The row labels come from values under the index_name
+column.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>CategoryCounts, an object for performing statistical tests on</dt><dd></dd>
+<dt>contingency tables.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Only applies to cases where an index_name is defined. The selected columns
+must be int types and represent the counts of corresponding categories.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="cogent3.util.table.Table.to_csv">

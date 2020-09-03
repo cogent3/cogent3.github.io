@@ -499,6 +499,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#get-the-table-as-a-row-oriented-dict">Get the table as a row oriented <code class="docutils literal notranslate"><span class="pre">dict</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#get-the-table-as-a-column-oriented-dict">Get the table as a column oriented <code class="docutils literal notranslate"><span class="pre">dict</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#get-the-table-as-a-pandas-dataframe">Get the table as a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-a-table-of-counts-as-a-contingency-table">Get a table of counts as a contingency table</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#appending-tables">Appending tables</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#summing-a-single-column">Summing a single column</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#summing-multiple-columns-or-rows-strictly-numerical-data">Summing multiple columns or rows - strictly numerical data</a></li>
@@ -747,6 +748,7 @@
 </li>
 <li class="toctree-l4"><a class="reference internal" href="../api/table/table.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">table</span></code></a><ul>
 <li class="toctree-l5"><a class="reference internal" href="../api/table/classes/cogent3.util.table.Table.html">Table</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/table/classes/cogent3.util.table.Columns.html">Columns</a></li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="../api/tree/tree.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tree</span></code></a><ul>
@@ -2793,16 +2795,16 @@ Ratio
 </thead>
 <tbody>
 <tr>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
 <td>4</td>
 <td>4</td>
 </tr>
 <tr>
-<td>9</td>
-<td>9</td>
+<td>5</td>
+<td>5</td>
+</tr>
+<tr>
+<td>6</td>
+<td>6</td>
 </tr>
 </tbody>
 </table>
@@ -2892,6 +2894,9 @@ Ratio
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>(&#39;Locus&#39;, &#39;Region&#39;, &#39;Ratio&#39;)
+</pre></div>
+</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>
 (&#39;Locus&#39;, &#39;Region&#39;, &#39;Stat&#39;)
 </pre></div>
 </div>
@@ -3251,6 +3256,303 @@ Ratio
 </div>
 <div class="cell_output docutils container">
 </div>
+</div>
+</div>
+<div class="section" id="get-a-table-of-counts-as-a-contingency-table">
+<h2>Get a table of counts as a contingency table<a class="headerlink" href="#get-a-table-of-counts-as-a-contingency-table" title="Permalink to this headline">¶</a></h2>
+<p>If our table consists of counts data, the <code class="docutils literal notranslate"><span class="pre">Table</span></code> can convert it into a <code class="docutils literal notranslate"><span class="pre">CategoryCount</span></code> instance that can be used for performing basic contingency table statistical tests, e.g. chisquare, G-test of independence, etc.. To do this, we must specify which column contains the row names using the <code class="docutils literal notranslate"><span class="pre">index</span></code> argument.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Ts&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">31</span><span class="p">,</span> <span class="mi">58</span><span class="p">],</span> <span class="s2">&quot;Tv&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">36</span><span class="p">,</span> <span class="mi">138</span><span class="p">],</span> <span class="s2">&quot;&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;syn&quot;</span><span class="p">,</span> <span class="s2">&quot;nsyn&quot;</span><span class="p">]},</span> <span class="n">index</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">table</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.c3table table {margin: 10px 0;}
+.c3table tr:last-child {border-bottom: 1px solid #000;} 
+.c3table tr > th {text-align: center !important; padding: 0 5px;}
+.c3table tr > td {text-align: right !important; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7;}
+.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+.c3table .cell_title {font-weight: bold;}
+</style>
+<div class="c3table">
+<table>
+<thead class="head_cell">
+<th></th>
+<th>Ts</th>
+<th>Tv</th>
+</thead>
+<tbody>
+<tr>
+<td class="index">syn</td>
+<td>31</td>
+<td>36</td>
+</tr>
+<tr>
+<td class="index">nsyn</td>
+<td>58</td>
+<td>138</td>
+</tr>
+</tbody>
+</table>
+<p>
+2 rows x 3 columns</p>
+</div></div></div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">contingency</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">to_contingency</span><span class="p">([</span><span class="s2">&quot;Ts&quot;</span><span class="p">,</span> <span class="s2">&quot;Tv&quot;</span><span class="p">])</span>
+<span class="n">contingency</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.c3table table {margin: 10px 0;}
+.c3table tr:last-child {border-bottom: 1px solid #000;} 
+.c3table tr > th {text-align: center !important; padding: 0 5px;}
+.c3table tr > td {text-align: right !important; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7;}
+.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+.c3table .cell_title {font-weight: bold;}
+</style>
+<div class="c3table">
+<table>
+<caption><span class="cell_title">Observed</span><br><span class="cell_legend"></span></caption>
+<thead class="head_cell">
+<th></th>
+<th>Ts</th>
+<th>Tv</th>
+</thead>
+<tbody>
+<tr>
+<td class="index">syn</td>
+<td>31</td>
+<td>36</td>
+</tr>
+<tr>
+<td class="index">nsyn</td>
+<td>58</td>
+<td>138</td>
+</tr>
+</tbody>
+</table>
+
+</div><br><style>
+.c3table table {margin: 10px 0;}
+.c3table tr:last-child {border-bottom: 1px solid #000;} 
+.c3table tr > th {text-align: center !important; padding: 0 5px;}
+.c3table tr > td {text-align: right !important; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7;}
+.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+.c3table .cell_title {font-weight: bold;}
+</style>
+<div class="c3table">
+<table>
+<caption><span class="cell_title">Expected</span><br><span class="cell_legend"></span></caption>
+<thead class="head_cell">
+<th></th>
+<th>Ts</th>
+<th>Tv</th>
+</thead>
+<tbody>
+<tr>
+<td class="index">syn</td>
+<td>22.6730</td>
+<td>44.3270</td>
+</tr>
+<tr>
+<td class="index">nsyn</td>
+<td>66.3270</td>
+<td>129.6730</td>
+</tr>
+</tbody>
+</table>
+
+</div><br><style>
+.c3table table {margin: 10px 0;}
+.c3table tr:last-child {border-bottom: 1px solid #000;} 
+.c3table tr > th {text-align: center !important; padding: 0 5px;}
+.c3table tr > td {text-align: right !important; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7;}
+.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+.c3table .cell_title {font-weight: bold;}
+</style>
+<div class="c3table">
+<table>
+<caption><span class="cell_title">Residuals</span><br><span class="cell_legend"></span></caption>
+<thead class="head_cell">
+<th></th>
+<th>Ts</th>
+<th>Tv</th>
+</thead>
+<tbody>
+<tr>
+<td class="index">syn</td>
+<td>1.7488</td>
+<td>-1.2507</td>
+</tr>
+<tr>
+<td class="index">nsyn</td>
+<td>-1.0225</td>
+<td>0.7312</td>
+</tr>
+</tbody>
+</table>
+
+</div></div></div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">g_test</span> <span class="o">=</span> <span class="n">contingency</span><span class="o">.</span><span class="n">G_independence</span><span class="p">()</span>
+<span class="n">g_test</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.c3table table {margin: 10px 0;}
+.c3table tr:last-child {border-bottom: 1px solid #000;} 
+.c3table tr > th {text-align: center !important; padding: 0 5px;}
+.c3table tr > td {text-align: right !important; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7;}
+.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+.c3table .cell_title {font-weight: bold;}
+</style>
+<div class="c3table">
+<table>
+<caption><span class="cell_title">G-test for independence (with Williams correction)</span><br><span class="cell_legend"></span></caption>
+<thead class="head_cell">
+<th>G</th>
+<th>df</th>
+<th>pvalue</th>
+</thead>
+<tbody>
+<tr>
+<td>5.973</td>
+<td>1</td>
+<td>0.0145</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+<style>
+.c3table table {margin: 10px 0;}
+.c3table tr:last-child {border-bottom: 1px solid #000;} 
+.c3table tr > th {text-align: center !important; padding: 0 5px;}
+.c3table tr > td {text-align: right !important; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7;}
+.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+.c3table .cell_title {font-weight: bold;}
+</style>
+<div class="c3table">
+<table>
+<caption><span class="cell_title">Observed</span><br><span class="cell_legend"></span></caption>
+<thead class="head_cell">
+<th></th>
+<th>Ts</th>
+<th>Tv</th>
+</thead>
+<tbody>
+<tr>
+<td class="index">nsyn</td>
+<td>58</td>
+<td>138</td>
+</tr>
+<tr>
+<td class="index">syn</td>
+<td>31</td>
+<td>36</td>
+</tr>
+</tbody>
+</table>
+
+</div><br><style>
+.c3table table {margin: 10px 0;}
+.c3table tr:last-child {border-bottom: 1px solid #000;} 
+.c3table tr > th {text-align: center !important; padding: 0 5px;}
+.c3table tr > td {text-align: right !important; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7;}
+.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+.c3table .cell_title {font-weight: bold;}
+</style>
+<div class="c3table">
+<table>
+<caption><span class="cell_title">Expected</span><br><span class="cell_legend"></span></caption>
+<thead class="head_cell">
+<th></th>
+<th>Ts</th>
+<th>Tv</th>
+</thead>
+<tbody>
+<tr>
+<td class="index">nsyn</td>
+<td>66.3270</td>
+<td>129.6730</td>
+</tr>
+<tr>
+<td class="index">syn</td>
+<td>22.6730</td>
+<td>44.3270</td>
+</tr>
+</tbody>
+</table>
+
+</div><br><style>
+.c3table table {margin: 10px 0;}
+.c3table tr:last-child {border-bottom: 1px solid #000;} 
+.c3table tr > th {text-align: center !important; padding: 0 5px;}
+.c3table tr > td {text-align: right !important; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7;}
+.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+.c3table .cell_title {font-weight: bold;}
+</style>
+<div class="c3table">
+<table>
+<caption><span class="cell_title">Residuals</span><br><span class="cell_legend"></span></caption>
+<thead class="head_cell">
+<th></th>
+<th>Ts</th>
+<th>Tv</th>
+</thead>
+<tbody>
+<tr>
+<td class="index">nsyn</td>
+<td>-1.0225</td>
+<td>0.7312</td>
+</tr>
+<tr>
+<td class="index">syn</td>
+<td>1.7488</td>
+<td>-1.2507</td>
+</tr>
+</tbody>
+</table>
+
+</div></div></div>
 </div>
 </div>
 <div class="section" id="appending-tables">
