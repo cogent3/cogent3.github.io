@@ -746,6 +746,18 @@
 <li class="toctree-l5"><a class="reference internal" href="../api/sequence/classes/cogent3.core.sequence.ProteinSequence.html">ProteinSequence</a></li>
 </ul>
 </li>
+<li class="toctree-l4"><a class="reference internal" href="../api/genetic_code/genetic_code.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">genetic_code</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/genetic_code/classes/cogent3.core.genetic_code.GeneticCode.html">GeneticCode</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../api/moltype/moltype.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">moltype</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/moltype/classes/cogent3.core.moltype.MolType.html">MolType</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../api/alphabet/alphabet.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">alphabet</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/alphabet/classes/cogent3.core.alphabet.Alphabet.html">Alphabet</a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="../api/table/table.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">table</span></code></a><ul>
 <li class="toctree-l5"><a class="reference internal" href="../api/table/classes/cogent3.util.table.Table.html">Table</a></li>
 <li class="toctree-l5"><a class="reference internal" href="../api/table/classes/cogent3.util.table.Columns.html">Columns</a></li>
@@ -867,11 +879,10 @@
 <p>An example of how to calculate the pairwise distances for a set of sequences.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
 <span class="kn">from</span> <span class="nn">cogent3.evolve</span> <span class="kn">import</span> <span class="n">distance</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -879,9 +890,9 @@
 <p>Import a substitution model (or create your own)</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.evolve.models</span> <span class="kn">import</span> <span class="n">HKY85</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.evolve.models</span> <span class="kn">import</span> <span class="n">HKY85</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -889,9 +900,9 @@
 <p>Load my alignment</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">al</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/long_testseqs.fasta&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">al</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/long_testseqs.fasta&quot;</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -899,13 +910,11 @@
 <p>Create a pairwise distances object with your alignment and substitution model and run it.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">distance</span><span class="o">.</span><span class="n">EstimateDistances</span><span class="p">(</span><span class="n">al</span><span class="p">,</span> <span class="n">submodel</span><span class="o">=</span><span class="n">HKY85</span><span class="p">())</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">distance</span><span class="o">.</span><span class="n">EstimateDistances</span><span class="p">(</span><span class="n">al</span><span class="p">,</span> <span class="n">submodel</span><span class="o">=</span><span class="n">HKY85</span><span class="p">())</span>
 <span class="n">d</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">d</span><span class="o">.</span><span class="n">get_pairwise_distances</span><span class="p">()</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -979,9 +988,9 @@
 <p>We’ll write a phylip formatted distance matrix.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;dists_for_phylo.phylip&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;phylip&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;dists_for_phylo.phylip&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;phylip&quot;</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -989,15 +998,12 @@
 <p>We’ll also save the distances to file in Python’s pickle format.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pickle</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pickle</span>
 
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;dists_for_phylo.pickle&quot;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">get_pairwise_distances</span><span class="p">(),</span> <span class="n">f</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>

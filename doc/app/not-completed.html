@@ -746,6 +746,18 @@
 <li class="toctree-l5"><a class="reference internal" href="../api/sequence/classes/cogent3.core.sequence.ProteinSequence.html">ProteinSequence</a></li>
 </ul>
 </li>
+<li class="toctree-l4"><a class="reference internal" href="../api/genetic_code/genetic_code.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">genetic_code</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/genetic_code/classes/cogent3.core.genetic_code.GeneticCode.html">GeneticCode</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../api/moltype/moltype.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">moltype</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/moltype/classes/cogent3.core.moltype.MolType.html">MolType</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../api/alphabet/alphabet.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">alphabet</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/alphabet/classes/cogent3.core.alphabet.Alphabet.html">Alphabet</a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="../api/table/table.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">table</span></code></a><ul>
 <li class="toctree-l5"><a class="reference internal" href="../api/table/classes/cogent3.util.table.Table.html">Table</a></li>
 <li class="toctree-l5"><a class="reference internal" href="../api/table/classes/cogent3.util.table.Columns.html">Columns</a></li>
@@ -873,13 +885,7 @@
 <p>The results when a condition was not met. For example, below I create an app that will return alignments that with 2 specific sequences but I’m including one that does not exist (“Mouse”). So this will fail.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.app</span> <span class="kn">import</span> <span class="n">io</span><span class="p">,</span> <span class="n">sample</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.app</span> <span class="kn">import</span> <span class="n">io</span><span class="p">,</span> <span class="n">sample</span>
 
 <span class="n">reader</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">load_aligned</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;fasta&quot;</span><span class="p">)</span>
 <span class="n">select_seqs</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">take_named_seqs</span><span class="p">(</span><span class="s2">&quot;Mouse&quot;</span><span class="p">,</span> <span class="s2">&quot;Human&quot;</span><span class="p">)</span>
@@ -887,7 +893,7 @@
 <span class="n">result</span> <span class="o">=</span> <span class="n">select_seqs</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
 <span class="n">result</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>NotCompleted(type=FALSE, origin=take_named_seqs, source=&quot;data/primate_brca1.fasta&quot;, message=&quot;named seq(s) {&#39;Mouse&#39;} not in [&#39;Chimpanzee&#39;, &#39;Galago&#39;, &#39;Gorilla&#39;, &#39;HowlerMon&#39;, &#39;Human&#39;, &#39;Orangutan&#39;, &#39;Rhesus&#39;]&quot;)
@@ -897,13 +903,11 @@
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">==</span> <span class="kc">False</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">==</span> <span class="kc">False</span>
 <span class="n">result</span><span class="o">.</span><span class="n">type</span>
 <span class="n">result</span><span class="o">.</span><span class="n">message</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>&quot;named seq(s) {&#39;Mouse&#39;} not in [&#39;Chimpanzee&#39;, &#39;Galago&#39;, &#39;Gorilla&#39;, &#39;HowlerMon&#39;, &#39;Human&#39;, &#39;Orangutan&#39;, &#39;Rhesus&#39;]&quot;
@@ -917,11 +921,10 @@
 <p>An <code class="docutils literal notranslate"><span class="pre">ERROR</span></code> type is returned if an exception is raised during the calculation. We trigger it in this case by trying to open a non-existent file.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">reader</span><span class="p">(</span><span class="s2">&quot;primate_brca1.fasta&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">reader</span><span class="p">(</span><span class="s2">&quot;primate_brca1.fasta&quot;</span><span class="p">)</span>
 <span class="n">result</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>NotCompleted(type=ERROR, origin=load_aligned, source=&quot;primate_brca1.fasta&quot;, message=&quot;Traceback (most recent call last):
@@ -929,7 +932,7 @@
     val = func(val, *args, **kwargs)
   File &quot;/usr/local/miniconda/envs/cogent3/lib/python3.8/site-packages/cogent3/app/io.py&quot;, line 134, in load
     path = SingleReadDataStore(path)[0]
-  File &quot;/usr/local/miniconda/envs/cogent3/lib/python3.8/site-packages/cogent3/app/data_store.py&quot;, line 344, in __init__
+  File &quot;/usr/local/miniconda/envs/cogent3/lib/python3.8/site-packages/cogent3/app/data_store.py&quot;, line 349, in __init__
     assert path.exists() and path.is_file()
 AssertionError
 &quot;)
@@ -942,13 +945,11 @@ AssertionError
 <h2>Composed functions propagate <code class="docutils literal notranslate"><span class="pre">NotCompleted</span></code> results<a class="headerlink" href="#composed-functions-propagate-notcompleted-results" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">process</span> <span class="o">=</span> <span class="n">reader</span> <span class="o">+</span> <span class="n">select_seqs</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">process</span> <span class="o">=</span> <span class="n">reader</span> <span class="o">+</span> <span class="n">select_seqs</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="s2">&quot;data/primate_brca1.fasta&quot;</span><span class="p">)</span>
 <span class="n">result</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>NotCompleted(type=FALSE, origin=take_named_seqs, source=&quot;data/primate_brca1.fasta&quot;, message=&quot;named seq(s) {&#39;Mouse&#39;} not in [&#39;Chimpanzee&#39;, &#39;Galago&#39;, &#39;Gorilla&#39;, &#39;HowlerMon&#39;, &#39;Human&#39;, &#39;Orangutan&#39;, &#39;Rhesus&#39;]&quot;)
@@ -959,11 +960,10 @@ AssertionError
 <p>and</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="s2">&quot;primate_brca1.fasta&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="s2">&quot;primate_brca1.fasta&quot;</span><span class="p">)</span>
 <span class="n">result</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>NotCompleted(type=ERROR, origin=load_aligned, source=&quot;primate_brca1.fasta&quot;, message=&quot;Traceback (most recent call last):
@@ -971,7 +971,7 @@ AssertionError
     val = func(val, *args, **kwargs)
   File &quot;/usr/local/miniconda/envs/cogent3/lib/python3.8/site-packages/cogent3/app/io.py&quot;, line 134, in load
     path = SingleReadDataStore(path)[0]
-  File &quot;/usr/local/miniconda/envs/cogent3/lib/python3.8/site-packages/cogent3/app/data_store.py&quot;, line 344, in __init__
+  File &quot;/usr/local/miniconda/envs/cogent3/lib/python3.8/site-packages/cogent3/app/data_store.py&quot;, line 349, in __init__
     assert path.exists() and path.is_file()
 AssertionError
 &quot;)

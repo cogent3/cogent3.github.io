@@ -746,6 +746,18 @@
 <li class="toctree-l5"><a class="reference internal" href="../api/sequence/classes/cogent3.core.sequence.ProteinSequence.html">ProteinSequence</a></li>
 </ul>
 </li>
+<li class="toctree-l4"><a class="reference internal" href="../api/genetic_code/genetic_code.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">genetic_code</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/genetic_code/classes/cogent3.core.genetic_code.GeneticCode.html">GeneticCode</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../api/moltype/moltype.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">moltype</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/moltype/classes/cogent3.core.moltype.MolType.html">MolType</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../api/alphabet/alphabet.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">alphabet</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/alphabet/classes/cogent3.core.alphabet.Alphabet.html">Alphabet</a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="../api/table/table.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">table</span></code></a><ul>
 <li class="toctree-l5"><a class="reference internal" href="../api/table/classes/cogent3.util.table.Table.html">Table</a></li>
 <li class="toctree-l5"><a class="reference internal" href="../api/table/classes/cogent3.util.table.Columns.html">Columns</a></li>
@@ -863,9 +875,9 @@
 <p>Although Cogent3 provides a means for directly aligning codon sequences, you may want to use a different approach based on the translate-align-introduce gaps into the original paradigm. After you’ve translated your codon sequences, and aligned the resulting amino acid sequences, you want to introduce the gaps from the aligned protein sequences back into the original codon sequences. Here’s how.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_unaligned_seqs</span><span class="p">,</span> <span class="n">make_aligned_seqs</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_unaligned_seqs</span><span class="p">,</span> <span class="n">make_aligned_seqs</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -873,13 +885,7 @@
 <p>First I’m going to construct an artificial example, using the seqs dict as a means to get the data into the Alignment object. The basic idea, however, is that you should already have a set of DNA sequences that are in frame (i.e. position 0 is the 1st codon position), you’ve translated those sequences and aligned these translated sequences. The result is an alignment of aa sequences and a set of unaligned DNA sequences from which the aa seqs were derived. If your sequences are not in frame you can adjust it by either slicing, or adding N’s to the beginning of the raw string.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">seqs</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">seqs</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;hum&quot;</span><span class="p">:</span> <span class="s2">&quot;AAGCAGATCCAGGAAAGCAGCGAGAATGGCAGCCTGGCCGCGCGCCAGGAGAGGCAGGCCCAGGTCAACCTCACT&quot;</span><span class="p">,</span>
     <span class="s2">&quot;mus&quot;</span><span class="p">:</span> <span class="s2">&quot;AAGCAGATCCAGGAGAGCGGCGAGAGCGGCAGCCTGGCCGCGCGGCAGGAGAGGCAGGCCCAAGTCAACCTCACG&quot;</span><span class="p">,</span>
     <span class="s2">&quot;rat&quot;</span><span class="p">:</span> <span class="s2">&quot;CTGAACAAGCAGCCACTTTCAAACAAGAAA&quot;</span><span class="p">,</span>
@@ -887,7 +893,7 @@
 <span class="n">unaligned_DNA</span> <span class="o">=</span> <span class="n">make_unaligned_seqs</span><span class="p">(</span><span class="n">seqs</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">unaligned_DNA</span><span class="o">.</span><span class="n">to_fasta</span><span class="p">())</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;hum
@@ -906,11 +912,10 @@ CTGAACAAGCAGCCACTTTCAAACAAGAAA
 <p>In order to ensure the alignment algorithm preserves the coding frame, we align the translation of the sequences. We need to translate them first, but note that because the seqs are unaligned they we have to set <code class="docutils literal notranslate"><span class="pre">aligned=False</span></code>, or we’ll get an error.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">unaligned_aa</span> <span class="o">=</span> <span class="n">unaligned_DNA</span><span class="o">.</span><span class="n">get_translation</span><span class="p">()</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">unaligned_aa</span> <span class="o">=</span> <span class="n">unaligned_DNA</span><span class="o">.</span><span class="n">get_translation</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">unaligned_aa</span><span class="o">.</span><span class="n">to_fasta</span><span class="p">())</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;hum
@@ -927,14 +932,7 @@ LNKQPLSNKK
 <p>The translated seqs can then be written to file, using the method <code class="docutils literal notranslate"><span class="pre">write</span></code>. That file then serves as input for an alignment program. The resulting alignment file can be read back in. (We won’t write to file in this example.) For this example we will specify the aligned sequences in the dict, rather than from file.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">aligned_aa_seqs</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aligned_aa_seqs</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;hum&quot;</span><span class="p">:</span> <span class="s2">&quot;KQIQESSENGSLAARQERQAQVNLT&quot;</span><span class="p">,</span>
     <span class="s2">&quot;mus&quot;</span><span class="p">:</span> <span class="s2">&quot;KQIQESGESGSLAARQERQAQVNLT&quot;</span><span class="p">,</span>
     <span class="s2">&quot;rat&quot;</span><span class="p">:</span> <span class="s2">&quot;LNKQ------PLS---------NKK&quot;</span><span class="p">,</span>
@@ -943,7 +941,7 @@ LNKQPLSNKK
 <span class="n">aligned_DNA</span> <span class="o">=</span> <span class="n">aligned_aa</span><span class="o">.</span><span class="n">replace_seqs</span><span class="p">(</span><span class="n">unaligned_DNA</span><span class="p">)</span>
 <span class="n">aligned_DNA</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>

@@ -746,6 +746,18 @@
 <li class="toctree-l5"><a class="reference internal" href="../api/sequence/classes/cogent3.core.sequence.ProteinSequence.html">ProteinSequence</a></li>
 </ul>
 </li>
+<li class="toctree-l4"><a class="reference internal" href="../api/genetic_code/genetic_code.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">genetic_code</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/genetic_code/classes/cogent3.core.genetic_code.GeneticCode.html">GeneticCode</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../api/moltype/moltype.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">moltype</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/moltype/classes/cogent3.core.moltype.MolType.html">MolType</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../api/alphabet/alphabet.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">alphabet</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/alphabet/classes/cogent3.core.alphabet.Alphabet.html">Alphabet</a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="../api/table/table.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">table</span></code></a><ul>
 <li class="toctree-l5"><a class="reference internal" href="../api/table/classes/cogent3.util.table.Table.html">Table</a></li>
 <li class="toctree-l5"><a class="reference internal" href="../api/table/classes/cogent3.util.table.Columns.html">Columns</a></li>
@@ -871,19 +883,14 @@
 <p>All sequence and alignment objects have a molecular type, or <code class="docutils literal notranslate"><span class="pre">MolType</span></code> which provides key properties for validating sequence characters. Here we use the <code class="docutils literal notranslate"><span class="pre">DNA</span></code> <code class="docutils literal notranslate"><span class="pre">MolType</span></code> to create a DNA sequence.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">DNA</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">DNA</span>
 
 <span class="n">my_seq</span> <span class="o">=</span> <span class="n">DNA</span><span class="o">.</span><span class="n">make_seq</span><span class="p">(</span><span class="s2">&quot;AGTACACTGGT&quot;</span><span class="p">)</span>
 <span class="n">my_seq</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">my_seq</span><span class="p">)</span>
 <span class="nb">str</span><span class="p">(</span><span class="n">my_seq</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>AGTACACTGGT
@@ -899,13 +906,11 @@
 <h3>Creating a RNA sequence from a string<a class="headerlink" href="#creating-a-rna-sequence-from-a-string" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">RNA</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">RNA</span>
 
 <span class="n">rnaseq</span> <span class="o">=</span> <span class="n">RNA</span><span class="o">.</span><span class="n">make_seq</span><span class="p">(</span><span class="s2">&quot;ACGUACGUACGUACGU&quot;</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -915,15 +920,12 @@
 <h3>Converting to FASTA format<a class="headerlink" href="#converting-to-fasta-format" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">DNA</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">DNA</span>
 
 <span class="n">my_seq</span> <span class="o">=</span> <span class="n">DNA</span><span class="o">.</span><span class="n">make_seq</span><span class="p">(</span><span class="s2">&quot;AGTACACTGGT&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">my_seq</span><span class="o">.</span><span class="n">to_fasta</span><span class="p">())</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;0
@@ -938,15 +940,12 @@ AGTACACTGGT
 <h3>Convert a RNA sequence to FASTA format<a class="headerlink" href="#convert-a-rna-sequence-to-fasta-format" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">RNA</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">RNA</span>
 
 <span class="n">rnaseq</span> <span class="o">=</span> <span class="n">RNA</span><span class="o">.</span><span class="n">make_seq</span><span class="p">(</span><span class="s2">&quot;ACGUACGUACGUACGU&quot;</span><span class="p">)</span>
 <span class="n">rnaseq</span><span class="o">.</span><span class="n">to_fasta</span><span class="p">()</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>&#39;&gt;0\nACGUACGUACGUACGU\n&#39;
@@ -960,17 +959,13 @@ AGTACACTGGT
 <p>You can also use a convenience <code class="docutils literal notranslate"><span class="pre">make_seq()</span></code> function, providing the moltype as a string.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_seq</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_seq</span>
 
 <span class="n">my_seq</span> <span class="o">=</span> <span class="n">make_seq</span><span class="p">(</span><span class="s2">&quot;AGTACACTGGT&quot;</span><span class="p">,</span> <span class="s2">&quot;my_gene&quot;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
 <span class="n">my_seq</span>
 <span class="nb">type</span><span class="p">(</span><span class="n">my_seq</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>cogent3.core.sequence.DnaSequence
@@ -983,17 +978,13 @@ AGTACACTGGT
 <h3>Setting or changing the name of a sequence<a class="headerlink" href="#setting-or-changing-the-name-of-a-sequence" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_seq</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_seq</span>
 
 <span class="n">my_seq</span> <span class="o">=</span> <span class="n">make_seq</span><span class="p">(</span><span class="s2">&quot;AGTACACTGGT&quot;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
 <span class="n">my_seq</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;my_gene&quot;</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">my_seq</span><span class="o">.</span><span class="n">to_fasta</span><span class="p">())</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;my_gene
@@ -1008,15 +999,12 @@ AGTACACTGGT
 <h3>Complementing a DNA sequence<a class="headerlink" href="#complementing-a-dna-sequence" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">DNA</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">DNA</span>
 
 <span class="n">my_seq</span> <span class="o">=</span> <span class="n">DNA</span><span class="o">.</span><span class="n">make_seq</span><span class="p">(</span><span class="s2">&quot;AGTACACTGGT&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">my_seq</span><span class="o">.</span><span class="n">complement</span><span class="p">())</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>TCATGTGACCA
@@ -1029,9 +1017,9 @@ AGTACACTGGT
 <h3>Reverse complementing a DNA sequence<a class="headerlink" href="#reverse-complementing-a-dna-sequence" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">my_seq</span><span class="o">.</span><span class="n">rc</span><span class="p">())</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">my_seq</span><span class="o">.</span><span class="n">rc</span><span class="p">())</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>ACCAGTGTACT
@@ -1042,9 +1030,9 @@ AGTACACTGGT
 <p>The <code class="docutils literal notranslate"><span class="pre">rc</span></code> method name is easier to type</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">my_seq</span><span class="o">.</span><span class="n">rc</span><span class="p">())</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">my_seq</span><span class="o">.</span><span class="n">rc</span><span class="p">())</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>ACCAGTGTACT
@@ -1057,19 +1045,14 @@ AGTACACTGGT
 <span id="translation"></span><h3>Translate a <code class="docutils literal notranslate"><span class="pre">DnaSequence</span></code> to protein<a class="headerlink" href="#translate-a-dnasequence-to-protein" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">DNA</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">DNA</span>
 
 <span class="n">my_seq</span> <span class="o">=</span> <span class="n">DNA</span><span class="o">.</span><span class="n">make_seq</span><span class="p">(</span><span class="s2">&quot;GCTTGGGAAAGTCAAATGGAA&quot;</span><span class="p">,</span> <span class="s2">&quot;protein-X&quot;</span><span class="p">)</span>
 <span class="n">pep</span> <span class="o">=</span> <span class="n">my_seq</span><span class="o">.</span><span class="n">get_translation</span><span class="p">()</span>
 <span class="nb">type</span><span class="p">(</span><span class="n">pep</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">pep</span><span class="o">.</span><span class="n">to_fasta</span><span class="p">())</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>&gt;protein-X
@@ -1084,15 +1067,12 @@ AWESQME
 <h3>Converting a DNA sequence to RNA<a class="headerlink" href="#converting-a-dna-sequence-to-rna" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">DNA</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">DNA</span>
 
 <span class="n">my_seq</span> <span class="o">=</span> <span class="n">DNA</span><span class="o">.</span><span class="n">make_seq</span><span class="p">(</span><span class="s2">&quot;ACGTACGTACGTACGT&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">my_seq</span><span class="o">.</span><span class="n">to_rna</span><span class="p">())</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>ACGUACGUACGUACGU
@@ -1105,15 +1085,12 @@ AWESQME
 <h3>Convert an RNA sequence to DNA<a class="headerlink" href="#convert-an-rna-sequence-to-dna" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">RNA</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">RNA</span>
 
 <span class="n">rnaseq</span> <span class="o">=</span> <span class="n">RNA</span><span class="o">.</span><span class="n">make_seq</span><span class="p">(</span><span class="s2">&quot;ACGUACGUACGUACGU&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">rnaseq</span><span class="o">.</span><span class="n">to_dna</span><span class="p">())</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>ACGTACGTACGTACGT
@@ -1126,17 +1103,13 @@ AWESQME
 <h3>Testing complementarity<a class="headerlink" href="#testing-complementarity" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">DNA</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">DNA</span>
 
 <span class="n">a</span> <span class="o">=</span> <span class="n">DNA</span><span class="o">.</span><span class="n">make_seq</span><span class="p">(</span><span class="s2">&quot;AGTACACTGGT&quot;</span><span class="p">)</span>
 <span class="n">a</span><span class="o">.</span><span class="n">can_pair</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">complement</span><span class="p">())</span>
 <span class="n">a</span><span class="o">.</span><span class="n">can_pair</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">rc</span><span class="p">())</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>True
@@ -1149,13 +1122,7 @@ AWESQME
 <h3>Joining two DNA sequences<a class="headerlink" href="#joining-two-dna-sequences" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">DNA</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">DNA</span>
 
 <span class="n">my_seq</span> <span class="o">=</span> <span class="n">DNA</span><span class="o">.</span><span class="n">make_seq</span><span class="p">(</span><span class="s2">&quot;AGTACACTGGT&quot;</span><span class="p">)</span>
 <span class="n">extra_seq</span> <span class="o">=</span> <span class="n">DNA</span><span class="o">.</span><span class="n">make_seq</span><span class="p">(</span><span class="s2">&quot;CTGAC&quot;</span><span class="p">)</span>
@@ -1163,7 +1130,7 @@ AWESQME
 <span class="n">long_seq</span>
 <span class="nb">str</span><span class="p">(</span><span class="n">long_seq</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>&#39;AGTACACTGGTCTGAC&#39;
@@ -1176,9 +1143,9 @@ AWESQME
 <h3>Slicing DNA sequences<a class="headerlink" href="#slicing-dna-sequences" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">my_seq</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">my_seq</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -1209,17 +1176,13 @@ AWESQME
 <p>We’ll do this by specifying the position indices of interest, creating a sequence <code class="docutils literal notranslate"><span class="pre">Feature</span></code> and using that to extract the positions.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">DNA</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">DNA</span>
 
 <span class="n">seq</span> <span class="o">=</span> <span class="n">DNA</span><span class="o">.</span><span class="n">make_array_seq</span><span class="p">(</span><span class="s2">&quot;ATGATGATGATG&quot;</span><span class="p">)</span>
 <span class="n">pos3</span> <span class="o">=</span> <span class="n">seq</span><span class="p">[</span><span class="mi">2</span><span class="p">::</span><span class="mi">3</span><span class="p">]</span>
 <span class="k">assert</span> <span class="nb">str</span><span class="p">(</span><span class="n">pos3</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;GGGG&quot;</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -1230,13 +1193,7 @@ AWESQME
 <p>In this instance we can use the annotatable sequence classes.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">DNA</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">DNA</span>
 
 <span class="n">seq</span> <span class="o">=</span> <span class="n">DNA</span><span class="o">.</span><span class="n">make_seq</span><span class="p">(</span><span class="s2">&quot;ATGATGATGATG&quot;</span><span class="p">)</span>
 <span class="n">indices</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">seq</span><span class="p">))[::</span><span class="mi">3</span><span class="p">]]</span>
@@ -1244,7 +1201,7 @@ AWESQME
 <span class="n">pos12</span> <span class="o">=</span> <span class="n">pos12</span><span class="o">.</span><span class="n">get_slice</span><span class="p">()</span>
 <span class="k">assert</span> <span class="nb">str</span><span class="p">(</span><span class="n">pos12</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;ATATATAT&quot;</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -1261,15 +1218,12 @@ AWESQME
 <h3>Remove gaps from a sequence<a class="headerlink" href="#remove-gaps-from-a-sequence" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">RNA</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">RNA</span>
 
 <span class="n">s</span> <span class="o">=</span> <span class="n">RNA</span><span class="o">.</span><span class="n">make_seq</span><span class="p">(</span><span class="s2">&quot;--AUUAUGCUAU-UAu--&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">degap</span><span class="p">())</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>AUUAUGCUAUUAU

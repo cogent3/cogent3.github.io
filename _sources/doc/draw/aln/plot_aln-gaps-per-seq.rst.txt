@@ -30,212 +30,192 @@ We have several different ways of counting sequence gaps, and of visualising the
 
 
 
-.. raw:: html
+.. only:: builder_html
 
-    <style>
-    .c3table table {margin: 10px 0;}
-    .c3table tr:last-child {border-bottom: 1px solid #000;} 
-    .c3table tr > th {text-align: center !important; padding: 0 5px;}
-    .c3table tr > td {text-align: right !important; padding: 5px;}
-    .c3table tr:nth-child(even) {background: #f7f7f7;}
-    .c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
-    .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
-    .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
-    .c3table .cell_title {font-weight: bold;}
-    </style>
-    <div class="c3table">
-    <table>
-    <thead class="head_cell">
-    <th>FlyingFox</th>
-    <th>DogFaced</th>
-    <th>FreeTaile</th>
-    <th>LittleBro</th>
-    <th>TombBat</th>
-    <th>RoundEare</th>
-    <th>FalseVamp</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td class="index">0</td>
-    <td>0</td>
-    <td>0</td>
-    <td>0</td>
-    <td>0</td>
-    <td>0</td>
-    <td>0</td>
-    </tr>
-    </tbody>
-    </table>
-    <table>
-    <thead class="head_cell">
-    <th>FlyingFox</th>
-    <th>LeafNose</th>
-    <th>Horse</th>
-    <th>Rhino</th>
-    <th>Pangolin</th>
-    <th>Cat</th>
-    <th>Dog</th>
-    <th>Llama</th>
-    <th>Pig</th>
-    <th>Cow</th>
-    <th>Hippo</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td class="index">0</td>
-    <td>0</td>
-    <td>0</td>
-    <td>0</td>
-    <td>0</td>
-    <td>0</td>
-    <td>0</td>
-    <td>0</td>
-    <td>0</td>
-    <td>3</td>
-    <td>0</td>
-    </tr>
-    </tbody>
-    </table>
-    <table>
-    <thead class="head_cell">
-    <th>FlyingFox</th>
-    <th>SpermWhale</th>
-    <th>HumpbackW</th>
-    <th>Mole</th>
-    <th>Hedgehog</th>
-    <th>TreeShrew</th>
-    <th>FlyingLem</th>
-    <th>Galago</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td class="index">0</td>
-    <td>0</td>
-    <td>0</td>
-    <td>0</td>
-    <td>0</td>
-    <td>3</td>
-    <td>0</td>
-    <td>3</td>
-    </tr>
-    </tbody>
-    </table>
-    <table>
-    <thead class="head_cell">
-    <th>FlyingFox</th>
-    <th>HowlerMon</th>
-    <th>Rhesus</th>
-    <th>Orangutan</th>
-    <th>Gorilla</th>
-    <th>Human</th>
-    <th>Chimpanzee</th>
-    <th>Jackrabbit</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td class="index">0</td>
-    <td>21</td>
-    <td>0</td>
-    <td>0</td>
-    <td>0</td>
-    <td>0</td>
-    <td>0</td>
-    <td>0</td>
-    </tr>
-    </tbody>
-    </table>
-    <table>
-    <thead class="head_cell">
-    <th>FlyingFox</th>
-    <th>FlyingSqu</th>
-    <th>OldWorld</th>
-    <th>Mouse</th>
-    <th>Rat</th>
-    <th>NineBande</th>
-    <th>HairyArma</th>
-    <th>Anteater</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td class="index">0</td>
-    <td>57</td>
-    <td>0</td>
-    <td>0</td>
-    <td>0</td>
-    <td>0</td>
-    <td>0</td>
-    <td>0</td>
-    </tr>
-    </tbody>
-    </table>
-    <table>
-    <thead class="head_cell">
-    <th>FlyingFox</th>
-    <th>Sloth</th>
-    <th>Dugong</th>
-    <th>Manatee</th>
-    <th>AfricanEl</th>
-    <th>AsianElep</th>
-    <th>RockHyrax</th>
-    <th>TreeHyrax</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td class="index">0</td>
-    <td>0</td>
-    <td>0</td>
-    <td>0</td>
-    <td>0</td>
-    <td>0</td>
-    <td>0</td>
-    <td>0</td>
-    </tr>
-    </tbody>
-    </table>
-    <table>
-    <thead class="head_cell">
-    <th>FlyingFox</th>
-    <th>Aardvark</th>
-    <th>GoldenMol</th>
-    <th>Madagascar</th>
-    <th>Tenrec</th>
-    <th>LesserEle</th>
-    <th>GiantElep</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td class="index">0</td>
-    <td>0</td>
-    <td>0</td>
-    <td>0</td>
-    <td>6</td>
-    <td>0</td>
-    <td>6</td>
-    </tr>
-    </tbody>
-    </table>
-    <table>
-    <thead class="head_cell">
-    <th>FlyingFox</th>
-    <th>Caenolest</th>
-    <th>Phascogale</th>
-    <th>Wombat</th>
-    <th>Bandicoot</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td class="index">0</td>
-    <td>0</td>
-    <td>0</td>
-    <td>0</td>
-    <td>0</td>
-    </tr>
-    </tbody>
-    </table>
+    .. raw:: html
 
-    </div>
-    <br />
-    <br />
+        <style>
+        .c3table table {margin: 10px 0;}
+        .c3table tr:last-child {border-bottom: 1px solid #000;} 
+        .c3table tr > th {text-align: center !important; padding: 0 5px;}
+        .c3table tr > td {text-align: right !important; padding: 5px;}
+        .c3table tr:nth-child(even) {background: #f7f7f7;}
+        .c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+        .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+        .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+        .c3table .cell_title {font-weight: bold;}
+        </style>
+        <div class="c3table">
+        <table>
+        <thead class="head_cell">
+        <th>FlyingFox</th>
+        <th>DogFaced</th>
+        <th>FreeTaile</th>
+        <th>LittleBro</th>
+        <th>TombBat</th>
+        <th>RoundEare</th>
+        <th>FalseVamp</th>
+        </thead>
+        <tbody>
+        <tr>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        </tr>
+        </tbody>
+        </table>
+        <table>
+        <thead class="head_cell">
+        <th>LeafNose</th>
+        <th>Horse</th>
+        <th>Rhino</th>
+        <th>Pangolin</th>
+        <th>Cat</th>
+        <th>Dog</th>
+        <th>Llama</th>
+        <th>Pig</th>
+        <th>Cow</th>
+        <th>Hippo</th>
+        <th>SpermWhale</th>
+        </thead>
+        <tbody>
+        <tr>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>3</td>
+        <td>0</td>
+        <td>0</td>
+        </tr>
+        </tbody>
+        </table>
+        <table>
+        <thead class="head_cell">
+        <th>HumpbackW</th>
+        <th>Mole</th>
+        <th>Hedgehog</th>
+        <th>TreeShrew</th>
+        <th>FlyingLem</th>
+        <th>Galago</th>
+        <th>HowlerMon</th>
+        <th>Rhesus</th>
+        </thead>
+        <tbody>
+        <tr>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>3</td>
+        <td>0</td>
+        <td>3</td>
+        <td>21</td>
+        <td>0</td>
+        </tr>
+        </tbody>
+        </table>
+        <table>
+        <thead class="head_cell">
+        <th>Orangutan</th>
+        <th>Gorilla</th>
+        <th>Human</th>
+        <th>Chimpanzee</th>
+        <th>Jackrabbit</th>
+        <th>FlyingSqu</th>
+        <th>OldWorld</th>
+        <th>Mouse</th>
+        </thead>
+        <tbody>
+        <tr>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>57</td>
+        <td>0</td>
+        <td>0</td>
+        </tr>
+        </tbody>
+        </table>
+        <table>
+        <thead class="head_cell">
+        <th>Rat</th>
+        <th>NineBande</th>
+        <th>HairyArma</th>
+        <th>Anteater</th>
+        <th>Sloth</th>
+        <th>Dugong</th>
+        <th>Manatee</th>
+        <th>AfricanEl</th>
+        </thead>
+        <tbody>
+        <tr>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        </tr>
+        </tbody>
+        </table>
+        <table>
+        <thead class="head_cell">
+        <th>AsianElep</th>
+        <th>RockHyrax</th>
+        <th>TreeHyrax</th>
+        <th>Aardvark</th>
+        <th>GoldenMol</th>
+        <th>Madagascar</th>
+        <th>Tenrec</th>
+        </thead>
+        <tbody>
+        <tr>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>6</td>
+        </tr>
+        </tbody>
+        </table>
+        <table>
+        <thead class="head_cell">
+        <th>LesserEle</th>
+        <th>GiantElep</th>
+        <th>Caenolest</th>
+        <th>Phascogale</th>
+        <th>Wombat</th>
+        <th>Bandicoot</th>
+        </thead>
+        <tbody>
+        <tr>
+        <td>0</td>
+        <td>6</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        </tr>
+        </tbody>
+        </table>
+
+        </div>
+        <br />
+        <br />
 
 Plotting counts of unique gaps
 ##############################
@@ -254,6 +234,9 @@ Displaying unique gaps as a bar chart
 
 
 
+.. raw:: html
+    :file: images/sphx_glr_plot_aln-gaps-per-seq_001.html
+
 
 
 
@@ -269,6 +252,9 @@ Displaying unique gaps as a violin plot
     counts.show(width=300, height=500)
 
 
+
+.. raw:: html
+    :file: images/sphx_glr_plot_aln-gaps-per-seq_002.html
 
 
 
@@ -286,6 +272,9 @@ Displaying unique gaps as a box plot
 
 
 
+.. raw:: html
+    :file: images/sphx_glr_plot_aln-gaps-per-seq_003.html
+
 
 
 
@@ -293,7 +282,7 @@ Displaying unique gaps as a box plot
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.651 seconds)
+   **Total running time of the script:** ( 0 minutes  0.656 seconds)
 
 
 .. _sphx_glr_download_doc_draw_aln_plot_aln-gaps-per-seq.py:

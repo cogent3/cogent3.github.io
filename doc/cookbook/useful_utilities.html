@@ -746,6 +746,18 @@
 <li class="toctree-l5"><a class="reference internal" href="../api/sequence/classes/cogent3.core.sequence.ProteinSequence.html">ProteinSequence</a></li>
 </ul>
 </li>
+<li class="toctree-l4"><a class="reference internal" href="../api/genetic_code/genetic_code.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">genetic_code</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/genetic_code/classes/cogent3.core.genetic_code.GeneticCode.html">GeneticCode</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../api/moltype/moltype.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">moltype</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/moltype/classes/cogent3.core.moltype.MolType.html">MolType</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../api/alphabet/alphabet.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">alphabet</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/alphabet/classes/cogent3.core.alphabet.Alphabet.html">Alphabet</a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="../api/table/table.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">table</span></code></a><ul>
 <li class="toctree-l5"><a class="reference internal" href="../api/table/classes/cogent3.util.table.Table.html">Table</a></li>
 <li class="toctree-l5"><a class="reference internal" href="../api/table/classes/cogent3.util.table.Columns.html">Columns</a></li>
@@ -867,15 +879,12 @@
 <p>Keys in a <code class="docutils literal notranslate"><span class="pre">UnionDict</span></code> can be accessed like attributes</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.union_dict</span> <span class="kn">import</span> <span class="n">UnionDict</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.union_dict</span> <span class="kn">import</span> <span class="n">UnionDict</span>
 
 <span class="n">data</span> <span class="o">=</span> <span class="n">UnionDict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">25</span><span class="p">]})</span>
 <span class="n">data</span><span class="o">.</span><span class="n">a</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>2
@@ -885,9 +894,9 @@
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>2
@@ -897,9 +906,9 @@
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">d</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">d</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[25]
@@ -913,17 +922,13 @@
 <p>If you use the <code class="docutils literal notranslate"><span class="pre">|</span></code> bitwise operator to compare two dicts and the left one is a <code class="docutils literal notranslate"><span class="pre">UnionDict</span></code>, a union operation is performed.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.union_dict</span> <span class="kn">import</span> <span class="n">UnionDict</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.union_dict</span> <span class="kn">import</span> <span class="n">UnionDict</span>
 
 <span class="n">data</span> <span class="o">=</span> <span class="n">UnionDict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">25</span><span class="p">]})</span>
 <span class="n">data</span><span class="o">.</span><span class="n">b</span> <span class="o">|=</span> <span class="p">{</span><span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">}</span>
 <span class="n">data</span><span class="o">.</span><span class="n">b</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;c&#39;: 24, &#39;d&#39;: 25}
@@ -934,20 +939,19 @@
 <p>This can also be done using the <code class="docutils literal notranslate"><span class="pre">union</span></code> method.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">union</span><span class="p">({</span><span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">25</span><span class="p">]})</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">union</span><span class="p">({</span><span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">25</span><span class="p">]})</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">b</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">b</span>
 <span class="p">{</span><span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">25</span><span class="p">]}</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;c&#39;: 24, &#39;d&#39;: [25]}
@@ -960,15 +964,12 @@
 <h3>Accessing a non-existent <code class="docutils literal notranslate"><span class="pre">UnionDict</span></code> key<a class="headerlink" href="#accessing-a-non-existent-uniondict-key" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.union_dict</span> <span class="kn">import</span> <span class="n">UnionDict</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.union_dict</span> <span class="kn">import</span> <span class="n">UnionDict</span>
 
 <span class="n">data</span> <span class="o">=</span> <span class="n">UnionDict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">25</span><span class="p">]})</span>
 <span class="n">data</span><span class="p">[</span><span class="s2">&quot;k&quot;</span><span class="p">]</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
@@ -986,9 +987,9 @@
 <p>But if accessing as an attribute, you get an attribute error.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">k</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">k</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
@@ -1026,17 +1027,7 @@
 <p>We write a simple factory function that uses a provided value for omega to compute the squared deviation from an estimate, then use it to create our optimisable function.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
 
 <span class="k">def</span> <span class="nf">DiffOmega</span><span class="p">(</span><span class="n">omega</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">omega_from_S</span><span class="p">(</span><span class="n">S</span><span class="p">):</span>
@@ -1048,7 +1039,7 @@
 <span class="n">omega</span> <span class="o">=</span> <span class="mf">0.1</span>
 <span class="n">f</span> <span class="o">=</span> <span class="n">DiffOmega</span><span class="p">(</span><span class="n">omega</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -1056,17 +1047,7 @@
 <p>We then import the minimise function and use it to minimise the function, obtaining the fit statistic and the associated estimate of S. Note that we provide lower and upper bounds (which are optional) and an initial guess for our parameter of interest (<code class="docutils literal notranslate"><span class="pre">S</span></code>).</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.optimisers</span> <span class="kn">import</span> <span class="n">minimise</span><span class="p">,</span> <span class="n">maximise</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.optimisers</span> <span class="kn">import</span> <span class="n">minimise</span><span class="p">,</span> <span class="n">maximise</span>
 
 <span class="n">S</span> <span class="o">=</span> <span class="n">minimise</span><span class="p">(</span>
     <span class="n">f</span><span class="p">,</span>  <span class="c1"># the function</span>
@@ -1078,7 +1059,7 @@
 <span class="k">assert</span> <span class="mf">0.0</span> <span class="o">&lt;=</span> <span class="n">f</span><span class="p">(</span><span class="n">S</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-6</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;S=</span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">S</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>S=-3.6150
@@ -1095,14 +1076,7 @@
 <p>This support method will force a variable to be an iterable, allowing you to guarantee that the variable will be safe for use in, say, a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.misc</span> <span class="kn">import</span> <span class="n">iterable</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.misc</span> <span class="kn">import</span> <span class="n">iterable</span>
 
 <span class="n">my_var</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">my_var</span><span class="p">:</span>
@@ -1111,7 +1085,7 @@
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">iterable</span><span class="p">(</span><span class="n">my_var</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
@@ -1134,15 +1108,7 @@
 <p>curry(f,x)(y) = f(x,y) or = lambda y: f(x,y). This was modified from the Python Cookbook. Docstrings are also carried over.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.misc</span> <span class="kn">import</span> <span class="n">curry</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.misc</span> <span class="kn">import</span> <span class="n">curry</span>
 
 <span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Some function&quot;&quot;&quot;</span>
@@ -1152,7 +1118,7 @@
 <span class="nb">print</span><span class="p">(</span><span class="n">bar</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
 <span class="n">bar</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span> curry(foo,5)
@@ -1171,17 +1137,13 @@
 <p>Perform a simple test to see if an object supports iteration</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.misc</span> <span class="kn">import</span> <span class="n">is_iterable</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.misc</span> <span class="kn">import</span> <span class="n">is_iterable</span>
 
 <span class="n">can_iter</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
 <span class="n">cannot_iter</span> <span class="o">=</span> <span class="mf">1.234</span>
 <span class="n">is_iterable</span><span class="p">(</span><span class="n">can_iter</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>True
@@ -1191,9 +1153,9 @@
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">is_iterable</span><span class="p">(</span><span class="n">cannot_iter</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">is_iterable</span><span class="p">(</span><span class="n">cannot_iter</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>False
@@ -1207,19 +1169,14 @@
 <p>Perform a simple test to see if an object is a single character</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.misc</span> <span class="kn">import</span> <span class="n">is_char</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.misc</span> <span class="kn">import</span> <span class="n">is_char</span>
 
 <span class="k">class</span> <span class="nc">foo</span><span class="p">:</span>
     <span class="k">pass</span>
 
 <span class="n">is_char</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>True
@@ -1229,9 +1186,9 @@
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">is_char</span><span class="p">(</span><span class="s2">&quot;ab&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">is_char</span><span class="p">(</span><span class="s2">&quot;ab&quot;</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>False
@@ -1241,9 +1198,9 @@
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">is_char</span><span class="p">(</span><span class="n">foo</span><span class="p">())</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">is_char</span><span class="p">(</span><span class="n">foo</span><span class="p">())</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>False
@@ -1257,22 +1214,20 @@
 <p>To flatten a deeply nested iterable, use <code class="docutils literal notranslate"><span class="pre">recursive_flatten</span></code>. This method supports multiple levels of nesting, and multiple iterable types</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.misc</span> <span class="kn">import</span> <span class="n">recursive_flatten</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.misc</span> <span class="kn">import</span> <span class="n">recursive_flatten</span>
 
 <span class="n">l</span> <span class="o">=</span> <span class="p">[[[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="s2">&quot;abcde&quot;</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">]]</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">recursive_flatten</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">recursive_flatten</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[1, 2, &#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;, 5, 6, 7, 8, 9, 10]
@@ -1286,13 +1241,11 @@
 <p>Perform a simple check to see if an object is not a list or a tuple</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.misc</span> <span class="kn">import</span> <span class="n">not_list_tuple</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.misc</span> <span class="kn">import</span> <span class="n">not_list_tuple</span>
 
 <span class="n">not_list_tuple</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>True
@@ -1302,9 +1255,9 @@
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">not_list_tuple</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">not_list_tuple</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>False
@@ -1314,9 +1267,9 @@
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">not_list_tuple</span><span class="p">(</span><span class="s2">&quot;ab&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">not_list_tuple</span><span class="p">(</span><span class="s2">&quot;ab&quot;</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>True
@@ -1330,15 +1283,12 @@
 <p>Create a case-insensitive object, for instance, if you want the key ‘a’ and ‘A’ to point to the same item in a dict</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.misc</span> <span class="kn">import</span> <span class="n">add_lowercase</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.misc</span> <span class="kn">import</span> <span class="n">add_lowercase</span>
 
 <span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">42</span><span class="p">:</span> <span class="s2">&quot;life&quot;</span><span class="p">}</span>
 <span class="n">add_lowercase</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;A&#39;: 5, &#39;B&#39;: 6, &#39;C&#39;: 7, &#39;foo&#39;: 8, 42: &#39;life&#39;, &#39;a&#39;: 5, &#39;b&#39;: 6, &#39;c&#39;: 7}
@@ -1352,19 +1302,14 @@
 <p>Automatically construct a distance matrix lookup function. This is useful for maintaining flexibility about whether a function is being computed or if a lookup is being used</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.misc</span> <span class="kn">import</span> <span class="n">DistanceFromMatrix</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.misc</span> <span class="kn">import</span> <span class="n">DistanceFromMatrix</span>
 <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">array</span>
 
 <span class="n">m</span> <span class="o">=</span> <span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]])</span>
 <span class="n">f</span> <span class="o">=</span> <span class="n">DistanceFromMatrix</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
 <span class="n">f</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>1
@@ -1374,9 +1319,9 @@
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>6
@@ -1390,24 +1335,7 @@
 <p>Check an object against base classes or derived classes to see if it is acceptable</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.misc</span> <span class="kn">import</span> <span class="n">ClassChecker</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.misc</span> <span class="kn">import</span> <span class="n">ClassChecker</span>
 
 <span class="k">class</span> <span class="nc">not_okay</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">pass</span>
@@ -1426,7 +1354,7 @@
 <span class="n">cc</span> <span class="o">=</span> <span class="n">ClassChecker</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">okay</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span>
 <span class="n">o</span> <span class="ow">in</span> <span class="n">cc</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>True
@@ -1436,9 +1364,9 @@
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">no</span> <span class="ow">in</span> <span class="n">cc</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">no</span> <span class="ow">in</span> <span class="n">cc</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>False
@@ -1448,9 +1376,9 @@
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="mi">5</span> <span class="ow">in</span> <span class="n">cc</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">5</span> <span class="ow">in</span> <span class="n">cc</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>False
@@ -1460,9 +1388,9 @@
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">}</span> <span class="ow">in</span> <span class="n">cc</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">}</span> <span class="ow">in</span> <span class="n">cc</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>True
@@ -1472,9 +1400,9 @@
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="s2">&quot;asasas&quot;</span> <span class="ow">in</span> <span class="n">cc</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;asasas&quot;</span> <span class="ow">in</span> <span class="n">cc</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>True
@@ -1484,9 +1412,9 @@
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">md</span> <span class="ow">in</span> <span class="n">cc</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">md</span> <span class="ow">in</span> <span class="n">cc</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>True
@@ -1500,16 +1428,7 @@
 <p>Delegate object method calls, properties and variables to the appropriate object. Useful to combine multiple objects together while assuring that the calls will go to the correct object.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.misc</span> <span class="kn">import</span> <span class="n">Delegator</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.misc</span> <span class="kn">import</span> <span class="n">Delegator</span>
 
 <span class="k">class</span> <span class="nc">ListAndString</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">Delegator</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
@@ -1520,7 +1439,7 @@
 <span class="n">ls</span> <span class="o">=</span> <span class="n">ListAndString</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">&quot;ab_cd&quot;</span><span class="p">)</span>
 <span class="nb">len</span><span class="p">(</span><span class="n">ls</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>3
@@ -1530,9 +1449,9 @@
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">ls</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ls</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>1
@@ -1542,9 +1461,9 @@
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">ls</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ls</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>&#39;AB_CD&#39;
@@ -1554,9 +1473,9 @@
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">ls</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ls</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[&#39;ab&#39;, &#39;cd&#39;]
@@ -1570,27 +1489,24 @@
 <p>Wrap a function to hide it from a class so that it isn’t a method.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.misc</span> <span class="kn">import</span> <span class="n">FunctionWrapper</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.misc</span> <span class="kn">import</span> <span class="n">FunctionWrapper</span>
 
 <span class="n">f</span> <span class="o">=</span> <span class="n">FunctionWrapper</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
 <span class="n">f</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;cogent3.util.misc.FunctionWrapper at 0x7fc94f85fd90&gt;
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;cogent3.util.misc.FunctionWrapper at 0x7fbbb98577c0&gt;
 </pre></div>
 </div>
 </div>
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>&#39;123&#39;
@@ -1605,15 +1521,12 @@
 <p>Here is a light example of the <code class="docutils literal notranslate"><span class="pre">ConstrainedDict</span></code></p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.misc</span> <span class="kn">import</span> <span class="n">ConstrainedDict</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.util.misc</span> <span class="kn">import</span> <span class="n">ConstrainedDict</span>
 
 <span class="n">d</span> <span class="o">=</span> <span class="n">ConstrainedDict</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">},</span> <span class="n">constraint</span><span class="o">=</span><span class="s2">&quot;abc&quot;</span><span class="p">)</span>
 <span class="n">d</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;a&#39;: 1, &#39;b&#39;: 2, &#39;c&#39;: 3}
@@ -1623,9 +1536,9 @@
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;d&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;d&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
@@ -1634,11 +1547,11 @@
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;d&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
 
 <span class="nn">/usr/local/miniconda/envs/cogent3/lib/python3.8/site-packages/cogent3/util/misc.py</span> in <span class="ni">__setitem__</span><span class="nt">(self, key, value)</span>
-<span class="g g-Whitespace">    </span><span class="mi">788</span>         <span class="sd">&quot;&quot;&quot;Sets self[key] to value if value in constraint.&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">789</span>         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">item_is_valid</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">790</span>             <span class="k">raise</span> <span class="n">ConstraintError</span><span class="p">(</span>
-<span class="nn">    791                 &quot;Item &#39;%s&#39; not</span> in <span class="ni">constraint &#39;%s&#39;&quot; % </span><span class="nt">(key, self.constraint)</span>
-<span class="g g-Whitespace">    </span><span class="mi">792</span>             <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">790</span>         <span class="sd">&quot;&quot;&quot;Sets self[key] to value if value in constraint.&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">791</span>         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">item_is_valid</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">792</span>             <span class="k">raise</span> <span class="n">ConstraintError</span><span class="p">(</span>
+<span class="nn">    793                 &quot;Item &#39;%s&#39; not</span> in <span class="ni">constraint &#39;%s&#39;&quot; % </span><span class="nt">(key, self.constraint)</span>
+<span class="g g-Whitespace">    </span><span class="mi">794</span>             <span class="p">)</span>
 
 <span class="ne">ConstraintError</span>: Item &#39;d&#39; not in constraint &#39;abc&#39;
 </pre></div>

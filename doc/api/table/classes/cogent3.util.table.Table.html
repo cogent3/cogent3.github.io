@@ -746,6 +746,18 @@
 <li class="toctree-l5"><a class="reference internal" href="../../sequence/classes/cogent3.core.sequence.ProteinSequence.html">ProteinSequence</a></li>
 </ul>
 </li>
+<li class="toctree-l4"><a class="reference internal" href="../../genetic_code/genetic_code.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">genetic_code</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../genetic_code/classes/cogent3.core.genetic_code.GeneticCode.html">GeneticCode</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../moltype/moltype.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">moltype</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../moltype/classes/cogent3.core.moltype.MolType.html">MolType</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../alphabet/alphabet.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">alphabet</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../alphabet/classes/cogent3.core.alphabet.Alphabet.html">Alphabet</a></li>
+</ul>
+</li>
 <li class="toctree-l4 current"><a class="reference internal" href="../table.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">table</span></code></a><ul class="current">
 <li class="toctree-l5 current"><a class="current reference internal" href="#">Table</a></li>
 <li class="toctree-l5"><a class="reference internal" href="cogent3.util.table.Columns.html">Columns</a></li>
@@ -870,7 +882,8 @@
 <dt><a class="reference internal" href="#cogent3.util.table.Table.format" title="cogent3.util.table.Table.format"><code class="xref py py-obj docutils literal notranslate"><span class="pre">format</span></code></a></dt><dd><p>the str display format</p>
 </dd>
 <dt><strong>header</strong></dt><dd></dd>
-<dt><strong>index_name</strong></dt><dd></dd>
+<dt><a class="reference internal" href="#cogent3.util.table.Table.index_name" title="cogent3.util.table.Table.index_name"><code class="xref py py-obj docutils literal notranslate"><span class="pre">index_name</span></code></a></dt><dd><p>column name whose values can be used to index table rows</p>
+</dd>
 <dt><strong>legend</strong></dt><dd></dd>
 <dt><strong>shape</strong></dt><dd></dd>
 <dt><strong>space</strong></dt><dd></dd>
@@ -927,7 +940,7 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#cogent3.util.table.Table.normalized" title="cogent3.util.table.Table.normalized"><code class="xref py py-obj docutils literal notranslate"><span class="pre">normalized</span></code></a>([by_row, denominator_func])</p></td>
 <td><p>returns a table with elements expressed as a fraction according to the results from func</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.util.table.Table.set_repr_policy" title="cogent3.util.table.Table.set_repr_policy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_repr_policy</span></code></a>([head, tail, random])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.util.table.Table.set_repr_policy" title="cogent3.util.table.Table.set_repr_policy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_repr_policy</span></code></a>([head, tail, random, show_shape])</p></td>
 <td><p>specify policy for repr(self)</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#cogent3.util.table.Table.sorted" title="cogent3.util.table.Table.sorted"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sorted</span></code></a>([columns, reverse])</p></td>
@@ -1026,7 +1039,8 @@ additional column.</p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p>All tables must have the same columns.</p>
+<p>All tables must have the same columns. If a column dtype differs between tables,
+dtype for that column in result is determined by numpy.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -1187,7 +1201,8 @@ True/False, or a string representing valid python code to be evaluated.</p>
 <dl class="py method">
 <dt id="cogent3.util.table.Table.index_name">
 <em class="property">property </em><code class="sig-name descname">index_name</code><a class="headerlink" href="#cogent3.util.table.Table.index_name" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>column name whose values can be used to index table rows</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="cogent3.util.table.Table.inner_join">
@@ -1248,7 +1263,7 @@ returns a value to be used as the denominator. Default is sum.</p>
 
 <dl class="py method">
 <dt id="cogent3.util.table.Table.set_repr_policy">
-<code class="sig-name descname">set_repr_policy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">head</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">tail</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">random</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.util.table.Table.set_repr_policy" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_repr_policy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">head</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">tail</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">random</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">show_shape</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.util.table.Table.set_repr_policy" title="Permalink to this definition">¶</a></dt>
 <dd><p>specify policy for repr(self)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1256,6 +1271,7 @@ returns a value to be used as the denominator. Default is sum.</p>
 <dt><strong>- head: number of top rows to included in represented display</strong></dt><dd></dd>
 <dt><strong>- tail: number of bottom rows to included in represented display</strong></dt><dd></dd>
 <dt><strong>- random: number of rows to sample randomly (supercedes head/tail)</strong></dt><dd></dd>
+<dt><strong>- show_shape: boolean to determine if table shape info is displayed</strong></dt><dd></dd>
 </dl>
 </dd>
 </dl>

@@ -746,6 +746,18 @@
 <li class="toctree-l5"><a class="reference internal" href="../api/sequence/classes/cogent3.core.sequence.ProteinSequence.html">ProteinSequence</a></li>
 </ul>
 </li>
+<li class="toctree-l4"><a class="reference internal" href="../api/genetic_code/genetic_code.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">genetic_code</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/genetic_code/classes/cogent3.core.genetic_code.GeneticCode.html">GeneticCode</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../api/moltype/moltype.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">moltype</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/moltype/classes/cogent3.core.moltype.MolType.html">MolType</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../api/alphabet/alphabet.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">alphabet</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/alphabet/classes/cogent3.core.alphabet.Alphabet.html">Alphabet</a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="../api/table/table.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">table</span></code></a><ul>
 <li class="toctree-l5"><a class="reference internal" href="../api/table/classes/cogent3.util.table.Table.html">Table</a></li>
 <li class="toctree-l5"><a class="reference internal" href="../api/table/classes/cogent3.util.table.Columns.html">Columns</a></li>
@@ -868,15 +880,12 @@
 <p>From <code class="docutils literal notranslate"><span class="pre">cogent3</span></code> import all the components we need.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span><span class="p">,</span> <span class="n">load_tree</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span><span class="p">,</span> <span class="n">load_tree</span>
 <span class="kn">from</span> <span class="nn">cogent3.evolve</span> <span class="kn">import</span> <span class="n">bootstrap</span>
 <span class="kn">from</span> <span class="nn">cogent3.evolve.models</span> <span class="kn">import</span> <span class="n">HKY85</span>
 <span class="kn">from</span> <span class="nn">cogent3.maths</span> <span class="kn">import</span> <span class="n">stats</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -885,15 +894,12 @@
 <p>We will use a HKY model.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_alt_function</span><span class="p">():</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_alt_function</span><span class="p">():</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">load_tree</span><span class="p">(</span><span class="s2">&quot;data/test.tree&quot;</span><span class="p">)</span>
     <span class="n">sm</span> <span class="o">=</span> <span class="n">HKY85</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">sm</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -901,17 +907,13 @@
 <p>Define a function that takes an alignment object and returns an appropriately assembled function for the alternative model. Since the two models are identical bar the constraint on the branch lengths, we’ll use the same code to generate the basic likelihood function as for the alt model, and then apply the constraint here</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_null_function</span><span class="p">():</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_null_function</span><span class="p">():</span>
     <span class="n">lf</span> <span class="o">=</span> <span class="n">create_alt_function</span><span class="p">()</span>
     <span class="c1"># set the local clock for humans &amp; howler monkey</span>
     <span class="n">lf</span><span class="o">.</span><span class="n">set_local_clock</span><span class="p">(</span><span class="s2">&quot;Human&quot;</span><span class="p">,</span> <span class="s2">&quot;HowlerMon&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">lf</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -919,9 +921,9 @@
 <p>Get our observed data alignment</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">aln</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/long_testseqs.fasta&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aln</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/long_testseqs.fasta&quot;</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -929,13 +931,11 @@
 <p>Create a <code class="docutils literal notranslate"><span class="pre">EstimateProbability</span></code> bootstrap instance</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">estimateP</span> <span class="o">=</span> <span class="n">bootstrap</span><span class="o">.</span><span class="n">EstimateProbability</span><span class="p">(</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">estimateP</span> <span class="o">=</span> <span class="n">bootstrap</span><span class="o">.</span><span class="n">EstimateProbability</span><span class="p">(</span>
     <span class="n">create_null_function</span><span class="p">(),</span> <span class="n">create_alt_function</span><span class="p">(),</span> <span class="n">aln</span>
 <span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -943,9 +943,9 @@
 <p>Specify how many random samples we want it to generate. Here we use a very small number of replicates only for the purpose of testing.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">estimateP</span><span class="o">.</span><span class="n">set_num_replicates</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">estimateP</span><span class="o">.</span><span class="n">set_num_replicates</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -953,9 +953,9 @@
 <p>Run it.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">estimateP</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">estimateP</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -963,9 +963,9 @@
 <p>Get the estimated probability.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">estimateP</span><span class="o">.</span><span class="n">get_estimated_prob</span><span class="p">()</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">estimateP</span><span class="o">.</span><span class="n">get_estimated_prob</span><span class="p">()</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -973,9 +973,9 @@
 <p><code class="docutils literal notranslate"><span class="pre">p</span></code> is a floating point value, as you’d expect. Grab the estimated likelihoods (null and alternate) for the observed data.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%.2f</span><span class="s2">, </span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">estimateP</span><span class="o">.</span><span class="n">get_observed_lnL</span><span class="p">())</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%.2f</span><span class="s2">, </span><span class="si">%.2f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">estimateP</span><span class="o">.</span><span class="n">get_observed_lnL</span><span class="p">())</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>-8751.94, -8750.59

@@ -746,6 +746,18 @@
 <li class="toctree-l5"><a class="reference internal" href="../api/sequence/classes/cogent3.core.sequence.ProteinSequence.html">ProteinSequence</a></li>
 </ul>
 </li>
+<li class="toctree-l4"><a class="reference internal" href="../api/genetic_code/genetic_code.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">genetic_code</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/genetic_code/classes/cogent3.core.genetic_code.GeneticCode.html">GeneticCode</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../api/moltype/moltype.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">moltype</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/moltype/classes/cogent3.core.moltype.MolType.html">MolType</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../api/alphabet/alphabet.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">alphabet</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/alphabet/classes/cogent3.core.alphabet.Alphabet.html">Alphabet</a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="../api/table/table.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">table</span></code></a><ul>
 <li class="toctree-l5"><a class="reference internal" href="../api/table/classes/cogent3.util.table.Table.html">Table</a></li>
 <li class="toctree-l5"><a class="reference internal" href="../api/table/classes/cogent3.util.table.Columns.html">Columns</a></li>
@@ -868,17 +880,13 @@
 <p>We start with the standard imports, plus using a canned codon substitution model and then load the sample data set.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span><span class="p">,</span> <span class="n">load_tree</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span><span class="p">,</span> <span class="n">load_tree</span>
 <span class="kn">from</span> <span class="nn">cogent3.evolve.models</span> <span class="kn">import</span> <span class="n">MG94HKY</span>
 
 <span class="n">aln</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/long_testseqs.fasta&quot;</span><span class="p">)</span>
 <span class="n">tree</span> <span class="o">=</span> <span class="n">load_tree</span><span class="p">(</span><span class="s2">&quot;data/test.tree&quot;</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -886,13 +894,11 @@
 <p>We construct the substitution model and likelihood function and set the alignment.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">sm</span> <span class="o">=</span> <span class="n">MG94HKY</span><span class="p">()</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sm</span> <span class="o">=</span> <span class="n">MG94HKY</span><span class="p">()</span>
 <span class="n">lf</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">lf</span><span class="o">.</span><span class="n">set_alignment</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -900,9 +906,9 @@
 <p>At this point we have a likelihood function with two exchangeability parameters from the substitution model (<code class="docutils literal notranslate"><span class="pre">kappa</span></code> the transition/transversion ratio; <code class="docutils literal notranslate"><span class="pre">omega</span></code> the nonsynonymous/synonymous ratio) plus branch lengths for all tree edges. To facilitate subsequent discussion I now display the tree</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">ascii_art</span><span class="p">())</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">ascii_art</span><span class="p">())</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>                              /-Human
@@ -931,14 +937,7 @@
 <p>I’m going to cause <code class="docutils literal notranslate"><span class="pre">omega</span></code> to attain a different value for all branches aside from the primate clade and stem (<code class="docutils literal notranslate"><span class="pre">HowlerMon</span></code>, <code class="docutils literal notranslate"><span class="pre">Human</span></code>, <code class="docutils literal notranslate"><span class="pre">edge.0</span></code>).</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span>
     <span class="s2">&quot;omega&quot;</span><span class="p">,</span>
     <span class="n">tip_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;DogFaced&quot;</span><span class="p">,</span> <span class="s2">&quot;Mouse&quot;</span><span class="p">],</span>
     <span class="n">outgroup_name</span><span class="o">=</span><span class="s2">&quot;Human&quot;</span><span class="p">,</span>
@@ -947,7 +946,7 @@
 <span class="p">)</span>
 <span class="n">lf</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><h4>Likelihood function statistics</h4>
@@ -1088,16 +1087,7 @@
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span><span class="s2">&quot;omega&quot;</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span><span class="s2">&quot;omega&quot;</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
 <span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span>
     <span class="s2">&quot;omega&quot;</span><span class="p">,</span>
     <span class="n">tip_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Human&quot;</span><span class="p">,</span> <span class="s2">&quot;HowlerMon&quot;</span><span class="p">],</span>
@@ -1108,7 +1098,7 @@
 <span class="p">)</span>
 <span class="n">lf</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><h4>Likelihood function statistics</h4>
@@ -1248,15 +1238,7 @@
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span>
     <span class="s2">&quot;omega&quot;</span><span class="p">,</span>
     <span class="n">tip_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Human&quot;</span><span class="p">,</span> <span class="s2">&quot;HowlerMon&quot;</span><span class="p">],</span>
     <span class="n">outgroup_name</span><span class="o">=</span><span class="s2">&quot;Mouse&quot;</span><span class="p">,</span>
@@ -1266,7 +1248,7 @@
 <span class="p">)</span>
 <span class="n">lf</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><h4>Likelihood function statistics</h4>
@@ -1453,16 +1435,7 @@
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span>
     <span class="s2">&quot;omega&quot;</span><span class="p">,</span>
     <span class="n">tip_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Human&quot;</span><span class="p">,</span> <span class="s2">&quot;HowlerMon&quot;</span><span class="p">],</span>
     <span class="n">outgroup_name</span><span class="o">=</span><span class="s2">&quot;Mouse&quot;</span><span class="p">,</span>
@@ -1473,7 +1446,7 @@
 <span class="n">lf</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">lf</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><h4>Likelihood function statistics</h4>
@@ -1606,15 +1579,7 @@
 <p>I’ll now free up <code class="docutils literal notranslate"><span class="pre">omega</span></code> on the primate clade, but making it a single value shared by all primate lineages.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span>
     <span class="s2">&quot;omega&quot;</span><span class="p">,</span>
     <span class="n">tip_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Human&quot;</span><span class="p">,</span> <span class="s2">&quot;HowlerMon&quot;</span><span class="p">],</span>
     <span class="n">outgroup_name</span><span class="o">=</span><span class="s2">&quot;Mouse&quot;</span><span class="p">,</span>
@@ -1624,7 +1589,7 @@
 <span class="n">lf</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">lf</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><h4>Likelihood function statistics</h4>
@@ -1757,15 +1722,7 @@
 <p>Finally I’ll allow all primate edges to have different values of <code class="docutils literal notranslate"><span class="pre">omega</span></code>.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span>
     <span class="s2">&quot;omega&quot;</span><span class="p">,</span>
     <span class="n">tip_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Human&quot;</span><span class="p">,</span> <span class="s2">&quot;HowlerMon&quot;</span><span class="p">],</span>
     <span class="n">outgroup_name</span><span class="o">=</span><span class="s2">&quot;Mouse&quot;</span><span class="p">,</span>
@@ -1775,7 +1732,7 @@
 <span class="n">lf</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">lf</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><h4>Likelihood function statistics</h4>
@@ -1908,13 +1865,11 @@
 <p>We now allow <code class="docutils literal notranslate"><span class="pre">omega</span></code> to be different on all edges.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span><span class="s2">&quot;omega&quot;</span><span class="p">,</span> <span class="n">is_independent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span><span class="s2">&quot;omega&quot;</span><span class="p">,</span> <span class="n">is_independent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">lf</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">lf</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><h4>Likelihood function statistics</h4>

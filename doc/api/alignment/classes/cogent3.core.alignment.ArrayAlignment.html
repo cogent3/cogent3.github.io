@@ -746,6 +746,18 @@
 <li class="toctree-l5"><a class="reference internal" href="../../sequence/classes/cogent3.core.sequence.ProteinSequence.html">ProteinSequence</a></li>
 </ul>
 </li>
+<li class="toctree-l4"><a class="reference internal" href="../../genetic_code/genetic_code.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">genetic_code</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../genetic_code/classes/cogent3.core.genetic_code.GeneticCode.html">GeneticCode</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../moltype/moltype.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">moltype</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../moltype/classes/cogent3.core.moltype.MolType.html">MolType</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../../alphabet/alphabet.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">alphabet</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../alphabet/classes/cogent3.core.alphabet.Alphabet.html">Alphabet</a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="../../table/table.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">table</span></code></a><ul>
 <li class="toctree-l5"><a class="reference internal" href="../../table/classes/cogent3.util.table.Table.html">Table</a></li>
 <li class="toctree-l5"><a class="reference internal" href="../../table/classes/cogent3.util.table.Columns.html">Columns</a></li>
@@ -1091,7 +1103,7 @@ them, primarily for efficiency.</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.ArrayAlignment.seqlogo" title="cogent3.core.alignment.ArrayAlignment.seqlogo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">seqlogo</span></code></a>([width, height, wrap, vspace, colours])</p></td>
 <td><p>returns Drawable sequence logo using mutual information</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.ArrayAlignment.set_repr_policy" title="cogent3.core.alignment.ArrayAlignment.set_repr_policy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_repr_policy</span></code></a>([num_seqs, num_pos, ref_name])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.ArrayAlignment.set_repr_policy" title="cogent3.core.alignment.ArrayAlignment.set_repr_policy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_repr_policy</span></code></a>([num_seqs, num_pos, …])</p></td>
 <td><p>specify policy for repr(self)</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.ArrayAlignment.sliding_windows" title="cogent3.core.alignment.ArrayAlignment.sliding_windows"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sliding_windows</span></code></a>(window, step[, start, end])</p></td>
@@ -2168,7 +2180,7 @@ possible value is -log2(1/num_states)</p>
 
 <dl class="py method">
 <dt id="cogent3.core.alignment.ArrayAlignment.set_repr_policy">
-<code class="sig-name descname">set_repr_policy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">num_seqs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">num_pos</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">ref_name</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.alignment.ArrayAlignment.set_repr_policy" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_repr_policy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">num_seqs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">num_pos</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">ref_name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">wrap</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.alignment.ArrayAlignment.set_repr_policy" title="Permalink to this definition">¶</a></dt>
 <dd><p>specify policy for repr(self)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -2179,6 +2191,8 @@ possible value is -log2(1/num_states)</p>
 </dd>
 <dt><strong>ref_name</strong><span class="classifier">str or None</span></dt><dd><p>name of sequence to be placed first, or “longest” (default).
 If latter, indicates longest sequence will be chosen.</p>
+</dd>
+<dt><strong>wrap</strong><span class="classifier">int or None</span></dt><dd><p>number of printed bases per row</p>
 </dd>
 </dl>
 </dd>
@@ -2280,8 +2294,7 @@ returns a label str</p>
 <dd class="field-odd"><dl>
 <dt><strong>name_order</strong></dt><dd><p>order of names for display.</p>
 </dd>
-<dt><strong>interleave_len</strong></dt><dd><p>maximum number of printed bases, defaults to
-alignment length</p>
+<dt><strong>interleave_len</strong></dt><dd><p>number of alignment columns per row</p>
 </dd>
 <dt><strong>limit</strong></dt><dd><p>truncate alignment to this length</p>
 </dd>
@@ -2396,7 +2409,7 @@ Alignment class. Conversion to ArrayAlignment loses annotations.</p>
 
 <dl class="py method">
 <dt id="cogent3.core.alignment.ArrayAlignment.trim_stop_codons">
-<code class="sig-name descname">trim_stop_codons</code><span class="sig-paren">(</span><em class="sig-param">gc=Standard Nuclear ======================================================            aa    IUPAC code                     codons ------------------------------------------------------       Alanine             A            GCT</em>, <em class="sig-param">GCC</em>, <em class="sig-param">GCA</em>, <em class="sig-param">GCG      Cysteine             C                    TGT</em>, <em class="sig-param">TGC Aspartic Acid             D                    GAT</em>, <em class="sig-param">GAC Glutamic Acid             E                    GAA</em>, <em class="sig-param">GAG Phenylalanine             F                    TTT</em>, <em class="sig-param">TTC       Glycine             G            GGT</em>, <em class="sig-param">GGC</em>, <em class="sig-param">GGA</em>, <em class="sig-param">GGG     Histidine             H                    CAT</em>, <em class="sig-param">CAC    Isoleucine             I                ATT</em>, <em class="sig-param">ATC</em>, <em class="sig-param">ATA        Lysine             K                    AAA</em>, <em class="sig-param">AAG       Leucine             L    TTA</em>, <em class="sig-param">TTG</em>, <em class="sig-param">CTT</em>, <em class="sig-param">CTC</em>, <em class="sig-param">CTA</em>, <em class="sig-param">CTG    Methionine             M                        ATG    Asparagine             N                    AAT</em>, <em class="sig-param">AAC       Proline             P            CCT</em>, <em class="sig-param">CCC</em>, <em class="sig-param">CCA</em>, <em class="sig-param">CCG     Glutamine             Q                    CAA</em>, <em class="sig-param">CAG      Arginine             R    CGT</em>, <em class="sig-param">CGC</em>, <em class="sig-param">CGA</em>, <em class="sig-param">CGG</em>, <em class="sig-param">AGA</em>, <em class="sig-param">AGG        Serine             S    TCT</em>, <em class="sig-param">TCC</em>, <em class="sig-param">TCA</em>, <em class="sig-param">TCG</em>, <em class="sig-param">AGT</em>, <em class="sig-param">AGC     Threonine             T            ACT</em>, <em class="sig-param">ACC</em>, <em class="sig-param">ACA</em>, <em class="sig-param">ACG        Valine             V            GTT</em>, <em class="sig-param">GTC</em>, <em class="sig-param">GTA</em>, <em class="sig-param">GTG    Tryptophan             W                        TGG      Tyrosine             Y                    TAT</em>, <em class="sig-param">TAC          STOP             *                TAA</em>, <em class="sig-param">TAG</em>, <em class="sig-param">TGA ------------------------------------------------------</em>, <em class="sig-param">allow_partial=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.alignment.ArrayAlignment.trim_stop_codons" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">trim_stop_codons</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">gc</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">allow_partial</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.alignment.ArrayAlignment.trim_stop_codons" title="Permalink to this definition">¶</a></dt>
 <dd><p>Removes any terminal stop codons from the sequences</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

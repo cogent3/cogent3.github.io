@@ -746,6 +746,18 @@
 <li class="toctree-l5"><a class="reference internal" href="../api/sequence/classes/cogent3.core.sequence.ProteinSequence.html">ProteinSequence</a></li>
 </ul>
 </li>
+<li class="toctree-l4"><a class="reference internal" href="../api/genetic_code/genetic_code.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">genetic_code</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/genetic_code/classes/cogent3.core.genetic_code.GeneticCode.html">GeneticCode</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../api/moltype/moltype.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">moltype</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/moltype/classes/cogent3.core.moltype.MolType.html">MolType</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../api/alphabet/alphabet.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">alphabet</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/alphabet/classes/cogent3.core.alphabet.Alphabet.html">Alphabet</a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="../api/table/table.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">table</span></code></a><ul>
 <li class="toctree-l5"><a class="reference internal" href="../api/table/classes/cogent3.util.table.Table.html">Table</a></li>
 <li class="toctree-l5"><a class="reference internal" href="../api/table/classes/cogent3.util.table.Columns.html">Columns</a></li>
@@ -877,15 +889,12 @@
 <p>We load a tab separated data file using the <code class="docutils literal notranslate"><span class="pre">load_table()</span></code> function. The format is inferred from the filename suffix and you will note, in this case, it’s not actually a <cite>csv</cite> file.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
 
 <span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">table</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -952,15 +961,12 @@
 <p>Although unnecessary in this case, it’s possible to override the suffix by specifying the delimiter using the <code class="docutils literal notranslate"><span class="pre">sep</span></code> argument.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
 
 <span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="n">table</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -1019,15 +1025,12 @@
 <p>If you only want a subset of the contents of a file, use the <code class="docutils literal notranslate"><span class="pre">FilteringParser</span></code>. This allows skipping certain lines by using a callback function. We illustrate this with <code class="docutils literal notranslate"><span class="pre">stats.tsv</span></code>, skipping any rows with <code class="docutils literal notranslate"><span class="pre">&quot;Ratio&quot;</span></code> &gt; 10.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
 
 <span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">table</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -1071,13 +1074,7 @@
 <p>If you only want a subset of the contents of a file, use the <code class="docutils literal notranslate"><span class="pre">FilteringParser</span></code>. This allows skipping certain lines by using a callback function. We illustrate this with <code class="docutils literal notranslate"><span class="pre">stats.tsv</span></code>, skipping any rows with <code class="docutils literal notranslate"><span class="pre">&quot;Ratio&quot;</span></code> &gt; 10.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.parse.table</span> <span class="kn">import</span> <span class="n">FilteringParser</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.parse.table</span> <span class="kn">import</span> <span class="n">FilteringParser</span>
 
 <span class="n">reader</span> <span class="o">=</span> <span class="n">FilteringParser</span><span class="p">(</span>
     <span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">with_header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span>
@@ -1085,7 +1082,7 @@
 <span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="n">reader</span><span class="o">=</span><span class="n">reader</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">table</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -1133,17 +1130,13 @@
 <p>Specify the columns by their names.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.parse.table</span> <span class="kn">import</span> <span class="n">FilteringParser</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.parse.table</span> <span class="kn">import</span> <span class="n">FilteringParser</span>
 
 <span class="n">reader</span> <span class="o">=</span> <span class="n">FilteringParser</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Locus&quot;</span><span class="p">,</span> <span class="s2">&quot;Ratio&quot;</span><span class="p">],</span> <span class="n">with_header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="n">reader</span><span class="o">=</span><span class="n">reader</span><span class="p">)</span>
 <span class="n">table</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -1193,17 +1186,13 @@
 <p>Or, by their index.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.parse.table</span> <span class="kn">import</span> <span class="n">FilteringParser</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.parse.table</span> <span class="kn">import</span> <span class="n">FilteringParser</span>
 
 <span class="n">reader</span> <span class="o">=</span> <span class="n">FilteringParser</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">with_header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="n">reader</span><span class="o">=</span><span class="n">reader</span><span class="p">)</span>
 <span class="n">table</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -1260,17 +1249,13 @@
 <p>We just use <code class="docutils literal notranslate"><span class="pre">FilteringParser</span></code>.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.parse.table</span> <span class="kn">import</span> <span class="n">FilteringParser</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.parse.table</span> <span class="kn">import</span> <span class="n">FilteringParser</span>
 
 <span class="n">reader</span> <span class="o">=</span> <span class="n">FilteringParser</span><span class="p">(</span><span class="n">with_header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="n">data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">reader</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">))</span>
 <span class="n">data</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>  <span class="c1"># just the first two lines</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[[&#39;Locus&#39;, &#39;Region&#39;, &#39;Ratio&#39;], [&#39;NP_003077&#39;, &#39;Con&#39;, &#39;2.5386013224378985&#39;]]
@@ -1287,19 +1272,14 @@
 <h2>Make a table from header and rows<a class="headerlink" href="#make-a-table-from-header-and-rows" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 
 <span class="n">header</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">]</span>
 <span class="n">rows</span> <span class="o">=</span> <span class="p">[</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">12</span><span class="p">)]</span>
 <span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="n">rows</span><span class="p">)</span>
 <span class="n">table</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -1353,17 +1333,13 @@
 <p>For a <code class="docutils literal notranslate"><span class="pre">dict</span></code> with key’s as column headers.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 
 <span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="n">B</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="n">C</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
 <span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
 <span class="n">table</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -1411,11 +1387,10 @@
 <h2>Specify the column order when creating from a <code class="docutils literal notranslate"><span class="pre">dict</span></code>.<a class="headerlink" href="#specify-the-column-order-when-creating-from-a-dict" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
 <span class="n">table</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -1521,13 +1496,7 @@
 <h2>Create a table from a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code><a class="headerlink" href="#create-a-table-from-a-pandas-dataframe" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">DataFrame</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">DataFrame</span>
 <span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 
 <span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">])</span>
@@ -1535,7 +1504,7 @@
 <span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">data_frame</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
 <span class="n">table</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -1575,15 +1544,12 @@
 <h2>Create a table from header and rows<a class="headerlink" href="#create-a-table-from-header-and-rows" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 
 <span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">]])</span>
 <span class="n">table</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -1624,17 +1590,13 @@
 <p><code class="docutils literal notranslate"><span class="pre">make_table()</span></code> is the utility function for creating <code class="docutils literal notranslate"><span class="pre">Table</span></code> objects from standard python objects.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 
 <span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">])</span>
 <span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
 <span class="n">table</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -1674,20 +1636,7 @@
 <h2>Create a table from a 2D dict<a class="headerlink" href="#create-a-table-from-a-2d-dict" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 
 <span class="n">d2D</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;edge.parent&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -1702,7 +1651,7 @@
 <span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">d2D</span><span class="p">,)</span>
 <span class="n">table</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -1755,15 +1704,7 @@
 <h2>Create a table that has complex python objects as elements<a class="headerlink" href="#create-a-table-that-has-complex-python-objects-as-elements" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 
 <span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span>
     <span class="n">header</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;abcd&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">],</span>
@@ -1773,7 +1714,7 @@
 <span class="p">)</span>
 <span class="n">table</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -1817,15 +1758,12 @@
 <h2>Create an empty table<a class="headerlink" href="#create-an-empty-table" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 
 <span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">()</span>
 <span class="n">table</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><p>
@@ -1836,19 +1774,14 @@
 <h2>Adding a new column<a class="headerlink" href="#adding-a-new-column" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 
 <span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">()</span>
 <span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
 <span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
 <span class="n">table</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -1893,17 +1826,13 @@
 <p>This can be done when you create the table.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 
 <span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">])</span>
 <span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Sample title&quot;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="s2">&quot;a legend&quot;</span><span class="p">)</span>
 <span class="n">table</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -1942,15 +1871,12 @@
 <p>It can be done by directly assigning to the corresponding attributes.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">])</span>
 <span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
 <span class="n">table</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;My title&quot;</span>
 <span class="n">table</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -1992,19 +1918,14 @@
 <p><code class="docutils literal notranslate"><span class="pre">Table</span></code> is a row oriented object. Iterating on the table returns each row as a new <code class="docutils literal notranslate"><span class="pre">Table</span></code> instance.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
 
 <span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">table</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
     <span class="k">break</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>=============================
@@ -2019,11 +1940,10 @@ NP_003077       Con    2.5386
 <p>The resulting rows can be indexed using their column names.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">table</span><span class="p">:</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">table</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;Locus&quot;</span><span class="p">])</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>NP_003077
@@ -2041,17 +1961,13 @@ NP_055852
 <p>The <code class="docutils literal notranslate"><span class="pre">Table.shape</span></code> attribute is like that of a <code class="docutils literal notranslate"><span class="pre">numpy</span></code> <code class="docutils literal notranslate"><span class="pre">array</span></code>. The first element (<code class="docutils literal notranslate"><span class="pre">Table.shape[0]</span></code>) is the number of rows.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 
 <span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">])</span>
 <span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
 <span class="n">table</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>True
@@ -2065,9 +1981,9 @@ NP_055852
 <p><code class="docutils literal notranslate"><span class="pre">Table.shape[1]</span></code> is the number of columns. Using the table from above.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>True
@@ -2081,15 +1997,12 @@ NP_055852
 <p>The <code class="docutils literal notranslate"><span class="pre">Table.columns</span></code> attribute is a <code class="docutils literal notranslate"><span class="pre">Columns</span></code> instance, an object with <code class="docutils literal notranslate"><span class="pre">dict</span></code> attributes.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
 
 <span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">table</span><span class="o">.</span><span class="n">columns</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>Columns(&#39;Locus&#39;: &lt;U9, &#39;Region&#39;: &lt;U6, &#39;Ratio&#39;: float64)
@@ -2099,9 +2012,9 @@ NP_055852
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="s2">&quot;Region&quot;</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="s2">&quot;Region&quot;</span><span class="p">]</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([&#39;Con&#39;, &#39;Con&#39;, &#39;Con&#39;, &#39;NonCon&#39;, &#39;NonCon&#39;], dtype=&#39;&lt;U6&#39;)
@@ -2112,11 +2025,10 @@ NP_055852
 <p>So iteration is the same as for dicts.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>Locus
@@ -2131,11 +2043,10 @@ Ratio
 <h2>Table slicing using column names<a class="headerlink" href="#table-slicing-using-column-names" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">table</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -2191,9 +2102,9 @@ Ratio
 <p>Slice using the column name.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Region&quot;</span><span class="p">:]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Region&quot;</span><span class="p">:]</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -2233,11 +2144,10 @@ Ratio
 <h2>Table slicing using indices<a class="headerlink" href="#table-slicing-using-indices" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">table</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span> <span class="p">:</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -2275,17 +2185,13 @@ Ratio
 <p>We change the <code class="docutils literal notranslate"><span class="pre">Ratio</span></code> column to using scientific notation.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
 
 <span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">table</span><span class="o">.</span><span class="n">format_column</span><span class="p">(</span><span class="s2">&quot;Ratio&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%.1e</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="n">table</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -2344,11 +2250,10 @@ Ratio
 <p>This can be done on table loading,</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">table</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -2404,11 +2309,10 @@ Ratio
 <p>or, for spacing at least, by modifying the attributes</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">space</span> <span class="o">=</span> <span class="s2">&quot;    &quot;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">space</span> <span class="o">=</span> <span class="s2">&quot;    &quot;</span>
 <span class="n">table</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -2467,19 +2371,14 @@ Ratio
 <p>Wrapping generates neat looking tables whether or not you index the table rows. We demonstrate here</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 
 <span class="n">h</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;A/C&quot;</span><span class="p">,</span> <span class="s2">&quot;A/G&quot;</span><span class="p">,</span> <span class="s2">&quot;A/T&quot;</span><span class="p">,</span> <span class="s2">&quot;C/A&quot;</span><span class="p">]</span>
 <span class="n">rows</span> <span class="o">=</span> <span class="p">[[</span><span class="s2">&quot;tardigrade&quot;</span><span class="p">,</span> <span class="mf">0.0425</span><span class="p">,</span> <span class="mf">0.1424</span><span class="p">,</span> <span class="mf">0.0226</span><span class="p">,</span> <span class="mf">0.0391</span><span class="p">]]</span>
 <span class="n">wrap_table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="n">h</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">rows</span><span class="p">,</span> <span class="n">max_width</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
 <span class="n">wrap_table</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -2526,11 +2425,10 @@ Ratio
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">wrap_table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="n">h</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">rows</span><span class="p">,</span> <span class="n">max_width</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wrap_table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="n">h</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">rows</span><span class="p">,</span> <span class="n">max_width</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
 <span class="n">wrap_table</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -2582,11 +2480,10 @@ Ratio
 <h2>Display the top of a table using <code class="docutils literal notranslate"><span class="pre">head()</span></code><a class="headerlink" href="#display-the-top-of-a-table-using-head" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)),</span> <span class="n">b</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))))</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)),</span> <span class="n">b</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))))</span>
 <span class="n">table</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -2636,9 +2533,9 @@ Ratio
 <p>You change how many rows are displayed.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -2731,9 +2628,9 @@ Ratio
 <p>You change how many rows are displayed.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -2769,11 +2666,10 @@ Ratio
 <h2>Display random rows from a table<a class="headerlink" href="#display-random-rows-from-a-table" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">set_repr_policy</span><span class="p">(</span><span class="n">random</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">set_repr_policy</span><span class="p">(</span><span class="n">random</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">table</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -2795,16 +2691,16 @@ Ratio
 </thead>
 <tbody>
 <tr>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
 <td>4</td>
 <td>4</td>
 </tr>
 <tr>
-<td>5</td>
-<td>5</td>
-</tr>
-<tr>
-<td>6</td>
-<td>6</td>
+<td>7</td>
+<td>7</td>
 </tr>
 </tbody>
 </table>
@@ -2817,11 +2713,10 @@ Ratio
 <h2>Change the number of rows displayed by <code class="docutils literal notranslate"><span class="pre">repr()</span></code><a class="headerlink" href="#change-the-number-of-rows-displayed-by-repr" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">set_repr_policy</span><span class="p">(</span><span class="n">head</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">tail</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">set_repr_policy</span><span class="p">(</span><span class="n">head</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">tail</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">table</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -2882,21 +2777,15 @@ Ratio
 <p>The table <code class="docutils literal notranslate"><span class="pre">header</span></code> is immutable. Changing column headings is done as follows.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
 <span class="n">table</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">with_new_header</span><span class="p">(</span><span class="s2">&quot;Ratio&quot;</span><span class="p">,</span> <span class="s2">&quot;Stat&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>(&#39;Locus&#39;, &#39;Region&#39;, &#39;Ratio&#39;)
-</pre></div>
-</div>
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>
 (&#39;Locus&#39;, &#39;Region&#39;, &#39;Stat&#39;)
 </pre></div>
 </div>
@@ -2907,15 +2796,12 @@ Ratio
 <h2>Adding a new column<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 
 <span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">()</span>
 <span class="n">table</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><p>
@@ -2923,13 +2809,11 @@ Ratio
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
 <span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
 <span class="n">table</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -2974,13 +2858,7 @@ Ratio
 <p>This can be used to take a single, or multiple columns and generate a new column of values. Here we’ll take 2 columns and return True/False based on a condition.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">table</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">with_new_column</span><span class="p">(</span>
     <span class="s2">&quot;LargeCon&quot;</span><span class="p">,</span>
     <span class="k">lambda</span> <span class="n">r_v</span><span class="p">:</span> <span class="n">r_v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Con&quot;</span> <span class="ow">and</span> <span class="n">r_v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">10.0</span><span class="p">,</span>
@@ -2988,7 +2866,7 @@ Ratio
 <span class="p">)</span>
 <span class="n">table</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -3052,11 +2930,10 @@ Ratio
 <h2>Get table data as a numpy array<a class="headerlink" href="#get-table-data-as-a-numpy-array" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">table</span><span class="o">.</span><span class="n">array</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[&#39;NP_003077&#39;, &#39;Con&#39;, 2.5386013224378985],
@@ -3074,13 +2951,11 @@ Ratio
 <p>Via the <code class="docutils literal notranslate"><span class="pre">Table.tolist()</span></code> method.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">locus</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">tolist</span><span class="p">(</span><span class="s2">&quot;Locus&quot;</span><span class="p">)</span>
 <span class="n">locus</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[&#39;NP_003077&#39;, &#39;NP_004893&#39;, &#39;NP_005079&#39;, &#39;NP_005500&#39;, &#39;NP_055852&#39;]
@@ -3091,9 +2966,9 @@ Ratio
 <p>Or directly from the column array object.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="s2">&quot;Locus&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="s2">&quot;Locus&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[&#39;NP_003077&#39;, &#39;NP_004893&#39;, &#39;NP_005079&#39;, &#39;NP_005500&#39;, &#39;NP_055852&#39;]
@@ -3107,13 +2982,11 @@ Ratio
 <p>This returns a row oriented list.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">rows</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">tolist</span><span class="p">([</span><span class="s2">&quot;Region&quot;</span><span class="p">,</span> <span class="s2">&quot;Locus&quot;</span><span class="p">])</span>
 <span class="n">rows</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[[&#39;Con&#39;, &#39;NP_003077&#39;],
@@ -3135,11 +3008,10 @@ Ratio
 <p>Keys in the resulting dict are the row indices, the value is a dict of column name, value pairs.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">table</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>{0: {&#39;Locus&#39;: &#39;NP_003077&#39;, &#39;Region&#39;: &#39;Con&#39;, &#39;Ratio&#39;: 2.5386013224378985},
@@ -3157,11 +3029,10 @@ Ratio
 <p>Keys in the resulting dict are the column names, the value is a list.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;Locus&#39;: [&#39;NP_003077&#39;, &#39;NP_004893&#39;, &#39;NP_005079&#39;, &#39;NP_005500&#39;, &#39;NP_055852&#39;],
@@ -3180,13 +3051,11 @@ Ratio
 <h2>Get the table as a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code><a class="headerlink" href="#get-the-table-as-a-pandas-dataframe" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span>
 <span class="n">df</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><div>
@@ -3250,9 +3119,9 @@ Ratio
 <p>You can also specify column(s) are categories</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="s2">&quot;Region&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="s2">&quot;Region&quot;</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -3263,11 +3132,10 @@ Ratio
 <p>If our table consists of counts data, the <code class="docutils literal notranslate"><span class="pre">Table</span></code> can convert it into a <code class="docutils literal notranslate"><span class="pre">CategoryCount</span></code> instance that can be used for performing basic contingency table statistical tests, e.g. chisquare, G-test of independence, etc.. To do this, we must specify which column contains the row names using the <code class="docutils literal notranslate"><span class="pre">index</span></code> argument.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Ts&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">31</span><span class="p">,</span> <span class="mi">58</span><span class="p">],</span> <span class="s2">&quot;Tv&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">36</span><span class="p">,</span> <span class="mi">138</span><span class="p">],</span> <span class="s2">&quot;&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;syn&quot;</span><span class="p">,</span> <span class="s2">&quot;nsyn&quot;</span><span class="p">]},</span> <span class="n">index</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Ts&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">31</span><span class="p">,</span> <span class="mi">58</span><span class="p">],</span> <span class="s2">&quot;Tv&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">36</span><span class="p">,</span> <span class="mi">138</span><span class="p">],</span> <span class="s2">&quot;&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;syn&quot;</span><span class="p">,</span> <span class="s2">&quot;nsyn&quot;</span><span class="p">]},</span> <span class="n">index</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 <span class="n">table</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -3307,11 +3175,10 @@ Ratio
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">contingency</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">to_contingency</span><span class="p">([</span><span class="s2">&quot;Ts&quot;</span><span class="p">,</span> <span class="s2">&quot;Tv&quot;</span><span class="p">])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">contingency</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">to_contingency</span><span class="p">([</span><span class="s2">&quot;Ts&quot;</span><span class="p">,</span> <span class="s2">&quot;Tv&quot;</span><span class="p">])</span>
 <span class="n">contingency</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -3417,11 +3284,10 @@ Ratio
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">g_test</span> <span class="o">=</span> <span class="n">contingency</span><span class="o">.</span><span class="n">G_independence</span><span class="p">()</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">g_test</span> <span class="o">=</span> <span class="n">contingency</span><span class="o">.</span><span class="n">G_independence</span><span class="p">()</span>
 <span class="n">g_test</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -3564,15 +3430,12 @@ Ratio
 <p>Can be done without specifying a new column (set the first argument to <code class="docutils literal notranslate"><span class="pre">appended</span></code> to be <code class="docutils literal notranslate"><span class="pre">None</span></code>). Here we simply use the same table data.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table1</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table1</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">table2</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">table</span> <span class="o">=</span> <span class="n">table1</span><span class="o">.</span><span class="n">appended</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">table2</span><span class="p">)</span>
 <span class="n">table</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -3653,15 +3516,12 @@ Ratio
 <p>Specifying with a new column. In this case, the value of the <code class="docutils literal notranslate"><span class="pre">table.title</span></code> becomes the value for the new column.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table1</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Data1&quot;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table1</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Data1&quot;</span>
 <span class="n">table2</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Data2&quot;</span>
 <span class="n">table</span> <span class="o">=</span> <span class="n">table1</span><span class="o">.</span><span class="n">appended</span><span class="p">(</span><span class="s2">&quot;Data#&quot;</span><span class="p">,</span> <span class="n">table2</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 <span class="n">table</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -3759,11 +3619,10 @@ Ratio
 <h2>Summing a single column<a class="headerlink" href="#summing-a-single-column" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">table</span><span class="o">.</span><span class="n">summed</span><span class="p">(</span><span class="s2">&quot;Ratio&quot;</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>20571166.652796596
@@ -3774,9 +3633,9 @@ Ratio
 <p>Because each column is just a <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>, this also can be done directly via the array methods.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="s2">&quot;Ratio&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="s2">&quot;Ratio&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>20571166.652796596
@@ -3790,19 +3649,14 @@ Ratio
 <p>We define a strictly numerical table,</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 
 <span class="n">all_numeric</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span>
     <span class="n">header</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">12</span><span class="p">)]</span>
 <span class="p">)</span>
 <span class="n">all_numeric</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -3853,9 +3707,9 @@ Ratio
 <p>and sum all columns (default condition)</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">all_numeric</span><span class="o">.</span><span class="n">summed</span><span class="p">()</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">all_numeric</span><span class="o">.</span><span class="n">summed</span><span class="p">()</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[18, 22, 26]
@@ -3866,9 +3720,9 @@ Ratio
 <p>and all rows</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">all_numeric</span><span class="o">.</span><span class="n">summed</span><span class="p">(</span><span class="n">col_sum</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">all_numeric</span><span class="o">.</span><span class="n">summed</span><span class="p">(</span><span class="n">col_sum</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[3, 12, 21, 30]
@@ -3882,15 +3736,12 @@ Ratio
 <p>We define a table with mixed data, like a distance matrix.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">mixed</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mixed</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span>
     <span class="n">header</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="p">[[</span><span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="p">]]</span>
 <span class="p">)</span>
 <span class="n">mixed</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -3936,9 +3787,9 @@ Ratio
 <p>and sum all columns (default condition), ignoring non-numerical data</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">mixed</span><span class="o">.</span><span class="n">summed</span><span class="p">(</span><span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mixed</span><span class="o">.</span><span class="n">summed</span><span class="p">(</span><span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[9, 8, 7]
@@ -3949,9 +3800,9 @@ Ratio
 <p>and all rows</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">mixed</span><span class="o">.</span><span class="n">summed</span><span class="p">(</span><span class="n">col_sum</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mixed</span><span class="o">.</span><span class="n">summed</span><span class="p">(</span><span class="n">col_sum</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[3, 8, 13]
@@ -3965,13 +3816,11 @@ Ratio
 <p>We can do this by providing a reference to an external function</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">sub_table</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">filtered</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mf">10.0</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">&quot;Ratio&quot;</span><span class="p">)</span>
 <span class="n">sub_table</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -4012,11 +3861,10 @@ Ratio
 <p>or using valid python syntax within a string, which is executed</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">sub_table</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">filtered</span><span class="p">(</span><span class="s2">&quot;Ratio &lt; 10.0&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sub_table</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">filtered</span><span class="p">(</span><span class="s2">&quot;Ratio &lt; 10.0&quot;</span><span class="p">)</span>
 <span class="n">sub_table</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -4057,11 +3905,10 @@ Ratio
 <p>You can also filter for values in multiple columns</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">sub_table</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">filtered</span><span class="p">(</span><span class="s2">&quot;Ratio &lt; 10.0 and Region == &#39;NonCon&#39;&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sub_table</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">filtered</span><span class="p">(</span><span class="s2">&quot;Ratio &lt; 10.0 and Region == &#39;NonCon&#39;&quot;</span><span class="p">)</span>
 <span class="n">sub_table</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -4100,11 +3947,10 @@ Ratio
 <p>We select only columns that have a sum &gt; 20 from the <code class="docutils literal notranslate"><span class="pre">all_numeric</span></code> table constructed above.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">big_numeric</span> <span class="o">=</span> <span class="n">all_numeric</span><span class="o">.</span><span class="n">filtered_by_column</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">big_numeric</span> <span class="o">=</span> <span class="n">all_numeric</span><span class="o">.</span><span class="n">filtered_by_column</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">)</span>
 <span class="n">big_numeric</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -4152,11 +3998,10 @@ Ratio
 <h2>Standard sorting<a class="headerlink" href="#standard-sorting" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">table</span><span class="o">.</span><span class="n">sorted</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s2">&quot;Ratio&quot;</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -4214,9 +4059,9 @@ Ratio
 <h2>Reverse sorting<a class="headerlink" href="#reverse-sorting" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">sorted</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s2">&quot;Ratio&quot;</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="s2">&quot;Ratio&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">sorted</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s2">&quot;Ratio&quot;</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="s2">&quot;Ratio&quot;</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -4274,9 +4119,9 @@ Ratio
 <h2>Sorting involving multiple columns, one reversed<a class="headerlink" href="#sorting-involving-multiple-columns-one-reversed" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">sorted</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Region&quot;</span><span class="p">,</span> <span class="s2">&quot;Ratio&quot;</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="s2">&quot;Ratio&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">sorted</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Region&quot;</span><span class="p">,</span> <span class="s2">&quot;Ratio&quot;</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="s2">&quot;Ratio&quot;</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -4334,13 +4179,11 @@ Ratio
 <h2>Getting raw data for a single column<a class="headerlink" href="#getting-raw-data-for-a-single-column" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">raw</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">tolist</span><span class="p">(</span><span class="s2">&quot;Region&quot;</span><span class="p">)</span>
 <span class="n">raw</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[&#39;Con&#39;, &#39;Con&#39;, &#39;Con&#39;, &#39;NonCon&#39;, &#39;NonCon&#39;]
@@ -4353,13 +4196,11 @@ Ratio
 <h2>Getting raw data for multiple columns<a class="headerlink" href="#getting-raw-data-for-multiple-columns" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">raw</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">tolist</span><span class="p">([</span><span class="s2">&quot;Locus&quot;</span><span class="p">,</span> <span class="s2">&quot;Region&quot;</span><span class="p">])</span>
 <span class="n">raw</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[[&#39;NP_003077&#39;, &#39;Con&#39;],
@@ -4376,11 +4217,10 @@ Ratio
 <h2>Getting distinct values<a class="headerlink" href="#getting-distinct-values" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="k">assert</span> <span class="n">table</span><span class="o">.</span><span class="n">distinct_values</span><span class="p">(</span><span class="s2">&quot;Region&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="nb">set</span><span class="p">([</span><span class="s2">&quot;NonCon&quot;</span><span class="p">,</span> <span class="s2">&quot;Con&quot;</span><span class="p">])</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -4390,11 +4230,10 @@ Ratio
 <h2>Counting occurrences of values<a class="headerlink" href="#counting-occurrences-of-values" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="k">assert</span> <span class="n">table</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;Region == &#39;NonCon&#39; and Ratio &gt; 1&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -4405,13 +4244,7 @@ Ratio
 <p>This returns a <code class="docutils literal notranslate"><span class="pre">CategoryCounter</span></code>, a dict like class.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 
 <span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span>
     <span class="n">data</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">],</span> <span class="n">B</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">])</span>
@@ -4419,7 +4252,7 @@ Ratio
 <span class="n">unique</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">count_unique</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>
 <span class="nb">type</span><span class="p">(</span><span class="n">unique</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>cogent3.maths.stats.number.CategoryCounter
@@ -4429,9 +4262,9 @@ Ratio
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">unique</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">unique</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;a&#39;: 2, &#39;b&#39;: 3}
@@ -4442,11 +4275,10 @@ Ratio
 <p>For multiple columns.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">unique</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">count_unique</span><span class="p">([</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">unique</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">count_unique</span><span class="p">([</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">])</span>
 <span class="n">unique</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>{(&#39;a&#39;, &#39;c&#39;): 1, (&#39;b&#39;, &#39;c&#39;): 3, (&#39;a&#39;, &#39;d&#39;): 1}
@@ -4456,11 +4288,10 @@ Ratio
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">unique</span><span class="o">.</span><span class="n">to_table</span><span class="p">()</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">unique</span><span class="o">.</span><span class="n">to_table</span><span class="p">()</span>
 <span class="n">r</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -4505,16 +4336,7 @@ Ratio
 <p>We do a standard inner join here for a restricted subset. We must specify the columns that will be used for the join. Here we just use <code class="docutils literal notranslate"><span class="pre">Locus</span></code>.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">rows</span> <span class="o">=</span> <span class="p">[</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rows</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">[</span><span class="s2">&quot;NP_004893&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
     <span class="p">[</span><span class="s2">&quot;NP_005079&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
     <span class="p">[</span><span class="s2">&quot;NP_005500&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
@@ -4525,7 +4347,7 @@ Ratio
 <span class="n">new</span> <span class="o">=</span> <span class="n">stats_table</span><span class="o">.</span><span class="n">joined</span><span class="p">(</span><span class="n">region_type</span><span class="p">,</span> <span class="n">columns_self</span><span class="o">=</span><span class="s2">&quot;Locus&quot;</span><span class="p">)</span>
 <span class="n">new</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -4591,17 +4413,7 @@ Ratio
 <h2>Transpose a table<a class="headerlink" href="#transpose-a-table" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 
 <span class="n">header</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;#OTU ID&quot;</span><span class="p">,</span> <span class="s2">&quot;14SK041&quot;</span><span class="p">,</span> <span class="s2">&quot;14SK802&quot;</span><span class="p">]</span>
 <span class="n">rows</span> <span class="o">=</span> <span class="p">[</span>
@@ -4613,7 +4425,7 @@ Ratio
 <span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="n">header</span><span class="p">,</span> <span class="n">rows</span><span class="o">=</span><span class="n">rows</span><span class="p">)</span>
 <span class="n">table</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -4664,11 +4476,10 @@ Ratio
 <p>We require a new column heading for the current header data. We also need to specify which existing column will become the header.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">tp</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">transposed</span><span class="p">(</span><span class="n">new_column_name</span><span class="o">=</span><span class="s2">&quot;sample&quot;</span><span class="p">,</span> <span class="n">select_as_header</span><span class="o">=</span><span class="s2">&quot;#OTU ID&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tp</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">transposed</span><span class="p">(</span><span class="n">new_column_name</span><span class="o">=</span><span class="s2">&quot;sample&quot;</span><span class="p">,</span> <span class="n">select_as_header</span><span class="o">=</span><span class="s2">&quot;#OTU ID&quot;</span><span class="p">)</span>
 <span class="n">tp</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -4718,15 +4529,12 @@ Ratio
 <p>Using the method provides finer control over formatting.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
 
 <span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;md&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>|     Locus | Region |         Ratio |
@@ -4746,15 +4554,12 @@ Ratio
 <p>Using the method provides finer control over formatting.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
 
 <span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;tex&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>\begin{table}[htp!]
@@ -4782,11 +4587,10 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
 <p>We use the <code class="docutils literal notranslate"><span class="pre">justify</span></code> argument to indicate the column justification.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">to_markdown</span><span class="p">(</span><span class="n">justify</span><span class="o">=</span><span class="s2">&quot;ccr&quot;</span><span class="p">))</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>|     Locus | Region |         Ratio |
@@ -4805,15 +4609,12 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
 <h2>Get a table as a latex formatted string<a class="headerlink" href="#get-a-table-as-a-latex-formatted-string" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span>
     <span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Some stats.&quot;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="s2">&quot;Derived from something.&quot;</span>
 <span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">to_latex</span><span class="p">(</span><span class="n">justify</span><span class="o">=</span><span class="s2">&quot;ccr&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;tab:table1&quot;</span><span class="p">))</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>\begin{table}[htp!]
@@ -4842,15 +4643,12 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
 <h2>Get a table as a restructured text csv-table<a class="headerlink" href="#get-a-table-as-a-restructured-text-csv-table" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span>
     <span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Some stats.&quot;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="s2">&quot;Derived from something.&quot;</span>
 <span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">to_rst</span><span class="p">(</span><span class="n">csv_table</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>.. csv-table:: Some stats.
@@ -4870,15 +4668,12 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
 <h2>Get a table as a restructured text grid table<a class="headerlink" href="#get-a-table-as-a-restructured-text-grid-table" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span>
     <span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Some stats.&quot;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="s2">&quot;Derived from something.&quot;</span>
 <span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">to_rst</span><span class="p">())</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>+------------------------------------+
@@ -4906,11 +4701,10 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
 <p>It is also possible to specify column alignment, table caption and other arguments.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;latex&quot;</span><span class="p">))</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>\begin{table}[htp!]
@@ -4942,9 +4736,9 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">bgraph</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bgraph</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style>
@@ -5006,15 +4800,7 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
 <p>Then converted.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span>
     <span class="n">bgraph</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span>
         <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;bedgraph&quot;</span><span class="p">,</span>
         <span class="n">name</span><span class="o">=</span><span class="s2">&quot;test track&quot;</span><span class="p">,</span>
@@ -5024,7 +4810,7 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
     <span class="p">)</span>
 <span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>track type=bedGraph name=&quot;test track&quot; description=&quot;test of bedgraph&quot; color=255,0,0
@@ -5039,15 +4825,12 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
 <h2>Getting a table as html<a class="headerlink" href="#getting-a-table-as-html" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
 
 <span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">straight_html</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">to_rich_html</span><span class="p">(</span><span class="n">compact</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -5055,17 +4838,13 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
 <p>We can provide customised formatting via a callback function.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">format_cell</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">row_num</span><span class="p">,</span> <span class="n">col_num</span><span class="p">):</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">format_cell</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">row_num</span><span class="p">,</span> <span class="n">col_num</span><span class="p">):</span>
     <span class="n">style</span> <span class="o">=</span> <span class="s1">&#39;style=&quot;background: rgba(176, 245, 102, 0.25);&quot;&#39;</span> <span class="k">if</span> <span class="n">value</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
     <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;td </span><span class="si">{</span><span class="n">style</span><span class="si">}</span><span class="s2">&gt;</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&lt;/td&gt;&quot;</span>
 
 <span class="n">rich_html</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">to_rich_html</span><span class="p">(</span><span class="n">row_cell_func</span><span class="o">=</span><span class="n">format_cell</span><span class="p">,</span> <span class="n">compact</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -5111,11 +4890,10 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
 <p>We could also use control html element format.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">element_format</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">thead</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;&lt;thead style=&quot;background: rgba(0, 250, 0, 0.1);&quot;&gt;&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">element_format</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">thead</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;&lt;thead style=&quot;background: rgba(0, 250, 0, 0.1);&quot;&gt;&#39;</span><span class="p">)</span>
 <span class="n">rich_html</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">to_rich_html</span><span class="p">(</span><span class="n">element_formatters</span><span class="o">=</span><span class="n">element_format</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -5164,13 +4942,11 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
 <p>Appending any of the following to a filename will cause that format to be used for writing.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.format.table</span> <span class="kn">import</span> <span class="n">known_formats</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.format.table</span> <span class="kn">import</span> <span class="n">known_formats</span>
 
 <span class="n">known_formats</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>(&#39;bedgraph&#39;,
@@ -5194,9 +4970,9 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
 <h2>Writing a latex formmated file<a class="headerlink" href="#writing-a-latex-formmated-file" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;stats_tab.tex&quot;</span><span class="p">,</span> <span class="n">justify</span><span class="o">=</span><span class="s2">&quot;ccr&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;tab:table1&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;stats_tab.tex&quot;</span><span class="p">,</span> <span class="n">justify</span><span class="o">=</span><span class="s2">&quot;ccr&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;tab:table1&quot;</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -5207,11 +4983,10 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
 <p>The delimiter can be specified explicitly using the <code class="docutils literal notranslate"><span class="pre">sep</span></code> argument or implicitly via the file name suffix.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">table</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;stats_tab.txt&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>

@@ -746,6 +746,18 @@
 <li class="toctree-l5"><a class="reference internal" href="../api/sequence/classes/cogent3.core.sequence.ProteinSequence.html">ProteinSequence</a></li>
 </ul>
 </li>
+<li class="toctree-l4"><a class="reference internal" href="../api/genetic_code/genetic_code.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">genetic_code</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/genetic_code/classes/cogent3.core.genetic_code.GeneticCode.html">GeneticCode</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../api/moltype/moltype.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">moltype</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/moltype/classes/cogent3.core.moltype.MolType.html">MolType</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="../api/alphabet/alphabet.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">alphabet</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/alphabet/classes/cogent3.core.alphabet.Alphabet.html">Alphabet</a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="../api/table/table.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">table</span></code></a><ul>
 <li class="toctree-l5"><a class="reference internal" href="../api/table/classes/cogent3.util.table.Table.html">Table</a></li>
 <li class="toctree-l5"><a class="reference internal" href="../api/table/classes/cogent3.util.table.Columns.html">Columns</a></li>
@@ -867,13 +879,11 @@
 <p>From <code class="docutils literal notranslate"><span class="pre">cogent3</span></code> import all the components we need</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span><span class="p">,</span> <span class="n">load_tree</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span><span class="p">,</span> <span class="n">load_tree</span>
 <span class="kn">from</span> <span class="nn">cogent3.evolve.models</span> <span class="kn">import</span> <span class="n">get_model</span>
 <span class="kn">from</span> <span class="nn">cogent3.maths</span> <span class="kn">import</span> <span class="n">stats</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -881,11 +891,10 @@
 <p>Get your alignment and tree.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">aln</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/long_testseqs.fasta&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aln</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/long_testseqs.fasta&quot;</span><span class="p">)</span>
 <span class="n">t</span> <span class="o">=</span> <span class="n">load_tree</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;data/test.tree&quot;</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -893,9 +902,9 @@
 <p>Create a HKY85 model.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">sm</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;HKY85&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sm</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;HKY85&quot;</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -903,9 +912,9 @@
 <p>Make the controller object and limit the display precision (to decrease the chance that small differences in estimates cause tests of the documentation to fail).</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">lf</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lf</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -913,9 +922,9 @@
 <p>Set the local clock for humans &amp; Howler Monkey. This method is just a special interface to the more general <code class="docutils literal notranslate"><span class="pre">set_param_rules()</span></code> method.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">set_local_clock</span><span class="p">(</span><span class="s2">&quot;Human&quot;</span><span class="p">,</span> <span class="s2">&quot;HowlerMon&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">set_local_clock</span><span class="p">(</span><span class="s2">&quot;Human&quot;</span><span class="p">,</span> <span class="s2">&quot;HowlerMon&quot;</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -923,9 +932,9 @@
 <p>Get the likelihood function object this object performs the actual likelihood calculation.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">set_alignment</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">set_alignment</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -933,9 +942,9 @@
 <p>Optimise the function capturing the return optimised lnL, and parameter value vector.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -943,11 +952,10 @@
 <p>View the resulting maximum-likelihood parameter values.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">set_name</span><span class="p">(</span><span class="s2">&quot;clock&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">set_name</span><span class="p">(</span><span class="s2">&quot;clock&quot;</span><span class="p">)</span>
 <span class="n">lf</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><h4>clock</h4>
@@ -1072,11 +1080,10 @@
 <p>We extract the log-likelihood and number of free parameters for later use.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">null_lnL</span> <span class="o">=</span> <span class="n">lf</span><span class="o">.</span><span class="n">get_log_likelihood</span><span class="p">()</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">null_lnL</span> <span class="o">=</span> <span class="n">lf</span><span class="o">.</span><span class="n">get_log_likelihood</span><span class="p">()</span>
 <span class="n">null_nfp</span> <span class="o">=</span> <span class="n">lf</span><span class="o">.</span><span class="n">get_num_free_params</span><span class="p">()</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -1084,9 +1091,9 @@
 <p>Clear the local clock constraint, freeing up the branch lengths.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span><span class="s2">&quot;length&quot;</span><span class="p">,</span> <span class="n">is_independent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span><span class="s2">&quot;length&quot;</span><span class="p">,</span> <span class="n">is_independent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -1094,9 +1101,9 @@
 <p>Run the optimiser capturing the return optimised lnL, and parameter value vector.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -1104,11 +1111,10 @@
 <p>View the resulting maximum-likelihood parameter values.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">set_name</span><span class="p">(</span><span class="s2">&quot;non clock&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">set_name</span><span class="p">(</span><span class="s2">&quot;non clock&quot;</span><span class="p">)</span>
 <span class="n">lf</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><h4>non clock</h4>
@@ -1233,13 +1239,11 @@
 <p>These two lnL’s are now used to calculate the likelihood ratio statistic it’s degrees-of-freedom and the probability of observing the LR.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">LR</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">lf</span><span class="o">.</span><span class="n">get_log_likelihood</span><span class="p">()</span> <span class="o">-</span> <span class="n">null_lnL</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">LR</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">lf</span><span class="o">.</span><span class="n">get_log_likelihood</span><span class="p">()</span> <span class="o">-</span> <span class="n">null_lnL</span><span class="p">)</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">lf</span><span class="o">.</span><span class="n">get_num_free_params</span><span class="p">()</span> <span class="o">-</span> <span class="n">null_nfp</span>
 <span class="n">P</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">chisqprob</span><span class="p">(</span><span class="n">LR</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 </div>
@@ -1247,13 +1251,11 @@
 <p>Print this and look up a <span class="math notranslate nohighlight">\(\chi^2\)</span> with number of edges - 1 degrees of freedom.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Likelihood ratio statistic = &quot;</span><span class="p">,</span> <span class="n">LR</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Likelihood ratio statistic = &quot;</span><span class="p">,</span> <span class="n">LR</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;degrees-of-freedom = &quot;</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;probability = &quot;</span><span class="p">,</span> <span class="n">P</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>Likelihood ratio statistic =  2.707164528557769
