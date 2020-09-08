@@ -4,7 +4,7 @@ Making Sense from Sequence
 
 ``cogent3`` is a mature python library for analysis of biological sequence data. We endeavour to provide a first-class experience within Jupyter notebooks, but the algorithms also support parallel execution on compute systems with 1000's of processors.
 
-``cogent3`` is released under the BSD-3 license, links to documentation and code are above. If you would like to contribute (and we hope you do!), we have created a companion `c3dev <https://github.com/cogent3/c3dev>`_ repo which provides details on how to contribute and some useful tools for doing so.
+``cogent3`` is released under the BSD-3 license, links to documentation and code are above. If you would like to contribute (and we hope you do!), we have created a companion `c3dev <https://github.com/cogent3/c3dev>`_ repo which provides `details on how to contribute <https://github.com/cogent3/c3dev/wiki>`_ and some useful tools for doing so.
 
 **Who is it for? Anyone who wants to analyse sequence divergence using robust statistical models.**
 
