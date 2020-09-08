@@ -958,7 +958,7 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#cogent3.util.table.Table.tail" title="cogent3.util.table.Table.tail"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tail</span></code></a>([nrows])</p></td>
 <td><p>displays bottom nrows</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.util.table.Table.to_contingency" title="cogent3.util.table.Table.to_contingency"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_contingency</span></code></a>(columns)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.util.table.Table.to_categorical" title="cogent3.util.table.Table.to_categorical"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_categorical</span></code></a>([columns])</p></td>
 <td><p>construct object that can be used for statistical tests</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#cogent3.util.table.Table.to_csv" title="cogent3.util.table.Table.to_csv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_csv</span></code></a>([with_title, with_legend])</p></td>
@@ -1268,10 +1268,14 @@ returns a value to be used as the denominator. Default is sum.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>- head: number of top rows to included in represented display</strong></dt><dd></dd>
-<dt><strong>- tail: number of bottom rows to included in represented display</strong></dt><dd></dd>
-<dt><strong>- random: number of rows to sample randomly (supercedes head/tail)</strong></dt><dd></dd>
-<dt><strong>- show_shape: boolean to determine if table shape info is displayed</strong></dt><dd></dd>
+<dt><strong>head</strong><span class="classifier">int</span></dt><dd><p>number of top rows to included in represented display</p>
+</dd>
+<dt><strong>tail</strong><span class="classifier">int</span></dt><dd><p>number of bottom rows to included in represented display</p>
+</dd>
+<dt><strong>random</strong><span class="classifier">int</span></dt><dd><p>number of rows to sample randomly (supercedes head/tail)</p>
+</dd>
+<dt><strong>show_shape</strong><span class="classifier">bool</span></dt><dd><p>boolean to determine if table shape info is displayed</p>
+</dd>
 </dl>
 </dd>
 </dl>
@@ -1370,15 +1374,15 @@ False, returns the row sum.</p>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="cogent3.util.table.Table.to_contingency">
-<code class="sig-name descname">to_contingency</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">columns</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.util.table.Table.to_contingency" title="Permalink to this definition">¶</a></dt>
+<dt id="cogent3.util.table.Table.to_categorical">
+<code class="sig-name descname">to_categorical</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">columns</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.util.table.Table.to_categorical" title="Permalink to this definition">¶</a></dt>
 <dd><p>construct object that can be used for statistical tests</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>columns</strong></dt><dd><p>columns to include. These correspond to contingency column
 labels. The row labels come from values under the index_name
-column.</p>
+column. Defaults to all columns.</p>
 </dd>
 </dl>
 </dd>
