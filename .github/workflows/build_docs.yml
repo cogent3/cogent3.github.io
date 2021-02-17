@@ -23,18 +23,20 @@ jobs:
           mv c3src/doc c3org/doc/doc
           cp c3org/doc/doc/set_working_directory.py c3org/doc/.
 
-      - name: Make conda environment
-        uses: goanpeca/setup-miniconda@v1
+      - name: Setup python
+        uses: "actions/setup-python@v1"
         with:
-           activate-environment: cogent3
-           environment-file: c3org/doc/gh-environment.yml
            python-version: 3.8
 
-      - shell: bash -l {0}
+      - name: "Setup virtualenv and install cogent3[dev]"
+        if: startsWith(runner.os, 'macOS') || startsWith(runner.os, 'Linux')
         run: |
-          conda activate cogent3
-          conda info
-          conda list
+          echo `pwd`
+          python --version
+          python -m venv .venv
+          source .venv/bin/activate
+          python -m pip install --upgrade pip wheel setuptools
+          python -m pip install "c3src[dev]"
 
       - name: Build docs
         shell: bash -l {0}
