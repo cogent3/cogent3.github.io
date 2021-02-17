@@ -32,12 +32,12 @@ jobs:
         if: startsWith(runner.os, 'macOS') || startsWith(runner.os, 'Linux')
         run: |
           echo `pwd`
-          echo `ls`
+          echo `ls c3src`
           python --version
           python -m venv .venv
           source .venv/bin/activate
           python -m pip install --upgrade pip wheel setuptools
-          python -m pip install "c3src[dev]"
+          python -m pip install "./c3src[dev]"
 
       - name: Build docs
         shell: bash -l {0}
