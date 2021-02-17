@@ -34,8 +34,9 @@
 <!-- CSS -->
 <link rel="stylesheet" href="../../_static/jupyter-sphinx.css" type="text/css" />
 <link rel="stylesheet" href="../../_static/thebelab.css" type="text/css" />
-<link rel="stylesheet" href="../../_static/sphinx-dropdown.css" type="text/css" />
-<link rel="stylesheet" href="../../_static/panels-bootstrap.min.css" type="text/css" />
+<link rel="stylesheet" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+<link rel="stylesheet" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+<link rel="stylesheet" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
 <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
 <link rel="stylesheet" href="../../_static/gallery-binder.css" type="text/css" />
 <link rel="stylesheet" href="../../_static/gallery-dataframe.css" type="text/css" />
@@ -60,14 +61,11 @@
 <script src="../../_static/jquery.js"></script>
 <script src="../../_static/underscore.js"></script>
 <script src="../../_static/doctools.js"></script>
-<script src="../../_static/language_data.js"></script>
 <script src="../../_static/thebelab-helper.js"></script>
 <script src="../../_static/plotly-latest.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-<script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+<script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
 <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="../../_static/require.js"></script>
-<script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
 <script src="../.././_static/js/custom.js"></script>
 
 </head>
@@ -327,11 +325,12 @@
 </li>
 <li class="toctree-l5"><a class="reference internal" href="loading_sequences.html#specifying-the-sequence-molecular-type">Specifying the sequence molecular type</a></li>
 <li class="toctree-l5"><a class="reference internal" href="loading_sequences.html#making-an-alignment-from-standard-python-objects">Making an alignment from standard python objects</a><ul>
-<li class="toctree-l6"><a class="reference internal" href="loading_sequences.html#from-a-series-of-strings">From a series of strings</a></li>
 <li class="toctree-l6"><a class="reference internal" href="loading_sequences.html#from-a-dict-of-strings">From a dict of strings</a></li>
+<li class="toctree-l6"><a class="reference internal" href="loading_sequences.html#from-a-series-of-strings">From a series of strings</a></li>
 <li class="toctree-l6"><a class="reference internal" href="loading_sequences.html#stripping-label-characters-on-loading">Stripping label characters on loading</a></li>
 </ul>
 </li>
+<li class="toctree-l5"><a class="reference internal" href="loading_sequences.html#making-a-sequence-collection-from-standard-python-objects">Making a sequence collection from standard python objects</a></li>
 <li class="toctree-l5"><a class="reference internal" href="loading_sequences.html#loading-sequences-using-format-parsers">Loading sequences using format parsers</a><ul>
 <li class="toctree-l6"><a class="reference internal" href="loading_sequences.html#loading-fasta-sequences-from-an-open-file-or-list-of-lines">Loading FASTA sequences from an open file or list of lines</a></li>
 <li class="toctree-l6"><a class="reference internal" href="loading_sequences.html#handling-overloaded-fasta-sequence-labels">Handling overloaded FASTA sequence labels</a></li>
@@ -461,10 +460,13 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Tabular data</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#loading-a-csv-file">Loading a csv file</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#loading-delimited-specifying-the-format">Loading delimited specifying the format</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#loading-a-set-number-of-lines-from-a-file">Loading a set number of lines from a file</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#selectively-loading-parts-of-a-big-file">Selectively loading parts of a big file</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#loading-only-some-columns">Loading only some columns</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#load-raw-data-as-a-list-of-lists-of-strings">Load raw data as a list of lists of strings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#selectively-loading-parts-of-a-big-file">Selectively loading parts of a big file</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#loading-a-set-number-of-lines-from-a-file">Loading a set number of lines from a file</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#loading-only-some-rows">Loading only some rows</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#loading-only-some-columns">Loading only some columns</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#load-raw-data-as-a-list-of-lists-of-strings">Load raw data as a list of lists of strings</a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="#make-a-table-from-header-and-rows">Make a table from header and rows</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#make-a-table-from-a-dict">Make a table from a <code class="docutils literal notranslate"><span class="pre">dict</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#specify-the-column-order-when-creating-from-a-dict">Specify the column order when creating from a <code class="docutils literal notranslate"><span class="pre">dict</span></code>.</a></li>
@@ -897,50 +899,36 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>Locus</th>
-<th>Region</th>
-<th>Ratio</th>
+<th>Locus</th><th>Region</th><th>Ratio</th>
 </thead>
 <tbody>
-<tr>
-<td>NP_003077</td>
-<td>Con</td>
-<td>2.5386</td>
-</tr>
-<tr>
-<td>NP_004893</td>
-<td>Con</td>
-<td>121351.4264</td>
-</tr>
-<tr>
-<td>NP_005079</td>
-<td>Con</td>
-<td>9516594.9789</td>
-</tr>
-<tr>
-<td>NP_005500</td>
-<td>NonCon</td>
-<td>0.0000</td>
-</tr>
-<tr>
-<td>NP_055852</td>
-<td>NonCon</td>
-<td>10933217.7090</td>
-</tr>
+<tr><td><span class="c3col_left">NP_003077</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">2.5386</span></td></tr>
+<tr><td><span class="c3col_left">NP_004893</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">121351.4264</span></td></tr>
+<tr><td><span class="c3col_left">NP_005079</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">9516594.9789</span></td></tr>
+<tr><td><span class="c3col_left">NP_005500</span></td><td><span class="c3col_left">NonCon</span></td><td><span class="c3col_right">0.0000</span></td></tr>
+<tr><td><span class="c3col_left">NP_055852</span></td><td><span class="c3col_left">NonCon</span></td><td><span class="c3col_right">10933217.7090</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -969,50 +957,36 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>Locus</th>
-<th>Region</th>
-<th>Ratio</th>
+<th>Locus</th><th>Region</th><th>Ratio</th>
 </thead>
 <tbody>
-<tr>
-<td>NP_003077</td>
-<td>Con</td>
-<td>2.5386</td>
-</tr>
-<tr>
-<td>NP_004893</td>
-<td>Con</td>
-<td>121351.4264</td>
-</tr>
-<tr>
-<td>NP_005079</td>
-<td>Con</td>
-<td>9516594.9789</td>
-</tr>
-<tr>
-<td>NP_005500</td>
-<td>NonCon</td>
-<td>0.0000</td>
-</tr>
-<tr>
-<td>NP_055852</td>
-<td>NonCon</td>
-<td>10933217.7090</td>
-</tr>
+<tr><td><span class="c3col_left">NP_003077</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">2.5386</span></td></tr>
+<tr><td><span class="c3col_left">NP_004893</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">121351.4264</span></td></tr>
+<tr><td><span class="c3col_left">NP_005079</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">9516594.9789</span></td></tr>
+<tr><td><span class="c3col_left">NP_005500</span></td><td><span class="c3col_left">NonCon</span></td><td><span class="c3col_right">0.0000</span></td></tr>
+<tr><td><span class="c3col_left">NP_055852</span></td><td><span class="c3col_left">NonCon</span></td><td><span class="c3col_right">10933217.7090</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -1020,9 +994,11 @@
 </div></div></div>
 </div>
 </div>
+<div class="section" id="selectively-loading-parts-of-a-big-file">
+<h2>Selectively loading parts of a big file<a class="headerlink" href="#selectively-loading-parts-of-a-big-file" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="loading-a-set-number-of-lines-from-a-file">
-<h2>Loading a set number of lines from a file<a class="headerlink" href="#loading-a-set-number-of-lines-from-a-file" title="Permalink to this headline">¶</a></h2>
-<p>If you only want a subset of the contents of a file, use the <code class="docutils literal notranslate"><span class="pre">FilteringParser</span></code>. This allows skipping certain lines by using a callback function. We illustrate this with <code class="docutils literal notranslate"><span class="pre">stats.tsv</span></code>, skipping any rows with <code class="docutils literal notranslate"><span class="pre">&quot;Ratio&quot;</span></code> &gt; 10.</p>
+<h3>Loading a set number of lines from a file<a class="headerlink" href="#loading-a-set-number-of-lines-from-a-file" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">limit</span></code> argument specifies the number of lines to read.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
@@ -1033,35 +1009,33 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>Locus</th>
-<th>Region</th>
-<th>Ratio</th>
+<th>Locus</th><th>Region</th><th>Ratio</th>
 </thead>
 <tbody>
-<tr>
-<td>NP_003077</td>
-<td>Con</td>
-<td>2.5386</td>
-</tr>
-<tr>
-<td>NP_004893</td>
-<td>Con</td>
-<td>121351.4264</td>
-</tr>
+<tr><td><span class="c3col_left">NP_003077</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">2.5386</span></td></tr>
+<tr><td><span class="c3col_left">NP_004893</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">121351.4264</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -1069,8 +1043,8 @@
 </div></div></div>
 </div>
 </div>
-<div class="section" id="selectively-loading-parts-of-a-big-file">
-<h2>Selectively loading parts of a big file<a class="headerlink" href="#selectively-loading-parts-of-a-big-file" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="loading-only-some-rows">
+<h3>Loading only some rows<a class="headerlink" href="#loading-only-some-rows" title="Permalink to this headline">¶</a></h3>
 <p>If you only want a subset of the contents of a file, use the <code class="docutils literal notranslate"><span class="pre">FilteringParser</span></code>. This allows skipping certain lines by using a callback function. We illustrate this with <code class="docutils literal notranslate"><span class="pre">stats.tsv</span></code>, skipping any rows with <code class="docutils literal notranslate"><span class="pre">&quot;Ratio&quot;</span></code> &gt; 10.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1085,48 +1059,88 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>Locus</th>
-<th>Region</th>
-<th>Ratio</th>
+<th>Locus</th><th>Region</th><th>Ratio</th>
 </thead>
 <tbody>
-<tr>
-<td>NP_003077</td>
-<td>Con</td>
-<td>2.5</td>
-</tr>
-<tr>
-<td>NP_005500</td>
-<td>NonCon</td>
-<td>0.0</td>
-</tr>
+<tr><td><span class="c3col_left">NP_003077</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">2.5</span></td></tr>
+<tr><td><span class="c3col_left">NP_005500</span></td><td><span class="c3col_left">NonCon</span></td><td><span class="c3col_right">0.0</span></td></tr>
 </tbody>
 </table>
 <p>
 2 rows x 3 columns</p>
 </div></div></div>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>You can also <code class="docutils literal notranslate"><span class="pre">negate</span></code> a condition, which is useful if the condition is complex.</p>
+<p>You can also <code class="docutils literal notranslate"><span class="pre">negate</span></code> a condition, which is useful if the condition is complex. In this example, it means keep the rows for which <code class="docutils literal notranslate"><span class="pre">Ratio</span> <span class="pre">&gt;</span> <span class="pre">10</span></code>.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">reader</span> <span class="o">=</span> <span class="n">FilteringParser</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">with_header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">negate</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+<span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="n">reader</span><span class="o">=</span><span class="n">reader</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">table</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div class="c3table">
+
+<style>
+.c3table table {margin: 10px 0;}
+.c3table tr:last-child {border-bottom: 1px solid #000;} 
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
+.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+.c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
+</style>
+
+<table>
+
+<thead class="head_cell">
+<th>Locus</th><th>Region</th><th>Ratio</th>
+</thead>
+<tbody>
+<tr><td><span class="c3col_left">NP_004893</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">121351.4</span></td></tr>
+<tr><td><span class="c3col_left">NP_005079</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">9516595.0</span></td></tr>
+<tr><td><span class="c3col_left">NP_055852</span></td><td><span class="c3col_left">NonCon</span></td><td><span class="c3col_right">10933217.7</span></td></tr>
+</tbody>
+</table>
+<p>
+3 rows x 3 columns</p>
+</div></div></div>
 </div>
 </div>
 <div class="section" id="loading-only-some-columns">
-<h2>Loading only some columns<a class="headerlink" href="#loading-only-some-columns" title="Permalink to this headline">¶</a></h2>
+<h3>Loading only some columns<a class="headerlink" href="#loading-only-some-columns" title="Permalink to this headline">¶</a></h3>
 <p>Specify the columns by their names.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1139,44 +1153,36 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>Locus</th>
-<th>Ratio</th>
+<th>Locus</th><th>Ratio</th>
 </thead>
 <tbody>
-<tr>
-<td>NP_003077</td>
-<td>2.5386</td>
-</tr>
-<tr>
-<td>NP_004893</td>
-<td>121351.4264</td>
-</tr>
-<tr>
-<td>NP_005079</td>
-<td>9516594.9789</td>
-</tr>
-<tr>
-<td>NP_005500</td>
-<td>0.0000</td>
-</tr>
-<tr>
-<td>NP_055852</td>
-<td>10933217.7090</td>
-</tr>
+<tr><td><span class="c3col_left">NP_003077</span></td><td><span class="c3col_right">2.5386</span></td></tr>
+<tr><td><span class="c3col_left">NP_004893</span></td><td><span class="c3col_right">121351.4264</span></td></tr>
+<tr><td><span class="c3col_left">NP_005079</span></td><td><span class="c3col_right">9516594.9789</span></td></tr>
+<tr><td><span class="c3col_left">NP_005500</span></td><td><span class="c3col_right">0.0000</span></td></tr>
+<tr><td><span class="c3col_left">NP_055852</span></td><td><span class="c3col_right">10933217.7090</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -1195,44 +1201,36 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>Locus</th>
-<th>Ratio</th>
+<th>Locus</th><th>Ratio</th>
 </thead>
 <tbody>
-<tr>
-<td>NP_003077</td>
-<td>2.5386</td>
-</tr>
-<tr>
-<td>NP_004893</td>
-<td>121351.4264</td>
-</tr>
-<tr>
-<td>NP_005079</td>
-<td>9516594.9789</td>
-</tr>
-<tr>
-<td>NP_005500</td>
-<td>0.0000</td>
-</tr>
-<tr>
-<td>NP_055852</td>
-<td>10933217.7090</td>
-</tr>
+<tr><td><span class="c3col_left">NP_003077</span></td><td><span class="c3col_right">2.5386</span></td></tr>
+<tr><td><span class="c3col_left">NP_004893</span></td><td><span class="c3col_right">121351.4264</span></td></tr>
+<tr><td><span class="c3col_left">NP_005079</span></td><td><span class="c3col_right">9516594.9789</span></td></tr>
+<tr><td><span class="c3col_left">NP_005500</span></td><td><span class="c3col_right">0.0000</span></td></tr>
+<tr><td><span class="c3col_left">NP_055852</span></td><td><span class="c3col_right">10933217.7090</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -1245,7 +1243,7 @@
 </div>
 </div>
 <div class="section" id="load-raw-data-as-a-list-of-lists-of-strings">
-<h2>Load raw data as a list of lists of strings<a class="headerlink" href="#load-raw-data-as-a-list-of-lists-of-strings" title="Permalink to this headline">¶</a></h2>
+<h3>Load raw data as a list of lists of strings<a class="headerlink" href="#load-raw-data-as-a-list-of-lists-of-strings" title="Permalink to this headline">¶</a></h3>
 <p>We just use <code class="docutils literal notranslate"><span class="pre">FilteringParser</span></code>.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1253,7 +1251,16 @@
 
 <span class="n">reader</span> <span class="o">=</span> <span class="n">FilteringParser</span><span class="p">(</span><span class="n">with_header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="n">data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">reader</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">))</span>
-<span class="n">data</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>  <span class="c1"># just the first two lines</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>We just display the first two lines.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1265,7 +1272,8 @@
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The individual elements are still <code class="docutils literal notranslate"><span class="pre">str</span></code>.</p>
+<p>The individual elements are all <code class="docutils literal notranslate"><span class="pre">str</span></code>.</p>
+</div>
 </div>
 </div>
 <div class="section" id="make-a-table-from-header-and-rows">
@@ -1282,45 +1290,35 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>A</th>
-<th>B</th>
-<th>C</th>
+<th>A</th><th>B</th><th>C</th>
 </thead>
 <tbody>
-<tr>
-<td>0</td>
-<td>1</td>
-<td>2</td>
-</tr>
-<tr>
-<td>3</td>
-<td>4</td>
-<td>5</td>
-</tr>
-<tr>
-<td>6</td>
-<td>7</td>
-<td>8</td>
-</tr>
-<tr>
-<td>9</td>
-<td>10</td>
-<td>11</td>
-</tr>
+<tr><td><span class="c3col_right">0</span></td><td><span class="c3col_right">1</span></td><td><span class="c3col_right">2</span></td></tr>
+<tr><td><span class="c3col_right">3</span></td><td><span class="c3col_right">4</span></td><td><span class="c3col_right">5</span></td></tr>
+<tr><td><span class="c3col_right">6</span></td><td><span class="c3col_right">7</span></td><td><span class="c3col_right">8</span></td></tr>
+<tr><td><span class="c3col_right">9</span></td><td><span class="c3col_right">10</span></td><td><span class="c3col_right">11</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -1342,40 +1340,34 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>A</th>
-<th>B</th>
-<th>C</th>
+<th>A</th><th>B</th><th>C</th>
 </thead>
 <tbody>
-<tr>
-<td>0</td>
-<td>1</td>
-<td>2</td>
-</tr>
-<tr>
-<td>3</td>
-<td>4</td>
-<td>5</td>
-</tr>
-<tr>
-<td>6</td>
-<td>7</td>
-<td>8</td>
-</tr>
+<tr><td><span class="c3col_right">0</span></td><td><span class="c3col_right">1</span></td><td><span class="c3col_right">2</span></td></tr>
+<tr><td><span class="c3col_right">3</span></td><td><span class="c3col_right">4</span></td><td><span class="c3col_right">5</span></td></tr>
+<tr><td><span class="c3col_right">6</span></td><td><span class="c3col_right">7</span></td><td><span class="c3col_right">8</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -1393,40 +1385,34 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>C</th>
-<th>A</th>
-<th>B</th>
+<th>C</th><th>A</th><th>B</th>
 </thead>
 <tbody>
-<tr>
-<td>2</td>
-<td>0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>5</td>
-<td>3</td>
-<td>4</td>
-</tr>
-<tr>
-<td>8</td>
-<td>6</td>
-<td>7</td>
-</tr>
+<tr><td><span class="c3col_right">2</span></td><td><span class="c3col_right">0</span></td><td><span class="c3col_right">1</span></td></tr>
+<tr><td><span class="c3col_right">5</span></td><td><span class="c3col_right">3</span></td><td><span class="c3col_right">4</span></td></tr>
+<tr><td><span class="c3col_right">8</span></td><td><span class="c3col_right">6</span></td><td><span class="c3col_right">7</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -1439,36 +1425,38 @@
 <p>A <code class="docutils literal notranslate"><span class="pre">Table</span></code> can be indexed like a dict if you designate a column as the index (and that column has a unique value for every row).</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s2">&quot;Locus&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="n">index_name</span><span class="o">=</span><span class="s2">&quot;Locus&quot;</span><span class="p">)</span>
 <span class="n">table</span><span class="p">[</span><span class="s2">&quot;NP_055852&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.25); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>Locus</th>
-<th>Region</th>
-<th>Ratio</th>
+<th>Locus</th><th>Region</th><th>Ratio</th>
 </thead>
 <tbody>
-<tr>
-<td class="index">NP_055852</td>
-<td>NonCon</td>
-<td>10933217.7090</td>
-</tr>
+<tr><td class="index"><span class="c3col_left">NP_055852</span></td><td><span class="c3col_left">NonCon</span></td><td><span class="c3col_right">10933217.7090</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -1497,6 +1485,7 @@
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">DataFrame</span>
+
 <span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 
 <span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">])</span>
@@ -1507,32 +1496,33 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>a</th>
-<th>b</th>
+<th>a</th><th>b</th>
 </thead>
 <tbody>
-<tr>
-<td>0</td>
-<td>a</td>
-</tr>
-<tr>
-<td>3</td>
-<td>c</td>
-</tr>
+<tr><td><span class="c3col_right">0</span></td><td><span class="c3col_left">a</span></td></tr>
+<tr><td><span class="c3col_right">3</span></td><td><span class="c3col_left">c</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -1552,32 +1542,33 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>a</th>
-<th>b</th>
+<th>a</th><th>b</th>
 </thead>
 <tbody>
-<tr>
-<td>0</td>
-<td>a</td>
-</tr>
-<tr>
-<td>3</td>
-<td>c</td>
-</tr>
+<tr><td><span class="c3col_right">0</span></td><td><span class="c3col_left">a</span></td></tr>
+<tr><td><span class="c3col_right">3</span></td><td><span class="c3col_left">c</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -1599,32 +1590,33 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>a</th>
-<th>b</th>
+<th>a</th><th>b</th>
 </thead>
 <tbody>
-<tr>
-<td>0</td>
-<td>a</td>
-</tr>
-<tr>
-<td>3</td>
-<td>c</td>
-</tr>
+<tr><td><span class="c3col_right">0</span></td><td><span class="c3col_left">a</span></td></tr>
+<tr><td><span class="c3col_right">3</span></td><td><span class="c3col_left">c</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -1645,54 +1637,56 @@
         <span class="s2">&quot;DogFaced&quot;</span><span class="p">:</span> <span class="s2">&quot;root&quot;</span><span class="p">,</span>
         <span class="s2">&quot;Human&quot;</span><span class="p">:</span> <span class="s2">&quot;edge.0&quot;</span><span class="p">,</span>
     <span class="p">},</span>
-    <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;NineBande&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;edge.1&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;DogFaced&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;Human&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,},</span>
-    <span class="s2">&quot;length&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;NineBande&quot;</span><span class="p">:</span> <span class="mf">4.0</span><span class="p">,</span> <span class="s2">&quot;edge.1&quot;</span><span class="p">:</span> <span class="mf">4.0</span><span class="p">,</span> <span class="s2">&quot;DogFaced&quot;</span><span class="p">:</span> <span class="mf">4.0</span><span class="p">,</span> <span class="s2">&quot;Human&quot;</span><span class="p">:</span> <span class="mf">4.0</span><span class="p">,},</span>
+    <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;NineBande&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="s2">&quot;edge.1&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="s2">&quot;DogFaced&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="s2">&quot;Human&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;length&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;NineBande&quot;</span><span class="p">:</span> <span class="mf">4.0</span><span class="p">,</span>
+        <span class="s2">&quot;edge.1&quot;</span><span class="p">:</span> <span class="mf">4.0</span><span class="p">,</span>
+        <span class="s2">&quot;DogFaced&quot;</span><span class="p">:</span> <span class="mf">4.0</span><span class="p">,</span>
+        <span class="s2">&quot;Human&quot;</span><span class="p">:</span> <span class="mf">4.0</span><span class="p">,</span>
+    <span class="p">},</span>
 <span class="p">}</span>
-<span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">d2D</span><span class="p">,)</span>
+<span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">d2D</span><span class="p">,</span>
+<span class="p">)</span>
 <span class="n">table</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>edge.parent</th>
-<th>x</th>
-<th>length</th>
+<th>edge.parent</th><th>x</th><th>length</th>
 </thead>
 <tbody>
-<tr>
-<td>root</td>
-<td>1.0000</td>
-<td>4.0000</td>
-</tr>
-<tr>
-<td>root</td>
-<td>1.0000</td>
-<td>4.0000</td>
-</tr>
-<tr>
-<td>root</td>
-<td>1.0000</td>
-<td>4.0000</td>
-</tr>
-<tr>
-<td>edge.0</td>
-<td>1.0000</td>
-<td>4.0000</td>
-</tr>
+<tr><td><span class="c3col_left">root</span></td><td><span class="c3col_right">1.0000</span></td><td><span class="c3col_right">4.0000</span></td></tr>
+<tr><td><span class="c3col_left">root</span></td><td><span class="c3col_right">1.0000</span></td><td><span class="c3col_right">4.0000</span></td></tr>
+<tr><td><span class="c3col_left">root</span></td><td><span class="c3col_right">1.0000</span></td><td><span class="c3col_right">4.0000</span></td></tr>
+<tr><td><span class="c3col_left">edge.0</span></td><td><span class="c3col_right">1.0000</span></td><td><span class="c3col_right">4.0000</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -1717,36 +1711,34 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>abcd</th>
-<th>data</th>
+<th>abcd</th><th>data</th>
 </thead>
 <tbody>
-<tr>
-<td>range(1, 6)</td>
-<td>0</td>
-</tr>
-<tr>
-<td>x</td>
-<td>5.0</td>
-</tr>
-<tr>
-<td>y</td>
-<td>*</td>
-</tr>
+<tr><td><span class="c3col_left">range(1, 6)</span></td><td><span class="c3col_left">0</span></td></tr>
+<tr><td><span class="c3col_left">x</span></td><td><span class="c3col_left">5.0</span></td></tr>
+<tr><td><span class="c3col_left">y</span></td><td><span class="c3col_left">None</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -1784,36 +1776,34 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>a</th>
-<th>b</th>
+<th>a</th><th>b</th>
 </thead>
 <tbody>
-<tr>
-<td>1</td>
-<td>2</td>
-</tr>
-<tr>
-<td>3</td>
-<td>4</td>
-</tr>
-<tr>
-<td>5</td>
-<td>6</td>
-</tr>
+<tr><td><span class="c3col_right">1</span></td><td><span class="c3col_right">2</span></td></tr>
+<tr><td><span class="c3col_right">3</span></td><td><span class="c3col_right">4</span></td></tr>
+<tr><td><span class="c3col_right">5</span></td><td><span class="c3col_right">6</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -1835,33 +1825,36 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
-<caption><span class="cell_title">Sample title</span><br><span class="cell_legend">a legend</span></caption>
+
+<caption>
+<span class="cell_title">Sample title</span> <br><span class="cell_legend">a legend</span></br>
+</caption>
 <thead class="head_cell">
-<th>a</th>
-<th>b</th>
+<th>a</th><th>b</th>
 </thead>
 <tbody>
-<tr>
-<td>0</td>
-<td>a</td>
-</tr>
-<tr>
-<td>3</td>
-<td>c</td>
-</tr>
+<tr><td><span class="c3col_right">0</span></td><td><span class="c3col_left">a</span></td></tr>
+<tr><td><span class="c3col_right">3</span></td><td><span class="c3col_left">c</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -1879,33 +1872,36 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
-<caption><span class="cell_title">My title</span><br><span class="cell_legend"></span></caption>
+
+<caption>
+<span class="cell_title">My title</span>
+</caption>
 <thead class="head_cell">
-<th>a</th>
-<th>b</th>
+<th>a</th><th>b</th>
 </thead>
 <tbody>
-<tr>
-<td>0</td>
-<td>a</td>
-</tr>
-<tr>
-<td>3</td>
-<td>c</td>
-</tr>
+<tr><td><span class="c3col_right">0</span></td><td><span class="c3col_left">a</span></td></tr>
+<tr><td><span class="c3col_right">3</span></td><td><span class="c3col_left">c</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -1929,9 +1925,9 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>=============================
-    Locus    Region     Ratio
+Locus        Region     Ratio
 -----------------------------
-NP_003077       Con    2.5386
+NP_003077    Con       2.5386
 -----------------------------
 </pre></div>
 </div>
@@ -2049,50 +2045,36 @@ Ratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>Locus</th>
-<th>Region</th>
-<th>Ratio</th>
+<th>Locus</th><th>Region</th><th>Ratio</th>
 </thead>
 <tbody>
-<tr>
-<td>NP_003077</td>
-<td>Con</td>
-<td>2.5386</td>
-</tr>
-<tr>
-<td>NP_004893</td>
-<td>Con</td>
-<td>121351.4264</td>
-</tr>
-<tr>
-<td>NP_005079</td>
-<td>Con</td>
-<td>9516594.9789</td>
-</tr>
-<tr>
-<td>NP_005500</td>
-<td>NonCon</td>
-<td>0.0000</td>
-</tr>
-<tr>
-<td>NP_055852</td>
-<td>NonCon</td>
-<td>10933217.7090</td>
-</tr>
+<tr><td><span class="c3col_left">NP_003077</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">2.5386</span></td></tr>
+<tr><td><span class="c3col_left">NP_004893</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">121351.4264</span></td></tr>
+<tr><td><span class="c3col_left">NP_005079</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">9516594.9789</span></td></tr>
+<tr><td><span class="c3col_left">NP_005500</span></td><td><span class="c3col_left">NonCon</span></td><td><span class="c3col_right">0.0000</span></td></tr>
+<tr><td><span class="c3col_left">NP_055852</span></td><td><span class="c3col_left">NonCon</span></td><td><span class="c3col_right">10933217.7090</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -2107,32 +2089,33 @@ Ratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>Region</th>
-<th>Ratio</th>
+<th>Region</th><th>Ratio</th>
 </thead>
 <tbody>
-<tr>
-<td>Con</td>
-<td>2.5386</td>
-</tr>
-<tr>
-<td>Con</td>
-<td>121351.4264</td>
-</tr>
+<tr><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">2.5386</span></td></tr>
+<tr><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">121351.4264</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -2150,29 +2133,33 @@ Ratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
 <th>Locus</th>
 </thead>
 <tbody>
-<tr>
-<td>NP_003077</td>
-</tr>
-<tr>
-<td>NP_004893</td>
-</tr>
+<tr><td><span class="c3col_left">NP_003077</span></td></tr>
+<tr><td><span class="c3col_left">NP_004893</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -2194,50 +2181,36 @@ Ratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>Locus</th>
-<th>Region</th>
-<th>Ratio</th>
+<th>Locus</th><th>Region</th><th>Ratio</th>
 </thead>
 <tbody>
-<tr>
-<td>NP_003077</td>
-<td>Con</td>
-<td>2.5e+00</td>
-</tr>
-<tr>
-<td>NP_004893</td>
-<td>Con</td>
-<td>1.2e+05</td>
-</tr>
-<tr>
-<td>NP_005079</td>
-<td>Con</td>
-<td>9.5e+06</td>
-</tr>
-<tr>
-<td>NP_005500</td>
-<td>NonCon</td>
-<td>7.4e-08</td>
-</tr>
-<tr>
-<td>NP_055852</td>
-<td>NonCon</td>
-<td>1.1e+07</td>
-</tr>
+<tr><td><span class="c3col_left">NP_003077</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">2.5e+00</span></td></tr>
+<tr><td><span class="c3col_left">NP_004893</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">1.2e+05</span></td></tr>
+<tr><td><span class="c3col_left">NP_005079</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">9.5e+06</span></td></tr>
+<tr><td><span class="c3col_left">NP_005500</span></td><td><span class="c3col_left">NonCon</span></td><td><span class="c3col_right">7.4e-08</span></td></tr>
+<tr><td><span class="c3col_left">NP_055852</span></td><td><span class="c3col_left">NonCon</span></td><td><span class="c3col_right">1.1e+07</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -2256,50 +2229,36 @@ Ratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>Locus</th>
-<th>Region</th>
-<th>Ratio</th>
+<th>Locus</th><th>Region</th><th>Ratio</th>
 </thead>
 <tbody>
-<tr>
-<td>NP_003077</td>
-<td>Con</td>
-<td>2.5</td>
-</tr>
-<tr>
-<td>NP_004893</td>
-<td>Con</td>
-<td>121351.4</td>
-</tr>
-<tr>
-<td>NP_005079</td>
-<td>Con</td>
-<td>9516595.0</td>
-</tr>
-<tr>
-<td>NP_005500</td>
-<td>NonCon</td>
-<td>0.0</td>
-</tr>
-<tr>
-<td>NP_055852</td>
-<td>NonCon</td>
-<td>10933217.7</td>
-</tr>
+<tr><td><span class="c3col_left">NP_003077</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">2.5</span></td></tr>
+<tr><td><span class="c3col_left">NP_004893</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">121351.4</span></td></tr>
+<tr><td><span class="c3col_left">NP_005079</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">9516595.0</span></td></tr>
+<tr><td><span class="c3col_left">NP_005500</span></td><td><span class="c3col_left">NonCon</span></td><td><span class="c3col_right">0.0</span></td></tr>
+<tr><td><span class="c3col_left">NP_055852</span></td><td><span class="c3col_left">NonCon</span></td><td><span class="c3col_right">10933217.7</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -2315,50 +2274,36 @@ Ratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>Locus</th>
-<th>Region</th>
-<th>Ratio</th>
+<th>Locus</th><th>Region</th><th>Ratio</th>
 </thead>
 <tbody>
-<tr>
-<td>NP_003077</td>
-<td>Con</td>
-<td>2.5</td>
-</tr>
-<tr>
-<td>NP_004893</td>
-<td>Con</td>
-<td>121351.4</td>
-</tr>
-<tr>
-<td>NP_005079</td>
-<td>Con</td>
-<td>9516595.0</td>
-</tr>
-<tr>
-<td>NP_005500</td>
-<td>NonCon</td>
-<td>0.0</td>
-</tr>
-<tr>
-<td>NP_055852</td>
-<td>NonCon</td>
-<td>10933217.7</td>
-</tr>
+<tr><td><span class="c3col_left">NP_003077</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">2.5</span></td></tr>
+<tr><td><span class="c3col_left">NP_004893</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">121351.4</span></td></tr>
+<tr><td><span class="c3col_left">NP_005079</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">9516595.0</span></td></tr>
+<tr><td><span class="c3col_left">NP_005500</span></td><td><span class="c3col_left">NonCon</span></td><td><span class="c3col_right">0.0</span></td></tr>
+<tr><td><span class="c3col_left">NP_055852</span></td><td><span class="c3col_left">NonCon</span></td><td><span class="c3col_right">10933217.7</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -2381,42 +2326,42 @@ Ratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>name</th>
-<th>A/C</th>
-<th>A/G</th>
+<th>name</th><th>A/C</th><th>A/G</th>
 </thead>
 <tbody>
-<tr>
-<td>tardigrade</td>
-<td>0.0425</td>
-<td>0.1424</td>
-</tr>
+<tr><td><span class="c3col_left">tardigrade</span></td><td><span class="c3col_right">0.0425</span></td><td><span class="c3col_right">0.1424</span></td></tr>
 </tbody>
 </table>
+
 <table>
+
 <thead class="head_cell">
-<th>A/T</th>
-<th>C/A</th>
+<th>A/T</th><th>C/A</th>
 </thead>
 <tbody>
-<tr>
-<td>0.0226</td>
-<td>0.0391</td>
-</tr>
+<tr><td><span class="c3col_right">0.0226</span></td><td><span class="c3col_right">0.0391</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -2425,50 +2370,48 @@ Ratio
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wrap_table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="n">h</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">rows</span><span class="p">,</span> <span class="n">max_width</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wrap_table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="n">h</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">rows</span><span class="p">,</span> <span class="n">max_width</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">index_name</span><span class="o">=</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
 <span class="n">wrap_table</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.25); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>name</th>
-<th>A/C</th>
-<th>A/G</th>
+<th>name</th><th>A/C</th><th>A/G</th>
 </thead>
 <tbody>
-<tr>
-<td class="index">tardigrade</td>
-<td>0.0425</td>
-<td>0.1424</td>
-</tr>
+<tr><td class="index"><span class="c3col_left">tardigrade</span></td><td><span class="c3col_right">0.0425</span></td><td><span class="c3col_right">0.1424</span></td></tr>
 </tbody>
 </table>
+
 <table>
+
 <thead class="head_cell">
-<th>name</th>
-<th>A/T</th>
-<th>C/A</th>
+<th>name</th><th>A/T</th><th>C/A</th>
 </thead>
 <tbody>
-<tr>
-<td class="index">tardigrade</td>
-<td>0.0226</td>
-<td>0.0391</td>
-</tr>
+<tr><td class="index"><span class="c3col_left">tardigrade</span></td><td><span class="c3col_right">0.0226</span></td><td><span class="c3col_right">0.0391</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -2486,44 +2429,36 @@ Ratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>a</th>
-<th>b</th>
+<th>a</th><th>b</th>
 </thead>
 <tbody>
-<tr>
-<td>0</td>
-<td>0</td>
-</tr>
-<tr>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>2</td>
-<td>2</td>
-</tr>
-<tr>
-<td>3</td>
-<td>3</td>
-</tr>
-<tr>
-<td>4</td>
-<td>4</td>
-</tr>
+<tr><td><span class="c3col_right">0</span></td><td><span class="c3col_right">0</span></td></tr>
+<tr><td><span class="c3col_right">1</span></td><td><span class="c3col_right">1</span></td></tr>
+<tr><td><span class="c3col_right">2</span></td><td><span class="c3col_right">2</span></td></tr>
+<tr><td><span class="c3col_right">3</span></td><td><span class="c3col_right">3</span></td></tr>
+<tr><td><span class="c3col_right">4</span></td><td><span class="c3col_right">4</span></td></tr>
 </tbody>
 </table>
 <p>Top 5 rows from
@@ -2538,32 +2473,33 @@ Ratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>a</th>
-<th>b</th>
+<th>a</th><th>b</th>
 </thead>
 <tbody>
-<tr>
-<td>0</td>
-<td>0</td>
-</tr>
-<tr>
-<td>1</td>
-<td>1</td>
-</tr>
+<tr><td><span class="c3col_right">0</span></td><td><span class="c3col_right">0</span></td></tr>
+<tr><td><span class="c3col_right">1</span></td><td><span class="c3col_right">1</span></td></tr>
 </tbody>
 </table>
 <p>Top 2 rows from
@@ -2581,44 +2517,36 @@ Ratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>a</th>
-<th>b</th>
+<th>a</th><th>b</th>
 </thead>
 <tbody>
-<tr>
-<td>5</td>
-<td>5</td>
-</tr>
-<tr>
-<td>6</td>
-<td>6</td>
-</tr>
-<tr>
-<td>7</td>
-<td>7</td>
-</tr>
-<tr>
-<td>8</td>
-<td>8</td>
-</tr>
-<tr>
-<td>9</td>
-<td>9</td>
-</tr>
+<tr><td><span class="c3col_right">5</span></td><td><span class="c3col_right">5</span></td></tr>
+<tr><td><span class="c3col_right">6</span></td><td><span class="c3col_right">6</span></td></tr>
+<tr><td><span class="c3col_right">7</span></td><td><span class="c3col_right">7</span></td></tr>
+<tr><td><span class="c3col_right">8</span></td><td><span class="c3col_right">8</span></td></tr>
+<tr><td><span class="c3col_right">9</span></td><td><span class="c3col_right">9</span></td></tr>
 </tbody>
 </table>
 <p>Bottom 5 rows from
@@ -2633,28 +2561,32 @@ Ratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>a</th>
-<th>b</th>
+<th>a</th><th>b</th>
 </thead>
 <tbody>
-<tr>
-<td>9</td>
-<td>9</td>
-</tr>
+<tr><td><span class="c3col_right">9</span></td><td><span class="c3col_right">9</span></td></tr>
 </tbody>
 </table>
 <p>Bottom 1 rows from
@@ -2672,36 +2604,34 @@ Ratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>a</th>
-<th>b</th>
+<th>a</th><th>b</th>
 </thead>
 <tbody>
-<tr>
-<td>0</td>
-<td>0</td>
-</tr>
-<tr>
-<td>2</td>
-<td>2</td>
-</tr>
-<tr>
-<td>8</td>
-<td>8</td>
-</tr>
+<tr><td><span class="c3col_right">1</span></td><td><span class="c3col_right">1</span></td></tr>
+<tr><td><span class="c3col_right">2</span></td><td><span class="c3col_right">2</span></td></tr>
+<tr><td><span class="c3col_right">9</span></td><td><span class="c3col_right">9</span></td></tr>
 </tbody>
 </table>
 <p>Random selection of 3 rows from
@@ -2719,48 +2649,37 @@ Ratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>a</th>
-<th>b</th>
+<th>a</th><th>b</th>
 </thead>
 <tbody>
-<tr>
-<td>0</td>
-<td>0</td>
-</tr>
-<tr>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>...</td>
-<td>...</td>
-</tr>
-<tr>
-<td>7</td>
-<td>7</td>
-</tr>
-<tr>
-<td>8</td>
-<td>8</td>
-</tr>
-<tr>
-<td>9</td>
-<td>9</td>
-</tr>
+<tr><td><span class="c3col_right">0</span></td><td><span class="c3col_right">0</span></td></tr>
+<tr><td><span class="c3col_right">1</span></td><td><span class="c3col_right">1</span></td></tr>
+<tr class="ellipsis"><td><span class="c3col_right">...</span></td><td><span class="c3col_right">...</span></td></tr>
+<tr><td><span class="c3col_right">7</span></td><td><span class="c3col_right">7</span></td></tr>
+<tr><td><span class="c3col_right">8</span></td><td><span class="c3col_right">8</span></td></tr>
+<tr><td><span class="c3col_right">9</span></td><td><span class="c3col_right">9</span></td></tr>
 </tbody>
 </table>
 <p>Top 2 and bottom 3 rows from
@@ -2816,36 +2735,34 @@ Ratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>a</th>
-<th>b</th>
+<th>a</th><th>b</th>
 </thead>
 <tbody>
-<tr>
-<td>1</td>
-<td>2</td>
-</tr>
-<tr>
-<td>3</td>
-<td>4</td>
-</tr>
-<tr>
-<td>5</td>
-<td>6</td>
-</tr>
+<tr><td><span class="c3col_right">1</span></td><td><span class="c3col_right">2</span></td></tr>
+<tr><td><span class="c3col_right">3</span></td><td><span class="c3col_right">4</span></td></tr>
+<tr><td><span class="c3col_right">5</span></td><td><span class="c3col_right">6</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -2869,56 +2786,36 @@ Ratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>Locus</th>
-<th>Region</th>
-<th>Ratio</th>
-<th>LargeCon</th>
+<th>Locus</th><th>Region</th><th>Ratio</th><th>LargeCon</th>
 </thead>
 <tbody>
-<tr>
-<td>NP_003077</td>
-<td>Con</td>
-<td>2.5386</td>
-<td>False</td>
-</tr>
-<tr>
-<td>NP_004893</td>
-<td>Con</td>
-<td>121351.4264</td>
-<td>True</td>
-</tr>
-<tr>
-<td>NP_005079</td>
-<td>Con</td>
-<td>9516594.9789</td>
-<td>True</td>
-</tr>
-<tr>
-<td>NP_005500</td>
-<td>NonCon</td>
-<td>0.0000</td>
-<td>False</td>
-</tr>
-<tr>
-<td>NP_055852</td>
-<td>NonCon</td>
-<td>10933217.7090</td>
-<td>False</td>
-</tr>
+<tr><td><span class="c3col_left">NP_003077</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">2.5386</span></td><td><span class="c3col_left">False</span></td></tr>
+<tr><td><span class="c3col_left">NP_004893</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">121351.4264</span></td><td><span class="c3col_left">True</span></td></tr>
+<tr><td><span class="c3col_left">NP_005079</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">9516594.9789</span></td><td><span class="c3col_left">True</span></td></tr>
+<tr><td><span class="c3col_left">NP_005500</span></td><td><span class="c3col_left">NonCon</span></td><td><span class="c3col_right">0.0000</span></td><td><span class="c3col_left">False</span></td></tr>
+<tr><td><span class="c3col_left">NP_055852</span></td><td><span class="c3col_left">NonCon</span></td><td><span class="c3col_right">10933217.7090</span></td><td><span class="c3col_left">False</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -3132,41 +3029,39 @@ Ratio
 <p>If our table consists of counts data, the <code class="docutils literal notranslate"><span class="pre">Table</span></code> can convert it into a <code class="docutils literal notranslate"><span class="pre">CategoryCount</span></code> instance that can be used for performing basic contingency table statistical tests, e.g. chisquare, G-test of independence, etc.. To do this, we must specify which column contains the row names using the <code class="docutils literal notranslate"><span class="pre">index</span></code> argument.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Ts&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">31</span><span class="p">,</span> <span class="mi">58</span><span class="p">],</span> <span class="s2">&quot;Tv&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">36</span><span class="p">,</span> <span class="mi">138</span><span class="p">],</span> <span class="s2">&quot;&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;syn&quot;</span><span class="p">,</span> <span class="s2">&quot;nsyn&quot;</span><span class="p">]},</span> <span class="n">index</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Ts&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">31</span><span class="p">,</span> <span class="mi">58</span><span class="p">],</span> <span class="s2">&quot;Tv&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">36</span><span class="p">,</span> <span class="mi">138</span><span class="p">],</span> <span class="s2">&quot;&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;syn&quot;</span><span class="p">,</span> <span class="s2">&quot;nsyn&quot;</span><span class="p">]},</span> <span class="n">index_name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 <span class="n">table</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.25); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th></th>
-<th>Ts</th>
-<th>Tv</th>
+<th></th><th>Ts</th><th>Tv</th>
 </thead>
 <tbody>
-<tr>
-<td class="index">syn</td>
-<td>31</td>
-<td>36</td>
-</tr>
-<tr>
-<td class="index">nsyn</td>
-<td>58</td>
-<td>138</td>
-</tr>
+<tr><td class="index"><span class="c3col_left">syn</span></td><td><span class="c3col_right">31</span></td><td><span class="c3col_right">36</span></td></tr>
+<tr><td class="index"><span class="c3col_left">nsyn</span></td><td><span class="c3col_right">58</span></td><td><span class="c3col_right">138</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -3181,102 +3076,102 @@ Ratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.25); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
-<caption><span class="cell_title">Observed</span><br><span class="cell_legend"></span></caption>
+
+<caption>
+<span class="cell_title">Observed</span>
+</caption>
 <thead class="head_cell">
-<th></th>
-<th>Ts</th>
-<th>Tv</th>
+<th></th><th>Ts</th><th>Tv</th>
 </thead>
 <tbody>
-<tr>
-<td class="index">syn</td>
-<td>31</td>
-<td>36</td>
-</tr>
-<tr>
-<td class="index">nsyn</td>
-<td>58</td>
-<td>138</td>
-</tr>
+<tr><td class="index"><span class="c3col_left">syn</span></td><td><span class="c3col_right">31</span></td><td><span class="c3col_right">36</span></td></tr>
+<tr><td class="index"><span class="c3col_left">nsyn</span></td><td><span class="c3col_right">58</span></td><td><span class="c3col_right">138</span></td></tr>
 </tbody>
 </table>
 
-</div><br><style>
+</div><br>
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.25); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
-<caption><span class="cell_title">Expected</span><br><span class="cell_legend"></span></caption>
+
+<caption>
+<span class="cell_title">Expected</span>
+</caption>
 <thead class="head_cell">
-<th></th>
-<th>Ts</th>
-<th>Tv</th>
+<th></th><th>Ts</th><th>Tv</th>
 </thead>
 <tbody>
-<tr>
-<td class="index">syn</td>
-<td>22.6730</td>
-<td>44.3270</td>
-</tr>
-<tr>
-<td class="index">nsyn</td>
-<td>66.3270</td>
-<td>129.6730</td>
-</tr>
+<tr><td class="index"><span class="c3col_left">syn</span></td><td><span class="c3col_right">22.6730</span></td><td><span class="c3col_right">44.3270</span></td></tr>
+<tr><td class="index"><span class="c3col_left">nsyn</span></td><td><span class="c3col_right">66.3270</span></td><td><span class="c3col_right">129.6730</span></td></tr>
 </tbody>
 </table>
 
-</div><br><style>
+</div><br>
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.25); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
-<caption><span class="cell_title">Residuals</span><br><span class="cell_legend"></span></caption>
+
+<caption>
+<span class="cell_title">Residuals</span>
+</caption>
 <thead class="head_cell">
-<th></th>
-<th>Ts</th>
-<th>Tv</th>
+<th></th><th>Ts</th><th>Tv</th>
 </thead>
 <tbody>
-<tr>
-<td class="index">syn</td>
-<td>1.7488</td>
-<td>-1.2507</td>
-</tr>
-<tr>
-<td class="index">nsyn</td>
-<td>-1.0225</td>
-<td>0.7312</td>
-</tr>
+<tr><td class="index"><span class="c3col_left">syn</span></td><td><span class="c3col_right">1.7488</span></td><td><span class="c3col_right">-1.2507</span></td></tr>
+<tr><td class="index"><span class="c3col_left">nsyn</span></td><td><span class="c3col_right">-1.0225</span></td><td><span class="c3col_right">0.7312</span></td></tr>
 </tbody>
 </table>
 
@@ -3290,131 +3185,135 @@ Ratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
-<caption><span class="cell_title">G-test for independence (with Williams correction)</span><br><span class="cell_legend"></span></caption>
+
+<caption>
+<span class="cell_title">G-test for independence (with Williams correction)</span>
+</caption>
 <thead class="head_cell">
-<th>G</th>
-<th>df</th>
-<th>pvalue</th>
+<th>G</th><th>df</th><th>pvalue</th>
 </thead>
 <tbody>
-<tr>
-<td>5.973</td>
-<td>1</td>
-<td>0.0145</td>
-</tr>
+<tr><td><span class="c3col_right">5.973</span></td><td><span class="c3col_right">1</span></td><td><span class="c3col_right">0.0145</span></td></tr>
 </tbody>
 </table>
 
 </div>
+
+<div class="c3table">
+
 <style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.25); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
-<caption><span class="cell_title">Observed</span><br><span class="cell_legend"></span></caption>
+
+<caption>
+<span class="cell_title">Observed</span>
+</caption>
 <thead class="head_cell">
-<th></th>
-<th>Ts</th>
-<th>Tv</th>
+<th></th><th>Ts</th><th>Tv</th>
 </thead>
 <tbody>
-<tr>
-<td class="index">nsyn</td>
-<td>58</td>
-<td>138</td>
-</tr>
-<tr>
-<td class="index">syn</td>
-<td>31</td>
-<td>36</td>
-</tr>
+<tr><td class="index"><span class="c3col_left">nsyn</span></td><td><span class="c3col_right">58</span></td><td><span class="c3col_right">138</span></td></tr>
+<tr><td class="index"><span class="c3col_left">syn</span></td><td><span class="c3col_right">31</span></td><td><span class="c3col_right">36</span></td></tr>
 </tbody>
 </table>
 
-</div><br><style>
+</div><br>
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.25); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
-<caption><span class="cell_title">Expected</span><br><span class="cell_legend"></span></caption>
+
+<caption>
+<span class="cell_title">Expected</span>
+</caption>
 <thead class="head_cell">
-<th></th>
-<th>Ts</th>
-<th>Tv</th>
+<th></th><th>Ts</th><th>Tv</th>
 </thead>
 <tbody>
-<tr>
-<td class="index">nsyn</td>
-<td>66.3270</td>
-<td>129.6730</td>
-</tr>
-<tr>
-<td class="index">syn</td>
-<td>22.6730</td>
-<td>44.3270</td>
-</tr>
+<tr><td class="index"><span class="c3col_left">nsyn</span></td><td><span class="c3col_right">66.3270</span></td><td><span class="c3col_right">129.6730</span></td></tr>
+<tr><td class="index"><span class="c3col_left">syn</span></td><td><span class="c3col_right">22.6730</span></td><td><span class="c3col_right">44.3270</span></td></tr>
 </tbody>
 </table>
 
-</div><br><style>
+</div><br>
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.25); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
-<caption><span class="cell_title">Residuals</span><br><span class="cell_legend"></span></caption>
+
+<caption>
+<span class="cell_title">Residuals</span>
+</caption>
 <thead class="head_cell">
-<th></th>
-<th>Ts</th>
-<th>Tv</th>
+<th></th><th>Ts</th><th>Tv</th>
 </thead>
 <tbody>
-<tr>
-<td class="index">nsyn</td>
-<td>-1.0225</td>
-<td>0.7312</td>
-</tr>
-<tr>
-<td class="index">syn</td>
-<td>1.7488</td>
-<td>-1.2507</td>
-</tr>
+<tr><td class="index"><span class="c3col_left">nsyn</span></td><td><span class="c3col_right">-1.0225</span></td><td><span class="c3col_right">0.7312</span></td></tr>
+<tr><td class="index"><span class="c3col_left">syn</span></td><td><span class="c3col_right">1.7488</span></td><td><span class="c3col_right">-1.2507</span></td></tr>
 </tbody>
 </table>
 
@@ -3438,75 +3337,41 @@ Ratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>Locus</th>
-<th>Region</th>
-<th>Ratio</th>
+<th>Locus</th><th>Region</th><th>Ratio</th>
 </thead>
 <tbody>
-<tr>
-<td>NP_003077</td>
-<td>Con</td>
-<td>2.5386</td>
-</tr>
-<tr>
-<td>NP_004893</td>
-<td>Con</td>
-<td>121351.4264</td>
-</tr>
-<tr>
-<td>NP_005079</td>
-<td>Con</td>
-<td>9516594.9789</td>
-</tr>
-<tr>
-<td>NP_005500</td>
-<td>NonCon</td>
-<td>0.0000</td>
-</tr>
-<tr>
-<td>NP_055852</td>
-<td>NonCon</td>
-<td>10933217.7090</td>
-</tr>
-<tr>
-<td>NP_003077</td>
-<td>Con</td>
-<td>2.5386</td>
-</tr>
-<tr>
-<td>NP_004893</td>
-<td>Con</td>
-<td>121351.4264</td>
-</tr>
-<tr>
-<td>NP_005079</td>
-<td>Con</td>
-<td>9516594.9789</td>
-</tr>
-<tr>
-<td>NP_005500</td>
-<td>NonCon</td>
-<td>0.0000</td>
-</tr>
-<tr>
-<td>NP_055852</td>
-<td>NonCon</td>
-<td>10933217.7090</td>
-</tr>
+<tr><td><span class="c3col_left">NP_003077</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">2.5386</span></td></tr>
+<tr><td><span class="c3col_left">NP_004893</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">121351.4264</span></td></tr>
+<tr><td><span class="c3col_left">NP_005079</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">9516594.9789</span></td></tr>
+<tr><td><span class="c3col_left">NP_005500</span></td><td><span class="c3col_left">NonCon</span></td><td><span class="c3col_right">0.0000</span></td></tr>
+<tr><td><span class="c3col_left">NP_055852</span></td><td><span class="c3col_left">NonCon</span></td><td><span class="c3col_right">10933217.7090</span></td></tr>
+<tr><td><span class="c3col_left">NP_003077</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">2.5386</span></td></tr>
+<tr><td><span class="c3col_left">NP_004893</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">121351.4264</span></td></tr>
+<tr><td><span class="c3col_left">NP_005079</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">9516594.9789</span></td></tr>
+<tr><td><span class="c3col_left">NP_005500</span></td><td><span class="c3col_left">NonCon</span></td><td><span class="c3col_right">0.0000</span></td></tr>
+<tr><td><span class="c3col_left">NP_055852</span></td><td><span class="c3col_left">NonCon</span></td><td><span class="c3col_right">10933217.7090</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -3524,86 +3389,41 @@ Ratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>Data#</th>
-<th>Locus</th>
-<th>Region</th>
-<th>Ratio</th>
+<th>Data#</th><th>Locus</th><th>Region</th><th>Ratio</th>
 </thead>
 <tbody>
-<tr>
-<td>Data1</td>
-<td>NP_003077</td>
-<td>Con</td>
-<td>2.5386</td>
-</tr>
-<tr>
-<td>Data1</td>
-<td>NP_004893</td>
-<td>Con</td>
-<td>121351.4264</td>
-</tr>
-<tr>
-<td>Data1</td>
-<td>NP_005079</td>
-<td>Con</td>
-<td>9516594.9789</td>
-</tr>
-<tr>
-<td>Data1</td>
-<td>NP_005500</td>
-<td>NonCon</td>
-<td>0.0000</td>
-</tr>
-<tr>
-<td>Data1</td>
-<td>NP_055852</td>
-<td>NonCon</td>
-<td>10933217.7090</td>
-</tr>
-<tr>
-<td>Data2</td>
-<td>NP_003077</td>
-<td>Con</td>
-<td>2.5386</td>
-</tr>
-<tr>
-<td>Data2</td>
-<td>NP_004893</td>
-<td>Con</td>
-<td>121351.4264</td>
-</tr>
-<tr>
-<td>Data2</td>
-<td>NP_005079</td>
-<td>Con</td>
-<td>9516594.9789</td>
-</tr>
-<tr>
-<td>Data2</td>
-<td>NP_005500</td>
-<td>NonCon</td>
-<td>0.0000</td>
-</tr>
-<tr>
-<td>Data2</td>
-<td>NP_055852</td>
-<td>NonCon</td>
-<td>10933217.7090</td>
-</tr>
+<tr><td><span class="c3col_left">Data1</span></td><td><span class="c3col_left">NP_003077</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">2.5386</span></td></tr>
+<tr><td><span class="c3col_left">Data1</span></td><td><span class="c3col_left">NP_004893</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">121351.4264</span></td></tr>
+<tr><td><span class="c3col_left">Data1</span></td><td><span class="c3col_left">NP_005079</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">9516594.9789</span></td></tr>
+<tr><td><span class="c3col_left">Data1</span></td><td><span class="c3col_left">NP_005500</span></td><td><span class="c3col_left">NonCon</span></td><td><span class="c3col_right">0.0000</span></td></tr>
+<tr><td><span class="c3col_left">Data1</span></td><td><span class="c3col_left">NP_055852</span></td><td><span class="c3col_left">NonCon</span></td><td><span class="c3col_right">10933217.7090</span></td></tr>
+<tr><td><span class="c3col_left">Data2</span></td><td><span class="c3col_left">NP_003077</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">2.5386</span></td></tr>
+<tr><td><span class="c3col_left">Data2</span></td><td><span class="c3col_left">NP_004893</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">121351.4264</span></td></tr>
+<tr><td><span class="c3col_left">Data2</span></td><td><span class="c3col_left">NP_005079</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">9516594.9789</span></td></tr>
+<tr><td><span class="c3col_left">Data2</span></td><td><span class="c3col_left">NP_005500</span></td><td><span class="c3col_left">NonCon</span></td><td><span class="c3col_right">0.0000</span></td></tr>
+<tr><td><span class="c3col_left">Data2</span></td><td><span class="c3col_left">NP_055852</span></td><td><span class="c3col_left">NonCon</span></td><td><span class="c3col_right">10933217.7090</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -3659,45 +3479,35 @@ Ratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>A</th>
-<th>B</th>
-<th>C</th>
+<th>A</th><th>B</th><th>C</th>
 </thead>
 <tbody>
-<tr>
-<td>0</td>
-<td>1</td>
-<td>2</td>
-</tr>
-<tr>
-<td>3</td>
-<td>4</td>
-<td>5</td>
-</tr>
-<tr>
-<td>6</td>
-<td>7</td>
-<td>8</td>
-</tr>
-<tr>
-<td>9</td>
-<td>10</td>
-<td>11</td>
-</tr>
+<tr><td><span class="c3col_right">0</span></td><td><span class="c3col_right">1</span></td><td><span class="c3col_right">2</span></td></tr>
+<tr><td><span class="c3col_right">3</span></td><td><span class="c3col_right">4</span></td><td><span class="c3col_right">5</span></td></tr>
+<tr><td><span class="c3col_right">6</span></td><td><span class="c3col_right">7</span></td><td><span class="c3col_right">8</span></td></tr>
+<tr><td><span class="c3col_right">9</span></td><td><span class="c3col_right">10</span></td><td><span class="c3col_right">11</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -3744,40 +3554,34 @@ Ratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>A</th>
-<th>B</th>
-<th>C</th>
+<th>A</th><th>B</th><th>C</th>
 </thead>
 <tbody>
-<tr>
-<td>*</td>
-<td>1</td>
-<td>2</td>
-</tr>
-<tr>
-<td>3</td>
-<td>*</td>
-<td>5</td>
-</tr>
-<tr>
-<td>6</td>
-<td>7</td>
-<td>*</td>
-</tr>
+<tr><td><span class="c3col_left">*</span></td><td><span class="c3col_left">1</span></td><td><span class="c3col_left">2</span></td></tr>
+<tr><td><span class="c3col_left">3</span></td><td><span class="c3col_left">*</span></td><td><span class="c3col_left">5</span></td></tr>
+<tr><td><span class="c3col_left">6</span></td><td><span class="c3col_left">7</span></td><td><span class="c3col_left">*</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -3823,35 +3627,33 @@ Ratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>Locus</th>
-<th>Region</th>
-<th>Ratio</th>
+<th>Locus</th><th>Region</th><th>Ratio</th>
 </thead>
 <tbody>
-<tr>
-<td>NP_003077</td>
-<td>Con</td>
-<td>2.5386</td>
-</tr>
-<tr>
-<td>NP_005500</td>
-<td>NonCon</td>
-<td>0.0000</td>
-</tr>
+<tr><td><span class="c3col_left">NP_003077</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">2.5386</span></td></tr>
+<tr><td><span class="c3col_left">NP_005500</span></td><td><span class="c3col_left">NonCon</span></td><td><span class="c3col_right">0.0000</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -3867,35 +3669,33 @@ Ratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>Locus</th>
-<th>Region</th>
-<th>Ratio</th>
+<th>Locus</th><th>Region</th><th>Ratio</th>
 </thead>
 <tbody>
-<tr>
-<td>NP_003077</td>
-<td>Con</td>
-<td>2.5386</td>
-</tr>
-<tr>
-<td>NP_005500</td>
-<td>NonCon</td>
-<td>0.0000</td>
-</tr>
+<tr><td><span class="c3col_left">NP_003077</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">2.5386</span></td></tr>
+<tr><td><span class="c3col_left">NP_005500</span></td><td><span class="c3col_left">NonCon</span></td><td><span class="c3col_right">0.0000</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -3911,30 +3711,32 @@ Ratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>Locus</th>
-<th>Region</th>
-<th>Ratio</th>
+<th>Locus</th><th>Region</th><th>Ratio</th>
 </thead>
 <tbody>
-<tr>
-<td>NP_005500</td>
-<td>NonCon</td>
-<td>0.0000</td>
-</tr>
+<tr><td><span class="c3col_left">NP_005500</span></td><td><span class="c3col_left">NonCon</span></td><td><span class="c3col_right">0.0000</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -3953,40 +3755,35 @@ Ratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>B</th>
-<th>C</th>
+<th>B</th><th>C</th>
 </thead>
 <tbody>
-<tr>
-<td>1</td>
-<td>2</td>
-</tr>
-<tr>
-<td>4</td>
-<td>5</td>
-</tr>
-<tr>
-<td>7</td>
-<td>8</td>
-</tr>
-<tr>
-<td>10</td>
-<td>11</td>
-</tr>
+<tr><td><span class="c3col_right">1</span></td><td><span class="c3col_right">2</span></td></tr>
+<tr><td><span class="c3col_right">4</span></td><td><span class="c3col_right">5</span></td></tr>
+<tr><td><span class="c3col_right">7</span></td><td><span class="c3col_right">8</span></td></tr>
+<tr><td><span class="c3col_right">10</span></td><td><span class="c3col_right">11</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -4004,50 +3801,36 @@ Ratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>Locus</th>
-<th>Region</th>
-<th>Ratio</th>
+<th>Locus</th><th>Region</th><th>Ratio</th>
 </thead>
 <tbody>
-<tr>
-<td>NP_005500</td>
-<td>NonCon</td>
-<td>0.0000</td>
-</tr>
-<tr>
-<td>NP_003077</td>
-<td>Con</td>
-<td>2.5386</td>
-</tr>
-<tr>
-<td>NP_004893</td>
-<td>Con</td>
-<td>121351.4264</td>
-</tr>
-<tr>
-<td>NP_005079</td>
-<td>Con</td>
-<td>9516594.9789</td>
-</tr>
-<tr>
-<td>NP_055852</td>
-<td>NonCon</td>
-<td>10933217.7090</td>
-</tr>
+<tr><td><span class="c3col_left">NP_005500</span></td><td><span class="c3col_left">NonCon</span></td><td><span class="c3col_right">0.0000</span></td></tr>
+<tr><td><span class="c3col_left">NP_003077</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">2.5386</span></td></tr>
+<tr><td><span class="c3col_left">NP_004893</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">121351.4264</span></td></tr>
+<tr><td><span class="c3col_left">NP_005079</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">9516594.9789</span></td></tr>
+<tr><td><span class="c3col_left">NP_055852</span></td><td><span class="c3col_left">NonCon</span></td><td><span class="c3col_right">10933217.7090</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -4064,50 +3847,36 @@ Ratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>Locus</th>
-<th>Region</th>
-<th>Ratio</th>
+<th>Locus</th><th>Region</th><th>Ratio</th>
 </thead>
 <tbody>
-<tr>
-<td>NP_055852</td>
-<td>NonCon</td>
-<td>10933217.7090</td>
-</tr>
-<tr>
-<td>NP_005079</td>
-<td>Con</td>
-<td>9516594.9789</td>
-</tr>
-<tr>
-<td>NP_004893</td>
-<td>Con</td>
-<td>121351.4264</td>
-</tr>
-<tr>
-<td>NP_003077</td>
-<td>Con</td>
-<td>2.5386</td>
-</tr>
-<tr>
-<td>NP_005500</td>
-<td>NonCon</td>
-<td>0.0000</td>
-</tr>
+<tr><td><span class="c3col_left">NP_055852</span></td><td><span class="c3col_left">NonCon</span></td><td><span class="c3col_right">10933217.7090</span></td></tr>
+<tr><td><span class="c3col_left">NP_005079</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">9516594.9789</span></td></tr>
+<tr><td><span class="c3col_left">NP_004893</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">121351.4264</span></td></tr>
+<tr><td><span class="c3col_left">NP_003077</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">2.5386</span></td></tr>
+<tr><td><span class="c3col_left">NP_005500</span></td><td><span class="c3col_left">NonCon</span></td><td><span class="c3col_right">0.0000</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -4124,50 +3893,36 @@ Ratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>Locus</th>
-<th>Region</th>
-<th>Ratio</th>
+<th>Locus</th><th>Region</th><th>Ratio</th>
 </thead>
 <tbody>
-<tr>
-<td>NP_005079</td>
-<td>Con</td>
-<td>9516594.9789</td>
-</tr>
-<tr>
-<td>NP_004893</td>
-<td>Con</td>
-<td>121351.4264</td>
-</tr>
-<tr>
-<td>NP_003077</td>
-<td>Con</td>
-<td>2.5386</td>
-</tr>
-<tr>
-<td>NP_055852</td>
-<td>NonCon</td>
-<td>10933217.7090</td>
-</tr>
-<tr>
-<td>NP_005500</td>
-<td>NonCon</td>
-<td>0.0000</td>
-</tr>
+<tr><td><span class="c3col_left">NP_005079</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">9516594.9789</span></td></tr>
+<tr><td><span class="c3col_left">NP_004893</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">121351.4264</span></td></tr>
+<tr><td><span class="c3col_left">NP_003077</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">2.5386</span></td></tr>
+<tr><td><span class="c3col_left">NP_055852</span></td><td><span class="c3col_left">NonCon</span></td><td><span class="c3col_right">10933217.7090</span></td></tr>
+<tr><td><span class="c3col_left">NP_005500</span></td><td><span class="c3col_left">NonCon</span></td><td><span class="c3col_right">0.0000</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -4267,7 +4022,7 @@ Ratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;a&#39;: 2, &#39;b&#39;: 3}
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>CategoryCounter({&#39;a&#39;: 2, &#39;b&#39;: 3})
 </pre></div>
 </div>
 </div>
@@ -4281,7 +4036,7 @@ Ratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>{(&#39;a&#39;, &#39;c&#39;): 1, (&#39;b&#39;, &#39;c&#39;): 3, (&#39;a&#39;, &#39;d&#39;): 1}
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>CategoryCounter({(&#39;a&#39;, &#39;c&#39;): 1, (&#39;b&#39;, &#39;c&#39;): 3, (&#39;a&#39;, &#39;d&#39;): 1})
 </pre></div>
 </div>
 </div>
@@ -4294,36 +4049,34 @@ Ratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>key</th>
-<th>count</th>
+<th>key</th><th>count</th>
 </thead>
 <tbody>
-<tr>
-<td>['a' 'c']</td>
-<td>1</td>
-</tr>
-<tr>
-<td>['b' 'c']</td>
-<td>3</td>
-</tr>
-<tr>
-<td>['a' 'd']</td>
-<td>1</td>
-</tr>
+<tr><td><span class="c3col_left">('a', 'c')</span></td><td><span class="c3col_right">1</span></td></tr>
+<tr><td><span class="c3col_left">('b', 'c')</span></td><td><span class="c3col_right">3</span></td></tr>
+<tr><td><span class="c3col_left">('a', 'd')</span></td><td><span class="c3col_right">1</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -4350,50 +4103,35 @@ Ratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>Locus</th>
-<th>Region</th>
-<th>Ratio</th>
-<th>right_LargeCon</th>
+<th>Locus</th><th>Region</th><th>Ratio</th><th>right_LargeCon</th>
 </thead>
 <tbody>
-<tr>
-<td>NP_004893</td>
-<td>Con</td>
-<td>121351.4264</td>
-<td>True</td>
-</tr>
-<tr>
-<td>NP_005079</td>
-<td>Con</td>
-<td>9516594.9789</td>
-<td>True</td>
-</tr>
-<tr>
-<td>NP_005500</td>
-<td>NonCon</td>
-<td>0.0000</td>
-<td>False</td>
-</tr>
-<tr>
-<td>NP_055852</td>
-<td>NonCon</td>
-<td>10933217.7090</td>
-<td>False</td>
-</tr>
+<tr><td><span class="c3col_left">NP_004893</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">121351.4264</span></td><td><span class="c3col_left">True</span></td></tr>
+<tr><td><span class="c3col_left">NP_005079</span></td><td><span class="c3col_left">Con</span></td><td><span class="c3col_right">9516594.9789</span></td><td><span class="c3col_left">True</span></td></tr>
+<tr><td><span class="c3col_left">NP_005500</span></td><td><span class="c3col_left">NonCon</span></td><td><span class="c3col_right">0.0000</span></td><td><span class="c3col_left">False</span></td></tr>
+<tr><td><span class="c3col_left">NP_055852</span></td><td><span class="c3col_left">NonCon</span></td><td><span class="c3col_right">10933217.7090</span></td><td><span class="c3col_left">False</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -4428,45 +4166,35 @@ Ratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>#OTU ID</th>
-<th>14SK041</th>
-<th>14SK802</th>
+<th>#OTU ID</th><th>14SK041</th><th>14SK802</th>
 </thead>
 <tbody>
-<tr>
-<td>-2920</td>
-<td>332</td>
-<td>294</td>
-</tr>
-<tr>
-<td>-1606</td>
-<td>302</td>
-<td>229</td>
-</tr>
-<tr>
-<td>-393</td>
-<td>141</td>
-<td>125</td>
-</tr>
-<tr>
-<td>-2109</td>
-<td>138</td>
-<td>120</td>
-</tr>
+<tr><td><span class="c3col_right">-2920</span></td><td><span class="c3col_left">332</span></td><td><span class="c3col_right">294</span></td></tr>
+<tr><td><span class="c3col_right">-1606</span></td><td><span class="c3col_left">302</span></td><td><span class="c3col_right">229</span></td></tr>
+<tr><td><span class="c3col_right">-393</span></td><td><span class="c3col_left">141</span></td><td><span class="c3col_right">125</span></td></tr>
+<tr><td><span class="c3col_right">-2109</span></td><td><span class="c3col_left">138</span></td><td><span class="c3col_right">120</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -4482,41 +4210,33 @@ Ratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>sample</th>
-<th>-2920</th>
-<th>-1606</th>
-<th>-393</th>
-<th>-2109</th>
+<th>sample</th><th>-2920</th><th>-1606</th><th>-393</th><th>-2109</th>
 </thead>
 <tbody>
-<tr>
-<td>14SK041</td>
-<td>332</td>
-<td>302</td>
-<td>141</td>
-<td>138</td>
-</tr>
-<tr>
-<td>14SK802</td>
-<td>294</td>
-<td>229</td>
-<td>125</td>
-<td>120</td>
-</tr>
+<tr><td><span class="c3col_left">14SK041</span></td><td><span class="c3col_left">332</span></td><td><span class="c3col_left">302</span></td><td><span class="c3col_right">141</span></td><td><span class="c3col_right">138</span></td></tr>
+<tr><td><span class="c3col_left">14SK802</span></td><td><span class="c3col_left">294</span></td><td><span class="c3col_left">229</span></td><td><span class="c3col_right">125</span></td><td><span class="c3col_right">120</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -4741,56 +4461,36 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
 .c3table table {margin: 10px 0;}
 .c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: center !important; padding: 0 5px;}
-.c3table tr > td {text-align: right !important; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7;}
-.c3table .index {background: rgba(161, 195, 209, 0.25); font-weight: 600;}
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
 .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
 .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
 .c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
 </style>
-<div class="c3table">
+
 <table>
+
 <thead class="head_cell">
-<th>chrom</th>
-<th>start</th>
-<th>end</th>
-<th>value</th>
+<th>chrom</th><th>start</th><th>end</th><th>value</th>
 </thead>
 <tbody>
-<tr>
-<td>1</td>
-<td>100</td>
-<td>101</td>
-<td>1.1230</td>
-</tr>
-<tr>
-<td>1</td>
-<td>101</td>
-<td>102</td>
-<td>1.1230</td>
-</tr>
-<tr>
-<td>1</td>
-<td>102</td>
-<td>103</td>
-<td>1.1230</td>
-</tr>
-<tr>
-<td>1</td>
-<td>103</td>
-<td>104</td>
-<td>1.1230</td>
-</tr>
-<tr>
-<td>1</td>
-<td>104</td>
-<td>105</td>
-<td>1.1230</td>
-</tr>
+<tr><td><span class="c3col_left">1</span></td><td><span class="c3col_right">100</span></td><td><span class="c3col_right">101</span></td><td><span class="c3col_right">1.1230</span></td></tr>
+<tr><td><span class="c3col_left">1</span></td><td><span class="c3col_right">101</span></td><td><span class="c3col_right">102</span></td><td><span class="c3col_right">1.1230</span></td></tr>
+<tr><td><span class="c3col_left">1</span></td><td><span class="c3col_right">102</span></td><td><span class="c3col_right">103</span></td><td><span class="c3col_right">1.1230</span></td></tr>
+<tr><td><span class="c3col_left">1</span></td><td><span class="c3col_right">103</span></td><td><span class="c3col_right">104</span></td><td><span class="c3col_right">1.1230</span></td></tr>
+<tr><td><span class="c3col_left">1</span></td><td><span class="c3col_right">104</span></td><td><span class="c3col_right">105</span></td><td><span class="c3col_right">1.1230</span></td></tr>
 </tbody>
 </table>
 <p>Top 5 rows from
@@ -5018,7 +4718,7 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
     <div id="footer-info" class="bg-light pl-2 pb-1 w-100">
         <div><span class="fa fa-copyright"></span>2020, cogent3 Team
         <a id="author-link" href=""></a> </div>
-        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.2.1 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
+        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
     </div>
 </footer>
 
