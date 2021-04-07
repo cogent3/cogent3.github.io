@@ -8,11 +8,11 @@ Making Sense from Sequence
 
 **Who is it for? Anyone who wants to analyse sequence divergence using robust statistical models.**
 
-``cogent3`` is unique in providing numerous non-stationary Markov models :cite:`2015.Kaehler.000` for modelling sequence evolution, including novel codon models :cite:`2017.Kaehler.000`. ``cogent3`` also includes an extensive collection of time-reversible models (again including novel codon models  :cite:`2010.Yap.000`). (`See using non-stationary models. <https://cogent3.org/cogent3/app/index.html#the-model-app>`_). We have done more than just invent these new methods, we have established the most robust algorithms :cite:`2008.Schranz.000` for their implementation and their suitability for real data :cite:`2013.Verbyla.000`. Additionally, there are novel signal processing methods focussed on statistical estimation of integer period signals :cite:`2011.Epps.000,2012.Bellani.000`.
+``cogent3`` is unique in providing numerous non-stationary Markov models :cite:`2015.Kaehler.000` for modelling sequence evolution, including novel codon models :cite:`2017.Kaehler.000`. ``cogent3`` also includes an extensive collection of time-reversible models (again including novel codon models  :cite:`2010.Yap.000`). (`See using non-stationary models. <doc/app/index.html#the-model-app>`_). We have done more than just invent these new methods, we have established the most robust algorithms :cite:`2008.Schranz.000` for their implementation and their suitability for real data :cite:`2013.Verbyla.000`. Additionally, there are novel signal processing methods focussed on statistical estimation of integer period signals :cite:`2011.Epps.000,2012.Bellani.000`.
 
 **Anyone who wants to undertake exploratory genomic data analysis**
 
-Beyond our novel methods, ``cogent3`` provides an extensive suite of capabilities for manipulating and analysing sequence data. For instance, the ability to `read standard biological data formats <https://cogent3.org/cogent3/cookbook/manipulating_biological_data.html>`_, manipulate sequences `by their annotations <https://cogent3.org/cogent3/examples/seq_features.html>`_, to perform multiple sequence alignment (`app docs`_) using any of our substitution models, `phylogenetic reconstruction <https://cogent3.org/cogent3/examples/index.html#phylogenetic-reconstruction>`_ and tree manipulation, manipulation of `tabular data <https://cogent3.org/cogent3/cookbook/tables.html>`_, visualisation of phylogenies (`image gallery`_) and much more.
+Beyond our novel methods, ``cogent3`` provides an extensive suite of capabilities for manipulating and analysing sequence data. For instance, the ability to `read standard biological data formats <doc/cookbook/manipulating_biological_data.html>`_, manipulate sequences `by their annotations <doc/examples/seq_features.html>`_, to perform multiple sequence alignment (`app docs`_) using any of our substitution models, `phylogenetic reconstruction <doc/examples/index.html#phylogenetic-reconstruction>`_ and tree manipulation, manipulation of `tabular data <doc/cookbook/tables.html>`_, visualisation of phylogenies (`image gallery`_) and much more.
 
 **Anyone looking for a functional programming style approach to genomic data analysis**
 
@@ -45,5 +45,5 @@ Our ``cogent3.app`` module (`app docs`_) provides a very different approach to u
     :filter: docname in docnames
     :style: unsrt
 
-.. _`app docs`: https://cogent3.org/cogent3/app/index.html
-.. _`image gallery`: https://cogent3.org/cogent3/draw/index.html
+.. _`app docs`: doc/app/index.html
+.. _`image gallery`: doc/draw/index.html
