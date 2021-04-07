@@ -7,7 +7,7 @@ from glob import glob
 # sphinx_navtree
 
 project = "cogent3"
-copyright = "2020, cogent3 Team"
+copyright = "2020-, cogent3 Team"
 author = "Gavin Huttley"
 
 # The full version, including alpha/beta/rc tags
