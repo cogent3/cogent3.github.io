@@ -1,3 +1,4 @@
+import datetime
 import os
 import pathlib
 import shutil
@@ -11,7 +12,8 @@ copyright = "2020-, cogent3 Team"
 author = "Gavin Huttley"
 
 # The full version, including alpha/beta/rc tags
-release = "2020.4"
+# Use clanedar versioning
+release = datetime.date.today().strftime("%Y.%m.%d")
 
 
 # -- General configuration ---------------------------------------------------
