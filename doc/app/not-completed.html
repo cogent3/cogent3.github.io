@@ -460,6 +460,11 @@
 <li class="toctree-l3"><a class="reference internal" href="../cookbook/tables.html">Tabular data</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../cookbook/tables.html#loading-a-csv-file">Loading a csv file</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../cookbook/tables.html#loading-delimited-specifying-the-format">Loading delimited specifying the format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cookbook/tables.html#loading-delimited-data-without-a-header-line">Loading delimited data without a header line</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../cookbook/tables.html#using-load-delimited">Using <code class="docutils literal notranslate"><span class="pre">load_delimited()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cookbook/tables.html#using-filteringparser">Using <code class="docutils literal notranslate"><span class="pre">FilteringParser</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="../cookbook/tables.html#selectively-loading-parts-of-a-big-file">Selectively loading parts of a big file</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="../cookbook/tables.html#loading-a-set-number-of-lines-from-a-file">Loading a set number of lines from a file</a></li>
 <li class="toctree-l5"><a class="reference internal" href="../cookbook/tables.html#loading-only-some-rows">Loading only some rows</a></li>
@@ -875,14 +880,14 @@
 <div class="cell_output docutils container">
 </div>
 </div>
-<div class="section" id="tracking-records-that-could-not-be-processed">
+<section id="tracking-records-that-could-not-be-processed">
 <h1>Tracking records that could not be processed<a class="headerlink" href="#tracking-records-that-could-not-be-processed" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="the-notcompleted-object">
+<section id="the-notcompleted-object">
 <span id="not-completed"></span><h2>The <code class="docutils literal notranslate"><span class="pre">NotCompleted</span></code> object<a class="headerlink" href="#the-notcompleted-object" title="Permalink to this headline">¶</a></h2>
 <p>This is an object returned when a composable function did not complete a task. <code class="docutils literal notranslate"><span class="pre">NotCompleted</span></code> is a special result type that can be produced by a composable app. These objects evaluate to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
 <p>An app can return a <code class="docutils literal notranslate"><span class="pre">NotCompleted</span></code> result for one of 2 reasons. The object contains information regarding the input data, where the issue arose and whatever message was provided by the code (like an exception traceback).</p>
-</div>
-<div class="section" id="notcompleted-false-type">
+</section>
+<section id="notcompleted-false-type">
 <h2><code class="docutils literal notranslate"><span class="pre">NotCompleted</span></code> FALSE type<a class="headerlink" href="#notcompleted-false-type" title="Permalink to this headline">¶</a></h2>
 <p>The results when a condition was not met. For example, below I create an app that will return alignments that with 2 specific sequences but I’m including one that does not exist (“Mouse”). So this will fail.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -917,8 +922,8 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="notcompleted-error-type">
+</section>
+<section id="notcompleted-error-type">
 <h2><code class="docutils literal notranslate"><span class="pre">NotCompleted</span></code> ERROR type<a class="headerlink" href="#notcompleted-error-type" title="Permalink to this headline">¶</a></h2>
 <p>An <code class="docutils literal notranslate"><span class="pre">ERROR</span></code> type is returned if an exception is raised during the calculation. We trigger it in this case by trying to open a non-existent file.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -930,7 +935,7 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>NotCompleted(type=ERROR, origin=load_aligned, source=&quot;primate_brca1.fasta&quot;, message=&quot;Traceback (most recent call last):
-  File &quot;/Users/runner/work/cogent3.github.io/cogent3.github.io/.venv/lib/python3.8/site-packages/cogent3/app/composable.py&quot;, line 299, in _trapped_call
+  File &quot;/Users/runner/work/cogent3.github.io/cogent3.github.io/.venv/lib/python3.8/site-packages/cogent3/app/composable.py&quot;, line 300, in _trapped_call
     val = func(val, *args, **kwargs)
   File &quot;/Users/runner/work/cogent3.github.io/cogent3.github.io/.venv/lib/python3.8/site-packages/cogent3/app/io.py&quot;, line 134, in load
     path = SingleReadDataStore(path)[0]
@@ -942,8 +947,8 @@ AssertionError
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="composed-functions-propagate-notcompleted-results">
+</section>
+<section id="composed-functions-propagate-notcompleted-results">
 <h2>Composed functions propagate <code class="docutils literal notranslate"><span class="pre">NotCompleted</span></code> results<a class="headerlink" href="#composed-functions-propagate-notcompleted-results" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -969,7 +974,7 @@ AssertionError
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>NotCompleted(type=ERROR, origin=load_aligned, source=&quot;primate_brca1.fasta&quot;, message=&quot;Traceback (most recent call last):
-  File &quot;/Users/runner/work/cogent3.github.io/cogent3.github.io/.venv/lib/python3.8/site-packages/cogent3/app/composable.py&quot;, line 299, in _trapped_call
+  File &quot;/Users/runner/work/cogent3.github.io/cogent3.github.io/.venv/lib/python3.8/site-packages/cogent3/app/composable.py&quot;, line 300, in _trapped_call
     val = func(val, *args, **kwargs)
   File &quot;/Users/runner/work/cogent3.github.io/cogent3.github.io/.venv/lib/python3.8/site-packages/cogent3/app/io.py&quot;, line 134, in load
     path = SingleReadDataStore(path)[0]
@@ -981,8 +986,8 @@ AssertionError
 </div>
 </div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
 </section>
@@ -1004,7 +1009,7 @@ AssertionError
     <div id="footer-info" class="bg-light pl-2 pb-1 w-100">
         <div><span class="fa fa-copyright"></span>2020, cogent3 Team
         <a id="author-link" href=""></a> </div>
-        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
+        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.3 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
     </div>
 </footer>
 

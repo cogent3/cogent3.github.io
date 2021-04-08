@@ -460,6 +460,11 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../cookbook/tables.html">Tabular data</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../../cookbook/tables.html#loading-a-csv-file">Loading a csv file</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../cookbook/tables.html#loading-delimited-specifying-the-format">Loading delimited specifying the format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../cookbook/tables.html#loading-delimited-data-without-a-header-line">Loading delimited data without a header line</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../../../cookbook/tables.html#using-load-delimited">Using <code class="docutils literal notranslate"><span class="pre">load_delimited()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="../../../cookbook/tables.html#using-filteringparser">Using <code class="docutils literal notranslate"><span class="pre">FilteringParser</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="../../../cookbook/tables.html#selectively-loading-parts-of-a-big-file">Selectively loading parts of a big file</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="../../../cookbook/tables.html#loading-a-set-number-of-lines-from-a-file">Loading a set number of lines from a file</a></li>
 <li class="toctree-l5"><a class="reference internal" href="../../../cookbook/tables.html#loading-only-some-rows">Loading only some rows</a></li>
@@ -871,7 +876,7 @@
 
 <section id="main-section" class="container flex-grow-1 has-nav">
     
-  <div class="section" id="alphabet">
+  <section id="alphabet">
 <h1>Alphabet<a class="headerlink" href="#alphabet" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="cogent3.core.alphabet.Alphabet">
@@ -1043,20 +1048,46 @@ to each element in the input.</p>
 <dt id="cogent3.core.alphabet.Alphabet.from_ordinals_to_seq">
 <code class="sig-name descname"><span class="pre">from_ordinals_to_seq</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.alphabet.Alphabet.from_ordinals_to_seq" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a Sequence object corresponding to indices in data.</p>
-<p>Unlike from_indices() in superclass, this method uses the MolType to
-coerce the result into a sequence of the correct class. Note that if
-the MolType is not set, this method will raise an AttributeError.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data: series</strong></dt><dd><p>series of int</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>Sequence with self.moltype</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Unlike from_indices(), this method uses the MolType to
+coerce the result into a sequence of the correct class.</p>
+<p>Raises an AttributeError if MolType is not set.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="cogent3.core.alphabet.Alphabet.from_seq_to_array">
 <code class="sig-name descname"><span class="pre">from_seq_to_array</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequence</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.alphabet.Alphabet.from_seq_to_array" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns an array of indices corresponding to items in sequence.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>sequence: Sequence</strong></dt><dd><p>A cogent3 sequence object</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>ndarray</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
 <p>Unlike to_indices() in superclass, this method returns a numpy array
 object. It also breaks the seqeunce into items in the current alphabet
-(e.g. breaking a raw DNA sequence into codons), which to_indices() does
-not do. It also requires the sequence to be a Sequence object rather
-than an arbitrary string, tuple, etc.</p>
+(e.g. breaking a raw DNA sequence into codons), which to_indices() does</p>
 </dd></dl>
 
 <dl class="py method">
@@ -1170,7 +1201,7 @@ element in the input.</p>
 
 </dd></dl>
 
-</div>
+</section>
 
 
 </section>
@@ -1192,7 +1223,7 @@ element in the input.</p>
     <div id="footer-info" class="bg-light pl-2 pb-1 w-100">
         <div><span class="fa fa-copyright"></span>2020, cogent3 Team
         <a id="author-link" href=""></a> </div>
-        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
+        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.3 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
     </div>
 </footer>
 

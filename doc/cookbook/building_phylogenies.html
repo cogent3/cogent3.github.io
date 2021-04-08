@@ -460,6 +460,11 @@
 <li class="toctree-l3"><a class="reference internal" href="tables.html">Tabular data</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="tables.html#loading-a-csv-file">Loading a csv file</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tables.html#loading-delimited-specifying-the-format">Loading delimited specifying the format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tables.html#loading-delimited-data-without-a-header-line">Loading delimited data without a header line</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="tables.html#using-load-delimited">Using <code class="docutils literal notranslate"><span class="pre">load_delimited()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="tables.html#using-filteringparser">Using <code class="docutils literal notranslate"><span class="pre">FilteringParser</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="tables.html#selectively-loading-parts-of-a-big-file">Selectively loading parts of a big file</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="tables.html#loading-a-set-number-of-lines-from-a-file">Loading a set number of lines from a file</a></li>
 <li class="toctree-l5"><a class="reference internal" href="tables.html#loading-only-some-rows">Loading only some rows</a></li>
@@ -875,12 +880,12 @@
 <div class="cell_output docutils container">
 </div>
 </div>
-<div class="section" id="building-phylogenies">
+<section id="building-phylogenies">
 <h1>Building phylogenies<a class="headerlink" href="#building-phylogenies" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="building-a-phylogenetic-tree-from-pairwise-distances">
+<section id="building-a-phylogenetic-tree-from-pairwise-distances">
 <h2>Building A Phylogenetic Tree From Pairwise Distances<a class="headerlink" href="#building-a-phylogenetic-tree-from-pairwise-distances" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="directly-via-alignment-quick-tree">
+</section>
+<section id="directly-via-alignment-quick-tree">
 <h2>Directly via <code class="docutils literal notranslate"><span class="pre">alignment.quick_tree()</span></code><a class="headerlink" href="#directly-via-alignment-quick-tree" title="Permalink to this headline">¶</a></h2>
 <p>Both the <code class="docutils literal notranslate"><span class="pre">ArrayAlignment</span></code> and <code class="docutils literal notranslate"><span class="pre">Alignment</span></code> classes support this.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -905,9 +910,9 @@
          |
          |          /-Chimpanzee
           \edge.2--|
-                   |          /-Human
+                   |          /-Gorilla
                     \edge.3--|
-                              \-Gorilla
+                              \-Human
 </pre></div>
 </div>
 </div>
@@ -922,7 +927,7 @@
 <div class="cell_output docutils container">
 </div>
 </div>
-<div class="section" id="using-the-distancematrix-object">
+<section id="using-the-distancematrix-object">
 <h3>Using the <code class="docutils literal notranslate"><span class="pre">DistanceMatrix</span></code> object<a class="headerlink" href="#using-the-distancematrix-object" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -947,15 +952,15 @@
          |
          |          /-Chimpanzee
           \edge.2--|
-                   |          /-Human
+                   |          /-Gorilla
                     \edge.3--|
-                              \-Gorilla
+                              \-Human
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="explicitly-via-distancematrix-and-cogent3-phylo-nj-nj">
+</section>
+<section id="explicitly-via-distancematrix-and-cogent3-phylo-nj-nj">
 <h3>Explicitly via <code class="docutils literal notranslate"><span class="pre">DistanceMatrix</span></code> and <code class="docutils literal notranslate"><span class="pre">cogent3.phylo.nj.nj()`</span></code><a class="headerlink" href="#explicitly-via-distancematrix-and-cogent3-phylo-nj-nj" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -981,15 +986,15 @@
          |
          |          /-Chimpanzee
           \edge.2--|
-                   |          /-Human
+                   |          /-Gorilla
                     \edge.3--|
-                              \-Gorilla
+                              \-Human
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="directly-from-a-pairwise-distance-dict">
+</section>
+<section id="directly-from-a-pairwise-distance-dict">
 <h3>Directly from a pairwise distance <code class="docutils literal notranslate"><span class="pre">dict</span></code><a class="headerlink" href="#directly-from-a-pairwise-distance-dict" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1004,16 +1009,16 @@
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>          /-b
          |
--root----|--a
+-root----|--c
          |
-          \-c
+          \-a
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="by-least-squares">
+</section>
+</section>
+<section id="by-least-squares">
 <h2>By Least-squares<a class="headerlink" href="#by-least-squares" title="Permalink to this headline">¶</a></h2>
 <p>We illustrate the phylogeny reconstruction by least-squares using the F81 substitution model. We use the advanced-stepwise addition algorithm to search tree space. Here <code class="docutils literal notranslate"><span class="pre">a</span></code> is the number of taxa to exhaustively evaluate all possible phylogenies for. Successive taxa are added to the top <code class="docutils literal notranslate"><span class="pre">k</span></code> trees (measured by the least-squares metric) and <code class="docutils literal notranslate"><span class="pre">k</span></code> trees are kept at each iteration.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1031,8 +1036,8 @@
 </div>
 </div>
 <p>Other optional arguments that can be passed to the <code class="docutils literal notranslate"><span class="pre">trex</span></code> method are: <code class="docutils literal notranslate"><span class="pre">return_all</span></code>, whether the <code class="docutils literal notranslate"><span class="pre">k</span></code> best trees at the final step are returned as a <code class="docutils literal notranslate"><span class="pre">ScoredTreeCollection</span></code> object; <code class="docutils literal notranslate"><span class="pre">order</span></code>, a series of tip names whose order defines the sequence in which tips will be added during tree building (this allows the user to randomise the input order).</p>
-</div>
-<div class="section" id="by-ml">
+</section>
+<section id="by-ml">
 <h2>By ML<a class="headerlink" href="#by-ml" title="Permalink to this headline">¶</a></h2>
 <p>We illustrate the phylogeny reconstruction using maximum-likelihood using the F81 substitution model. We use the advanced-stepwise addition algorithm to search tree space.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1049,8 +1054,8 @@
 <div class="cell_output docutils container">
 </div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
 </section>
@@ -1072,7 +1077,7 @@
     <div id="footer-info" class="bg-light pl-2 pb-1 w-100">
         <div><span class="fa fa-copyright"></span>2020, cogent3 Team
         <a id="author-link" href=""></a> </div>
-        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
+        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.3 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
     </div>
 </footer>
 

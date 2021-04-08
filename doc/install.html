@@ -460,6 +460,11 @@
 <li class="toctree-l3"><a class="reference internal" href="cookbook/tables.html">Tabular data</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="cookbook/tables.html#loading-a-csv-file">Loading a csv file</a></li>
 <li class="toctree-l4"><a class="reference internal" href="cookbook/tables.html#loading-delimited-specifying-the-format">Loading delimited specifying the format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cookbook/tables.html#loading-delimited-data-without-a-header-line">Loading delimited data without a header line</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="cookbook/tables.html#using-load-delimited">Using <code class="docutils literal notranslate"><span class="pre">load_delimited()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="cookbook/tables.html#using-filteringparser">Using <code class="docutils literal notranslate"><span class="pre">FilteringParser</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="cookbook/tables.html#selectively-loading-parts-of-a-big-file">Selectively loading parts of a big file</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="cookbook/tables.html#loading-a-set-number-of-lines-from-a-file">Loading a set number of lines from a file</a></li>
 <li class="toctree-l5"><a class="reference internal" href="cookbook/tables.html#loading-only-some-rows">Loading only some rows</a></li>
@@ -871,16 +876,16 @@
 
 <section id="main-section" class="container flex-grow-1 has-nav">
     
-  <div class="section" id="installation">
+  <section id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="minimal-installation">
+<section id="minimal-installation">
 <h2>Minimal installation<a class="headerlink" href="#minimal-installation" title="Permalink to this headline">¶</a></h2>
 <p>Suitable for when you don’t need plotting.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pip install cogent3
 </pre></div>
 </div>
-</div>
-<div class="section" id="install-with-graphing-tools">
+</section>
+<section id="install-with-graphing-tools">
 <h2>Install with graphing tools<a class="headerlink" href="#install-with-graphing-tools" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pip install cogent3<span class="o">[</span>extra<span class="o">]</span>
 </pre></div>
@@ -889,8 +894,8 @@
 <p class="admonition-title">Note</p>
 <p>Writing image files requires you install <code class="docutils literal notranslate"><span class="pre">plotly-orca</span></code>. That’s best done using <code class="docutils literal notranslate"><span class="pre">conda</span></code> (see below).</p>
 </div>
-</div>
-<div class="section" id="install-with-developer-tools">
+</section>
+<section id="install-with-developer-tools">
 <h2>Install with developer tools<a class="headerlink" href="#install-with-developer-tools" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pip install cogent3<span class="o">[</span>dev<span class="o">]</span>
 </pre></div>
@@ -899,8 +904,8 @@
 <p class="admonition-title">Note</p>
 <p>Installs all dependencies that can be installed using <code class="docutils literal notranslate"><span class="pre">pip</span></code>.</p>
 </div>
-</div>
-<div class="section" id="installing-the-development-version">
+</section>
+<section id="installing-the-development-version">
 <h2>Installing the development version<a class="headerlink" href="#installing-the-development-version" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pip install git+https://github.com/cogent3/cogent3.git@develop#egg<span class="o">=</span>cogent3
 </pre></div>
@@ -909,11 +914,11 @@
 <p class="admonition-title">Warning</p>
 <p>This is the bleeding edge!</p>
 </div>
-</div>
-<div class="section" id="installing-using-conda">
+</section>
+<section id="installing-using-conda">
 <h2>Installing using <code class="docutils literal notranslate"><span class="pre">conda</span></code><a class="headerlink" href="#installing-using-conda" title="Permalink to this headline">¶</a></h2>
 <p>Strictly speaking, this is just a <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code> into a <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">conda</a> environment. Do this is if you want all the capabilities that come with <a class="reference external" href="https://jupyter.org">Jupyterlab</a> and <a class="reference external" href="https://pypi.org/project/plotly/">Plotly</a>, particularly the ability to save image files.</p>
-<div class="section" id="manual-creation-of-the-conda-environment">
+<section id="manual-creation-of-the-conda-environment">
 <h3>Manual creation of the <code class="docutils literal notranslate"><span class="pre">conda</span></code> environment<a class="headerlink" href="#manual-creation-of-the-conda-environment" title="Permalink to this headline">¶</a></h3>
 <p>Once you’ve downloaded and installed <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">conda</a>, create a custom environment, e.g.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ conda create -n c3-env <span class="nv">python</span><span class="o">=</span><span class="m">3</span>
@@ -926,9 +931,9 @@ $ conda activate c3-env
 </div>
 <p>then follow the instructions posted on the <a class="reference external" href="https://pypi.org/project/plotly/">Plotly</a> pipy page to install and configure Plotly for jupyter.</p>
 <p>Then install <code class="docutils literal notranslate"><span class="pre">cogent3</span></code> using the variant of <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code> from above that you want.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
 </section>
@@ -950,7 +955,7 @@ $ conda activate c3-env
     <div id="footer-info" class="bg-light pl-2 pb-1 w-100">
         <div><span class="fa fa-copyright"></span>2020, cogent3 Team
         <a id="author-link" href=""></a> </div>
-        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
+        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.3 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
     </div>
 </footer>
 

@@ -460,6 +460,11 @@
 <li class="toctree-l3"><a class="reference internal" href="../cookbook/tables.html">Tabular data</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../cookbook/tables.html#loading-a-csv-file">Loading a csv file</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../cookbook/tables.html#loading-delimited-specifying-the-format">Loading delimited specifying the format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cookbook/tables.html#loading-delimited-data-without-a-header-line">Loading delimited data without a header line</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../cookbook/tables.html#using-load-delimited">Using <code class="docutils literal notranslate"><span class="pre">load_delimited()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cookbook/tables.html#using-filteringparser">Using <code class="docutils literal notranslate"><span class="pre">FilteringParser</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="../cookbook/tables.html#selectively-loading-parts-of-a-big-file">Selectively loading parts of a big file</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="../cookbook/tables.html#loading-a-set-number-of-lines-from-a-file">Loading a set number of lines from a file</a></li>
 <li class="toctree-l5"><a class="reference internal" href="../cookbook/tables.html#loading-only-some-rows">Loading only some rows</a></li>
@@ -871,11 +876,11 @@
 
 <section id="main-section" class="container flex-grow-1 has-nav">
     
-  <div class="section" id="overview-of-using-apps">
+  <section id="overview-of-using-apps">
 <h1>Overview of using apps<a class="headerlink" href="#overview-of-using-apps" title="Permalink to this headline">¶</a></h1>
 <p>The general idea is you create the flavour of function you want from an existing app. What you have created is then callable. It can be applied to a single data object (like an alignment file), or a series of them  (like a directory of alignment files). Alternatively, an app can be combined with other apps to make a pipeline.</p>
 <p>I illustrate the general approach for a simple example – extracting third codon positions.</p>
-<div class="section" id="define-the-apps">
+<section id="define-the-apps">
 <h2>Define the apps<a class="headerlink" href="#define-the-apps" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.app</span> <span class="kn">import</span> <span class="n">io</span><span class="p">,</span> <span class="n">sample</span>
 
@@ -884,8 +889,8 @@
 <span class="n">writer</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">write_seqs</span><span class="p">(</span><span class="s2">&quot;path/to/write/thirdpos.zip&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;fasta&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="using-apps-like-functions">
+</section>
+<section id="using-apps-like-functions">
 <h2>Using apps like functions<a class="headerlink" href="#using-apps-like-functions" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">reader</span><span class="p">(</span><span class="s2">&quot;some/path/to/seqs.fasta&quot;</span><span class="p">)</span>
 <span class="n">just3rd</span> <span class="o">=</span> <span class="n">cpos3</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
@@ -893,16 +898,16 @@
 </pre></div>
 </div>
 <p>In the above, <code class="docutils literal notranslate"><span class="pre">m</span></code> is a <code class="docutils literal notranslate"><span class="pre">DataStoreMember</span></code>. The result will be written into the zip archive specified in constructing the <code class="docutils literal notranslate"><span class="pre">writer</span></code>.</p>
-</div>
-<div class="section" id="composing-a-multi-step-process-from-several-apps">
+</section>
+<section id="composing-a-multi-step-process-from-several-apps">
 <h2>Composing a multi-step process from several apps<a class="headerlink" href="#composing-a-multi-step-process-from-several-apps" title="Permalink to this headline">¶</a></h2>
 <p>The above can be simplified by creation of a single composed function. Executing this with the path argument will generate the same output.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">process</span> <span class="o">=</span> <span class="n">reader</span> <span class="o">+</span> <span class="n">cpos3</span> <span class="o">+</span> <span class="n">writer</span>
 <span class="n">m</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="s2">&quot;some/path/to/seqs.fasta&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="applying-a-process-to-multiple-data-records">
+</section>
+<section id="applying-a-process-to-multiple-data-records">
 <h2>Applying a process to multiple data records<a class="headerlink" href="#applying-a-process-to-multiple-data-records" title="Permalink to this headline">¶</a></h2>
 <p>We use a data store to identify all data files in a directory that we want to analyse. <code class="docutils literal notranslate"><span class="pre">process</span></code> can be then applied to all records in the data store.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dstore</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">get_data_store</span><span class="p">(</span><span class="s2">&quot;path/to/dir&quot;</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;fasta&quot;</span><span class="p">)</span>
@@ -910,37 +915,37 @@
 </pre></div>
 </div>
 <p>Here <code class="docutils literal notranslate"><span class="pre">r</span></code> is a list of all the <code class="docutils literal notranslate"><span class="pre">DataStoreMember</span></code> instances.</p>
-</div>
-<div class="section" id="other-important-features">
+</section>
+<section id="other-important-features">
 <h2>Other important features<a class="headerlink" href="#other-important-features" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="you-can-track-progress">
+<section id="you-can-track-progress">
 <h3>You can track progress<a class="headerlink" href="#you-can-track-progress" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">process</span><span class="o">.</span><span class="n">apply_to</span><span class="p">(</span><span class="n">dstore</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="you-can-do-parallel-computation">
+</section>
+<section id="you-can-do-parallel-computation">
 <h3>You can do parallel computation<a class="headerlink" href="#you-can-do-parallel-computation" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">process</span><span class="o">.</span><span class="n">apply_to</span><span class="p">(</span><span class="n">dstore</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>By default, this will use all available processors on your machine. If you are running in an mpi environment, you can add the argument <code class="docutils literal notranslate"><span class="pre">par_kw=dict(use_mpi=True)</span></code>.</p>
-</div>
-<div class="section" id="you-can-log-the-settings-and-data-analysed">
+</section>
+<section id="you-can-log-the-settings-and-data-analysed">
 <h3>You can log the settings and data analysed<a class="headerlink" href="#you-can-log-the-settings-and-data-analysed" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">process</span><span class="o">.</span><span class="n">apply_to</span><span class="p">(</span><span class="n">dstore</span><span class="p">,</span> <span class="n">logger</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="all-of-the-above">
+</section>
+<section id="all-of-the-above">
 <h3>All of the above<a class="headerlink" href="#all-of-the-above" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">process</span><span class="o">.</span><span class="n">apply_to</span><span class="p">(</span><span class="n">dstore</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">logger</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>If you use the <code class="docutils literal notranslate"><span class="pre">json</span></code> based output formats (either explicitly, or via using the tinydb data store type), any “failures” (see <a class="reference internal" href="not-completed.html#not-completed"><span class="std std-ref">The NotCompleted object</span></a>) will be written to file also and a convenient interface is provided for interrogating those.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
 </section>
@@ -962,7 +967,7 @@
     <div id="footer-info" class="bg-light pl-2 pb-1 w-100">
         <div><span class="fa fa-copyright"></span>2020, cogent3 Team
         <a id="author-link" href=""></a> </div>
-        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
+        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.3 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
     </div>
 </footer>
 

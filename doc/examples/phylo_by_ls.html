@@ -460,6 +460,11 @@
 <li class="toctree-l3"><a class="reference internal" href="../cookbook/tables.html">Tabular data</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../cookbook/tables.html#loading-a-csv-file">Loading a csv file</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../cookbook/tables.html#loading-delimited-specifying-the-format">Loading delimited specifying the format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cookbook/tables.html#loading-delimited-data-without-a-header-line">Loading delimited data without a header line</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../cookbook/tables.html#using-load-delimited">Using <code class="docutils literal notranslate"><span class="pre">load_delimited()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cookbook/tables.html#using-filteringparser">Using <code class="docutils literal notranslate"><span class="pre">FilteringParser</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="../cookbook/tables.html#selectively-loading-parts-of-a-big-file">Selectively loading parts of a big file</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="../cookbook/tables.html#loading-a-set-number-of-lines-from-a-file">Loading a set number of lines from a file</a></li>
 <li class="toctree-l5"><a class="reference internal" href="../cookbook/tables.html#loading-only-some-rows">Loading only some rows</a></li>
@@ -875,7 +880,7 @@
 <div class="cell_output docutils container">
 </div>
 </div>
-<div class="section" id="phylogenetic-reconstruction-by-least-squares">
+<section id="phylogenetic-reconstruction-by-least-squares">
 <h1>Phylogenetic reconstruction by least squares<a class="headerlink" href="#phylogenetic-reconstruction-by-least-squares" title="Permalink to this headline">¶</a></h1>
 <p><em>Section author: Gavin Huttley</em></p>
 <p>We will load some pre-computed pairwise distance data. To see how that data was computed see the <a class="reference internal" href="calculate_pairwise_distances.html#calculating-pairwise-distances"><span class="std std-ref">Calculate pairwise distances between sequences</span></a> example. That data is saved in a format called <code class="docutils literal notranslate"><span class="pre">pickle</span></code> which is native to python. As per usual, we import the basic components we need.</p>
@@ -927,7 +932,7 @@
 </div>
 </div>
 <p>We will search tree space for the collection of best trees using the advanced stepwise addition algorithm (hereafter <em>asaa</em>).</p>
-<div class="section" id="look-for-the-single-best-tree">
+<section id="look-for-the-single-best-tree">
 <h2>Look for the single best tree<a class="headerlink" href="#look-for-the-single-best-tree" title="Permalink to this headline">¶</a></h2>
 <p>In this use case we are after just 1 tree. We specify up to what taxa size all possible trees for the sample will be computed. Here we are specifying <code class="docutils literal notranslate"><span class="pre">a=5</span></code>. This means 5 sequences will be picked randomly and all possible trees relating them will be evaluated. <code class="docutils literal notranslate"><span class="pre">k=1</span></code> means only the best tree will be kept at the end of each such round of evaluation. For every remaining sequence it is grafted onto every possible branch of this tree. The best <code class="docutils literal notranslate"><span class="pre">k</span></code> results are then taken to the next round, when another sequence is randomly selected for addition. This proceeds until all sequences have been added. The result with following arguments is a single wls score and a single <code class="docutils literal notranslate"><span class="pre">Tree</span></code> which can be saved etc ..</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -941,8 +946,8 @@
 </div>
 </div>
 <p>We won’t display this tree, because we are doing more below.</p>
-</div>
-<div class="section" id="a-more-rigorous-tree-space-search">
+</section>
+<section id="a-more-rigorous-tree-space-search">
 <h2>A more rigorous tree space search<a class="headerlink" href="#a-more-rigorous-tree-space-search" title="Permalink to this headline">¶</a></h2>
 <p>We change the settings, so we keep more trees and then look at the distribution of the statistics for the last collection of trees. We could also change <code class="docutils literal notranslate"><span class="pre">a</span></code> to be larger, but in the current case we just adjust <code class="docutils literal notranslate"><span class="pre">k</span></code>. We also set the argument <code class="docutils literal notranslate"><span class="pre">return_all=True</span></code>, the effect of which is to return the complete set of saved trees. These, and their support statistic, can then be inspected.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1025,8 +1030,8 @@
 </div>
 </div>
 <p>You can see the difference involves the Jackrabbit, TreeShrew, Gorilla, Rat clade.</p>
-</div>
-<div class="section" id="assessing-the-fit-for-a-pre-specified-tree-topology">
+</section>
+<section id="assessing-the-fit-for-a-pre-specified-tree-topology">
 <h2>Assessing the fit for a pre-specified tree topology<a class="headerlink" href="#assessing-the-fit-for-a-pre-specified-tree-topology" title="Permalink to this headline">¶</a></h2>
 <p>In some instances we may have a tree from the literature or elsewhere whose fit to the data we seek to evaluate. In this case I’m going load a tree as follows.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1066,16 +1071,16 @@
 <div class="cell_output docutils container">
 </div>
 </div>
-</div>
-<div class="section" id="using-maximum-likelihood-for-measuring-tree-fit">
+</section>
+<section id="using-maximum-likelihood-for-measuring-tree-fit">
 <h2>Using maximum likelihood for measuring tree fit<a class="headerlink" href="#using-maximum-likelihood-for-measuring-tree-fit" title="Permalink to this headline">¶</a></h2>
 <p>This is a much slower algorithm and the interface largely mirrors that for the above. The difference is you import <code class="docutils literal notranslate"><span class="pre">maximum_likelihood</span></code> instead of <code class="docutils literal notranslate"><span class="pre">least_squares</span></code>, and use the <code class="docutils literal notranslate"><span class="pre">ML</span></code> instead of <code class="docutils literal notranslate"><span class="pre">WLS</span></code> classes. The <code class="docutils literal notranslate"><span class="pre">ML</span></code> class requires a substitution model (like a HKY85 for DNA or JTT92 for protein), and an alignment. It also optionally takes a distance matrix, such as that used here, computed for the same sequences. These distances are then used to obtain estimates of branch lengths by the WLS method for each evaluated tree topology which are then used as starting values for the likelihood optimisation.</p>
 <div class="jupyter_cell docutils container">
 <div class="cell_output docutils container">
 </div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
 </section>
@@ -1097,7 +1102,7 @@
     <div id="footer-info" class="bg-light pl-2 pb-1 w-100">
         <div><span class="fa fa-copyright"></span>2020, cogent3 Team
         <a id="author-link" href=""></a> </div>
-        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
+        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.3 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
     </div>
 </footer>
 

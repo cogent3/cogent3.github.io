@@ -460,6 +460,11 @@
 <li class="toctree-l3"><a class="reference internal" href="../cookbook/tables.html">Tabular data</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../cookbook/tables.html#loading-a-csv-file">Loading a csv file</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../cookbook/tables.html#loading-delimited-specifying-the-format">Loading delimited specifying the format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cookbook/tables.html#loading-delimited-data-without-a-header-line">Loading delimited data without a header line</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../cookbook/tables.html#using-load-delimited">Using <code class="docutils literal notranslate"><span class="pre">load_delimited()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cookbook/tables.html#using-filteringparser">Using <code class="docutils literal notranslate"><span class="pre">FilteringParser</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="../cookbook/tables.html#selectively-loading-parts-of-a-big-file">Selectively loading parts of a big file</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="../cookbook/tables.html#loading-a-set-number-of-lines-from-a-file">Loading a set number of lines from a file</a></li>
 <li class="toctree-l5"><a class="reference internal" href="../cookbook/tables.html#loading-only-some-rows">Loading only some rows</a></li>
@@ -871,7 +876,7 @@
 
 <section id="main-section" class="container flex-grow-1 has-nav">
     
-  <div class="section" id="what-apps-are-there">
+  <section id="what-apps-are-there">
 <h1>What apps are there?<a class="headerlink" href="#what-apps-are-there" title="Permalink to this headline">¶</a></h1>
 <p>Apps perform functions ranging from multiple sequence alignment (e.g. <code class="docutils literal notranslate"><span class="pre">progressive_align</span></code>), to excluding alignment columns containing non-nucleotide characters (e.g. <code class="docutils literal notranslate"><span class="pre">omit_degenerates</span></code>) to performing maximum-likelihood evolutionary analyses (e.g. <code class="docutils literal notranslate"><span class="pre">model</span></code>).</p>
 <p>Apps that are identified as “composable” (with a value of <code class="docutils literal notranslate"><span class="pre">True</span></code> under that column) can be combined into a single function by addition.</p>
@@ -969,6 +974,10 @@
     reading frame. Returns modified Alignment.</span></td><td><span class="c3col_left">aligned, serialisable</span></td><td><span class="c3col_left">aligned, serialisable</span></td><td><span class="c3col_left">ArrayAlignment, Alignment</span></td></tr>
 <tr><td><span class="c3col_left">cogent3.app.sample</span></td><td><span class="c3col_left">take_codon_positions</span></td><td><span class="c3col_left">True</span></td><td><span class="c3col_left">Extracts the specified codon position(s) from an alignment.
     Returns an Alignment.</span></td><td><span class="c3col_left">aligned, serialisable</span></td><td><span class="c3col_left">aligned, serialisable</span></td><td><span class="c3col_left">ArrayAlignment, Alignment</span></td></tr>
+<tr><td><span class="c3col_left">cogent3.app.sample</span></td><td><span class="c3col_left">take_n_seqs</span></td><td><span class="c3col_left">True</span></td><td><span class="c3col_left">Selects n sequences from a collection. Chooses first n sequences, or selects randomly if specified.
+
+    Returns original object type with the selected sequences, NotCompleted object otherwise.
+    </span></td><td><span class="c3col_left">sequences, aligned, serialisable</span></td><td><span class="c3col_left">sequences, aligned, serialisable</span></td><td><span class="c3col_left">ArrayAlignment, Alignment, SequenceCollection</span></td></tr>
 <tr><td><span class="c3col_left">cogent3.app.sample</span></td><td><span class="c3col_left">take_named_seqs</span></td><td><span class="c3col_left">True</span></td><td><span class="c3col_left">Extracts (or everything but) named sequences. Returns a filtered
     sequences, alignment that satisified the condition, NotCompleted otherwise.</span></td><td><span class="c3col_left">sequences, aligned, serialisable</span></td><td><span class="c3col_left">sequences, aligned, serialisable</span></td><td><span class="c3col_left">ArrayAlignment, Alignment, SequenceCollection</span></td></tr>
 <tr><td><span class="c3col_left">cogent3.app.sample</span></td><td><span class="c3col_left">trim_stop_codons</span></td><td><span class="c3col_left">True</span></td><td><span class="c3col_left">Removes terminal stop codons. Returns sequences / alignment.</span></td><td><span class="c3col_left">sequences, aligned, serialisable</span></td><td><span class="c3col_left">sequences, aligned, serialisable</span></td><td><span class="c3col_left">ArrayAlignment, Alignment, SequenceCollection</span></td></tr>
@@ -983,10 +992,10 @@
 </tbody>
 </table>
 <p>
-37 rows x 7 columns</p>
+38 rows x 7 columns</p>
 </div></div></div>
 </div>
-</div>
+</section>
 
 
 </section>
@@ -1008,7 +1017,7 @@
     <div id="footer-info" class="bg-light pl-2 pb-1 w-100">
         <div><span class="fa fa-copyright"></span>2020, cogent3 Team
         <a id="author-link" href=""></a> </div>
-        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
+        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.3 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
     </div>
 </footer>
 

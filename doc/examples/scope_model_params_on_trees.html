@@ -460,6 +460,11 @@
 <li class="toctree-l3"><a class="reference internal" href="../cookbook/tables.html">Tabular data</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../cookbook/tables.html#loading-a-csv-file">Loading a csv file</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../cookbook/tables.html#loading-delimited-specifying-the-format">Loading delimited specifying the format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cookbook/tables.html#loading-delimited-data-without-a-header-line">Loading delimited data without a header line</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../cookbook/tables.html#using-load-delimited">Using <code class="docutils literal notranslate"><span class="pre">load_delimited()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cookbook/tables.html#using-filteringparser">Using <code class="docutils literal notranslate"><span class="pre">FilteringParser</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="../cookbook/tables.html#selectively-loading-parts-of-a-big-file">Selectively loading parts of a big file</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="../cookbook/tables.html#loading-a-set-number-of-lines-from-a-file">Loading a set number of lines from a file</a></li>
 <li class="toctree-l5"><a class="reference internal" href="../cookbook/tables.html#loading-only-some-rows">Loading only some rows</a></li>
@@ -875,7 +880,7 @@
 <div class="cell_output docutils container">
 </div>
 </div>
-<div class="section" id="allowing-substitution-model-parameters-to-differ-between-branches">
+<section id="allowing-substitution-model-parameters-to-differ-between-branches">
 <span id="scope-params-on-trees"></span><h1>Allowing substitution model parameters to differ between branches<a class="headerlink" href="#allowing-substitution-model-parameters-to-differ-between-branches" title="Permalink to this headline">¶</a></h1>
 <p><em>Section author: Gavin Huttley</em></p>
 <p>A common task concerns assessing how substitution model exchangeability parameters differ between evolutionary lineages. This is most commonly of interest for the case of testing for natural selection. Here I’ll demonstrate the different ways of scoping parameters across trees for the codon model case and how these can be used for evolutionary modelling.</p>
@@ -934,7 +939,7 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">stem</span></code>: Whether the edge leading to the node is included.</p></li>
 </ul>
 <p>The next concepts include exactly what can be scoped and how. In the case of testing for distinctive periods of natural selection it is common to specify distinct values for <code class="docutils literal notranslate"><span class="pre">omega</span></code> for an edge. I’ll first illustrate some possible uses for the arguments above by setting <code class="docutils literal notranslate"><span class="pre">omega</span></code> to be distinctive for specific edges. I will set a value for omega so that printing the likelihood function illustrates what edges have been effected, but I won’t actually do any model fitting.</p>
-<div class="section" id="specifying-a-clade">
+<section id="specifying-a-clade">
 <h2>Specifying a clade<a class="headerlink" href="#specifying-a-clade" title="Permalink to this headline">¶</a></h2>
 <p>I’m going to cause <code class="docutils literal notranslate"><span class="pre">omega</span></code> to attain a different value for all branches aside from the primate clade and stem (<code class="docutils literal notranslate"><span class="pre">HowlerMon</span></code>, <code class="docutils literal notranslate"><span class="pre">Human</span></code>, <code class="docutils literal notranslate"><span class="pre">edge.0</span></code>).</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1061,8 +1066,8 @@
 </div></div></div>
 </div>
 <p>As you can see <code class="docutils literal notranslate"><span class="pre">omega</span></code> for the primate edges I listed above have the default parameter value (1.0), while the others have what I’ve assigned. In fact, you could omit the <code class="docutils literal notranslate"><span class="pre">clade</span></code> argument as this is the default, but I think for readability of scripts it’s best to be explicit.</p>
-</div>
-<div class="section" id="specifying-a-stem">
+</section>
+<section id="specifying-a-stem">
 <h2>Specifying a stem<a class="headerlink" href="#specifying-a-stem" title="Permalink to this headline">¶</a></h2>
 <p>This time I’ll specify the stem leading to the primates as the edge of interest.</p>
 <div class="admonition note">
@@ -1194,8 +1199,8 @@
 
 </div></div></div>
 </div>
-</div>
-<div class="section" id="specifying-clade-and-stem">
+</section>
+<section id="specifying-clade-and-stem">
 <h2>Specifying clade and stem<a class="headerlink" href="#specifying-clade-and-stem" title="Permalink to this headline">¶</a></h2>
 <p>I’ll specify that both the primates and their stem are to be considered.</p>
 <div class="jupyter_cell docutils container">
@@ -1326,12 +1331,12 @@
 
 </div></div></div>
 </div>
-</div>
-<div class="section" id="alternate-arguments-for-specifying-edges">
+</section>
+<section id="alternate-arguments-for-specifying-edges">
 <h2>Alternate arguments for specifying edges<a class="headerlink" href="#alternate-arguments-for-specifying-edges" title="Permalink to this headline">¶</a></h2>
 <p>The likelihood function <code class="docutils literal notranslate"><span class="pre">set_param_rule</span></code> method also has the arguments of <code class="docutils literal notranslate"><span class="pre">edge</span></code> and <code class="docutils literal notranslate"><span class="pre">edges</span></code>. These allow specific naming of the tree edge(s) to be affected by a rule. In general, however, the <code class="docutils literal notranslate"><span class="pre">tip_names</span></code> + <code class="docutils literal notranslate"><span class="pre">outgroup_name</span></code> combo is more robust.</p>
-</div>
-<div class="section" id="applications-of-scoped-parameters">
+</section>
+<section id="applications-of-scoped-parameters">
 <h2>Applications of scoped parameters<a class="headerlink" href="#applications-of-scoped-parameters" title="Permalink to this headline">¶</a></h2>
 <p>The general use-cases for which a tree scope can be applied are:</p>
 <ol class="arabic simple">
@@ -1875,8 +1880,8 @@
 
 </div></div></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
 </section>
@@ -1898,7 +1903,7 @@
     <div id="footer-info" class="bg-light pl-2 pb-1 w-100">
         <div><span class="fa fa-copyright"></span>2020, cogent3 Team
         <a id="author-link" href=""></a> </div>
-        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
+        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.3 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
     </div>
 </footer>
 

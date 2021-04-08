@@ -460,6 +460,11 @@
 <li class="toctree-l3"><a class="reference internal" href="../cookbook/tables.html">Tabular data</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../cookbook/tables.html#loading-a-csv-file">Loading a csv file</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../cookbook/tables.html#loading-delimited-specifying-the-format">Loading delimited specifying the format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cookbook/tables.html#loading-delimited-data-without-a-header-line">Loading delimited data without a header line</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../cookbook/tables.html#using-load-delimited">Using <code class="docutils literal notranslate"><span class="pre">load_delimited()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cookbook/tables.html#using-filteringparser">Using <code class="docutils literal notranslate"><span class="pre">FilteringParser</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="../cookbook/tables.html#selectively-loading-parts-of-a-big-file">Selectively loading parts of a big file</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="../cookbook/tables.html#loading-a-set-number-of-lines-from-a-file">Loading a set number of lines from a file</a></li>
 <li class="toctree-l5"><a class="reference internal" href="../cookbook/tables.html#loading-only-some-rows">Loading only some rows</a></li>
@@ -875,7 +880,7 @@
 <div class="cell_output docutils container">
 </div>
 </div>
-<div class="section" id="specifying-data-for-analysis">
+<section id="specifying-data-for-analysis">
 <h1>Specifying data for analysis<a class="headerlink" href="#specifying-data-for-analysis" title="Permalink to this headline">¶</a></h1>
 <p>We introduce the concept of a “data store”. This represents the data record(s) that you want to analyse. It can be a single file, a directory of files, a zipped directory of files or a single <code class="docutils literal notranslate"><span class="pre">tinydb</span></code> file containing multiple data records.</p>
 <p>We represent this concept by a <code class="docutils literal notranslate"><span class="pre">DataStore</span></code> class. There are different flavours of these:</p>
@@ -885,7 +890,7 @@
 <li><p>TinyDB based (this is a NoSQL json based data base)</p></li>
 </ul>
 <p>These can be read only or writable. All of these types support being indexed, iterated over, filtered, etc.. The <code class="docutils literal notranslate"><span class="pre">tinydb</span></code> variants do have some unique abilities (discussed below).</p>
-<div class="section" id="a-read-only-data-store">
+<section id="a-read-only-data-store">
 <h2>A read only data store<a class="headerlink" href="#a-read-only-data-store" title="Permalink to this headline">¶</a></h2>
 <p>To create one of these, you provide a <code class="docutils literal notranslate"><span class="pre">path</span></code> AND a <code class="docutils literal notranslate"><span class="pre">suffix</span></code> of the files within the directory / zip that you will be analysing. (If the path ends with <code class="docutils literal notranslate"><span class="pre">.tinydb</span></code>, no file suffix is required.)</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -903,8 +908,8 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="data-store-members">
+</section>
+<section id="data-store-members">
 <h2>Data store “members”<a class="headerlink" href="#data-store-members" title="Permalink to this headline">¶</a></h2>
 <p>These are able to read their own raw data.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -932,8 +937,8 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="showing-the-last-few-members">
+</section>
+<section id="showing-the-last-few-members">
 <h2>Showing the last few members<a class="headerlink" href="#showing-the-last-few-members" title="Permalink to this headline">¶</a></h2>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">head()</span></code> method to see the first few.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -952,8 +957,8 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="filtering-a-data-store-for-specific-members">
+</section>
+<section id="filtering-a-data-store-for-specific-members">
 <h2>Filtering a data store for specific members<a class="headerlink" href="#filtering-a-data-store-for-specific-members" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -967,8 +972,8 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="looping-over-a-data-store">
+</section>
+<section id="looping-over-a-data-store">
 <h2>Looping over a data store<a class="headerlink" href="#looping-over-a-data-store" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -987,12 +992,12 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="making-a-writeable-data-store">
+</section>
+<section id="making-a-writeable-data-store">
 <h2>Making a writeable data store<a class="headerlink" href="#making-a-writeable-data-store" title="Permalink to this headline">¶</a></h2>
 <p>The creation of a writeable data store is handled for you by the different writers we provide under <code class="docutils literal notranslate"><span class="pre">cogent3.app.io</span></code>.</p>
-</div>
-<div class="section" id="tinydb-data-stores-are-special">
+</section>
+<section id="tinydb-data-stores-are-special">
 <h2>TinyDB data stores are special<a class="headerlink" href="#tinydb-data-stores-are-special" title="Permalink to this headline">¶</a></h2>
 <p>When you specify a TinyDB data store as your output (by using <code class="docutils literal notranslate"><span class="pre">io.write_db()</span></code>), you get additional features that are useful for dissecting the results of an analysis.</p>
 <p>One important issue to note is the process which creates a TinyDB “locks” the file. If that process exits unnaturally (e.g. the run that was producing it was interrupted) then the file may remain in a locked state. If the db is in this state, <code class="docutils literal notranslate"><span class="pre">cogent3</span></code> will not modify it unless you explicitly unlock it.</p>
@@ -1052,7 +1057,7 @@
 <div class="cell_output docutils container">
 </div>
 </div>
-<div class="section" id="interrogating-run-logs">
+<section id="interrogating-run-logs">
 <h3>Interrogating run logs<a class="headerlink" href="#interrogating-run-logs" title="Permalink to this headline">¶</a></h3>
 <p>If you use the <code class="docutils literal notranslate"><span class="pre">apply_to(logger=true)</span></code> method, a <code class="docutils literal notranslate"><span class="pre">scitrack</span></code> logfile will be included in the data store. This includes useful information regarding the run conditions that produced the contents of the data store.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1124,9 +1129,9 @@
 </div>
 </div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
 </section>
@@ -1148,7 +1153,7 @@
     <div id="footer-info" class="bg-light pl-2 pb-1 w-100">
         <div><span class="fa fa-copyright"></span>2020, cogent3 Team
         <a id="author-link" href=""></a> </div>
-        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
+        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.3 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
     </div>
 </footer>
 

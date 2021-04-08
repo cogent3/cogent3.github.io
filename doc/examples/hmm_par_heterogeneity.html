@@ -460,6 +460,11 @@
 <li class="toctree-l3"><a class="reference internal" href="../cookbook/tables.html">Tabular data</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../cookbook/tables.html#loading-a-csv-file">Loading a csv file</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../cookbook/tables.html#loading-delimited-specifying-the-format">Loading delimited specifying the format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../cookbook/tables.html#loading-delimited-data-without-a-header-line">Loading delimited data without a header line</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../cookbook/tables.html#using-load-delimited">Using <code class="docutils literal notranslate"><span class="pre">load_delimited()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="../cookbook/tables.html#using-filteringparser">Using <code class="docutils literal notranslate"><span class="pre">FilteringParser</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="../cookbook/tables.html#selectively-loading-parts-of-a-big-file">Selectively loading parts of a big file</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="../cookbook/tables.html#loading-a-set-number-of-lines-from-a-file">Loading a set number of lines from a file</a></li>
 <li class="toctree-l5"><a class="reference internal" href="../cookbook/tables.html#loading-only-some-rows">Loading only some rows</a></li>
@@ -875,7 +880,7 @@
 <div class="cell_output docutils container">
 </div>
 </div>
-<div class="section" id="evaluate-process-heterogeneity-using-a-hidden-markov-model">
+<section id="evaluate-process-heterogeneity-using-a-hidden-markov-model">
 <span id="rate-heterogeneity-hmm"></span><h1>Evaluate process heterogeneity using a Hidden Markov Model<a class="headerlink" href="#evaluate-process-heterogeneity-using-a-hidden-markov-model" title="Permalink to this headline">¶</a></h1>
 <p><em>Section author: Gavin Huttley</em></p>
 <p>The existence of rate heterogeneity in the evolution of biological sequences is well known. Typically such an evolutionary property is evaluated using so-called site-heterogeneity models. These models postulate the existence of discrete classes of sites, where sites within a class evolve according to a specific rate that is distinct from the rates of the other classes. These models retain the assumption that alignment columns evolve independently. One can naturally ask the question of whether rate classes occur randomly throughout the sequence or whether they are in fact auto-correlated - meaning sites of a class tend to cluster together. Because we do not have, <em>a priori</em>, a basis for classifying the sites the models are specified such that each column can belong to any of the designated site classes and the likelihood is computed across all possible classifications. Post numerical optimisation we can calculate the posterior probability a site column belongs to a specific site class. In <code class="docutils literal notranslate"><span class="pre">cogent3</span></code>, site classes are referred to as <code class="docutils literal notranslate"><span class="pre">bins</span></code> and so we refer to bin probabilities etc…</p>
@@ -904,7 +909,7 @@
 <div class="cell_output docutils container">
 </div>
 </div>
-<div class="section" id="model-ho-no-rate-heterogeneity">
+<section id="model-ho-no-rate-heterogeneity">
 <h2>Model Ho: no rate heterogeneity<a class="headerlink" href="#model-ho-no-rate-heterogeneity" title="Permalink to this headline">¶</a></h2>
 <p>We define a HKY model of nucleotide substitution, which has a transition parameter. This is defined using the <code class="docutils literal notranslate"><span class="pre">MotifChange</span></code> class, by specifying a transition as <strong>not</strong> a transversion (<code class="docutils literal notranslate"><span class="pre">~MotifChange('R','Y')</span></code>).</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1041,8 +1046,8 @@
 
 </div></div></div>
 </div>
-</div>
-<div class="section" id="model-ha-1-two-classes-of-gamma-distributed-but-independent-sites">
+</section>
+<section id="model-ha-1-two-classes-of-gamma-distributed-but-independent-sites">
 <h2>Model Ha(1): two classes of gamma distributed but independent sites<a class="headerlink" href="#model-ha-1-two-classes-of-gamma-distributed-but-independent-sites" title="Permalink to this headline">¶</a></h2>
 <p>Our next hypothesis is that there are two rate classes, or bins, with rates gamma distributed. We will restrict the bin probabilities to be equal.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1207,8 +1212,8 @@
 
 </div></div></div>
 </div>
-</div>
-<div class="section" id="model-ha-2-fast-and-slowly-evolving-sites-are-auto-correlated">
+</section>
+<section id="model-ha-2-fast-and-slowly-evolving-sites-are-auto-correlated">
 <h2>Model Ha(2): fast and slowly evolving sites are auto-correlated<a class="headerlink" href="#model-ha-2-fast-and-slowly-evolving-sites-are-auto-correlated" title="Permalink to this headline">¶</a></h2>
 <p>We then specify a model with switches for changing between site-classes, the HMM part. The setup is almost identical to that for above with the sole difference being setting the <code class="docutils literal notranslate"><span class="pre">sites_independent=False</span></code>.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1442,8 +1447,8 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="a-model-with-patches-of-kappa">
+</section>
+<section id="a-model-with-patches-of-kappa">
 <h2>A model with patches of <code class="docutils literal notranslate"><span class="pre">kappa</span></code><a class="headerlink" href="#a-model-with-patches-of-kappa" title="Permalink to this headline">¶</a></h2>
 <p>In this example we model sequence evolution where there are 2 classes of sites distinguished by their <code class="docutils literal notranslate"><span class="pre">kappa</span></code> parameters. We need to know what value of <code class="docutils literal notranslate"><span class="pre">kappa</span></code> to specify the delineation of the bin boundaries. We can determine this from the null model (<code class="docutils literal notranslate"><span class="pre">lf_one</span></code>). For this use case, we also need to use a <code class="docutils literal notranslate"><span class="pre">numpy.array</span></code>, so we’ll import that.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1640,8 +1645,8 @@
 
 </div></div></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
 </section>
@@ -1663,7 +1668,7 @@
     <div id="footer-info" class="bg-light pl-2 pb-1 w-100">
         <div><span class="fa fa-copyright"></span>2020, cogent3 Team
         <a id="author-link" href=""></a> </div>
-        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.1 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
+        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.3 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
     </div>
 </footer>
 
