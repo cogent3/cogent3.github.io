@@ -1,3 +1,4 @@
+import datetime
 import os
 import pathlib
 import shutil
@@ -5,13 +6,15 @@ import sys
 from glob import glob
 
 # sphinx_navtree
-
+today = datetime.date.today()
+year = today.strftime("%Y")
 project = "cogent3"
-copyright = "2020-, cogent3 Team"
+copyright = f"2020-{year}, cogent3 Team"
 author = "Gavin Huttley"
 
 # The full version, including alpha/beta/rc tags
-release = "2020.4"
+# Use clanedar versioning
+release = today.strftime("%Y.%m.%d")
 
 
 # -- General configuration ---------------------------------------------------
@@ -68,7 +71,7 @@ html_theme_options = {
             ],
         ),
     ],
-    "years": "2020, cogent3 Team",
+    "years": copyright,
     "navigation_depth": 6,
 }
 

@@ -35,6 +35,7 @@ Our ``cogent3.app`` module (`app docs`_) provides a very different approach to u
     pycogent
     projects
     doc/licenses
+    genindex
 
 
 ------
