@@ -7,7 +7,7 @@
 <!-- IE Compatibility tag -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>cogent3 2021.04.09 documentation</title>
+<title>cogent3 2021.04.12 documentation</title>
 
 <link href="../.././_static/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
 
@@ -707,6 +707,18 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/index.html#utilities">Utilities</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../examples/parallel.html">Parallel computations</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../examples/parallel.html#parallel-computation-on-a-single-computer">Parallel computation on a single computer</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../examples/parallel.html#using-app-apply-to">Using <code class="docutils literal notranslate"><span class="pre">app.apply_to()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="../examples/parallel.html#directly-using-cogent3-util-parallel-map">Directly using <code class="docutils literal notranslate"><span class="pre">cogent3.util.parallel.map()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../examples/parallel.html#parallel-computation-on-multiple-computers">Parallel computation on multiple computers</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api/index.html">API</a><ul>
@@ -883,11 +895,11 @@
 <div class="cell_output docutils container">
 </div>
 </div>
-<section id="evolutionary-analysis-using-likelihood">
+<div class="section" id="evolutionary-analysis-using-likelihood">
 <h1>Evolutionary Analysis Using Likelihood<a class="headerlink" href="#evolutionary-analysis-using-likelihood" title="Permalink to this headline">¶</a></h1>
-<section id="specifying-substitution-models">
+<div class="section" id="specifying-substitution-models">
 <h2>Specifying substitution models<a class="headerlink" href="#specifying-substitution-models" title="Permalink to this headline">¶</a></h2>
-<section id="the-available-pre-defined-substitution-models">
+<div class="section" id="the-available-pre-defined-substitution-models">
 <h3>The available pre-defined substitution models<a class="headerlink" href="#the-available-pre-defined-substitution-models" title="Permalink to this headline">¶</a></h3>
 <p>In cases where code takes a substitution model as an argument, you can use the value under “Abbreviation” as a string.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -958,8 +970,8 @@
 25 rows x 3 columns</p>
 </div></div></div>
 </div>
-</section>
-<section id="getting-a-substitution-model-with-get-model">
+</div>
+<div class="section" id="getting-a-substitution-model-with-get-model">
 <h3>Getting a substitution model with <code class="docutils literal notranslate"><span class="pre">get_model()</span></code><a class="headerlink" href="#getting-a-substitution-model-with-get-model" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -978,11 +990,11 @@ TimeReversibleNucleotide ( name = &#39;HKY85&#39;; type = &#39;None&#39;; params
 </div>
 </div>
 </div>
-</section>
-<section id="rate-heterogeneity-models">
+</div>
+<div class="section" id="rate-heterogeneity-models">
 <h3>Rate heterogeneity models<a class="headerlink" href="#rate-heterogeneity-models" title="Permalink to this headline">¶</a></h3>
 <p>We illustrate this for the gamma distributed case using examples of the canned models displayed above. Creating rate heterogeneity variants of the canned models can be done by using optional arguments that get passed to the substitution model class.</p>
-<section id="for-nucleotide">
+<div class="section" id="for-nucleotide">
 <h4>For nucleotide<a class="headerlink" href="#for-nucleotide" title="Permalink to this headline">¶</a></h4>
 <p>We specify a general time reversible nucleotide model with gamma distributed rate heterogeneity.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1002,8 +1014,8 @@ TimeReversibleNucleotide ( name = &#39;GTR&#39;; type = &#39;None&#39;; params =
 </div>
 </div>
 </div>
-</section>
-<section id="for-codon">
+</div>
+<div class="section" id="for-codon">
 <h4>For codon<a class="headerlink" href="#for-codon" title="Permalink to this headline">¶</a></h4>
 <p>We specify a conditional nucleotide frequency codon model with nucleotide general time reversible parameters and a parameter for the ratio of nonsynonymous to synonymous substitutions (omega) with gamma distributed rate heterogeneity.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1023,8 +1035,8 @@ TimeReversibleCodon ( name = &#39;CNFGTR&#39;; type = &#39;None&#39;; params = [
 </div>
 </div>
 </div>
-</section>
-<section id="for-protein">
+</div>
+<div class="section" id="for-protein">
 <h4>For protein<a class="headerlink" href="#for-protein" title="Permalink to this headline">¶</a></h4>
 <p>We specify a Jones, Taylor and Thornton 1992 empirical protein substitution model with gamma distributed rate heterogeneity.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1044,10 +1056,10 @@ Empirical ( name = &#39;JTT92&#39;; type = &#39;None&#39;; number of motifs = 20
 </div>
 </div>
 </div>
-</section>
-</section>
-</section>
-<section id="making-a-likelihood-function">
+</div>
+</div>
+</div>
+<div class="section" id="making-a-likelihood-function">
 <h2>Making a likelihood function<a class="headerlink" href="#making-a-likelihood-function" title="Permalink to this headline">¶</a></h2>
 <p>You start by specifying a substitution model and use that to construct a likelihood function for a specific tree.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1064,7 +1076,7 @@ Empirical ( name = &#39;JTT92&#39;; type = &#39;None&#39;; number of motifs = 20
 <div class="cell_output docutils container">
 </div>
 </div>
-<section id="providing-an-alignment-to-a-likelihood-function">
+<div class="section" id="providing-an-alignment-to-a-likelihood-function">
 <h3>Providing an alignment to a likelihood function<a class="headerlink" href="#providing-an-alignment-to-a-likelihood-function" title="Permalink to this headline">¶</a></h3>
 <p>You need to load an alignment and then provide it a likelihood function. I construct very simple trees and alignments for this example.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1085,8 +1097,8 @@ Empirical ( name = &#39;JTT92&#39;; type = &#39;None&#39;; number of motifs = 20
 <div class="cell_output docutils container">
 </div>
 </div>
-</section>
-<section id="scoping-parameters-on-trees-time-heterogeneous-models">
+</div>
+<div class="section" id="scoping-parameters-on-trees-time-heterogeneous-models">
 <h3>Scoping parameters on trees – time heterogeneous models<a class="headerlink" href="#scoping-parameters-on-trees-time-heterogeneous-models" title="Permalink to this headline">¶</a></h3>
 <p>For many evolutionary analyses, it’s desirable to allow different branches on a tree to have different values of a parameter. We show this for a simple codon model case here where we want the great apes (the clade that includes human and orangutan) to have a different value of the ratio of nonsynonymous to synonymous substitutions. This parameter is identified in the precanned <code class="docutils literal notranslate"><span class="pre">CNFGTR</span></code> model as <code class="docutils literal notranslate"><span class="pre">omega</span></code>.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1308,8 +1320,8 @@ Empirical ( name = &#39;JTT92&#39;; type = &#39;None&#39;; number of motifs = 20
 </div></div></div>
 </div>
 <p>A more extensive description of capabilities is in <a class="reference internal" href="../examples/scope_model_params_on_trees.html#scope-params-on-trees"><span class="std std-ref">Allowing substitution model parameters to differ between branches</span></a>.</p>
-</section>
-<section id="specifying-a-parameter-as-constant">
+</div>
+<div class="section" id="specifying-a-parameter-as-constant">
 <h3>Specifying a parameter as constant<a class="headerlink" href="#specifying-a-parameter-as-constant" title="Permalink to this headline">¶</a></h3>
 <p>This means the parameter will not be modified during likelihood maximisation. We show this here by making the <code class="docutils literal notranslate"><span class="pre">omega</span></code> parameter constant at the value 1 – essentially the condition of selective neutrality.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1327,8 +1339,8 @@ Empirical ( name = &#39;JTT92&#39;; type = &#39;None&#39;; number of motifs = 20
 <div class="cell_output docutils container">
 </div>
 </div>
-</section>
-<section id="providing-a-starting-value-for-a-parameter">
+</div>
+<div class="section" id="providing-a-starting-value-for-a-parameter">
 <h3>Providing a starting value for a parameter<a class="headerlink" href="#providing-a-starting-value-for-a-parameter" title="Permalink to this headline">¶</a></h3>
 <p>This can be useful to improve performance, the closer you are to the maximum likelihood estimator the quicker optimisation will be.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1346,8 +1358,8 @@ Empirical ( name = &#39;JTT92&#39;; type = &#39;None&#39;; number of motifs = 20
 <div class="cell_output docutils container">
 </div>
 </div>
-</section>
-<section id="setting-parameter-bounds-for-optimisation">
+</div>
+<div class="section" id="setting-parameter-bounds-for-optimisation">
 <h3>Setting parameter bounds for optimisation<a class="headerlink" href="#setting-parameter-bounds-for-optimisation" title="Permalink to this headline">¶</a></h3>
 <p>This can be useful for stopping optimisers from getting stuck in a bad part of parameter space. The following is for <code class="docutils literal notranslate"><span class="pre">omega</span></code> in a codon model. I’m also providing an initial guess for the parameter (<code class="docutils literal notranslate"><span class="pre">init=0.1</span></code>) as well as a lower bound. An initial guess that is close to the maximum likelihood estimate will speed up optimisation.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1365,8 +1377,8 @@ Empirical ( name = &#39;JTT92&#39;; type = &#39;None&#39;; number of motifs = 20
 <div class="cell_output docutils container">
 </div>
 </div>
-</section>
-<section id="setting-an-upper-bound-for-branch-length">
+</div>
+<div class="section" id="setting-an-upper-bound-for-branch-length">
 <h3>Setting an upper bound for branch length<a class="headerlink" href="#setting-an-upper-bound-for-branch-length" title="Permalink to this headline">¶</a></h3>
 <p>If the branch length estimates seem too large, setting just an upper bound can be sensible. This will apply to all edges on the tree.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1388,8 +1400,8 @@ Empirical ( name = &#39;JTT92&#39;; type = &#39;None&#39;; number of motifs = 20
 <p class="admonition-title">Note</p>
 <p>If, after optimising, the branch lengths equal to the upper value you set then the function has not been fully maximised and you should consider adjusting the boundary again.</p>
 </div>
-</section>
-<section id="specifying-rate-heterogeneity-functions">
+</div>
+<div class="section" id="specifying-rate-heterogeneity-functions">
 <h3>Specifying rate heterogeneity functions<a class="headerlink" href="#specifying-rate-heterogeneity-functions" title="Permalink to this headline">¶</a></h3>
 <p>We extend the simple gamma distributed rate heterogeneity case for nucleotides from above to construction of the actual likelihood function. We do this for 4 bins and constraint the bin probabilities to be equal.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1408,8 +1420,8 @@ Empirical ( name = &#39;JTT92&#39;; type = &#39;None&#39;; number of motifs = 20
 </div>
 </div>
 <p>For more detailed discussion of defining and using these models see <a class="reference internal" href="../examples/rate_heterogeneity.html#rate-heterogeneity"><span class="std std-ref">Analysis of rate heterogeneity</span></a>.</p>
-</section>
-<section id="specifying-phylo-hmms">
+</div>
+<div class="section" id="specifying-phylo-hmms">
 <h3>Specifying Phylo-HMMs<a class="headerlink" href="#specifying-phylo-hmms" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1427,8 +1439,8 @@ Empirical ( name = &#39;JTT92&#39;; type = &#39;None&#39;; number of motifs = 20
 </div>
 </div>
 <p>For more detailed discussion of defining and using these models see <a class="reference internal" href="../examples/hmm_par_heterogeneity.html#rate-heterogeneity-hmm"><span class="std std-ref">Evaluate process heterogeneity using a Hidden Markov Model</span></a>.</p>
-</section>
-<section id="fitting-likelihood-functions-choice-of-optimisers">
+</div>
+<div class="section" id="fitting-likelihood-functions-choice-of-optimisers">
 <h3>Fitting likelihood functions - Choice of optimisers<a class="headerlink" href="#fitting-likelihood-functions-choice-of-optimisers" title="Permalink to this headline">¶</a></h3>
 <p>There are 2 types of optimiser: simulated annealing, a <em>global</em> optimiser; and Powell, a <em>local</em> optimiser. The simulated annealing method is slow compared to Powell and in general Powell is an adequate choice. I setup a simple nucleotide model to illustrate these.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1478,8 +1490,8 @@ Empirical ( name = &#39;JTT92&#39;; type = &#39;None&#39;; number of motifs = 20
 <div class="cell_output docutils container">
 </div>
 </div>
-</section>
-<section id="how-to-check-your-optimisation-was-successful">
+</div>
+<div class="section" id="how-to-check-your-optimisation-was-successful">
 <h3>How to check your optimisation was successful<a class="headerlink" href="#how-to-check-your-optimisation-was-successful" title="Permalink to this headline">¶</a></h3>
 <p>There is no guarantee that an optimised function has achieved a global maximum. We can, however, be sure that a maximum was achieved by validating that the optimiser stopped because the specified tolerance condition was met, rather than exceeding the maximum number of evaluations. The latter number is set to ensure optimisation doesn’t proceed endlessly. If the optimiser exited because this limit was exceeded you can be sure that the function <strong>has not</strong> been successfully optimised.</p>
 <p>We can monitor this situation using the <code class="docutils literal notranslate"><span class="pre">limit_action</span></code> argument to <code class="docutils literal notranslate"><span class="pre">optimise</span></code>. Providing the value <code class="docutils literal notranslate"><span class="pre">raise</span></code> causes an exception to be raised if this condition occurs, as shown below. Providing <code class="docutils literal notranslate"><span class="pre">warn</span></code> (default) instead will cause a warning message to be printed to screen but execution will continue. The value <code class="docutils literal notranslate"><span class="pre">ignore</span></code> hides any such message.</p>
@@ -1515,8 +1527,8 @@ Empirical ( name = &#39;JTT92&#39;; type = &#39;None&#39;; number of motifs = 20
 <p class="admonition-title">Note</p>
 <p>We recommend using <code class="docutils literal notranslate"><span class="pre">limit_action='raise'</span></code> and catching the <code class="docutils literal notranslate"><span class="pre">ArithmeticError</span></code> error explicitly (as demonstrated above). You really shouldn’t be using results from such an optimisation run.</p>
 </div>
-</section>
-<section id="overview-of-the-fitted-likelihood-function">
+</div>
+<div class="section" id="overview-of-the-fitted-likelihood-function">
 <h3>Overview of the fitted likelihood function<a class="headerlink" href="#overview-of-the-fitted-likelihood-function" title="Permalink to this headline">¶</a></h3>
 <p>In Jupyter, the likelihood function object presents a representation of the main object features.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1648,7 +1660,7 @@ Empirical ( name = &#39;JTT92&#39;; type = &#39;None&#39;; number of motifs = 20
 
 </div></div></div>
 </div>
-<section id="log-likelihood-and-number-of-free-parameters">
+<div class="section" id="log-likelihood-and-number-of-free-parameters">
 <h4>Log likelihood and number of free parameters<a class="headerlink" href="#log-likelihood-and-number-of-free-parameters" title="Permalink to this headline">¶</a></h4>
 <p>Reusing the optimised <code class="docutils literal notranslate"><span class="pre">lf</span></code> object from above, we can get the log-likelihood and the number of free parameters.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1681,8 +1693,8 @@ Empirical ( name = &#39;JTT92&#39;; type = &#39;None&#39;; number of motifs = 20
 <p class="admonition-title">Warning</p>
 <p>The number of free parameters (nfp) refers only to the number of parameters that were modifiable by the optimiser. Typically, the degrees-of-freedom of a likelihood ratio test statistic is computed as the difference in nfp between models. This will not be correct for models in which a boundary conditions exist (rate heterogeneity models where a parameter value boundary is set between bins).</p>
 </div>
-</section>
-<section id="aikake-information-criterion">
+</div>
+<div class="section" id="aikake-information-criterion">
 <h4>Aikake Information Criterion<a class="headerlink" href="#aikake-information-criterion" title="Permalink to this headline">¶</a></h4>
 <p>Reusing the optimised <code class="docutils literal notranslate"><span class="pre">lf</span></code> object from above.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1710,8 +1722,8 @@ Empirical ( name = &#39;JTT92&#39;; type = &#39;None&#39;; number of motifs = 20
 </div>
 </div>
 </div>
-</section>
-<section id="bayesian-information-criterion">
+</div>
+<div class="section" id="bayesian-information-criterion">
 <h4>Bayesian Information Criterion<a class="headerlink" href="#bayesian-information-criterion" title="Permalink to this headline">¶</a></h4>
 <p>Reusing the optimised <code class="docutils literal notranslate"><span class="pre">lf</span></code> object from above.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1726,11 +1738,11 @@ Empirical ( name = &#39;JTT92&#39;; type = &#39;None&#39;; number of motifs = 20
 </div>
 </div>
 </div>
-</section>
-<section id="getting-maximum-likelihood-estimates">
+</div>
+<div class="section" id="getting-maximum-likelihood-estimates">
 <h4>Getting maximum likelihood estimates<a class="headerlink" href="#getting-maximum-likelihood-estimates" title="Permalink to this headline">¶</a></h4>
 <p>Reusing the optimised <code class="docutils literal notranslate"><span class="pre">lf</span></code> object from above.</p>
-<section id="one-at-a-time">
+<div class="section" id="one-at-a-time">
 <h5>One at a time<a class="headerlink" href="#one-at-a-time" title="Permalink to this headline">¶</a></h5>
 <p>We get the statistics out individually. We get the <code class="docutils literal notranslate"><span class="pre">length</span></code> for the Human edge and the exchangeability parameter <code class="docutils literal notranslate"><span class="pre">A/G</span></code>.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1759,8 +1771,8 @@ Empirical ( name = &#39;JTT92&#39;; type = &#39;None&#39;; number of motifs = 20
 </div>
 </div>
 </div>
-</section>
-<section id="just-the-motif-probabilities">
+</div>
+<div class="section" id="just-the-motif-probabilities">
 <h5>Just the motif probabilities<a class="headerlink" href="#just-the-motif-probabilities" title="Permalink to this headline">¶</a></h5>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1801,8 +1813,8 @@ Empirical ( name = &#39;JTT92&#39;; type = &#39;None&#39;; number of motifs = 20
 
 </div></div></div>
 </div>
-</section>
-<section id="as-tables">
+</div>
+<div class="section" id="as-tables">
 <h5>As tables<a class="headerlink" href="#as-tables" title="Permalink to this headline">¶</a></h5>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1847,10 +1859,10 @@ Empirical ( name = &#39;JTT92&#39;; type = &#39;None&#39;; number of motifs = 20
 1 rows x 5 columns</p>
 </div></div></div>
 </div>
-</section>
-</section>
-</section>
-<section id="testing-hypotheses-using-likelihood-ratio-tests">
+</div>
+</div>
+</div>
+<div class="section" id="testing-hypotheses-using-likelihood-ratio-tests">
 <h3>Testing Hypotheses - Using Likelihood Ratio Tests<a class="headerlink" href="#testing-hypotheses-using-likelihood-ratio-tests" title="Permalink to this headline">¶</a></h3>
 <p>We test the molecular clock hypothesis for human and chimpanzee lineages. The null has these two branches constrained to be equal.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -2070,7 +2082,7 @@ Empirical ( name = &#39;JTT92&#39;; type = &#39;None&#39;; number of motifs = 20
 </div>
 </div>
 </div>
-<section id="testing-hypotheses-by-parametric-bootstrapping">
+<div class="section" id="testing-hypotheses-by-parametric-bootstrapping">
 <h4>Testing Hypotheses - By parametric bootstrapping<a class="headerlink" href="#testing-hypotheses-by-parametric-bootstrapping" title="Permalink to this headline">¶</a></h4>
 <p>If we can’t rely on the asymptotic behaviour of the LRT, e.g. due to small alignment length, we can use a parametric bootstrap. Convenience functions for that are described in more detail here <a class="reference internal" href="../examples/parametric_bootstrap.html#parametric-bootstrap"><span class="std std-ref">Performing a parametric bootstrap</span></a>.</p>
 <p>In general, however, this capability derives from the ability of any defined <code class="docutils literal notranslate"><span class="pre">evolve</span></code> likelihood function to simulate an alignment. This property is provided as <code class="docutils literal notranslate"><span class="pre">simulate_alignment</span></code> method on likelihood function objects.</p>
@@ -2116,20 +2128,20 @@ Empirical ( name = &#39;JTT92&#39;; type = &#39;None&#39;; number of motifs = 20
 <div class="c3align">
 <table>
 <tr class="num_row"><td></td><td><b>0</b></td></tr>
-<tr><td class="label">Chimpanzee</td><td><span class="C_dna">C</span><span class="C_dna">C</span><span class="C_dna">C</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="C_dna">C</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="C_dna">C</span></td></tr>
-<tr><td class="label">Galago</td><td><span class="C_dna">.</span><span class="C_dna">.</span><span class="C_dna">.</span><span class="C_dna">C</span><span class="C_dna">.</span><span class="A_dna">A</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">G</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">G</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="G_dna">G</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="A_dna">A</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="A_dna">A</span><span class="C_dna">C</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="A_dna">A</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span></td></tr>
-<tr><td class="label">Gorilla</td><td><span class="C_dna">.</span><span class="C_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="C_dna">C</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span></td></tr>
-<tr><td class="label">HowlerMon</td><td><span class="C_dna">.</span><span class="C_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">G</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="C_dna">C</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span></td></tr>
-<tr><td class="label">Human</td><td><span class="C_dna">.</span><span class="C_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">G</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="C_dna">C</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span></td></tr>
-<tr><td class="label">Orangutan</td><td><span class="C_dna">.</span><span class="C_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="C_dna">C</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span></td></tr>
-<tr><td class="label">Rhesus</td><td><span class="C_dna">.</span><span class="C_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="T_dna">T</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="C_dna">C</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span></td></tr>
+<tr><td class="label">Chimpanzee</td><td><span class="G_dna">G</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="C_dna">C</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="C_dna">C</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="C_dna">C</span><span class="C_dna">C</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="C_dna">C</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="T_dna">T</span></td></tr>
+<tr><td class="label">Galago</td><td><span class="G_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">A</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="T_dna">T</span><span class="C_dna">C</span><span class="C_dna">C</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="G_dna">G</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">A</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="T_dna">T</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="G_dna">G</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="T_dna">T</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">A</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">A</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span></td></tr>
+<tr><td class="label">Gorilla</td><td><span class="G_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span></td></tr>
+<tr><td class="label">HowlerMon</td><td><span class="G_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="C_dna">C</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="T_dna">T</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="G_dna">G</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span></td></tr>
+<tr><td class="label">Human</td><td><span class="G_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span></td></tr>
+<tr><td class="label">Orangutan</td><td><span class="G_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span></td></tr>
+<tr><td class="label">Rhesus</td><td><span class="G_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="C_dna">C</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="G_dna">G</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">A</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span></td></tr>
 </table>
 <p><i>7 x 60 dna alignment</i></p>
 </div></div></div>
 </div>
-</section>
-</section>
-<section id="determining-confidence-intervals-on-mles">
+</div>
+</div>
+<div class="section" id="determining-confidence-intervals-on-mles">
 <h3>Determining confidence intervals on MLEs<a class="headerlink" href="#determining-confidence-intervals-on-mles" title="Permalink to this headline">¶</a></h3>
 <p>The profile method is used to calculate a confidence interval for a named parameter. We show it here for a global substitution model exchangeability parameter (<em>kappa</em>, the ratio of transition to transversion rates) and for an edge specific parameter (just the human branch length).</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -2157,8 +2169,8 @@ lo=0.00 ; mle=0.01 ; hi=0.01
 </div>
 </div>
 </div>
-</section>
-<section id="saving-results">
+</div>
+<div class="section" id="saving-results">
 <h3>Saving results<a class="headerlink" href="#saving-results" title="Permalink to this headline">¶</a></h3>
 <p>The best approach is to use the json string from the <code class="docutils literal notranslate"><span class="pre">to_json()</span></code> method. The saved data can be later reloaded using <code class="docutils literal notranslate"><span class="pre">cogent3.util.deserialise.deserialise_object()</span></code>. The <code class="docutils literal notranslate"><span class="pre">json</span></code> data contains the alignment, tree topology, substitution model, parameter values, etc..</p>
 <p>To illustrate this, I create a very simple likelihood function. The <code class="docutils literal notranslate"><span class="pre">json</span></code> variable below is just a string that can be saved to disk.</p>
@@ -2266,8 +2278,8 @@ lo=0.00 ; mle=0.01 ; hi=0.01
 
 </div></div></div>
 </div>
-</section>
-<section id="reconstructing-ancestral-sequences">
+</div>
+<div class="section" id="reconstructing-ancestral-sequences">
 <h3>Reconstructing ancestral sequences<a class="headerlink" href="#reconstructing-ancestral-sequences" title="Permalink to this headline">¶</a></h3>
 <p>We first fit a likelihood function.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -2367,9 +2379,9 @@ lo=0.00 ; mle=0.01 ; hi=0.01
 </div>
 <hr class="docutils" />
 <p>There’s nothing that improves performance quite like being close to the maximum likelihood values. So using the <code class="docutils literal notranslate"><span class="pre">set_param_rule</span></code> method to provide good starting values can be very useful. As this can be difficult to do one easy way is to build simpler models that are nested within the one you’re interested in. Fitting those models and then relaxing constraints until you’re at the parameterisation of interest can markedly improve optimisation speed.</p>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
 
 
 </section>
@@ -2391,7 +2403,7 @@ lo=0.00 ; mle=0.01 ; hi=0.01
     <div id="footer-info" class="bg-light pl-2 pb-1 w-100">
         <div><span class="fa fa-copyright"></span>2020-2021, cogent3 Team
         <a id="author-link" href=""></a> </div>
-        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.3 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
+        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.4 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
     </div>
 </footer>
 

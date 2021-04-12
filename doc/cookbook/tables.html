@@ -7,7 +7,7 @@
 <!-- IE Compatibility tag -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>cogent3 2021.04.09 documentation</title>
+<title>cogent3 2021.04.12 documentation</title>
 
 <link href="../.././_static/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
 
@@ -707,6 +707,18 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/index.html#utilities">Utilities</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../examples/parallel.html">Parallel computations</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../examples/parallel.html#parallel-computation-on-a-single-computer">Parallel computation on a single computer</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../examples/parallel.html#using-app-apply-to">Using <code class="docutils literal notranslate"><span class="pre">app.apply_to()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="../examples/parallel.html#directly-using-cogent3-util-parallel-map">Directly using <code class="docutils literal notranslate"><span class="pre">cogent3.util.parallel.map()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../examples/parallel.html#parallel-computation-on-multiple-computers">Parallel computation on multiple computers</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api/index.html">API</a><ul>
@@ -883,7 +895,7 @@
 <div class="cell_output docutils container">
 </div>
 </div>
-<section id="tabular-data">
+<div class="section" id="tabular-data">
 <h1>Tabular data<a class="headerlink" href="#tabular-data" title="Permalink to this headline">¶</a></h1>
 <p><code class="docutils literal notranslate"><span class="pre">Table</span></code> handles tabular data, storing as columns in a, you guessed it, <code class="docutils literal notranslate"><span class="pre">columns</span></code> attribute. The latter acts like a dictionary, with the column names as the keys and the column values being  <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> instances. The table itself is iterable over rows.</p>
 <div class="admonition note">
@@ -894,7 +906,7 @@
 <div class="cell_output docutils container">
 </div>
 </div>
-<section id="loading-a-csv-file">
+<div class="section" id="loading-a-csv-file">
 <h2>Loading a csv file<a class="headerlink" href="#loading-a-csv-file" title="Permalink to this headline">¶</a></h2>
 <p>We load a tab separated data file using the <code class="docutils literal notranslate"><span class="pre">load_table()</span></code> function. The format is inferred from the filename suffix and you will note, in this case, it’s not actually a <cite>csv</cite> file.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -951,8 +963,8 @@
 <p class="admonition-title">Note</p>
 <p>If you invoke the static column types argument, i.e.``load_table(…, static_column_types=True)`` and the column data are not static, those columns will be left as a string type.</p>
 </div>
-</section>
-<section id="loading-delimited-specifying-the-format">
+</div>
+<div class="section" id="loading-delimited-specifying-the-format">
 <h2>Loading delimited specifying the format<a class="headerlink" href="#loading-delimited-specifying-the-format" title="Permalink to this headline">¶</a></h2>
 <p>Although unnecessary in this case, it’s possible to override the suffix by specifying the delimiter using the <code class="docutils literal notranslate"><span class="pre">sep</span></code> argument.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1001,11 +1013,11 @@
 5 rows x 3 columns</p>
 </div></div></div>
 </div>
-</section>
-<section id="loading-delimited-data-without-a-header-line">
+</div>
+<div class="section" id="loading-delimited-data-without-a-header-line">
 <h2>Loading delimited data without a header line<a class="headerlink" href="#loading-delimited-data-without-a-header-line" title="Permalink to this headline">¶</a></h2>
 <p>To create a table from the follow examples, you specify your header and use <code class="docutils literal notranslate"><span class="pre">make_table()</span></code>.</p>
-<section id="using-load-delimited">
+<div class="section" id="using-load-delimited">
 <h3>Using <code class="docutils literal notranslate"><span class="pre">load_delimited()</span></code><a class="headerlink" href="#using-load-delimited" title="Permalink to this headline">¶</a></h3>
 <p>This is just a standard parsing function which does not do any filtering or converting elements to non-string types.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1062,8 +1074,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="using-filteringparser">
+</div>
+<div class="section" id="using-filteringparser">
 <h3>Using <code class="docutils literal notranslate"><span class="pre">FilteringParser</span></code><a class="headerlink" href="#using-filteringparser" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1120,11 +1132,11 @@
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="selectively-loading-parts-of-a-big-file">
+</div>
+</div>
+<div class="section" id="selectively-loading-parts-of-a-big-file">
 <h2>Selectively loading parts of a big file<a class="headerlink" href="#selectively-loading-parts-of-a-big-file" title="Permalink to this headline">¶</a></h2>
-<section id="loading-a-set-number-of-lines-from-a-file">
+<div class="section" id="loading-a-set-number-of-lines-from-a-file">
 <h3>Loading a set number of lines from a file<a class="headerlink" href="#loading-a-set-number-of-lines-from-a-file" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">limit</span></code> argument specifies the number of lines to read.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1170,8 +1182,8 @@
 2 rows x 3 columns</p>
 </div></div></div>
 </div>
-</section>
-<section id="loading-only-some-rows">
+</div>
+<div class="section" id="loading-only-some-rows">
 <h3>Loading only some rows<a class="headerlink" href="#loading-only-some-rows" title="Permalink to this headline">¶</a></h3>
 <p>If you only want a subset of the contents of a file, use the <code class="docutils literal notranslate"><span class="pre">FilteringParser</span></code>. This allows skipping certain lines by using a callback function. We illustrate this with <code class="docutils literal notranslate"><span class="pre">stats.tsv</span></code>, skipping any rows with <code class="docutils literal notranslate"><span class="pre">&quot;Ratio&quot;</span></code> &gt; 10.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1266,8 +1278,8 @@
 3 rows x 3 columns</p>
 </div></div></div>
 </div>
-</section>
-<section id="loading-only-some-columns">
+</div>
+<div class="section" id="loading-only-some-columns">
 <h3>Loading only some columns<a class="headerlink" href="#loading-only-some-columns" title="Permalink to this headline">¶</a></h3>
 <p>Specify the columns by their names.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1369,8 +1381,8 @@
 <p class="admonition-title">Note</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">negate</span></code> argument does not affect the columns evaluated.</p>
 </div>
-</section>
-<section id="load-raw-data-as-a-list-of-lists-of-strings">
+</div>
+<div class="section" id="load-raw-data-as-a-list-of-lists-of-strings">
 <h3>Load raw data as a list of lists of strings<a class="headerlink" href="#load-raw-data-as-a-list-of-lists-of-strings" title="Permalink to this headline">¶</a></h3>
 <p>We just use <code class="docutils literal notranslate"><span class="pre">FilteringParser</span></code>.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1402,9 +1414,9 @@
 <p class="admonition-title">Note</p>
 <p>The individual elements are all <code class="docutils literal notranslate"><span class="pre">str</span></code>.</p>
 </div>
-</section>
-</section>
-<section id="make-a-table-from-header-and-rows">
+</div>
+</div>
+<div class="section" id="make-a-table-from-header-and-rows">
 <h2>Make a table from header and rows<a class="headerlink" href="#make-a-table-from-header-and-rows" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1453,8 +1465,8 @@
 4 rows x 3 columns</p>
 </div></div></div>
 </div>
-</section>
-<section id="make-a-table-from-a-dict">
+</div>
+<div class="section" id="make-a-table-from-a-dict">
 <h2>Make a table from a <code class="docutils literal notranslate"><span class="pre">dict</span></code><a class="headerlink" href="#make-a-table-from-a-dict" title="Permalink to this headline">¶</a></h2>
 <p>For a <code class="docutils literal notranslate"><span class="pre">dict</span></code> with key’s as column headers.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1502,8 +1514,8 @@
 3 rows x 3 columns</p>
 </div></div></div>
 </div>
-</section>
-<section id="specify-the-column-order-when-creating-from-a-dict">
+</div>
+<div class="section" id="specify-the-column-order-when-creating-from-a-dict">
 <h2>Specify the column order when creating from a <code class="docutils literal notranslate"><span class="pre">dict</span></code>.<a class="headerlink" href="#specify-the-column-order-when-creating-from-a-dict" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1547,8 +1559,8 @@
 3 rows x 3 columns</p>
 </div></div></div>
 </div>
-</section>
-<section id="create-the-table-with-an-index">
+</div>
+<div class="section" id="create-the-table-with-an-index">
 <h2>Create the table with an index<a class="headerlink" href="#create-the-table-with-an-index" title="Permalink to this headline">¶</a></h2>
 <p>A <code class="docutils literal notranslate"><span class="pre">Table</span></code> can be indexed like a dict if you designate a column as the index (and that column has a unique value for every row).</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1607,8 +1619,8 @@
 <p class="admonition-title">Note</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">index</span></code> argument also applies when using <code class="docutils literal notranslate"><span class="pre">make_table()</span></code>.</p>
 </div>
-</section>
-<section id="create-a-table-from-a-pandas-dataframe">
+</div>
+<div class="section" id="create-a-table-from-a-pandas-dataframe">
 <h2>Create a table from a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code><a class="headerlink" href="#create-a-table-from-a-pandas-dataframe" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1657,8 +1669,8 @@
 2 rows x 2 columns</p>
 </div></div></div>
 </div>
-</section>
-<section id="create-a-table-from-header-and-rows">
+</div>
+<div class="section" id="create-a-table-from-header-and-rows">
 <h2>Create a table from header and rows<a class="headerlink" href="#create-a-table-from-header-and-rows" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1703,8 +1715,8 @@
 2 rows x 2 columns</p>
 </div></div></div>
 </div>
-</section>
-<section id="create-a-table-from-dict">
+</div>
+<div class="section" id="create-a-table-from-dict">
 <h2>Create a table from dict<a class="headerlink" href="#create-a-table-from-dict" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">make_table()</span></code> is the utility function for creating <code class="docutils literal notranslate"><span class="pre">Table</span></code> objects from standard python objects.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1751,8 +1763,8 @@
 2 rows x 2 columns</p>
 </div></div></div>
 </div>
-</section>
-<section id="create-a-table-from-a-2d-dict">
+</div>
+<div class="section" id="create-a-table-from-a-2d-dict">
 <h2>Create a table from a 2D dict<a class="headerlink" href="#create-a-table-from-a-2d-dict" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1821,8 +1833,8 @@
 4 rows x 3 columns</p>
 </div></div></div>
 </div>
-</section>
-<section id="create-a-table-that-has-complex-python-objects-as-elements">
+</div>
+<div class="section" id="create-a-table-that-has-complex-python-objects-as-elements">
 <h2>Create a table that has complex python objects as elements<a class="headerlink" href="#create-a-table-that-has-complex-python-objects-as-elements" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1873,8 +1885,8 @@
 3 rows x 2 columns</p>
 </div></div></div>
 </div>
-</section>
-<section id="create-an-empty-table">
+</div>
+<div class="section" id="create-an-empty-table">
 <h2>Create an empty table<a class="headerlink" href="#create-an-empty-table" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1889,8 +1901,8 @@
 <div class="output text_html"><p>
 0 rows x 0 columns</p></div></div>
 </div>
-</section>
-<section id="adding-a-new-column">
+</div>
+<div class="section" id="adding-a-new-column">
 <h2>Adding a new column<a class="headerlink" href="#adding-a-new-column" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1938,8 +1950,8 @@
 3 rows x 2 columns</p>
 </div></div></div>
 </div>
-</section>
-<section id="add-a-title-and-a-legend-to-a-table">
+</div>
+<div class="section" id="add-a-title-and-a-legend-to-a-table">
 <h2>Add a title and a legend to a table<a class="headerlink" href="#add-a-title-and-a-legend-to-a-table" title="Permalink to this headline">¶</a></h2>
 <p>This can be done when you create the table.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -2036,8 +2048,8 @@
 2 rows x 2 columns</p>
 </div></div></div>
 </div>
-</section>
-<section id="iterating-over-table-rows">
+</div>
+<div class="section" id="iterating-over-table-rows">
 <h2>Iterating over table rows<a class="headerlink" href="#iterating-over-table-rows" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">Table</span></code> is a row oriented object. Iterating on the table returns each row as a new <code class="docutils literal notranslate"><span class="pre">Table</span></code> instance.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -2079,8 +2091,8 @@ NP_055852
 </div>
 </div>
 </div>
-</section>
-<section id="how-many-rows-are-there">
+</div>
+<div class="section" id="how-many-rows-are-there">
 <h2>How many rows are there?<a class="headerlink" href="#how-many-rows-are-there" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">Table.shape</span></code> attribute is like that of a <code class="docutils literal notranslate"><span class="pre">numpy</span></code> <code class="docutils literal notranslate"><span class="pre">array</span></code>. The first element (<code class="docutils literal notranslate"><span class="pre">Table.shape[0]</span></code>) is the number of rows.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -2099,8 +2111,8 @@ NP_055852
 </div>
 </div>
 </div>
-</section>
-<section id="how-many-columns-are-there">
+</div>
+<div class="section" id="how-many-columns-are-there">
 <h2>How many columns are there?<a class="headerlink" href="#how-many-columns-are-there" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">Table.shape[1]</span></code> is the number of columns. Using the table from above.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -2115,8 +2127,8 @@ NP_055852
 </div>
 </div>
 </div>
-</section>
-<section id="iterating-over-table-columns">
+</div>
+<div class="section" id="iterating-over-table-columns">
 <h2>Iterating over table columns<a class="headerlink" href="#iterating-over-table-columns" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">Table.columns</span></code> attribute is a <code class="docutils literal notranslate"><span class="pre">Columns</span></code> instance, an object with <code class="docutils literal notranslate"><span class="pre">dict</span></code> attributes.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -2162,8 +2174,8 @@ Ratio
 </div>
 </div>
 </div>
-</section>
-<section id="table-slicing-using-column-names">
+</div>
+<div class="section" id="table-slicing-using-column-names">
 <h2>Table slicing using column names<a class="headerlink" href="#table-slicing-using-column-names" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -2250,8 +2262,8 @@ Ratio
 2 rows x 2 columns</p>
 </div></div></div>
 </div>
-</section>
-<section id="table-slicing-using-indices">
+</div>
+<div class="section" id="table-slicing-using-indices">
 <h2>Table slicing using indices<a class="headerlink" href="#table-slicing-using-indices" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -2294,8 +2306,8 @@ Ratio
 2 rows x 1 columns</p>
 </div></div></div>
 </div>
-</section>
-<section id="changing-displayed-numerical-precision">
+</div>
+<div class="section" id="changing-displayed-numerical-precision">
 <h2>Changing displayed numerical precision<a class="headerlink" href="#changing-displayed-numerical-precision" title="Permalink to this headline">¶</a></h2>
 <p>We change the <code class="docutils literal notranslate"><span class="pre">Ratio</span></code> column to using scientific notation.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -2345,8 +2357,8 @@ Ratio
 5 rows x 3 columns</p>
 </div></div></div>
 </div>
-</section>
-<section id="change-digits-or-column-spacing">
+</div>
+<div class="section" id="change-digits-or-column-spacing">
 <h2>Change digits or column spacing<a class="headerlink" href="#change-digits-or-column-spacing" title="Permalink to this headline">¶</a></h2>
 <p>This can be done on table loading,</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -2438,8 +2450,8 @@ Ratio
 5 rows x 3 columns</p>
 </div></div></div>
 </div>
-</section>
-<section id="wrapping-tables-for-display">
+</div>
+<div class="section" id="wrapping-tables-for-display">
 <h2>Wrapping tables for display<a class="headerlink" href="#wrapping-tables-for-display" title="Permalink to this headline">¶</a></h2>
 <p>Wrapping generates neat looking tables whether or not you index the table rows. We demonstrate here</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -2546,8 +2558,8 @@ Ratio
 1 rows x 5 columns</p>
 </div></div></div>
 </div>
-</section>
-<section id="display-the-top-of-a-table-using-head">
+</div>
+<div class="section" id="display-the-top-of-a-table-using-head">
 <h2>Display the top of a table using <code class="docutils literal notranslate"><span class="pre">head()</span></code><a class="headerlink" href="#display-the-top-of-a-table-using-head" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -2635,8 +2647,8 @@ Ratio
 </div></div></div>
 </div>
 <p>The table shape is that of the original table.</p>
-</section>
-<section id="display-the-bottom-of-a-table-using-tail">
+</div>
+<div class="section" id="display-the-bottom-of-a-table-using-tail">
 <h2>Display the bottom of a table using <code class="docutils literal notranslate"><span class="pre">tail()</span></code><a class="headerlink" href="#display-the-bottom-of-a-table-using-tail" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -2721,8 +2733,8 @@ Ratio
 10 rows x 2 columns</p>
 </div></div></div>
 </div>
-</section>
-<section id="display-random-rows-from-a-table">
+</div>
+<div class="section" id="display-random-rows-from-a-table">
 <h2>Display random rows from a table<a class="headerlink" href="#display-random-rows-from-a-table" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -2758,16 +2770,16 @@ Ratio
 </thead>
 <tbody>
 <tr><td><span class="c3col_right">0</span></td><td><span class="c3col_right">0</span></td></tr>
-<tr><td><span class="c3col_right">5</span></td><td><span class="c3col_right">5</span></td></tr>
-<tr><td><span class="c3col_right">9</span></td><td><span class="c3col_right">9</span></td></tr>
+<tr><td><span class="c3col_right">3</span></td><td><span class="c3col_right">3</span></td></tr>
+<tr><td><span class="c3col_right">4</span></td><td><span class="c3col_right">4</span></td></tr>
 </tbody>
 </table>
 <p>Random selection of 3 rows from
 10 rows x 2 columns</p>
 </div></div></div>
 </div>
-</section>
-<section id="change-the-number-of-rows-displayed-by-repr">
+</div>
+<div class="section" id="change-the-number-of-rows-displayed-by-repr">
 <h2>Change the number of rows displayed by <code class="docutils literal notranslate"><span class="pre">repr()</span></code><a class="headerlink" href="#change-the-number-of-rows-displayed-by-repr" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -2818,8 +2830,8 @@ Ratio
 <p class="admonition-title">Note</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">...</span></code> indicates the break between the top and bottom rows.</p>
 </div>
-</section>
-<section id="changing-column-headings">
+</div>
+<div class="section" id="changing-column-headings">
 <h2>Changing column headings<a class="headerlink" href="#changing-column-headings" title="Permalink to this headline">¶</a></h2>
 <p>The table <code class="docutils literal notranslate"><span class="pre">header</span></code> is immutable. Changing column headings is done as follows.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -2838,8 +2850,8 @@ Ratio
 </div>
 </div>
 </div>
-</section>
-<section id="id1">
+</div>
+<div class="section" id="id1">
 <h2>Adding a new column<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -2897,8 +2909,8 @@ Ratio
 3 rows x 2 columns</p>
 </div></div></div>
 </div>
-</section>
-<section id="create-a-new-column-from-existing-ones">
+</div>
+<div class="section" id="create-a-new-column-from-existing-ones">
 <h2>Create a new column from existing ones<a class="headerlink" href="#create-a-new-column-from-existing-ones" title="Permalink to this headline">¶</a></h2>
 <p>This can be used to take a single, or multiple columns and generate a new column of values. Here we’ll take 2 columns and return True/False based on a condition.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -2950,8 +2962,8 @@ Ratio
 5 rows x 4 columns</p>
 </div></div></div>
 </div>
-</section>
-<section id="get-table-data-as-a-numpy-array">
+</div>
+<div class="section" id="get-table-data-as-a-numpy-array">
 <h2>Get table data as a numpy array<a class="headerlink" href="#get-table-data-as-a-numpy-array" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -2970,8 +2982,8 @@ Ratio
 </div>
 </div>
 </div>
-</section>
-<section id="get-a-table-column-as-a-list">
+</div>
+<div class="section" id="get-a-table-column-as-a-list">
 <h2>Get a table column as a list<a class="headerlink" href="#get-a-table-column-as-a-list" title="Permalink to this headline">¶</a></h2>
 <p>Via the <code class="docutils literal notranslate"><span class="pre">Table.tolist()</span></code> method.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -3001,8 +3013,8 @@ Ratio
 </div>
 </div>
 </div>
-</section>
-<section id="get-multiple-table-columns-as-a-list">
+</div>
+<div class="section" id="get-multiple-table-columns-as-a-list">
 <h2>Get multiple table columns as a list<a class="headerlink" href="#get-multiple-table-columns-as-a-list" title="Permalink to this headline">¶</a></h2>
 <p>This returns a row oriented list.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -3027,8 +3039,8 @@ Ratio
 <p class="admonition-title">Note</p>
 <p>column name order dictates the element order per row</p>
 </div>
-</section>
-<section id="get-the-table-as-a-row-oriented-dict">
+</div>
+<div class="section" id="get-the-table-as-a-row-oriented-dict">
 <h2>Get the table as a row oriented <code class="docutils literal notranslate"><span class="pre">dict</span></code><a class="headerlink" href="#get-the-table-as-a-row-oriented-dict" title="Permalink to this headline">¶</a></h2>
 <p>Keys in the resulting dict are the row indices, the value is a dict of column name, value pairs.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -3048,8 +3060,8 @@ Ratio
 </div>
 </div>
 </div>
-</section>
-<section id="get-the-table-as-a-column-oriented-dict">
+</div>
+<div class="section" id="get-the-table-as-a-column-oriented-dict">
 <h2>Get the table as a column oriented <code class="docutils literal notranslate"><span class="pre">dict</span></code><a class="headerlink" href="#get-the-table-as-a-column-oriented-dict" title="Permalink to this headline">¶</a></h2>
 <p>Keys in the resulting dict are the column names, the value is a list.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -3071,8 +3083,8 @@ Ratio
 </div>
 </div>
 </div>
-</section>
-<section id="get-the-table-as-a-pandas-dataframe">
+</div>
+<div class="section" id="get-the-table-as-a-pandas-dataframe">
 <h2>Get the table as a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code><a class="headerlink" href="#get-the-table-as-a-pandas-dataframe" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -3151,8 +3163,8 @@ Ratio
 <div class="cell_output docutils container">
 </div>
 </div>
-</section>
-<section id="get-a-table-of-counts-as-a-contingency-table">
+</div>
+<div class="section" id="get-a-table-of-counts-as-a-contingency-table">
 <h2>Get a table of counts as a contingency table<a class="headerlink" href="#get-a-table-of-counts-as-a-contingency-table" title="Permalink to this headline">¶</a></h2>
 <p>If our table consists of counts data, the <code class="docutils literal notranslate"><span class="pre">Table</span></code> can convert it into a <code class="docutils literal notranslate"><span class="pre">CategoryCount</span></code> instance that can be used for performing basic contingency table statistical tests, e.g. chisquare, G-test of independence, etc.. To do this, we must specify which column contains the row names using the <code class="docutils literal notranslate"><span class="pre">index</span></code> argument.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -3447,8 +3459,8 @@ Ratio
 
 </div></div></div>
 </div>
-</section>
-<section id="appending-tables">
+</div>
+<div class="section" id="appending-tables">
 <h2>Appending tables<a class="headerlink" href="#appending-tables" title="Permalink to this headline">¶</a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -3562,8 +3574,8 @@ Ratio
 <p class="admonition-title">Note</p>
 <p>We assigned an empty string to <code class="docutils literal notranslate"><span class="pre">title</span></code>, otherwise the resulting table has the same <code class="docutils literal notranslate"><span class="pre">title</span></code> attribute as that of <code class="docutils literal notranslate"><span class="pre">table1</span></code>.</p>
 </div>
-</section>
-<section id="summing-a-single-column">
+</div>
+<div class="section" id="summing-a-single-column">
 <h2>Summing a single column<a class="headerlink" href="#summing-a-single-column" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -3591,8 +3603,8 @@ Ratio
 </div>
 </div>
 </div>
-</section>
-<section id="summing-multiple-columns-or-rows-strictly-numerical-data">
+</div>
+<div class="section" id="summing-multiple-columns-or-rows-strictly-numerical-data">
 <h2>Summing multiple columns or rows - strictly numerical data<a class="headerlink" href="#summing-multiple-columns-or-rows-strictly-numerical-data" title="Permalink to this headline">¶</a></h2>
 <p>We define a strictly numerical table,</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -3668,8 +3680,8 @@ Ratio
 </div>
 </div>
 </div>
-</section>
-<section id="summing-multiple-columns-or-rows-with-mixed-non-numeric-numeric-data">
+</div>
+<div class="section" id="summing-multiple-columns-or-rows-with-mixed-non-numeric-numeric-data">
 <h2>Summing multiple columns or rows with mixed non-numeric/numeric data<a class="headerlink" href="#summing-multiple-columns-or-rows-with-mixed-non-numeric-numeric-data" title="Permalink to this headline">¶</a></h2>
 <p>We define a table with mixed data, like a distance matrix.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -3742,8 +3754,8 @@ Ratio
 </div>
 </div>
 </div>
-</section>
-<section id="filtering-table-rows">
+</div>
+<div class="section" id="filtering-table-rows">
 <h2>Filtering table rows<a class="headerlink" href="#filtering-table-rows" title="Permalink to this headline">¶</a></h2>
 <p>We can do this by providing a reference to an external function</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -3871,8 +3883,8 @@ Ratio
 1 rows x 3 columns</p>
 </div></div></div>
 </div>
-</section>
-<section id="filtering-table-columns">
+</div>
+<div class="section" id="filtering-table-columns">
 <h2>Filtering table columns<a class="headerlink" href="#filtering-table-columns" title="Permalink to this headline">¶</a></h2>
 <p>We select only columns that have a sum &gt; 20 from the <code class="docutils literal notranslate"><span class="pre">all_numeric</span></code> table constructed above.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -3918,8 +3930,8 @@ Ratio
 4 rows x 2 columns</p>
 </div></div></div>
 </div>
-</section>
-<section id="standard-sorting">
+</div>
+<div class="section" id="standard-sorting">
 <h2>Standard sorting<a class="headerlink" href="#standard-sorting" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -3965,8 +3977,8 @@ Ratio
 5 rows x 3 columns</p>
 </div></div></div>
 </div>
-</section>
-<section id="reverse-sorting">
+</div>
+<div class="section" id="reverse-sorting">
 <h2>Reverse sorting<a class="headerlink" href="#reverse-sorting" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -4011,8 +4023,8 @@ Ratio
 5 rows x 3 columns</p>
 </div></div></div>
 </div>
-</section>
-<section id="sorting-involving-multiple-columns-one-reversed">
+</div>
+<div class="section" id="sorting-involving-multiple-columns-one-reversed">
 <h2>Sorting involving multiple columns, one reversed<a class="headerlink" href="#sorting-involving-multiple-columns-one-reversed" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -4057,8 +4069,8 @@ Ratio
 5 rows x 3 columns</p>
 </div></div></div>
 </div>
-</section>
-<section id="getting-raw-data-for-a-single-column">
+</div>
+<div class="section" id="getting-raw-data-for-a-single-column">
 <h2>Getting raw data for a single column<a class="headerlink" href="#getting-raw-data-for-a-single-column" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -4074,8 +4086,8 @@ Ratio
 </div>
 </div>
 </div>
-</section>
-<section id="getting-raw-data-for-multiple-columns">
+</div>
+<div class="section" id="getting-raw-data-for-multiple-columns">
 <h2>Getting raw data for multiple columns<a class="headerlink" href="#getting-raw-data-for-multiple-columns" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -4095,8 +4107,8 @@ Ratio
 </div>
 </div>
 </div>
-</section>
-<section id="getting-distinct-values">
+</div>
+<div class="section" id="getting-distinct-values">
 <h2>Getting distinct values<a class="headerlink" href="#getting-distinct-values" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -4108,8 +4120,8 @@ Ratio
 <div class="cell_output docutils container">
 </div>
 </div>
-</section>
-<section id="counting-occurrences-of-values">
+</div>
+<div class="section" id="counting-occurrences-of-values">
 <h2>Counting occurrences of values<a class="headerlink" href="#counting-occurrences-of-values" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -4121,8 +4133,8 @@ Ratio
 <div class="cell_output docutils container">
 </div>
 </div>
-</section>
-<section id="counting-unique-values">
+</div>
+<div class="section" id="counting-unique-values">
 <h2>Counting unique values<a class="headerlink" href="#counting-unique-values" title="Permalink to this headline">¶</a></h2>
 <p>This returns a <code class="docutils literal notranslate"><span class="pre">CategoryCounter</span></code>, a dict like class.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -4211,8 +4223,8 @@ Ratio
 3 rows x 2 columns</p>
 </div></div></div>
 </div>
-</section>
-<section id="joining-or-merging-tables">
+</div>
+<div class="section" id="joining-or-merging-tables">
 <h2>Joining or merging tables<a class="headerlink" href="#joining-or-merging-tables" title="Permalink to this headline">¶</a></h2>
 <p>We do a standard inner join here for a restricted subset. We must specify the columns that will be used for the join. Here we just use <code class="docutils literal notranslate"><span class="pre">Locus</span></code>.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -4274,8 +4286,8 @@ Ratio
 <p class="admonition-title">Note</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">joined()</span></code> method is just a wrapper for the <code class="docutils literal notranslate"><span class="pre">inner_join()</span></code> and <code class="docutils literal notranslate"><span class="pre">cross_join()</span></code> (row cartesian product) methods, which you can use directly.</p>
 </div>
-</section>
-<section id="transpose-a-table">
+</div>
+<div class="section" id="transpose-a-table">
 <h2>Transpose a table<a class="headerlink" href="#transpose-a-table" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -4371,8 +4383,8 @@ Ratio
 2 rows x 5 columns</p>
 </div></div></div>
 </div>
-</section>
-<section id="specify-markdown-as-the-str-format">
+</div>
+<div class="section" id="specify-markdown-as-the-str-format">
 <h2>Specify markdown as the <code class="docutils literal notranslate"><span class="pre">str()</span></code> format<a class="headerlink" href="#specify-markdown-as-the-str-format" title="Permalink to this headline">¶</a></h2>
 <p>Using the method provides finer control over formatting.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -4396,8 +4408,8 @@ Ratio
 </div>
 </div>
 </div>
-</section>
-<section id="specify-latex-as-the-str-format">
+</div>
+<div class="section" id="specify-latex-as-the-str-format">
 <h2>Specify latex as the <code class="docutils literal notranslate"><span class="pre">str()</span></code> format<a class="headerlink" href="#specify-latex-as-the-str-format" title="Permalink to this headline">¶</a></h2>
 <p>Using the method provides finer control over formatting.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -4429,8 +4441,8 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
 </div>
 </div>
 </div>
-</section>
-<section id="get-a-table-as-a-markdown-formatted-string">
+</div>
+<div class="section" id="get-a-table-as-a-markdown-formatted-string">
 <h2>Get a table as a markdown formatted string<a class="headerlink" href="#get-a-table-as-a-markdown-formatted-string" title="Permalink to this headline">¶</a></h2>
 <p>We use the <code class="docutils literal notranslate"><span class="pre">justify</span></code> argument to indicate the column justification.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -4452,8 +4464,8 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
 </div>
 </div>
 </div>
-</section>
-<section id="get-a-table-as-a-latex-formatted-string">
+</div>
+<div class="section" id="get-a-table-as-a-latex-formatted-string">
 <h2>Get a table as a latex formatted string<a class="headerlink" href="#get-a-table-as-a-latex-formatted-string" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -4486,8 +4498,8 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
 </div>
 </div>
 </div>
-</section>
-<section id="get-a-table-as-a-restructured-text-csv-table">
+</div>
+<div class="section" id="get-a-table-as-a-restructured-text-csv-table">
 <h2>Get a table as a restructured text csv-table<a class="headerlink" href="#get-a-table-as-a-restructured-text-csv-table" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -4511,8 +4523,8 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
 </div>
 </div>
 </div>
-</section>
-<section id="get-a-table-as-a-restructured-text-grid-table">
+</div>
+<div class="section" id="get-a-table-as-a-restructured-text-grid-table">
 <h2>Get a table as a restructured text grid table<a class="headerlink" href="#get-a-table-as-a-restructured-text-grid-table" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -4543,8 +4555,8 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
 </div>
 </div>
 </div>
-</section>
-<section id="getting-a-latex-format-table-with-to-string">
+</div>
+<div class="section" id="getting-a-latex-format-table-with-to-string">
 <h2>Getting a latex format table with <code class="docutils literal notranslate"><span class="pre">to_string()</span></code><a class="headerlink" href="#getting-a-latex-format-table-with-to-string" title="Permalink to this headline">¶</a></h2>
 <p>It is also possible to specify column alignment, table caption and other arguments.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -4574,8 +4586,8 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
 </div>
 </div>
 </div>
-</section>
-<section id="getting-a-bedgraph-format-with-to-string">
+</div>
+<div class="section" id="getting-a-bedgraph-format-with-to-string">
 <h2>Getting a bedGraph format with <code class="docutils literal notranslate"><span class="pre">to_string()</span></code><a class="headerlink" href="#getting-a-bedgraph-format-with-to-string" title="Permalink to this headline">¶</a></h2>
 <p>This format allows display of annotation tracks on genome browsers. A small sample of a bigger table.</p>
 <div class="jupyter_cell docutils container">
@@ -4648,8 +4660,8 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
 </div>
 </div>
 </div>
-</section>
-<section id="getting-a-table-as-html">
+</div>
+<div class="section" id="getting-a-table-as-html">
 <h2>Getting a table as html<a class="headerlink" href="#getting-a-table-as-html" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -4764,8 +4776,8 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
 </tbody>
 </table></div></div>
 </div>
-</section>
-<section id="what-formats-can-be-written">
+</div>
+<div class="section" id="what-formats-can-be-written">
 <h2>What formats can be written?<a class="headerlink" href="#what-formats-can-be-written" title="Permalink to this headline">¶</a></h2>
 <p>Appending any of the following to a filename will cause that format to be used for writing.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -4793,8 +4805,8 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
 </div>
 </div>
 </div>
-</section>
-<section id="writing-a-latex-formmated-file">
+</div>
+<div class="section" id="writing-a-latex-formmated-file">
 <h2>Writing a latex formmated file<a class="headerlink" href="#writing-a-latex-formmated-file" title="Permalink to this headline">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -4805,8 +4817,8 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
 <div class="cell_output docutils container">
 </div>
 </div>
-</section>
-<section id="writing-delimited-formats">
+</div>
+<div class="section" id="writing-delimited-formats">
 <h2>Writing delimited formats<a class="headerlink" href="#writing-delimited-formats" title="Permalink to this headline">¶</a></h2>
 <p>The delimiter can be specified explicitly using the <code class="docutils literal notranslate"><span class="pre">sep</span></code> argument or implicitly via the file name suffix.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -4823,8 +4835,8 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
 <div class="cell_output docutils container">
 </div>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
 </section>
@@ -4846,7 +4858,7 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
     <div id="footer-info" class="bg-light pl-2 pb-1 w-100">
         <div><span class="fa fa-copyright"></span>2020-2021, cogent3 Team
         <a id="author-link" href=""></a> </div>
-        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.3 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
+        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.4 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
     </div>
 </footer>
 

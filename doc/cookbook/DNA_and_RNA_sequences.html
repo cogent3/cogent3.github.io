@@ -7,7 +7,7 @@
 <!-- IE Compatibility tag -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>cogent3 2021.04.09 documentation</title>
+<title>cogent3 2021.04.12 documentation</title>
 
 <link href="../.././_static/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
 
@@ -707,6 +707,18 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/index.html#utilities">Utilities</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../examples/parallel.html">Parallel computations</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../examples/parallel.html#parallel-computation-on-a-single-computer">Parallel computation on a single computer</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../examples/parallel.html#using-app-apply-to">Using <code class="docutils literal notranslate"><span class="pre">app.apply_to()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="../examples/parallel.html#directly-using-cogent3-util-parallel-map">Directly using <code class="docutils literal notranslate"><span class="pre">cogent3.util.parallel.map()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../examples/parallel.html#parallel-computation-on-multiple-computers">Parallel computation on multiple computers</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api/index.html">API</a><ul>
@@ -879,16 +891,16 @@
 
 <section id="main-section" class="container flex-grow-1 has-nav">
     
-  <section id="sequence">
+  <div class="section" id="sequence">
 <span id="dna-rna-seqs"></span><h1><code class="docutils literal notranslate"><span class="pre">Sequence</span></code><a class="headerlink" href="#sequence" title="Permalink to this headline">¶</a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">Sequence</span></code> object contains classes that represent biological sequence data. These provide generic biological sequence manipulation functions, plus functions that are critical for the <code class="docutils literal notranslate"><span class="pre">evolve</span></code> module calculations.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Do not import sequence classes directly! It is expected that you will access them through <code class="docutils literal notranslate"><span class="pre">MolType</span></code> objects. The molecular types can be accessed via the <code class="docutils literal notranslate"><span class="pre">cogent3.get_moltype()</span></code> function. Sequence classes depend on information from the <code class="docutils literal notranslate"><span class="pre">MolType</span></code> that is <strong>only</strong> available after <code class="docutils literal notranslate"><span class="pre">MolType</span></code> has been imported. Sequences are intended to be immutable. This is not enforced by the code for performance reasons, but don’t alter the <code class="docutils literal notranslate"><span class="pre">MolType</span></code> or the sequence data after creation.</p>
 </div>
-<section id="dna-and-rna-sequences">
+<div class="section" id="dna-and-rna-sequences">
 <h2>DNA and RNA sequences<a class="headerlink" href="#dna-and-rna-sequences" title="Permalink to this headline">¶</a></h2>
-<section id="creating-a-dna-sequence-from-a-string">
+<div class="section" id="creating-a-dna-sequence-from-a-string">
 <h3>Creating a DNA sequence from a string<a class="headerlink" href="#creating-a-dna-sequence-from-a-string" title="Permalink to this headline">¶</a></h3>
 <p>All sequence and alignment objects have a molecular type, or <code class="docutils literal notranslate"><span class="pre">MolType</span></code> which provides key properties for validating sequence characters. Here we use the <code class="docutils literal notranslate"><span class="pre">DNA</span></code> <code class="docutils literal notranslate"><span class="pre">MolType</span></code> to create a DNA sequence.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -911,8 +923,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="creating-a-rna-sequence-from-a-string">
+</div>
+<div class="section" id="creating-a-rna-sequence-from-a-string">
 <h3>Creating a RNA sequence from a string<a class="headerlink" href="#creating-a-rna-sequence-from-a-string" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -925,8 +937,8 @@
 <div class="cell_output docutils container">
 </div>
 </div>
-</section>
-<section id="converting-to-fasta-format">
+</div>
+<div class="section" id="converting-to-fasta-format">
 <h3>Converting to FASTA format<a class="headerlink" href="#converting-to-fasta-format" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -945,8 +957,8 @@ AGTACACTGGT
 </div>
 </div>
 </div>
-</section>
-<section id="convert-a-rna-sequence-to-fasta-format">
+</div>
+<div class="section" id="convert-a-rna-sequence-to-fasta-format">
 <h3>Convert a RNA sequence to FASTA format<a class="headerlink" href="#convert-a-rna-sequence-to-fasta-format" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -963,8 +975,8 @@ AGTACACTGGT
 </div>
 </div>
 </div>
-</section>
-<section id="creating-a-named-sequence">
+</div>
+<div class="section" id="creating-a-named-sequence">
 <h3>Creating a named sequence<a class="headerlink" href="#creating-a-named-sequence" title="Permalink to this headline">¶</a></h3>
 <p>You can also use a convenience <code class="docutils literal notranslate"><span class="pre">make_seq()</span></code> function, providing the moltype as a string.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -983,8 +995,8 @@ AGTACACTGGT
 </div>
 </div>
 </div>
-</section>
-<section id="setting-or-changing-the-name-of-a-sequence">
+</div>
+<div class="section" id="setting-or-changing-the-name-of-a-sequence">
 <h3>Setting or changing the name of a sequence<a class="headerlink" href="#setting-or-changing-the-name-of-a-sequence" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1004,8 +1016,8 @@ AGTACACTGGT
 </div>
 </div>
 </div>
-</section>
-<section id="complementing-a-dna-sequence">
+</div>
+<div class="section" id="complementing-a-dna-sequence">
 <h3>Complementing a DNA sequence<a class="headerlink" href="#complementing-a-dna-sequence" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1022,8 +1034,8 @@ AGTACACTGGT
 </div>
 </div>
 </div>
-</section>
-<section id="reverse-complementing-a-dna-sequence">
+</div>
+<div class="section" id="reverse-complementing-a-dna-sequence">
 <h3>Reverse complementing a DNA sequence<a class="headerlink" href="#reverse-complementing-a-dna-sequence" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1050,8 +1062,8 @@ AGTACACTGGT
 </div>
 </div>
 </div>
-</section>
-<section id="translate-a-dnasequence-to-protein">
+</div>
+<div class="section" id="translate-a-dnasequence-to-protein">
 <span id="translation"></span><h3>Translate a <code class="docutils literal notranslate"><span class="pre">DnaSequence</span></code> to protein<a class="headerlink" href="#translate-a-dnasequence-to-protein" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1072,8 +1084,8 @@ AWESQME
 </div>
 </div>
 </div>
-</section>
-<section id="converting-a-dna-sequence-to-rna">
+</div>
+<div class="section" id="converting-a-dna-sequence-to-rna">
 <h3>Converting a DNA sequence to RNA<a class="headerlink" href="#converting-a-dna-sequence-to-rna" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1090,8 +1102,8 @@ AWESQME
 </div>
 </div>
 </div>
-</section>
-<section id="convert-an-rna-sequence-to-dna">
+</div>
+<div class="section" id="convert-an-rna-sequence-to-dna">
 <h3>Convert an RNA sequence to DNA<a class="headerlink" href="#convert-an-rna-sequence-to-dna" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1108,8 +1120,8 @@ AWESQME
 </div>
 </div>
 </div>
-</section>
-<section id="testing-complementarity">
+</div>
+<div class="section" id="testing-complementarity">
 <h3>Testing complementarity<a class="headerlink" href="#testing-complementarity" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1127,8 +1139,8 @@ AWESQME
 </div>
 </div>
 </div>
-</section>
-<section id="joining-two-dna-sequences">
+</div>
+<div class="section" id="joining-two-dna-sequences">
 <h3>Joining two DNA sequences<a class="headerlink" href="#joining-two-dna-sequences" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1148,8 +1160,8 @@ AWESQME
 </div>
 </div>
 </div>
-</section>
-<section id="slicing-dna-sequences">
+</div>
+<div class="section" id="slicing-dna-sequences">
 <h3>Slicing DNA sequences<a class="headerlink" href="#slicing-dna-sequences" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1179,8 +1191,8 @@ AWESQME
 <p><i>5 DnaSequence</i></p>
 </div></div></div>
 </div>
-</section>
-<section id="getting-3rd-positions-from-codons">
+</div>
+<div class="section" id="getting-3rd-positions-from-codons">
 <h3>Getting 3rd positions from codons<a class="headerlink" href="#getting-3rd-positions-from-codons" title="Permalink to this headline">¶</a></h3>
 <p>The easiest approach is to work off the <code class="docutils literal notranslate"><span class="pre">cogent3</span></code> <code class="docutils literal notranslate"><span class="pre">ArrayAlignment</span></code> object.</p>
 <p>We’ll do this by specifying the position indices of interest, creating a sequence <code class="docutils literal notranslate"><span class="pre">Feature</span></code> and using that to extract the positions.</p>
@@ -1197,8 +1209,8 @@ AWESQME
 <div class="cell_output docutils container">
 </div>
 </div>
-</section>
-<section id="getting-1st-and-2nd-positions-from-codons">
+</div>
+<div class="section" id="getting-1st-and-2nd-positions-from-codons">
 <h3>Getting 1st and 2nd positions from codons<a class="headerlink" href="#getting-1st-and-2nd-positions-from-codons" title="Permalink to this headline">¶</a></h3>
 <p>In this instance we can use the annotatable sequence classes.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1216,15 +1228,15 @@ AWESQME
 <div class="cell_output docutils container">
 </div>
 </div>
-</section>
-<section id="return-a-randomized-version-of-the-sequence">
+</div>
+<div class="section" id="return-a-randomized-version-of-the-sequence">
 <h3>Return a randomized version of the sequence<a class="headerlink" href="#return-a-randomized-version-of-the-sequence" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="n">rnaseq</span><span class="o">.</span><span class="n">shuffle</span><span class="p">()</span>
 <span class="n">ACAACUGGCUCUGAUG</span>
 </pre></div>
 </div>
-</section>
-<section id="remove-gaps-from-a-sequence">
+</div>
+<div class="section" id="remove-gaps-from-a-sequence">
 <h3>Remove gaps from a sequence<a class="headerlink" href="#remove-gaps-from-a-sequence" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1241,9 +1253,9 @@ AWESQME
 </div>
 </div>
 </div>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
 
 
 </section>
@@ -1265,7 +1277,7 @@ AWESQME
     <div id="footer-info" class="bg-light pl-2 pb-1 w-100">
         <div><span class="fa fa-copyright"></span>2020-2021, cogent3 Team
         <a id="author-link" href=""></a> </div>
-        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.3 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
+        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.4 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
     </div>
 </footer>
 

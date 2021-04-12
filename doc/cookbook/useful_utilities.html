@@ -7,7 +7,7 @@
 <!-- IE Compatibility tag -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>cogent3 2021.04.09 documentation</title>
+<title>cogent3 2021.04.12 documentation</title>
 
 <link href="../.././_static/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
 
@@ -707,6 +707,18 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="../examples/index.html#utilities">Utilities</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../examples/parallel.html">Parallel computations</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../examples/parallel.html#parallel-computation-on-a-single-computer">Parallel computation on a single computer</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../examples/parallel.html#using-app-apply-to">Using <code class="docutils literal notranslate"><span class="pre">app.apply_to()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="../examples/parallel.html#directly-using-cogent3-util-parallel-map">Directly using <code class="docutils literal notranslate"><span class="pre">cogent3.util.parallel.map()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../examples/parallel.html#parallel-computation-on-multiple-computers">Parallel computation on multiple computers</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api/index.html">API</a><ul>
@@ -879,12 +891,12 @@
 
 <section id="main-section" class="container flex-grow-1 has-nav">
     
-  <section id="useful-utilities">
+  <div class="section" id="useful-utilities">
 <h1>Useful Utilities<a class="headerlink" href="#useful-utilities" title="Permalink to this headline">¶</a></h1>
-<section id="uniondict-a-dict-with-set-like-operations-and-keys-as-attributes">
+<div class="section" id="uniondict-a-dict-with-set-like-operations-and-keys-as-attributes">
 <span id="union-dict"></span><h2><code class="docutils literal notranslate"><span class="pre">UnionDict</span></code> – a dict with set like operations and keys as attributes<a class="headerlink" href="#uniondict-a-dict-with-set-like-operations-and-keys-as-attributes" title="Permalink to this headline">¶</a></h2>
 <p>This object combines the key-element storage of a <code class="docutils literal notranslate"><span class="pre">dict</span></code> with the union operation of a <code class="docutils literal notranslate"><span class="pre">set()</span></code> object. It is used in the <code class="docutils literal notranslate"><span class="pre">cogent3.draw</span></code> module, primarily for the <code class="docutils literal notranslate"><span class="pre">figure</span></code> and <code class="docutils literal notranslate"><span class="pre">layout</span></code> attributes.</p>
-<section id="accessing-elements-of-a-uniondict">
+<div class="section" id="accessing-elements-of-a-uniondict">
 <h3>Accessing elements of a <code class="docutils literal notranslate"><span class="pre">UnionDict</span></code><a class="headerlink" href="#accessing-elements-of-a-uniondict" title="Permalink to this headline">¶</a></h3>
 <p>Keys in a <code class="docutils literal notranslate"><span class="pre">UnionDict</span></code> can be accessed like attributes</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -926,8 +938,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="updating-a-uniondict">
+</div>
+<div class="section" id="updating-a-uniondict">
 <h3>Updating a <code class="docutils literal notranslate"><span class="pre">UnionDict</span></code><a class="headerlink" href="#updating-a-uniondict" title="Permalink to this headline">¶</a></h3>
 <p>If you use the <code class="docutils literal notranslate"><span class="pre">|</span></code> bitwise operator to compare two dicts and the left one is a <code class="docutils literal notranslate"><span class="pre">UnionDict</span></code>, a union operation is performed.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -969,8 +981,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="accessing-a-non-existent-uniondict-key">
+</div>
+<div class="section" id="accessing-a-non-existent-uniondict-key">
 <h3>Accessing a non-existent <code class="docutils literal notranslate"><span class="pre">UnionDict</span></code> key<a class="headerlink" href="#accessing-a-non-existent-uniondict-key" title="Permalink to this headline">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1029,9 +1041,9 @@
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="using-cogent3-s-optimisers-for-your-own-functions">
+</div>
+</div>
+<div class="section" id="using-cogent3-s-optimisers-for-your-own-functions">
 <h2>Using Cogent3’s optimisers for your own functions<a class="headerlink" href="#using-cogent3-s-optimisers-for-your-own-functions" title="Permalink to this headline">¶</a></h2>
 <p>You have a function that you want to maximise/minimise. The parameters in your function may be bounded (must lie in a specific interval) or not. The <code class="docutils literal notranslate"><span class="pre">cogent3</span></code> optimisers can be applied to these cases. The <code class="docutils literal notranslate"><span class="pre">Powell</span></code> (a local optimiser) and <code class="docutils literal notranslate"><span class="pre">SimulatedAnnealing</span></code> (a global optimiser) classes in particular have had their interfaces standardised for such use cases. We demonstrate for a very simple function below.</p>
 <p>We write a simple factory function that uses a provided value for omega to compute the squared deviation from an estimate, then use it to create our optimisable function.</p>
@@ -1078,10 +1090,10 @@
 </div>
 </div>
 <p>The minimise and maximise functions can also handle multidimensional optimisations, just make xinit (and the bounds) lists rather than scalar values.</p>
-</section>
-<section id="miscellaneous-functions">
+</div>
+<div class="section" id="miscellaneous-functions">
 <h2>Miscellaneous functions<a class="headerlink" href="#miscellaneous-functions" title="Permalink to this headline">¶</a></h2>
-<section id="force-a-variable-to-be-iterable">
+<div class="section" id="force-a-variable-to-be-iterable">
 <span id="index-0"></span><h3>Force a variable to be iterable<a class="headerlink" href="#force-a-variable-to-be-iterable" title="Permalink to this headline">¶</a></h3>
 <p>This support method will force a variable to be an iterable, allowing you to guarantee that the variable will be safe for use in, say, a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1112,8 +1124,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="curry-a-function">
+</div>
+<div class="section" id="curry-a-function">
 <h3>Curry a function<a class="headerlink" href="#curry-a-function" title="Permalink to this headline">¶</a></h3>
 <p>curry(f,x)(y) = f(x,y) or = lambda y: f(x,y). This was modified from the Python Cookbook. Docstrings are also carried over.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1141,8 +1153,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="test-to-see-if-an-object-is-iterable">
+</div>
+<div class="section" id="test-to-see-if-an-object-is-iterable">
 <h3>Test to see if an object is iterable<a class="headerlink" href="#test-to-see-if-an-object-is-iterable" title="Permalink to this headline">¶</a></h3>
 <p>Perform a simple test to see if an object supports iteration</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1173,8 +1185,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="test-to-see-if-an-object-is-a-single-char">
+</div>
+<div class="section" id="test-to-see-if-an-object-is-a-single-char">
 <h3>Test to see if an object is a single char<a class="headerlink" href="#test-to-see-if-an-object-is-a-single-char" title="Permalink to this headline">¶</a></h3>
 <p>Perform a simple test to see if an object is a single character</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1218,8 +1230,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="flatten-a-deeply-nested-iterable">
+</div>
+<div class="section" id="flatten-a-deeply-nested-iterable">
 <h3>Flatten a deeply nested iterable<a class="headerlink" href="#flatten-a-deeply-nested-iterable" title="Permalink to this headline">¶</a></h3>
 <p>To flatten a deeply nested iterable, use <code class="docutils literal notranslate"><span class="pre">recursive_flatten</span></code>. This method supports multiple levels of nesting, and multiple iterable types</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1245,8 +1257,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="test-to-determine-if-list-of-tuple">
+</div>
+<div class="section" id="test-to-determine-if-list-of-tuple">
 <h3>Test to determine if <code class="docutils literal notranslate"><span class="pre">list</span></code> of <code class="docutils literal notranslate"><span class="pre">tuple</span></code><a class="headerlink" href="#test-to-determine-if-list-of-tuple" title="Permalink to this headline">¶</a></h3>
 <p>Perform a simple check to see if an object is not a list or a tuple</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1287,8 +1299,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="create-a-case-insensitive-iterable">
+</div>
+<div class="section" id="create-a-case-insensitive-iterable">
 <h3>Create a case-insensitive iterable<a class="headerlink" href="#create-a-case-insensitive-iterable" title="Permalink to this headline">¶</a></h3>
 <p>Create a case-insensitive object, for instance, if you want the key ‘a’ and ‘A’ to point to the same item in a dict</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1306,8 +1318,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="construct-a-distance-matrix-lookup-function">
+</div>
+<div class="section" id="construct-a-distance-matrix-lookup-function">
 <h3>Construct a distance matrix lookup function<a class="headerlink" href="#construct-a-distance-matrix-lookup-function" title="Permalink to this headline">¶</a></h3>
 <p>Automatically construct a distance matrix lookup function. This is useful for maintaining flexibility about whether a function is being computed or if a lookup is being used</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1339,8 +1351,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="check-class-types">
+</div>
+<div class="section" id="check-class-types">
 <h3>Check class types<a class="headerlink" href="#check-class-types" title="Permalink to this headline">¶</a></h3>
 <p>Check an object against base classes or derived classes to see if it is acceptable</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1432,8 +1444,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="delegate-to-a-separate-object">
+</div>
+<div class="section" id="delegate-to-a-separate-object">
 <h3>Delegate to a separate object<a class="headerlink" href="#delegate-to-a-separate-object" title="Permalink to this headline">¶</a></h3>
 <p>Delegate object method calls, properties and variables to the appropriate object. Useful to combine multiple objects together while assuring that the calls will go to the correct object.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1493,8 +1505,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="wrap-a-function-to-hide-from-a-class">
+</div>
+<div class="section" id="wrap-a-function-to-hide-from-a-class">
 <h3>Wrap a function to hide from a class<a class="headerlink" href="#wrap-a-function-to-hide-from-a-class" title="Permalink to this headline">¶</a></h3>
 <p>Wrap a function to hide it from a class so that it isn’t a method.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1507,7 +1519,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;cogent3.util.misc.FunctionWrapper at 0x11c4f74f0&gt;
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;cogent3.util.misc.FunctionWrapper at 0x11269d7f0&gt;
 </pre></div>
 </div>
 </div>
@@ -1524,8 +1536,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="construct-a-constrained-container">
+</div>
+<div class="section" id="construct-a-constrained-container">
 <h3>Construct a constrained container<a class="headerlink" href="#construct-a-constrained-container" title="Permalink to this headline">¶</a></h3>
 <p>Wrap a container with a constraint. This is useful for enforcing that the data contained is valid within a defined context. Cogent3 provides a base <code class="docutils literal notranslate"><span class="pre">ConstrainedContainer</span></code> which can be used to construct user-defined constrained objects. Cogent3 also provides <code class="docutils literal notranslate"><span class="pre">ConstrainedString</span></code>, <code class="docutils literal notranslate"><span class="pre">ConstrainedList</span></code>, and <code class="docutils literal notranslate"><span class="pre">ConstrainedDict</span></code>. These provided types fully cover the builtin types while staying integrated with the <code class="docutils literal notranslate"><span class="pre">ConstrainedContainer</span></code>.</p>
 <p>Here is a light example of the <code class="docutils literal notranslate"><span class="pre">ConstrainedDict</span></code></p>
@@ -1568,9 +1580,9 @@
 </div>
 </div>
 </div>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
 
 
 </section>
@@ -1592,7 +1604,7 @@
     <div id="footer-info" class="bg-light pl-2 pb-1 w-100">
         <div><span class="fa fa-copyright"></span>2020-2021, cogent3 Team
         <a id="author-link" href=""></a> </div>
-        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.3 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
+        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.4 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
     </div>
 </footer>
 

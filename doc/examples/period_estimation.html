@@ -7,7 +7,7 @@
 <!-- IE Compatibility tag -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>cogent3 2021.04.09 documentation</title>
+<title>cogent3 2021.04.12 documentation</title>
 
 <link href="../.././_static/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
 
@@ -707,6 +707,18 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#utilities">Utilities</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="parallel.html">Parallel computations</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="parallel.html#parallel-computation-on-a-single-computer">Parallel computation on a single computer</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="parallel.html#using-app-apply-to">Using <code class="docutils literal notranslate"><span class="pre">app.apply_to()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="parallel.html#directly-using-cogent3-util-parallel-map">Directly using <code class="docutils literal notranslate"><span class="pre">cogent3.util.parallel.map()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="parallel.html#parallel-computation-on-multiple-computers">Parallel computation on multiple computers</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api/index.html">API</a><ul>
@@ -879,7 +891,7 @@
 
 <section id="main-section" class="container flex-grow-1 has-nav">
     
-  <section id="estimating-periodic-signals">
+  <div class="section" id="estimating-periodic-signals">
 <h1>Estimating periodic signals<a class="headerlink" href="#estimating-periodic-signals" title="Permalink to this headline">¶</a></h1>
 <p><em>Section author: Gavin Huttley, Julien Epps, Hua Ying</em></p>
 <p>We consider two different scenarios:</p>
@@ -888,9 +900,9 @@
 <li><p>estimating the power for a given period</p></li>
 <li><p>measuring statistical significance for the latter case</p></li>
 </ul>
-<section id="estimating-the-periods-in-a-signal">
+<div class="section" id="estimating-the-periods-in-a-signal">
 <h2>Estimating the periods in a signal<a class="headerlink" href="#estimating-the-periods-in-a-signal" title="Permalink to this headline">¶</a></h2>
-<section id="for-numerical-continuous-data">
+<div class="section" id="for-numerical-continuous-data">
 <h3>For numerical (continuous) data<a class="headerlink" href="#for-numerical-continuous-data" title="Permalink to this headline">¶</a></h3>
 <p>We first make some sample data. A periodic signal and some noise.</p>
 <div class="jupyter_cell docutils container">
@@ -912,7 +924,7 @@
 <div class="cell_output docutils container">
 </div>
 </div>
-<section id="discrete-fourier-transform">
+<div class="section" id="discrete-fourier-transform">
 <h4>Discrete Fourier transform<a class="headerlink" href="#discrete-fourier-transform" title="Permalink to this headline">¶</a></h4>
 <p>We now use the discrete Fourier transform to estimate periodicity in this signal. Given we set the period to equal 10, we expect the maximum power for that index.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -980,8 +992,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="auto-correlation">
+</div>
+<div class="section" id="auto-correlation">
 <h4>Auto-correlation<a class="headerlink" href="#auto-correlation" title="Permalink to this headline">¶</a></h4>
 <p>We now use auto-correlation.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1043,9 +1055,9 @@
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="for-symbolic-data">
+</div>
+</div>
+<div class="section" id="for-symbolic-data">
 <h3>For symbolic data<a class="headerlink" href="#for-symbolic-data" title="Permalink to this headline">¶</a></h3>
 <p>We create a sequence as just a string</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1282,11 +1294,11 @@
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="estimating-power-for-specified-period">
+</div>
+</div>
+<div class="section" id="estimating-power-for-specified-period">
 <h2>Estimating power for specified period<a class="headerlink" href="#estimating-power-for-specified-period" title="Permalink to this headline">¶</a></h2>
-<section id="id1">
+<div class="section" id="id1">
 <h3>For numerical (continuous) data<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p>We just use <code class="docutils literal notranslate"><span class="pre">sig</span></code> created above. The Goertzel algorithm gives the same result as the <code class="docutils literal notranslate"><span class="pre">dft</span></code>.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1304,8 +1316,8 @@
 </div>
 </div>
 </div>
-</section>
-<section id="id2">
+</div>
+<div class="section" id="id2">
 <h3>For symbolic data<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>We use the symbols from the above example. For the <code class="docutils literal notranslate"><span class="pre">ipdft</span></code>, <code class="docutils literal notranslate"><span class="pre">auto_corr</span></code> and <code class="docutils literal notranslate"><span class="pre">hybrid</span></code> functions we just need to identify the array index containing the period of interest and slice the corresponding value from the returned powers. The reported periods start at <code class="docutils literal notranslate"><span class="pre">llim</span></code>, which defaults to 2, but indexes start at 0, the index for a period-5 is simply 5-<code class="docutils literal notranslate"><span class="pre">llim</span></code>.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1369,11 +1381,11 @@
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="measuring-statistical-significance-of-periodic-signals">
+</div>
+</div>
+<div class="section" id="measuring-statistical-significance-of-periodic-signals">
 <h2>Measuring statistical significance of periodic signals<a class="headerlink" href="#measuring-statistical-significance-of-periodic-signals" title="Permalink to this headline">¶</a></h2>
-<section id="id3">
+<div class="section" id="id3">
 <h3>For numerical (continuous data)<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <p>We use the signal provided above. Because significance testing is being done using a resampling approach, we define a calculator which precomputes some values to improve compute performance. For a continuous signal, we’ll use the Goertzel algorithm.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1407,10 +1419,10 @@
 </div>
 </div>
 </div>
-</section>
-<section id="id4">
+</div>
+<div class="section" id="id4">
 <h3>For symbolic data<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
-<section id="permutation-testing">
+<div class="section" id="permutation-testing">
 <h4>Permutation testing<a class="headerlink" href="#permutation-testing" title="Permalink to this headline">¶</a></h4>
 <p>The very notion of permutation testing for periods, applied to a genome, requires the compute performance be as quick as possible. This means providing as much information up front as possible. We have made the implementation flexible by not assuming how the user will convert sequences to symbols. It’s also the case that numerous windows of exactly the same size are being assessed. Accordingly, we use a class to construct a fixed signal length evaluator. We do this for the hybrid metric first.</p>
 <div class="jupyter_cell jupyter_container docutils container">
@@ -1466,10 +1478,10 @@
 </div>
 </div>
 </div>
-</section>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
+</div>
 
 
 </section>
@@ -1491,7 +1503,7 @@
     <div id="footer-info" class="bg-light pl-2 pb-1 w-100">
         <div><span class="fa fa-copyright"></span>2020-2021, cogent3 Team
         <a id="author-link" href=""></a> </div>
-        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.3 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
+        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.4 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
     </div>
 </footer>
 
