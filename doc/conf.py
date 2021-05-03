@@ -58,6 +58,7 @@ html_theme_options = {
         ("Install", "doc/install.html"),
         ("Gallery", "doc/draw/index.html"),
         ("Docs", "doc/index.html"),
+        ("Forum", "https://github.com/cogent3/cogent3/discussions"),
         ("GitHub", "https://github.com/cogent3/cogent3"),
         (
             "Site",
