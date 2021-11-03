@@ -48,6 +48,7 @@ extensions = [
     "sphinx_panels",
 ]
 
+bibtex_bibfiles = ["cogent3.bib"]
 
 html_theme = "sphinx_docs_theme"
 html_theme_path = [
@@ -75,7 +76,6 @@ html_theme_options = {
     "years": copyright,
     "navigation_depth": 6,
 }
-
 
 # todo_include_todos=True # to expose the TODOs, uncomment this line
 
