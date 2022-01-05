@@ -18,10 +18,6 @@ release = today.strftime("%Y.%m.%d")
 
 
 # -- General configuration ---------------------------------------------------
-
-# set the plotly renderer
-os.environ["PLOTLY_RENDERER"] = "sphinx_gallery"
-
 sys.path.append("../src")
 
 # Allow autosummary to generate stub files
