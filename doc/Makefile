@@ -26,7 +26,7 @@ html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS)  "$(SOURCEDIR)" $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in _build/html."
-	-rm -rf draw/
+	
 
 github:
 	@make html
@@ -34,5 +34,5 @@ github:
 
 clean:
 	-rm -rf $(BUILDDIR)/*
-	-rm -rf doc/draw/
+	
 	
