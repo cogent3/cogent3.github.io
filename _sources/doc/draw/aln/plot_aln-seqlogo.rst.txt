@@ -1,174 +1,57 @@
-.. only:: html
+.. jupyter-execute::
+    :hide-code:
 
-    .. note::
-        :class: sphx-glr-download-link-note
+    import set_working_directory
 
-        Click :ref:`here <sphx_glr_download_doc_draw_aln_plot_aln-seqlogo.py>`     to download the full example code
-    .. rst-class:: sphx-glr-example-title
-
-    .. _sphx_glr_doc_draw_aln_plot_aln-seqlogo.py:
-
-
-Draw sequence logos
-===================
+Sequence logos
+==============
 
 Sequence logo's display sequence information. They're extensively applied to transcription factor binding site (TFBS) display. They can also be applied to sequence alignments more generally.
 
 Drawing logo for a TFBS
-#######################
+-----------------------
 
-We use the TFBS for the TAT box binding protein.
+We use the TFBS for the TATA box binding protein.
 
-
-.. code-block:: default
-
+.. jupyter-execute::
 
     from cogent3 import load_aligned_seqs
     from cogent3.parse import jaspar
 
-
-    _, pwm = jaspar.read("../../data/tbp.jaspar")
+    _, pwm = jaspar.read("data/tbp.jaspar")
     freqarr = pwm.to_freq_array()
     freqarr[:5]  # illustrating the contents of the MotifFreqsArray
 
-
-
-
-
-
-
-.. only:: builder_html
-
-    .. raw:: html
-
-
-        <div class="c3table">
-
-        <style>
-        .c3table table {margin: 10px 0;}
-        .c3table tr:last-child {border-bottom: 1px solid #000;} 
-        .c3table tr > th {text-align: left; padding: 0 5px;}
-        .c3table tr > td {text-align: left; padding: 5px;}
-        .c3table tr:nth-child(even) {background: #f7f7f7 !important;}
-        .c3table .ellipsis {background: rgba(0, 0, 0, .01);}
-        .c3table .index {background: rgba(161, 195, 209, 0.25); margin: 10px; font-weight: 600;}
-        .c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
-        .c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
-        .c3table .cell_title {font-weight: bold;}
-        .c3col_left { text-align: left !important; display: block;}
-        .c3col_right { text-align: right !important; display: block;}
-        .c3col_center { text-align: center !important; display: block;}
-        </style>
-
-        <table>
-
-        <thead class="head_cell">
-        <th></th><th>T</th><th>C</th><th>A</th><th>G</th>
-        </thead>
-        <tbody>
-        <tr><td class="index"><span class="c3col_right">0</span></td><td><span class="c3col_right">0.0797</span></td><td><span class="c3col_right">0.3728</span></td><td><span class="c3col_right">0.1568</span></td><td><span class="c3col_right">0.3907</span></td></tr>
-        <tr><td class="index"><span class="c3col_right">1</span></td><td><span class="c3col_right">0.7943</span></td><td><span class="c3col_right">0.1183</span></td><td><span class="c3col_right">0.0411</span></td><td><span class="c3col_right">0.0463</span></td></tr>
-        <tr><td class="index"><span class="c3col_right">2</span></td><td><span class="c3col_right">0.0900</span></td><td><span class="c3col_right">0.0000</span></td><td><span class="c3col_right">0.9049</span></td><td><span class="c3col_right">0.0051</span></td></tr>
-        <tr><td class="index"><span class="c3col_right">3</span></td><td><span class="c3col_right">0.9614</span></td><td><span class="c3col_right">0.0257</span></td><td><span class="c3col_right">0.0077</span></td><td><span class="c3col_right">0.0051</span></td></tr>
-        <tr><td class="index"><span class="c3col_right">4</span></td><td><span class="c3col_right">0.0771</span></td><td><span class="c3col_right">0.0000</span></td><td><span class="c3col_right">0.9100</span></td><td><span class="c3col_right">0.0129</span></td></tr>
-        </tbody>
-        </table>
-
-        </div>
-        <br />
-        <br />
-
-
-.. code-block:: default
+.. jupyter-execute::
 
     logo = freqarr.logo()
     logo.show(height=250, width=500)
 
+.. jupyter-execute::
+    :hide-code:
 
+    outpath = set_working_directory.get_thumbnail_dir() / "plot_aln-seqlogo.png"
 
-
-.. raw:: html
-    :file: images/sphx_glr_plot_aln-seqlogo_001.html
-
-
-
-
+    logo.write(outpath)
 
 Drawing a sequence logo from a multiple sequence alignment
-##########################################################
+----------------------------------------------------------
 
 This can be done for an entire alignment, but bear in mind it can take some time to render. Note that we include gap characters in the display.
 
+.. jupyter-execute::
 
-.. code-block:: default
-
-
-
-    aln = load_aligned_seqs("../../data/brca1-bats.fasta", moltype="dna")
+    aln = load_aligned_seqs("data/brca1-bats.fasta", moltype="dna")
     l = aln[:311].seqlogo(height=300, width=500, wrap=60, vspace=0.05)
     l.show()
 
-
-
-
-.. raw:: html
-    :file: images/sphx_glr_plot_aln-seqlogo_002.html
-
-
-
-
-
 Sequence logo of protein alignment
-##################################
+----------------------------------
 
-No difference here except it uses the built-in colour scheme from the protein `MolType`.
+No difference here except it uses the built-in colour scheme from the protein ``MolType``.
 
-
-.. code-block:: default
-
+.. jupyter-execute::
 
     aa = aln.get_translation(incomplete_ok=True)[:120]
     logo = aa.seqlogo(width=500, height=300, wrap=50, vspace=0.1)
     logo.show()
-
-
-
-.. raw:: html
-    :file: images/sphx_glr_plot_aln-seqlogo_003.html
-
-
-
-
-
-
-.. rst-class:: sphx-glr-timing
-
-   **Total running time of the script:** ( 0 minutes  2.296 seconds)
-
-
-.. _sphx_glr_download_doc_draw_aln_plot_aln-seqlogo.py:
-
-
-.. only :: html
-
- .. container:: sphx-glr-footer
-    :class: sphx-glr-footer-example
-
-
-
-  .. container:: sphx-glr-download sphx-glr-download-python
-
-     :download:`Download Python source code: plot_aln-seqlogo.py <plot_aln-seqlogo.py>`
-
-
-
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-     :download:`Download Jupyter notebook: plot_aln-seqlogo.ipynb <plot_aln-seqlogo.ipynb>`
-
-
-.. only:: html
-
- .. rst-class:: sphx-glr-signature
-
-    `Gallery generated by Sphinx-Gallery <https://sphinx-gallery.github.io>`_

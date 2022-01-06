@@ -7,7 +7,7 @@
 <!-- IE Compatibility tag -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>cogent3 2021.05.19 documentation</title>
+<title>cogent3 2022.01.06 documentation</title>
 
 <link href="./_static/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
 
@@ -32,14 +32,14 @@
 <script src="./_static/lib/html5shiv/html5shiv.min.js"></script>
 <![endif]-->
 <!-- CSS -->
+<link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+<link rel="stylesheet" href="_static/css/docs.css" type="text/css" />
 <link rel="stylesheet" href="_static/jupyter-sphinx.css" type="text/css" />
 <link rel="stylesheet" href="_static/thebelab.css" type="text/css" />
+<link rel="stylesheet" href="_static/sg_gallery.css" type="text/css" />
 <link rel="stylesheet" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
 <link rel="stylesheet" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
 <link rel="stylesheet" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
-<link rel="stylesheet" href="_static/gallery.css" type="text/css" />
-<link rel="stylesheet" href="_static/gallery-binder.css" type="text/css" />
-<link rel="stylesheet" href="_static/gallery-dataframe.css" type="text/css" />
 
 <link rel="stylesheet" href="./_static/lib/bootswatch/litera/bootstrap.min.css">
 <link rel="stylesheet" href="./_static/lib/font-awesome/css/font-awesome.min.css">
@@ -58,6 +58,7 @@
 <script src="./_static/lib/bootstrap/js/bootstrap.min.js"></script>
 <script src="./_static/lib/highlight/highlight.pack.js"></script>
 <script src="./_static/js/initializeHighlight.js"></script>
+<script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
 <script src="_static/jquery.js"></script>
 <script src="_static/underscore.js"></script>
 <script src="_static/doctools.js"></script>
@@ -153,12 +154,12 @@
 
 <section id="main-section" class="container flex-grow-1 ">
     
-  <div class="section" id="making-sense-from-sequence">
+  <section id="making-sense-from-sequence">
 <h1>Making Sense from Sequence<a class="headerlink" href="#making-sense-from-sequence" title="Permalink to this headline">¶</a></h1>
 <p><code class="docutils literal notranslate"><span class="pre">cogent3</span></code> is a mature python library for analysis of biological sequence data. We endeavour to provide a first-class experience within Jupyter notebooks, but the algorithms also support parallel execution on compute systems with 1000’s of processors.</p>
 <p><code class="docutils literal notranslate"><span class="pre">cogent3</span></code> is released under the BSD-3 license, links to documentation and code are above. If you would like to contribute (and we hope you do!), we have created a companion <a class="reference external" href="https://github.com/cogent3/c3dev">c3dev</a> repo which provides <a class="reference external" href="https://github.com/cogent3/c3dev/wiki">details on how to contribute</a> and some useful tools for doing so.</p>
 <p><strong>Who is it for? Anyone who wants to analyse sequence divergence using robust statistical models.</strong></p>
-<p><code class="docutils literal notranslate"><span class="pre">cogent3</span></code> is unique in providing numerous non-stationary Markov models <a class="bibtex reference internal" href="#kaehler-000" id="id1">[1]</a> for modelling sequence evolution, including novel codon models <a class="bibtex reference internal" href="#id8" id="id2">[2]</a>. <code class="docutils literal notranslate"><span class="pre">cogent3</span></code> also includes an extensive collection of time-reversible models (again including novel codon models  <a class="bibtex reference internal" href="#yap-000" id="id3">[3]</a>). (<a class="reference external" href="doc/app/index.html#the-model-app">See using non-stationary models.</a>). We have done more than just invent these new methods, we have established the most robust algorithms <a class="bibtex reference internal" href="#schranz-000" id="id4">[4]</a> for their implementation and their suitability for real data <a class="bibtex reference internal" href="#verbyla-000" id="id5">[5]</a>. Additionally, there are novel signal processing methods focussed on statistical estimation of integer period signals <a class="bibtex reference internal" href="#epps-000" id="id6">[6]</a><a class="bibtex reference internal" href="#bellani-000" id="id7">[7]</a>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">cogent3</span></code> is unique in providing numerous non-stationary Markov models <span id="id1">[<a class="reference internal" href="#id12" title="Benjamin D Kaehler, Von Bing Yap, Rongli Zhang, and Gavin A Huttley. Genetic distance for a general non-stationary Markov substitution process. Systematic Biology, 64:281–93, 2015. URL: https://www.ncbi.nlm.nih.gov/pubmed/25503772.">1</a>]</span> for modelling sequence evolution, including novel codon models <span id="id2">[<a class="reference internal" href="#id25" title="Benjamin D Kaehler, Von Bing Yap, and Gavin A Huttley. Standard codon substitution models overestimate purifying selection for non-stationary data. Genome Biology and Evolution, 9:134–149, 2017. URL: https://www.ncbi.nlm.nih.gov/pubmed/28175284.">2</a>]</span>. <code class="docutils literal notranslate"><span class="pre">cogent3</span></code> also includes an extensive collection of time-reversible models (again including novel codon models  <span id="id3">[<a class="reference internal" href="#id14" title="Von Bing Yap, Helen Lindsay, Simon Easteal, and Gavin Huttley. Estimates of the effect of natural selection on protein-coding content. Molecular Biology and Evolution, 27:726–734, 2010. URL: https://www.ncbi.nlm.nih.gov/pubmed/19815689.">3</a>]</span>). (<a class="reference external" href="doc/app/index.html#the-model-app">See using non-stationary models.</a>). We have done more than just invent these new methods, we have established the most robust algorithms <span id="id4">[<a class="reference internal" href="#id18" title="Harold W Schranz, Von Bing Yap, Simon Easteal, Rob Knight, and Gavin A Huttley. Pathological rate matrices: from primates to pathogens. BMC Bioinformatics, 9:550, 2008. URL: https://www.ncbi.nlm.nih.gov/pubmed/19099591.">4</a>]</span> for their implementation and their suitability for real data <span id="id5">[<a class="reference internal" href="#id23" title="Klara L Verbyla, Von Bing Yap, Anuj Pahwa, Yunli Shao, and Gavin A Huttley. The embedding problem for Markov models of nucleotide substitution. PLoS ONE, 8:e69187, 2013. URL: https://pubmed.ncbi.nlm.nih.gov/23935949/.">5</a>]</span>. Additionally, there are novel signal processing methods focussed on statistical estimation of integer period signals <span id="id6">[<a class="reference internal" href="#id17" title="Julien Epps, Hua Ying, and Gavin Huttley. Statistical methods for detecting periodic fragments in DNA sequence data. Biology Direct, 6:21, 2011. URL: https://www.ncbi.nlm.nih.gov/pubmed/21527008.">6</a>, <a class="reference internal" href="#id21" title="M Bellani, J Epps, and G Huttley. A Comparison of Periodicity Profile Methods for Sequence Analysis. Proc. IEEE Workshop on Genomic Signal Processing and Statistics, 2012. URL: https://ieeexplore.ieee.org/document/6507731.">7</a>]</span>.</p>
 <p><strong>Anyone who wants to undertake exploratory genomic data analysis</strong></p>
 <p>Beyond our novel methods, <code class="docutils literal notranslate"><span class="pre">cogent3</span></code> provides an extensive suite of capabilities for manipulating and analysing sequence data. For instance, the ability to <a class="reference external" href="doc/cookbook/manipulating_biological_data.html">read standard biological data formats</a>, manipulate sequences <a class="reference external" href="doc/examples/seq_features.html">by their annotations</a>, to perform multiple sequence alignment (<a class="reference external" href="doc/app/index.html">app docs</a>) using any of our substitution models, <a class="reference external" href="doc/examples/index.html#phylogenetic-reconstruction">phylogenetic reconstruction</a> and tree manipulation, manipulation of <a class="reference external" href="doc/cookbook/tables.html">tabular data</a>, visualisation of phylogenies (<a class="reference external" href="doc/draw/index.html">image gallery</a>) and much more.</p>
 <p><strong>Anyone looking for a functional programming style approach to genomic data analysis</strong></p>
@@ -169,31 +170,31 @@
 </div>
 <hr class="docutils" />
 <p class="rubric">Citations</p>
-<p id="bibtex-bibliography-index-0"><dl class="citation">
-<dt class="bibtex label" id="kaehler-000"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<p id="id7"><dl class="citation">
+<dt class="label" id="id12"><span class="brackets">1</span></dt>
 <dd><p>Benjamin D Kaehler, Von Bing Yap, Rongli Zhang, and Gavin A Huttley. Genetic distance for a general non-stationary Markov substitution process. <em>Systematic Biology</em>, 64:281–93, 2015. URL: <a class="reference external" href="https://www.ncbi.nlm.nih.gov/pubmed/25503772">https://www.ncbi.nlm.nih.gov/pubmed/25503772</a>.</p>
 </dd>
-<dt class="bibtex label" id="id8"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dt class="label" id="id25"><span class="brackets">2</span></dt>
 <dd><p>Benjamin D Kaehler, Von Bing Yap, and Gavin A Huttley. Standard codon substitution models overestimate purifying selection for non-stationary data. <em>Genome Biology and Evolution</em>, 9:134–149, 2017. URL: <a class="reference external" href="https://www.ncbi.nlm.nih.gov/pubmed/28175284">https://www.ncbi.nlm.nih.gov/pubmed/28175284</a>.</p>
 </dd>
-<dt class="bibtex label" id="yap-000"><span class="brackets"><a class="fn-backref" href="#id3">3</a></span></dt>
+<dt class="label" id="id14"><span class="brackets">3</span></dt>
 <dd><p>Von Bing Yap, Helen Lindsay, Simon Easteal, and Gavin Huttley. Estimates of the effect of natural selection on protein-coding content. <em>Molecular Biology and Evolution</em>, 27:726–734, 2010. URL: <a class="reference external" href="https://www.ncbi.nlm.nih.gov/pubmed/19815689">https://www.ncbi.nlm.nih.gov/pubmed/19815689</a>.</p>
 </dd>
-<dt class="bibtex label" id="schranz-000"><span class="brackets"><a class="fn-backref" href="#id4">4</a></span></dt>
+<dt class="label" id="id18"><span class="brackets">4</span></dt>
 <dd><p>Harold W Schranz, Von Bing Yap, Simon Easteal, Rob Knight, and Gavin A Huttley. Pathological rate matrices: from primates to pathogens. <em>BMC Bioinformatics</em>, 9:550, 2008. URL: <a class="reference external" href="https://www.ncbi.nlm.nih.gov/pubmed/19099591">https://www.ncbi.nlm.nih.gov/pubmed/19099591</a>.</p>
 </dd>
-<dt class="bibtex label" id="verbyla-000"><span class="brackets"><a class="fn-backref" href="#id5">5</a></span></dt>
+<dt class="label" id="id23"><span class="brackets">5</span></dt>
 <dd><p>Klara L Verbyla, Von Bing Yap, Anuj Pahwa, Yunli Shao, and Gavin A Huttley. The embedding problem for Markov models of nucleotide substitution. <em>PLoS ONE</em>, 8:e69187, 2013. URL: <a class="reference external" href="https://pubmed.ncbi.nlm.nih.gov/23935949/">https://pubmed.ncbi.nlm.nih.gov/23935949/</a>.</p>
 </dd>
-<dt class="bibtex label" id="epps-000"><span class="brackets"><a class="fn-backref" href="#id6">6</a></span></dt>
+<dt class="label" id="id17"><span class="brackets">6</span></dt>
 <dd><p>Julien Epps, Hua Ying, and Gavin Huttley. Statistical methods for detecting periodic fragments in DNA sequence data. <em>Biology Direct</em>, 6:21, 2011. URL: <a class="reference external" href="https://www.ncbi.nlm.nih.gov/pubmed/21527008">https://www.ncbi.nlm.nih.gov/pubmed/21527008</a>.</p>
 </dd>
-<dt class="bibtex label" id="bellani-000"><span class="brackets"><a class="fn-backref" href="#id7">7</a></span></dt>
+<dt class="label" id="id21"><span class="brackets">7</span></dt>
 <dd><p>M Bellani, J Epps, and G Huttley. A Comparison of Periodicity Profile Methods for Sequence Analysis. <em>Proc. IEEE Workshop on Genomic Signal Processing and Statistics</em>, 2012. URL: <a class="reference external" href="https://ieeexplore.ieee.org/document/6507731">https://ieeexplore.ieee.org/document/6507731</a>.</p>
 </dd>
 </dl>
 </p>
-</div>
+</section>
 
 
 </section>
@@ -213,9 +214,9 @@
         </div>
     </div>
     <div id="footer-info" class="bg-light pl-2 pb-1 w-100">
-        <div><span class="fa fa-copyright"></span>2020-2021, cogent3 Team
+        <div><span class="fa fa-copyright"></span>2020-2022, cogent3 Team
         <a id="author-link" href=""></a> </div>
-        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 3.5.4 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
+        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.2 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
     </div>
 </footer>
 
