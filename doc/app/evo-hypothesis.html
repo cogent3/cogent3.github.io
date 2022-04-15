@@ -7,7 +7,7 @@
 <!-- IE Compatibility tag -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>cogent3 2022.01.06 documentation</title>
+<title>cogent3 2022.04.15 documentation</title>
 
 <link href="../.././_static/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
 
@@ -65,7 +65,7 @@
 <script src="../../_static/thebelab-helper.js"></script>
 <script src="../../_static/plotly-latest.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-<script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+<script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
 <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="../../_static/require.js"></script>
 <script src="../.././_static/js/custom.js"></script>
 
@@ -902,7 +902,7 @@
 <p>We evaluate whether the GTR model is sufficient for a data set, compared with the GN (non-stationary general nucleotide model).</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.app</span> <span class="kn">import</span> <span class="n">io</span><span class="p">,</span> <span class="n">evo</span><span class="p">,</span> <span class="n">sample</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.app</span> <span class="kn">import</span> <span class="n">evo</span><span class="p">,</span> <span class="n">io</span><span class="p">,</span> <span class="n">sample</span>
 
 <span class="n">loader</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">load_aligned</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;fasta&quot;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
 <span class="n">aln</span> <span class="o">=</span> <span class="n">loader</span><span class="p">(</span><span class="s2">&quot;data/primate_brca1.fasta&quot;</span><span class="p">)</span>
@@ -915,10 +915,9 @@
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tree</span> <span class="o">=</span> <span class="s2">&quot;data/primate_brca1.tree&quot;</span>
-<span class="n">sm_args</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">optimise_motif_probs</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">null</span> <span class="o">=</span> <span class="n">evo</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="s2">&quot;GTR&quot;</span><span class="p">,</span> <span class="n">tree</span><span class="o">=</span><span class="n">tree</span><span class="p">,</span> <span class="n">sm_args</span><span class="o">=</span><span class="n">sm_args</span><span class="p">)</span>
-<span class="n">alt</span> <span class="o">=</span> <span class="n">evo</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="s2">&quot;GN&quot;</span><span class="p">,</span> <span class="n">tree</span><span class="o">=</span><span class="n">tree</span><span class="p">,</span> <span class="n">sm_args</span><span class="o">=</span><span class="n">sm_args</span><span class="p">)</span>
+<span class="n">null</span> <span class="o">=</span> <span class="n">evo</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="s2">&quot;GTR&quot;</span><span class="p">,</span> <span class="n">tree</span><span class="o">=</span><span class="n">tree</span><span class="p">,</span> <span class="n">optimise_motif_probs</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">alt</span> <span class="o">=</span> <span class="n">evo</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="s2">&quot;GN&quot;</span><span class="p">,</span> <span class="n">tree</span><span class="o">=</span><span class="n">tree</span><span class="p">,</span> <span class="n">optimise_motif_probs</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">hyp</span> <span class="o">=</span> <span class="n">evo</span><span class="o">.</span><span class="n">hypothesis</span><span class="p">(</span><span class="n">null</span><span class="p">,</span> <span class="n">alt</span><span class="p">)</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">hyp</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
 <span class="nb">type</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
@@ -967,7 +966,7 @@
 <th>LR</th><th>df</th><th>pvalue</th>
 </thead>
 <tbody>
-<tr><td><span class="c3col_right">9.6172</span></td><td><span class="c3col_right">6</span></td><td><span class="c3col_right">0.1417</span></td></tr>
+<tr><td><span class="c3col_right">9.3813</span></td><td><span class="c3col_right">6</span></td><td><span class="c3col_right">0.1532</span></td></tr>
 </tbody>
 </table>
 
@@ -997,8 +996,8 @@
 <th>hypothesis</th><th>key</th><th>lnL</th><th>nfp</th><th>DLC</th><th>unique_Q</th>
 </thead>
 <tbody>
-<tr><td><span class="c3col_left">null</span></td><td><span class="c3col_left">'GTR'</span></td><td><span class="c3col_right">-6992.7690</span></td><td><span class="c3col_right">16</span></td><td><span class="c3col_left">True</span></td><td><span class="c3col_left">True</span></td></tr>
-<tr><td><span class="c3col_left">alt</span></td><td><span class="c3col_left">'GN'</span></td><td><span class="c3col_right">-6987.9604</span></td><td><span class="c3col_right">22</span></td><td><span class="c3col_left">True</span></td><td><span class="c3col_left">True</span></td></tr>
+<tr><td><span class="c3col_left">null</span></td><td><span class="c3col_left">'GTR'</span></td><td><span class="c3col_right">-6992.5741</span></td><td><span class="c3col_right">19</span></td><td><span class="c3col_left">True</span></td><td><span class="c3col_left">True</span></td></tr>
+<tr><td><span class="c3col_left">alt</span></td><td><span class="c3col_left">'GN'</span></td><td><span class="c3col_right">-6987.8834</span></td><td><span class="c3col_right">25</span></td><td><span class="c3col_left">True</span></td><td><span class="c3col_left">True</span></td></tr>
 </tbody>
 </table>
 
@@ -1016,7 +1015,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>(9.617188970112693, 6, 0.14172644421663724)
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>(9.381277659260377, 6, 0.15324334517698213)
 </pre></div>
 </div>
 </div>
@@ -1060,7 +1059,7 @@
 <th>key</th><th>lnL</th><th>nfp</th><th>DLC</th><th>unique_Q</th>
 </thead>
 <tbody>
-<tr><td><span class="c3col_left">'GTR'</span></td><td><span class="c3col_right">-6992.7690</span></td><td><span class="c3col_right">16</span></td><td><span class="c3col_left">True</span></td><td><span class="c3col_left">True</span></td></tr>
+<tr><td><span class="c3col_left">'GTR'</span></td><td><span class="c3col_right">-6992.5741</span></td><td><span class="c3col_right">19</span></td><td><span class="c3col_left">True</span></td><td><span class="c3col_left">True</span></td></tr>
 </tbody>
 </table>
 
@@ -1074,8 +1073,8 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><h4>GTR</h4>
-<p>log-likelihood = -6992.7690</p>
-<p>number of free parameters = 16</p>
+<p>log-likelihood = -6992.5741</p>
+<p>number of free parameters = 19</p>
 
 <div class="c3table">
 
@@ -1104,7 +1103,7 @@
 <th>A/C</th><th>A/G</th><th>A/T</th><th>C/G</th><th>C/T</th>
 </thead>
 <tbody>
-<tr><td><span class="c3col_right">1.2315</span></td><td><span class="c3col_right">5.2532</span></td><td><span class="c3col_right">0.9584</span></td><td><span class="c3col_right">2.3157</span></td><td><span class="c3col_right">5.9697</span></td></tr>
+<tr><td><span class="c3col_right">1.2296</span></td><td><span class="c3col_right">5.2479</span></td><td><span class="c3col_right">0.9473</span></td><td><span class="c3col_right">2.3389</span></td><td><span class="c3col_right">5.9667</span></td></tr>
 </tbody>
 </table>
 
@@ -1137,16 +1136,16 @@
 <th>edge</th><th>parent</th><th>length</th>
 </thead>
 <tbody>
-<tr><td><span class="c3col_left">Galago</span></td><td><span class="c3col_left">root</span></td><td><span class="c3col_right">0.1731</span></td></tr>
-<tr><td><span class="c3col_left">HowlerMon</span></td><td><span class="c3col_left">root</span></td><td><span class="c3col_right">0.0449</span></td></tr>
-<tr><td><span class="c3col_left">Rhesus</span></td><td><span class="c3col_left">edge.3</span></td><td><span class="c3col_right">0.0216</span></td></tr>
+<tr><td><span class="c3col_left">Galago</span></td><td><span class="c3col_left">root</span></td><td><span class="c3col_right">0.1727</span></td></tr>
+<tr><td><span class="c3col_left">HowlerMon</span></td><td><span class="c3col_left">root</span></td><td><span class="c3col_right">0.0448</span></td></tr>
+<tr><td><span class="c3col_left">Rhesus</span></td><td><span class="c3col_left">edge.3</span></td><td><span class="c3col_right">0.0215</span></td></tr>
 <tr><td><span class="c3col_left">Orangutan</span></td><td><span class="c3col_left">edge.2</span></td><td><span class="c3col_right">0.0077</span></td></tr>
 <tr><td><span class="c3col_left">Gorilla</span></td><td><span class="c3col_left">edge.1</span></td><td><span class="c3col_right">0.0025</span></td></tr>
-<tr><td><span class="c3col_left">Human</span></td><td><span class="c3col_left">edge.0</span></td><td><span class="c3col_right">0.0061</span></td></tr>
+<tr><td><span class="c3col_left">Human</span></td><td><span class="c3col_left">edge.0</span></td><td><span class="c3col_right">0.0060</span></td></tr>
 <tr><td><span class="c3col_left">Chimpanzee</span></td><td><span class="c3col_left">edge.0</span></td><td><span class="c3col_right">0.0028</span></td></tr>
 <tr><td><span class="c3col_left">edge.0</span></td><td><span class="c3col_left">edge.1</span></td><td><span class="c3col_right">0.0000</span></td></tr>
 <tr><td><span class="c3col_left">edge.1</span></td><td><span class="c3col_left">edge.2</span></td><td><span class="c3col_right">0.0034</span></td></tr>
-<tr><td><span class="c3col_left">edge.2</span></td><td><span class="c3col_left">edge.3</span></td><td><span class="c3col_right">0.0120</span></td></tr>
+<tr><td><span class="c3col_left">edge.2</span></td><td><span class="c3col_left">edge.3</span></td><td><span class="c3col_right">0.0119</span></td></tr>
 <tr><td><span class="c3col_left">edge.3</span></td><td><span class="c3col_left">root</span></td><td><span class="c3col_right">0.0076</span></td></tr>
 </tbody>
 </table>
@@ -1180,7 +1179,7 @@
 <th>A</th><th>C</th><th>G</th><th>T</th>
 </thead>
 <tbody>
-<tr><td><span class="c3col_right">0.3757</span></td><td><span class="c3col_right">0.1742</span></td><td><span class="c3col_right">0.2095</span></td><td><span class="c3col_right">0.2406</span></td></tr>
+<tr><td><span class="c3col_right">0.3792</span></td><td><span class="c3col_right">0.1719</span></td><td><span class="c3col_right">0.2066</span></td><td><span class="c3col_right">0.2423</span></td></tr>
 </tbody>
 </table>
 
@@ -1197,8 +1196,8 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><h4>GN</h4>
-<p>log-likelihood = -6987.9604</p>
-<p>number of free parameters = 22</p>
+<p>log-likelihood = -6987.8834</p>
+<p>number of free parameters = 25</p>
 
 <div class="c3table">
 
@@ -1227,7 +1226,7 @@
 <th>A>C</th><th>A>G</th><th>A>T</th><th>C>A</th><th>C>G</th><th>C>T</th><th>G>A</th><th>G>C</th><th>G>T</th><th>T>A</th>
 </thead>
 <tbody>
-<tr><td><span class="c3col_right">0.8699</span></td><td><span class="c3col_right">3.6640</span></td><td><span class="c3col_right">0.9110</span></td><td><span class="c3col_right">1.5907</span></td><td><span class="c3col_right">2.1245</span></td><td><span class="c3col_right">6.0240</span></td><td><span class="c3col_right">8.2212</span></td><td><span class="c3col_right">1.2295</span></td><td><span class="c3col_right">0.6296</span></td><td><span class="c3col_right">1.2502</span></td></tr>
+<tr><td><span class="c3col_right">0.8700</span></td><td><span class="c3col_right">3.6670</span></td><td><span class="c3col_right">0.9111</span></td><td><span class="c3col_right">1.5925</span></td><td><span class="c3col_right">2.1264</span></td><td><span class="c3col_right">6.0324</span></td><td><span class="c3col_right">8.2178</span></td><td><span class="c3col_right">1.2288</span></td><td><span class="c3col_right">0.6294</span></td><td><span class="c3col_right">1.2499</span></td></tr>
 </tbody>
 </table>
 
@@ -1240,7 +1239,7 @@
 <th>T>C</th>
 </thead>
 <tbody>
-<tr><td><span class="c3col_right">3.4168</span></td></tr>
+<tr><td><span class="c3col_right">3.4136</span></td></tr>
 </tbody>
 </table>
 
@@ -1273,7 +1272,7 @@
 <th>edge</th><th>parent</th><th>length</th>
 </thead>
 <tbody>
-<tr><td><span class="c3col_left">Galago</span></td><td><span class="c3col_left">root</span></td><td><span class="c3col_right">0.1734</span></td></tr>
+<tr><td><span class="c3col_left">Galago</span></td><td><span class="c3col_left">root</span></td><td><span class="c3col_right">0.1735</span></td></tr>
 <tr><td><span class="c3col_left">HowlerMon</span></td><td><span class="c3col_left">root</span></td><td><span class="c3col_right">0.0450</span></td></tr>
 <tr><td><span class="c3col_left">Rhesus</span></td><td><span class="c3col_left">edge.3</span></td><td><span class="c3col_right">0.0215</span></td></tr>
 <tr><td><span class="c3col_left">Orangutan</span></td><td><span class="c3col_left">edge.2</span></td><td><span class="c3col_right">0.0078</span></td></tr>
@@ -1316,7 +1315,7 @@
 <th>A</th><th>C</th><th>G</th><th>T</th>
 </thead>
 <tbody>
-<tr><td><span class="c3col_right">0.3757</span></td><td><span class="c3col_right">0.1742</span></td><td><span class="c3col_right">0.2095</span></td><td><span class="c3col_right">0.2406</span></td></tr>
+<tr><td><span class="c3col_right">0.3756</span></td><td><span class="c3col_right">0.1768</span></td><td><span class="c3col_right">0.2078</span></td><td><span class="c3col_right">0.2398</span></td></tr>
 </tbody>
 </table>
 
@@ -1357,7 +1356,7 @@
     <div id="footer-info" class="bg-light pl-2 pb-1 w-100">
         <div><span class="fa fa-copyright"></span>2020-2022, cogent3 Team
         <a id="author-link" href=""></a> </div>
-        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 4.3.2 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
+        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
     </div>
 </footer>
 
