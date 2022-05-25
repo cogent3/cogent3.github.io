@@ -154,25 +154,42 @@
 
 <section id="main-section" class="container flex-grow-1 ">
     
-  <section id="alignment">
-<h1><code class="xref py py-mod docutils literal notranslate"><span class="pre">alignment</span></code><a class="headerlink" href="#alignment" title="Permalink to this headline">¶</a></h1>
-<table class="autosummary longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="classes/cogent3.core.alignment.SequenceCollection.html#cogent3.core.alignment.SequenceCollection" title="cogent3.core.alignment.SequenceCollection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SequenceCollection</span></code></a>(data[, names, alphabet, ...])</p></td>
-<td><p>Container for unaligned sequences</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="classes/cogent3.core.alignment.Alignment.html#cogent3.core.alignment.Alignment" title="cogent3.core.alignment.Alignment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Alignment</span></code></a>(*args, **kwargs)</p></td>
-<td><p>An annotatable alignment class</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="classes/cogent3.core.alignment.ArrayAlignment.html#cogent3.core.alignment.ArrayAlignment" title="cogent3.core.alignment.ArrayAlignment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ArrayAlignment</span></code></a>(*args, **kwargs)</p></td>
-<td><p>Holds a dense array representing a multiple sequence alignment.</p></td>
-</tr>
-</tbody>
-</table>
+  <section id="load-seq">
+<h1>load_seq<a class="headerlink" href="#load-seq" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="cogent3.__init__.load_seq">
+<span class="sig-name descname"><span class="pre">load_seq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">pathlib.Path</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">moltype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_to_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parser_kw</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">cogent3.core.sequence.Sequence</span></span></span><a class="headerlink" href="#cogent3.__init__.load_seq" title="Permalink to this definition">¶</a></dt>
+<dd><p>loads unaligned sequences from file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>filename</strong><span class="classifier">str</span></dt><dd><p>path to sequence file</p>
+</dd>
+<dt><strong>format</strong><span class="classifier">str</span></dt><dd><p>sequence file format, if not specified tries to guess from the path suffix</p>
+</dd>
+<dt><strong>moltype</strong><span class="classifier">str</span></dt><dd><p>the moltype, eg DNA, PROTEIN, ‘dna’, ‘protein’</p>
+</dd>
+<dt><strong>label_to_name</strong><span class="classifier">callable</span></dt><dd><p>function for converting original name into another name.</p>
+</dd>
+<dt><strong>parser_kw</strong><span class="classifier">dict</span></dt><dd><p>optional arguments for the parser</p>
+</dd>
+<dt><strong>info</strong><span class="classifier">dict</span></dt><dd><p>a dict from which to make an info object</p>
+</dd>
+<dt><strong>**kw</strong></dt><dd><p>other keyword arguments passed to SequenceCollection</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">Sequence</span></code></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Returns <strong>one</strong> sequence from a file. Use load_aligned_seqs or
+load_unaligned_seqs to get a collection.</p>
+</dd></dl>
+
 </section>
 
 
