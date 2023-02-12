@@ -7,7 +7,7 @@
 <!-- IE Compatibility tag -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>cogent3 2022.05.25 documentation</title>
+<title>cogent3 2023.02.12 documentation</title>
 
 <link href="./_static/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
 
@@ -37,9 +37,8 @@
 <link rel="stylesheet" href="_static/jupyter-sphinx.css" type="text/css" />
 <link rel="stylesheet" href="_static/thebelab.css" type="text/css" />
 <link rel="stylesheet" href="_static/sg_gallery.css" type="text/css" />
-<link rel="stylesheet" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
-<link rel="stylesheet" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
-<link rel="stylesheet" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+<link rel="stylesheet" href="_static/sphinx-dropdown.css" type="text/css" />
+<link rel="stylesheet" href="_static/panels-bootstrap.min.css" type="text/css" />
 
 <link rel="stylesheet" href="./_static/lib/bootswatch/litera/bootstrap.min.css">
 <link rel="stylesheet" href="./_static/lib/font-awesome/css/font-awesome.min.css">
@@ -59,13 +58,12 @@
 <script src="./_static/lib/highlight/highlight.pack.js"></script>
 <script src="./_static/js/initializeHighlight.js"></script>
 <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-<script src="_static/jquery.js"></script>
-<script src="_static/underscore.js"></script>
 <script src="_static/doctools.js"></script>
+<script src="_static/sphinx_highlight.js"></script>
 <script src="_static/thebelab-helper.js"></script>
 <script src="_static/plotly-latest.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-<script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
 <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="_static/require.js"></script>
 <script src="./_static/js/custom.js"></script>
 
@@ -173,32 +171,38 @@
 <li class="toctree-l1"><a class="reference internal" href="doc/index.html">Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="doc/app/index.html">The <code class="docutils literal notranslate"><span class="pre">apps</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="doc/app/index.html#overview">Overview</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="doc/app/warning.html">Warning – apps are alpha!</a></li>
 <li class="toctree-l4"><a class="reference internal" href="doc/app/app-overview.html">Overview of using apps</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="doc/app/app-overview.html#define-the-apps">Define the apps</a></li>
-<li class="toctree-l5"><a class="reference internal" href="doc/app/app-overview.html#using-apps-like-functions">Using apps like functions</a></li>
-<li class="toctree-l5"><a class="reference internal" href="doc/app/app-overview.html#composing-a-multi-step-process-from-several-apps">Composing a multi-step process from several apps</a></li>
-<li class="toctree-l5"><a class="reference internal" href="doc/app/app-overview.html#applying-a-process-to-multiple-data-records">Applying a process to multiple data records</a></li>
+<li class="toctree-l5"><a class="reference internal" href="doc/app/app-overview.html#types-of-apps">Types of apps</a></li>
+<li class="toctree-l5"><a class="reference internal" href="doc/app/app-overview.html#composability">Composability</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="doc/app/app-overview.html#composability-rules">Composability rules</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="doc/app/app-overview.html#an-example">An example</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="doc/app/app-overview.html#using-apps-sequentially-like-functions">Using apps sequentially like functions</a></li>
+<li class="toctree-l6"><a class="reference internal" href="doc/app/app-overview.html#composing-a-multi-step-process-from-several-apps">Composing a multi-step process from several apps</a></li>
+<li class="toctree-l6"><a class="reference internal" href="doc/app/app-overview.html#applying-a-process-to-multiple-data-records">Applying a process to multiple data records</a></li>
+</ul>
+</li>
 <li class="toctree-l5"><a class="reference internal" href="doc/app/app-overview.html#other-important-features">Other important features</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="doc/app/app-overview.html#the-settings-and-data-analysed-will-be-logged">The settings and data analysed will be logged</a></li>
+<li class="toctree-l6"><a class="reference internal" href="doc/app/app-overview.html#failures-are-recorded">Failures are recorded</a></li>
 <li class="toctree-l6"><a class="reference internal" href="doc/app/app-overview.html#you-can-track-progress">You can track progress</a></li>
 <li class="toctree-l6"><a class="reference internal" href="doc/app/app-overview.html#you-can-do-parallel-computation">You can do parallel computation</a></li>
-<li class="toctree-l6"><a class="reference internal" href="doc/app/app-overview.html#you-can-log-the-settings-and-data-analysed">You can log the settings and data analysed</a></li>
 <li class="toctree-l6"><a class="reference internal" href="doc/app/app-overview.html#all-of-the-above">All of the above</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l4"><a class="reference internal" href="doc/app/app-help.html">Getting help on an app</a></li>
+<li class="toctree-l4"><a class="reference internal" href="doc/app/app-get.html">Getting an app</a></li>
+<li class="toctree-l4"><a class="reference internal" href="doc/app/available-apps.html">Displaying installed apps</a></li>
 <li class="toctree-l4"><a class="reference internal" href="doc/app/dstore.html">Specifying data for analysis</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="doc/app/dstore.html#a-read-only-data-store">A read only data store</a></li>
 <li class="toctree-l5"><a class="reference internal" href="doc/app/dstore.html#data-store-members">Data store “members”</a></li>
-<li class="toctree-l5"><a class="reference internal" href="doc/app/dstore.html#showing-the-last-few-members">Showing the last few members</a></li>
-<li class="toctree-l5"><a class="reference internal" href="doc/app/dstore.html#filtering-a-data-store-for-specific-members">Filtering a data store for specific members</a></li>
 <li class="toctree-l5"><a class="reference internal" href="doc/app/dstore.html#looping-over-a-data-store">Looping over a data store</a></li>
 <li class="toctree-l5"><a class="reference internal" href="doc/app/dstore.html#making-a-writeable-data-store">Making a writeable data store</a></li>
-<li class="toctree-l5"><a class="reference internal" href="doc/app/dstore.html#tinydb-data-stores-are-special">TinyDB data stores are special</a><ul>
-<li class="toctree-l6"><a class="reference internal" href="doc/app/dstore.html#interrogating-run-logs">Interrogating run logs</a></li>
-</ul>
-</li>
+<li class="toctree-l5"><a class="reference internal" href="doc/app/dstore.html#sqlitedb-data-stores-for-serialised-data">Sqlitedb data stores for serialised data</a></li>
+<li class="toctree-l5"><a class="reference internal" href="doc/app/dstore.html#interrogating-run-logs">Interrogating run logs</a></li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="doc/app/not-completed.html">Tracking records that could not be processed</a><ul>
@@ -208,7 +212,6 @@
 <li class="toctree-l5"><a class="reference internal" href="doc/app/not-completed.html#composed-functions-propagate-notcompleted-results">Composed functions propagate <code class="docutils literal notranslate"><span class="pre">NotCompleted</span></code> results</a></li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="doc/app/available-apps.html">What apps are there?</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="doc/app/index.html#the-progressive-align-app">The <code class="docutils literal notranslate"><span class="pre">progressive_align</span></code> App</a><ul>
@@ -310,7 +313,7 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="doc/app/index.html#the-user-function-apps">The <code class="docutils literal notranslate"><span class="pre">user_function</span></code> Apps</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="doc/app/index.html#write-your-own-apps">Write your own Apps</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="doc/app/user_function.html">Turn your functions into composable apps</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="doc/app/user_function.html#a-simple-example">A simple example</a></li>
 <li class="toctree-l5"><a class="reference internal" href="doc/app/user_function.html#renaming-sequences">Renaming sequences</a></li>
@@ -324,9 +327,10 @@
 <li class="toctree-l2"><a class="reference internal" href="doc/cookbook/index.html">Cookbook</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="doc/cookbook/manipulating_biological_data.html">Manipulating biological data</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="doc/cookbook/manipulating_biological_data.html#sequences-and-alignments">Sequences and Alignments</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="doc/cookbook/loading_sequences.html">Loading an alignment from a file</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="doc/cookbook/loading_sequences.html">Loading an alignment from a file or url</a><ul>
 <li class="toctree-l6"><a class="reference internal" href="doc/cookbook/loading_sequences.html#loading-aligned-sequences">Loading aligned sequences</a></li>
 <li class="toctree-l6"><a class="reference internal" href="doc/cookbook/loading_sequences.html#loading-unaligned-sequences">Loading unaligned sequences</a></li>
+<li class="toctree-l6"><a class="reference internal" href="doc/cookbook/loading_sequences.html#loading-from-a-url">Loading from a url</a></li>
 <li class="toctree-l6"><a class="reference internal" href="doc/cookbook/loading_sequences.html#specifying-the-file-format">Specifying the file format</a></li>
 </ul>
 </li>
@@ -466,6 +470,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="doc/cookbook/tables.html">Tabular data</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="doc/cookbook/tables.html#loading-a-csv-file">Loading a csv file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="doc/cookbook/tables.html#loading-from-a-url">Loading from a url</a></li>
 <li class="toctree-l4"><a class="reference internal" href="doc/cookbook/tables.html#loading-delimited-specifying-the-format">Loading delimited specifying the format</a></li>
 <li class="toctree-l4"><a class="reference internal" href="doc/cookbook/tables.html#loading-delimited-data-without-a-header-line">Loading delimited data without a header line</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="doc/cookbook/tables.html#using-load-delimited">Using <code class="docutils literal notranslate"><span class="pre">load_delimited()</span></code></a></li>
@@ -731,70 +736,170 @@
 <li class="toctree-l2"><a class="reference internal" href="doc/api/index.html">API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="doc/api/index.html#utility-functions-for">Utility Functions For</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="doc/api/index.html#loading-data-from-file">Loading data from file</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.load_seq.html">load_seq</a></li>
-<li class="toctree-l5"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.load_aligned_seqs.html">load_aligned_seqs</a></li>
-<li class="toctree-l5"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.load_unaligned_seqs.html">load_unaligned_seqs</a></li>
-<li class="toctree-l5"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.load_delimited.html">load_delimited</a></li>
-<li class="toctree-l5"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.load_table.html">load_table</a></li>
-<li class="toctree-l5"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.load_tree.html">load_tree</a></li>
+<li class="toctree-l5"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.load_seq.html">load_seq</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.load_seq.html#cogent3.__init__.load_seq"><code class="docutils literal notranslate"><span class="pre">load_seq()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.load_aligned_seqs.html">load_aligned_seqs</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.load_aligned_seqs.html#cogent3.__init__.load_aligned_seqs"><code class="docutils literal notranslate"><span class="pre">load_aligned_seqs()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.load_unaligned_seqs.html">load_unaligned_seqs</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.load_unaligned_seqs.html#cogent3.__init__.load_unaligned_seqs"><code class="docutils literal notranslate"><span class="pre">load_unaligned_seqs()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.load_delimited.html">load_delimited</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.load_delimited.html#cogent3.__init__.load_delimited"><code class="docutils literal notranslate"><span class="pre">load_delimited()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.load_table.html">load_table</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.load_table.html#cogent3.__init__.load_table"><code class="docutils literal notranslate"><span class="pre">load_table()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.load_tree.html">load_tree</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.load_tree.html#cogent3.__init__.load_tree"><code class="docutils literal notranslate"><span class="pre">load_tree()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="doc/api/index.html#making-cogent3-types-from-standard-python-types">Making cogent3 types from standard Python types</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.make_seq.html">make_seq</a></li>
-<li class="toctree-l5"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.make_aligned_seqs.html">make_aligned_seqs</a></li>
-<li class="toctree-l5"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.make_unaligned_seqs.html">make_unaligned_seqs</a></li>
-<li class="toctree-l5"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.make_table.html">make_table</a></li>
-<li class="toctree-l5"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.make_tree.html">make_tree</a></li>
+<li class="toctree-l5"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.make_seq.html">make_seq</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.make_seq.html#cogent3.__init__.make_seq"><code class="docutils literal notranslate"><span class="pre">make_seq()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.make_aligned_seqs.html">make_aligned_seqs</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.make_aligned_seqs.html#cogent3.__init__.make_aligned_seqs"><code class="docutils literal notranslate"><span class="pre">make_aligned_seqs()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.make_unaligned_seqs.html">make_unaligned_seqs</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.make_unaligned_seqs.html#cogent3.__init__.make_unaligned_seqs"><code class="docutils literal notranslate"><span class="pre">make_unaligned_seqs()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.make_table.html">make_table</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.make_table.html#cogent3.__init__.make_table"><code class="docutils literal notranslate"><span class="pre">make_table()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.make_tree.html">make_tree</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.make_tree.html#cogent3.__init__.make_tree"><code class="docutils literal notranslate"><span class="pre">make_tree()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="doc/api/index.html#getting-commonly-used-cogent3-types">Getting commonly used cogent3 types</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.get_code.html">get_code</a></li>
-<li class="toctree-l5"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.get_moltype.html">get_moltype</a></li>
-<li class="toctree-l5"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.get_model.html">get_model</a></li>
+<li class="toctree-l5"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.get_code.html">get_code</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.get_code.html#cogent3.__init__.get_code"><code class="docutils literal notranslate"><span class="pre">get_code()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.get_moltype.html">get_moltype</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.get_moltype.html#cogent3.__init__.get_moltype"><code class="docutils literal notranslate"><span class="pre">get_moltype()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.get_model.html">get_model</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.get_model.html#cogent3.__init__.get_model"><code class="docutils literal notranslate"><span class="pre">get_model()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="doc/api/index.html#displaying-cogent3-builtins">Displaying cogent3 builtins</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.available_codes.html">available_codes</a></li>
-<li class="toctree-l5"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.available_moltypes.html">available_moltypes</a></li>
-<li class="toctree-l5"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.available_models.html">available_models</a></li>
-<li class="toctree-l5"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.available_apps.html">available_apps</a></li>
+<li class="toctree-l5"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.available_codes.html">available_codes</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.available_codes.html#cogent3.__init__.available_codes"><code class="docutils literal notranslate"><span class="pre">available_codes()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.available_moltypes.html">available_moltypes</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.available_moltypes.html#cogent3.__init__.available_moltypes"><code class="docutils literal notranslate"><span class="pre">available_moltypes()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.available_models.html">available_models</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.available_models.html#cogent3.__init__.available_models"><code class="docutils literal notranslate"><span class="pre">available_models()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.available_apps.html">available_apps</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="doc/api/__init__/cogent3.__init__.available_apps.html#cogent3.__init__.available_apps"><code class="docutils literal notranslate"><span class="pre">available_apps()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="doc/api/index.html#the-major-cogent3-data-types">The Major cogent3 Data Types</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="doc/api/alignment/alignment.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">alignment</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="doc/api/alignment/classes/cogent3.core.alignment.SequenceCollection.html">SequenceCollection</a></li>
-<li class="toctree-l5"><a class="reference internal" href="doc/api/alignment/classes/cogent3.core.alignment.Alignment.html">Alignment</a></li>
-<li class="toctree-l5"><a class="reference internal" href="doc/api/alignment/classes/cogent3.core.alignment.ArrayAlignment.html">ArrayAlignment</a></li>
+<li class="toctree-l5"><a class="reference internal" href="doc/api/alignment/classes/cogent3.core.alignment.SequenceCollection.html">SequenceCollection</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="doc/api/alignment/classes/cogent3.core.alignment.SequenceCollection.html#cogent3.core.alignment.SequenceCollection"><code class="docutils literal notranslate"><span class="pre">SequenceCollection</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="doc/api/alignment/classes/cogent3.core.alignment.Alignment.html">Alignment</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="doc/api/alignment/classes/cogent3.core.alignment.Alignment.html#cogent3.core.alignment.Alignment"><code class="docutils literal notranslate"><span class="pre">Alignment</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="doc/api/alignment/classes/cogent3.core.alignment.ArrayAlignment.html">ArrayAlignment</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="doc/api/alignment/classes/cogent3.core.alignment.ArrayAlignment.html#cogent3.core.alignment.ArrayAlignment"><code class="docutils literal notranslate"><span class="pre">ArrayAlignment</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="doc/api/sequence/sequence.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sequence</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="doc/api/sequence/classes/cogent3.core.sequence.DnaSequence.html">DnaSequence</a></li>
-<li class="toctree-l5"><a class="reference internal" href="doc/api/sequence/classes/cogent3.core.sequence.RnaSequence.html">RnaSequence</a></li>
-<li class="toctree-l5"><a class="reference internal" href="doc/api/sequence/classes/cogent3.core.sequence.ProteinSequence.html">ProteinSequence</a></li>
+<li class="toctree-l5"><a class="reference internal" href="doc/api/sequence/classes/cogent3.core.sequence.DnaSequence.html">DnaSequence</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="doc/api/sequence/classes/cogent3.core.sequence.DnaSequence.html#cogent3.core.sequence.DnaSequence"><code class="docutils literal notranslate"><span class="pre">DnaSequence</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="doc/api/sequence/classes/cogent3.core.sequence.RnaSequence.html">RnaSequence</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="doc/api/sequence/classes/cogent3.core.sequence.RnaSequence.html#cogent3.core.sequence.RnaSequence"><code class="docutils literal notranslate"><span class="pre">RnaSequence</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="doc/api/sequence/classes/cogent3.core.sequence.ProteinSequence.html">ProteinSequence</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="doc/api/sequence/classes/cogent3.core.sequence.ProteinSequence.html#cogent3.core.sequence.ProteinSequence"><code class="docutils literal notranslate"><span class="pre">ProteinSequence</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="doc/api/genetic_code/genetic_code.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">genetic_code</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="doc/api/genetic_code/classes/cogent3.core.genetic_code.GeneticCode.html">GeneticCode</a></li>
+<li class="toctree-l5"><a class="reference internal" href="doc/api/genetic_code/classes/cogent3.core.genetic_code.GeneticCode.html">GeneticCode</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="doc/api/genetic_code/classes/cogent3.core.genetic_code.GeneticCode.html#cogent3.core.genetic_code.GeneticCode"><code class="docutils literal notranslate"><span class="pre">GeneticCode</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="doc/api/moltype/moltype.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">moltype</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="doc/api/moltype/classes/cogent3.core.moltype.MolType.html">MolType</a></li>
+<li class="toctree-l5"><a class="reference internal" href="doc/api/moltype/classes/cogent3.core.moltype.MolType.html">MolType</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="doc/api/moltype/classes/cogent3.core.moltype.MolType.html#cogent3.core.moltype.MolType"><code class="docutils literal notranslate"><span class="pre">MolType</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="doc/api/alphabet/alphabet.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">alphabet</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="doc/api/alphabet/classes/cogent3.core.alphabet.Alphabet.html">Alphabet</a></li>
+<li class="toctree-l5"><a class="reference internal" href="doc/api/alphabet/classes/cogent3.core.alphabet.Alphabet.html">Alphabet</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="doc/api/alphabet/classes/cogent3.core.alphabet.Alphabet.html#cogent3.core.alphabet.Alphabet"><code class="docutils literal notranslate"><span class="pre">Alphabet</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="doc/api/table/table.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">table</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="doc/api/table/classes/cogent3.util.table.Table.html">Table</a></li>
-<li class="toctree-l5"><a class="reference internal" href="doc/api/table/classes/cogent3.util.table.Columns.html">Columns</a></li>
-<li class="toctree-l5"><a class="reference internal" href="doc/api/table/classes/cogent3.parse.table.FilteringParser.html">FilteringParser</a></li>
+<li class="toctree-l5"><a class="reference internal" href="doc/api/table/classes/cogent3.util.table.Table.html">Table</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="doc/api/table/classes/cogent3.util.table.Table.html#cogent3.util.table.Table"><code class="docutils literal notranslate"><span class="pre">Table</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="doc/api/table/classes/cogent3.util.table.Columns.html">Columns</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="doc/api/table/classes/cogent3.util.table.Columns.html#cogent3.util.table.Columns"><code class="docutils literal notranslate"><span class="pre">Columns</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="doc/api/table/classes/cogent3.parse.table.FilteringParser.html">FilteringParser</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="doc/api/table/classes/cogent3.parse.table.FilteringParser.html#cogent3.parse.table.FilteringParser"><code class="docutils literal notranslate"><span class="pre">FilteringParser</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="doc/api/tree/tree.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tree</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="doc/api/tree/classes/cogent3.core.tree.PhyloNode.html">PhyloNode</a></li>
+<li class="toctree-l5"><a class="reference internal" href="doc/api/tree/classes/cogent3.core.tree.PhyloNode.html">PhyloNode</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="doc/api/tree/classes/cogent3.core.tree.PhyloNode.html#cogent3.core.tree.PhyloNode"><code class="docutils literal notranslate"><span class="pre">PhyloNode</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="doc/api/index.html#defining-composable-apps">Defining Composable Apps</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="doc/api/apps/composable.define_app.html">define_app</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="doc/api/apps/composable.define_app.html#cogent3.app.composable.define_app"><code class="docutils literal notranslate"><span class="pre">define_app()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -895,8 +1000,8 @@
 <section id="main-section" class="container flex-grow-1 has-nav">
     
   <section id="project-history">
-<h1>Project History<a class="headerlink" href="#project-history" title="Permalink to this headline">¶</a></h1>
-<p><code class="docutils literal notranslate"><span class="pre">cogent3</span></code> is a descendant of PyCogent. While there is much in common with PyCogent, the amount of change has been substantial, motivating the new name <a class="footnote-reference brackets" href="#id4" id="id1">*</a>.</p>
+<h1>Project History<a class="headerlink" href="#project-history" title="Permalink to this heading">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">cogent3</span></code> is a descendant of PyCogent. While there is much in common with PyCogent, the amount of change has been substantial, motivating the new name <a class="footnote-reference brackets" href="#id4" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>*<span class="fn-bracket">]</span></a>.</p>
 <p>Given this history, we are grateful to the multitude of individuals who have made contributions over the years. These individuals are explicitly acknowledged in all the files they contributed to and were co-authors on the original PyEvolve <span id="id2">[<a class="reference internal" href="#id21" title="A Butterfield, V Vedagiri, E Lang, C Lawrence, M J Wakefield, A Isaev, and G A Huttley. PyEvolve: a toolkit for statistical modelling of molecular evolution. BMC Bioinformatics, 5:1, 2004. URL: https://www.ncbi.nlm.nih.gov/pubmed/14706121.">1</a>]</span> and PyCogent <span id="id3">[<a class="reference internal" href="#id9" title="R Knight, P Maxwell, A Birmingham, J Carnes, J G Caporaso, B C Easton, M Eaton, M Hamady, H Lindsay, Z Liu, C Lozupone, D McDonald, M Robeson, R Sammut, S Smit, M J Wakefield, J Widmann, S Wikman, S Wilson, H Ying, and G A Huttley. PyCogent: a toolkit for making sense from sequence. Genome Biol, 8:R171, 2007. URL: https://www.ncbi.nlm.nih.gov/pubmed/17708774.">2</a>]</span> publications.</p>
 <p>Compared to PyCogent version 1.9, there have been massive changes. These include:</p>
 <ul class="simple">
@@ -907,8 +1012,8 @@
 </ul>
 <p>The rewrite has been a massive amount of work and unfortunately the changes to the API are only indirectly documented by virtue of having the documentation match the library state. Thus, the best way to get older PyCogent scripts working is to check the Library documentation related to your code. More explicitly, you can also search in the <a class="reference external" href="https://github.com/cogent3/cogent3">repository history</a>.</p>
 <section id="cogent3-no-longer-includes-module-x-what-do-i-do">
-<h2><code class="docutils literal notranslate"><span class="pre">cogent3</span></code> no longer includes module <code class="docutils literal notranslate"><span class="pre">x</span></code>, what do I do?<a class="headerlink" href="#cogent3-no-longer-includes-module-x-what-do-i-do" title="Permalink to this headline">¶</a></h2>
-<dl class="glossary simple">
+<h2><code class="docutils literal notranslate"><span class="pre">cogent3</span></code> no longer includes module <code class="docutils literal notranslate"><span class="pre">x</span></code>, what do I do?<a class="headerlink" href="#cogent3-no-longer-includes-module-x-what-do-i-do" title="Permalink to this heading">¶</a></h2>
+<dl class="simple glossary">
 <dt id="term-cogent.app"><code class="docutils literal notranslate"><span class="pre">cogent.app</span></code><a class="headerlink" href="#term-cogent.app" title="Permalink to this term">¶</a></dt><dd><p>The <code class="docutils literal notranslate"><span class="pre">PyCogent</span></code> module was concerned with wrapping external applications. There are multple 3rd party alternatives to this, for example <code class="docutils literal notranslate"><span class="pre">click</span></code>, <code class="docutils literal notranslate"><span class="pre">burrito</span></code>, etc.. The <code class="docutils literal notranslate"><span class="pre">cogent3.app</span></code> module is very different being focussed on providing a functional style interface to <code class="docutils literal notranslate"><span class="pre">cogent3</span></code> capabilities.</p>
 </dd>
 <dt id="term-cogent.db.ensembl"><code class="docutils literal notranslate"><span class="pre">cogent.db.ensembl</span></code><a class="headerlink" href="#term-cogent.db.ensembl" title="Permalink to this term">¶</a></dt><dd><p>This has been turned into a standalone project, <a class="reference external" href="https://github.com/cogent3/ensembldb3">EnsemblDb3</a>.</p>
@@ -924,22 +1029,24 @@
 <dt id="term-cogent.maths.unifrac"><code class="docutils literal notranslate"><span class="pre">cogent.maths.unifrac</span></code><a class="headerlink" href="#term-cogent.maths.unifrac" title="Permalink to this term">¶</a></dt><dd><p>The microbiome related functions are now in <a class="reference external" href="https://scikit-bio.org">scikit-bio</a>.</p>
 </dd>
 </dl>
-<dl class="footnote brackets">
-<dt class="label" id="id4"><span class="brackets"><a class="fn-backref" href="#id1">*</a></span></dt>
-<dd><p>it’s Python 3 only amd <code class="docutils literal notranslate"><span class="pre">cogent</span></code> was always the import name for PyCogent (dating back to PyEvolve <span id="id5">[<a class="reference internal" href="#id21" title="A Butterfield, V Vedagiri, E Lang, C Lawrence, M J Wakefield, A Isaev, and G A Huttley. PyEvolve: a toolkit for statistical modelling of molecular evolution. BMC Bioinformatics, 5:1, 2004. URL: https://www.ncbi.nlm.nih.gov/pubmed/14706121.">1</a>]</span>).</p>
-</dd>
-</dl>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id4" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">*</a><span class="fn-bracket">]</span></span>
+<p>it’s Python 3 only amd <code class="docutils literal notranslate"><span class="pre">cogent</span></code> was always the import name for PyCogent (dating back to PyEvolve <span id="id5">[<a class="reference internal" href="#id21" title="A Butterfield, V Vedagiri, E Lang, C Lawrence, M J Wakefield, A Isaev, and G A Huttley. PyEvolve: a toolkit for statistical modelling of molecular evolution. BMC Bioinformatics, 5:1, 2004. URL: https://www.ncbi.nlm.nih.gov/pubmed/14706121.">1</a>]</span>).</p>
+</aside>
+</aside>
 <hr class="docutils" />
 <p class="rubric">References</p>
 <div class="docutils container" id="id6">
-<dl class="citation">
-<dt class="label" id="id21"><span class="brackets">1</span></dt>
-<dd><p>A Butterfield, V Vedagiri, E Lang, C Lawrence, M J Wakefield, A Isaev, and G A Huttley. PyEvolve: a toolkit for statistical modelling of molecular evolution. <em>BMC Bioinformatics</em>, 5:1, 2004. URL: <a class="reference external" href="https://www.ncbi.nlm.nih.gov/pubmed/14706121">https://www.ncbi.nlm.nih.gov/pubmed/14706121</a>.</p>
-</dd>
-<dt class="label" id="id9"><span class="brackets">2</span></dt>
-<dd><p>R Knight, P Maxwell, A Birmingham, J Carnes, J G Caporaso, B C Easton, M Eaton, M Hamady, H Lindsay, Z Liu, C Lozupone, D McDonald, M Robeson, R Sammut, S Smit, M J Wakefield, J Widmann, S Wikman, S Wilson, H Ying, and G A Huttley. PyCogent: a toolkit for making sense from sequence. <em>Genome Biol</em>, 8:R171, 2007. URL: <a class="reference external" href="https://www.ncbi.nlm.nih.gov/pubmed/17708774">https://www.ncbi.nlm.nih.gov/pubmed/17708774</a>.</p>
-</dd>
-</dl>
+<div class="citation" id="id21" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p>A Butterfield, V Vedagiri, E Lang, C Lawrence, M J Wakefield, A Isaev, and G A Huttley. PyEvolve: a toolkit for statistical modelling of molecular evolution. <em>BMC Bioinformatics</em>, 5:1, 2004. URL: <a class="reference external" href="https://www.ncbi.nlm.nih.gov/pubmed/14706121">https://www.ncbi.nlm.nih.gov/pubmed/14706121</a>.</p>
+</div>
+<div class="citation" id="id9" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
+<p>R Knight, P Maxwell, A Birmingham, J Carnes, J G Caporaso, B C Easton, M Eaton, M Hamady, H Lindsay, Z Liu, C Lozupone, D McDonald, M Robeson, R Sammut, S Smit, M J Wakefield, J Widmann, S Wikman, S Wilson, H Ying, and G A Huttley. PyCogent: a toolkit for making sense from sequence. <em>Genome Biol</em>, 8:R171, 2007. URL: <a class="reference external" href="https://www.ncbi.nlm.nih.gov/pubmed/17708774">https://www.ncbi.nlm.nih.gov/pubmed/17708774</a>.</p>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -962,9 +1069,9 @@
         </div>
     </div>
     <div id="footer-info" class="bg-light pl-2 pb-1 w-100">
-        <div><span class="fa fa-copyright"></span>2020-2022, cogent3 Team
+        <div><span class="fa fa-copyright"></span>2020-2023, cogent3 Team
         <a id="author-link" href=""></a> </div>
-        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
+        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 6.1.3 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
     </div>
 </footer>
 

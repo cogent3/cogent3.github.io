@@ -7,7 +7,7 @@
 <!-- IE Compatibility tag -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>cogent3 2022.05.25 documentation</title>
+<title>cogent3 2023.02.12 documentation</title>
 
 <link href="../.././_static/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
 
@@ -37,9 +37,8 @@
 <link rel="stylesheet" href="../../_static/jupyter-sphinx.css" type="text/css" />
 <link rel="stylesheet" href="../../_static/thebelab.css" type="text/css" />
 <link rel="stylesheet" href="../../_static/sg_gallery.css" type="text/css" />
-<link rel="stylesheet" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
-<link rel="stylesheet" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
-<link rel="stylesheet" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+<link rel="stylesheet" href="../../_static/sphinx-dropdown.css" type="text/css" />
+<link rel="stylesheet" href="../../_static/panels-bootstrap.min.css" type="text/css" />
 
 <link rel="stylesheet" href="../.././_static/lib/bootswatch/litera/bootstrap.min.css">
 <link rel="stylesheet" href="../.././_static/lib/font-awesome/css/font-awesome.min.css">
@@ -59,13 +58,12 @@
 <script src="../.././_static/lib/highlight/highlight.pack.js"></script>
 <script src="../.././_static/js/initializeHighlight.js"></script>
 <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-<script src="../../_static/jquery.js"></script>
-<script src="../../_static/underscore.js"></script>
 <script src="../../_static/doctools.js"></script>
+<script src="../../_static/sphinx_highlight.js"></script>
 <script src="../../_static/thebelab-helper.js"></script>
 <script src="../../_static/plotly-latest.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-<script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
 <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="../../_static/require.js"></script>
 <script src="../.././_static/js/custom.js"></script>
 
@@ -173,32 +171,38 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../app/index.html">The <code class="docutils literal notranslate"><span class="pre">apps</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../app/index.html#overview">Overview</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../app/warning.html">Warning – apps are alpha!</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../app/app-overview.html">Overview of using apps</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="../app/app-overview.html#define-the-apps">Define the apps</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../app/app-overview.html#using-apps-like-functions">Using apps like functions</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../app/app-overview.html#composing-a-multi-step-process-from-several-apps">Composing a multi-step process from several apps</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../app/app-overview.html#applying-a-process-to-multiple-data-records">Applying a process to multiple data records</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../app/app-overview.html#types-of-apps">Types of apps</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../app/app-overview.html#composability">Composability</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../app/app-overview.html#composability-rules">Composability rules</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../app/app-overview.html#an-example">An example</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../app/app-overview.html#using-apps-sequentially-like-functions">Using apps sequentially like functions</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../app/app-overview.html#composing-a-multi-step-process-from-several-apps">Composing a multi-step process from several apps</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../app/app-overview.html#applying-a-process-to-multiple-data-records">Applying a process to multiple data records</a></li>
+</ul>
+</li>
 <li class="toctree-l5"><a class="reference internal" href="../app/app-overview.html#other-important-features">Other important features</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../app/app-overview.html#the-settings-and-data-analysed-will-be-logged">The settings and data analysed will be logged</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../app/app-overview.html#failures-are-recorded">Failures are recorded</a></li>
 <li class="toctree-l6"><a class="reference internal" href="../app/app-overview.html#you-can-track-progress">You can track progress</a></li>
 <li class="toctree-l6"><a class="reference internal" href="../app/app-overview.html#you-can-do-parallel-computation">You can do parallel computation</a></li>
-<li class="toctree-l6"><a class="reference internal" href="../app/app-overview.html#you-can-log-the-settings-and-data-analysed">You can log the settings and data analysed</a></li>
 <li class="toctree-l6"><a class="reference internal" href="../app/app-overview.html#all-of-the-above">All of the above</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l4"><a class="reference internal" href="../app/app-help.html">Getting help on an app</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../app/app-get.html">Getting an app</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../app/available-apps.html">Displaying installed apps</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../app/dstore.html">Specifying data for analysis</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="../app/dstore.html#a-read-only-data-store">A read only data store</a></li>
 <li class="toctree-l5"><a class="reference internal" href="../app/dstore.html#data-store-members">Data store “members”</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../app/dstore.html#showing-the-last-few-members">Showing the last few members</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../app/dstore.html#filtering-a-data-store-for-specific-members">Filtering a data store for specific members</a></li>
 <li class="toctree-l5"><a class="reference internal" href="../app/dstore.html#looping-over-a-data-store">Looping over a data store</a></li>
 <li class="toctree-l5"><a class="reference internal" href="../app/dstore.html#making-a-writeable-data-store">Making a writeable data store</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../app/dstore.html#tinydb-data-stores-are-special">TinyDB data stores are special</a><ul>
-<li class="toctree-l6"><a class="reference internal" href="../app/dstore.html#interrogating-run-logs">Interrogating run logs</a></li>
-</ul>
-</li>
+<li class="toctree-l5"><a class="reference internal" href="../app/dstore.html#sqlitedb-data-stores-for-serialised-data">Sqlitedb data stores for serialised data</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../app/dstore.html#interrogating-run-logs">Interrogating run logs</a></li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="../app/not-completed.html">Tracking records that could not be processed</a><ul>
@@ -208,7 +212,6 @@
 <li class="toctree-l5"><a class="reference internal" href="../app/not-completed.html#composed-functions-propagate-notcompleted-results">Composed functions propagate <code class="docutils literal notranslate"><span class="pre">NotCompleted</span></code> results</a></li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="../app/available-apps.html">What apps are there?</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../app/index.html#the-progressive-align-app">The <code class="docutils literal notranslate"><span class="pre">progressive_align</span></code> App</a><ul>
@@ -310,7 +313,7 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../app/index.html#the-user-function-apps">The <code class="docutils literal notranslate"><span class="pre">user_function</span></code> Apps</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../app/index.html#write-your-own-apps">Write your own Apps</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../app/user_function.html">Turn your functions into composable apps</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="../app/user_function.html#a-simple-example">A simple example</a></li>
 <li class="toctree-l5"><a class="reference internal" href="../app/user_function.html#renaming-sequences">Renaming sequences</a></li>
@@ -324,9 +327,10 @@
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Cookbook</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="manipulating_biological_data.html">Manipulating biological data</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="manipulating_biological_data.html#sequences-and-alignments">Sequences and Alignments</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="loading_sequences.html">Loading an alignment from a file</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="loading_sequences.html">Loading an alignment from a file or url</a><ul>
 <li class="toctree-l6"><a class="reference internal" href="loading_sequences.html#loading-aligned-sequences">Loading aligned sequences</a></li>
 <li class="toctree-l6"><a class="reference internal" href="loading_sequences.html#loading-unaligned-sequences">Loading unaligned sequences</a></li>
+<li class="toctree-l6"><a class="reference internal" href="loading_sequences.html#loading-from-a-url">Loading from a url</a></li>
 <li class="toctree-l6"><a class="reference internal" href="loading_sequences.html#specifying-the-file-format">Specifying the file format</a></li>
 </ul>
 </li>
@@ -466,6 +470,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="tables.html">Tabular data</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="tables.html#loading-a-csv-file">Loading a csv file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tables.html#loading-from-a-url">Loading from a url</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tables.html#loading-delimited-specifying-the-format">Loading delimited specifying the format</a></li>
 <li class="toctree-l4"><a class="reference internal" href="tables.html#loading-delimited-data-without-a-header-line">Loading delimited data without a header line</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="tables.html#using-load-delimited">Using <code class="docutils literal notranslate"><span class="pre">load_delimited()</span></code></a></li>
@@ -731,70 +736,170 @@
 <li class="toctree-l2"><a class="reference internal" href="../api/index.html">API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../api/index.html#utility-functions-for">Utility Functions For</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../api/index.html#loading-data-from-file">Loading data from file</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_seq.html">load_seq</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_aligned_seqs.html">load_aligned_seqs</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_unaligned_seqs.html">load_unaligned_seqs</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_delimited.html">load_delimited</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_table.html">load_table</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_tree.html">load_tree</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_seq.html">load_seq</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_seq.html#cogent3.__init__.load_seq"><code class="docutils literal notranslate"><span class="pre">load_seq()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_aligned_seqs.html">load_aligned_seqs</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_aligned_seqs.html#cogent3.__init__.load_aligned_seqs"><code class="docutils literal notranslate"><span class="pre">load_aligned_seqs()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_unaligned_seqs.html">load_unaligned_seqs</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_unaligned_seqs.html#cogent3.__init__.load_unaligned_seqs"><code class="docutils literal notranslate"><span class="pre">load_unaligned_seqs()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_delimited.html">load_delimited</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_delimited.html#cogent3.__init__.load_delimited"><code class="docutils literal notranslate"><span class="pre">load_delimited()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_table.html">load_table</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_table.html#cogent3.__init__.load_table"><code class="docutils literal notranslate"><span class="pre">load_table()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_tree.html">load_tree</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_tree.html#cogent3.__init__.load_tree"><code class="docutils literal notranslate"><span class="pre">load_tree()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="../api/index.html#making-cogent3-types-from-standard-python-types">Making cogent3 types from standard Python types</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_seq.html">make_seq</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_aligned_seqs.html">make_aligned_seqs</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_unaligned_seqs.html">make_unaligned_seqs</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_table.html">make_table</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_tree.html">make_tree</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_seq.html">make_seq</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_seq.html#cogent3.__init__.make_seq"><code class="docutils literal notranslate"><span class="pre">make_seq()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_aligned_seqs.html">make_aligned_seqs</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_aligned_seqs.html#cogent3.__init__.make_aligned_seqs"><code class="docutils literal notranslate"><span class="pre">make_aligned_seqs()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_unaligned_seqs.html">make_unaligned_seqs</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_unaligned_seqs.html#cogent3.__init__.make_unaligned_seqs"><code class="docutils literal notranslate"><span class="pre">make_unaligned_seqs()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_table.html">make_table</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_table.html#cogent3.__init__.make_table"><code class="docutils literal notranslate"><span class="pre">make_table()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_tree.html">make_tree</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_tree.html#cogent3.__init__.make_tree"><code class="docutils literal notranslate"><span class="pre">make_tree()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="../api/index.html#getting-commonly-used-cogent3-types">Getting commonly used cogent3 types</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.get_code.html">get_code</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.get_moltype.html">get_moltype</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.get_model.html">get_model</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.get_code.html">get_code</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/__init__/cogent3.__init__.get_code.html#cogent3.__init__.get_code"><code class="docutils literal notranslate"><span class="pre">get_code()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.get_moltype.html">get_moltype</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/__init__/cogent3.__init__.get_moltype.html#cogent3.__init__.get_moltype"><code class="docutils literal notranslate"><span class="pre">get_moltype()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.get_model.html">get_model</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/__init__/cogent3.__init__.get_model.html#cogent3.__init__.get_model"><code class="docutils literal notranslate"><span class="pre">get_model()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="../api/index.html#displaying-cogent3-builtins">Displaying cogent3 builtins</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_codes.html">available_codes</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_moltypes.html">available_moltypes</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_models.html">available_models</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_apps.html">available_apps</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_codes.html">available_codes</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_codes.html#cogent3.__init__.available_codes"><code class="docutils literal notranslate"><span class="pre">available_codes()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_moltypes.html">available_moltypes</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_moltypes.html#cogent3.__init__.available_moltypes"><code class="docutils literal notranslate"><span class="pre">available_moltypes()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_models.html">available_models</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_models.html#cogent3.__init__.available_models"><code class="docutils literal notranslate"><span class="pre">available_models()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_apps.html">available_apps</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_apps.html#cogent3.__init__.available_apps"><code class="docutils literal notranslate"><span class="pre">available_apps()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../api/index.html#the-major-cogent3-data-types">The Major cogent3 Data Types</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../api/alignment/alignment.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">alignment</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="../api/alignment/classes/cogent3.core.alignment.SequenceCollection.html">SequenceCollection</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/alignment/classes/cogent3.core.alignment.Alignment.html">Alignment</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/alignment/classes/cogent3.core.alignment.ArrayAlignment.html">ArrayAlignment</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/alignment/classes/cogent3.core.alignment.SequenceCollection.html">SequenceCollection</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/alignment/classes/cogent3.core.alignment.SequenceCollection.html#cogent3.core.alignment.SequenceCollection"><code class="docutils literal notranslate"><span class="pre">SequenceCollection</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/alignment/classes/cogent3.core.alignment.Alignment.html">Alignment</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/alignment/classes/cogent3.core.alignment.Alignment.html#cogent3.core.alignment.Alignment"><code class="docutils literal notranslate"><span class="pre">Alignment</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/alignment/classes/cogent3.core.alignment.ArrayAlignment.html">ArrayAlignment</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/alignment/classes/cogent3.core.alignment.ArrayAlignment.html#cogent3.core.alignment.ArrayAlignment"><code class="docutils literal notranslate"><span class="pre">ArrayAlignment</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="../api/sequence/sequence.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sequence</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="../api/sequence/classes/cogent3.core.sequence.DnaSequence.html">DnaSequence</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/sequence/classes/cogent3.core.sequence.RnaSequence.html">RnaSequence</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/sequence/classes/cogent3.core.sequence.ProteinSequence.html">ProteinSequence</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/sequence/classes/cogent3.core.sequence.DnaSequence.html">DnaSequence</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/sequence/classes/cogent3.core.sequence.DnaSequence.html#cogent3.core.sequence.DnaSequence"><code class="docutils literal notranslate"><span class="pre">DnaSequence</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/sequence/classes/cogent3.core.sequence.RnaSequence.html">RnaSequence</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/sequence/classes/cogent3.core.sequence.RnaSequence.html#cogent3.core.sequence.RnaSequence"><code class="docutils literal notranslate"><span class="pre">RnaSequence</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/sequence/classes/cogent3.core.sequence.ProteinSequence.html">ProteinSequence</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/sequence/classes/cogent3.core.sequence.ProteinSequence.html#cogent3.core.sequence.ProteinSequence"><code class="docutils literal notranslate"><span class="pre">ProteinSequence</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="../api/genetic_code/genetic_code.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">genetic_code</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="../api/genetic_code/classes/cogent3.core.genetic_code.GeneticCode.html">GeneticCode</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/genetic_code/classes/cogent3.core.genetic_code.GeneticCode.html">GeneticCode</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/genetic_code/classes/cogent3.core.genetic_code.GeneticCode.html#cogent3.core.genetic_code.GeneticCode"><code class="docutils literal notranslate"><span class="pre">GeneticCode</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="../api/moltype/moltype.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">moltype</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="../api/moltype/classes/cogent3.core.moltype.MolType.html">MolType</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/moltype/classes/cogent3.core.moltype.MolType.html">MolType</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/moltype/classes/cogent3.core.moltype.MolType.html#cogent3.core.moltype.MolType"><code class="docutils literal notranslate"><span class="pre">MolType</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="../api/alphabet/alphabet.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">alphabet</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="../api/alphabet/classes/cogent3.core.alphabet.Alphabet.html">Alphabet</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/alphabet/classes/cogent3.core.alphabet.Alphabet.html">Alphabet</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/alphabet/classes/cogent3.core.alphabet.Alphabet.html#cogent3.core.alphabet.Alphabet"><code class="docutils literal notranslate"><span class="pre">Alphabet</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="../api/table/table.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">table</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="../api/table/classes/cogent3.util.table.Table.html">Table</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/table/classes/cogent3.util.table.Columns.html">Columns</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/table/classes/cogent3.parse.table.FilteringParser.html">FilteringParser</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/table/classes/cogent3.util.table.Table.html">Table</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/table/classes/cogent3.util.table.Table.html#cogent3.util.table.Table"><code class="docutils literal notranslate"><span class="pre">Table</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/table/classes/cogent3.util.table.Columns.html">Columns</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/table/classes/cogent3.util.table.Columns.html#cogent3.util.table.Columns"><code class="docutils literal notranslate"><span class="pre">Columns</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/table/classes/cogent3.parse.table.FilteringParser.html">FilteringParser</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/table/classes/cogent3.parse.table.FilteringParser.html#cogent3.parse.table.FilteringParser"><code class="docutils literal notranslate"><span class="pre">FilteringParser</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="../api/tree/tree.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tree</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="../api/tree/classes/cogent3.core.tree.PhyloNode.html">PhyloNode</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/tree/classes/cogent3.core.tree.PhyloNode.html">PhyloNode</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/tree/classes/cogent3.core.tree.PhyloNode.html#cogent3.core.tree.PhyloNode"><code class="docutils literal notranslate"><span class="pre">PhyloNode</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api/index.html#defining-composable-apps">Defining Composable Apps</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/apps/composable.define_app.html">define_app</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/apps/composable.define_app.html#cogent3.app.composable.define_app"><code class="docutils literal notranslate"><span class="pre">define_app()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -895,10 +1000,10 @@
 <section id="main-section" class="container flex-grow-1 has-nav">
     
   <section id="translate-dna-sequences">
-<h1>Translate DNA sequences<a class="headerlink" href="#translate-dna-sequences" title="Permalink to this headline">¶</a></h1>
+<h1>Translate DNA sequences<a class="headerlink" href="#translate-dna-sequences" title="Permalink to this heading">¶</a></h1>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">get_code</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">get_code</span>
 
 <span class="n">standard_code</span> <span class="o">=</span> <span class="n">get_code</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">standard_code</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;TTTGCAAAC&quot;</span><span class="p">)</span>
@@ -914,10 +1019,10 @@
 <p>Conversion to a <code class="docutils literal notranslate"><span class="pre">ProteinSequence</span></code> from a <code class="docutils literal notranslate"><span class="pre">DnaSequence</span></code> is shown in <a class="reference internal" href="DNA_and_RNA_sequences.html#translation"><span class="std std-ref">Translate a DnaSequence to protein</span></a>.</p>
 </section>
 <section id="translate-all-six-frames">
-<h1>Translate all six frames<a class="headerlink" href="#translate-all-six-frames" title="Permalink to this headline">¶</a></h1>
+<h1>Translate all six frames<a class="headerlink" href="#translate-all-six-frames" title="Permalink to this heading">¶</a></h1>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">get_code</span><span class="p">,</span> <span class="n">make_seq</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">get_code</span><span class="p">,</span> <span class="n">make_seq</span>
 
 <span class="n">standard_code</span> <span class="o">=</span> <span class="n">get_code</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">seq</span> <span class="o">=</span> <span class="n">make_seq</span><span class="p">(</span><span class="s2">&quot;ATGCTAACATAAA&quot;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
@@ -934,10 +1039,10 @@
 </div>
 </section>
 <section id="find-out-how-many-stops-in-a-frame">
-<h1>Find out how many stops in a frame<a class="headerlink" href="#find-out-how-many-stops-in-a-frame" title="Permalink to this headline">¶</a></h1>
+<h1>Find out how many stops in a frame<a class="headerlink" href="#find-out-how-many-stops-in-a-frame" title="Permalink to this heading">¶</a></h1>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">get_code</span><span class="p">,</span> <span class="n">make_seq</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">get_code</span><span class="p">,</span> <span class="n">make_seq</span>
 
 <span class="n">standard_code</span> <span class="o">=</span> <span class="n">get_code</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">seq</span> <span class="o">=</span> <span class="n">make_seq</span><span class="p">(</span><span class="s2">&quot;ATGCTAACATAAA&quot;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
@@ -972,10 +1077,10 @@
 </div>
 </section>
 <section id="translate-a-codon">
-<h1>Translate a codon<a class="headerlink" href="#translate-a-codon" title="Permalink to this headline">¶</a></h1>
+<h1>Translate a codon<a class="headerlink" href="#translate-a-codon" title="Permalink to this heading">¶</a></h1>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">get_code</span><span class="p">,</span> <span class="n">make_seq</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">get_code</span><span class="p">,</span> <span class="n">make_seq</span>
 
 <span class="n">standard_code</span> <span class="o">=</span> <span class="n">get_code</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">standard_code</span><span class="p">[</span><span class="s2">&quot;TTT&quot;</span><span class="p">]</span>
@@ -991,7 +1096,7 @@
 <p>or get the codons for a single amino acid</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">standard_code</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">standard_code</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1003,10 +1108,10 @@
 </div>
 </section>
 <section id="look-up-the-amino-acid-corresponding-to-a-single-codon">
-<h1>Look up the amino acid corresponding to a single codon<a class="headerlink" href="#look-up-the-amino-acid-corresponding-to-a-single-codon" title="Permalink to this headline">¶</a></h1>
+<h1>Look up the amino acid corresponding to a single codon<a class="headerlink" href="#look-up-the-amino-acid-corresponding-to-a-single-codon" title="Permalink to this heading">¶</a></h1>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">get_code</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">get_code</span>
 
 <span class="n">standard_code</span> <span class="o">=</span> <span class="n">get_code</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">standard_code</span><span class="p">[</span><span class="s2">&quot;TTT&quot;</span><span class="p">]</span>
@@ -1021,10 +1126,10 @@
 </div>
 </section>
 <section id="get-all-the-codons-for-one-amino-acid">
-<h1>Get all the codons for one amino acid<a class="headerlink" href="#get-all-the-codons-for-one-amino-acid" title="Permalink to this headline">¶</a></h1>
+<h1>Get all the codons for one amino acid<a class="headerlink" href="#get-all-the-codons-for-one-amino-acid" title="Permalink to this heading">¶</a></h1>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">get_code</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">get_code</span>
 
 <span class="n">standard_code</span> <span class="o">=</span> <span class="n">get_code</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">standard_code</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">]</span>
@@ -1039,10 +1144,10 @@
 </div>
 </section>
 <section id="get-all-the-codons-for-a-group-of-amino-acids">
-<h1>Get all the codons for a group of amino acids<a class="headerlink" href="#get-all-the-codons-for-a-group-of-amino-acids" title="Permalink to this headline">¶</a></h1>
+<h1>Get all the codons for a group of amino acids<a class="headerlink" href="#get-all-the-codons-for-a-group-of-amino-acids" title="Permalink to this heading">¶</a></h1>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">targets</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">targets</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">]</span>
 <span class="n">codons</span> <span class="o">=</span> <span class="p">[</span><span class="n">standard_code</span><span class="p">[</span><span class="n">aa</span><span class="p">]</span> <span class="k">for</span> <span class="n">aa</span> <span class="ow">in</span> <span class="n">targets</span><span class="p">]</span>
 <span class="n">codons</span>
 <span class="n">flat_list</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">codons</span><span class="p">,</span> <span class="p">[])</span>
@@ -1058,10 +1163,10 @@
 </div>
 </section>
 <section id="converting-the-codonalphabet-to-codon-series">
-<h1>Converting the <code class="docutils literal notranslate"><span class="pre">CodonAlphabet</span></code> to codon series<a class="headerlink" href="#converting-the-codonalphabet-to-codon-series" title="Permalink to this headline">¶</a></h1>
+<h1>Converting the <code class="docutils literal notranslate"><span class="pre">CodonAlphabet</span></code> to codon series<a class="headerlink" href="#converting-the-codonalphabet-to-codon-series" title="Permalink to this heading">¶</a></h1>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_seq</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_seq</span>
 
 <span class="n">my_seq</span> <span class="o">=</span> <span class="n">make_seq</span><span class="p">(</span><span class="s2">&quot;AGTACACTGGTT&quot;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
 <span class="nb">sorted</span><span class="p">(</span><span class="n">my_seq</span><span class="o">.</span><span class="n">codon_alphabet</span><span class="p">())</span>
@@ -1077,11 +1182,11 @@
 </div>
 </section>
 <section id="obtaining-the-codons-from-a-dnasequence-object">
-<h1>Obtaining the codons from a <code class="docutils literal notranslate"><span class="pre">DnaSequence</span></code> object<a class="headerlink" href="#obtaining-the-codons-from-a-dnasequence-object" title="Permalink to this headline">¶</a></h1>
+<h1>Obtaining the codons from a <code class="docutils literal notranslate"><span class="pre">DnaSequence</span></code> object<a class="headerlink" href="#obtaining-the-codons-from-a-dnasequence-object" title="Permalink to this heading">¶</a></h1>
 <p>Use the method <code class="docutils literal notranslate"><span class="pre">get_in_motif_size</span></code></p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_seq</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_seq</span>
 
 <span class="n">my_seq</span> <span class="o">=</span> <span class="n">make_seq</span><span class="p">(</span><span class="s2">&quot;ATGCACTGGTAA&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;my_gene&quot;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
 <span class="n">codons</span> <span class="o">=</span> <span class="n">my_seq</span><span class="o">.</span><span class="n">get_in_motif_size</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
@@ -1097,32 +1202,36 @@
 </div>
 </section>
 <section id="translating-a-dna-sequence-with-a-terminating-stop-codon">
-<h1>Translating a DNA sequence with a terminating stop codon<a class="headerlink" href="#translating-a-dna-sequence-with-a-terminating-stop-codon" title="Permalink to this headline">¶</a></h1>
+<h1>Translating a DNA sequence with a terminating stop codon<a class="headerlink" href="#translating-a-dna-sequence-with-a-terminating-stop-codon" title="Permalink to this heading">¶</a></h1>
 <p>You can’t translate a sequence that contains a stop codon.</p>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pep</span> <span class="o">=</span> <span class="n">my_seq</span><span class="o">.</span><span class="n">get_translation</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pep</span> <span class="o">=</span> <span class="n">my_seq</span><span class="o">.</span><span class="n">get_translation</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">AlphabetError</span><span class="g g-Whitespace">                             </span>Traceback (most recent call last)
-<span class="nn">Input In [11],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">12</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">pep</span> <span class="o">=</span> <span class="n">my_seq</span><span class="o">.</span><span class="n">get_translation</span><span class="p">()</span>
 
-<span class="nn">File ~/work/cogent3.github.io/cogent3.github.io/.venv/lib/python3.9/site-packages/cogent3/core/sequence.py:1285,</span> in <span class="ni">NucleicAcidSequence.get_translation</span><span class="nt">(self, gc, incomplete_ok)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1283</span> <span class="n">orig_codon</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_seq</span><span class="p">[</span><span class="n">posn</span> <span class="p">:</span> <span class="n">posn</span> <span class="o">+</span> <span class="mi">3</span><span class="p">]</span>
-<span class="g g-Whitespace">   </span><span class="mi">1284</span> <span class="k">try</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1285</span>     <span class="n">resolved</span> <span class="o">=</span> <span class="n">codon_alphabet</span><span class="o">.</span><span class="n">resolve_ambiguity</span><span class="p">(</span><span class="n">orig_codon</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1286</span> <span class="k">except</span> <span class="n">AlphabetError</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1287</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">incomplete_ok</span> <span class="ow">or</span> <span class="s2">&quot;-&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">orig_codon</span><span class="p">:</span>
+<span class="nn">File ~/work/cogent3.github.io/cogent3.github.io/.venv/lib/python3.9/site-packages/cogent3/core/sequence.py:1316,</span> in <span class="ni">NucleicAcidSequence.get_translation</span><span class="nt">(self, gc, incomplete_ok)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1314</span> <span class="n">orig_codon</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_seq</span><span class="p">[</span><span class="n">posn</span> <span class="p">:</span> <span class="n">posn</span> <span class="o">+</span> <span class="mi">3</span><span class="p">]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1315</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1316</span>     <span class="n">resolved</span> <span class="o">=</span> <span class="n">codon_alphabet</span><span class="o">.</span><span class="n">resolve_ambiguity</span><span class="p">(</span><span class="n">orig_codon</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1317</span> <span class="k">except</span> <span class="n">AlphabetError</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1318</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">incomplete_ok</span> <span class="ow">or</span> <span class="s2">&quot;-&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">orig_codon</span><span class="p">:</span>
 
-<span class="nn">File ~/work/cogent3.github.io/cogent3.github.io/.venv/lib/python3.9/site-packages/cogent3/core/alphabet.py:720,</span> in <span class="ni">Alphabet.resolve_ambiguity</span><span class="nt">(self, ambig_motif)</span>
-<span class="g g-Whitespace">    </span><span class="mi">717</span> <span class="n">motif_set</span> <span class="o">=</span> <span class="p">[</span><span class="n">motif</span> <span class="k">for</span> <span class="n">motif</span> <span class="ow">in</span> <span class="n">motif_set</span> <span class="k">if</span> <span class="n">motif</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_quick_motifset</span><span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">719</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">motif_set</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">720</span>     <span class="k">raise</span> <span class="n">AlphabetError</span><span class="p">(</span><span class="n">ambig_motif</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">722</span> <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">motif_set</span><span class="p">)</span>
+<span class="nn">File ~/work/cogent3.github.io/cogent3.github.io/.venv/lib/python3.9/site-packages/cogent3/core/alphabet.py:710,</span> in <span class="ni">Alphabet.resolve_ambiguity</span><span class="nt">(self, ambig_motif)</span>
+<span class="g g-Whitespace">    </span><span class="mi">707</span> <span class="n">motif_set</span> <span class="o">=</span> <span class="p">[</span><span class="n">motif</span> <span class="k">for</span> <span class="n">motif</span> <span class="ow">in</span> <span class="n">motif_set</span> <span class="k">if</span> <span class="n">motif</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_quick_motifset</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">709</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">motif_set</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">710</span>     <span class="k">raise</span> <span class="n">AlphabetError</span><span class="p">(</span><span class="n">ambig_motif</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">712</span> <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">motif_set</span><span class="p">)</span>
 
 <span class="ne">AlphabetError</span>: TAA
 </pre></div>
@@ -1130,10 +1239,10 @@
 </div>
 </div>
 <section id="by-removing-the-trailing-stop-codon-first">
-<h2>By removing the trailing stop codon first<a class="headerlink" href="#by-removing-the-trailing-stop-codon-first" title="Permalink to this headline">¶</a></h2>
+<h2>By removing the trailing stop codon first<a class="headerlink" href="#by-removing-the-trailing-stop-codon-first" title="Permalink to this heading">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_seq</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_seq</span>
 
 <span class="n">my_seq</span> <span class="o">=</span> <span class="n">make_seq</span><span class="p">(</span><span class="s2">&quot;ATGCACTGGTAA&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;my_gene&quot;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
 <span class="n">seq</span> <span class="o">=</span> <span class="n">my_seq</span><span class="o">.</span><span class="n">trim_stop_codon</span><span class="p">()</span>
@@ -1154,10 +1263,10 @@ MHW
 </div>
 </section>
 <section id="by-slicing-the-dnasequence-first">
-<h2>By slicing the <code class="docutils literal notranslate"><span class="pre">DnaSequence</span></code> first<a class="headerlink" href="#by-slicing-the-dnasequence-first" title="Permalink to this headline">¶</a></h2>
+<h2>By slicing the <code class="docutils literal notranslate"><span class="pre">DnaSequence</span></code> first<a class="headerlink" href="#by-slicing-the-dnasequence-first" title="Permalink to this heading">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_seq</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_seq</span>
 
 <span class="n">my_seq</span> <span class="o">=</span> <span class="n">make_seq</span><span class="p">(</span><span class="s2">&quot;CAAATGTATTAA&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;my_gene&quot;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
 <span class="n">pep</span> <span class="o">=</span> <span class="n">my_seq</span><span class="p">[:</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">get_translation</span><span class="p">()</span>
@@ -1194,9 +1303,9 @@ QMY
         </div>
     </div>
     <div id="footer-info" class="bg-light pl-2 pb-1 w-100">
-        <div><span class="fa fa-copyright"></span>2020-2022, cogent3 Team
+        <div><span class="fa fa-copyright"></span>2020-2023, cogent3 Team
         <a id="author-link" href=""></a> </div>
-        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
+        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 6.1.3 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
     </div>
 </footer>
 

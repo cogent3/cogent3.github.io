@@ -7,7 +7,7 @@
 <!-- IE Compatibility tag -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>cogent3 2022.05.25 documentation</title>
+<title>cogent3 2023.02.12 documentation</title>
 
 <link href="../.././_static/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
 
@@ -37,9 +37,8 @@
 <link rel="stylesheet" href="../../_static/jupyter-sphinx.css" type="text/css" />
 <link rel="stylesheet" href="../../_static/thebelab.css" type="text/css" />
 <link rel="stylesheet" href="../../_static/sg_gallery.css" type="text/css" />
-<link rel="stylesheet" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
-<link rel="stylesheet" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
-<link rel="stylesheet" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+<link rel="stylesheet" href="../../_static/sphinx-dropdown.css" type="text/css" />
+<link rel="stylesheet" href="../../_static/panels-bootstrap.min.css" type="text/css" />
 
 <link rel="stylesheet" href="../.././_static/lib/bootswatch/litera/bootstrap.min.css">
 <link rel="stylesheet" href="../.././_static/lib/font-awesome/css/font-awesome.min.css">
@@ -59,13 +58,12 @@
 <script src="../.././_static/lib/highlight/highlight.pack.js"></script>
 <script src="../.././_static/js/initializeHighlight.js"></script>
 <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-<script src="../../_static/jquery.js"></script>
-<script src="../../_static/underscore.js"></script>
 <script src="../../_static/doctools.js"></script>
+<script src="../../_static/sphinx_highlight.js"></script>
 <script src="../../_static/thebelab-helper.js"></script>
 <script src="../../_static/plotly-latest.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-<script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
 <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="../../_static/require.js"></script>
 <script src="../.././_static/js/custom.js"></script>
 
@@ -173,32 +171,38 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Documentation</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../app/index.html">The <code class="docutils literal notranslate"><span class="pre">apps</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../app/index.html#overview">Overview</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../app/warning.html">Warning – apps are alpha!</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../app/app-overview.html">Overview of using apps</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="../app/app-overview.html#define-the-apps">Define the apps</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../app/app-overview.html#using-apps-like-functions">Using apps like functions</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../app/app-overview.html#composing-a-multi-step-process-from-several-apps">Composing a multi-step process from several apps</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../app/app-overview.html#applying-a-process-to-multiple-data-records">Applying a process to multiple data records</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../app/app-overview.html#types-of-apps">Types of apps</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../app/app-overview.html#composability">Composability</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../app/app-overview.html#composability-rules">Composability rules</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../app/app-overview.html#an-example">An example</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../app/app-overview.html#using-apps-sequentially-like-functions">Using apps sequentially like functions</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../app/app-overview.html#composing-a-multi-step-process-from-several-apps">Composing a multi-step process from several apps</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../app/app-overview.html#applying-a-process-to-multiple-data-records">Applying a process to multiple data records</a></li>
+</ul>
+</li>
 <li class="toctree-l5"><a class="reference internal" href="../app/app-overview.html#other-important-features">Other important features</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../app/app-overview.html#the-settings-and-data-analysed-will-be-logged">The settings and data analysed will be logged</a></li>
+<li class="toctree-l6"><a class="reference internal" href="../app/app-overview.html#failures-are-recorded">Failures are recorded</a></li>
 <li class="toctree-l6"><a class="reference internal" href="../app/app-overview.html#you-can-track-progress">You can track progress</a></li>
 <li class="toctree-l6"><a class="reference internal" href="../app/app-overview.html#you-can-do-parallel-computation">You can do parallel computation</a></li>
-<li class="toctree-l6"><a class="reference internal" href="../app/app-overview.html#you-can-log-the-settings-and-data-analysed">You can log the settings and data analysed</a></li>
 <li class="toctree-l6"><a class="reference internal" href="../app/app-overview.html#all-of-the-above">All of the above</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l4"><a class="reference internal" href="../app/app-help.html">Getting help on an app</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../app/app-get.html">Getting an app</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../app/available-apps.html">Displaying installed apps</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../app/dstore.html">Specifying data for analysis</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="../app/dstore.html#a-read-only-data-store">A read only data store</a></li>
 <li class="toctree-l5"><a class="reference internal" href="../app/dstore.html#data-store-members">Data store “members”</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../app/dstore.html#showing-the-last-few-members">Showing the last few members</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../app/dstore.html#filtering-a-data-store-for-specific-members">Filtering a data store for specific members</a></li>
 <li class="toctree-l5"><a class="reference internal" href="../app/dstore.html#looping-over-a-data-store">Looping over a data store</a></li>
 <li class="toctree-l5"><a class="reference internal" href="../app/dstore.html#making-a-writeable-data-store">Making a writeable data store</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../app/dstore.html#tinydb-data-stores-are-special">TinyDB data stores are special</a><ul>
-<li class="toctree-l6"><a class="reference internal" href="../app/dstore.html#interrogating-run-logs">Interrogating run logs</a></li>
-</ul>
-</li>
+<li class="toctree-l5"><a class="reference internal" href="../app/dstore.html#sqlitedb-data-stores-for-serialised-data">Sqlitedb data stores for serialised data</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../app/dstore.html#interrogating-run-logs">Interrogating run logs</a></li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="../app/not-completed.html">Tracking records that could not be processed</a><ul>
@@ -208,7 +212,6 @@
 <li class="toctree-l5"><a class="reference internal" href="../app/not-completed.html#composed-functions-propagate-notcompleted-results">Composed functions propagate <code class="docutils literal notranslate"><span class="pre">NotCompleted</span></code> results</a></li>
 </ul>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="../app/available-apps.html">What apps are there?</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../app/index.html#the-progressive-align-app">The <code class="docutils literal notranslate"><span class="pre">progressive_align</span></code> App</a><ul>
@@ -310,7 +313,7 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../app/index.html#the-user-function-apps">The <code class="docutils literal notranslate"><span class="pre">user_function</span></code> Apps</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../app/index.html#write-your-own-apps">Write your own Apps</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../app/user_function.html">Turn your functions into composable apps</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="../app/user_function.html#a-simple-example">A simple example</a></li>
 <li class="toctree-l5"><a class="reference internal" href="../app/user_function.html#renaming-sequences">Renaming sequences</a></li>
@@ -324,9 +327,10 @@
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Cookbook</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="manipulating_biological_data.html">Manipulating biological data</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="manipulating_biological_data.html#sequences-and-alignments">Sequences and Alignments</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="loading_sequences.html">Loading an alignment from a file</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="loading_sequences.html">Loading an alignment from a file or url</a><ul>
 <li class="toctree-l6"><a class="reference internal" href="loading_sequences.html#loading-aligned-sequences">Loading aligned sequences</a></li>
 <li class="toctree-l6"><a class="reference internal" href="loading_sequences.html#loading-unaligned-sequences">Loading unaligned sequences</a></li>
+<li class="toctree-l6"><a class="reference internal" href="loading_sequences.html#loading-from-a-url">Loading from a url</a></li>
 <li class="toctree-l6"><a class="reference internal" href="loading_sequences.html#specifying-the-file-format">Specifying the file format</a></li>
 </ul>
 </li>
@@ -466,6 +470,7 @@
 </li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Tabular data</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#loading-a-csv-file">Loading a csv file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#loading-from-a-url">Loading from a url</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#loading-delimited-specifying-the-format">Loading delimited specifying the format</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#loading-delimited-data-without-a-header-line">Loading delimited data without a header line</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="#using-load-delimited">Using <code class="docutils literal notranslate"><span class="pre">load_delimited()</span></code></a></li>
@@ -731,70 +736,170 @@
 <li class="toctree-l2"><a class="reference internal" href="../api/index.html">API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../api/index.html#utility-functions-for">Utility Functions For</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../api/index.html#loading-data-from-file">Loading data from file</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_seq.html">load_seq</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_aligned_seqs.html">load_aligned_seqs</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_unaligned_seqs.html">load_unaligned_seqs</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_delimited.html">load_delimited</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_table.html">load_table</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_tree.html">load_tree</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_seq.html">load_seq</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_seq.html#cogent3.__init__.load_seq"><code class="docutils literal notranslate"><span class="pre">load_seq()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_aligned_seqs.html">load_aligned_seqs</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_aligned_seqs.html#cogent3.__init__.load_aligned_seqs"><code class="docutils literal notranslate"><span class="pre">load_aligned_seqs()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_unaligned_seqs.html">load_unaligned_seqs</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_unaligned_seqs.html#cogent3.__init__.load_unaligned_seqs"><code class="docutils literal notranslate"><span class="pre">load_unaligned_seqs()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_delimited.html">load_delimited</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_delimited.html#cogent3.__init__.load_delimited"><code class="docutils literal notranslate"><span class="pre">load_delimited()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_table.html">load_table</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_table.html#cogent3.__init__.load_table"><code class="docutils literal notranslate"><span class="pre">load_table()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_tree.html">load_tree</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_tree.html#cogent3.__init__.load_tree"><code class="docutils literal notranslate"><span class="pre">load_tree()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="../api/index.html#making-cogent3-types-from-standard-python-types">Making cogent3 types from standard Python types</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_seq.html">make_seq</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_aligned_seqs.html">make_aligned_seqs</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_unaligned_seqs.html">make_unaligned_seqs</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_table.html">make_table</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_tree.html">make_tree</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_seq.html">make_seq</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_seq.html#cogent3.__init__.make_seq"><code class="docutils literal notranslate"><span class="pre">make_seq()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_aligned_seqs.html">make_aligned_seqs</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_aligned_seqs.html#cogent3.__init__.make_aligned_seqs"><code class="docutils literal notranslate"><span class="pre">make_aligned_seqs()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_unaligned_seqs.html">make_unaligned_seqs</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_unaligned_seqs.html#cogent3.__init__.make_unaligned_seqs"><code class="docutils literal notranslate"><span class="pre">make_unaligned_seqs()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_table.html">make_table</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_table.html#cogent3.__init__.make_table"><code class="docutils literal notranslate"><span class="pre">make_table()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_tree.html">make_tree</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_tree.html#cogent3.__init__.make_tree"><code class="docutils literal notranslate"><span class="pre">make_tree()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="../api/index.html#getting-commonly-used-cogent3-types">Getting commonly used cogent3 types</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.get_code.html">get_code</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.get_moltype.html">get_moltype</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.get_model.html">get_model</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.get_code.html">get_code</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/__init__/cogent3.__init__.get_code.html#cogent3.__init__.get_code"><code class="docutils literal notranslate"><span class="pre">get_code()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.get_moltype.html">get_moltype</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/__init__/cogent3.__init__.get_moltype.html#cogent3.__init__.get_moltype"><code class="docutils literal notranslate"><span class="pre">get_moltype()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.get_model.html">get_model</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/__init__/cogent3.__init__.get_model.html#cogent3.__init__.get_model"><code class="docutils literal notranslate"><span class="pre">get_model()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="../api/index.html#displaying-cogent3-builtins">Displaying cogent3 builtins</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_codes.html">available_codes</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_moltypes.html">available_moltypes</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_models.html">available_models</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_apps.html">available_apps</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_codes.html">available_codes</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_codes.html#cogent3.__init__.available_codes"><code class="docutils literal notranslate"><span class="pre">available_codes()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_moltypes.html">available_moltypes</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_moltypes.html#cogent3.__init__.available_moltypes"><code class="docutils literal notranslate"><span class="pre">available_moltypes()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_models.html">available_models</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_models.html#cogent3.__init__.available_models"><code class="docutils literal notranslate"><span class="pre">available_models()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_apps.html">available_apps</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_apps.html#cogent3.__init__.available_apps"><code class="docutils literal notranslate"><span class="pre">available_apps()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../api/index.html#the-major-cogent3-data-types">The Major cogent3 Data Types</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../api/alignment/alignment.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">alignment</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="../api/alignment/classes/cogent3.core.alignment.SequenceCollection.html">SequenceCollection</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/alignment/classes/cogent3.core.alignment.Alignment.html">Alignment</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/alignment/classes/cogent3.core.alignment.ArrayAlignment.html">ArrayAlignment</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/alignment/classes/cogent3.core.alignment.SequenceCollection.html">SequenceCollection</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/alignment/classes/cogent3.core.alignment.SequenceCollection.html#cogent3.core.alignment.SequenceCollection"><code class="docutils literal notranslate"><span class="pre">SequenceCollection</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/alignment/classes/cogent3.core.alignment.Alignment.html">Alignment</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/alignment/classes/cogent3.core.alignment.Alignment.html#cogent3.core.alignment.Alignment"><code class="docutils literal notranslate"><span class="pre">Alignment</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/alignment/classes/cogent3.core.alignment.ArrayAlignment.html">ArrayAlignment</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/alignment/classes/cogent3.core.alignment.ArrayAlignment.html#cogent3.core.alignment.ArrayAlignment"><code class="docutils literal notranslate"><span class="pre">ArrayAlignment</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="../api/sequence/sequence.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sequence</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="../api/sequence/classes/cogent3.core.sequence.DnaSequence.html">DnaSequence</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/sequence/classes/cogent3.core.sequence.RnaSequence.html">RnaSequence</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/sequence/classes/cogent3.core.sequence.ProteinSequence.html">ProteinSequence</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/sequence/classes/cogent3.core.sequence.DnaSequence.html">DnaSequence</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/sequence/classes/cogent3.core.sequence.DnaSequence.html#cogent3.core.sequence.DnaSequence"><code class="docutils literal notranslate"><span class="pre">DnaSequence</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/sequence/classes/cogent3.core.sequence.RnaSequence.html">RnaSequence</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/sequence/classes/cogent3.core.sequence.RnaSequence.html#cogent3.core.sequence.RnaSequence"><code class="docutils literal notranslate"><span class="pre">RnaSequence</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/sequence/classes/cogent3.core.sequence.ProteinSequence.html">ProteinSequence</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/sequence/classes/cogent3.core.sequence.ProteinSequence.html#cogent3.core.sequence.ProteinSequence"><code class="docutils literal notranslate"><span class="pre">ProteinSequence</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="../api/genetic_code/genetic_code.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">genetic_code</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="../api/genetic_code/classes/cogent3.core.genetic_code.GeneticCode.html">GeneticCode</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/genetic_code/classes/cogent3.core.genetic_code.GeneticCode.html">GeneticCode</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/genetic_code/classes/cogent3.core.genetic_code.GeneticCode.html#cogent3.core.genetic_code.GeneticCode"><code class="docutils literal notranslate"><span class="pre">GeneticCode</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="../api/moltype/moltype.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">moltype</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="../api/moltype/classes/cogent3.core.moltype.MolType.html">MolType</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/moltype/classes/cogent3.core.moltype.MolType.html">MolType</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/moltype/classes/cogent3.core.moltype.MolType.html#cogent3.core.moltype.MolType"><code class="docutils literal notranslate"><span class="pre">MolType</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="../api/alphabet/alphabet.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">alphabet</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="../api/alphabet/classes/cogent3.core.alphabet.Alphabet.html">Alphabet</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/alphabet/classes/cogent3.core.alphabet.Alphabet.html">Alphabet</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/alphabet/classes/cogent3.core.alphabet.Alphabet.html#cogent3.core.alphabet.Alphabet"><code class="docutils literal notranslate"><span class="pre">Alphabet</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="../api/table/table.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">table</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="../api/table/classes/cogent3.util.table.Table.html">Table</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/table/classes/cogent3.util.table.Columns.html">Columns</a></li>
-<li class="toctree-l5"><a class="reference internal" href="../api/table/classes/cogent3.parse.table.FilteringParser.html">FilteringParser</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/table/classes/cogent3.util.table.Table.html">Table</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/table/classes/cogent3.util.table.Table.html#cogent3.util.table.Table"><code class="docutils literal notranslate"><span class="pre">Table</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/table/classes/cogent3.util.table.Columns.html">Columns</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/table/classes/cogent3.util.table.Columns.html#cogent3.util.table.Columns"><code class="docutils literal notranslate"><span class="pre">Columns</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="../api/table/classes/cogent3.parse.table.FilteringParser.html">FilteringParser</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/table/classes/cogent3.parse.table.FilteringParser.html#cogent3.parse.table.FilteringParser"><code class="docutils literal notranslate"><span class="pre">FilteringParser</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l4"><a class="reference internal" href="../api/tree/tree.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tree</span></code></a><ul>
-<li class="toctree-l5"><a class="reference internal" href="../api/tree/classes/cogent3.core.tree.PhyloNode.html">PhyloNode</a></li>
+<li class="toctree-l5"><a class="reference internal" href="../api/tree/classes/cogent3.core.tree.PhyloNode.html">PhyloNode</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="../api/tree/classes/cogent3.core.tree.PhyloNode.html#cogent3.core.tree.PhyloNode"><code class="docutils literal notranslate"><span class="pre">PhyloNode</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api/index.html#defining-composable-apps">Defining Composable Apps</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/apps/composable.define_app.html">define_app</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="../api/apps/composable.define_app.html#cogent3.app.composable.define_app"><code class="docutils literal notranslate"><span class="pre">define_app()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -899,7 +1004,7 @@
 </div>
 </div>
 <section id="tabular-data">
-<h1>Tabular data<a class="headerlink" href="#tabular-data" title="Permalink to this headline">¶</a></h1>
+<h1>Tabular data<a class="headerlink" href="#tabular-data" title="Permalink to this heading">¶</a></h1>
 <p><code class="docutils literal notranslate"><span class="pre">Table</span></code> handles tabular data, storing as columns in a, you guessed it, <code class="docutils literal notranslate"><span class="pre">columns</span></code> attribute. The latter acts like a dictionary, with the column names as the keys and the column values being  <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> instances. The table itself is iterable over rows.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -910,11 +1015,11 @@
 </div>
 </div>
 <section id="loading-a-csv-file">
-<h2>Loading a csv file<a class="headerlink" href="#loading-a-csv-file" title="Permalink to this headline">¶</a></h2>
+<h2>Loading a csv file<a class="headerlink" href="#loading-a-csv-file" title="Permalink to this heading">¶</a></h2>
 <p>We load a tab separated data file using the <code class="docutils literal notranslate"><span class="pre">load_table()</span></code> function. The format is inferred from the filename suffix and you will note, in this case, it’s not actually a <cite>csv</cite> file.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
 
 <span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">table</span>
@@ -967,12 +1072,27 @@
 <p>If you invoke the static column types argument, i.e.``load_table(…, static_column_types=True)`` and the column data are not static, those columns will be left as a string type.</p>
 </div>
 </section>
+<section id="loading-from-a-url">
+<h2>Loading from a url<a class="headerlink" href="#loading-from-a-url" title="Permalink to this heading">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">cogent3</span></code> load functions support loading from a url. We load the above <code class="docutils literal notranslate"><span class="pre">.tsv</span></code> file directly from GitHub.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
+
+<span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;https://raw.githubusercontent.com/cogent3/cogent3/develop/doc/data/stats.tsv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+</section>
 <section id="loading-delimited-specifying-the-format">
-<h2>Loading delimited specifying the format<a class="headerlink" href="#loading-delimited-specifying-the-format" title="Permalink to this headline">¶</a></h2>
+<h2>Loading delimited specifying the format<a class="headerlink" href="#loading-delimited-specifying-the-format" title="Permalink to this heading">¶</a></h2>
 <p>Although unnecessary in this case, it’s possible to override the suffix by specifying the delimiter using the <code class="docutils literal notranslate"><span class="pre">sep</span></code> argument.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
 
 <span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="n">table</span>
@@ -1018,14 +1138,14 @@
 </div>
 </section>
 <section id="loading-delimited-data-without-a-header-line">
-<h2>Loading delimited data without a header line<a class="headerlink" href="#loading-delimited-data-without-a-header-line" title="Permalink to this headline">¶</a></h2>
+<h2>Loading delimited data without a header line<a class="headerlink" href="#loading-delimited-data-without-a-header-line" title="Permalink to this heading">¶</a></h2>
 <p>To create a table from the follow examples, you specify your header and use <code class="docutils literal notranslate"><span class="pre">make_table()</span></code>.</p>
 <section id="using-load-delimited">
-<h3>Using <code class="docutils literal notranslate"><span class="pre">load_delimited()</span></code><a class="headerlink" href="#using-load-delimited" title="Permalink to this headline">¶</a></h3>
+<h3>Using <code class="docutils literal notranslate"><span class="pre">load_delimited()</span></code><a class="headerlink" href="#using-load-delimited" title="Permalink to this heading">¶</a></h3>
 <p>This is just a standard parsing function which does not do any filtering or converting elements to non-string types.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.parse.table</span> <span class="kn">import</span> <span class="n">load_delimited</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.parse.table</span> <span class="kn">import</span> <span class="n">load_delimited</span>
 
 <span class="n">header</span><span class="p">,</span> <span class="n">rows</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="n">load_delimited</span><span class="p">(</span><span class="s2">&quot;data/CerebellumDukeDNaseSeq.pk&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="n">rows</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
@@ -1079,10 +1199,10 @@
 </div>
 </section>
 <section id="using-filteringparser">
-<h3>Using <code class="docutils literal notranslate"><span class="pre">FilteringParser</span></code><a class="headerlink" href="#using-filteringparser" title="Permalink to this headline">¶</a></h3>
+<h3>Using <code class="docutils literal notranslate"><span class="pre">FilteringParser</span></code><a class="headerlink" href="#using-filteringparser" title="Permalink to this heading">¶</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.parse.table</span> <span class="kn">import</span> <span class="n">FilteringParser</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.parse.table</span> <span class="kn">import</span> <span class="n">FilteringParser</span>
 
 <span class="n">reader</span> <span class="o">=</span> <span class="n">FilteringParser</span><span class="p">(</span><span class="n">with_header</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="n">rows</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">reader</span><span class="p">(</span><span class="s2">&quot;data/CerebellumDukeDNaseSeq.pk&quot;</span><span class="p">))</span>
@@ -1138,13 +1258,13 @@
 </section>
 </section>
 <section id="selectively-loading-parts-of-a-big-file">
-<h2>Selectively loading parts of a big file<a class="headerlink" href="#selectively-loading-parts-of-a-big-file" title="Permalink to this headline">¶</a></h2>
+<h2>Selectively loading parts of a big file<a class="headerlink" href="#selectively-loading-parts-of-a-big-file" title="Permalink to this heading">¶</a></h2>
 <section id="loading-a-set-number-of-lines-from-a-file">
-<h3>Loading a set number of lines from a file<a class="headerlink" href="#loading-a-set-number-of-lines-from-a-file" title="Permalink to this headline">¶</a></h3>
+<h3>Loading a set number of lines from a file<a class="headerlink" href="#loading-a-set-number-of-lines-from-a-file" title="Permalink to this heading">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">limit</span></code> argument specifies the number of lines to read.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
 
 <span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">table</span>
@@ -1187,11 +1307,11 @@
 </div>
 </section>
 <section id="loading-only-some-rows">
-<h3>Loading only some rows<a class="headerlink" href="#loading-only-some-rows" title="Permalink to this headline">¶</a></h3>
+<h3>Loading only some rows<a class="headerlink" href="#loading-only-some-rows" title="Permalink to this heading">¶</a></h3>
 <p>If you only want a subset of the contents of a file, use the <code class="docutils literal notranslate"><span class="pre">FilteringParser</span></code>. This allows skipping certain lines by using a callback function. We illustrate this with <code class="docutils literal notranslate"><span class="pre">stats.tsv</span></code>, skipping any rows with <code class="docutils literal notranslate"><span class="pre">&quot;Ratio&quot;</span></code> &gt; 10.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.parse.table</span> <span class="kn">import</span> <span class="n">FilteringParser</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.parse.table</span> <span class="kn">import</span> <span class="n">FilteringParser</span>
 
 <span class="n">reader</span> <span class="o">=</span> <span class="n">FilteringParser</span><span class="p">(</span>
     <span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">with_header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span>
@@ -1238,7 +1358,7 @@
 <p>You can also <code class="docutils literal notranslate"><span class="pre">negate</span></code> a condition, which is useful if the condition is complex. In this example, it means keep the rows for which <code class="docutils literal notranslate"><span class="pre">Ratio</span> <span class="pre">&gt;</span> <span class="pre">10</span></code>.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">reader</span> <span class="o">=</span> <span class="n">FilteringParser</span><span class="p">(</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reader</span> <span class="o">=</span> <span class="n">FilteringParser</span><span class="p">(</span>
     <span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">with_header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">negate</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
 <span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="n">reader</span><span class="o">=</span><span class="n">reader</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -1283,11 +1403,11 @@
 </div>
 </section>
 <section id="loading-only-some-columns">
-<h3>Loading only some columns<a class="headerlink" href="#loading-only-some-columns" title="Permalink to this headline">¶</a></h3>
+<h3>Loading only some columns<a class="headerlink" href="#loading-only-some-columns" title="Permalink to this heading">¶</a></h3>
 <p>Specify the columns by their names.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.parse.table</span> <span class="kn">import</span> <span class="n">FilteringParser</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.parse.table</span> <span class="kn">import</span> <span class="n">FilteringParser</span>
 
 <span class="n">reader</span> <span class="o">=</span> <span class="n">FilteringParser</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Locus&quot;</span><span class="p">,</span> <span class="s2">&quot;Ratio&quot;</span><span class="p">],</span> <span class="n">with_header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="n">reader</span><span class="o">=</span><span class="n">reader</span><span class="p">)</span>
@@ -1335,7 +1455,7 @@
 <p>Or, by their index.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.parse.table</span> <span class="kn">import</span> <span class="n">FilteringParser</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.parse.table</span> <span class="kn">import</span> <span class="n">FilteringParser</span>
 
 <span class="n">reader</span> <span class="o">=</span> <span class="n">FilteringParser</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">with_header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="n">reader</span><span class="o">=</span><span class="n">reader</span><span class="p">)</span>
@@ -1386,11 +1506,11 @@
 </div>
 </section>
 <section id="load-raw-data-as-a-list-of-lists-of-strings">
-<h3>Load raw data as a list of lists of strings<a class="headerlink" href="#load-raw-data-as-a-list-of-lists-of-strings" title="Permalink to this headline">¶</a></h3>
+<h3>Load raw data as a list of lists of strings<a class="headerlink" href="#load-raw-data-as-a-list-of-lists-of-strings" title="Permalink to this heading">¶</a></h3>
 <p>We just use <code class="docutils literal notranslate"><span class="pre">FilteringParser</span></code>.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.parse.table</span> <span class="kn">import</span> <span class="n">FilteringParser</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.parse.table</span> <span class="kn">import</span> <span class="n">FilteringParser</span>
 
 <span class="n">reader</span> <span class="o">=</span> <span class="n">FilteringParser</span><span class="p">(</span><span class="n">with_header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="n">data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">reader</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">))</span>
@@ -1403,7 +1523,7 @@
 <p>We just display the first two lines.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1420,10 +1540,10 @@
 </section>
 </section>
 <section id="make-a-table-from-header-and-rows">
-<h2>Make a table from header and rows<a class="headerlink" href="#make-a-table-from-header-and-rows" title="Permalink to this headline">¶</a></h2>
+<h2>Make a table from header and rows<a class="headerlink" href="#make-a-table-from-header-and-rows" title="Permalink to this heading">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 
 <span class="n">header</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">]</span>
 <span class="n">rows</span> <span class="o">=</span> <span class="p">[</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">12</span><span class="p">)]</span>
@@ -1470,11 +1590,11 @@
 </div>
 </section>
 <section id="make-a-table-from-a-dict">
-<h2>Make a table from a <code class="docutils literal notranslate"><span class="pre">dict</span></code><a class="headerlink" href="#make-a-table-from-a-dict" title="Permalink to this headline">¶</a></h2>
+<h2>Make a table from a <code class="docutils literal notranslate"><span class="pre">dict</span></code><a class="headerlink" href="#make-a-table-from-a-dict" title="Permalink to this heading">¶</a></h2>
 <p>For a <code class="docutils literal notranslate"><span class="pre">dict</span></code> with key’s as column headers.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 
 <span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="n">B</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="n">C</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
 <span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
@@ -1519,10 +1639,10 @@
 </div>
 </section>
 <section id="specify-the-column-order-when-creating-from-a-dict">
-<h2>Specify the column order when creating from a <code class="docutils literal notranslate"><span class="pre">dict</span></code>.<a class="headerlink" href="#specify-the-column-order-when-creating-from-a-dict" title="Permalink to this headline">¶</a></h2>
+<h2>Specify the column order when creating from a <code class="docutils literal notranslate"><span class="pre">dict</span></code>.<a class="headerlink" href="#specify-the-column-order-when-creating-from-a-dict" title="Permalink to this heading">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
 <span class="n">table</span>
 </pre></div>
 </div>
@@ -1564,11 +1684,11 @@
 </div>
 </section>
 <section id="create-the-table-with-an-index">
-<h2>Create the table with an index<a class="headerlink" href="#create-the-table-with-an-index" title="Permalink to this headline">¶</a></h2>
+<h2>Create the table with an index<a class="headerlink" href="#create-the-table-with-an-index" title="Permalink to this heading">¶</a></h2>
 <p>A <code class="docutils literal notranslate"><span class="pre">Table</span></code> can be indexed like a dict if you designate a column as the index (and that column has a unique value for every row).</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="n">index_name</span><span class="o">=</span><span class="s2">&quot;Locus&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="n">index_name</span><span class="o">=</span><span class="s2">&quot;Locus&quot;</span><span class="p">)</span>
 <span class="n">table</span><span class="p">[</span><span class="s2">&quot;NP_055852&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -1608,7 +1728,7 @@
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="p">[</span><span class="s2">&quot;NP_055852&quot;</span><span class="p">,</span> <span class="s2">&quot;Region&quot;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="p">[</span><span class="s2">&quot;NP_055852&quot;</span><span class="p">,</span> <span class="s2">&quot;Region&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1624,10 +1744,10 @@
 </div>
 </section>
 <section id="create-a-table-from-a-pandas-dataframe">
-<h2>Create a table from a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code><a class="headerlink" href="#create-a-table-from-a-pandas-dataframe" title="Permalink to this headline">¶</a></h2>
+<h2>Create a table from a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code><a class="headerlink" href="#create-a-table-from-a-pandas-dataframe" title="Permalink to this heading">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">DataFrame</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">DataFrame</span>
 
 <span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 
@@ -1674,10 +1794,10 @@
 </div>
 </section>
 <section id="create-a-table-from-header-and-rows">
-<h2>Create a table from header and rows<a class="headerlink" href="#create-a-table-from-header-and-rows" title="Permalink to this headline">¶</a></h2>
+<h2>Create a table from header and rows<a class="headerlink" href="#create-a-table-from-header-and-rows" title="Permalink to this heading">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 
 <span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">]])</span>
 <span class="n">table</span>
@@ -1720,11 +1840,11 @@
 </div>
 </section>
 <section id="create-a-table-from-dict">
-<h2>Create a table from dict<a class="headerlink" href="#create-a-table-from-dict" title="Permalink to this headline">¶</a></h2>
+<h2>Create a table from dict<a class="headerlink" href="#create-a-table-from-dict" title="Permalink to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">make_table()</span></code> is the utility function for creating <code class="docutils literal notranslate"><span class="pre">Table</span></code> objects from standard python objects.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 
 <span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">])</span>
 <span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
@@ -1768,10 +1888,10 @@
 </div>
 </section>
 <section id="create-a-table-from-a-2d-dict">
-<h2>Create a table from a 2D dict<a class="headerlink" href="#create-a-table-from-a-2d-dict" title="Permalink to this headline">¶</a></h2>
+<h2>Create a table from a 2D dict<a class="headerlink" href="#create-a-table-from-a-2d-dict" title="Permalink to this heading">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 
 <span class="n">d2D</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;edge.parent&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -1838,10 +1958,10 @@
 </div>
 </section>
 <section id="create-a-table-that-has-complex-python-objects-as-elements">
-<h2>Create a table that has complex python objects as elements<a class="headerlink" href="#create-a-table-that-has-complex-python-objects-as-elements" title="Permalink to this headline">¶</a></h2>
+<h2>Create a table that has complex python objects as elements<a class="headerlink" href="#create-a-table-that-has-complex-python-objects-as-elements" title="Permalink to this heading">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 
 <span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span>
     <span class="n">header</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;abcd&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">],</span>
@@ -1890,10 +2010,10 @@
 </div>
 </section>
 <section id="create-an-empty-table">
-<h2>Create an empty table<a class="headerlink" href="#create-an-empty-table" title="Permalink to this headline">¶</a></h2>
+<h2>Create an empty table<a class="headerlink" href="#create-an-empty-table" title="Permalink to this heading">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 
 <span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">()</span>
 <span class="n">table</span>
@@ -1906,10 +2026,10 @@
 </div>
 </section>
 <section id="adding-a-new-column">
-<h2>Adding a new column<a class="headerlink" href="#adding-a-new-column" title="Permalink to this headline">¶</a></h2>
+<h2>Adding a new column<a class="headerlink" href="#adding-a-new-column" title="Permalink to this heading">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 
 <span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">()</span>
 <span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
@@ -1955,11 +2075,11 @@
 </div>
 </section>
 <section id="add-a-title-and-a-legend-to-a-table">
-<h2>Add a title and a legend to a table<a class="headerlink" href="#add-a-title-and-a-legend-to-a-table" title="Permalink to this headline">¶</a></h2>
+<h2>Add a title and a legend to a table<a class="headerlink" href="#add-a-title-and-a-legend-to-a-table" title="Permalink to this heading">¶</a></h2>
 <p>This can be done when you create the table.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 
 <span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">])</span>
 <span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Sample title&quot;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="s2">&quot;a legend&quot;</span><span class="p">)</span>
@@ -2007,7 +2127,7 @@
 <p>It can be done by directly assigning to the corresponding attributes.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">])</span>
 <span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
 <span class="n">table</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;My title&quot;</span>
 <span class="n">table</span>
@@ -2053,11 +2173,11 @@
 </div>
 </section>
 <section id="iterating-over-table-rows">
-<h2>Iterating over table rows<a class="headerlink" href="#iterating-over-table-rows" title="Permalink to this headline">¶</a></h2>
+<h2>Iterating over table rows<a class="headerlink" href="#iterating-over-table-rows" title="Permalink to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">Table</span></code> is a row oriented object. Iterating on the table returns each row as a new <code class="docutils literal notranslate"><span class="pre">Table</span></code> instance.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
 
 <span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">table</span><span class="p">:</span>
@@ -2079,7 +2199,7 @@ NP_003077    Con       2.5386
 <p>The resulting rows can be indexed using their column names.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">table</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">table</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;Locus&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -2096,11 +2216,11 @@ NP_055852
 </div>
 </section>
 <section id="how-many-rows-are-there">
-<h2>How many rows are there?<a class="headerlink" href="#how-many-rows-are-there" title="Permalink to this headline">¶</a></h2>
+<h2>How many rows are there?<a class="headerlink" href="#how-many-rows-are-there" title="Permalink to this heading">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">Table.shape</span></code> attribute is like that of a <code class="docutils literal notranslate"><span class="pre">numpy</span></code> <code class="docutils literal notranslate"><span class="pre">array</span></code>. The first element (<code class="docutils literal notranslate"><span class="pre">Table.shape[0]</span></code>) is the number of rows.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 
 <span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="n">b</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">])</span>
 <span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
@@ -2116,11 +2236,11 @@ NP_055852
 </div>
 </section>
 <section id="how-many-columns-are-there">
-<h2>How many columns are there?<a class="headerlink" href="#how-many-columns-are-there" title="Permalink to this headline">¶</a></h2>
+<h2>How many columns are there?<a class="headerlink" href="#how-many-columns-are-there" title="Permalink to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">Table.shape[1]</span></code> is the number of columns. Using the table from above.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span>
 </pre></div>
 </div>
 </div>
@@ -2132,11 +2252,11 @@ NP_055852
 </div>
 </section>
 <section id="iterating-over-table-columns">
-<h2>Iterating over table columns<a class="headerlink" href="#iterating-over-table-columns" title="Permalink to this headline">¶</a></h2>
+<h2>Iterating over table columns<a class="headerlink" href="#iterating-over-table-columns" title="Permalink to this heading">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">Table.columns</span></code> attribute is a <code class="docutils literal notranslate"><span class="pre">Columns</span></code> instance, an object with <code class="docutils literal notranslate"><span class="pre">dict</span></code> attributes.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
 
 <span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">table</span><span class="o">.</span><span class="n">columns</span>
@@ -2151,7 +2271,7 @@ NP_055852
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="s2">&quot;Region&quot;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="s2">&quot;Region&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -2164,7 +2284,7 @@ NP_055852
 <p>So iteration is the same as for dicts.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -2179,10 +2299,10 @@ Ratio
 </div>
 </section>
 <section id="table-slicing-using-column-names">
-<h2>Table slicing using column names<a class="headerlink" href="#table-slicing-using-column-names" title="Permalink to this headline">¶</a></h2>
+<h2>Table slicing using column names<a class="headerlink" href="#table-slicing-using-column-names" title="Permalink to this heading">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">table</span>
 </pre></div>
 </div>
@@ -2227,7 +2347,7 @@ Ratio
 <p>Slice using the column name.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Region&quot;</span><span class="p">:]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Region&quot;</span><span class="p">:]</span>
 </pre></div>
 </div>
 </div>
@@ -2267,10 +2387,10 @@ Ratio
 </div>
 </section>
 <section id="table-slicing-using-indices">
-<h2>Table slicing using indices<a class="headerlink" href="#table-slicing-using-indices" title="Permalink to this headline">¶</a></h2>
+<h2>Table slicing using indices<a class="headerlink" href="#table-slicing-using-indices" title="Permalink to this heading">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">table</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span> <span class="p">:</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -2311,11 +2431,11 @@ Ratio
 </div>
 </section>
 <section id="changing-displayed-numerical-precision">
-<h2>Changing displayed numerical precision<a class="headerlink" href="#changing-displayed-numerical-precision" title="Permalink to this headline">¶</a></h2>
+<h2>Changing displayed numerical precision<a class="headerlink" href="#changing-displayed-numerical-precision" title="Permalink to this heading">¶</a></h2>
 <p>We change the <code class="docutils literal notranslate"><span class="pre">Ratio</span></code> column to using scientific notation.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
 
 <span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">table</span><span class="o">.</span><span class="n">format_column</span><span class="p">(</span><span class="s2">&quot;Ratio&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="si">%.1e</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -2362,11 +2482,11 @@ Ratio
 </div>
 </section>
 <section id="change-digits-or-column-spacing">
-<h2>Change digits or column spacing<a class="headerlink" href="#change-digits-or-column-spacing" title="Permalink to this headline">¶</a></h2>
+<h2>Change digits or column spacing<a class="headerlink" href="#change-digits-or-column-spacing" title="Permalink to this heading">¶</a></h2>
 <p>This can be done on table loading,</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">table</span>
 </pre></div>
 </div>
@@ -2411,7 +2531,7 @@ Ratio
 <p>or, for spacing at least, by modifying the attributes</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">space</span> <span class="o">=</span> <span class="s2">&quot;    &quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">space</span> <span class="o">=</span> <span class="s2">&quot;    &quot;</span>
 <span class="n">table</span>
 </pre></div>
 </div>
@@ -2455,11 +2575,11 @@ Ratio
 </div>
 </section>
 <section id="wrapping-tables-for-display">
-<h2>Wrapping tables for display<a class="headerlink" href="#wrapping-tables-for-display" title="Permalink to this headline">¶</a></h2>
+<h2>Wrapping tables for display<a class="headerlink" href="#wrapping-tables-for-display" title="Permalink to this heading">¶</a></h2>
 <p>Wrapping generates neat looking tables whether or not you index the table rows. We demonstrate here</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 
 <span class="n">h</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;A/C&quot;</span><span class="p">,</span> <span class="s2">&quot;A/G&quot;</span><span class="p">,</span> <span class="s2">&quot;A/T&quot;</span><span class="p">,</span> <span class="s2">&quot;C/A&quot;</span><span class="p">]</span>
 <span class="n">rows</span> <span class="o">=</span> <span class="p">[[</span><span class="s2">&quot;tardigrade&quot;</span><span class="p">,</span> <span class="mf">0.0425</span><span class="p">,</span> <span class="mf">0.1424</span><span class="p">,</span> <span class="mf">0.0226</span><span class="p">,</span> <span class="mf">0.0391</span><span class="p">]]</span>
@@ -2513,7 +2633,7 @@ Ratio
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wrap_table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="n">h</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">rows</span><span class="p">,</span> <span class="n">max_width</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">index_name</span><span class="o">=</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wrap_table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="n">h</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">rows</span><span class="p">,</span> <span class="n">max_width</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">index_name</span><span class="o">=</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
 <span class="n">wrap_table</span>
 </pre></div>
 </div>
@@ -2563,10 +2683,10 @@ Ratio
 </div>
 </section>
 <section id="display-the-top-of-a-table-using-head">
-<h2>Display the top of a table using <code class="docutils literal notranslate"><span class="pre">head()</span></code><a class="headerlink" href="#display-the-top-of-a-table-using-head" title="Permalink to this headline">¶</a></h2>
+<h2>Display the top of a table using <code class="docutils literal notranslate"><span class="pre">head()</span></code><a class="headerlink" href="#display-the-top-of-a-table-using-head" title="Permalink to this heading">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)),</span> <span class="n">b</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)),</span> <span class="n">b</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))))</span>
 <span class="n">table</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -2611,7 +2731,7 @@ Ratio
 <p>You change how many rows are displayed.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2652,10 +2772,10 @@ Ratio
 <p>The table shape is that of the original table.</p>
 </section>
 <section id="display-the-bottom-of-a-table-using-tail">
-<h2>Display the bottom of a table using <code class="docutils literal notranslate"><span class="pre">tail()</span></code><a class="headerlink" href="#display-the-bottom-of-a-table-using-tail" title="Permalink to this headline">¶</a></h2>
+<h2>Display the bottom of a table using <code class="docutils literal notranslate"><span class="pre">tail()</span></code><a class="headerlink" href="#display-the-bottom-of-a-table-using-tail" title="Permalink to this heading">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -2699,7 +2819,7 @@ Ratio
 <p>You change how many rows are displayed.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2738,10 +2858,10 @@ Ratio
 </div>
 </section>
 <section id="display-random-rows-from-a-table">
-<h2>Display random rows from a table<a class="headerlink" href="#display-random-rows-from-a-table" title="Permalink to this headline">¶</a></h2>
+<h2>Display random rows from a table<a class="headerlink" href="#display-random-rows-from-a-table" title="Permalink to this heading">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">set_repr_policy</span><span class="p">(</span><span class="n">random</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">set_repr_policy</span><span class="p">(</span><span class="n">random</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">table</span>
 </pre></div>
 </div>
@@ -2772,9 +2892,9 @@ Ratio
 <th>a</th><th>b</th>
 </thead>
 <tbody>
-<tr><td><span class="c3col_right">0</span></td><td><span class="c3col_right">0</span></td></tr>
-<tr><td><span class="c3col_right">3</span></td><td><span class="c3col_right">3</span></td></tr>
-<tr><td><span class="c3col_right">7</span></td><td><span class="c3col_right">7</span></td></tr>
+<tr><td><span class="c3col_right">4</span></td><td><span class="c3col_right">4</span></td></tr>
+<tr><td><span class="c3col_right">5</span></td><td><span class="c3col_right">5</span></td></tr>
+<tr><td><span class="c3col_right">9</span></td><td><span class="c3col_right">9</span></td></tr>
 </tbody>
 </table>
 <p>Random selection of 3 rows from
@@ -2783,10 +2903,10 @@ Ratio
 </div>
 </section>
 <section id="change-the-number-of-rows-displayed-by-repr">
-<h2>Change the number of rows displayed by <code class="docutils literal notranslate"><span class="pre">repr()</span></code><a class="headerlink" href="#change-the-number-of-rows-displayed-by-repr" title="Permalink to this headline">¶</a></h2>
+<h2>Change the number of rows displayed by <code class="docutils literal notranslate"><span class="pre">repr()</span></code><a class="headerlink" href="#change-the-number-of-rows-displayed-by-repr" title="Permalink to this heading">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">set_repr_policy</span><span class="p">(</span><span class="n">head</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">tail</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">set_repr_policy</span><span class="p">(</span><span class="n">head</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">tail</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">table</span>
 </pre></div>
 </div>
@@ -2835,11 +2955,11 @@ Ratio
 </div>
 </section>
 <section id="changing-column-headings">
-<h2>Changing column headings<a class="headerlink" href="#changing-column-headings" title="Permalink to this headline">¶</a></h2>
+<h2>Changing column headings<a class="headerlink" href="#changing-column-headings" title="Permalink to this heading">¶</a></h2>
 <p>The table <code class="docutils literal notranslate"><span class="pre">header</span></code> is immutable. Changing column headings is done as follows.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
 <span class="n">table</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">with_new_header</span><span class="p">(</span><span class="s2">&quot;Ratio&quot;</span><span class="p">,</span> <span class="s2">&quot;Stat&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
@@ -2855,10 +2975,10 @@ Ratio
 </div>
 </section>
 <section id="id1">
-<h2>Adding a new column<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2>Adding a new column<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 
 <span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">()</span>
 <span class="n">table</span>
@@ -2871,7 +2991,7 @@ Ratio
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
 <span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
 <span class="n">table</span>
 </pre></div>
@@ -2914,11 +3034,11 @@ Ratio
 </div>
 </section>
 <section id="create-a-new-column-from-existing-ones">
-<h2>Create a new column from existing ones<a class="headerlink" href="#create-a-new-column-from-existing-ones" title="Permalink to this headline">¶</a></h2>
+<h2>Create a new column from existing ones<a class="headerlink" href="#create-a-new-column-from-existing-ones" title="Permalink to this heading">¶</a></h2>
 <p>This can be used to take a single, or multiple columns and generate a new column of values. Here we’ll take 2 columns and return True/False based on a condition.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">table</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">with_new_column</span><span class="p">(</span>
     <span class="s2">&quot;LargeCon&quot;</span><span class="p">,</span>
     <span class="k">lambda</span> <span class="n">r_v</span><span class="p">:</span> <span class="n">r_v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Con&quot;</span> <span class="ow">and</span> <span class="n">r_v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">10.0</span><span class="p">,</span>
@@ -2967,10 +3087,10 @@ Ratio
 </div>
 </section>
 <section id="get-table-data-as-a-numpy-array">
-<h2>Get table data as a numpy array<a class="headerlink" href="#get-table-data-as-a-numpy-array" title="Permalink to this headline">¶</a></h2>
+<h2>Get table data as a numpy array<a class="headerlink" href="#get-table-data-as-a-numpy-array" title="Permalink to this heading">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">table</span><span class="o">.</span><span class="n">array</span>
 </pre></div>
 </div>
@@ -2987,11 +3107,11 @@ Ratio
 </div>
 </section>
 <section id="get-a-table-column-as-a-list">
-<h2>Get a table column as a list<a class="headerlink" href="#get-a-table-column-as-a-list" title="Permalink to this headline">¶</a></h2>
+<h2>Get a table column as a list<a class="headerlink" href="#get-a-table-column-as-a-list" title="Permalink to this heading">¶</a></h2>
 <p>Via the <code class="docutils literal notranslate"><span class="pre">Table.tolist()</span></code> method.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">locus</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">tolist</span><span class="p">(</span><span class="s2">&quot;Locus&quot;</span><span class="p">)</span>
 <span class="n">locus</span>
 </pre></div>
@@ -3006,7 +3126,7 @@ Ratio
 <p>Or directly from the column array object.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="s2">&quot;Locus&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="s2">&quot;Locus&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -3018,11 +3138,11 @@ Ratio
 </div>
 </section>
 <section id="get-multiple-table-columns-as-a-list">
-<h2>Get multiple table columns as a list<a class="headerlink" href="#get-multiple-table-columns-as-a-list" title="Permalink to this headline">¶</a></h2>
+<h2>Get multiple table columns as a list<a class="headerlink" href="#get-multiple-table-columns-as-a-list" title="Permalink to this heading">¶</a></h2>
 <p>This returns a row oriented list.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">rows</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">tolist</span><span class="p">([</span><span class="s2">&quot;Region&quot;</span><span class="p">,</span> <span class="s2">&quot;Locus&quot;</span><span class="p">])</span>
 <span class="n">rows</span>
 </pre></div>
@@ -3044,11 +3164,11 @@ Ratio
 </div>
 </section>
 <section id="get-the-table-as-a-row-oriented-dict">
-<h2>Get the table as a row oriented <code class="docutils literal notranslate"><span class="pre">dict</span></code><a class="headerlink" href="#get-the-table-as-a-row-oriented-dict" title="Permalink to this headline">¶</a></h2>
+<h2>Get the table as a row oriented <code class="docutils literal notranslate"><span class="pre">dict</span></code><a class="headerlink" href="#get-the-table-as-a-row-oriented-dict" title="Permalink to this heading">¶</a></h2>
 <p>Keys in the resulting dict are the row indices, the value is a dict of column name, value pairs.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">table</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -3065,11 +3185,11 @@ Ratio
 </div>
 </section>
 <section id="get-the-table-as-a-column-oriented-dict">
-<h2>Get the table as a column oriented <code class="docutils literal notranslate"><span class="pre">dict</span></code><a class="headerlink" href="#get-the-table-as-a-column-oriented-dict" title="Permalink to this headline">¶</a></h2>
+<h2>Get the table as a column oriented <code class="docutils literal notranslate"><span class="pre">dict</span></code><a class="headerlink" href="#get-the-table-as-a-column-oriented-dict" title="Permalink to this heading">¶</a></h2>
 <p>Keys in the resulting dict are the column names, the value is a list.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -3088,10 +3208,10 @@ Ratio
 </div>
 </section>
 <section id="get-the-table-as-a-pandas-dataframe">
-<h2>Get the table as a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code><a class="headerlink" href="#get-the-table-as-a-pandas-dataframe" title="Permalink to this headline">¶</a></h2>
+<h2>Get the table as a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code><a class="headerlink" href="#get-the-table-as-a-pandas-dataframe" title="Permalink to this heading">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span>
 <span class="n">df</span>
 </pre></div>
@@ -3159,7 +3279,7 @@ Ratio
 <p>You can also specify column(s) are categories</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="s2">&quot;Region&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">(</span><span class="n">categories</span><span class="o">=</span><span class="s2">&quot;Region&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -3168,11 +3288,11 @@ Ratio
 </div>
 </section>
 <section id="get-a-table-of-counts-as-a-contingency-table">
-<h2>Get a table of counts as a contingency table<a class="headerlink" href="#get-a-table-of-counts-as-a-contingency-table" title="Permalink to this headline">¶</a></h2>
+<h2>Get a table of counts as a contingency table<a class="headerlink" href="#get-a-table-of-counts-as-a-contingency-table" title="Permalink to this heading">¶</a></h2>
 <p>If our table consists of counts data, the <code class="docutils literal notranslate"><span class="pre">Table</span></code> can convert it into a <code class="docutils literal notranslate"><span class="pre">CategoryCount</span></code> instance that can be used for performing basic contingency table statistical tests, e.g. chisquare, G-test of independence, etc.. To do this, we must specify which column contains the row names using the <code class="docutils literal notranslate"><span class="pre">index_name</span></code> argument.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Ts&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">31</span><span class="p">,</span> <span class="mi">58</span><span class="p">],</span> <span class="s2">&quot;Tv&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">36</span><span class="p">,</span> <span class="mi">138</span><span class="p">],</span> <span class="s2">&quot;&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;syn&quot;</span><span class="p">,</span> <span class="s2">&quot;nsyn&quot;</span><span class="p">]},</span> <span class="n">index_name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Ts&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">31</span><span class="p">,</span> <span class="mi">58</span><span class="p">],</span> <span class="s2">&quot;Tv&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">36</span><span class="p">,</span> <span class="mi">138</span><span class="p">],</span> <span class="s2">&quot;&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;syn&quot;</span><span class="p">,</span> <span class="s2">&quot;nsyn&quot;</span><span class="p">]},</span> <span class="n">index_name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 <span class="n">table</span>
 </pre></div>
 </div>
@@ -3213,7 +3333,7 @@ Ratio
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">contingency</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">to_categorical</span><span class="p">([</span><span class="s2">&quot;Ts&quot;</span><span class="p">,</span> <span class="s2">&quot;Tv&quot;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">contingency</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">to_categorical</span><span class="p">([</span><span class="s2">&quot;Ts&quot;</span><span class="p">,</span> <span class="s2">&quot;Tv&quot;</span><span class="p">])</span>
 <span class="n">contingency</span>
 </pre></div>
 </div>
@@ -3322,7 +3442,7 @@ Ratio
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">g_test</span> <span class="o">=</span> <span class="n">contingency</span><span class="o">.</span><span class="n">G_independence</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g_test</span> <span class="o">=</span> <span class="n">contingency</span><span class="o">.</span><span class="n">G_independence</span><span class="p">()</span>
 <span class="n">g_test</span>
 </pre></div>
 </div>
@@ -3465,7 +3585,7 @@ Ratio
 <p>Alternatively, you could also specify the <code class="docutils literal notranslate"><span class="pre">index_name</span></code> of the category column as</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Ts&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">31</span><span class="p">,</span> <span class="mi">58</span><span class="p">],</span> <span class="s2">&quot;Tv&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">36</span><span class="p">,</span> <span class="mi">138</span><span class="p">],</span> <span class="s2">&quot;&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;syn&quot;</span><span class="p">,</span> <span class="s2">&quot;nsyn&quot;</span><span class="p">]})</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Ts&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">31</span><span class="p">,</span> <span class="mi">58</span><span class="p">],</span> <span class="s2">&quot;Tv&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">36</span><span class="p">,</span> <span class="mi">138</span><span class="p">],</span> <span class="s2">&quot;&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;syn&quot;</span><span class="p">,</span> <span class="s2">&quot;nsyn&quot;</span><span class="p">]})</span>
 <span class="n">contingency</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">to_categorical</span><span class="p">([</span><span class="s2">&quot;Ts&quot;</span><span class="p">,</span> <span class="s2">&quot;Tv&quot;</span><span class="p">],</span> <span class="n">index_name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -3475,7 +3595,7 @@ Ratio
 </div>
 </section>
 <section id="appending-tables">
-<h2>Appending tables<a class="headerlink" href="#appending-tables" title="Permalink to this headline">¶</a></h2>
+<h2>Appending tables<a class="headerlink" href="#appending-tables" title="Permalink to this heading">¶</a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Only for tables with the same columns.</p>
@@ -3483,7 +3603,7 @@ Ratio
 <p>Can be done without specifying a new column (set the first argument to <code class="docutils literal notranslate"><span class="pre">appended</span></code> to be <code class="docutils literal notranslate"><span class="pre">None</span></code>). Here we simply use the same table data.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table1</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table1</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">table2</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">table</span> <span class="o">=</span> <span class="n">table1</span><span class="o">.</span><span class="n">appended</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">table2</span><span class="p">)</span>
 <span class="n">table</span>
@@ -3535,7 +3655,7 @@ Ratio
 <p>Specifying with a new column. In this case, the value of the <code class="docutils literal notranslate"><span class="pre">table.title</span></code> becomes the value for the new column.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table1</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Data1&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table1</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Data1&quot;</span>
 <span class="n">table2</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Data2&quot;</span>
 <span class="n">table</span> <span class="o">=</span> <span class="n">table1</span><span class="o">.</span><span class="n">appended</span><span class="p">(</span><span class="s2">&quot;Data#&quot;</span><span class="p">,</span> <span class="n">table2</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 <span class="n">table</span>
@@ -3590,10 +3710,10 @@ Ratio
 </div>
 </section>
 <section id="summing-a-single-column">
-<h2>Summing a single column<a class="headerlink" href="#summing-a-single-column" title="Permalink to this headline">¶</a></h2>
+<h2>Summing a single column<a class="headerlink" href="#summing-a-single-column" title="Permalink to this heading">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">table</span><span class="o">.</span><span class="n">summed</span><span class="p">(</span><span class="s2">&quot;Ratio&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -3607,7 +3727,7 @@ Ratio
 <p>Because each column is just a <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>, this also can be done directly via the array methods.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="s2">&quot;Ratio&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="s2">&quot;Ratio&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -3619,11 +3739,11 @@ Ratio
 </div>
 </section>
 <section id="summing-multiple-columns-or-rows-strictly-numerical-data">
-<h2>Summing multiple columns or rows - strictly numerical data<a class="headerlink" href="#summing-multiple-columns-or-rows-strictly-numerical-data" title="Permalink to this headline">¶</a></h2>
+<h2>Summing multiple columns or rows - strictly numerical data<a class="headerlink" href="#summing-multiple-columns-or-rows-strictly-numerical-data" title="Permalink to this heading">¶</a></h2>
 <p>We define a strictly numerical table,</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 
 <span class="n">all_numeric</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span>
     <span class="n">header</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">12</span><span class="p">)]</span>
@@ -3671,7 +3791,7 @@ Ratio
 <p>and sum all columns (default condition)</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">all_numeric</span><span class="o">.</span><span class="n">summed</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_numeric</span><span class="o">.</span><span class="n">summed</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -3684,7 +3804,7 @@ Ratio
 <p>and all rows</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">all_numeric</span><span class="o">.</span><span class="n">summed</span><span class="p">(</span><span class="n">col_sum</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_numeric</span><span class="o">.</span><span class="n">summed</span><span class="p">(</span><span class="n">col_sum</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -3696,11 +3816,11 @@ Ratio
 </div>
 </section>
 <section id="summing-multiple-columns-or-rows-with-mixed-non-numeric-numeric-data">
-<h2>Summing multiple columns or rows with mixed non-numeric/numeric data<a class="headerlink" href="#summing-multiple-columns-or-rows-with-mixed-non-numeric-numeric-data" title="Permalink to this headline">¶</a></h2>
+<h2>Summing multiple columns or rows with mixed non-numeric/numeric data<a class="headerlink" href="#summing-multiple-columns-or-rows-with-mixed-non-numeric-numeric-data" title="Permalink to this heading">¶</a></h2>
 <p>We define a table with mixed data, like a distance matrix.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mixed</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mixed</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span>
     <span class="n">header</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="p">[[</span><span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="p">]]</span>
 <span class="p">)</span>
 <span class="n">mixed</span>
@@ -3745,7 +3865,7 @@ Ratio
 <p>and sum all columns (default condition), ignoring non-numerical data</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mixed</span><span class="o">.</span><span class="n">summed</span><span class="p">(</span><span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mixed</span><span class="o">.</span><span class="n">summed</span><span class="p">(</span><span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -3758,7 +3878,7 @@ Ratio
 <p>and all rows</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mixed</span><span class="o">.</span><span class="n">summed</span><span class="p">(</span><span class="n">col_sum</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mixed</span><span class="o">.</span><span class="n">summed</span><span class="p">(</span><span class="n">col_sum</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -3770,11 +3890,11 @@ Ratio
 </div>
 </section>
 <section id="filtering-table-rows">
-<h2>Filtering table rows<a class="headerlink" href="#filtering-table-rows" title="Permalink to this headline">¶</a></h2>
+<h2>Filtering table rows<a class="headerlink" href="#filtering-table-rows" title="Permalink to this heading">¶</a></h2>
 <p>We can do this by providing a reference to an external function</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">sub_table</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">filtered</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mf">10.0</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">&quot;Ratio&quot;</span><span class="p">)</span>
 <span class="n">sub_table</span>
 </pre></div>
@@ -3817,7 +3937,7 @@ Ratio
 <p>or using valid python syntax within a string, which is executed</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sub_table</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">filtered</span><span class="p">(</span><span class="s2">&quot;Ratio &lt; 10.0&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sub_table</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">filtered</span><span class="p">(</span><span class="s2">&quot;Ratio &lt; 10.0&quot;</span><span class="p">)</span>
 <span class="n">sub_table</span>
 </pre></div>
 </div>
@@ -3859,7 +3979,7 @@ Ratio
 <p>You can also filter for values in multiple columns</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sub_table</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">filtered</span><span class="p">(</span><span class="s2">&quot;Ratio &lt; 10.0 and Region == &#39;NonCon&#39;&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sub_table</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">filtered</span><span class="p">(</span><span class="s2">&quot;Ratio &lt; 10.0 and Region == &#39;NonCon&#39;&quot;</span><span class="p">)</span>
 <span class="n">sub_table</span>
 </pre></div>
 </div>
@@ -3899,11 +4019,11 @@ Ratio
 </div>
 </section>
 <section id="filtering-table-columns">
-<h2>Filtering table columns<a class="headerlink" href="#filtering-table-columns" title="Permalink to this headline">¶</a></h2>
+<h2>Filtering table columns<a class="headerlink" href="#filtering-table-columns" title="Permalink to this heading">¶</a></h2>
 <p>We select only columns that have a sum &gt; 20 from the <code class="docutils literal notranslate"><span class="pre">all_numeric</span></code> table constructed above.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">big_numeric</span> <span class="o">=</span> <span class="n">all_numeric</span><span class="o">.</span><span class="n">filtered_by_column</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">big_numeric</span> <span class="o">=</span> <span class="n">all_numeric</span><span class="o">.</span><span class="n">filtered_by_column</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">)</span>
 <span class="n">big_numeric</span>
 </pre></div>
 </div>
@@ -3946,10 +4066,10 @@ Ratio
 </div>
 </section>
 <section id="standard-sorting">
-<h2>Standard sorting<a class="headerlink" href="#standard-sorting" title="Permalink to this headline">¶</a></h2>
+<h2>Standard sorting<a class="headerlink" href="#standard-sorting" title="Permalink to this heading">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">table</span><span class="o">.</span><span class="n">sorted</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s2">&quot;Ratio&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -3993,10 +4113,10 @@ Ratio
 </div>
 </section>
 <section id="reverse-sorting">
-<h2>Reverse sorting<a class="headerlink" href="#reverse-sorting" title="Permalink to this headline">¶</a></h2>
+<h2>Reverse sorting<a class="headerlink" href="#reverse-sorting" title="Permalink to this heading">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">sorted</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s2">&quot;Ratio&quot;</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="s2">&quot;Ratio&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">sorted</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s2">&quot;Ratio&quot;</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="s2">&quot;Ratio&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -4039,10 +4159,10 @@ Ratio
 </div>
 </section>
 <section id="sorting-involving-multiple-columns-one-reversed">
-<h2>Sorting involving multiple columns, one reversed<a class="headerlink" href="#sorting-involving-multiple-columns-one-reversed" title="Permalink to this headline">¶</a></h2>
+<h2>Sorting involving multiple columns, one reversed<a class="headerlink" href="#sorting-involving-multiple-columns-one-reversed" title="Permalink to this heading">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">sorted</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Region&quot;</span><span class="p">,</span> <span class="s2">&quot;Ratio&quot;</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="s2">&quot;Ratio&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">sorted</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Region&quot;</span><span class="p">,</span> <span class="s2">&quot;Ratio&quot;</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="s2">&quot;Ratio&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -4085,10 +4205,10 @@ Ratio
 </div>
 </section>
 <section id="getting-raw-data-for-a-single-column">
-<h2>Getting raw data for a single column<a class="headerlink" href="#getting-raw-data-for-a-single-column" title="Permalink to this headline">¶</a></h2>
+<h2>Getting raw data for a single column<a class="headerlink" href="#getting-raw-data-for-a-single-column" title="Permalink to this heading">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">raw</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">tolist</span><span class="p">(</span><span class="s2">&quot;Region&quot;</span><span class="p">)</span>
 <span class="n">raw</span>
 </pre></div>
@@ -4102,10 +4222,10 @@ Ratio
 </div>
 </section>
 <section id="getting-raw-data-for-multiple-columns">
-<h2>Getting raw data for multiple columns<a class="headerlink" href="#getting-raw-data-for-multiple-columns" title="Permalink to this headline">¶</a></h2>
+<h2>Getting raw data for multiple columns<a class="headerlink" href="#getting-raw-data-for-multiple-columns" title="Permalink to this heading">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">raw</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">tolist</span><span class="p">([</span><span class="s2">&quot;Locus&quot;</span><span class="p">,</span> <span class="s2">&quot;Region&quot;</span><span class="p">])</span>
 <span class="n">raw</span>
 </pre></div>
@@ -4123,10 +4243,10 @@ Ratio
 </div>
 </section>
 <section id="getting-distinct-values">
-<h2>Getting distinct values<a class="headerlink" href="#getting-distinct-values" title="Permalink to this headline">¶</a></h2>
+<h2>Getting distinct values<a class="headerlink" href="#getting-distinct-values" title="Permalink to this heading">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="k">assert</span> <span class="n">table</span><span class="o">.</span><span class="n">distinct_values</span><span class="p">(</span><span class="s2">&quot;Region&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="nb">set</span><span class="p">([</span><span class="s2">&quot;NonCon&quot;</span><span class="p">,</span> <span class="s2">&quot;Con&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -4136,10 +4256,10 @@ Ratio
 </div>
 </section>
 <section id="counting-occurrences-of-values">
-<h2>Counting occurrences of values<a class="headerlink" href="#counting-occurrences-of-values" title="Permalink to this headline">¶</a></h2>
+<h2>Counting occurrences of values<a class="headerlink" href="#counting-occurrences-of-values" title="Permalink to this heading">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="k">assert</span> <span class="n">table</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;Region == &#39;NonCon&#39; and Ratio &gt; 1&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
 </pre></div>
 </div>
@@ -4149,11 +4269,11 @@ Ratio
 </div>
 </section>
 <section id="counting-unique-values">
-<h2>Counting unique values<a class="headerlink" href="#counting-unique-values" title="Permalink to this headline">¶</a></h2>
+<h2>Counting unique values<a class="headerlink" href="#counting-unique-values" title="Permalink to this heading">¶</a></h2>
 <p>This returns a <code class="docutils literal notranslate"><span class="pre">CategoryCounter</span></code>, a dict like class.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 
 <span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span>
     <span class="n">data</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">],</span> <span class="n">B</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">])</span>
@@ -4171,7 +4291,7 @@ Ratio
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">unique</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unique</span>
 </pre></div>
 </div>
 </div>
@@ -4184,7 +4304,7 @@ Ratio
 <p>For multiple columns.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">unique</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">count_unique</span><span class="p">([</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unique</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">count_unique</span><span class="p">([</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">])</span>
 <span class="n">unique</span>
 </pre></div>
 </div>
@@ -4197,7 +4317,7 @@ Ratio
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">unique</span><span class="o">.</span><span class="n">to_table</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">unique</span><span class="o">.</span><span class="n">to_table</span><span class="p">()</span>
 <span class="n">r</span>
 </pre></div>
 </div>
@@ -4239,11 +4359,11 @@ Ratio
 </div>
 </section>
 <section id="joining-or-merging-tables">
-<h2>Joining or merging tables<a class="headerlink" href="#joining-or-merging-tables" title="Permalink to this headline">¶</a></h2>
+<h2>Joining or merging tables<a class="headerlink" href="#joining-or-merging-tables" title="Permalink to this heading">¶</a></h2>
 <p>We do a standard inner join here for a restricted subset. We must specify the columns that will be used for the join. Here we just use <code class="docutils literal notranslate"><span class="pre">Locus</span></code>.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rows</span> <span class="o">=</span> <span class="p">[</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rows</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">[</span><span class="s2">&quot;NP_004893&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
     <span class="p">[</span><span class="s2">&quot;NP_005079&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
     <span class="p">[</span><span class="s2">&quot;NP_005500&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
@@ -4302,10 +4422,10 @@ Ratio
 </div>
 </section>
 <section id="transpose-a-table">
-<h2>Transpose a table<a class="headerlink" href="#transpose-a-table" title="Permalink to this headline">¶</a></h2>
+<h2>Transpose a table<a class="headerlink" href="#transpose-a-table" title="Permalink to this heading">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
 
 <span class="n">header</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;#OTU ID&quot;</span><span class="p">,</span> <span class="s2">&quot;14SK041&quot;</span><span class="p">,</span> <span class="s2">&quot;14SK802&quot;</span><span class="p">]</span>
 <span class="n">rows</span> <span class="o">=</span> <span class="p">[</span>
@@ -4358,7 +4478,7 @@ Ratio
 <p>We require a new column heading for the current header data. We also need to specify which existing column will become the header.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tp</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">transposed</span><span class="p">(</span><span class="n">new_column_name</span><span class="o">=</span><span class="s2">&quot;sample&quot;</span><span class="p">,</span> <span class="n">select_as_header</span><span class="o">=</span><span class="s2">&quot;#OTU ID&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tp</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">transposed</span><span class="p">(</span><span class="n">new_column_name</span><span class="o">=</span><span class="s2">&quot;sample&quot;</span><span class="p">,</span> <span class="n">select_as_header</span><span class="o">=</span><span class="s2">&quot;#OTU ID&quot;</span><span class="p">)</span>
 <span class="n">tp</span>
 </pre></div>
 </div>
@@ -4399,11 +4519,11 @@ Ratio
 </div>
 </section>
 <section id="specify-markdown-as-the-str-format">
-<h2>Specify markdown as the <code class="docutils literal notranslate"><span class="pre">str()</span></code> format<a class="headerlink" href="#specify-markdown-as-the-str-format" title="Permalink to this headline">¶</a></h2>
+<h2>Specify markdown as the <code class="docutils literal notranslate"><span class="pre">str()</span></code> format<a class="headerlink" href="#specify-markdown-as-the-str-format" title="Permalink to this heading">¶</a></h2>
 <p>Using the method provides finer control over formatting.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
 
 <span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;md&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
@@ -4424,11 +4544,11 @@ Ratio
 </div>
 </section>
 <section id="specify-latex-as-the-str-format">
-<h2>Specify latex as the <code class="docutils literal notranslate"><span class="pre">str()</span></code> format<a class="headerlink" href="#specify-latex-as-the-str-format" title="Permalink to this headline">¶</a></h2>
+<h2>Specify latex as the <code class="docutils literal notranslate"><span class="pre">str()</span></code> format<a class="headerlink" href="#specify-latex-as-the-str-format" title="Permalink to this heading">¶</a></h2>
 <p>Using the method provides finer control over formatting.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
 
 <span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;tex&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
@@ -4457,11 +4577,11 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
 </div>
 </section>
 <section id="get-a-table-as-a-markdown-formatted-string">
-<h2>Get a table as a markdown formatted string<a class="headerlink" href="#get-a-table-as-a-markdown-formatted-string" title="Permalink to this headline">¶</a></h2>
+<h2>Get a table as a markdown formatted string<a class="headerlink" href="#get-a-table-as-a-markdown-formatted-string" title="Permalink to this heading">¶</a></h2>
 <p>We use the <code class="docutils literal notranslate"><span class="pre">justify</span></code> argument to indicate the column justification.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">to_markdown</span><span class="p">(</span><span class="n">justify</span><span class="o">=</span><span class="s2">&quot;ccr&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
@@ -4480,10 +4600,10 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
 </div>
 </section>
 <section id="get-a-table-as-a-latex-formatted-string">
-<h2>Get a table as a latex formatted string<a class="headerlink" href="#get-a-table-as-a-latex-formatted-string" title="Permalink to this headline">¶</a></h2>
+<h2>Get a table as a latex formatted string<a class="headerlink" href="#get-a-table-as-a-latex-formatted-string" title="Permalink to this heading">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span>
     <span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Some stats.&quot;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="s2">&quot;Derived from something.&quot;</span>
 <span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">to_latex</span><span class="p">(</span><span class="n">justify</span><span class="o">=</span><span class="s2">&quot;ccr&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;tab:table1&quot;</span><span class="p">))</span>
@@ -4514,10 +4634,10 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
 </div>
 </section>
 <section id="get-a-table-as-a-restructured-text-csv-table">
-<h2>Get a table as a restructured text csv-table<a class="headerlink" href="#get-a-table-as-a-restructured-text-csv-table" title="Permalink to this headline">¶</a></h2>
+<h2>Get a table as a restructured text csv-table<a class="headerlink" href="#get-a-table-as-a-restructured-text-csv-table" title="Permalink to this heading">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span>
     <span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Some stats.&quot;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="s2">&quot;Derived from something.&quot;</span>
 <span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">to_rst</span><span class="p">(</span><span class="n">csv_table</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
@@ -4539,10 +4659,10 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
 </div>
 </section>
 <section id="get-a-table-as-a-restructured-text-grid-table">
-<h2>Get a table as a restructured text grid table<a class="headerlink" href="#get-a-table-as-a-restructured-text-grid-table" title="Permalink to this headline">¶</a></h2>
+<h2>Get a table as a restructured text grid table<a class="headerlink" href="#get-a-table-as-a-restructured-text-grid-table" title="Permalink to this heading">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span>
     <span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Some stats.&quot;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="s2">&quot;Derived from something.&quot;</span>
 <span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">to_rst</span><span class="p">())</span>
@@ -4571,11 +4691,11 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
 </div>
 </section>
 <section id="getting-a-latex-format-table-with-to-string">
-<h2>Getting a latex format table with <code class="docutils literal notranslate"><span class="pre">to_string()</span></code><a class="headerlink" href="#getting-a-latex-format-table-with-to-string" title="Permalink to this headline">¶</a></h2>
+<h2>Getting a latex format table with <code class="docutils literal notranslate"><span class="pre">to_string()</span></code><a class="headerlink" href="#getting-a-latex-format-table-with-to-string" title="Permalink to this heading">¶</a></h2>
 <p>It is also possible to specify column alignment, table caption and other arguments.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">&quot;latex&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
@@ -4602,7 +4722,7 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
 </div>
 </section>
 <section id="getting-a-bedgraph-format-with-to-string">
-<h2>Getting a bedGraph format with <code class="docutils literal notranslate"><span class="pre">to_string()</span></code><a class="headerlink" href="#getting-a-bedgraph-format-with-to-string" title="Permalink to this headline">¶</a></h2>
+<h2>Getting a bedGraph format with <code class="docutils literal notranslate"><span class="pre">to_string()</span></code><a class="headerlink" href="#getting-a-bedgraph-format-with-to-string" title="Permalink to this heading">¶</a></h2>
 <p>This format allows display of annotation tracks on genome browsers. A small sample of a bigger table.</p>
 <div class="jupyter_cell docutils container">
 <div class="cell_output docutils container">
@@ -4610,7 +4730,7 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bgraph</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bgraph</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -4654,7 +4774,7 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
 <p>Then converted.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span>
     <span class="n">bgraph</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span>
         <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;bedgraph&quot;</span><span class="p">,</span>
         <span class="n">name</span><span class="o">=</span><span class="s2">&quot;test track&quot;</span><span class="p">,</span>
@@ -4676,10 +4796,10 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
 </div>
 </section>
 <section id="getting-a-table-as-html">
-<h2>Getting a table as html<a class="headerlink" href="#getting-a-table-as-html" title="Permalink to this headline">¶</a></h2>
+<h2>Getting a table as html<a class="headerlink" href="#getting-a-table-as-html" title="Permalink to this heading">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_table</span>
 
 <span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">straight_html</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">to_html</span><span class="p">()</span>
@@ -4691,11 +4811,11 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
 </div>
 </section>
 <section id="what-formats-can-be-written">
-<h2>What formats can be written?<a class="headerlink" href="#what-formats-can-be-written" title="Permalink to this headline">¶</a></h2>
+<h2>What formats can be written?<a class="headerlink" href="#what-formats-can-be-written" title="Permalink to this heading">¶</a></h2>
 <p>Appending any of the following to a filename will cause that format to be used for writing.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.format.table</span> <span class="kn">import</span> <span class="n">known_formats</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.format.table</span> <span class="kn">import</span> <span class="n">known_formats</span>
 
 <span class="n">known_formats</span>
 </pre></div>
@@ -4720,10 +4840,10 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
 </div>
 </section>
 <section id="writing-a-latex-formmated-file">
-<h2>Writing a latex formmated file<a class="headerlink" href="#writing-a-latex-formmated-file" title="Permalink to this headline">¶</a></h2>
+<h2>Writing a latex formmated file<a class="headerlink" href="#writing-a-latex-formmated-file" title="Permalink to this heading">¶</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;stats_tab.tex&quot;</span><span class="p">,</span> <span class="n">justify</span><span class="o">=</span><span class="s2">&quot;ccr&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;tab:table1&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;stats_tab.tex&quot;</span><span class="p">,</span> <span class="n">justify</span><span class="o">=</span><span class="s2">&quot;ccr&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;tab:table1&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -4732,11 +4852,11 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
 </div>
 </section>
 <section id="writing-delimited-formats">
-<h2>Writing delimited formats<a class="headerlink" href="#writing-delimited-formats" title="Permalink to this headline">¶</a></h2>
+<h2>Writing delimited formats<a class="headerlink" href="#writing-delimited-formats" title="Permalink to this heading">¶</a></h2>
 <p>The delimiter can be specified explicitly using the <code class="docutils literal notranslate"><span class="pre">sep</span></code> argument or implicitly via the file name suffix.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">load_table</span><span class="p">(</span><span class="s2">&quot;data/stats.tsv&quot;</span><span class="p">)</span>
 <span class="n">table</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;stats_tab.txt&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -4769,9 +4889,9 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
         </div>
     </div>
     <div id="footer-info" class="bg-light pl-2 pb-1 w-100">
-        <div><span class="fa fa-copyright"></span>2020-2022, cogent3 Team
+        <div><span class="fa fa-copyright"></span>2020-2023, cogent3 Team
         <a id="author-link" href=""></a> </div>
-        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
+        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 6.1.3 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
     </div>
 </footer>
 
