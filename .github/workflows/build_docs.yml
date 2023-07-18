@@ -24,11 +24,12 @@ jobs:
         run: |
           mv c3src/doc c3org/doc/doc
           cp c3org/doc/doc/set_working_directory.py c3org/doc/.
+          cp c3org/doc/doc/cogent3.bib c3org/doc/.
 
       - name: Setup python
         uses: "actions/setup-python@v1"
         with:
-           python-version: 3.9
+           python-version: "3.11"
 
       - name: "Setup virtualenv and install cogent3[dev]"
         if: startsWith(runner.os, 'macOS') || startsWith(runner.os, 'Linux')

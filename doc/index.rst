@@ -2,39 +2,58 @@
 Making Sense from Sequence
 ##########################
 
-``cogent3`` is a mature python library for analysis of biological sequence data. We endeavour to provide a first-class experience within Jupyter notebooks, but the algorithms also support parallel execution on compute systems with 1000's of processors.
+``cogent3`` is a mature python library for analysis of biological sequence data. We endeavour to provide a first-class experience within Jupyter notebooks, but the algorithms also support parallel execution on compute systems with 1000's of processors. It be used for...
 
-``cogent3`` is released under the BSD-3 license, links to documentation and code are above. If you would like to contribute (and we hope you do!), we have created a companion `c3dev <https://github.com/cogent3/c3dev>`_ repo which provides `details on how to contribute <https://github.com/cogent3/c3dev/wiki>`_ and some useful tools for doing so.
+.. tabbed:: Data wrangling
 
-**Who is it for? Anyone who wants to analyse sequence divergence using robust statistical models.**
+    ``cogent3`` provides an extensive suite of capabilities for manipulating and analysing sequence data. For instance, the ability to `read standard biological data formats <doc/cookbook/manipulating_biological_data.html>`_, manipulate sequences `by their annotations <doc/examples/seq_features.html>`_, to perform multiple sequence alignment (`app docs`_) using any of our substitution models, `phylogenetic reconstruction <doc/examples/index.html#phylogenetic-reconstruction>`_ and tree manipulation, manipulation of `tabular data <doc/cookbook/tables.html>`_, visualisation of phylogenies (`image gallery`_) and much more.
 
-``cogent3`` is unique in providing numerous non-stationary Markov models :cite:`2015.Kaehler.000` for modelling sequence evolution, including novel codon models :cite:`2017.Kaehler.000`. ``cogent3`` also includes an extensive collection of time-reversible models (again including novel codon models  :cite:`2010.Yap.000`). (`See using non-stationary models. <doc/app/index.html#the-model-app>`_). We have done more than just invent these new methods, we have established the most robust algorithms :cite:`2008.Schranz.000` for their implementation and their suitability for real data :cite:`2013.Verbyla.000`. Additionally, there are novel signal processing methods focussed on statistical estimation of integer period signals :cite:`2011.Epps.000,2012.Bellani.000`.
 
-**Anyone who wants to undertake exploratory genomic data analysis**
+    .. dropdown:: 🎬 Data wrangling with sequence annotations
 
-Beyond our novel methods, ``cogent3`` provides an extensive suite of capabilities for manipulating and analysing sequence data. For instance, the ability to `read standard biological data formats <doc/cookbook/manipulating_biological_data.html>`_, manipulate sequences `by their annotations <doc/examples/seq_features.html>`_, to perform multiple sequence alignment (`app docs`_) using any of our substitution models, `phylogenetic reconstruction <doc/examples/index.html#phylogenetic-reconstruction>`_ and tree manipulation, manipulation of `tabular data <doc/cookbook/tables.html>`_, visualisation of phylogenies (`image gallery`_) and much more.
+        .. video:: https://user-images.githubusercontent.com/3102996/253847297-2611cda8-e078-4b86-a269-43fbf6ced14c.mp4
+            :width: 400
 
-**Anyone looking for a functional programming style approach to genomic data analysis**
 
-Our ``cogent3.app`` module (`app docs`_) provides a very different approach to using the library capabilities. Notably, a functional programming style interface lowers the barrier to entry for using ``cogent3``\ 's advanced capabilities. It also supports building pipelines suitable for large-scale analysis. Individuals comfortable with R should find this interface pretty easy to use.
+.. tabbed:: Modelling molecular evolution
+
+    Differences in the frequency of nucleotides between species is common. In such cases, non-reversible models of sequence evolution are required for robust estimation of important quantities such as branch lengths, or measuring natural selection :cite:`2015.Kaehler.000, 2017.Kaehler.000` (`see using non-stationary models. <doc/app/index.html#the-model-app>`_). We have done more than just invent these new methods, we have established the most robust algorithms :cite:`2008.Schranz.000` for their implementation and their suitability for real data :cite:`2013.Verbyla.000`.
+
+    .. dropdown:: 🎬 Testing a hypothesis involving a non-stationary nucleotide process
+
+        .. video:: https://user-images.githubusercontent.com/3102996/253849611-6ddd8705-8f16-4b24-b651-68b2123ecdf0.mp4
+            :width: 400
+
+.. tabbed:: Beginner friendly
+
+    You don't have to be an expert in structural programming languages (like Python) to use ``cogent3``! Interactive usage in Jupyter notebooks and a functional programming style interface lowers the barrier to entry. Individuals comfortable with R should find this interface less complex. (See the ``cogent3.app`` documentation.)
+
+    .. dropdown:: 🎬 Using cogent3 apps
+
+        .. video:: https://user-images.githubusercontent.com/3102996/253849168-a821de1a-1aad-4761-970f-e365f6b3b1cd.mp4
+            :width: 400
+
+
+.. the ordering of the index items below is critical since it defines the web site header!
 
 .. toctree::
     :hidden:
     :maxdepth: 1
 
+    doc/draw/index
     doc/install
     doc/index
-    doc/draw/index
-    general
+    doc/general
 
 .. toctree::
     :hidden:
     :maxdepth: 1
 
-    history
-    pycogent
-    projects
     doc/licenses
+    history
+    doc/pycogent
+    projects
+    doc/data_file_links
     genindex
 
 
