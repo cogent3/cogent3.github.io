@@ -1,165 +1,480 @@
+
+
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
-<!-- IE Compatibility tag -->
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-<title>cogent3 2023.07.18 documentation</title>
-
-<link href="../.././_static/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
 
 
-<!-- Metadata -->
-<meta name="description"
-      content="cogent3 documentation site">
+<html >
 
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
+    <title>Loading a csv file &#8212; cogent3 2023.07.18 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-<!-- Facebook OpenGraph -->
-<meta property="og:type" content="website"/>
-<meta property="og:site" content="cogent3 documentation site"/>
-<meta property="og:title" content="cogent3"/>
-<meta property="og:description"
-      content="Check the documentation site for cogent3"/>
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/thebelab-helper.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'doc/cookbook/loading_tabular';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-<!-- HTML5 Shiv. For IE6-8 support of HTML5 elements -->
-<!--[if lt IE 9]>
-<script src="../.././_static/lib/html5shiv/html5shiv.min.js"></script>
-<![endif]-->
-<!-- CSS -->
-<link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-<link rel="stylesheet" href="../../_static/css/docs.css" type="text/css" />
-<link rel="stylesheet" href="../../_static/jupyter-sphinx.css" type="text/css" />
-<link rel="stylesheet" href="../../_static/thebelab.css" type="text/css" />
-<link rel="stylesheet" href="../../_static/sg_gallery.css" type="text/css" />
-<link rel="stylesheet" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
-<link rel="stylesheet" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
-<link rel="stylesheet" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
-
-<link rel="stylesheet" href="../.././_static/lib/bootswatch/litera/bootstrap.min.css">
-<link rel="stylesheet" href="../.././_static/lib/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="../.././_static/lib/highlight/styles/default.css">
-
-<!-- Docs Template style -->
-<link rel="stylesheet" href="../.././_static/pygments.css">
-<link rel="stylesheet" href="../.././_static/css/common.css">
-<link rel="stylesheet" href="../.././_static/css/link.css">
-<link rel="stylesheet" href="../.././_static/css/custom.css">
-
-<!-- JavaScript -->
-
-<script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-<script src="../.././_static/lib/jquery/jquery.min.js"></script>
-<script src="../.././_static/lib/bootstrap/js/bootstrap.min.js"></script>
-<script src="../.././_static/lib/highlight/highlight.pack.js"></script>
-<script src="../.././_static/js/initializeHighlight.js"></script>
-<script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-<script src="../../_static/jquery.js"></script>
-<script src="../../_static/underscore.js"></script>
-<script src="../../_static/doctools.js"></script>
-<script src="../../_static/thebelab-helper.js"></script>
-<script src="../../_static/plotly-latest.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
-<script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="../../_static/require.js"></script>
-<script src="../.././_static/js/custom.js"></script>
-
-</head>
-<body class="d-flex flex-column">
-<header>
-    <nav id="navbar-main" class="navbar navbar-expand navbar-light bg-light">
-    <a class="navbar-brand" href="../.././index.html">cogent3</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-main-menu" aria-controls="navbar-main" aria-expanded="false" aria-label="Toggle navigation">
-       <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div id="navbar-main-menu" class="collapse navbar-collapse">
-        <small class="navbar-text"><span id="navbar-version"></span></time></small>
-        <div class="ml-auto d-flex align-items-center row">
-            
-            
-            <div class="col-sm">
-                <ul class="navbar-nav">
-                    
-                    
-                    <li class="nav-item">
-                        <a href="../install.html" class="nav-link" title="Install">Install</a>
-                    </li>
-                    
-                    
-                    
-                    <li class="nav-item">
-                        <a href="../draw/index.html" class="nav-link" title="Gallery">Gallery</a>
-                    </li>
-                    
-                    
-                    
-                    <li class="nav-item">
-                        <a href="../index.html" class="nav-link" title="Docs">Docs</a>
-                    </li>
-                    
-                    
-                    
-                    <li class="nav-item">
-                        <a href="https://github.com/cogent3/cogent3/discussions" class="nav-link" title="Forum">Forum</a>
-                    </li>
-                    
-                    
-                    
-                    <li class="nav-item">
-                        <a href="https://github.com/cogent3/cogent3" class="nav-link" title="GitHub">GitHub</a>
-                    </li>
-                    
-                    
-                    
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" id="examplesDropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Site</a>
-                        <div class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="examplesDropdown">
-                            
-                            <a href="../../general.html" class="dropdown-item" title="Posting Bugs">Posting Bugs</a>
-                            
-                            <a href="../../general.html" class="dropdown-item" title="Citation">Citation</a>
-                            
-                            <a href="../../general.html" class="dropdown-item" title="Support">Support</a>
-                            
-                            <a href="../../history.html" class="dropdown-item" title="History">History</a>
-                            
-                            <a href="../../projects.html" class="dropdown-item" title="Projects">Projects</a>
-                            
-                            <a href="../licenses.html" class="dropdown-item" title="License">License</a>
-                            
-                        </div>
-                    </li>
-                    
-                    
-                </ul>
-            </div>
-            
-            <div role="search">
-                <form id="Search-form" class="wy-form" action="../../search.html" method="get">
-                    <input type="text" name="q" placeholder="Search docs" />
-                    <input type="hidden" name="check_keywords" value="yes" />
-                    <input type="hidden" name="area" value="default" />
-                </form>
-            </div>
-        </div>
-    </div>
-</nav>
-</header>
-
-<section id="main-section" class="container flex-grow-1 ">
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
     
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">cogent3</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../draw/index.html">
+                        Image Gallery
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../install.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../index.html">
+                        User Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../general.html">
+                        Community
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../licenses.html">
+                        License
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../history.html">
+                        Project History
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../pycogent.html">
+                        How does cogent3 relate to PyCogent?
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../projects.html">
+                        Projects using cogent3
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../data_file_links.html">
+                        Data Files Used in the Documentation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../genindex.html">
+                        Index
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cogent3/cogent3" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../draw/index.html">
+                        Image Gallery
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../install.html">
+                        Installation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../index.html">
+                        User Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../general.html">
+                        Community
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../licenses.html">
+                        License
+                      </a>
+                    </li>
+                
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../history.html">
+                        Project History
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../pycogent.html">
+                        How does cogent3 relate to PyCogent?
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../projects.html">
+                        Projects using cogent3
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../data_file_links.html">
+                        Data Files Used in the Documentation
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../genindex.html">
+                        Index
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cogent3/cogent3" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Loading a csv file</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
   <div class="jupyter_cell docutils container">
 <div class="cell_output docutils container">
 </div>
 </div>
 <section id="loading-a-csv-file">
-<h1>Loading a csv file<a class="headerlink" href="#loading-a-csv-file" title="Permalink to this headline">¶</a></h1>
+<h1>Loading a csv file<a class="headerlink" href="#loading-a-csv-file" title="Permalink to this headline">#</a></h1>
 <p>We load a tab separated data file using the <code class="docutils literal notranslate"><span class="pre">load_table()</span></code> function. The format is inferred from the filename suffix and you will note, in this case, it’s not actually a <cite>csv</cite> file.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -217,7 +532,7 @@
 </div>
 </section>
 <section id="loading-from-a-url">
-<h1>Loading from a url<a class="headerlink" href="#loading-from-a-url" title="Permalink to this headline">¶</a></h1>
+<h1>Loading from a url<a class="headerlink" href="#loading-from-a-url" title="Permalink to this headline">#</a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">cogent3</span></code> load functions support loading from a url. We load the above <code class="docutils literal notranslate"><span class="pre">.tsv</span></code> file directly from GitHub.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -232,7 +547,7 @@
 </div>
 </section>
 <section id="loading-delimited-specifying-the-format">
-<h1>Loading delimited specifying the format<a class="headerlink" href="#loading-delimited-specifying-the-format" title="Permalink to this headline">¶</a></h1>
+<h1>Loading delimited specifying the format<a class="headerlink" href="#loading-delimited-specifying-the-format" title="Permalink to this headline">#</a></h1>
 <p>Although unnecessary in this case, it’s possible to override the suffix by specifying the delimiter using the <code class="docutils literal notranslate"><span class="pre">sep</span></code> argument.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -282,10 +597,10 @@
 </div>
 </section>
 <section id="loading-delimited-data-without-a-header-line">
-<h1>Loading delimited data without a header line<a class="headerlink" href="#loading-delimited-data-without-a-header-line" title="Permalink to this headline">¶</a></h1>
+<h1>Loading delimited data without a header line<a class="headerlink" href="#loading-delimited-data-without-a-header-line" title="Permalink to this headline">#</a></h1>
 <p>To create a table from the follow examples, you specify your header and use <code class="docutils literal notranslate"><span class="pre">make_table()</span></code>.</p>
 <section id="using-load-delimited">
-<h2>Using <code class="docutils literal notranslate"><span class="pre">load_delimited()</span></code><a class="headerlink" href="#using-load-delimited" title="Permalink to this headline">¶</a></h2>
+<h2>Using <code class="docutils literal notranslate"><span class="pre">load_delimited()</span></code><a class="headerlink" href="#using-load-delimited" title="Permalink to this headline">#</a></h2>
 <p>This is just a standard parsing function which does not do any filtering or converting elements to non-string types.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -343,7 +658,7 @@
 </div>
 </section>
 <section id="using-filteringparser">
-<h2>Using <code class="docutils literal notranslate"><span class="pre">FilteringParser</span></code><a class="headerlink" href="#using-filteringparser" title="Permalink to this headline">¶</a></h2>
+<h2>Using <code class="docutils literal notranslate"><span class="pre">FilteringParser</span></code><a class="headerlink" href="#using-filteringparser" title="Permalink to this headline">#</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.parse.table</span> <span class="kn">import</span> <span class="n">FilteringParser</span>
@@ -402,9 +717,9 @@
 </section>
 </section>
 <section id="selectively-loading-parts-of-a-big-file">
-<h1>Selectively loading parts of a big file<a class="headerlink" href="#selectively-loading-parts-of-a-big-file" title="Permalink to this headline">¶</a></h1>
+<h1>Selectively loading parts of a big file<a class="headerlink" href="#selectively-loading-parts-of-a-big-file" title="Permalink to this headline">#</a></h1>
 <section id="loading-a-set-number-of-lines-from-a-file">
-<h2>Loading a set number of lines from a file<a class="headerlink" href="#loading-a-set-number-of-lines-from-a-file" title="Permalink to this headline">¶</a></h2>
+<h2>Loading a set number of lines from a file<a class="headerlink" href="#loading-a-set-number-of-lines-from-a-file" title="Permalink to this headline">#</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">limit</span></code> argument specifies the number of lines to read.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -451,7 +766,7 @@
 </div>
 </section>
 <section id="loading-only-some-rows">
-<h2>Loading only some rows<a class="headerlink" href="#loading-only-some-rows" title="Permalink to this headline">¶</a></h2>
+<h2>Loading only some rows<a class="headerlink" href="#loading-only-some-rows" title="Permalink to this headline">#</a></h2>
 <p>If you only want a subset of the contents of a file, use the <code class="docutils literal notranslate"><span class="pre">FilteringParser</span></code>. This allows skipping certain lines by using a callback function. We illustrate this with <code class="docutils literal notranslate"><span class="pre">stats.tsv</span></code>, skipping any rows with <code class="docutils literal notranslate"><span class="pre">&quot;Ratio&quot;</span></code> &gt; 10.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -547,7 +862,7 @@
 </div>
 </section>
 <section id="loading-only-some-columns">
-<h2>Loading only some columns<a class="headerlink" href="#loading-only-some-columns" title="Permalink to this headline">¶</a></h2>
+<h2>Loading only some columns<a class="headerlink" href="#loading-only-some-columns" title="Permalink to this headline">#</a></h2>
 <p>Specify the columns by their names.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -650,7 +965,7 @@
 </div>
 </section>
 <section id="load-raw-data-as-a-list-of-lists-of-strings">
-<h2>Load raw data as a list of lists of strings<a class="headerlink" href="#load-raw-data-as-a-list-of-lists-of-strings" title="Permalink to this headline">¶</a></h2>
+<h2>Load raw data as a list of lists of strings<a class="headerlink" href="#load-raw-data-as-a-list-of-lists-of-strings" title="Permalink to this headline">#</a></h2>
 <p>We just use <code class="docutils literal notranslate"><span class="pre">FilteringParser</span></code>.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -684,7 +999,7 @@
 </section>
 </section>
 <section id="make-a-table-from-header-and-rows">
-<h1>Make a table from header and rows<a class="headerlink" href="#make-a-table-from-header-and-rows" title="Permalink to this headline">¶</a></h1>
+<h1>Make a table from header and rows<a class="headerlink" href="#make-a-table-from-header-and-rows" title="Permalink to this headline">#</a></h1>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
@@ -734,7 +1049,7 @@
 </div>
 </section>
 <section id="make-a-table-from-a-dict">
-<h1>Make a table from a <code class="docutils literal notranslate"><span class="pre">dict</span></code><a class="headerlink" href="#make-a-table-from-a-dict" title="Permalink to this headline">¶</a></h1>
+<h1>Make a table from a <code class="docutils literal notranslate"><span class="pre">dict</span></code><a class="headerlink" href="#make-a-table-from-a-dict" title="Permalink to this headline">#</a></h1>
 <p>For a <code class="docutils literal notranslate"><span class="pre">dict</span></code> with key’s as column headers.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -783,7 +1098,7 @@
 </div>
 </section>
 <section id="specify-the-column-order-when-creating-from-a-dict">
-<h1>Specify the column order when creating from a <code class="docutils literal notranslate"><span class="pre">dict</span></code>.<a class="headerlink" href="#specify-the-column-order-when-creating-from-a-dict" title="Permalink to this headline">¶</a></h1>
+<h1>Specify the column order when creating from a <code class="docutils literal notranslate"><span class="pre">dict</span></code>.<a class="headerlink" href="#specify-the-column-order-when-creating-from-a-dict" title="Permalink to this headline">#</a></h1>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span><span class="n">header</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
@@ -828,7 +1143,7 @@
 </div>
 </section>
 <section id="create-the-table-with-an-index">
-<h1>Create the table with an index<a class="headerlink" href="#create-the-table-with-an-index" title="Permalink to this headline">¶</a></h1>
+<h1>Create the table with an index<a class="headerlink" href="#create-the-table-with-an-index" title="Permalink to this headline">#</a></h1>
 <p>A <code class="docutils literal notranslate"><span class="pre">Table</span></code> can be indexed like a dict if you designate a column as the index (and that column has a unique value for every row).</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -888,7 +1203,7 @@
 </div>
 </section>
 <section id="create-a-table-from-a-pandas-dataframe">
-<h1>Create a table from a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code><a class="headerlink" href="#create-a-table-from-a-pandas-dataframe" title="Permalink to this headline">¶</a></h1>
+<h1>Create a table from a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code><a class="headerlink" href="#create-a-table-from-a-pandas-dataframe" title="Permalink to this headline">#</a></h1>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">DataFrame</span>
@@ -938,7 +1253,7 @@
 </div>
 </section>
 <section id="create-a-table-from-header-and-rows">
-<h1>Create a table from header and rows<a class="headerlink" href="#create-a-table-from-header-and-rows" title="Permalink to this headline">¶</a></h1>
+<h1>Create a table from header and rows<a class="headerlink" href="#create-a-table-from-header-and-rows" title="Permalink to this headline">#</a></h1>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
@@ -984,7 +1299,7 @@
 </div>
 </section>
 <section id="create-a-table-from-dict">
-<h1>Create a table from dict<a class="headerlink" href="#create-a-table-from-dict" title="Permalink to this headline">¶</a></h1>
+<h1>Create a table from dict<a class="headerlink" href="#create-a-table-from-dict" title="Permalink to this headline">#</a></h1>
 <p><code class="docutils literal notranslate"><span class="pre">make_table()</span></code> is the utility function for creating <code class="docutils literal notranslate"><span class="pre">Table</span></code> objects from standard python objects.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1032,7 +1347,7 @@
 </div>
 </section>
 <section id="create-a-table-from-a-2d-dict">
-<h1>Create a table from a 2D dict<a class="headerlink" href="#create-a-table-from-a-2d-dict" title="Permalink to this headline">¶</a></h1>
+<h1>Create a table from a 2D dict<a class="headerlink" href="#create-a-table-from-a-2d-dict" title="Permalink to this headline">#</a></h1>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
@@ -1102,7 +1417,7 @@
 </div>
 </section>
 <section id="create-a-table-that-has-complex-python-objects-as-elements">
-<h1>Create a table that has complex python objects as elements<a class="headerlink" href="#create-a-table-that-has-complex-python-objects-as-elements" title="Permalink to this headline">¶</a></h1>
+<h1>Create a table that has complex python objects as elements<a class="headerlink" href="#create-a-table-that-has-complex-python-objects-as-elements" title="Permalink to this headline">#</a></h1>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
@@ -1154,7 +1469,7 @@
 </div>
 </section>
 <section id="create-an-empty-table">
-<h1>Create an empty table<a class="headerlink" href="#create-an-empty-table" title="Permalink to this headline">¶</a></h1>
+<h1>Create an empty table<a class="headerlink" href="#create-an-empty-table" title="Permalink to this headline">#</a></h1>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_table</span>
@@ -1171,28 +1486,113 @@
 </section>
 
 
-</section>
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
 
-<footer class="footer w-100 pt-2 border-top bg-light">
-    <div id="footer-nav" class="bg-light container">
-        <div id="navbar-footer" class="row">
-            
-            <div class="col">
-                <dl class="text-center mb-1">
-                    
-                    
-                    
-                </dl>
+                </footer>
+              
             </div>
             
-        </div>
-    </div>
-    <div id="footer-info" class="bg-light pl-2 pb-1 w-100">
-        <div><span class="fa fa-copyright"></span>2020-2023, cogent3 Team
-        <a id="author-link" href=""></a> </div>
-        <div>Powered by <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0 and the <a href="https://github.com/Bernardo-MG/sphinx-docs-theme">Sphinx Docs Theme</a></div>
-    </div>
-</footer>
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
-</body>
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Loading a csv file</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-from-a-url">Loading from a url</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-delimited-specifying-the-format">Loading delimited specifying the format</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-delimited-data-without-a-header-line">Loading delimited data without a header line</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-load-delimited">Using <code class="docutils literal notranslate"><span class="pre">load_delimited()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-filteringparser">Using <code class="docutils literal notranslate"><span class="pre">FilteringParser</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#selectively-loading-parts-of-a-big-file">Selectively loading parts of a big file</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-a-set-number-of-lines-from-a-file">Loading a set number of lines from a file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-only-some-rows">Loading only some rows</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-only-some-columns">Loading only some columns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-raw-data-as-a-list-of-lists-of-strings">Load raw data as a list of lists of strings</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#make-a-table-from-header-and-rows">Make a table from header and rows</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#make-a-table-from-a-dict">Make a table from a <code class="docutils literal notranslate"><span class="pre">dict</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#specify-the-column-order-when-creating-from-a-dict">Specify the column order when creating from a <code class="docutils literal notranslate"><span class="pre">dict</span></code>.</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#create-the-table-with-an-index">Create the table with an index</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-table-from-a-pandas-dataframe">Create a table from a <code class="docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-table-from-header-and-rows">Create a table from header and rows</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-table-from-dict">Create a table from dict</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-table-from-a-2d-dict">Create a table from a 2D dict</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-table-that-has-complex-python-objects-as-elements">Create a table that has complex python objects as elements</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#create-an-empty-table">Create an empty table</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2020-2023, cogent3 Team.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
 </html>
