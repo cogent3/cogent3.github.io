@@ -1,12 +1,13 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Phylogenetic reconstruction by least squares &#8212; cogent3 2023.09.23 documentation</title>
   
@@ -28,21 +29,23 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-dropdown.css?v=995e94df" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.min.css?v=21c0b90a" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=da3cec82" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
   <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
 
-    <script src="../../_static/documentation_options.js?v=39e0e6a8"></script>
-    <script src="../../_static/doctools.js?v=888ff710"></script>
-    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
     <script src="../../_static/thebelab-helper.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
@@ -53,7 +56,7 @@
     <link rel="next" title="Parallel computations" href="parallel.html" />
     <link rel="prev" title="Make a UPGMA cluster" href="calculate_UPGMA_cluster.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -677,7 +680,7 @@ document.write(`
 </div>
 </div>
 <section id="phylogenetic-reconstruction-by-least-squares">
-<h1>Phylogenetic reconstruction by least squares<a class="headerlink" href="#phylogenetic-reconstruction-by-least-squares" title="Link to this heading">#</a></h1>
+<h1>Phylogenetic reconstruction by least squares<a class="headerlink" href="#phylogenetic-reconstruction-by-least-squares" title="Permalink to this headline">#</a></h1>
 <p><em>Section author: Gavin Huttley</em></p>
 <p>We will load some pre-computed pairwise distance data. To see how that data was computed see the <a class="reference internal" href="calculate_pairwise_distances.html#calculating-pairwise-distances"><span class="std std-ref">Calculate pairwise distances between sequences</span></a> example. That data is saved in a format called <code class="docutils literal notranslate"><span class="pre">pickle</span></code> which is native to python. As per usual, we import the basic components we need.</p>
 <div class="jupyter_cell docutils container">
@@ -730,7 +733,7 @@ document.write(`
 </div>
 <p>We will search tree space for the collection of best trees using the advanced stepwise addition algorithm (hereafter <em>asaa</em>).</p>
 <section id="look-for-the-single-best-tree">
-<h2>Look for the single best tree<a class="headerlink" href="#look-for-the-single-best-tree" title="Link to this heading">#</a></h2>
+<h2>Look for the single best tree<a class="headerlink" href="#look-for-the-single-best-tree" title="Permalink to this headline">#</a></h2>
 <p>In this use case we are after just 1 tree. We specify up to what taxa size all possible trees for the sample will be computed. Here we are specifying <code class="docutils literal notranslate"><span class="pre">a=5</span></code>. This means 5 sequences will be picked randomly and all possible trees relating them will be evaluated. <code class="docutils literal notranslate"><span class="pre">k=1</span></code> means only the best tree will be kept at the end of each such round of evaluation. For every remaining sequence it is grafted onto every possible branch of this tree. The best <code class="docutils literal notranslate"><span class="pre">k</span></code> results are then taken to the next round, when another sequence is randomly selected for addition. This proceeds until all sequences have been added. The result with following arguments is a single wls score and a single <code class="docutils literal notranslate"><span class="pre">Tree</span></code> which can be saved etc ..</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -745,7 +748,7 @@ document.write(`
 <p>We won’t display this tree, because we are doing more below.</p>
 </section>
 <section id="a-more-rigorous-tree-space-search">
-<h2>A more rigorous tree space search<a class="headerlink" href="#a-more-rigorous-tree-space-search" title="Link to this heading">#</a></h2>
+<h2>A more rigorous tree space search<a class="headerlink" href="#a-more-rigorous-tree-space-search" title="Permalink to this headline">#</a></h2>
 <p>We change the settings, so we keep more trees and then look at the distribution of the statistics for the last collection of trees. We could also change <code class="docutils literal notranslate"><span class="pre">a</span></code> to be larger, but in the current case we just adjust <code class="docutils literal notranslate"><span class="pre">k</span></code>. We also set the argument <code class="docutils literal notranslate"><span class="pre">return_all=True</span></code>, the effect of which is to return the complete set of saved trees. These, and their support statistic, can then be inspected.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -829,7 +832,7 @@ document.write(`
 <p>You can see the difference involves the Jackrabbit, TreeShrew, Gorilla, Rat clade.</p>
 </section>
 <section id="assessing-the-fit-for-a-pre-specified-tree-topology">
-<h2>Assessing the fit for a pre-specified tree topology<a class="headerlink" href="#assessing-the-fit-for-a-pre-specified-tree-topology" title="Link to this heading">#</a></h2>
+<h2>Assessing the fit for a pre-specified tree topology<a class="headerlink" href="#assessing-the-fit-for-a-pre-specified-tree-topology" title="Permalink to this headline">#</a></h2>
 <p>In some instances we may have a tree from the literature or elsewhere whose fit to the data we seek to evaluate. In this case I’m going load a tree as follows.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -870,7 +873,7 @@ document.write(`
 </div>
 </section>
 <section id="using-maximum-likelihood-for-measuring-tree-fit">
-<h2>Using maximum likelihood for measuring tree fit<a class="headerlink" href="#using-maximum-likelihood-for-measuring-tree-fit" title="Link to this heading">#</a></h2>
+<h2>Using maximum likelihood for measuring tree fit<a class="headerlink" href="#using-maximum-likelihood-for-measuring-tree-fit" title="Permalink to this headline">#</a></h2>
 <p>This is a much slower algorithm and the interface largely mirrors that for the above. The difference is you import <code class="docutils literal notranslate"><span class="pre">maximum_likelihood</span></code> instead of <code class="docutils literal notranslate"><span class="pre">least_squares</span></code>, and use the <code class="docutils literal notranslate"><span class="pre">ML</span></code> instead of <code class="docutils literal notranslate"><span class="pre">WLS</span></code> classes. The <code class="docutils literal notranslate"><span class="pre">ML</span></code> class requires a substitution model (like a HKY85 for DNA or JTT92 for protein), and an alignment. It also optionally takes a distance matrix, such as that used here, computed for the same sequences. These distances are then used to obtain estimates of branch lengths by the WLS method for each evaluated tree topology which are then used as starting values for the likelihood optimisation.</p>
 <div class="jupyter_cell docutils container">
 <div class="cell_output docutils container">
@@ -961,7 +964,7 @@ document.write(`
       
         <div class="footer-item">
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
     <br/>
   </p>
 </div>

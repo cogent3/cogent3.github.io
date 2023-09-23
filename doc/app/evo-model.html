@@ -1,12 +1,13 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Apply a non-stationary nucleotide model to an alignment with 3 sequences &#8212; cogent3 2023.09.23 documentation</title>
   
@@ -28,21 +29,23 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-dropdown.css?v=995e94df" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.min.css?v=21c0b90a" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=da3cec82" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
   <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
 
-    <script src="../../_static/documentation_options.js?v=39e0e6a8"></script>
-    <script src="../../_static/doctools.js?v=888ff710"></script>
-    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
     <script src="../../_static/thebelab-helper.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
@@ -53,7 +56,7 @@
     <link rel="next" title="Apply a non-stationary nucleotide model to an alignment with a tree" href="evo-model-with-tree.html" />
     <link rel="prev" title="Modelling sequence evolution" href="index-evo-model.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -682,7 +685,7 @@ document.write(`
 </div>
 </div>
 <section id="apply-a-non-stationary-nucleotide-model-to-an-alignment-with-3-sequences">
-<h1>Apply a non-stationary nucleotide model to an alignment with 3 sequences<a class="headerlink" href="#apply-a-non-stationary-nucleotide-model-to-an-alignment-with-3-sequences" title="Link to this heading">#</a></h1>
+<h1>Apply a non-stationary nucleotide model to an alignment with 3 sequences<a class="headerlink" href="#apply-a-non-stationary-nucleotide-model-to-an-alignment-with-3-sequences" title="Permalink to this headline">#</a></h1>
 <p>We load some sample data first and select just 3 sequences.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -736,7 +739,7 @@ show_progress=False, verbose=False)
 </div>
 </div>
 <section id="model-result">
-<h2><code class="docutils literal notranslate"><span class="pre">model_result</span></code><a class="headerlink" href="#model-result" title="Link to this heading">#</a></h2>
+<h2><code class="docutils literal notranslate"><span class="pre">model_result</span></code><a class="headerlink" href="#model-result" title="Permalink to this headline">#</a></h2>
 <p>As the output above indicates, <code class="docutils literal notranslate"><span class="pre">fitted</span></code> is a <code class="docutils literal notranslate"><span class="pre">model_result</span></code> object.</p>
 <p>This object provides an interface for accessing attributes of a fitted model. The representation display (below), a styled table in a jupyter notebook, presents a summary view with the log-likelihood (<code class="docutils literal notranslate"><span class="pre">lnL</span></code>), number of free parameters (<code class="docutils literal notranslate"><span class="pre">nfp</span></code>) and whether all matrices satisfied the identifiability conditions diagonal largest in column (DLC) and a unique mapping of Q to P. (For description of these quantities and why they matter see <a class="reference external" href="https://www.ncbi.nlm.nih.gov/pubmed/?term=8854662">Chang 1996</a> and <a class="reference external" href="https://www.ncbi.nlm.nih.gov/pubmed/25503772">Kaehler et al</a>.)</p>
 <p><code class="docutils literal notranslate"><span class="pre">model_result</span></code> has dictionary behaviour, hence the <code class="docutils literal notranslate"><span class="pre">key</span></code> column. This will be demonstrated below.</p>
@@ -960,7 +963,7 @@ show_progress=False, verbose=False)
 </div>
 </section>
 <section id="fitting-a-separate-nucleotide-model-to-each-codon-position">
-<h2>Fitting a separate nucleotide model to each codon position<a class="headerlink" href="#fitting-a-separate-nucleotide-model-to-each-codon-position" title="Link to this heading">#</a></h2>
+<h2>Fitting a separate nucleotide model to each codon position<a class="headerlink" href="#fitting-a-separate-nucleotide-model-to-each-codon-position" title="Permalink to this headline">#</a></h2>
 <p>Controlled by setting <code class="docutils literal notranslate"><span class="pre">split_codons=True</span></code>.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1219,7 +1222,7 @@ show_progress=False, verbose=False)
       
         <div class="footer-item">
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
     <br/>
   </p>
 </div>

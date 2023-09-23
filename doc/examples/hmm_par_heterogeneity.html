@@ -1,12 +1,13 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Evaluate process heterogeneity using a Hidden Markov Model &#8212; cogent3 2023.09.23 documentation</title>
   
@@ -28,21 +29,23 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-dropdown.css?v=995e94df" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.min.css?v=21c0b90a" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=da3cec82" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
   <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
 
-    <script src="../../_static/documentation_options.js?v=39e0e6a8"></script>
-    <script src="../../_static/doctools.js?v=888ff710"></script>
-    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
     <script src="../../_static/thebelab-helper.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
@@ -53,7 +56,7 @@
     <link rel="next" title="Calculate pairwise distances between sequences" href="calculate_pairwise_distances.html" />
     <link rel="prev" title="Analysis of rate heterogeneity" href="rate_heterogeneity.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:language" content="None"/>
   </head>
   
   
@@ -677,7 +680,7 @@ document.write(`
 </div>
 </div>
 <section id="evaluate-process-heterogeneity-using-a-hidden-markov-model">
-<span id="rate-heterogeneity-hmm"></span><h1>Evaluate process heterogeneity using a Hidden Markov Model<a class="headerlink" href="#evaluate-process-heterogeneity-using-a-hidden-markov-model" title="Link to this heading">#</a></h1>
+<span id="rate-heterogeneity-hmm"></span><h1>Evaluate process heterogeneity using a Hidden Markov Model<a class="headerlink" href="#evaluate-process-heterogeneity-using-a-hidden-markov-model" title="Permalink to this headline">#</a></h1>
 <p><em>Section author: Gavin Huttley</em></p>
 <p>The existence of rate heterogeneity in the evolution of biological sequences is well known. Typically such an evolutionary property is evaluated using so-called site-heterogeneity models. These models postulate the existence of discrete classes of sites, where sites within a class evolve according to a specific rate that is distinct from the rates of the other classes. These models retain the assumption that alignment columns evolve independently. One can naturally ask the question of whether rate classes occur randomly throughout the sequence or whether they are in fact auto-correlated - meaning sites of a class tend to cluster together. Because we do not have, <em>a priori</em>, a basis for classifying the sites the models are specified such that each column can belong to any of the designated site classes and the likelihood is computed across all possible classifications. Post numerical optimisation we can calculate the posterior probability a site column belongs to a specific site class. In <code class="docutils literal notranslate"><span class="pre">cogent3</span></code>, site classes are referred to as <code class="docutils literal notranslate"><span class="pre">bins</span></code> and so we refer to bin probabilities etc…</p>
 <p>To illustrate how to evaluate these hypotheses formally we specify 3 nested hypotheses: (i) Ho: no rate heterogeneity; (ii) Ha(1): two classes of sites - fast and slow, but independent sites; (iii) Ha(2): fast and slowly evolving sites are auto-correlated (meaning a sites class is correlated with that of its’ immediate neighbours).</p>
@@ -709,7 +712,7 @@ document.write(`
 </div>
 </div>
 <section id="model-ho-no-rate-heterogeneity">
-<h2>Model Ho: no rate heterogeneity<a class="headerlink" href="#model-ho-no-rate-heterogeneity" title="Link to this heading">#</a></h2>
+<h2>Model Ho: no rate heterogeneity<a class="headerlink" href="#model-ho-no-rate-heterogeneity" title="Permalink to this headline">#</a></h2>
 <p>We define a HKY model of nucleotide substitution, which has a transition parameter. This is defined using the <code class="docutils literal notranslate"><span class="pre">MotifChange</span></code> class, by specifying a transition as <strong>not</strong> a transversion (<code class="docutils literal notranslate"><span class="pre">~MotifChange('R','Y')</span></code>).</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -847,7 +850,7 @@ document.write(`
 </div>
 </section>
 <section id="model-ha-1-two-classes-of-gamma-distributed-but-independent-sites">
-<h2>Model Ha(1): two classes of gamma distributed but independent sites<a class="headerlink" href="#model-ha-1-two-classes-of-gamma-distributed-but-independent-sites" title="Link to this heading">#</a></h2>
+<h2>Model Ha(1): two classes of gamma distributed but independent sites<a class="headerlink" href="#model-ha-1-two-classes-of-gamma-distributed-but-independent-sites" title="Permalink to this headline">#</a></h2>
 <p>Our next hypothesis is that there are two rate classes, or bins, with rates gamma distributed. We will restrict the bin probabilities to be equal.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1013,7 +1016,7 @@ document.write(`
 </div>
 </section>
 <section id="model-ha-2-fast-and-slowly-evolving-sites-are-auto-correlated">
-<h2>Model Ha(2): fast and slowly evolving sites are auto-correlated<a class="headerlink" href="#model-ha-2-fast-and-slowly-evolving-sites-are-auto-correlated" title="Link to this heading">#</a></h2>
+<h2>Model Ha(2): fast and slowly evolving sites are auto-correlated<a class="headerlink" href="#model-ha-2-fast-and-slowly-evolving-sites-are-auto-correlated" title="Permalink to this headline">#</a></h2>
 <p>We then specify a model with switches for changing between site-classes, the HMM part. The setup is almost identical to that for above with the sole difference being setting the <code class="docutils literal notranslate"><span class="pre">sites_independent=False</span></code>.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1248,7 +1251,7 @@ document.write(`
 </div>
 </section>
 <section id="a-model-with-patches-of-kappa">
-<h2>A model with patches of <code class="docutils literal notranslate"><span class="pre">kappa</span></code><a class="headerlink" href="#a-model-with-patches-of-kappa" title="Link to this heading">#</a></h2>
+<h2>A model with patches of <code class="docutils literal notranslate"><span class="pre">kappa</span></code><a class="headerlink" href="#a-model-with-patches-of-kappa" title="Permalink to this headline">#</a></h2>
 <p>In this example we model sequence evolution where there are 2 classes of sites distinguished by their <code class="docutils literal notranslate"><span class="pre">kappa</span></code> parameters. We need to know what value of <code class="docutils literal notranslate"><span class="pre">kappa</span></code> to specify the delineation of the bin boundaries. We can determine this from the null model (<code class="docutils literal notranslate"><span class="pre">lf_one</span></code>). For this use case, we also need to use a <code class="docutils literal notranslate"><span class="pre">numpy.array</span></code>, so we’ll import that.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1529,7 +1532,7 @@ document.write(`
       
         <div class="footer-item">
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
     <br/>
   </p>
 </div>
