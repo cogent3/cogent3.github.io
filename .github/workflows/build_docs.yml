@@ -39,12 +39,14 @@ jobs:
           source .venv/bin/activate
           python -m pip install --upgrade pip wheel setuptools
           python -m pip install -r c3org/requirements.txt
+          python -m pip list
 
       - name: Build docs
         shell: bash -l {0}
         working-directory: c3org/doc/
         run: |
           source ../../.venv/bin/activate
+          export PYDEVD_DISABLE_FILE_VALIDATION=1
           make github
 
       - name: Deploy
