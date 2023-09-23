@@ -39,6 +39,9 @@ jobs:
           source .venv/bin/activate
           python -m pip install --upgrade pip wheel setuptools
           python -m pip install -r c3org/requirements.txt
+          # we have to force sphinx-panels reinstall, this is due
+          # to changes in pip's resolver algorithm
+          python -m pip install sphinx-panels -U
           python -m pip list
 
       - name: Build docs
