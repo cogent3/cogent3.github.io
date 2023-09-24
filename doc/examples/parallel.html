@@ -1,15 +1,14 @@
 
-
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Parallel computations &#8212; cogent3 2023.09.23 documentation</title>
+    <title>Parallel computations &#8212; cogent3 2023.09.24 documentation</title>
   
   
   
@@ -29,26 +28,24 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=da3cec82" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
   <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/documentation_options.js?v=d1c3a718"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/thebelab-helper.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'doc/examples/parallel';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -56,7 +53,7 @@
     <link rel="next" title="API" href="../api/index.html" />
     <link rel="prev" title="Phylogenetic reconstruction by least squares" href="phylo_by_ls.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
   
   
@@ -676,7 +673,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section id="parallel-computations">
-<span id="parallel"></span><h1>Parallel computations<a class="headerlink" href="#parallel-computations" title="Permalink to this headline">#</a></h1>
+<span id="parallel"></span><h1>Parallel computations<a class="headerlink" href="#parallel-computations" title="Link to this heading">#</a></h1>
 <p><code class="docutils literal notranslate"><span class="pre">cogent3</span></code> supports parallel computation explicitly for the case where the same calculations need to be performed on many different data sets. As an example, consider the case of aligning all the one-to-one orthologs of protein coding genes sampled from 100 vertebrate species where the data for each gene is stored in a separate text file. These files are used as input for an alignment algorithm that will produce a corresponding output file. In other words, applying the alignment algorithm to <code class="docutils literal notranslate"><span class="pre">&quot;homologs1.fasta&quot;</span></code> produces <code class="docutils literal notranslate"><span class="pre">&quot;aligned-homologs1.fasta&quot;</span></code>.</p>
 <p>We could perform the alignments in serial, one after the other, on one CPU core of a single computer. But what if we have 18,000 such files? If we had 18,000 CPUs then we could assign one alignment task to each file and be done in the same time as aligning a single file! This case is an example of “data parallelism” or “data level parallelism”.</p>
 <p>There are multiple algorithmic approaches to solving parallel computation problems. The approach <code class="docutils literal notranslate"><span class="pre">cogent3</span></code> adopts is that of a master process and helper (or worker) processes. The master process splits the work up amongst the available CPU cores. Using our alignment example, the master process assigns sets of files to each worker CPU core. Each worker then performs the alignment step on its designated files and returns each alignment to the master process.</p>
@@ -686,10 +683,10 @@ document.write(`
 <p>While the alignment problem indicated above stipulated writing all results to separate files, this is not always a good idea. It can prove very inefficient if the individual alignment files are small. In such a case, storing the result in a single file (e.g. as a <code class="docutils literal notranslate"><span class="pre">sqlitedb</span></code> database) is better.</p>
 </div>
 <section id="parallel-computation-on-a-single-computer">
-<h2>Parallel computation on a single computer<a class="headerlink" href="#parallel-computation-on-a-single-computer" title="Permalink to this headline">#</a></h2>
+<h2>Parallel computation on a single computer<a class="headerlink" href="#parallel-computation-on-a-single-computer" title="Link to this heading">#</a></h2>
 <p>This is the simplest case to implement, requires no additional software installs and will work with standalone scripts or within Jupyter notebooks. For this use case, <code class="docutils literal notranslate"><span class="pre">cogent3.util.parallel</span></code> uses the Python standard library <code class="docutils literal notranslate"><span class="pre">concurrent.futures</span></code> module.</p>
 <section id="using-app-apply-to">
-<h3>Using <code class="docutils literal notranslate"><span class="pre">app.apply_to()</span></code><a class="headerlink" href="#using-app-apply-to" title="Permalink to this headline">#</a></h3>
+<h3>Using <code class="docutils literal notranslate"><span class="pre">app.apply_to()</span></code><a class="headerlink" href="#using-app-apply-to" title="Link to this heading">#</a></h3>
 <p>If you are using <code class="docutils literal notranslate"><span class="pre">cogent3</span></code> <a class="reference internal" href="../app/app-overview.html#apps"><span class="std std-ref">composable apps</span></a>, then the simplest approach is to use the <code class="docutils literal notranslate"><span class="pre">apply_to()</span></code> method. The conditions of parallel execution are controlled using the keyword arguments <code class="docutils literal notranslate"><span class="pre">parallel</span></code> and <code class="docutils literal notranslate"><span class="pre">par_kw</span></code>. The former indicates parallel execution is to be undertaken. The latter is how additional arguments are provided to <code class="docutils literal notranslate"><span class="pre">parallel.map()</span></code>. For instance, using 4 workers would be specified as:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">apply_to</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">par_kw</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
 </pre></div>
@@ -700,7 +697,7 @@ document.write(`
 </div>
 </section>
 <section id="directly-using-cogent3-util-parallel-map">
-<h3>Directly using <code class="docutils literal notranslate"><span class="pre">cogent3.util.parallel.map()</span></code><a class="headerlink" href="#directly-using-cogent3-util-parallel-map" title="Permalink to this headline">#</a></h3>
+<h3>Directly using <code class="docutils literal notranslate"><span class="pre">cogent3.util.parallel.map()</span></code><a class="headerlink" href="#directly-using-cogent3-util-parallel-map" title="Link to this heading">#</a></h3>
 <p>This function behaves like the standard python builtin <code class="docutils literal notranslate"><span class="pre">map()</span></code> except it enables distribution of calculations across CPUs.  The demo script shown below calculates a small number of prime numbers by splitting chunks of numbers across the provided cores. The key line is</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">parallel</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">is_prime</span><span class="p">,</span> <span class="n">PRIMES</span><span class="p">,</span> <span class="n">max_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 </pre></div>
@@ -754,7 +751,7 @@ document.write(`
 </section>
 </section>
 <section id="parallel-computation-on-multiple-computers">
-<h2>Parallel computation on multiple computers<a class="headerlink" href="#parallel-computation-on-multiple-computers" title="Permalink to this headline">#</a></h2>
+<h2>Parallel computation on multiple computers<a class="headerlink" href="#parallel-computation-on-multiple-computers" title="Link to this heading">#</a></h2>
 <p>On systems consisting of multiple separate computers, we use the <a class="reference external" href="https://mpi4py.readthedocs.io/">mpi4py</a> bindings to the message passing interface (MPI) standard. Specifically, <code class="docutils literal notranslate"><span class="pre">cogent3.util.parallel.map(...,</span> <span class="pre">use_mpi=True,</span> <span class="pre">...)</span></code> uses the <a class="reference external" href="https://mpi4py.readthedocs.io/en/stable/mpi4py.futures.html">mpi4py futures</a> module of <a class="reference external" href="https://mpi4py.readthedocs.io/">mpi4py</a>. This module is modelled after that of <code class="docutils literal notranslate"><span class="pre">concurrent.futures</span></code> but using it has some important differences.</p>
 <p>First, you must install additional software. You will need to install a tool implementing the MPI system (e.g. <a class="reference external" href="https://www.open-mpi.org/">openmpi</a>) and the MPI python bindings library <code class="docutils literal notranslate"><span class="pre">mpi4py</span></code>. To install <code class="docutils literal notranslate"><span class="pre">openmpi</span></code>, you can use conda, homebrew or your preferred package manager. You can just pip install <code class="docutils literal notranslate"><span class="pre">mpi4py</span></code>.</p>
 <p>Second, as described in the documentation on <a class="reference external" href="https://mpi4py.readthedocs.io/en/stable/mpi4py.futures.html">mpi4py futures</a>, you need to write your code slightly differently. We provide an example that runs on a supercomputer. To execute a program on this facility, we submit a “job” to a “queuing system” (e.g. <a class="reference external" href="https://en.wikipedia.org/wiki/Portable_Batch_System">PBS</a>) which controls the scheduling of our job with the computing resources we requested (how many CPUs, how much RAM, etc..). There are many such job control systems and the specifics of how to select the resources your job needs can vary between them. In general, however, our experience is the user writes two scripts.</p>
@@ -762,7 +759,7 @@ document.write(`
 <li><p>a script performing the computations you actually care about</p></li>
 <li><p>a bash script for the queuing system setting out the job parameters and invoking (1)</p></li>
 </ol>
-<p>The example code presented below is based on the <code class="docutils literal notranslate"><span class="pre">mpi4py</span></code> demo script for computing prime numbers. In addition to validating the prime numbers, it also prints out the “MPI rank” of the processor <a class="footnote-reference brackets" href="#id4" id="id1">1</a>. The script relies on the environment variable, <code class="docutils literal notranslate"><span class="pre">PBS_NCPUS</span></code> <a class="footnote-reference brackets" href="#id5" id="id2">2</a>, to establish the number of CPUs that are available. It prints to stdout, the rank of each processor <a class="footnote-reference brackets" href="#id6" id="id3">3</a>.</p>
+<p>The example code presented below is based on the <code class="docutils literal notranslate"><span class="pre">mpi4py</span></code> demo script for computing prime numbers. In addition to validating the prime numbers, it also prints out the “MPI rank” of the processor <a class="footnote-reference brackets" href="#id4" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>. The script relies on the environment variable, <code class="docutils literal notranslate"><span class="pre">PBS_NCPUS</span></code> <a class="footnote-reference brackets" href="#id5" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>, to establish the number of CPUs that are available. It prints to stdout, the rank of each processor <a class="footnote-reference brackets" href="#id6" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>.</p>
 <p>To execute this script as part of a PBS job script you need to use the following command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ mpiexec -n $PBS_NCPUS python3 -m mpi4py.futures demo-mpi-parallel.py
 </pre></div>
@@ -850,17 +847,20 @@ document.write(`
     <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
-<dl class="footnote brackets">
-<dt class="label" id="id4"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p>On MPI, the main process has rank 0, all others have rank &gt; 0.</p>
-</dd>
-<dt class="label" id="id5"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
-<dd><p>This environment variable is created by the PBS system on executing the job script.</p>
-</dd>
-<dt class="label" id="id6"><span class="brackets"><a class="fn-backref" href="#id3">3</a></span></dt>
-<dd><p>You can check your execution of the script is correct by validating you get all the ranks up to one minus the number of CPUs you requested.</p>
-</dd>
-</dl>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id4" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>On MPI, the main process has rank 0, all others have rank &gt; 0.</p>
+</aside>
+<aside class="footnote brackets" id="id5" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p>This environment variable is created by the PBS system on executing the job script.</p>
+</aside>
+<aside class="footnote brackets" id="id6" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
+<p>You can check your execution of the script is correct by validating you get all the ranks up to one minus the number of CPUs you requested.</p>
+</aside>
+</aside>
 </section>
 </section>
 
@@ -948,7 +948,7 @@ document.write(`
       
         <div class="footer-item">
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     <br/>
   </p>
 </div>

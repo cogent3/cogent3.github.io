@@ -1,15 +1,14 @@
 
-
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Sequence Collections and Alignments &#8212; cogent3 2023.09.23 documentation</title>
+    <title>Sequence Collections and Alignments &#8212; cogent3 2023.09.24 documentation</title>
   
   
   
@@ -29,26 +28,24 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=da3cec82" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
   <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/documentation_options.js?v=d1c3a718"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/thebelab-helper.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'doc/cookbook/alignments';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -56,7 +53,7 @@
     <link rel="next" title="Features" href="features.html" />
     <link rel="prev" title="Protein sequences" href="protein_sequences.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
   
   
@@ -685,18 +682,18 @@ document.write(`
 </div>
 </div>
 <section id="sequence-collections-and-alignments">
-<h1>Sequence Collections and Alignments<a class="headerlink" href="#sequence-collections-and-alignments" title="Permalink to this headline">#</a></h1>
+<h1>Sequence Collections and Alignments<a class="headerlink" href="#sequence-collections-and-alignments" title="Link to this heading">#</a></h1>
 <p>For loading collections of unaligned or aligned sequences see <a class="reference internal" href="loading_sequences.html#load-seqs"><span class="std std-ref">Loading an alignment from a file or url</span></a>.</p>
 <section id="what-s-the-difference-between-alignment-and-arrayalignment">
-<h2>What’s the difference between <code class="docutils literal notranslate"><span class="pre">Alignment</span></code> and <code class="docutils literal notranslate"><span class="pre">ArrayAlignment</span></code>?<a class="headerlink" href="#what-s-the-difference-between-alignment-and-arrayalignment" title="Permalink to this headline">#</a></h2>
+<h2>What’s the difference between <code class="docutils literal notranslate"><span class="pre">Alignment</span></code> and <code class="docutils literal notranslate"><span class="pre">ArrayAlignment</span></code>?<a class="headerlink" href="#what-s-the-difference-between-alignment-and-arrayalignment" title="Link to this heading">#</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">Alignment</span></code> class can be annotated, meaning you can add annotations to an Alignment or it’s member sequences and you can slice the alignment via those objects. This capability is achieved, under the hood, by having the individual sequences represent gaps as a “span”, rather than explicitly as a “-” character in the sequence itself. This representation is also efficient for very long sequences.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">ArrayAlignment</span></code> class cannot be annotated. The class represents its sequences as a <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> instance. Thus, the gaps are included as a state in the array. This class is better at handling a lot of sequences and should typically be faster. This is the default class returned by the <code class="docutils literal notranslate"><span class="pre">load_aligned_seqs</span></code> and <code class="docutils literal notranslate"><span class="pre">make_aligned_seqs</span></code> functions. (See <a class="reference internal" href="loading_sequences.html#load-seqs"><span class="std std-ref">Loading an alignment from a file or url</span></a> for details.)</p>
 <p>You can change alignment types using the <code class="docutils literal notranslate"><span class="pre">to_type()</span></code> method.</p>
 </section>
 <section id="basic-collection-objects">
-<h2>Basic Collection objects<a class="headerlink" href="#basic-collection-objects" title="Permalink to this headline">#</a></h2>
+<h2>Basic Collection objects<a class="headerlink" href="#basic-collection-objects" title="Link to this heading">#</a></h2>
 <section id="constructing-a-sequencecollection-or-alignment-object-from-strings">
-<h3>Constructing a <code class="docutils literal notranslate"><span class="pre">SequenceCollection</span></code> or <code class="docutils literal notranslate"><span class="pre">Alignment</span></code> object from strings<a class="headerlink" href="#constructing-a-sequencecollection-or-alignment-object-from-strings" title="Permalink to this headline">#</a></h3>
+<h3>Constructing a <code class="docutils literal notranslate"><span class="pre">SequenceCollection</span></code> or <code class="docutils literal notranslate"><span class="pre">Alignment</span></code> object from strings<a class="headerlink" href="#constructing-a-sequencecollection-or-alignment-object-from-strings" title="Link to this heading">#</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span><span class="p">,</span> <span class="n">make_unaligned_seqs</span>
@@ -728,7 +725,7 @@ document.write(`
 </div>
 </section>
 <section id="constructing-a-arrayalignment-using-make-aligned-seqs">
-<h3>Constructing a <code class="docutils literal notranslate"><span class="pre">ArrayAlignment</span></code> using <code class="docutils literal notranslate"><span class="pre">make_aligned_seqs</span></code><a class="headerlink" href="#constructing-a-arrayalignment-using-make-aligned-seqs" title="Permalink to this headline">#</a></h3>
+<h3>Constructing a <code class="docutils literal notranslate"><span class="pre">ArrayAlignment</span></code> using <code class="docutils literal notranslate"><span class="pre">make_aligned_seqs</span></code><a class="headerlink" href="#constructing-a-arrayalignment-using-make-aligned-seqs" title="Link to this heading">#</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span>
@@ -769,7 +766,7 @@ document.write(`
 </div>
 </section>
 <section id="converting-a-sequencecollection-to-fasta-format">
-<h3>Converting a <code class="docutils literal notranslate"><span class="pre">SequenceCollection</span></code> to FASTA format<a class="headerlink" href="#converting-a-sequencecollection-to-fasta-format" title="Permalink to this headline">#</a></h3>
+<h3>Converting a <code class="docutils literal notranslate"><span class="pre">SequenceCollection</span></code> to FASTA format<a class="headerlink" href="#converting-a-sequencecollection-to-fasta-format" title="Link to this heading">#</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_unaligned_seqs</span>
@@ -780,7 +777,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;cogent3.core.alignment.SequenceCollection at 0x7f03df9027d0&gt;
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;cogent3.core.alignment.SequenceCollection at 0x7f78730f0c10&gt;
 </pre></div>
 </div>
 </div>
@@ -788,10 +785,10 @@ document.write(`
 </section>
 </section>
 <section id="adding-new-sequences-to-an-existing-collection-or-alignment">
-<h2>Adding new sequences to an existing collection or alignment<a class="headerlink" href="#adding-new-sequences-to-an-existing-collection-or-alignment" title="Permalink to this headline">#</a></h2>
+<h2>Adding new sequences to an existing collection or alignment<a class="headerlink" href="#adding-new-sequences-to-an-existing-collection-or-alignment" title="Link to this heading">#</a></h2>
 <p>New sequences can be either appended or inserted using the <code class="docutils literal notranslate"><span class="pre">add_seqs</span></code> method. More than one sequence can be added at the same time. Note that <code class="docutils literal notranslate"><span class="pre">add_seqs</span></code> does not modify the existing collection/alignment, it creates a new one.</p>
 <section id="appending-the-sequences">
-<h3>Appending the sequences<a class="headerlink" href="#appending-the-sequences" title="Permalink to this headline">#</a></h3>
+<h3>Appending the sequences<a class="headerlink" href="#appending-the-sequences" title="Link to this heading">#</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">add_seqs</span></code> without additional parameters will append the sequences to the end of the collection/alignment.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -873,7 +870,7 @@ document.write(`
 </div>
 </section>
 <section id="inserting-the-sequences">
-<h3>Inserting the sequences<a class="headerlink" href="#inserting-the-sequences" title="Permalink to this headline">#</a></h3>
+<h3>Inserting the sequences<a class="headerlink" href="#inserting-the-sequences" title="Link to this heading">#</a></h3>
 <p>Sequences can be inserted into an alignment at the specified position using either the <code class="docutils literal notranslate"><span class="pre">before_name</span></code> or <code class="docutils literal notranslate"><span class="pre">after_name</span></code> arguments.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -945,7 +942,7 @@ document.write(`
 </div>
 </section>
 <section id="inserting-sequence-s-based-on-their-alignment-to-a-reference-sequence">
-<h3>Inserting sequence(s) based on their alignment to a reference sequence<a class="headerlink" href="#inserting-sequence-s-based-on-their-alignment-to-a-reference-sequence" title="Permalink to this headline">#</a></h3>
+<h3>Inserting sequence(s) based on their alignment to a reference sequence<a class="headerlink" href="#inserting-sequence-s-based-on-their-alignment-to-a-reference-sequence" title="Link to this heading">#</a></h3>
 <p>Already aligned sequences can be added to an existing <code class="docutils literal notranslate"><span class="pre">Alignment</span></code> object and aligned at the same time using the <code class="docutils literal notranslate"><span class="pre">add_from_ref_aln</span></code> method. The alignment is performed based on their alignment to a reference sequence (which must be present in both alignments). The method assumes the first sequence in <code class="docutils literal notranslate"><span class="pre">ref_aln.names[0]</span></code> is the reference.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -997,7 +994,7 @@ document.write(`
 <p>This method does not work with the <code class="docutils literal notranslate"><span class="pre">ArrayAlignment</span></code> class.</p>
 </div>
 <section id="removing-all-columns-with-gaps-in-a-named-sequence">
-<h4>Removing all columns with gaps in a named sequence<a class="headerlink" href="#removing-all-columns-with-gaps-in-a-named-sequence" title="Permalink to this headline">#</a></h4>
+<h4>Removing all columns with gaps in a named sequence<a class="headerlink" href="#removing-all-columns-with-gaps-in-a-named-sequence" title="Link to this heading">#</a></h4>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span>
@@ -1040,9 +1037,9 @@ document.write(`
 </section>
 </section>
 <section id="the-elements-of-a-collection-or-alignment">
-<h2>The elements of a collection or alignment<a class="headerlink" href="#the-elements-of-a-collection-or-alignment" title="Permalink to this headline">#</a></h2>
+<h2>The elements of a collection or alignment<a class="headerlink" href="#the-elements-of-a-collection-or-alignment" title="Link to this heading">#</a></h2>
 <section id="accessing-individual-sequences-from-a-collection-or-alignment-by-name">
-<h3>Accessing individual sequences from a collection or alignment by name<a class="headerlink" href="#accessing-individual-sequences-from-a-collection-or-alignment-by-name" title="Permalink to this headline">#</a></h3>
+<h3>Accessing individual sequences from a collection or alignment by name<a class="headerlink" href="#accessing-individual-sequences-from-a-collection-or-alignment-by-name" title="Link to this heading">#</a></h3>
 <p>Using the <code class="docutils literal notranslate"><span class="pre">get_seq</span></code> method allows for extracting an unaligned sequence from a collection or alignment by name.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1113,7 +1110,7 @@ document.write(`
 </div>
 </section>
 <section id="slice-the-sequences-from-an-alignment-like-a-list">
-<h3>Slice the sequences from an alignment like a list<a class="headerlink" href="#slice-the-sequences-from-an-alignment-like-a-list" title="Permalink to this headline">#</a></h3>
+<h3>Slice the sequences from an alignment like a list<a class="headerlink" href="#slice-the-sequences-from-an-alignment-like-a-list" title="Link to this heading">#</a></h3>
 <p>The usual approach is to access a <code class="docutils literal notranslate"><span class="pre">SequenceCollection</span></code> or <code class="docutils literal notranslate"><span class="pre">Alignment</span></code> object as a dictionary, obtaining the individual sequences using the titles as “keys” (above).  However, one can also iterate through the collection like a list.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1193,7 +1190,7 @@ document.write(`
 </div>
 </section>
 <section id="getting-a-subset-of-sequences-from-the-alignment">
-<h3>Getting a subset of sequences from the alignment<a class="headerlink" href="#getting-a-subset-of-sequences-from-the-alignment" title="Permalink to this headline">#</a></h3>
+<h3>Getting a subset of sequences from the alignment<a class="headerlink" href="#getting-a-subset-of-sequences-from-the-alignment" title="Link to this heading">#</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
@@ -1229,9 +1226,9 @@ document.write(`
 </section>
 </section>
 <section id="alignments">
-<h2>Alignments<a class="headerlink" href="#alignments" title="Permalink to this headline">#</a></h2>
+<h2>Alignments<a class="headerlink" href="#alignments" title="Link to this heading">#</a></h2>
 <section id="creating-an-alignment-object-from-a-sequencecollection">
-<h3>Creating an <code class="docutils literal notranslate"><span class="pre">Alignment</span></code> object from a <code class="docutils literal notranslate"><span class="pre">SequenceCollection</span></code><a class="headerlink" href="#creating-an-alignment-object-from-a-sequencecollection" title="Permalink to this headline">#</a></h3>
+<h3>Creating an <code class="docutils literal notranslate"><span class="pre">Alignment</span></code> object from a <code class="docutils literal notranslate"><span class="pre">SequenceCollection</span></code><a class="headerlink" href="#creating-an-alignment-object-from-a-sequencecollection" title="Link to this heading">#</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_unaligned_seqs</span>
@@ -1243,7 +1240,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;cogent3.core.alignment.SequenceCollection at 0x7f03df916110&gt;
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;cogent3.core.alignment.SequenceCollection at 0x7f7872f1c1d0&gt;
 </pre></div>
 </div>
 </div>
@@ -1284,7 +1281,7 @@ document.write(`
 </div>
 </section>
 <section id="convert-alignment-to-dna-rna-or-protein-moltypes">
-<h3>Convert alignment to DNA, RNA or PROTEIN moltypes<a class="headerlink" href="#convert-alignment-to-dna-rna-or-protein-moltypes" title="Permalink to this headline">#</a></h3>
+<h3>Convert alignment to DNA, RNA or PROTEIN moltypes<a class="headerlink" href="#convert-alignment-to-dna-rna-or-protein-moltypes" title="Link to this heading">#</a></h3>
 <p>This is useful if you’ve loaded a sequence alignment without specifying the moltype and later need to convert it using the dedicated method</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1443,9 +1440,9 @@ document.write(`
 </div>
 </section>
 <section id="handling-gaps">
-<h3>Handling gaps<a class="headerlink" href="#handling-gaps" title="Permalink to this headline">#</a></h3>
+<h3>Handling gaps<a class="headerlink" href="#handling-gaps" title="Link to this heading">#</a></h3>
 <section id="remove-all-gaps-from-an-alignment-in-fasta-format">
-<h4>Remove all gaps from an alignment in FASTA format<a class="headerlink" href="#remove-all-gaps-from-an-alignment-in-fasta-format" title="Permalink to this headline">#</a></h4>
+<h4>Remove all gaps from an alignment in FASTA format<a class="headerlink" href="#remove-all-gaps-from-an-alignment-in-fasta-format" title="Link to this heading">#</a></h4>
 <p>This necessarily returns a <code class="docutils literal notranslate"><span class="pre">SequenceCollection</span></code>.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1466,7 +1463,7 @@ document.write(`
 </section>
 </section>
 <section id="writing-sequences-to-file">
-<h3>Writing sequences to file<a class="headerlink" href="#writing-sequences-to-file" title="Permalink to this headline">#</a></h3>
+<h3>Writing sequences to file<a class="headerlink" href="#writing-sequences-to-file" title="Link to this heading">#</a></h3>
 <p>Both collection and alignment objects have a <code class="docutils literal notranslate"><span class="pre">write</span></code> method. The output format is inferred from the filename suffix,</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1504,7 +1501,7 @@ document.write(`
 </div>
 </section>
 <section id="converting-an-alignment-to-fasta-format">
-<h3>Converting an alignment to FASTA format<a class="headerlink" href="#converting-an-alignment-to-fasta-format" title="Permalink to this headline">#</a></h3>
+<h3>Converting an alignment to FASTA format<a class="headerlink" href="#converting-an-alignment-to-fasta-format" title="Link to this heading">#</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
@@ -1521,7 +1518,7 @@ document.write(`
 </div>
 </section>
 <section id="converting-an-alignment-into-phylip-format">
-<h3>Converting an alignment into Phylip format<a class="headerlink" href="#converting-an-alignment-into-phylip-format" title="Permalink to this headline">#</a></h3>
+<h3>Converting an alignment into Phylip format<a class="headerlink" href="#converting-an-alignment-into-phylip-format" title="Link to this heading">#</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
@@ -1548,7 +1545,7 @@ DogFaced  GCAAGGAGCCAGCAGAACAGATGGGTTGAAACTAAGGAAACATGTAATGATAGGCAGACT
 </div>
 </section>
 <section id="converting-an-alignment-to-a-list-of-strings">
-<h3>Converting an alignment to a list of strings<a class="headerlink" href="#converting-an-alignment-to-a-list-of-strings" title="Permalink to this headline">#</a></h3>
+<h3>Converting an alignment to a list of strings<a class="headerlink" href="#converting-an-alignment-to-a-list-of-strings" title="Link to this heading">#</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
@@ -1566,9 +1563,9 @@ DogFaced  GCAAGGAGCCAGCAGAACAGATGGGTTGAAACTAAGGAAACATGTAATGATAGGCAGACT
 </section>
 </section>
 <section id="slicing-an-alignment">
-<h2>Slicing an alignment<a class="headerlink" href="#slicing-an-alignment" title="Permalink to this headline">#</a></h2>
+<h2>Slicing an alignment<a class="headerlink" href="#slicing-an-alignment" title="Link to this heading">#</a></h2>
 <section id="by-rows-sequences">
-<h3>By rows (sequences)<a class="headerlink" href="#by-rows-sequences" title="Permalink to this headline">#</a></h3>
+<h3>By rows (sequences)<a class="headerlink" href="#by-rows-sequences" title="Link to this heading">#</a></h3>
 <p>An <code class="docutils literal notranslate"><span class="pre">Alignment</span></code> can be sliced</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1633,7 +1630,7 @@ DogFaced  GCAAGGAGCCAGCAGAACAGATGGGTTGAAACTAAGGAAACATGTAATGATAGGCAGACT
 </div>
 </section>
 <section id="getting-a-single-column-from-an-alignment">
-<h3>Getting a single column from an alignment<a class="headerlink" href="#getting-a-single-column-from-an-alignment" title="Permalink to this headline">#</a></h3>
+<h3>Getting a single column from an alignment<a class="headerlink" href="#getting-a-single-column-from-an-alignment" title="Link to this heading">#</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
@@ -1648,7 +1645,7 @@ DogFaced  GCAAGGAGCCAGCAGAACAGATGGGTTGAAACTAAGGAAACATGTAATGATAGGCAGACT
 </div>
 </section>
 <section id="getting-a-region-of-contiguous-columns">
-<h3>Getting a region of contiguous columns<a class="headerlink" href="#getting-a-region-of-contiguous-columns" title="Permalink to this headline">#</a></h3>
+<h3>Getting a region of contiguous columns<a class="headerlink" href="#getting-a-region-of-contiguous-columns" title="Link to this heading">#</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
@@ -1663,7 +1660,7 @@ DogFaced  GCAAGGAGCCAGCAGAACAGATGGGTTGAAACTAAGGAAACATGTAATGATAGGCAGACT
 </div>
 </section>
 <section id="iterating-over-alignment-positions">
-<h3>Iterating over alignment positions<a class="headerlink" href="#iterating-over-alignment-positions" title="Permalink to this headline">#</a></h3>
+<h3>Iterating over alignment positions<a class="headerlink" href="#iterating-over-alignment-positions" title="Link to this heading">#</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
@@ -1684,7 +1681,7 @@ DogFaced  GCAAGGAGCCAGCAGAACAGATGGGTTGAAACTAAGGAAACATGTAATGATAGGCAGACT
 </div>
 </section>
 <section id="getting-codon-3rd-positions-from-alignment">
-<h3>Getting codon 3rd positions from <code class="docutils literal notranslate"><span class="pre">Alignment</span></code><a class="headerlink" href="#getting-codon-3rd-positions-from-alignment" title="Permalink to this headline">#</a></h3>
+<h3>Getting codon 3rd positions from <code class="docutils literal notranslate"><span class="pre">Alignment</span></code><a class="headerlink" href="#getting-codon-3rd-positions-from-alignment" title="Link to this heading">#</a></h3>
 <p>We’ll do this by specifying the position indices of interest, creating a sequence <code class="docutils literal notranslate"><span class="pre">Feature</span></code> and using that to extract the positions.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -1787,7 +1784,7 @@ DogFaced  GCAAGGAGCCAGCAGAACAGATGGGTTGAAACTAAGGAAACATGTAATGATAGGCAGACT
 </div>
 </section>
 <section id="getting-codon-3rd-positions-from-arrayalignment">
-<h3>Getting codon 3rd positions from <code class="docutils literal notranslate"><span class="pre">ArrayAlignment</span></code><a class="headerlink" href="#getting-codon-3rd-positions-from-arrayalignment" title="Permalink to this headline">#</a></h3>
+<h3>Getting codon 3rd positions from <code class="docutils literal notranslate"><span class="pre">ArrayAlignment</span></code><a class="headerlink" href="#getting-codon-3rd-positions-from-arrayalignment" title="Link to this heading">#</a></h3>
 <p>We can use more conventional slice notation in this instance. Note, because Python counts from 0, the 3rd position starts at index 2.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -2080,9 +2077,9 @@ _bytes{font-family: "Lucida Console",monospace !important; font-size: 12pt !impo
 </div>
 </section>
 <section id="filtering-positions">
-<span id="filter-positions"></span><h3>Filtering positions<a class="headerlink" href="#filtering-positions" title="Permalink to this headline">#</a></h3>
+<span id="filter-positions"></span><h3>Filtering positions<a class="headerlink" href="#filtering-positions" title="Link to this heading">#</a></h3>
 <section id="trim-terminal-stop-codons">
-<h4>Trim terminal stop codons<a class="headerlink" href="#trim-terminal-stop-codons" title="Permalink to this headline">#</a></h4>
+<h4>Trim terminal stop codons<a class="headerlink" href="#trim-terminal-stop-codons" title="Link to this heading">#</a></h4>
 <p>For evolutionary analyses that use codon models we need to exclude terminating stop codons. For the case where the sequences are all of length divisible by 3.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -2142,7 +2139,7 @@ _bytes{font-family: "Lucida Console",monospace !important; font-size: 12pt !impo
 </div>
 </section>
 <section id="eliminating-columns-with-non-nucleotide-characters">
-<h4>Eliminating columns with non-nucleotide characters<a class="headerlink" href="#eliminating-columns-with-non-nucleotide-characters" title="Permalink to this headline">#</a></h4>
+<h4>Eliminating columns with non-nucleotide characters<a class="headerlink" href="#eliminating-columns-with-non-nucleotide-characters" title="Link to this heading">#</a></h4>
 <p>We sometimes want to eliminate ambiguous or gap data from our alignments. We show how to exclude alignment columns by the characters they contain. In the first instance we do this just for single nucleotide columns, then for trinucleotides (equivalent for handling codons). Both are done using the <code class="docutils literal notranslate"><span class="pre">no_degenerates</span></code> method.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -2230,7 +2227,7 @@ _bytes{font-family: "Lucida Console",monospace !important; font-size: 12pt !impo
 </div>
 </section>
 <section id="getting-all-variable-positions-from-an-alignment">
-<h4>Getting all variable positions from an alignment<a class="headerlink" href="#getting-all-variable-positions-from-an-alignment" title="Permalink to this headline">#</a></h4>
+<h4>Getting all variable positions from an alignment<a class="headerlink" href="#getting-all-variable-positions-from-an-alignment" title="Link to this heading">#</a></h4>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
@@ -2524,7 +2521,7 @@ _bytes{font-family: "Lucida Console",monospace !important; font-size: 12pt !impo
 </div>
 </section>
 <section id="getting-all-constant-positions-from-an-alignment">
-<h4>Getting all constant positions from an alignment<a class="headerlink" href="#getting-all-constant-positions-from-an-alignment" title="Permalink to this headline">#</a></h4>
+<h4>Getting all constant positions from an alignment<a class="headerlink" href="#getting-all-constant-positions-from-an-alignment" title="Link to this heading">#</a></h4>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
@@ -2818,7 +2815,7 @@ _bytes{font-family: "Lucida Console",monospace !important; font-size: 12pt !impo
 </div>
 </section>
 <section id="getting-all-variable-codons-from-an-alignment">
-<h4>Getting all variable codons from an alignment<a class="headerlink" href="#getting-all-variable-codons-from-an-alignment" title="Permalink to this headline">#</a></h4>
+<h4>Getting all variable codons from an alignment<a class="headerlink" href="#getting-all-variable-codons-from-an-alignment" title="Link to this heading">#</a></h4>
 <p>This is done using the <code class="docutils literal notranslate"><span class="pre">filtered</span></code> method using the <code class="docutils literal notranslate"><span class="pre">motif_length</span></code> argument. We demonstrate this first for the <code class="docutils literal notranslate"><span class="pre">ArrayAlignment</span></code>.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -3404,9 +3401,9 @@ _bytes{font-family: "Lucida Console",monospace !important; font-size: 12pt !impo
 </section>
 </section>
 <section id="filtering-sequences">
-<h3>Filtering sequences<a class="headerlink" href="#filtering-sequences" title="Permalink to this headline">#</a></h3>
+<h3>Filtering sequences<a class="headerlink" href="#filtering-sequences" title="Link to this heading">#</a></h3>
 <section id="extracting-sequences-by-sequence-identifier-into-a-new-alignment-object">
-<h4>Extracting sequences by sequence identifier into a new alignment object<a class="headerlink" href="#extracting-sequences-by-sequence-identifier-into-a-new-alignment-object" title="Permalink to this headline">#</a></h4>
+<h4>Extracting sequences by sequence identifier into a new alignment object<a class="headerlink" href="#extracting-sequences-by-sequence-identifier-into-a-new-alignment-object" title="Link to this heading">#</a></h4>
 <p>You can use <code class="docutils literal notranslate"><span class="pre">take_seqs</span></code> to extract some sequences by sequence identifier from an alignment to a new alignment object:</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -3981,7 +3978,7 @@ _bytes{font-family: "Lucida Console",monospace !important; font-size: 12pt !impo
 </div>
 </section>
 <section id="extracting-sequences-using-an-arbitrary-function-into-a-new-alignment-object">
-<h4>Extracting sequences using an arbitrary function into a new alignment object<a class="headerlink" href="#extracting-sequences-using-an-arbitrary-function-into-a-new-alignment-object" title="Permalink to this headline">#</a></h4>
+<h4>Extracting sequences using an arbitrary function into a new alignment object<a class="headerlink" href="#extracting-sequences-using-an-arbitrary-function-into-a-new-alignment-object" title="Link to this heading">#</a></h4>
 <p>You can use <code class="docutils literal notranslate"><span class="pre">take_seqs_if</span></code> to extract sequences into a new alignment object based on whether an arbitrary function applied to the sequence evaluates to True. For example, to extract sequences which don’t contain any N bases you could do the following:</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -4061,9 +4058,9 @@ _bytes{font-family: "Lucida Console",monospace !important; font-size: 12pt !impo
 </section>
 </section>
 <section id="computing-alignment-statistics">
-<h2>Computing alignment statistics<a class="headerlink" href="#computing-alignment-statistics" title="Permalink to this headline">#</a></h2>
+<h2>Computing alignment statistics<a class="headerlink" href="#computing-alignment-statistics" title="Link to this heading">#</a></h2>
 <section id="getting-motif-counts">
-<h3>Getting motif counts<a class="headerlink" href="#getting-motif-counts" title="Permalink to this headline">#</a></h3>
+<h3>Getting motif counts<a class="headerlink" href="#getting-motif-counts" title="Link to this heading">#</a></h3>
 <p>We state the motif length we want and whether to allow gap or ambiguous characters. The latter only has meaning for IPUAC character sets (the DNA, RNA or PROTEIN moltypes). We illustrate this for the DNA moltype with motif lengths of 1 and 3.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -4198,7 +4195,7 @@ _bytes{font-family: "Lucida Console",monospace !important; font-size: 12pt !impo
 </div>
 </section>
 <section id="computing-motif-probabilities-from-an-alignment">
-<h3>Computing motif probabilities from an alignment<a class="headerlink" href="#computing-motif-probabilities-from-an-alignment" title="Permalink to this headline">#</a></h3>
+<h3>Computing motif probabilities from an alignment<a class="headerlink" href="#computing-motif-probabilities-from-an-alignment" title="Link to this heading">#</a></h3>
 <p>The method <code class="docutils literal notranslate"><span class="pre">get_motif_probs</span></code> of <code class="docutils literal notranslate"><span class="pre">Alignment</span></code> objects returns the probabilities for all motifs of a given length. For individual nucleotides:</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -4369,9 +4366,9 @@ ACA  0.002
 </div>
 </section>
 <section id="working-with-alignment-gaps">
-<h3>Working with alignment gaps<a class="headerlink" href="#working-with-alignment-gaps" title="Permalink to this headline">#</a></h3>
+<h3>Working with alignment gaps<a class="headerlink" href="#working-with-alignment-gaps" title="Link to this heading">#</a></h3>
 <section id="filtering-extracted-columns-for-the-gap-character">
-<h4>Filtering extracted columns for the gap character<a class="headerlink" href="#filtering-extracted-columns-for-the-gap-character" title="Permalink to this headline">#</a></h4>
+<h4>Filtering extracted columns for the gap character<a class="headerlink" href="#filtering-extracted-columns-for-the-gap-character" title="Link to this heading">#</a></h4>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
@@ -4393,7 +4390,7 @@ ACA  0.002
 </div>
 </section>
 <section id="calculating-the-gap-fraction">
-<h4>Calculating the gap fraction<a class="headerlink" href="#calculating-the-gap-fraction" title="Permalink to this headline">#</a></h4>
+<h4>Calculating the gap fraction<a class="headerlink" href="#calculating-the-gap-fraction" title="Link to this heading">#</a></h4>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">load_aligned_seqs</span>
@@ -4450,7 +4447,7 @@ ACA  0.002
 </div>
 </section>
 <section id="extracting-maps-of-aligned-to-unaligned-positions-i-e-gap-maps">
-<h4>Extracting maps of aligned to unaligned positions (i.e., gap maps)<a class="headerlink" href="#extracting-maps-of-aligned-to-unaligned-positions-i-e-gap-maps" title="Permalink to this headline">#</a></h4>
+<h4>Extracting maps of aligned to unaligned positions (i.e., gap maps)<a class="headerlink" href="#extracting-maps-of-aligned-to-unaligned-positions-i-e-gap-maps" title="Link to this heading">#</a></h4>
 <p>It’s often important to know how an alignment position relates to a position in one or more of the sequences in the alignment. The <code class="docutils literal notranslate"><span class="pre">gap_maps</span></code> method of the individual sequences is useful for this. To get a map of sequence to alignment positions for a specific sequence in your alignment, do the following:</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -4525,7 +4522,7 @@ ACA  0.002
 </div>
 </section>
 <section id="filtering-alignments-based-on-gaps">
-<h4>Filtering alignments based on gaps<a class="headerlink" href="#filtering-alignments-based-on-gaps" title="Permalink to this headline">#</a></h4>
+<h4>Filtering alignments based on gaps<a class="headerlink" href="#filtering-alignments-based-on-gaps" title="Link to this heading">#</a></h4>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>An alternate, computationally faster, approach to removing gaps is to use the <code class="docutils literal notranslate"><span class="pre">filtered</span></code> method as discussed in <a class="reference internal" href="#filter-positions"><span class="std std-ref">Filtering positions</span></a>.</p>
@@ -4832,7 +4829,7 @@ ACA  0.002
       
         <div class="footer-item">
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     <br/>
   </p>
 </div>

@@ -1,15 +1,14 @@
 
-
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Allowing substitution model parameters to differ between branches &#8212; cogent3 2023.09.23 documentation</title>
+    <title>Allowing substitution model parameters to differ between branches &#8212; cogent3 2023.09.24 documentation</title>
   
   
   
@@ -29,26 +28,24 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=da3cec82" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
   <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/documentation_options.js?v=d1c3a718"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/thebelab-helper.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'doc/examples/scope_model_params_on_trees';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -56,7 +53,7 @@
     <link rel="next" title="Using codon models" href="codon_models.html" />
     <link rel="prev" title="A test of the neutral theory" href="neutral_test.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
   
   
@@ -680,7 +677,7 @@ document.write(`
 </div>
 </div>
 <section id="allowing-substitution-model-parameters-to-differ-between-branches">
-<span id="scope-params-on-trees"></span><h1>Allowing substitution model parameters to differ between branches<a class="headerlink" href="#allowing-substitution-model-parameters-to-differ-between-branches" title="Permalink to this headline">#</a></h1>
+<span id="scope-params-on-trees"></span><h1>Allowing substitution model parameters to differ between branches<a class="headerlink" href="#allowing-substitution-model-parameters-to-differ-between-branches" title="Link to this heading">#</a></h1>
 <p><em>Section author: Gavin Huttley</em></p>
 <p>A common task concerns assessing how substitution model exchangeability parameters differ between evolutionary lineages. This is most commonly of interest for the case of testing for natural selection. Here I’ll demonstrate the different ways of scoping parameters across trees for the codon model case and how these can be used for evolutionary modelling.</p>
 <p>We start with the standard imports, plus using a canned codon substitution model and then load the sample data set.</p>
@@ -739,7 +736,7 @@ document.write(`
 </ul>
 <p>The next concepts include exactly what can be scoped and how. In the case of testing for distinctive periods of natural selection it is common to specify distinct values for <code class="docutils literal notranslate"><span class="pre">omega</span></code> for an edge. I’ll first illustrate some possible uses for the arguments above by setting <code class="docutils literal notranslate"><span class="pre">omega</span></code> to be distinctive for specific edges. I will set a value for omega so that printing the likelihood function illustrates what edges have been effected, but I won’t actually do any model fitting.</p>
 <section id="specifying-a-clade">
-<h2>Specifying a clade<a class="headerlink" href="#specifying-a-clade" title="Permalink to this headline">#</a></h2>
+<h2>Specifying a clade<a class="headerlink" href="#specifying-a-clade" title="Link to this heading">#</a></h2>
 <p>I’m going to cause <code class="docutils literal notranslate"><span class="pre">omega</span></code> to attain a different value for all branches aside from the primate clade and stem (<code class="docutils literal notranslate"><span class="pre">HowlerMon</span></code>, <code class="docutils literal notranslate"><span class="pre">Human</span></code>, <code class="docutils literal notranslate"><span class="pre">edge.0</span></code>).</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
@@ -867,7 +864,7 @@ document.write(`
 <p>As you can see <code class="docutils literal notranslate"><span class="pre">omega</span></code> for the primate edges I listed above have the default parameter value (1.0), while the others have what I’ve assigned. In fact, you could omit the <code class="docutils literal notranslate"><span class="pre">clade</span></code> argument as this is the default, but I think for readability of scripts it’s best to be explicit.</p>
 </section>
 <section id="specifying-a-stem">
-<h2>Specifying a stem<a class="headerlink" href="#specifying-a-stem" title="Permalink to this headline">#</a></h2>
+<h2>Specifying a stem<a class="headerlink" href="#specifying-a-stem" title="Link to this heading">#</a></h2>
 <p>This time I’ll specify the stem leading to the primates as the edge of interest.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1000,7 +997,7 @@ document.write(`
 </div>
 </section>
 <section id="specifying-clade-and-stem">
-<h2>Specifying clade and stem<a class="headerlink" href="#specifying-clade-and-stem" title="Permalink to this headline">#</a></h2>
+<h2>Specifying clade and stem<a class="headerlink" href="#specifying-clade-and-stem" title="Link to this heading">#</a></h2>
 <p>I’ll specify that both the primates and their stem are to be considered.</p>
 <div class="jupyter_cell docutils container">
 <div class="cell_output docutils container">
@@ -1132,11 +1129,11 @@ document.write(`
 </div>
 </section>
 <section id="alternate-arguments-for-specifying-edges">
-<h2>Alternate arguments for specifying edges<a class="headerlink" href="#alternate-arguments-for-specifying-edges" title="Permalink to this headline">#</a></h2>
+<h2>Alternate arguments for specifying edges<a class="headerlink" href="#alternate-arguments-for-specifying-edges" title="Link to this heading">#</a></h2>
 <p>The likelihood function <code class="docutils literal notranslate"><span class="pre">set_param_rule</span></code> method also has the arguments of <code class="docutils literal notranslate"><span class="pre">edge</span></code> and <code class="docutils literal notranslate"><span class="pre">edges</span></code>. These allow specific naming of the tree edge(s) to be affected by a rule. In general, however, the <code class="docutils literal notranslate"><span class="pre">tip_names</span></code> + <code class="docutils literal notranslate"><span class="pre">outgroup_name</span></code> combo is more robust.</p>
 </section>
 <section id="applications-of-scoped-parameters">
-<h2>Applications of scoped parameters<a class="headerlink" href="#applications-of-scoped-parameters" title="Permalink to this headline">#</a></h2>
+<h2>Applications of scoped parameters<a class="headerlink" href="#applications-of-scoped-parameters" title="Link to this heading">#</a></h2>
 <p>The general use-cases for which a tree scope can be applied are:</p>
 <ol class="arabic simple">
 <li><p>constraining all edges identified by a rule to have a specific value which is constant and not modifiable</p></li>
@@ -1765,7 +1762,7 @@ document.write(`
       
         <div class="footer-item">
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.5.0.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     <br/>
   </p>
 </div>
