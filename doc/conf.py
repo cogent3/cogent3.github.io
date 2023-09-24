@@ -37,12 +37,9 @@ extensions = [
     "sphinx.ext.mathjax",
     "sphinx.ext.todo",
     "sphinxcontrib.bibtex",
-    "sphinx_panels",
+    "sphinx_design",
     "sphinxcontrib.video",
 ]
-
-# stop sphinx-panels from including css
-# panels_add_bootstrap_css = False
 
 
 # Allow autosummary to generate stub files
