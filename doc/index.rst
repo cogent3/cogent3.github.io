@@ -45,7 +45,7 @@ Making Sense from Sequence
     doc/draw/index
     doc/install
     doc/index
-    doc/general
+    doc/community
 
 .. toctree::
     :hidden:
