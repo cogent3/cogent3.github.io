@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Turn your functions into composable apps &#8212; cogent3 2023.10.01 documentation</title>
+    <title>Turn your functions into composable apps &#8212; cogent3 2023.10.04 documentation</title>
   
   
   
@@ -39,7 +39,7 @@
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
   <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
 
-    <script src="../../_static/documentation_options.js?v=78ca2e5f"></script>
+    <script src="../../_static/documentation_options.js?v=19188162"></script>
     <script src="../../_static/doctools.js?v=888ff710"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/thebelab-helper.js"></script>
@@ -689,6 +689,72 @@ document.write(`
 <p class="admonition-title">Note</p>
 <p>At present, your function can have only one required argument.</p>
 </div>
+<section id="supported-cogent3-types">
+<h2>Supported cogent3 types<a class="headerlink" href="#supported-cogent3-types" title="Link to this heading">#</a></h2>
+<p>If you function takes or returns cogent3 types, you can use the existing type hints. To see what these are, use the <code class="docutils literal notranslate"><span class="pre">defined_types()</span></code> function.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.app.typing</span> <span class="kn">import</span> <span class="n">defined_types</span>
+
+<span class="n">defined_types</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div class="c3table">
+
+<style>
+.c3table table {margin: 10px 0;}
+.c3table tr:last-child {border-bottom: 1px solid #000;} 
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.25); margin: 10px; font-weight: 600;}
+.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+.c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
+</style>
+
+<table>
+
+<caption>
+<span class="cell_title">To use a type hint, from cogent3.app import typing</span> <br><span class="cell_legend">An app which uses one of these hints is compatible with the indicated types.</span></br>
+</caption>
+<thead class="head_cell">
+<th>type hint</th><th>includes</th>
+</thead>
+<tbody>
+<tr><td class="index"><span class="c3col_left">AlignedSeqsType</span></td><td><span class="c3col_left">ArrayAlignment, Alignment</span></td></tr>
+<tr><td class="index"><span class="c3col_left">UnalignedSeqsType</span></td><td><span class="c3col_left">SequenceCollection</span></td></tr>
+<tr><td class="index"><span class="c3col_left">SeqsCollectionType</span></td><td><span class="c3col_left">SequenceCollection, ArrayAlignment, Alignment</span></td></tr>
+<tr><td class="index"><span class="c3col_left">SeqType</span></td><td><span class="c3col_left">ProteinSequence, Sequence, ProteinWithStopSequence, ByteSequence, DnaSequence, RnaSequence</span></td></tr>
+<tr><td class="index"><span class="c3col_left">PairwiseDistanceType</span></td><td><span class="c3col_left">DistanceMatrix</span></td></tr>
+<tr><td class="index"><span class="c3col_left">TabularType</span></td><td><span class="c3col_left">Table, DictArray, DistanceMatrix</span></td></tr>
+<tr><td class="index"><span class="c3col_left">TreeType</span></td><td><span class="c3col_left">TreeNode, PhyloNode</span></td></tr>
+<tr><td class="index"><span class="c3col_left">SerialisableType</span></td><td><span class="c3col_left">SerialisableType</span></td></tr>
+<tr><td class="index"><span class="c3col_left">BootstrapResultType</span></td><td><span class="c3col_left">bootstrap_result</span></td></tr>
+<tr><td class="index"><span class="c3col_left">HypothesisResultType</span></td><td><span class="c3col_left">hypothesis_result</span></td></tr>
+<tr><td class="index"><span class="c3col_left">ModelCollectionResultType</span></td><td><span class="c3col_left">model_collection_result</span></td></tr>
+<tr><td class="index"><span class="c3col_left">ModelResultType</span></td><td><span class="c3col_left">model_result</span></td></tr>
+<tr><td class="index"><span class="c3col_left">TabularResultType</span></td><td><span class="c3col_left">tabular_result</span></td></tr>
+<tr><td class="index"><span class="c3col_left">GenericResultType</span></td><td><span class="c3col_left">generic_result</span></td></tr>
+<tr><td class="index"><span class="c3col_left">ResultType</span></td><td><span class="c3col_left">model_result, generic_result, tabular_result, hypothesis_result, bootstrap_result</span></td></tr>
+<tr><td class="index"><span class="c3col_left">IdentifierType</span></td><td><span class="c3col_left">IdentifierType</span></td></tr>
+</tbody>
+</table>
+
+</div></div></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You don’t have to use cogent3 types, you can also use standard python types.</p>
+</div>
+</section>
 <section id="a-simple-example">
 <h2>A simple example<a class="headerlink" href="#a-simple-example" title="Link to this heading">#</a></h2>
 <p>Let’s make an app that returns the elements of an alignment up to a specified index, with the index being a keyword argument. We now define a decorated function <code class="docutils literal notranslate"><span class="pre">up_to</span></code> and import the type hints and the decorator.</p>
@@ -908,6 +974,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supported-cogent3-types">Supported cogent3 types</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-simple-example">A simple example</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#renaming-sequences">Renaming sequences</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-user-app-with-a-different-output-type">A user app with a different output type</a></li>
