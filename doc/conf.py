@@ -47,7 +47,7 @@ autosummary_generate = True
 add_module_names = False  # don't include module path to module/func names
 # Prevent numpydoc from requiring stub files for methods
 numpydoc_class_members_toctree = False
-
+html_logo = "_static/c3-logo.png"
 bibtex_bibfiles = ["cogent3.bib"]
 
 templates_path = ["doc/templates"]
@@ -97,10 +97,6 @@ html_theme_options = {
     # "navbar_center": ["navbar-nav", "navbar-icon-links"],
     # "navbar_end": [],
     "header_links_before_dropdown": 5,
-    "logo": {
-        "text": "cogent3",
-        "alt_text": "cogent3",
-    },
     "collapse_navigation": False,
 }
 # https://github.com/cogent3/cogent3/discussions
