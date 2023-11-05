@@ -48,7 +48,7 @@ add_module_names = False  # don't include module path to module/func names
 # Prevent numpydoc from requiring stub files for methods
 numpydoc_class_members_toctree = False
 html_logo = "_static/c3-logo.png"
-html_favicon = "_static/c3-logo.ico"
+html_favicon = "_static/c3-square.svg"
 bibtex_bibfiles = ["cogent3.bib"]
 
 templates_path = ["doc/templates"]
