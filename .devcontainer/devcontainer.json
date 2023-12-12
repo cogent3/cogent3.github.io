@@ -1,0 +1,18 @@
+{
+    "name": "Cogent3 documentation",
+    "dockerFile": "../Dockerfile",
+    "settings": {
+        "terminal.integrated.shell.linux": "/bin/zsh"
+    },
+    "runArgs": [
+        "-v", 
+        "/run/host-services/ssh-auth.sock:/ssh-auth.sock", 
+        "-e", 
+        "SSH_AUTH_SOCK=/ssh-auth.sock"
+      ],
+    "postCreateCommand": "python -m venv c3org && echo 'source c3org/bin/activate' >> ~/.zshrc",
+    "extensions": ["ms-python.python"],
+    "workspaceFolder": "/cogent3.github.io",
+    "mounts": ["source=${localWorkspaceFolder},target=/cogent3.github.io,type=bind,consistency=cached"]
+
+}
