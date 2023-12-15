@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Alignment &#8212; cogent3 2023.12.13 documentation</title>
+    <title>Alignment &#8212; cogent3 2023.12.15 documentation</title>
   
   
   
@@ -39,7 +39,7 @@
 <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
   <script src="../../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script src="../../../../_static/documentation_options.js?v=767a2d0c"></script>
+    <script src="../../../../_static/documentation_options.js?v=198b39d8"></script>
     <script src="../../../../_static/doctools.js?v=888ff710"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/thebelab-helper.js"></script>
@@ -130,8 +130,8 @@
       
     
     
-    <img src="../../../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2023.12.13 documentation - Home"/>
-    <script>document.write(`<img src="../../../../_static/c3-logo.png" class="logo__image only-dark" alt="cogent3 2023.12.13 documentation - Home"/>`);</script>
+    <img src="../../../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2023.12.15 documentation - Home"/>
+    <script>document.write(`<img src="../../../../_static/c3-logo.png" class="logo__image only-dark" alt="cogent3 2023.12.15 documentation - Home"/>`);</script>
   
   
 </a></div>
@@ -705,6 +705,7 @@ document.write(`
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>annotation_db</strong></dt><dd></dd>
+<dt><strong>named_seqs</strong></dt><dd></dd>
 <dt><a class="reference internal" href="#cogent3.core.alignment.Alignment.num_seqs" title="cogent3.core.alignment.Alignment.num_seqs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">num_seqs</span></code></a></dt><dd><p>Returns the number of sequences in the alignment.</p>
 </dd>
 <dt><a class="reference internal" href="#cogent3.core.alignment.Alignment.positions" title="cogent3.core.alignment.Alignment.positions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">positions</span></code></a></dt><dd><p>Iterates over positions in the alignment, in order.</p>
@@ -830,160 +831,157 @@ document.write(`
 <tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.get_translation" title="cogent3.core.alignment.Alignment.get_translation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_translation</span></code></a>([gc, incomplete_ok, ...])</p></td>
 <td><p>translate from nucleic acid to protein</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.has_terminal_stop" title="cogent3.core.alignment.Alignment.has_terminal_stop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_terminal_stop</span></code></a>([gc, strict, allow_partial])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.has_terminal_stop" title="cogent3.core.alignment.Alignment.has_terminal_stop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_terminal_stop</span></code></a>([gc, strict])</p></td>
 <td><p>Returns True if any sequence has a terminal stop codon.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.has_terminal_stops" title="cogent3.core.alignment.Alignment.has_terminal_stops"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_terminal_stops</span></code></a>(**kwargs)</p></td>
-<td><p>deprecated</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.information_plot" title="cogent3.core.alignment.Alignment.information_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">information_plot</span></code></a>([width, height, window, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.information_plot" title="cogent3.core.alignment.Alignment.information_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">information_plot</span></code></a>([width, height, window, ...])</p></td>
 <td><p>plot information per position</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.is_ragged" title="cogent3.core.alignment.Alignment.is_ragged"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_ragged</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.is_ragged" title="cogent3.core.alignment.Alignment.is_ragged"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_ragged</span></code></a>()</p></td>
 <td><p>Returns True if alignment has sequences of different lengths.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.iter_positions" title="cogent3.core.alignment.Alignment.iter_positions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">iter_positions</span></code></a>([pos_order])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.iter_positions" title="cogent3.core.alignment.Alignment.iter_positions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">iter_positions</span></code></a>([pos_order])</p></td>
 <td><p>Iterates over positions in the alignment, in order.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.iter_selected" title="cogent3.core.alignment.Alignment.iter_selected"><code class="xref py py-obj docutils literal notranslate"><span class="pre">iter_selected</span></code></a>([seq_order, pos_order])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.iter_selected" title="cogent3.core.alignment.Alignment.iter_selected"><code class="xref py py-obj docutils literal notranslate"><span class="pre">iter_selected</span></code></a>([seq_order, pos_order])</p></td>
 <td><p>Iterates over elements in the alignment.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.iter_seqs" title="cogent3.core.alignment.Alignment.iter_seqs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">iter_seqs</span></code></a>([seq_order])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.iter_seqs" title="cogent3.core.alignment.Alignment.iter_seqs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">iter_seqs</span></code></a>([seq_order])</p></td>
 <td><p>Iterates over values (sequences) in the alignment, in order.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.iupac_consensus" title="cogent3.core.alignment.Alignment.iupac_consensus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">iupac_consensus</span></code></a>([alphabet, allow_gaps])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.iupac_consensus" title="cogent3.core.alignment.Alignment.iupac_consensus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">iupac_consensus</span></code></a>([alphabet, allow_gaps])</p></td>
 <td><p>Returns string containing IUPAC consensus sequence of the alignment.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.majority_consensus" title="cogent3.core.alignment.Alignment.majority_consensus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">majority_consensus</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.majority_consensus" title="cogent3.core.alignment.Alignment.majority_consensus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">majority_consensus</span></code></a>()</p></td>
 <td><p>Returns list containing most frequent item at each position.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.make_feature" title="cogent3.core.alignment.Alignment.make_feature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_feature</span></code></a>(*, feature[, on_alignment])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.make_feature" title="cogent3.core.alignment.Alignment.make_feature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_feature</span></code></a>(*, feature[, on_alignment])</p></td>
 <td><p>create a feature on named sequence, or on the alignment itself</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.matching_ref" title="cogent3.core.alignment.Alignment.matching_ref"><code class="xref py py-obj docutils literal notranslate"><span class="pre">matching_ref</span></code></a>(ref_name, gap_fraction, gap_run)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.matching_ref" title="cogent3.core.alignment.Alignment.matching_ref"><code class="xref py py-obj docutils literal notranslate"><span class="pre">matching_ref</span></code></a>(ref_name, gap_fraction, gap_run)</p></td>
 <td><p>Returns new alignment with seqs well aligned with a reference.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.no_degenerates" title="cogent3.core.alignment.Alignment.no_degenerates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">no_degenerates</span></code></a>([motif_length, allow_gap])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.no_degenerates" title="cogent3.core.alignment.Alignment.no_degenerates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">no_degenerates</span></code></a>([motif_length, allow_gap])</p></td>
 <td><p>returns new alignment without degenerate characters</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.omit_bad_seqs" title="cogent3.core.alignment.Alignment.omit_bad_seqs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omit_bad_seqs</span></code></a>([quantile])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.omit_bad_seqs" title="cogent3.core.alignment.Alignment.omit_bad_seqs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omit_bad_seqs</span></code></a>([quantile])</p></td>
 <td><p>Returns new alignment without sequences with a number of uniquely introduced gaps exceeding quantile</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.omit_gap_pos" title="cogent3.core.alignment.Alignment.omit_gap_pos"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omit_gap_pos</span></code></a>([allowed_gap_frac, motif_length])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.omit_gap_pos" title="cogent3.core.alignment.Alignment.omit_gap_pos"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omit_gap_pos</span></code></a>([allowed_gap_frac, motif_length])</p></td>
 <td><p>Returns new alignment where all cols (motifs) have &lt;= allowed_gap_frac gaps.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.omit_gap_runs" title="cogent3.core.alignment.Alignment.omit_gap_runs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omit_gap_runs</span></code></a>([allowed_run])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.omit_gap_runs" title="cogent3.core.alignment.Alignment.omit_gap_runs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omit_gap_runs</span></code></a>([allowed_run])</p></td>
 <td><p>Returns new alignment where all seqs have runs of gaps &lt;=allowed_run.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.omit_gap_seqs" title="cogent3.core.alignment.Alignment.omit_gap_seqs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omit_gap_seqs</span></code></a>([allowed_gap_frac])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.omit_gap_seqs" title="cogent3.core.alignment.Alignment.omit_gap_seqs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">omit_gap_seqs</span></code></a>([allowed_gap_frac])</p></td>
 <td><p>Returns new alignment with seqs that have &lt;= allowed_gap_frac.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.pad_seqs" title="cogent3.core.alignment.Alignment.pad_seqs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pad_seqs</span></code></a>([pad_length])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.pad_seqs" title="cogent3.core.alignment.Alignment.pad_seqs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pad_seqs</span></code></a>([pad_length])</p></td>
 <td><p>Returns copy in which sequences are padded to same length.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.probs_per_pos" title="cogent3.core.alignment.Alignment.probs_per_pos"><code class="xref py py-obj docutils literal notranslate"><span class="pre">probs_per_pos</span></code></a>([motif_length, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.probs_per_pos" title="cogent3.core.alignment.Alignment.probs_per_pos"><code class="xref py py-obj docutils literal notranslate"><span class="pre">probs_per_pos</span></code></a>([motif_length, ...])</p></td>
 <td><p>returns MotifFreqsArray per position</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.probs_per_seq" title="cogent3.core.alignment.Alignment.probs_per_seq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">probs_per_seq</span></code></a>([motif_length, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.probs_per_seq" title="cogent3.core.alignment.Alignment.probs_per_seq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">probs_per_seq</span></code></a>([motif_length, ...])</p></td>
 <td><p>return MotifFreqsArray per sequence</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.quick_tree" title="cogent3.core.alignment.Alignment.quick_tree"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quick_tree</span></code></a>([calc, bootstrap, drop_invalid, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.quick_tree" title="cogent3.core.alignment.Alignment.quick_tree"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quick_tree</span></code></a>([calc, bootstrap, drop_invalid, ...])</p></td>
 <td><p>Returns pairwise distances between sequences.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.rc" title="cogent3.core.alignment.Alignment.rc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rc</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.rc" title="cogent3.core.alignment.Alignment.rc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rc</span></code></a>()</p></td>
 <td><p>Returns the reverse complement alignment</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.rename_seqs" title="cogent3.core.alignment.Alignment.rename_seqs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rename_seqs</span></code></a>(renamer)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.rename_seqs" title="cogent3.core.alignment.Alignment.rename_seqs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rename_seqs</span></code></a>(renamer)</p></td>
 <td><p>returns new instance with sequences renamed</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.replace_seqs" title="cogent3.core.alignment.Alignment.replace_seqs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">replace_seqs</span></code></a>(seqs[, aa_to_codon])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.replace_seqs" title="cogent3.core.alignment.Alignment.replace_seqs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">replace_seqs</span></code></a>(seqs[, aa_to_codon])</p></td>
 <td><p>Returns new alignment with same shape but with data taken from seqs.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.reverse_complement" title="cogent3.core.alignment.Alignment.reverse_complement"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reverse_complement</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.reverse_complement" title="cogent3.core.alignment.Alignment.reverse_complement"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reverse_complement</span></code></a>()</p></td>
 <td><p>Returns the reverse complement alignment.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.sample" title="cogent3.core.alignment.Alignment.sample"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sample</span></code></a>([n, with_replacement, motif_length, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.sample" title="cogent3.core.alignment.Alignment.sample"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sample</span></code></a>([n, with_replacement, motif_length, ...])</p></td>
 <td><p>Returns random sample of positions from self, e.g. to bootstrap.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.seqlogo" title="cogent3.core.alignment.Alignment.seqlogo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">seqlogo</span></code></a>([width, height, wrap, vspace, colours])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.seqlogo" title="cogent3.core.alignment.Alignment.seqlogo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">seqlogo</span></code></a>([width, height, wrap, vspace, colours])</p></td>
 <td><p>returns Drawable sequence logo using mutual information</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.set_repr_policy" title="cogent3.core.alignment.Alignment.set_repr_policy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_repr_policy</span></code></a>([num_seqs, num_pos, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.set_repr_policy" title="cogent3.core.alignment.Alignment.set_repr_policy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_repr_policy</span></code></a>([num_seqs, num_pos, ...])</p></td>
 <td><p>specify policy for repr(self)</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.sliding_windows" title="cogent3.core.alignment.Alignment.sliding_windows"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sliding_windows</span></code></a>(window, step[, start, end])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.sliding_windows" title="cogent3.core.alignment.Alignment.sliding_windows"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sliding_windows</span></code></a>(window, step[, start, end])</p></td>
 <td><p>Generator yielding new alignments of given length and interval.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.strand_symmetry" title="cogent3.core.alignment.Alignment.strand_symmetry"><code class="xref py py-obj docutils literal notranslate"><span class="pre">strand_symmetry</span></code></a>([motif_length])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.strand_symmetry" title="cogent3.core.alignment.Alignment.strand_symmetry"><code class="xref py py-obj docutils literal notranslate"><span class="pre">strand_symmetry</span></code></a>([motif_length])</p></td>
 <td><p>returns dict of strand symmetry test results per seq</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.take_positions" title="cogent3.core.alignment.Alignment.take_positions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">take_positions</span></code></a>(cols[, negate])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.take_positions" title="cogent3.core.alignment.Alignment.take_positions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">take_positions</span></code></a>(cols[, negate])</p></td>
 <td><p>Returns new Alignment containing only specified positions.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.take_positions_if" title="cogent3.core.alignment.Alignment.take_positions_if"><code class="xref py py-obj docutils literal notranslate"><span class="pre">take_positions_if</span></code></a>(f[, negate])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.take_positions_if" title="cogent3.core.alignment.Alignment.take_positions_if"><code class="xref py py-obj docutils literal notranslate"><span class="pre">take_positions_if</span></code></a>(f[, negate])</p></td>
 <td><p>Returns new Alignment containing cols where f(col) is True.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.take_seqs" title="cogent3.core.alignment.Alignment.take_seqs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">take_seqs</span></code></a>(seqs[, negate])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.take_seqs" title="cogent3.core.alignment.Alignment.take_seqs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">take_seqs</span></code></a>(seqs[, negate])</p></td>
 <td><p>Returns new Alignment containing only specified seqs.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.take_seqs_if" title="cogent3.core.alignment.Alignment.take_seqs_if"><code class="xref py py-obj docutils literal notranslate"><span class="pre">take_seqs_if</span></code></a>(f[, negate])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.take_seqs_if" title="cogent3.core.alignment.Alignment.take_seqs_if"><code class="xref py py-obj docutils literal notranslate"><span class="pre">take_seqs_if</span></code></a>(f[, negate])</p></td>
 <td><p>Returns new Alignment containing seqs where f(row) is True.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.to_dict" title="cogent3.core.alignment.Alignment.to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.to_dict" title="cogent3.core.alignment.Alignment.to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code></a>()</p></td>
 <td><p>Returns the alignment as dict of names -&gt; strings.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.to_dna" title="cogent3.core.alignment.Alignment.to_dna"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dna</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.to_dna" title="cogent3.core.alignment.Alignment.to_dna"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dna</span></code></a>()</p></td>
 <td><p>returns copy of self as an alignment of DNA moltype seqs</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.to_fasta" title="cogent3.core.alignment.Alignment.to_fasta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_fasta</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.to_fasta" title="cogent3.core.alignment.Alignment.to_fasta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_fasta</span></code></a>()</p></td>
 <td><p>Return alignment in Fasta format</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.to_html" title="cogent3.core.alignment.Alignment.to_html"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_html</span></code></a>([name_order, wrap, limit, ref_name, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.to_html" title="cogent3.core.alignment.Alignment.to_html"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_html</span></code></a>([name_order, wrap, limit, ref_name, ...])</p></td>
 <td><p>returns html with embedded styles for sequence colouring</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.to_json" title="cogent3.core.alignment.Alignment.to_json"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_json</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.to_json" title="cogent3.core.alignment.Alignment.to_json"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_json</span></code></a>()</p></td>
 <td><p>returns json formatted string</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.to_moltype" title="cogent3.core.alignment.Alignment.to_moltype"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_moltype</span></code></a>(moltype)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.to_moltype" title="cogent3.core.alignment.Alignment.to_moltype"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_moltype</span></code></a>(moltype)</p></td>
 <td><p>returns copy of self with moltype seqs</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.to_nexus" title="cogent3.core.alignment.Alignment.to_nexus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_nexus</span></code></a>(seq_type[, wrap])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.to_nexus" title="cogent3.core.alignment.Alignment.to_nexus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_nexus</span></code></a>(seq_type[, wrap])</p></td>
 <td><p>Return alignment in NEXUS format and mapping to sequence ids</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.to_phylip" title="cogent3.core.alignment.Alignment.to_phylip"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_phylip</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.to_phylip" title="cogent3.core.alignment.Alignment.to_phylip"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_phylip</span></code></a>()</p></td>
 <td><p>Return alignment in PHYLIP format and mapping to sequence ids</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.to_pretty" title="cogent3.core.alignment.Alignment.to_pretty"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_pretty</span></code></a>([name_order, wrap])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.to_pretty" title="cogent3.core.alignment.Alignment.to_pretty"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_pretty</span></code></a>([name_order, wrap])</p></td>
 <td><p>returns a string representation of the alignment in pretty print format</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.to_protein" title="cogent3.core.alignment.Alignment.to_protein"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_protein</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.to_protein" title="cogent3.core.alignment.Alignment.to_protein"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_protein</span></code></a>()</p></td>
 <td><p>returns copy of self as an alignment of PROTEIN moltype seqs</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.to_rich_dict" title="cogent3.core.alignment.Alignment.to_rich_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_rich_dict</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.to_rich_dict" title="cogent3.core.alignment.Alignment.to_rich_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_rich_dict</span></code></a>()</p></td>
 <td><p>returns detailed content including info and moltype attributes</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.to_rna" title="cogent3.core.alignment.Alignment.to_rna"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_rna</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.to_rna" title="cogent3.core.alignment.Alignment.to_rna"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_rna</span></code></a>()</p></td>
 <td><p>returns copy of self as an alignment of RNA moltype seqs</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.to_type" title="cogent3.core.alignment.Alignment.to_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_type</span></code></a>([array_align, moltype, alphabet])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.to_type" title="cogent3.core.alignment.Alignment.to_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_type</span></code></a>([array_align, moltype, alphabet])</p></td>
 <td><p>returns alignment of type indicated by array_align</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.trim_stop_codons" title="cogent3.core.alignment.Alignment.trim_stop_codons"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trim_stop_codons</span></code></a>([gc, strict, allow_partial])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.trim_stop_codons" title="cogent3.core.alignment.Alignment.trim_stop_codons"><code class="xref py py-obj docutils literal notranslate"><span class="pre">trim_stop_codons</span></code></a>([gc, strict])</p></td>
 <td><p>Removes any terminal stop codons from the sequences</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.variable_positions" title="cogent3.core.alignment.Alignment.variable_positions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">variable_positions</span></code></a>([include_gap_motif])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.variable_positions" title="cogent3.core.alignment.Alignment.variable_positions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">variable_positions</span></code></a>([include_gap_motif])</p></td>
 <td><p>Return a list of variable position indexes.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.with_gaps_from" title="cogent3.core.alignment.Alignment.with_gaps_from"><code class="xref py py-obj docutils literal notranslate"><span class="pre">with_gaps_from</span></code></a>(template)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.with_gaps_from" title="cogent3.core.alignment.Alignment.with_gaps_from"><code class="xref py py-obj docutils literal notranslate"><span class="pre">with_gaps_from</span></code></a>(template)</p></td>
 <td><p>Same alignment but overwritten with the gaps from 'template'</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.with_masked_annotations" title="cogent3.core.alignment.Alignment.with_masked_annotations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">with_masked_annotations</span></code></a>(biotypes[, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.with_masked_annotations" title="cogent3.core.alignment.Alignment.with_masked_annotations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">with_masked_annotations</span></code></a>(biotypes[, ...])</p></td>
 <td><p>returns an alignment with annot_types regions replaced by mask_char if shadow is False, otherwise all other regions are masked.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.with_modified_termini" title="cogent3.core.alignment.Alignment.with_modified_termini"><code class="xref py py-obj docutils literal notranslate"><span class="pre">with_modified_termini</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.with_modified_termini" title="cogent3.core.alignment.Alignment.with_modified_termini"><code class="xref py py-obj docutils literal notranslate"><span class="pre">with_modified_termini</span></code></a>()</p></td>
 <td><p>Changes the termini to include termini char instead of gapmotif.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.write" title="cogent3.core.alignment.Alignment.write"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write</span></code></a>([filename, format])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Alignment.write" title="cogent3.core.alignment.Alignment.write"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write</span></code></a>([filename, format])</p></td>
 <td><p>Write the alignment to a file, preserving order of sequences.</p></td>
 </tr>
 </tbody>
@@ -1779,7 +1777,7 @@ raises a ValueError if False</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cogent3.core.alignment.Alignment.has_terminal_stop">
-<span class="sig-name descname"><span class="pre">has_terminal_stop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_partial</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#cogent3.core.alignment.Alignment.has_terminal_stop" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">has_terminal_stop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#cogent3.core.alignment.Alignment.has_terminal_stop" title="Link to this definition">#</a></dt>
 <dd><p>Returns True if any sequence has a terminal stop codon.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1792,12 +1790,6 @@ or name</p>
 </dl>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cogent3.core.alignment.Alignment.has_terminal_stops">
-<span class="sig-name descname"><span class="pre">has_terminal_stops</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#cogent3.core.alignment.Alignment.has_terminal_stops" title="Link to this definition">#</a></dt>
-<dd><p>deprecated</p>
 </dd></dl>
 
 <dl class="py method">
@@ -1938,6 +1930,11 @@ originals).</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="cogent3.core.alignment.Alignment.moltype">
 <span class="sig-name descname"><span class="pre">moltype</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">MolType(('a',</span> <span class="pre">'b',</span> <span class="pre">'c',</span> <span class="pre">'d',</span> <span class="pre">'e',</span> <span class="pre">'f',</span> <span class="pre">'g',</span> <span class="pre">'h',</span> <span class="pre">'i',</span> <span class="pre">'j',</span> <span class="pre">'k',</span> <span class="pre">'l',</span> <span class="pre">'m',</span> <span class="pre">'n',</span> <span class="pre">'o',</span> <span class="pre">'p',</span> <span class="pre">'q',</span> <span class="pre">'r',</span> <span class="pre">'s',</span> <span class="pre">'t',</span> <span class="pre">'u',</span> <span class="pre">'v',</span> <span class="pre">'w',</span> <span class="pre">'x',</span> <span class="pre">'y',</span> <span class="pre">'z',</span> <span class="pre">'A',</span> <span class="pre">'B',</span> <span class="pre">'C',</span> <span class="pre">'D',</span> <span class="pre">'E',</span> <span class="pre">'F',</span> <span class="pre">'G',</span> <span class="pre">'H',</span> <span class="pre">'I',</span> <span class="pre">'J',</span> <span class="pre">'K',</span> <span class="pre">'L',</span> <span class="pre">'M',</span> <span class="pre">'N',</span> <span class="pre">'O',</span> <span class="pre">'P',</span> <span class="pre">'Q',</span> <span class="pre">'R',</span> <span class="pre">'S',</span> <span class="pre">'T',</span> <span class="pre">'U',</span> <span class="pre">'V',</span> <span class="pre">'W',</span> <span class="pre">'X',</span> <span class="pre">'Y',</span> <span class="pre">'Z'))</span></em><a class="headerlink" href="#cogent3.core.alignment.Alignment.moltype" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cogent3.core.alignment.Alignment.named_seqs">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">named_seqs</span></span><a class="headerlink" href="#cogent3.core.alignment.Alignment.named_seqs" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -2457,7 +2454,7 @@ Alignment class. Conversion to ArrayAlignment loses annotations.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cogent3.core.alignment.Alignment.trim_stop_codons">
-<span class="sig-name descname"><span class="pre">trim_stop_codons</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_partial</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.alignment.Alignment.trim_stop_codons" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">trim_stop_codons</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.alignment.Alignment.trim_stop_codons" title="Link to this definition">#</a></dt>
 <dd><p>Removes any terminal stop codons from the sequences</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -2633,7 +2630,6 @@ suffix.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.alignment.Alignment.get_similar"><code class="docutils literal notranslate"><span class="pre">Alignment.get_similar()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.alignment.Alignment.get_translation"><code class="docutils literal notranslate"><span class="pre">Alignment.get_translation()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.alignment.Alignment.has_terminal_stop"><code class="docutils literal notranslate"><span class="pre">Alignment.has_terminal_stop()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.alignment.Alignment.has_terminal_stops"><code class="docutils literal notranslate"><span class="pre">Alignment.has_terminal_stops()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.alignment.Alignment.information_plot"><code class="docutils literal notranslate"><span class="pre">Alignment.information_plot()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.alignment.Alignment.is_array"><code class="docutils literal notranslate"><span class="pre">Alignment.is_array</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.alignment.Alignment.is_ragged"><code class="docutils literal notranslate"><span class="pre">Alignment.is_ragged()</span></code></a></li>
@@ -2645,6 +2641,7 @@ suffix.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.alignment.Alignment.make_feature"><code class="docutils literal notranslate"><span class="pre">Alignment.make_feature()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.alignment.Alignment.matching_ref"><code class="docutils literal notranslate"><span class="pre">Alignment.matching_ref()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.alignment.Alignment.moltype"><code class="docutils literal notranslate"><span class="pre">Alignment.moltype</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.alignment.Alignment.named_seqs"><code class="docutils literal notranslate"><span class="pre">Alignment.named_seqs</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.alignment.Alignment.no_degenerates"><code class="docutils literal notranslate"><span class="pre">Alignment.no_degenerates()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.alignment.Alignment.num_seqs"><code class="docutils literal notranslate"><span class="pre">Alignment.num_seqs</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.alignment.Alignment.omit_bad_seqs"><code class="docutils literal notranslate"><span class="pre">Alignment.omit_bad_seqs()</span></code></a></li>
