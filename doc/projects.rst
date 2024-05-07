@@ -5,11 +5,9 @@ Projects using ``cogent3``
 If you want your projected added to this list, make a PR!
 
 `EnsemblLite <https://github.com/cogent3/EnsemblLite>`_
-    Command line tool for localising subsets of Ensembl data and providing
-    a command line interface for querying.
-
-`HomologSampler <https://github.com/cogent3/homologsampler>`_
-    Command line application for sampling related genes from Ensembl.
+    Command line tool for localising subsets of Ensembl data. It provides
+    a command line interface for sampling related genes and whole genome
+    alignments.
 
 `c3dev <https://github.com/cogent3/c3dev>`_
     Tools for development of cogent3 and replated projects.
