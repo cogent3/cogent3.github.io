@@ -4,11 +4,10 @@ Projects using ``cogent3``
 
 If you want your projected added to this list, make a PR!
 
-`EnsemblDb3 <https://github.com/cogent3/ensembldb3>`_
-    Python API for managing and querying ensembl.org MySQL databases.
-
-`HomologSampler <https://github.com/cogent3/homologsampler>`_
-    Command line application for sampling related genes from Ensembl.
+`EnsemblLite <https://github.com/cogent3/EnsemblLite>`_
+    Command line tool for localising subsets of Ensembl data. It provides
+    a command line interface for sampling related genes and whole genome
+    alignments.
 
 `c3dev <https://github.com/cogent3/c3dev>`_
     Tools for development of cogent3 and replated projects.
