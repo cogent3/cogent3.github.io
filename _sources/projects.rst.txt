@@ -4,6 +4,12 @@ Projects using ``cogent3``
 
 If you want your projected added to this list, make a PR!
 
+`Spectral cluster Supertree <https://pypi.org/project/sc-supertree/>`_
+    Spectral Cluster Supertree is a state-of-the-art algorithm for constructing rooted supertrees from collections of rooted source trees.
+
+`piqtree2 <https://pypi.org/project/piqtree2/>`_
+    piqtree2 is a library that allows you to use IQ-TREE2 directly from Python! The interface with Python is through cogent3 objects.
+
 `EnsemblLite <https://github.com/cogent3/EnsemblLite>`_
     Command line tool for localising subsets of Ensembl data. It provides
     a command line interface for sampling related genes and whole genome
