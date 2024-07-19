@@ -10,7 +10,6 @@ Making Sense from Sequence
 
         ``cogent3`` provides an extensive suite of capabilities for manipulating and analysing sequence data. For instance, the ability to `read standard biological data formats <doc/cookbook/manipulating_biological_data.html>`_, manipulate sequences `by their annotations <doc/examples/seq_features.html>`_, to perform multiple sequence alignment (`app docs`_) using any of our substitution models, `phylogenetic reconstruction <doc/examples/index.html#phylogenetic-reconstruction>`_ and tree manipulation, manipulation of `tabular data <doc/cookbook/tables.html>`_, visualisation of phylogenies (`image gallery`_) and much more.
 
-
         .. dropdown:: 🎬 Data wrangling with sequence annotations
 
             .. video:: https://user-images.githubusercontent.com/3102996/253847297-2611cda8-e078-4b86-a269-43fbf6ced14c.mp4
@@ -34,6 +33,30 @@ Making Sense from Sequence
 
             .. video:: https://user-images.githubusercontent.com/3102996/253849168-a821de1a-1aad-4761-970f-e365f6b3b1cd.mp4
                 :width: 400
+
+
+📣 New Features & Announcements
+===============================
+
+.. dropdown:: 🆕 Supporting third-party apps as plugins 🔌
+
+    Cogent3 now provides support for plugins! Third-party developers can deploy their code as cogent3 apps with just a few lines. See the app `demo project <https://github.com/cogent3/app_template>`_ for an example of how easy it is to share your cogent3 apps.
+
+    Please post any questions you have about writing apps or sharing them on `cogent3 discussions <https://github.com/cogent3/cogent3/discussions>`_.
+
+.. dropdown:: 🆕 The developers of Cogent3 and IQ-TREE2 announce piqtree2 🎉
+
+    Speaking of plugins, our first major third-party plugin is `piqtree2 <https://pypi.org/project/piqtree2>`_. Try it out and `give us feedback <https://github.com/iqtree/piqtree2/discussions>`_.
+
+.. dropdown:: 🆕 New core data types improve efficiency and flexibility
+
+    The cogent3 development team 👾 are hard at work modernising cogent3 core objects 💪🛠.
+
+    In this release, the ``Sequence``, ``SequenceCollection``, ``MolType``, ``GeneticCode``, and alphabet classes have all been rewritten from scratch to simplify the code while improving its flexibility and performance. (We're working on alignments for the next release.)
+
+    The "new-style" objects enhance performance by supporting the access of the underlying data in various formats (i.e. ``numpy`` arrays, bytes or strings). You can create "new-style" objects by setting the ``new_type=True`` argument in top-level functions (``make_seq``, ``load_seq``, ``make_unaligned_seqs``, ``get_moltype``, ``get_code``). These are not yet the default and are not fully integrated into the existing code. They can also differ in their API relative to the classes they replace. 
+
+    We encourage experimentation in cases where integration with old objects is NOT required and `look forward to any feedback <https://github.com/cogent3/cogent3/discussions>`_!
 
 
 .. the ordering of the index items below is critical since it defines the web site header!
