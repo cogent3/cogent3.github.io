@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>GeneticCode &#8212; cogent3 2024.07.19 documentation</title>
+    <title>GeneticCode &#8212; cogent3 2024.07.26 documentation</title>
   
   
   
@@ -39,7 +39,7 @@
 <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../../../../_static/documentation_options.js?v=131c492e"></script>
+    <script src="../../../../_static/documentation_options.js?v=56569a20"></script>
     <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/thebelab-helper.js"></script>
@@ -132,8 +132,8 @@
       
     
     
-    <img src="../../../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2024.07.19 documentation - Home"/>
-    <script>document.write(`<img src="../../../../_static/c3-logo.png" class="logo__image only-dark" alt="cogent3 2024.07.19 documentation - Home"/>`);</script>
+    <img src="../../../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2024.07.26 documentation - Home"/>
+    <script>document.write(`<img src="../../../../_static/c3-logo.png" class="logo__image only-dark" alt="cogent3 2024.07.26 documentation - Home"/>`);</script>
   
   
 </a></div>
@@ -516,7 +516,8 @@ document.write(`
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../../app/index-custom.html">Custom Apps</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../app/user_function.html">Turn your functions into composable apps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../app/user_function.html">Why write apps?</a></li>
+
 </ul>
 </details></li>
 </ul>
@@ -723,12 +724,14 @@ document.write(`
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GeneticCode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code_sequence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ID</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_codon_sequence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.genetic_code.GeneticCode" title="Link to this definition">#</a></dt>
 <dd><p>Holds codon to amino acid mapping, and vice versa.</p>
 <p>Use the <cite>get_code()</cite> function to get one of the included code instances. These are created as follows.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">code_sequence</span> <span class="o">=</span> <span class="s1">&#39;FFLLSSSSYY**CC*WLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVAAAADDEEGGGG&#39;</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">code_sequence</span> <span class="o">=</span> <span class="p">(</span>
+<span class="gp">... </span>    <span class="s2">&quot;FFLLSSSSYY**CC*WLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVAAAADDEEGGGG&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gc</span> <span class="o">=</span> <span class="n">GeneticCode</span><span class="p">(</span><span class="n">code_sequence</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sgc</span><span class="p">[</span><span class="s1">&#39;UUU&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;F&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sgc</span><span class="p">[</span><span class="s1">&#39;TTT&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;F&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sgc</span><span class="p">[</span><span class="s1">&#39;F&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="p">[</span><span class="s1">&#39;TTT&#39;</span><span class="p">,</span> <span class="s1">&#39;TTC&#39;</span><span class="p">]</span>          <span class="c1">#in arbitrary order</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sgc</span><span class="p">[</span><span class="s1">&#39;*&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="p">[</span><span class="s1">&#39;TAA&#39;</span><span class="p">,</span> <span class="s1">&#39;TAG&#39;</span><span class="p">,</span> <span class="s1">&#39;TGA&#39;</span><span class="p">]</span>   <span class="c1">#in arbitrary order</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sgc</span><span class="p">[</span><span class="s2">&quot;UUU&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;F&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sgc</span><span class="p">[</span><span class="s2">&quot;TTT&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;F&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sgc</span><span class="p">[</span><span class="s2">&quot;F&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;TTT&quot;</span><span class="p">,</span> <span class="s2">&quot;TTC&quot;</span><span class="p">]</span>  <span class="c1"># in arbitrary order</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sgc</span><span class="p">[</span><span class="s2">&quot;*&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;TAA&quot;</span><span class="p">,</span> <span class="s2">&quot;TAG&quot;</span><span class="p">,</span> <span class="s2">&quot;TGA&quot;</span><span class="p">]</span>  <span class="c1"># in arbitrary order</span>
 </pre></div>
 </div>
 <p>code_sequence : 64 character string containing NCBI genetic code translation</p>
@@ -978,7 +981,7 @@ string representation of the amino acid in other. Always returns a
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.6.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
     <br/>
   </p>
 </div>

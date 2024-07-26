@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Turn your functions into composable apps &#8212; cogent3 2024.07.19 documentation</title>
+    <title>Why write apps? &#8212; cogent3 2024.07.26 documentation</title>
   
   
   
@@ -39,7 +39,7 @@
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../../_static/documentation_options.js?v=131c492e"></script>
+    <script src="../../_static/documentation_options.js?v=56569a20"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/thebelab-helper.js"></script>
@@ -132,8 +132,8 @@
       
     
     
-    <img src="../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2024.07.19 documentation - Home"/>
-    <script>document.write(`<img src="../../_static/c3-logo.png" class="logo__image only-dark" alt="cogent3 2024.07.19 documentation - Home"/>`);</script>
+    <img src="../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2024.07.26 documentation - Home"/>
+    <script>document.write(`<img src="../../_static/c3-logo.png" class="logo__image only-dark" alt="cogent3 2024.07.26 documentation - Home"/>`);</script>
   
   
 </a></div>
@@ -516,7 +516,8 @@ document.write(`
 </ul>
 </details></li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="index-custom.html">Custom Apps</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">Turn your functions into composable apps</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Why write apps?</a></li>
+
 </ul>
 </details></li>
 </ul>
@@ -699,7 +700,7 @@ document.write(`
     
     <li class="breadcrumb-item"><a href="index-custom.html" class="nav-link">Custom Apps</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">Turn your...</li>
+    <li class="breadcrumb-item active" aria-current="page">Why write apps?</li>
   </ul>
 </nav>
 </div>
@@ -716,21 +717,95 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="turn-your-functions-into-composable-apps">
-<h1>Turn your functions into composable apps<a class="headerlink" href="#turn-your-functions-into-composable-apps" title="Link to this heading">#</a></h1>
-<p>Just use the <code class="docutils literal notranslate"><span class="pre">define_app</span></code> decorator! This generates a wrapper class that has a reference to your function and can then become part of a composed function.</p>
-<p>You need two things:</p>
-<ol class="arabic simple">
-<li><p>your function</p></li>
-<li><p>Type hints on the function’s first argument and the function return type.</p></li>
-</ol>
+  <section id="why-write-apps">
+<h1>Why write apps?<a class="headerlink" href="#why-write-apps" title="Link to this heading">#</a></h1>
+<p>Cogent3 apps solve several problems. Here are just a few.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text"><strong>An analysis that requires multiple apps can be composed into a single process.</strong></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Defining and using composed apps is simple, and the code is easier to read and check. Compare using a “composed” app, made up of three separate apps</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># making a composed</span>
+<span class="n">my_steps</span> <span class="o">=</span> <span class="n">step_1</span> <span class="o">+</span> <span class="n">step_2</span> <span class="o">+</span> <span class="n">step_3</span>
+<span class="n">step_3_output</span> <span class="o">=</span> <span class="n">my_steps</span><span class="p">(</span><span class="n">step_1_input</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sd-card-text">to using each app in order.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">step_1_output</span> <span class="o">=</span> <span class="n">step_1</span><span class="p">(</span><span class="n">step_1_input</span><span class="p">)</span>
+<span class="n">step_2_output</span> <span class="o">=</span> <span class="n">step_2</span><span class="p">(</span><span class="n">step_1_output</span><span class="p">)</span>
+<span class="n">step_3_output</span> <span class="o">=</span> <span class="n">step_3</span><span class="p">(</span><span class="n">step_2_input</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text"><strong>Applying a process to multiple data records can be done without looping.</strong></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Cogent3 <a class="reference internal" href="app_overview/dstore.html#data-stores"><span class="std std-ref">data stores</span></a> simplify selecting data for analysis and can be applied for batch execution by an app.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">step_1_inputs</span> <span class="o">=</span> <span class="n">open_data_store</span><span class="p">(</span><span class="s2">&quot;path/to/seqs&quot;</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;fasta&quot;</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">my_steps</span><span class="o">.</span><span class="n">as_completed</span><span class="p">(</span><span class="n">step_1_inputs</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text"><strong>Distributing your app as a Cogent3 plugin reduces the learning curve for users.</strong></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Cogent3 provides mechanisms for discovering your app, getting help on it with an example of how to use it. This mechanism is the same for all apps, which means users do not need to know the structure of your package (see the <a class="reference internal" href="app_overview/app-overview.html#app-start"><span class="std std-ref">app overview</span></a>).</p>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text"><strong>The app infrastructure comes with a freebies!</strong></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">When used as part of a composed function, they automatically provide logging. Composed apps can record run failures (everyone encounters bad data ☹️) and make it easier to see how much of an analysis was affected. They also greatly simplify running analyses in parallel.</p>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text"><strong>Apps are seriously easy to write!</strong></span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Read on to see just how easy they are. In summary, just two lines of code extra plus two extra lines in your projects’ <cite>pyproject.toml</cite>, and you have everything you need to distribute your app.</p>
+<p class="sd-card-text">Use the <a class="reference external" href="https://github.com/cogent3/app_template">cogent3 app cookiecutter template</a> to get a head start.</p>
+</div>
+</details></section>
+<section id="writing-your-own-apps">
+<h1>Writing your own apps<a class="headerlink" href="#writing-your-own-apps" title="Link to this heading">#</a></h1>
+<p>Consider the case where you have a directory of files with the same format. You want to apply a consistent procedure to each file separately and produce a corresponding output. If one of the files is incompatible with the calculations, you want to record that and continue processing the rest. This is the use case for which Cogent3 apps are designed. By building your own apps, you can easily incorporate them as a part of a more substantial algorithm. You also get invaluable capabilities such as automated logging and simplifying their execution in parallel.</p>
+<p>To write a Cogent3 app, you must make some decisions. What type of processing will your app do? What data type(s) will it accept as input? What data type will it produce as output? Do you need to deal with data that doesn’t satisfy a condition?</p>
+<p>Defining apps is achieved with the <code class="docutils literal notranslate"><span class="pre">define_app</span></code>  decorator. Below, we describe the different configuration options and give three examples of writing apps.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Specifying the type of app</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">The <a class="reference internal" href="app_overview/app-overview.html#app-types"><span class="std std-ref">supported app types</span></a> are indicated by the <code class="docutils literal notranslate"><span class="pre">AppType</span></code> enum</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.app.composable</span> <span class="kn">import</span> <span class="n">AppType</span>
+
+<span class="nb">list</span><span class="p">(</span><span class="n">AppType</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[&lt;AppType.LOADER: &#39;loader&#39;&gt;,
+ &lt;AppType.WRITER: &#39;writer&#39;&gt;,
+ &lt;AppType.GENERIC: &#39;generic&#39;&gt;,
+ &lt;AppType.NON_COMPOSABLE: &#39;non_composable&#39;&gt;]
+</pre></div>
+</div>
+</div>
+</div>
+<p class="sd-card-text">The decorator has a default value of <code class="docutils literal notranslate"><span class="pre">&quot;generic&quot;</span></code>. This means that the app does data transformation and does not, for example, load data from disk or write data to disk (those are the <code class="docutils literal notranslate"><span class="pre">loader</span></code> and <code class="docutils literal notranslate"><span class="pre">writer</span></code> types).</p>
+<p class="sd-card-text">If your application is not intended to be applied sequentially, before or after other cogent3 apps, to a series of independent data records of the same type, then you set <code class="docutils literal notranslate"><span class="pre">define_app(app_type=AppType.NON_COMPOSABLE)</span></code> (or equivalently <code class="docutils literal notranslate"><span class="pre">define_app(app_type=&quot;non_composable&quot;)</span></code>).</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>At present, your function can have only one required argument.</p>
+<p class="sd-card-text">Non-composable apps cannot be added (or composed) with other apps.</p>
 </div>
-<section id="supported-cogent3-types">
-<h2>Supported cogent3 types<a class="headerlink" href="#supported-cogent3-types" title="Link to this heading">#</a></h2>
-<p>If your function takes or returns <code class="docutils literal notranslate"><span class="pre">cogent3</span></code> types, you can use the existing type hints. To see what these are, use the <code class="docutils literal notranslate"><span class="pre">defined_types()</span></code> function.</p>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Handling not completed values</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Cogent3 apps are designed to handle conditions under which data cannot be completely processed. For example, any errors during execution are stored in a <a class="reference internal" href="app_overview/not-completed.html#not-completed"><span class="std std-ref">not completed</span></a> object (<code class="docutils literal notranslate"><span class="pre">NotCompleted</span></code>). All subsequent steps are skipped whenever an app returns a <code class="docutils literal notranslate"><span class="pre">NotCompleted</span></code> object.</p>
+<p class="sd-card-text">These objects can also be used to stop the processing of a particular data record. For example, say you’re writing an application that requires sequences to have some minimum length. If an input sequence is shorter than this, then you can create a <a class="reference internal" href="app_overview/not-completed.html#not-completed"><span class="std std-ref">not completed</span></a> object and return it. This prevents any future processing, but the reasons for the failure (which you get to specify) can be saved for future reference.</p>
+<p class="sd-card-text">You may want access to <code class="docutils literal notranslate"><span class="pre">NotCompleted</span></code> instances if, for example, you are developing an <code class="docutils literal notranslate"><span class="pre">AppType.WRITER</span></code>. You can allow your code to “see” them with <code class="docutils literal notranslate"><span class="pre">define_app(skip_not_completed=False)</span></code>.</p>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Supported cogent3 types</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">You can use the existing type hints if your function takes or returns <code class="docutils literal notranslate"><span class="pre">cogent3</span></code> types. To see these, use the <code class="docutils literal notranslate"><span class="pre">defined_types()</span></code> function.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.app.typing</span> <span class="kn">import</span> <span class="n">defined_types</span>
@@ -769,13 +844,13 @@ document.write(`
 </thead>
 <tbody>
 <tr><td class="index"><span class="c3col_left">UnionType</span></td><td><span class="c3col_left">UnionType</span></td></tr>
-<tr><td class="index"><span class="c3col_left">AlignedSeqsType</span></td><td><span class="c3col_left">Alignment, ArrayAlignment</span></td></tr>
+<tr><td class="index"><span class="c3col_left">AlignedSeqsType</span></td><td><span class="c3col_left">ArrayAlignment, Alignment</span></td></tr>
 <tr><td class="index"><span class="c3col_left">UnalignedSeqsType</span></td><td><span class="c3col_left">SequenceCollection</span></td></tr>
-<tr><td class="index"><span class="c3col_left">SeqsCollectionType</span></td><td><span class="c3col_left">SequenceCollection, Alignment, ArrayAlignment</span></td></tr>
-<tr><td class="index"><span class="c3col_left">SeqType</span></td><td><span class="c3col_left">RnaSequence, Sequence, ByteSequence, ProteinWithStopSequence, ProteinSequence, DnaSequence</span></td></tr>
+<tr><td class="index"><span class="c3col_left">SeqsCollectionType</span></td><td><span class="c3col_left">SequenceCollection, ArrayAlignment, Alignment</span></td></tr>
+<tr><td class="index"><span class="c3col_left">SeqType</span></td><td><span class="c3col_left">ByteSequence, DnaSequence, ProteinWithStopSequence, Sequence, ProteinSequence, RnaSequence</span></td></tr>
 <tr><td class="index"><span class="c3col_left">PairwiseDistanceType</span></td><td><span class="c3col_left">DistanceMatrix</span></td></tr>
-<tr><td class="index"><span class="c3col_left">TabularType</span></td><td><span class="c3col_left">Table, DistanceMatrix, DictArray</span></td></tr>
-<tr><td class="index"><span class="c3col_left">TreeType</span></td><td><span class="c3col_left">TreeNode, PhyloNode</span></td></tr>
+<tr><td class="index"><span class="c3col_left">TabularType</span></td><td><span class="c3col_left">DictArray, Table, DistanceMatrix</span></td></tr>
+<tr><td class="index"><span class="c3col_left">TreeType</span></td><td><span class="c3col_left">PhyloNode, TreeNode</span></td></tr>
 <tr><td class="index"><span class="c3col_left">SerialisableType</span></td><td><span class="c3col_left">SerialisableType</span></td></tr>
 <tr><td class="index"><span class="c3col_left">BootstrapResultType</span></td><td><span class="c3col_left">bootstrap_result</span></td></tr>
 <tr><td class="index"><span class="c3col_left">HypothesisResultType</span></td><td><span class="c3col_left">hypothesis_result</span></td></tr>
@@ -783,7 +858,7 @@ document.write(`
 <tr><td class="index"><span class="c3col_left">ModelResultType</span></td><td><span class="c3col_left">model_result</span></td></tr>
 <tr><td class="index"><span class="c3col_left">TabularResultType</span></td><td><span class="c3col_left">tabular_result</span></td></tr>
 <tr><td class="index"><span class="c3col_left">GenericResultType</span></td><td><span class="c3col_left">generic_result</span></td></tr>
-<tr><td class="index"><span class="c3col_left">ResultType</span></td><td><span class="c3col_left">hypothesis_result, model_result, generic_result, bootstrap_result, tabular_result</span></td></tr>
+<tr><td class="index"><span class="c3col_left">ResultType</span></td><td><span class="c3col_left">model_result, hypothesis_result, tabular_result, bootstrap_result, generic_result</span></td></tr>
 <tr><td class="index"><span class="c3col_left">IdentifierType</span></td><td><span class="c3col_left">IdentifierType</span></td></tr>
 </tbody>
 </table>
@@ -792,48 +867,55 @@ document.write(`
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>You don’t have to use cogent3 types, you can also use standard python types.</p>
+<p class="sd-card-text">You don’t have to use cogent3 types. You can also use standard python types.</p>
 </div>
-</section>
-<section id="a-simple-example">
-<h2>A simple example<a class="headerlink" href="#a-simple-example" title="Link to this heading">#</a></h2>
-<p>Let’s make an app that returns the elements of an alignment up to a specified index, with the index being a keyword argument. We now define a decorated function <code class="docutils literal notranslate"><span class="pre">up_to</span></code> and import the type hints and the decorator.</p>
+</div>
+</details><section id="defining-a-cogent3-app-from-a-function">
+<h2>Defining a cogent3 app from a function<a class="headerlink" href="#defining-a-cogent3-app-from-a-function" title="Link to this heading">#</a></h2>
+<p>We will write a function that takes a Cogent3 alignment and returns the first <em>n</em> positions where the user defines <em>n</em>.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.app.composable</span> <span class="kn">import</span> <span class="n">define_app</span>
 <span class="kn">from</span> <span class="nn">cogent3.app.typing</span> <span class="kn">import</span> <span class="n">AlignedSeqsType</span>
 
 <span class="nd">@define_app</span>
-<span class="k">def</span> <span class="nf">up_to</span><span class="p">(</span><span class="n">val</span><span class="p">:</span> <span class="n">AlignedSeqsType</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AlignedSeqsType</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">val</span><span class="p">[:</span><span class="n">index</span><span class="p">]</span>
+<span class="k">def</span> <span class="nf">n_positions</span><span class="p">(</span><span class="n">val</span><span class="p">:</span> <span class="n">AlignedSeqsType</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AlignedSeqsType</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">val</span><span class="p">[:</span><span class="n">n</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 </div>
 </div>
-<p>We create an app instance for a specific value of <code class="docutils literal notranslate"><span class="pre">index</span></code></p>
+<p>The critical elements of a function being defined as an app are:</p>
+<ol class="arabic simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">define_app</span></code> decorator is used.</p></li>
+<li><p>Type hints are specified for the function’s first argument and its return type.</p></li>
+</ol>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Using the custom app</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">We create an app instance for a specific value of <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">first4</span> <span class="o">=</span> <span class="n">up_to</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">first4</span> <span class="o">=</span> <span class="n">n_positions</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">first4</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>up_to(index=4)
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>n_positions(n=4)
 </pre></div>
 </div>
 </div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">repr()</span></code> of the instance indicates the wrapped function and the module it’s in.</p>
-<p>You use <code class="docutils literal notranslate"><span class="pre">first4()</span></code> like all composable apps, e.g.</p>
+<p class="sd-card-text">The instance’s <code class="docutils literal notranslate"><span class="pre">repr()</span></code> indicates the wrapped function and the argument values. You use <code class="docutils literal notranslate"><span class="pre">first4()</span></code> like all composable apps, e.g.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3</span> <span class="kn">import</span> <span class="n">make_aligned_seqs</span>
 
 <span class="n">aln</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span>
-    <span class="n">data</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s2">&quot;GCAAGCGTTTAT&quot;</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="s2">&quot;GCTTTTGTCAAT&quot;</span><span class="p">),</span> <span class="n">array_align</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span>
+    <span class="n">data</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s2">&quot;GCAAGCGTTTAT&quot;</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="s2">&quot;GCTTTTGTCAAT&quot;</span><span class="p">),</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span>
 <span class="p">)</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">first4</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
 <span class="n">result</span>
@@ -864,30 +946,45 @@ document.write(`
 <p><i>2 x 4 dna alignment</i></p>
 </div></div></div>
 </div>
-</section>
-<section id="renaming-sequences">
-<h2>Renaming sequences<a class="headerlink" href="#renaming-sequences" title="Link to this heading">#</a></h2>
-<p>This time we wrap a method call on a <code class="docutils literal notranslate"><span class="pre">SequenceCollection</span></code> (and the alignment sub-classes) for renaming sequences. We also illustrate here that to support both aligned and unaligned data types as input/output, we have to include these in the construction of the custom function.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">SerialisableType</span></code> indicates the data has the ability to be converted to <code class="docutils literal notranslate"><span class="pre">json</span></code>.</p>
 </div>
+</details></section>
+<section id="defining-a-cogent3-app-from-a-class">
+<h2>Defining a cogent3 app from a class<a class="headerlink" href="#defining-a-cogent3-app-from-a-class" title="Link to this heading">#</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
-
-<span class="kn">from</span> <span class="nn">cogent3.app.composable</span> <span class="kn">import</span> <span class="n">define_app</span>
-<span class="kn">from</span> <span class="nn">cogent3.app.typing</span> <span class="kn">import</span> <span class="n">SeqsCollectionType</span><span class="p">,</span> <span class="n">SerialisableType</span>
-
-<span class="n">T</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="n">SeqsCollectionType</span><span class="p">,</span> <span class="n">SerialisableType</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.app.composable</span> <span class="kn">import</span> <span class="n">define_app</span>
+<span class="kn">from</span> <span class="nn">cogent3.app.typing</span> <span class="kn">import</span> <span class="n">AlignedSeqsType</span>
 
 <span class="nd">@define_app</span>
-<span class="k">def</span> <span class="nf">rename_seqs</span><span class="p">(</span><span class="n">seqs</span><span class="p">:</span> <span class="n">SeqsCollectionType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;upper case names&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">seqs</span><span class="o">.</span><span class="n">rename_seqs</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+<span class="k">class</span> <span class="nc">n_positions</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span>
 
-<span class="n">renamer</span> <span class="o">=</span> <span class="n">rename_seqs</span><span class="p">()</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">renamer</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">:</span> <span class="n">AlignedSeqsType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AlignedSeqsType</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">val</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>The critical elements of a class being defined as an app are:</p>
+<ol class="arabic simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">define_app</span></code> decorator is used.</p></li>
+<li><p>The class has a <code class="docutils literal notranslate"><span class="pre">main()</span></code> method.</p></li>
+<li><p>Type hints are specified for the <code class="docutils literal notranslate"><span class="pre">main()</span></code> methods first argument and its return type.</p></li>
+</ol>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Using the custom app</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">This is identical to what we did above.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">first4</span> <span class="o">=</span> <span class="n">n_positions</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># we use the alignment defined above</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">first4</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
 <span class="n">result</span>
 </pre></div>
 </div>
@@ -910,64 +1007,72 @@ document.write(`
 <div class="c3align">
 <table>
 <tr class="num_row"><td></td><td><b>0</b></td></tr>
-<tr><td class="label">A</td><td><span class="G_dna">G</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="T_dna">T</span></td></tr>
-<tr><td class="label">B</td><td><span class="G_dna">.</span><span class="C_dna">.</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="A_dna">.</span><span class="T_dna">.</span></td></tr>
+<tr><td class="label">a</td><td><span class="G_dna">G</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="A_dna">A</span></td></tr>
+<tr><td class="label">b</td><td><span class="G_dna">.</span><span class="C_dna">.</span><span class="T_dna">T</span><span class="T_dna">T</span></td></tr>
 </table>
-<p><i>2 x 12 dna alignment</i></p>
+<p><i>2 x 4 dna alignment</i></p>
 </div></div></div>
 </div>
-</section>
-<section id="a-user-app-with-a-different-output-type">
-<h2>A user app with a different output type<a class="headerlink" href="#a-user-app-with-a-different-output-type" title="Link to this heading">#</a></h2>
-<p>In this example, we make a function that returns a <code class="docutils literal notranslate"><span class="pre">DistanceMatrix</span></code> from an alignment.</p>
+</div>
+</details></section>
+<section id="custom-apps-for-standard-python-types">
+<h2>Custom apps for standard python types<a class="headerlink" href="#custom-apps-for-standard-python-types" title="Link to this heading">#</a></h2>
+<p>In this example, we have two apps that process pure Python types only.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.app.composable</span> <span class="kn">import</span> <span class="n">define_app</span>
-<span class="kn">from</span> <span class="nn">cogent3.app.typing</span> <span class="kn">import</span> <span class="n">AlignedSeqsType</span><span class="p">,</span> <span class="n">PairwiseDistanceType</span>
 
 <span class="nd">@define_app</span>
-<span class="k">def</span> <span class="nf">get_dists</span><span class="p">(</span><span class="n">aln</span><span class="p">:</span> <span class="n">AlignedSeqsType</span><span class="p">,</span> <span class="n">calc</span><span class="o">=</span><span class="s2">&quot;hamming&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PairwiseDistanceType</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">aln</span><span class="o">.</span><span class="n">distance_matrix</span><span class="p">(</span><span class="n">calc</span><span class="o">=</span><span class="n">calc</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">lower</span><span class="p">(</span><span class="n">arg</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bytes</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">arg</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
 
-<span class="n">percent_dist</span> <span class="o">=</span> <span class="n">get_dists</span><span class="p">(</span><span class="n">calc</span><span class="o">=</span><span class="s2">&quot;pdist&quot;</span><span class="p">)</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">percent_dist</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
-<span class="n">result</span>
+<span class="nd">@define_app</span>
+<span class="k">def</span> <span class="nf">space</span><span class="p">(</span><span class="n">arg</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bytes</span><span class="p">:</span>
+    <span class="n">sep</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="sa">b</span><span class="s2">&quot; &quot;</span>
+    <span class="n">arg</span> <span class="o">=</span> <span class="n">arg</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">
-<div class="c3table">
-
-<style>
-.c3table table {margin: 10px 0;}
-.c3table tr:last-child {border-bottom: 1px solid #000;} 
-.c3table tr > th {text-align: left; padding: 0 5px;}
-.c3table tr > td {text-align: left; padding: 5px;}
-.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
-.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
-.c3table .index {background: rgba(161, 195, 209, 0.25); margin: 10px; font-weight: 600;}
-.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
-.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
-.c3table .cell_title {font-weight: bold;}
-.c3col_left { text-align: left !important; display: block;}
-.c3col_right { text-align: right !important; display: block;}
-.c3col_center { text-align: center !important; display: block;}
-</style>
-
-<table>
-
-<thead class="head_cell">
-<th>names</th><th>a</th><th>b</th>
-</thead>
-<tbody>
-<tr><td class="index"><span class="c3col_left">a</span></td><td><span class="c3col_right">0.0000</span></td><td><span class="c3col_right">0.5000</span></td></tr>
-<tr><td class="index"><span class="c3col_left">b</span></td><td><span class="c3col_right">0.5000</span></td><td><span class="c3col_right">0.0000</span></td></tr>
-</tbody>
-</table>
-
-</div></div></div>
 </div>
+</div>
+<p>The only difference to the above examples is we use standard python types for the type hints.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Using the two apps</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">We create a composed app and apply it.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">app</span> <span class="o">=</span> <span class="n">lower</span><span class="p">()</span> <span class="o">+</span> <span class="n">space</span><span class="p">()</span>
+<span class="n">app</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>lower() + space()
+</pre></div>
+</div>
+</div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">app</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;HELLO   there&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>b&#39;hello there&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</details></section>
+<section id="app-naming-conventions">
+<h2>App naming conventions<a class="headerlink" href="#app-naming-conventions" title="Link to this heading">#</a></h2>
+<p>Use words in lower case separated by underscores (e.g. <code class="docutils literal notranslate"><span class="pre">lower_case</span></code>) to name your apps. Apps are callable, just like functions, and the <a class="reference external" href="https://peps.python.org/pep-0008/#function-and-variable-names">PEP8 guidelines</a> specify this naming style.</p>
+<p>If you will make your app available on the Python package index, we recommend prefixing each app with your package name. For example, the <a class="reference external" href="https://pypi.org/project/piqtree2">piqtree2</a> library distributes apps with names such as <code class="docutils literal notranslate"><span class="pre">piqtree_phylo</span></code>.</p>
 </section>
 </section>
 
@@ -1017,11 +1122,16 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supported-cogent3-types">Supported cogent3 types</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-simple-example">A simple example</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#renaming-sequences">Renaming sequences</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-user-app-with-a-different-output-type">A user app with a different output type</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Why write apps?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-your-own-apps">Writing your own apps</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-a-cogent3-app-from-a-function">Defining a cogent3 app from a function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-a-cogent3-app-from-a-class">Defining a cogent3 app from a class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-apps-for-standard-python-types">Custom apps for standard python types</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#app-naming-conventions">App naming conventions</a></li>
 </ul>
+</li>
+</ul>
+
   </nav></div>
 
 </div></div>
@@ -1058,7 +1168,7 @@ document.write(`
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.6.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.7.
     <br/>
   </p>
 </div>
