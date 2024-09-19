@@ -10,7 +10,7 @@ Compared to PyCogent version 1.9, there have been massive changes. These include
 
 - integration of many of the new developments on algorithms and modelling published by the `Huttley lab <https://biology.anu.edu.au/research/groups/huttley-group-bioinformatics-molecular-evolution-genomes>`_ over the last decade
 - an experimental ``cogent3.app`` module that presents a functional programming style interface to ``cogent3``
-- modernised our dependencies including using ``plotly`` for visualisation, ``tqdm`` for progress bar display, ``concurrent.futures`` and ``mpi4py.futures`` for parallel process execution, ``tox`` and ``pytest`` for unit testing
+- modernised our dependencies including using ``plotly`` for visualisation, ``tqdm`` for progress bar display, ``loky``, ``concurrent.futures`` and ``mpi4py.futures`` for parallel process execution, ``nox`` and ``pytest`` for unit testing
 - switched to calendar based versioning
 
 The rewrite has been a massive amount of work and unfortunately the changes to the API are only indirectly documented by virtue of having the documentation match the library state. Thus, the best way to get older PyCogent scripts working is to check the Library documentation related to your code. More explicitly, you can also search in the `repository history <https://github.com/cogent3/cogent3>`_.
