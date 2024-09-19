@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Why write apps? &#8212; cogent3 2024.08.09 documentation</title>
+    <title>Why write apps? &#8212; cogent3 2024.09.19 documentation</title>
   
   
   
@@ -39,7 +39,7 @@
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../../_static/documentation_options.js?v=9db0cdfc"></script>
+    <script src="../../_static/documentation_options.js?v=ebb921a2"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/thebelab-helper.js"></script>
@@ -132,8 +132,8 @@
       
     
     
-    <img src="../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2024.08.09 documentation - Home"/>
-    <script>document.write(`<img src="../../_static/c3-logo.png" class="logo__image only-dark" alt="cogent3 2024.08.09 documentation - Home"/>`);</script>
+    <img src="../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2024.09.19 documentation - Home"/>
+    <script>document.write(`<img src="../../_static/c3-logo.png" class="logo__image only-dark" alt="cogent3 2024.09.19 documentation - Home"/>`);</script>
   
   
 </a></div>
@@ -474,6 +474,7 @@ document.write(`
 <li class="toctree-l4"><a class="reference internal" href="app_cookbook/sample-omit-duplicated.html">Remove duplicated sequences from an alignment</a></li>
 <li class="toctree-l4"><a class="reference internal" href="app_cookbook/sample-min-len.html">Filter sequence collections and alignments by length</a></li>
 <li class="toctree-l4"><a class="reference internal" href="app_cookbook/sample-fixed-len.html">Sample an alignment to a fixed length</a></li>
+<li class="toctree-l4"><a class="reference internal" href="app_cookbook/sample-trim-stops.html">Remove trailing stop codons from sequences in an alignment</a></li>
 <li class="toctree-l4"><a class="reference internal" href="app_cookbook/sample-take-pos.html">Sample nucleotides from a given codon position</a></li>
 <li class="toctree-l4"><a class="reference internal" href="app_cookbook/sample-take-seqs.html">Select named sequences from a collection</a></li>
 <li class="toctree-l4"><a class="reference internal" href="app_cookbook/sample-take-n-seqs.html">Select <cite>n</cite> sequences from a collection</a></li>
@@ -844,12 +845,12 @@ document.write(`
 </thead>
 <tbody>
 <tr><td class="index"><span class="c3col_left">UnionType</span></td><td><span class="c3col_left">UnionType</span></td></tr>
-<tr><td class="index"><span class="c3col_left">AlignedSeqsType</span></td><td><span class="c3col_left">ArrayAlignment, Alignment</span></td></tr>
+<tr><td class="index"><span class="c3col_left">AlignedSeqsType</span></td><td><span class="c3col_left">Alignment, ArrayAlignment</span></td></tr>
 <tr><td class="index"><span class="c3col_left">UnalignedSeqsType</span></td><td><span class="c3col_left">SequenceCollection</span></td></tr>
-<tr><td class="index"><span class="c3col_left">SeqsCollectionType</span></td><td><span class="c3col_left">SequenceCollection, ArrayAlignment, Alignment</span></td></tr>
-<tr><td class="index"><span class="c3col_left">SeqType</span></td><td><span class="c3col_left">ProteinWithStopSequence, Sequence, DnaSequence, ProteinSequence, RnaSequence, ByteSequence</span></td></tr>
+<tr><td class="index"><span class="c3col_left">SeqsCollectionType</span></td><td><span class="c3col_left">SequenceCollection, Alignment, ArrayAlignment</span></td></tr>
+<tr><td class="index"><span class="c3col_left">SeqType</span></td><td><span class="c3col_left">ByteSequence, ProteinSequence, RnaSequence, Sequence, DnaSequence, ProteinWithStopSequence</span></td></tr>
 <tr><td class="index"><span class="c3col_left">PairwiseDistanceType</span></td><td><span class="c3col_left">DistanceMatrix</span></td></tr>
-<tr><td class="index"><span class="c3col_left">TabularType</span></td><td><span class="c3col_left">DictArray, Table, DistanceMatrix</span></td></tr>
+<tr><td class="index"><span class="c3col_left">TabularType</span></td><td><span class="c3col_left">DictArray, DistanceMatrix, Table</span></td></tr>
 <tr><td class="index"><span class="c3col_left">TreeType</span></td><td><span class="c3col_left">PhyloNode, TreeNode</span></td></tr>
 <tr><td class="index"><span class="c3col_left">SerialisableType</span></td><td><span class="c3col_left">SerialisableType</span></td></tr>
 <tr><td class="index"><span class="c3col_left">BootstrapResultType</span></td><td><span class="c3col_left">bootstrap_result</span></td></tr>
@@ -858,7 +859,7 @@ document.write(`
 <tr><td class="index"><span class="c3col_left">ModelResultType</span></td><td><span class="c3col_left">model_result</span></td></tr>
 <tr><td class="index"><span class="c3col_left">TabularResultType</span></td><td><span class="c3col_left">tabular_result</span></td></tr>
 <tr><td class="index"><span class="c3col_left">GenericResultType</span></td><td><span class="c3col_left">generic_result</span></td></tr>
-<tr><td class="index"><span class="c3col_left">ResultType</span></td><td><span class="c3col_left">tabular_result, model_result, bootstrap_result, generic_result, hypothesis_result</span></td></tr>
+<tr><td class="index"><span class="c3col_left">ResultType</span></td><td><span class="c3col_left">bootstrap_result, generic_result, model_result, tabular_result, hypothesis_result</span></td></tr>
 <tr><td class="index"><span class="c3col_left">IdentifierType</span></td><td><span class="c3col_left">IdentifierType</span></td></tr>
 </tbody>
 </table>

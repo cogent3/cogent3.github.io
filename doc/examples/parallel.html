@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Parallel computations &#8212; cogent3 2024.08.09 documentation</title>
+    <title>Parallel computations &#8212; cogent3 2024.09.19 documentation</title>
   
   
   
@@ -39,7 +39,7 @@
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../../_static/documentation_options.js?v=9db0cdfc"></script>
+    <script src="../../_static/documentation_options.js?v=ebb921a2"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/thebelab-helper.js"></script>
@@ -132,8 +132,8 @@
       
     
     
-    <img src="../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2024.08.09 documentation - Home"/>
-    <script>document.write(`<img src="../../_static/c3-logo.png" class="logo__image only-dark" alt="cogent3 2024.08.09 documentation - Home"/>`);</script>
+    <img src="../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2024.09.19 documentation - Home"/>
+    <script>document.write(`<img src="../../_static/c3-logo.png" class="logo__image only-dark" alt="cogent3 2024.09.19 documentation - Home"/>`);</script>
   
   
 </a></div>
@@ -474,6 +474,7 @@ document.write(`
 <li class="toctree-l4"><a class="reference internal" href="../app/app_cookbook/sample-omit-duplicated.html">Remove duplicated sequences from an alignment</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../app/app_cookbook/sample-min-len.html">Filter sequence collections and alignments by length</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../app/app_cookbook/sample-fixed-len.html">Sample an alignment to a fixed length</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../app/app_cookbook/sample-trim-stops.html">Remove trailing stop codons from sequences in an alignment</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../app/app_cookbook/sample-take-pos.html">Sample nucleotides from a given codon position</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../app/app_cookbook/sample-take-seqs.html">Select named sequences from a collection</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../app/app_cookbook/sample-take-n-seqs.html">Select <cite>n</cite> sequences from a collection</a></li>
@@ -727,8 +728,19 @@ document.write(`
 <p>This is the simplest case to implement, requires no additional software installs and will work with standalone scripts or within Jupyter notebooks. For this use case, <code class="docutils literal notranslate"><span class="pre">cogent3.util.parallel</span></code> uses the Python standard library <code class="docutils literal notranslate"><span class="pre">concurrent.futures</span></code> module.</p>
 <section id="using-app-apply-to">
 <h3>Using <code class="docutils literal notranslate"><span class="pre">app.apply_to()</span></code><a class="headerlink" href="#using-app-apply-to" title="Link to this heading">#</a></h3>
-<p>If you are using <code class="docutils literal notranslate"><span class="pre">cogent3</span></code> <a class="reference internal" href="../app/app_overview/app-overview.html#apps"><span class="std std-ref">composable apps</span></a>, then the simplest approach is to use the <code class="docutils literal notranslate"><span class="pre">apply_to()</span></code> method. The conditions of parallel execution are controlled using the keyword arguments <code class="docutils literal notranslate"><span class="pre">parallel</span></code> and <code class="docutils literal notranslate"><span class="pre">par_kw</span></code>. The former indicates parallel execution is to be undertaken. The latter is how additional arguments are provided to <code class="docutils literal notranslate"><span class="pre">parallel.map()</span></code>. For instance, using 4 workers would be specified as:</p>
+<p>If you are using a composed <code class="docutils literal notranslate"><span class="pre">cogent3</span></code> <a class="reference internal" href="../app/app_overview/app-overview.html#apps"><span class="std std-ref">app</span></a> <strong>with</strong> a writer, then the simplest approach is to use the <code class="docutils literal notranslate"><span class="pre">apply_to()</span></code> method. The conditions of parallel execution are controlled using the keyword arguments <code class="docutils literal notranslate"><span class="pre">parallel</span></code> and <code class="docutils literal notranslate"><span class="pre">par_kw</span></code>. The former indicates parallel execution is to be undertaken. The latter is how additional arguments are provided to <code class="docutils literal notranslate"><span class="pre">parallel.as_completed()</span></code>. For instance, using 4 workers would be specified as:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">apply_to</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">par_kw</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are using mpi, set <code class="docutils literal notranslate"><span class="pre">par_kw=dict(max_workers=4,</span> <span class="pre">use_mpi=True)</span></code>.</p>
+</div>
+</section>
+<section id="using-app-as-completed">
+<h3>Using <code class="docutils literal notranslate"><span class="pre">app.as_completed()</span></code><a class="headerlink" href="#using-app-as-completed" title="Link to this heading">#</a></h3>
+<p>If you are using a composed <code class="docutils literal notranslate"><span class="pre">cogent3</span></code> <a class="reference internal" href="../app/app_overview/app-overview.html#apps"><span class="std std-ref">app</span></a> <strong>without</strong> a writer, then use the <code class="docutils literal notranslate"><span class="pre">as_completed()</span></code> method. The arguments are the same as for <code class="docutils literal notranslate"><span class="pre">apply_to()</span></code> but as this method returns a generator, you use a builtin type to execute the call.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">as_completed</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">parallel</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">par_kw</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">)))</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -980,6 +992,7 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parallel-computation-on-a-single-computer">Parallel computation on a single computer</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-app-apply-to">Using <code class="docutils literal notranslate"><span class="pre">app.apply_to()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-app-as-completed">Using <code class="docutils literal notranslate"><span class="pre">app.as_completed()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#directly-using-cogent3-util-parallel-as-completed">Directly using <code class="docutils literal notranslate"><span class="pre">cogent3.util.parallel.as_completed()</span></code></a></li>
 </ul>
 </li>

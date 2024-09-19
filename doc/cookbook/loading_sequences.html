@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Loading a sequence from a file &#8212; cogent3 2024.08.09 documentation</title>
+    <title>Loading a sequence from a file &#8212; cogent3 2024.09.19 documentation</title>
   
   
   
@@ -39,7 +39,7 @@
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../../_static/documentation_options.js?v=9db0cdfc"></script>
+    <script src="../../_static/documentation_options.js?v=ebb921a2"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/thebelab-helper.js"></script>
@@ -132,8 +132,8 @@
       
     
     
-    <img src="../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2024.08.09 documentation - Home"/>
-    <script>document.write(`<img src="../../_static/c3-logo.png" class="logo__image only-dark" alt="cogent3 2024.08.09 documentation - Home"/>`);</script>
+    <img src="../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2024.09.19 documentation - Home"/>
+    <script>document.write(`<img src="../../_static/c3-logo.png" class="logo__image only-dark" alt="cogent3 2024.09.19 documentation - Home"/>`);</script>
   
   
 </a></div>
@@ -474,6 +474,7 @@ document.write(`
 <li class="toctree-l4"><a class="reference internal" href="../app/app_cookbook/sample-omit-duplicated.html">Remove duplicated sequences from an alignment</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../app/app_cookbook/sample-min-len.html">Filter sequence collections and alignments by length</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../app/app_cookbook/sample-fixed-len.html">Sample an alignment to a fixed length</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../app/app_cookbook/sample-trim-stops.html">Remove trailing stop codons from sequences in an alignment</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../app/app_cookbook/sample-take-pos.html">Sample nucleotides from a given codon position</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../app/app_cookbook/sample-take-seqs.html">Select named sequences from a collection</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../app/app_cookbook/sample-take-n-seqs.html">Select <cite>n</cite> sequences from a collection</a></li>
@@ -1654,17 +1655,16 @@ _bytes{font-family: "Lucida Console",monospace !important; font-size: 12pt !impo
 <p><code class="docutils literal notranslate"><span class="pre">load_aligned_seqs()</span></code> and <code class="docutils literal notranslate"><span class="pre">load_unaligned_seqs()</span></code> are just convenience interfaces to format parsers. It can sometimes be more effective to use the parsers directly, say when you don’t want to load everything into memory.</p>
 <section id="loading-fasta-sequences-from-an-open-file-or-list-of-lines">
 <h2>Loading FASTA sequences from an open file or list of lines<a class="headerlink" href="#loading-fasta-sequences-from-an-open-file-or-list-of-lines" title="Link to this heading">#</a></h2>
-<p>To load FASTA formatted sequences directly, you can use the <code class="docutils literal notranslate"><span class="pre">MinimalFastaParser</span></code>.</p>
+<p>To load FASTA formatted sequences directly, you can use <code class="docutils literal notranslate"><span class="pre">iter_fasta_records</span></code>. This parser returns data as python strings.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This returns the sequences as strings.</p>
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.parse.fasta</span> <span class="kn">import</span> <span class="n">MinimalFastaParser</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.parse.fasta</span> <span class="kn">import</span> <span class="n">iter_fasta_records</span>
 
-<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data/long_testseqs.fasta&quot;</span><span class="p">)</span>
-<span class="n">seqs</span> <span class="o">=</span> <span class="p">[(</span><span class="n">name</span><span class="p">,</span> <span class="n">seq</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">seq</span> <span class="ow">in</span> <span class="n">MinimalFastaParser</span><span class="p">(</span><span class="n">f</span><span class="p">)]</span>
+<span class="n">seqs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">iter_fasta_records</span><span class="p">(</span><span class="s2">&quot;data/long_testseqs.fasta&quot;</span><span class="p">))</span>
 <span class="n">seqs</span>
 </pre></div>
 </div>
@@ -1714,7 +1714,7 @@ chimp &lt;class &#39;cogent3.parse.fasta.RichLabel&#39;&gt;
 <p><code class="docutils literal notranslate"><span class="pre">RichLabel</span></code> objects have an <code class="docutils literal notranslate"><span class="pre">Info</span></code> object as an attribute, allowing specific reference to all the specified label fields.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.parse.fasta</span> <span class="kn">import</span> <span class="n">LabelParser</span><span class="p">,</span> <span class="n">MinimalFastaParser</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.parse.fasta</span> <span class="kn">import</span> <span class="n">LabelParser</span><span class="p">,</span> <span class="n">iter_fasta_records</span>
 
 <span class="n">fasta_data</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">&quot;&gt;gi|10047090|ref|NP_055147.1| small muscle protein, X-linked [Homo sapiens]&quot;</span><span class="p">,</span>
@@ -1729,7 +1729,7 @@ chimp &lt;class &#39;cogent3.parse.fasta.RichLabel&#39;&gt;
     <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;gi&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;ref&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span>
     <span class="n">split_with</span><span class="o">=</span><span class="s2">&quot;|&quot;</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">seq</span> <span class="ow">in</span> <span class="n">MinimalFastaParser</span><span class="p">(</span><span class="n">fasta_data</span><span class="p">,</span> <span class="n">label_to_name</span><span class="o">=</span><span class="n">label_to_name</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">seq</span> <span class="ow">in</span> <span class="n">iter_fasta_records</span><span class="p">(</span><span class="n">fasta_data</span><span class="p">,</span> <span class="n">label_to_name</span><span class="o">=</span><span class="n">label_to_name</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">gi</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">description</span><span class="p">)</span>
