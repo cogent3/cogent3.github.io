@@ -38,6 +38,14 @@ Making Sense from Sequence
 📣 New Features & Announcements
 ===============================
 
+.. dropdown:: 🆕 A new tutorial on using non-stationary amino acid models 🧐
+
+    A new contribution from Peter Goodman and Andrew Wheeler demonstrates how to specify a non-stationary amino acid substitution model. Check it out :ref:`here <nonstationary-model-aa-inference>`. Thanks Peter and Andrew!
+
+.. dropdown:: 🆕 Faster sequence coevolution measures 🚀
+
+    We have completely rewritten all the Mutual Information based coevolution statistic calculators. Single CPU performance is orders of magnitude faster than the old implementation and we now also support parallel execution. The existing ``<alignment>.coevolution()`` method uses these so you don't need to do anything different to use the new algorithms.
+
 .. dropdown:: 🆕 Supporting third-party apps as plugins 🔌
 
     Cogent3 now provides support for plugins! Third-party developers can deploy their code as cogent3 apps with just a few lines. See the app `demo project <https://github.com/cogent3/app_template>`_ for an example of how easy it is to share your cogent3 apps.
