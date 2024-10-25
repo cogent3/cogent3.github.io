@@ -40,7 +40,7 @@ Making Sense from Sequence
 
 .. dropdown:: 🆕 A new tutorial on using non-stationary amino acid models 🧐
 
-    A new contribution from Peter Goodman and Andrew Wheeler demonstrates how to specify a non-stationary amino acid substitution model. Check it out :ref:`here <nonstationary-model-aa-inference>`. Thanks Peter and Andrew!
+    A new contribution from Peter Goodman and Andrew Wheeler demonstrates how to specify a non-stationary amino acid substitution model. Check it out their :ref:`tutorial <nonstationary-model-aa-inference>` and `the original paper <https://doi.org/10.1101/2023.02.01.526552>`_. Thanks Peter, Andrew and their colleagues!
 
 .. dropdown:: 🆕 Faster sequence coevolution measures 🚀
 
