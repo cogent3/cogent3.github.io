@@ -1,0 +1,964 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>SeqsData &#8212; cogent3 2024.12.03 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=da3cec82" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../../../../_static/documentation_options.js?v=636e5722"></script>
+    <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/thebelab-helper.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'doc/api/new_alignment/classes/cogent3.core.new_alignment.SeqsData';</script>
+    <link rel="icon" href="../../../../_static/c3-square.svg"/>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="SeqDataView" href="cogent3.core.new_alignment.SeqDataView.html" />
+    <link rel="prev" title="new_alignment" href="../alignment.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2024.12.03 documentation - Home"/>
+    <img src="../../../../_static/c3-logo.png" class="logo__image only-dark pst-js-only" alt="cogent3 2024.12.03 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../draw/index.html">
+    Image Gallery
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../../index.html">
+    User Guides
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../community.html">
+    Community
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../licenses.html">
+    License
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../history.html">
+    Project History
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../pycogent.html">
+    How does cogent3 relate to PyCogent?
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../projects.html">
+    Projects using cogent3
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../data_file_links.html">
+    Data Files Used in the Documentation
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../genindex.html">
+    Index
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cogent3/cogent3" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../draw/index.html">
+    Image Gallery
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../../index.html">
+    User Guides
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../community.html">
+    Community
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../licenses.html">
+    License
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../history.html">
+    Project History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../pycogent.html">
+    How does cogent3 relate to PyCogent?
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../projects.html">
+    Projects using cogent3
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../data_file_links.html">
+    Data Files Used in the Documentation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../genindex.html">
+    Index
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cogent3/cogent3" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../app/index.html">apps</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../app/index-app.html">Overview of apps</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../app/app_overview/app-overview.html">Overview of using apps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../app/app_overview/app-help.html">Getting help on an app</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../app/app_overview/app-get.html">Getting an app</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../app/app_overview/available-apps.html">Displaying installed apps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../app/app_overview/dstore.html">Data stores – collections of data records</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../app/app_overview/not-completed.html">Tracking records that could not be processed</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../app/index-cookbook.html">App Cookbook</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../app/app_cookbook/index-loaders.html">Loading data</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../app/app_cookbook/load-aligned.html">Loading aligned sequence data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../app/app_cookbook/load-unaligned.html">Loading unaligned sequence data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../app/app_cookbook/load-tabular.html">Loading tabular data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../app/app_cookbook/load-json.html">Loading JSON serialised objects</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../app/app_cookbook/index-align.html">Sequence Alignment</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../app/app_cookbook/align-nucleotide.html">Using a nucleotide model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../app/app_cookbook/align-codon.html">Using a codon model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../app/app_cookbook/align-protein.html">Using a protein model</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../app/app_cookbook/index-sample.html">Filtering data</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../app/app_cookbook/sample-omit-degen.html">Removing degenerate characters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../app/app_cookbook/sample-omit-gap.html">Removing highly gapped positions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../app/app_cookbook/sample-omit-bad.html">Remove problem sequences from an alignment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../app/app_cookbook/sample-omit-duplicated.html">Remove duplicated sequences from an alignment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../app/app_cookbook/sample-min-len.html">Filter sequence collections and alignments by length</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../app/app_cookbook/sample-fixed-len.html">Sample an alignment to a fixed length</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../app/app_cookbook/sample-trim-stops.html">Remove trailing stop codons from sequences in an alignment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../app/app_cookbook/sample-take-pos.html">Sample nucleotides from a given codon position</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../app/app_cookbook/sample-take-seqs.html">Select named sequences from a collection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../app/app_cookbook/sample-take-n-seqs.html">Select <cite>n</cite> sequences from a collection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../app/app_cookbook/sample-concat.html">Concatenating alignments</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../app/app_cookbook/index-writers.html">Writing Data</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../app/app_cookbook/write-seqs.html">Writing sequences and sequence alignments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../app/app_cookbook/write-tabular.html">Writing tabular data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../app/app_cookbook/write-json.html">Writing JSON Serialised Objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../app/app_cookbook/write-db.html">Writing a database to file</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../app/index-tutorials.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../app/app_tutorials/index-evo-model.html">Modelling sequence evolution</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../app/app_tutorials/evo-model.html">Apply a non-stationary nucleotide model to an alignment with 3 sequences</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../app/app_tutorials/evo-model-with-tree.html">Apply a non-stationary nucleotide model to an alignment with a tree</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../app/app_tutorials/evo-model-timehet.html">Specifying a non-stationary model with time-heterogeneous parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../app/app_tutorials/evo-extract-model-stats.html">Extracting maximum likelihood estimates from a <code class="docutils literal notranslate"><span class="pre">model_result</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../app/app_tutorials/evo-ancestral-states.html">Reconstructing ancestral states</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../app/app_tutorials/evo-dt-nuc-model.html">Applying a discrete-time, non-stationary nucleotide model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../app/app_tutorials/evo-tr-nuc-model.html">Applying a time-reversible nucleotide model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../app/app_tutorials/evo-nstat-codon-model.html">Applying GNC, a non-stationary codon model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../app/app_tutorials/evo-tr-codon-model.html">Applying a time-reversible codon model</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../app/app_tutorials/index-evo-hypothesis.html">Testing hypotheses about sequence evolution</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../app/app_tutorials/evo-hypothesis.html">Testing a hypothesis – non-stationary or time-reversible</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../app/app_tutorials/index-evo-natsel.html">Testing for natural selection</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../app/app_tutorials/evo-natsel_neutral.html"><code class="docutils literal notranslate"><span class="pre">natsel_neutral</span></code> – a test for selective neutrality</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../app/app_tutorials/evo-natsel_timehet.html"><code class="docutils literal notranslate"><span class="pre">natsel_timehet</span></code> – a test of branch heterogeneity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../app/app_tutorials/evo-natsel_sitehet.html"><code class="docutils literal notranslate"><span class="pre">natsel_sitehet</span></code> – a test of site heterogeneity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../app/app_tutorials/evo-natsel_zhang.html"><code class="docutils literal notranslate"><span class="pre">natsel_zhang</span></code> – a branch-site test</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../app/index-custom.html">Custom Apps</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../app/user_function.html">Why write apps?</a></li>
+
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../cookbook/index.html">Cookbook</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../cookbook/manipulating_biological_data.html">Manipulating biological data</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../cookbook/loading_sequences.html">Loading a sequence from a file</a></li>
+
+
+
+
+
+<li class="toctree-l3"><a class="reference internal" href="../../../cookbook/DNA_and_RNA_sequences.html">Sequences</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../cookbook/protein_sequences.html">Protein sequences</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../cookbook/alignments.html">Sequence Collections and Alignments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../cookbook/features.html">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../cookbook/annotation_db.html">Annotation Databases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../cookbook/moltypes.html">Molecular types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../cookbook/alphabet.html">Alphabets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../cookbook/what_codes.html">Available genetic codes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../cookbook/genetic_code.html">Using genetic codes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../cookbook/simple_trees.html">Trees</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/tables.html">Tabular data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/building_alignments.html">Building alignments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/calc_genetic_distance.html">Genetic distance calculation</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/building_phylogenies.html">Building phylogenies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/evo_modelling.html">Evolutionary Analysis Using Likelihood</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../cookbook/useful_utilities.html">Useful Utilities</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../examples/index.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/align_codons_to_protein.html">Map protein alignment gaps to DNA alignment gaps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/manipulating_tree_nodes.html">Manipulation of Tree Node Objects</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/period_estimation.html">Estimating periodic signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/simple.html">The simplest script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/relative_rate.html">Performing a relative rate test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/neutral_test.html">A test of the neutral theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/scope_model_params_on_trees.html">Allowing substitution model parameters to differ between branches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/codon_models.html">Using codon models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/empirical_protein_models.html">Use an empirical protein substitution model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/testing_multi_loci.html">Likelihood analysis of multiple loci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/simulate_alignment.html">Simulate an alignment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/parametric_bootstrap.html">Performing a parametric bootstrap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/rate_heterogeneity.html">Analysis of rate heterogeneity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/hmm_par_heterogeneity.html">Evaluate process heterogeneity using a Hidden Markov Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/nonstationary_inference.html">Inferring Amino Acid frequencies with a nonstationary model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/calculate_pairwise_distances.html">Calculate pairwise distances between sequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/calculate_neigbourjoining_tree.html">Make a neighbor joining tree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/calculate_UPGMA_cluster.html">Make a UPGMA cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/phylo_by_ls.html">Phylogenetic reconstruction by least squares</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/parallel.html">Parallel computations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../index.html">API</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../__init__/cogent3.__init__.load_seq.html">load_seq</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../__init__/cogent3.__init__.load_aligned_seqs.html">load_aligned_seqs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../__init__/cogent3.__init__.load_unaligned_seqs.html">load_unaligned_seqs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../__init__/cogent3.__init__.load_delimited.html">load_delimited</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../__init__/cogent3.__init__.load_table.html">load_table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../__init__/cogent3.__init__.load_tree.html">load_tree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../__init__/cogent3.__init__.load_annotations.html">load_annotations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../__init__/cogent3.__init__.open_data_store.html">open_data_store</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../__init__/cogent3.__init__.open_.html">open</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../__init__/cogent3.__init__.make_seq.html">make_seq</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../__init__/cogent3.__init__.make_aligned_seqs.html">make_aligned_seqs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../__init__/cogent3.__init__.make_unaligned_seqs.html">make_unaligned_seqs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../__init__/cogent3.__init__.make_table.html">make_table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../__init__/cogent3.__init__.make_tree.html">make_tree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../__init__/cogent3.__init__.get_code.html">get_code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../__init__/cogent3.__init__.get_moltype.html">get_moltype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../__init__/cogent3.__init__.get_model.html">get_model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../__init__/cogent3.__init__.available_codes.html">available_codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../__init__/cogent3.__init__.available_moltypes.html">available_moltypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../__init__/cogent3.__init__.available_models.html">available_models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../__init__/cogent3.__init__.available_apps.html">available_apps</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../alignment/alignment.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">alignment</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../alignment/classes/cogent3.core.alignment.SequenceCollection.html">SequenceCollection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../alignment/classes/cogent3.core.alignment.Alignment.html">Alignment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../alignment/classes/cogent3.core.alignment.ArrayAlignment.html">ArrayAlignment</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../annotation/annotation.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">annotation</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../annotation/classes/cogent3.core.annotation.Feature.html">Feature</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../annotation_db/annotation_db.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">annotation_db</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../annotation_db/classes/cogent3.core.annotation_db.BasicAnnotationDb.html">BasicAnnotationDb</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../annotation_db/classes/cogent3.core.annotation_db.GffAnnotationDb.html">GffAnnotationDb</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../annotation_db/classes/cogent3.core.annotation_db.GenbankAnnotationDb.html">GenbankAnnotationDb</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../sequence/sequence.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sequence</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../sequence/classes/cogent3.core.sequence.DnaSequence.html">DnaSequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../sequence/classes/cogent3.core.sequence.RnaSequence.html">RnaSequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../sequence/classes/cogent3.core.sequence.ProteinSequence.html">ProteinSequence</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../genetic_code/genetic_code.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">genetic_code</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../genetic_code/classes/cogent3.core.genetic_code.GeneticCode.html">GeneticCode</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../moltype/moltype.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">moltype</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../moltype/classes/cogent3.core.moltype.MolType.html">MolType</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../alphabet/alphabet.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">alphabet</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../alphabet/classes/cogent3.core.alphabet.Alphabet.html">Alphabet</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../table/table.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">table</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../table/classes/cogent3.util.table.Table.html">Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../table/classes/cogent3.util.table.Columns.html">Columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../table/classes/cogent3.parse.table.FilteringParser.html">FilteringParser</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../tree/tree.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tree</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../tree/classes/cogent3.core.tree.PhyloNode.html">PhyloNode</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="../alignment.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">new_alignment</span></code></a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">SeqsData</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cogent3.core.new_alignment.SeqDataView.html">SeqDataView</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cogent3.core.new_alignment.SequenceCollection.html">SequenceCollection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cogent3.core.new_alignment.AlignedSeqsData.html">AlignedSeqsData</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cogent3.core.new_alignment.AlignedDataView.html">AlignedDataView</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cogent3.core.new_alignment.Aligned.html">Aligned</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cogent3.core.new_alignment.Alignment.html">Alignment</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../new_sequence/sequence.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">new_sequence</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../new_sequence/classes/cogent3.core.new_sequence.DnaSequence.html">DnaSequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../new_sequence/classes/cogent3.core.new_sequence.RnaSequence.html">RnaSequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../new_sequence/classes/cogent3.core.new_sequence.ProteinSequence.html">ProteinSequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../new_sequence/classes/cogent3.core.new_sequence.SeqView.html">SeqView</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../new_sequence/classes/cogent3.core.new_sequence.SliceRecord.html">SliceRecord</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../new_genetic_code/genetic_code.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">new_genetic_code</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../new_genetic_code/classes/cogent3.core.new_genetic_code.GeneticCode.html">GeneticCode</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../new_moltype/moltype.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">new_moltype</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../new_moltype/classes/cogent3.core.new_moltype.MolType.html">MolType</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../new_alphabet/alphabet.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">new_alphabet</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../new_alphabet/classes/cogent3.core.new_alphabet.CharAlphabet.html">CharAlphabet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../new_alphabet/classes/cogent3.core.new_alphabet.KmerAlphabet.html">KmerAlphabet</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../app/composable/define_app.html">define_app</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../app/io/classes/cogent3.app.io.register_datastore_reader.html">register_datastore_reader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../app/data_store/classes/cogent3.app.data_store.DataMember.html">DataMember</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../app/data_store/classes/cogent3.app.data_store.DataStoreDirectory.html">DataStoreDirectory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../app/data_store/classes/cogent3.app.data_store.ReadOnlyDataStoreZipped.html">ReadOnlyDataStoreZipped</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../app/sqlite_data_store/classes/cogent3.app.sqlite_data_store.DataStoreSqlite.html">DataStoreSqlite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../util/deserialise/deserialise_object.html">deserialise_object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../util/deserialise/classes/cogent3.util.deserialise.register_deserialiser.html">register_deserialiser</a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../index.html" class="nav-link">User Guides</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">API</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../alignment.html" class="nav-link"><code class="xref py py-mod docutils literal notranslate"><span class="pre">new_alignment</span></code></a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">SeqsData</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="seqsdata">
+<h1>SeqsData<a class="headerlink" href="#seqsdata" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="cogent3.core.new_alignment.SeqsData">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SeqsData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bytes</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alphabet</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AlphabetABC</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.new_alignment.SeqsData" title="Link to this definition">#</a></dt>
+<dd><p>The builtin <code class="docutils literal notranslate"><span class="pre">cogent3</span></code> implementation of a collection of sequences underlying
+a <code class="docutils literal notranslate"><span class="pre">SequenceCollection</span></code>. The sequence data is stored as numpy arrays. Indexing
+this object (using an int or seq name) returns a <code class="docutils literal notranslate"><span class="pre">SeqDataView</span></code>, which can realise
+the corresponding slice as a string, bytes, or numpy array via the alphabet.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>alphabet</strong></dt><dd></dd>
+<dt><strong>names</strong></dt><dd></dd>
+<dt><strong>offset</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.new_alignment.SeqsData.add_seqs" title="cogent3.core.new_alignment.SeqsData.add_seqs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_seqs</span></code></a>(seqs[, force_unique_keys, offset])</p></td>
+<td><p>Returns a new SeqsData object with added sequences.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.new_alignment.SeqsData.get_seq_length" title="cogent3.core.new_alignment.SeqsData.get_seq_length"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_seq_length</span></code></a>(seqid)</p></td>
+<td><p>return length for seqid</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p><strong>from_seqs</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>get_seq_array</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>get_seq_bytes</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>get_seq_str</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>get_view</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>to_alphabet</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="rubric">Notes</p>
+<p>Methods on this object only accepts plust strand start, stop and step
+indices for selecting segments of data. It can return the gap coordinates
+for a sequence as used by IndelMap.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cogent3.core.new_alignment.SeqsData.add_seqs">
+<span class="sig-name descname"><span class="pre">add_seqs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seqs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bytes</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_unique_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#cogent3.core.new_alignment.SeqsData" title="cogent3.core.new_alignment.SeqsData"><span class="pre">SeqsData</span></a></span></span><a class="headerlink" href="#cogent3.core.new_alignment.SeqsData.add_seqs" title="Link to this definition">#</a></dt>
+<dd><p>Returns a new SeqsData object with added sequences. If force_unique_keys
+is True, raises ValueError if any names already exist in the collection.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cogent3.core.new_alignment.SeqsData.alphabet">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">alphabet</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">AlphabetABC</span></em><a class="headerlink" href="#cogent3.core.new_alignment.SeqsData.alphabet" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cogent3.core.new_alignment.SeqsData.from_seqs">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_seqs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bytes</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alphabet</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AlphabetABC</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.new_alignment.SeqsData.from_seqs" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cogent3.core.new_alignment.SeqsData.get_seq_array">
+<span class="sig-name descname"><span class="pre">get_seq_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seqid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#cogent3.core.new_alignment.SeqsData.get_seq_array" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cogent3.core.new_alignment.SeqsData.get_seq_bytes">
+<span class="sig-name descname"><span class="pre">get_seq_bytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seqid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="headerlink" href="#cogent3.core.new_alignment.SeqsData.get_seq_bytes" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cogent3.core.new_alignment.SeqsData.get_seq_length">
+<span class="sig-name descname"><span class="pre">get_seq_length</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seqid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#cogent3.core.new_alignment.SeqsData.get_seq_length" title="Link to this definition">#</a></dt>
+<dd><p>return length for seqid</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cogent3.core.new_alignment.SeqsData.get_seq_str">
+<span class="sig-name descname"><span class="pre">get_seq_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seqid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#cogent3.core.new_alignment.SeqsData.get_seq_str" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cogent3.core.new_alignment.SeqsData.get_view">
+<span class="sig-name descname"><span class="pre">get_view</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seqid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="cogent3.core.new_alignment.SeqDataView.html#cogent3.core.new_alignment.SeqDataView" title="cogent3.core.new_alignment.SeqDataView"><span class="pre">SeqDataView</span></a></span></span><a class="headerlink" href="#cogent3.core.new_alignment.SeqsData.get_view" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cogent3.core.new_alignment.SeqsData.names">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">names</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#cogent3.core.new_alignment.SeqsData.names" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cogent3.core.new_alignment.SeqsData.offset">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">offset</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#cogent3.core.new_alignment.SeqsData.offset" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cogent3.core.new_alignment.SeqsData.to_alphabet">
+<span class="sig-name descname"><span class="pre">to_alphabet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alphabet</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">AlphabetABC</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_valid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#cogent3.core.new_alignment.SeqsData" title="cogent3.core.new_alignment.SeqsData"><span class="pre">SeqsData</span></a></span></span><a class="headerlink" href="#cogent3.core.new_alignment.SeqsData.to_alphabet" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../alignment.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><code class="xref py py-mod docutils literal notranslate"><span class="pre">new_alignment</span></code></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="cogent3.core.new_alignment.SeqDataView.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">SeqDataView</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.new_alignment.SeqsData"><code class="docutils literal notranslate"><span class="pre">SeqsData</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.new_alignment.SeqsData.add_seqs"><code class="docutils literal notranslate"><span class="pre">SeqsData.add_seqs()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.new_alignment.SeqsData.alphabet"><code class="docutils literal notranslate"><span class="pre">SeqsData.alphabet</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.new_alignment.SeqsData.from_seqs"><code class="docutils literal notranslate"><span class="pre">SeqsData.from_seqs()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.new_alignment.SeqsData.get_seq_array"><code class="docutils literal notranslate"><span class="pre">SeqsData.get_seq_array()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.new_alignment.SeqsData.get_seq_bytes"><code class="docutils literal notranslate"><span class="pre">SeqsData.get_seq_bytes()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.new_alignment.SeqsData.get_seq_length"><code class="docutils literal notranslate"><span class="pre">SeqsData.get_seq_length()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.new_alignment.SeqsData.get_seq_str"><code class="docutils literal notranslate"><span class="pre">SeqsData.get_seq_str()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.new_alignment.SeqsData.get_view"><code class="docutils literal notranslate"><span class="pre">SeqsData.get_view()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.new_alignment.SeqsData.names"><code class="docutils literal notranslate"><span class="pre">SeqsData.names</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.new_alignment.SeqsData.offset"><code class="docutils literal notranslate"><span class="pre">SeqsData.offset</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.new_alignment.SeqsData.to_alphabet"><code class="docutils literal notranslate"><span class="pre">SeqsData.to_alphabet()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2020-2024, cogent3 Team.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
