@@ -38,9 +38,25 @@ Making Sense from Sequence
 📣 New Features & Announcements
 ===============================
 
+.. dropdown:: 🆕 Cogent3 and Plotly blog post 😎
+
+    A demo of the combined power of cogent3 and Plotly applied to the `analysis of SARS-COV-2 genomes <https://plotly.com/blog/decoding-genomes-cogent3-plotly/>`_.
+
+.. dropdown:: 🆕 New core data types improve efficiency and flexibility
+
+    The cogent3 development team 👾 have been hard at work modernising the core internals 💪🛠.
+
+    The grand rewrite of alignment classes is ready for use! The new approach unifies the best features of the old classes plus gives us the foundation for major performance improvements in the future (see the next announcement). Try them out by setting ``new_type=True`` in the top level functions ``make_aligned_seqs()`` and ``load_aligned_seqs()``. The new types are not fully integrated into the existing code and can differ in their API relative to the old style classes.
+
+    Please try them out and `give us feedback <https://github.com/cogent3/cogent3/discussions>`_!
+
+.. dropdown:: 🆕 Faster pairwise genetic distance calculations 🚀
+
+    We have completely rewritten a subset of the genetic distance calculators. These are now only available using the new type ``Alignment.distance_matrix()`` method. Single CPU performance is waaay faster 💨 plus they support parallel execution.
+
 .. dropdown:: 🆕 A new tutorial on using non-stationary amino acid models 🧐
 
-    A new contribution from Peter Goodman and Andrew Wheeler demonstrates how to specify a non-stationary amino acid substitution model. Check it out their :ref:`tutorial <nonstationary-model-aa-inference>` and `the original paper <https://doi.org/10.1101/2023.02.01.526552>`_. Thanks Peter, Andrew and their colleagues!
+    A new contribution from Peter Goodman and Andrew Wheeler demonstrates how to specify a non-stationary amino acid substitution model. Check out their :ref:`tutorial <nonstationary-model-aa-inference>` and `the original paper <https://doi.org/10.1101/2023.02.01.526552>`_. Thanks Peter, Andrew and their colleagues!
 
 .. dropdown:: 🆕 Faster sequence coevolution measures 🚀
 
@@ -48,23 +64,13 @@ Making Sense from Sequence
 
 .. dropdown:: 🆕 Supporting third-party apps as plugins 🔌
 
-    Cogent3 now provides support for plugins! Third-party developers can deploy their code as cogent3 apps with just a few lines. See the app `demo project <https://github.com/cogent3/app_template>`_ for an example of how easy it is to share your cogent3 apps.
+    Third-party developers can deploy their code as cogent3 apps with just a few lines. See the app `demo project <https://github.com/cogent3/app_template>`_ for an example of how easy it is to share your cogent3 apps.
 
     Please post any questions you have about writing apps or sharing them on `cogent3 discussions <https://github.com/cogent3/cogent3/discussions>`_.
 
-.. dropdown:: 🆕 The developers of Cogent3 and IQ-TREE2 announce piqtree2 🎉
+.. dropdown:: 🆕 Docs are out for piqtree2 🎉
 
-    Speaking of plugins, our first major third-party plugin is `piqtree2 <https://pypi.org/project/piqtree2>`_. Try it out and `give us feedback <https://github.com/iqtree/piqtree2/discussions>`_.
-
-.. dropdown:: 🆕 New core data types improve efficiency and flexibility
-
-    The cogent3 development team 👾 are hard at work modernising cogent3 core objects 💪🛠.
-
-    In this release, the ``Sequence``, ``SequenceCollection``, ``MolType``, ``GeneticCode``, and alphabet classes have all been rewritten from scratch to simplify the code while improving its flexibility and performance. (We're working on alignments for the next release.)
-
-    The "new-style" objects enhance performance by supporting the access of the underlying data in various formats (i.e. ``numpy`` arrays, bytes or strings). You can create "new-style" objects by setting the ``new_type=True`` argument in top-level functions (``make_seq``, ``load_seq``, ``make_unaligned_seqs``, ``get_moltype``, ``get_code``). These are not yet the default and are not fully integrated into the existing code. They can also differ in their API relative to the classes they replace. 
-
-    We encourage experimentation in cases where integration with old objects is NOT required and `look forward to any feedback <https://github.com/cogent3/cogent3/discussions>`_!
+    Speaking of plugins, checkout the new documentation for `piqtree2 <https://piqtree2.readthedocs.io/>`_.
 
 
 .. the ordering of the index items below is critical since it defines the web site header!
