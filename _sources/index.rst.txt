@@ -2,7 +2,7 @@
 Making Sense from Sequence
 ##########################
 
-``cogent3`` is a mature python library for analysis of biological sequence data. We endeavour to provide a first-class experience within Jupyter notebooks, but the algorithms also support parallel execution on compute systems with 1000's of processors. It be used for...
+``cogent3`` is a python library for analysis of biological sequence data. We endeavour to provide a first-class experience within Jupyter notebooks, but the algorithms also support parallel execution on compute systems with 1000's of processors. It be used for...
 
 .. tab-set::
 
@@ -38,6 +38,10 @@ Making Sense from Sequence
 📣 New Features & Announcements
 ===============================
 
+.. dropdown:: 🆕 The release of piqtree 🎉
+
+    The `piqtree <https://piqtree.readthedocs.io/>`_ project has made a major release. It now supports parallel execution for some functions.
+
 .. dropdown:: 🆕 Cogent3 and Plotly blog post 😎
 
     A demo of the combined power of cogent3 and Plotly applied to the `analysis of SARS-COV-2 genomes <https://plotly.com/blog/decoding-genomes-cogent3-plotly/>`_.
@@ -56,7 +60,7 @@ Making Sense from Sequence
 
 .. dropdown:: 🆕 A new tutorial on using non-stationary amino acid models 🧐
 
-    A new contribution from Peter Goodman and Andrew Wheeler demonstrates how to specify a non-stationary amino acid substitution model. Check out their :ref:`tutorial <nonstationary-model-aa-inference>` and `the original paper <https://doi.org/10.1101/2023.02.01.526552>`_. Thanks Peter, Andrew and their colleagues!
+    A new contribution from Peter Goodman and Andrew Wheeler demonstrates how to specify a non-stationary amino acid substitution model. Check  out their :ref:`tutorial <nonstationary-model-aa-inference>` and `the original paper <https://doi.org/10.1101/2023.02.01.526552>`_. Thanks Peter, Andrew and their colleagues!
 
 .. dropdown:: 🆕 Faster sequence coevolution measures 🚀
 
@@ -67,11 +71,6 @@ Making Sense from Sequence
     Third-party developers can deploy their code as cogent3 apps with just a few lines. See the app `demo project <https://github.com/cogent3/app_template>`_ for an example of how easy it is to share your cogent3 apps.
 
     Please post any questions you have about writing apps or sharing them on `cogent3 discussions <https://github.com/cogent3/cogent3/discussions>`_.
-
-.. dropdown:: 🆕 Docs are out for piqtree2 🎉
-
-    Speaking of plugins, checkout the new documentation for `piqtree2 <https://piqtree2.readthedocs.io/>`_.
-
 
 .. the ordering of the index items below is critical since it defines the web site header!
 
