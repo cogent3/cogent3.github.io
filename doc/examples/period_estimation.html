@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Estimating periodic signals &#8212; cogent3 2024.12.19 documentation</title>
+    <title>Estimating periodic signals &#8212; cogent3 2025.01.17 documentation</title>
   
   
   
@@ -30,7 +30,7 @@
   <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -42,7 +42,7 @@
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../_static/documentation_options.js?v=b7b2ba1a"></script>
+    <script src="../../_static/documentation_options.js?v=21afde67"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/thebelab-helper.js"></script>
@@ -124,8 +124,8 @@
       
     
     
-    <img src="../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2024.12.19 documentation - Home"/>
-    <img src="../../_static/c3-logo.png" class="logo__image only-dark pst-js-only" alt="cogent3 2024.12.19 documentation - Home"/>
+    <img src="../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2025.01.17 documentation - Home"/>
+    <img src="../../_static/c3-logo.png" class="logo__image only-dark pst-js-only" alt="cogent3 2025.01.17 documentation - Home"/>
   
   
 </a></div>
@@ -746,7 +746,7 @@
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span>
 
 <span class="n">t</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
 <span class="n">n</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
@@ -764,7 +764,7 @@
 <p>We now use the discrete Fourier transform to estimate periodicity in this signal. Given we set the period to equal 10, we expect the maximum power for that index.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.period</span> <span class="kn">import</span> <span class="n">dft</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.maths.period</span><span class="w"> </span><span class="kn">import</span> <span class="n">dft</span>
 
 <span class="n">pwr</span><span class="p">,</span> <span class="n">period</span> <span class="o">=</span> <span class="n">dft</span><span class="p">(</span><span class="n">sig</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
@@ -833,7 +833,7 @@
 <p>We now use auto-correlation.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.period</span> <span class="kn">import</span> <span class="n">auto_corr</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.maths.period</span><span class="w"> </span><span class="kn">import</span> <span class="n">auto_corr</span>
 
 <span class="n">pwr</span><span class="p">,</span> <span class="n">period</span> <span class="o">=</span> <span class="n">auto_corr</span><span class="p">(</span><span class="n">sig</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
@@ -911,7 +911,7 @@
 <p>We then specify the motifs whose occurrences will be converted into 1, with all other motifs converted into 0. As we might want to do this in batches for many sequences we use a factory function.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.stats.period</span> <span class="kn">import</span> <span class="n">SeqToSymbols</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.maths.stats.period</span><span class="w"> </span><span class="kn">import</span> <span class="n">SeqToSymbols</span>
 
 <span class="n">seq_to_symbols</span> <span class="o">=</span> <span class="n">SeqToSymbols</span><span class="p">([</span><span class="s2">&quot;AA&quot;</span><span class="p">,</span> <span class="s2">&quot;TT&quot;</span><span class="p">,</span> <span class="s2">&quot;AT&quot;</span><span class="p">])</span>
 <span class="n">symbols</span> <span class="o">=</span> <span class="n">seq_to_symbols</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
@@ -935,7 +935,7 @@
 <p>We then estimate the integer discrete Fourier transform for the full data. To do this, we need to pass in the symbols from full conversion of the sequence. The returned values are the powers and periods.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.period</span> <span class="kn">import</span> <span class="n">ipdft</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.maths.period</span><span class="w"> </span><span class="kn">import</span> <span class="n">ipdft</span>
 
 <span class="n">powers</span><span class="p">,</span> <span class="n">periods</span> <span class="o">=</span> <span class="n">ipdft</span><span class="p">(</span><span class="n">symbols</span><span class="p">)</span>
 <span class="n">powers</span>
@@ -1010,7 +1010,7 @@
 <p>We can also compute the auto-correlation statistic, and the hybrid (which combines IPDFT and auto-correlation).</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.period</span> <span class="kn">import</span> <span class="n">auto_corr</span><span class="p">,</span> <span class="n">hybrid</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.maths.period</span><span class="w"> </span><span class="kn">import</span> <span class="n">auto_corr</span><span class="p">,</span> <span class="n">hybrid</span>
 
 <span class="n">powers</span><span class="p">,</span> <span class="n">periods</span> <span class="o">=</span> <span class="n">auto_corr</span><span class="p">(</span><span class="n">symbols</span><span class="p">)</span>
 <span class="n">powers</span>
@@ -1138,7 +1138,7 @@
 <p>We just use <code class="docutils literal notranslate"><span class="pre">sig</span></code> created above. The Goertzel algorithm gives the same result as the <code class="docutils literal notranslate"><span class="pre">dft</span></code>.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.period</span> <span class="kn">import</span> <span class="n">goertzel</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.maths.period</span><span class="w"> </span><span class="kn">import</span> <span class="n">goertzel</span>
 
 <span class="n">pwr</span> <span class="o">=</span> <span class="n">goertzel</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">pwr</span><span class="p">)</span>
@@ -1185,7 +1185,7 @@
 <p>For Fourier techniques, we can compute the power for a specific period more efficiently using Goertzel algorithm.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.period</span> <span class="kn">import</span> <span class="n">goertzel</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.maths.period</span><span class="w"> </span><span class="kn">import</span> <span class="n">goertzel</span>
 
 <span class="n">period</span> <span class="o">=</span> <span class="mi">4</span>
 <span class="n">power</span> <span class="o">=</span> <span class="n">goertzel</span><span class="p">(</span><span class="n">symbols</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
@@ -1225,7 +1225,7 @@
 <p>We use the signal provided above. Because significance testing is being done using a resampling approach, we define a calculator which precomputes some values to improve compute performance. For a continuous signal, we’ll use the Goertzel algorithm.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.period</span> <span class="kn">import</span> <span class="n">Goertzel</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.maths.period</span><span class="w"> </span><span class="kn">import</span> <span class="n">Goertzel</span>
 
 <span class="n">goertzel_calc</span> <span class="o">=</span> <span class="n">Goertzel</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sig</span><span class="p">),</span> <span class="n">period</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
@@ -1237,7 +1237,7 @@
 <p>Having defined this, we then just pass this calculator to the <code class="docutils literal notranslate"><span class="pre">blockwise_bootstrap</span></code> function. The other critical settings are the <code class="docutils literal notranslate"><span class="pre">block_size</span></code> which specifies the size of segments of contiguous sequence positions to use for sampling and <code class="docutils literal notranslate"><span class="pre">num_reps</span></code> which is the number of permuted replicate sequences to generate.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.stats.period</span> <span class="kn">import</span> <span class="n">blockwise_bootstrap</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.maths.stats.period</span><span class="w"> </span><span class="kn">import</span> <span class="n">blockwise_bootstrap</span>
 
 <span class="n">obs_stat</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">blockwise_bootstrap</span><span class="p">(</span>
     <span class="n">sig</span><span class="p">,</span> <span class="n">calc</span><span class="o">=</span><span class="n">goertzel_calc</span><span class="p">,</span> <span class="n">block_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">num_reps</span><span class="o">=</span><span class="mi">1000</span>
@@ -1262,7 +1262,7 @@
 <p>The very notion of permutation testing for periods, applied to a genome, requires the compute performance be as quick as possible. This means providing as much information up front as possible. We have made the implementation flexible by not assuming how the user will convert sequences to symbols. It’s also the case that numerous windows of exactly the same size are being assessed. Accordingly, we use a class to construct a fixed signal length evaluator. We do this for the hybrid metric first.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.period</span> <span class="kn">import</span> <span class="n">Hybrid</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.maths.period</span><span class="w"> </span><span class="kn">import</span> <span class="n">Hybrid</span>
 
 <span class="n">hybrid_calculator</span> <span class="o">=</span> <span class="n">Hybrid</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">period</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 </pre></div>
@@ -1278,7 +1278,7 @@
 <p>We then construct a seq-to-symbol convertor.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.stats.period</span> <span class="kn">import</span> <span class="n">SeqToSymbols</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.maths.stats.period</span><span class="w"> </span><span class="kn">import</span> <span class="n">SeqToSymbols</span>
 
 <span class="n">seq_to_symbols</span> <span class="o">=</span> <span class="n">SeqToSymbols</span><span class="p">([</span><span class="s2">&quot;AA&quot;</span><span class="p">,</span> <span class="s2">&quot;TT&quot;</span><span class="p">,</span> <span class="s2">&quot;AT&quot;</span><span class="p">],</span> <span class="n">length</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
 </pre></div>
@@ -1290,7 +1290,7 @@
 <p>The rest is as per the analysis using <code class="docutils literal notranslate"><span class="pre">Goertzel</span></code> above.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cogent3.maths.stats.period</span> <span class="kn">import</span> <span class="n">blockwise_bootstrap</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.maths.stats.period</span><span class="w"> </span><span class="kn">import</span> <span class="n">blockwise_bootstrap</span>
 
 <span class="n">stat</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">blockwise_bootstrap</span><span class="p">(</span>
     <span class="n">s</span><span class="p">,</span>
@@ -1415,7 +1415,7 @@
 
   <p class="copyright">
     
-      © Copyright 2020-2024, cogent3 Team.
+      © Copyright 2020-2025, cogent3 Team.
       <br/>
     
   </p>

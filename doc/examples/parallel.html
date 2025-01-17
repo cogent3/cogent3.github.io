@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Parallel computations &#8212; cogent3 2024.12.19 documentation</title>
+    <title>Parallel computations &#8212; cogent3 2025.01.17 documentation</title>
   
   
   
@@ -30,7 +30,7 @@
   <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -42,7 +42,7 @@
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../_static/documentation_options.js?v=b7b2ba1a"></script>
+    <script src="../../_static/documentation_options.js?v=21afde67"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/thebelab-helper.js"></script>
@@ -124,8 +124,8 @@
       
     
     
-    <img src="../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2024.12.19 documentation - Home"/>
-    <img src="../../_static/c3-logo.png" class="logo__image only-dark pst-js-only" alt="cogent3 2024.12.19 documentation - Home"/>
+    <img src="../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2025.01.17 documentation - Home"/>
+    <img src="../../_static/c3-logo.png" class="logo__image only-dark pst-js-only" alt="cogent3 2025.01.17 documentation - Home"/>
   
   
 </a></div>
@@ -777,14 +777,14 @@
 <p class="admonition-title">Note</p>
 <p>If you don’t specify <code class="docutils literal notranslate"><span class="pre">max_workers</span></code>, all available CPUs will be used.</p>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
 
-<span class="kn">from</span> <span class="nn">cogent3.util</span> <span class="kn">import</span> <span class="n">parallel</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">parallel</span>
 
 
-<span class="k">def</span> <span class="nf">is_prime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_prime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">parallel</span><span class="o">.</span><span class="n">get_rank</span><span class="p">()</span>
 
     <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -813,7 +813,7 @@
 <span class="p">)</span>  <span class="c1"># multiplying just to increase the amount of data to calculate</span>
 
 
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;World size: </span><span class="si">{</span><span class="n">parallel</span><span class="o">.</span><span class="n">SIZE</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
@@ -866,12 +866,12 @@
 <p class="admonition-title">Note</p>
 <p>You can use <code class="docutils literal notranslate"><span class="pre">mpi</span></code> for parallel execution on a single computer. This can be useful for checking your code prior to migrating to a larger system.</p>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
 
-<span class="kn">from</span> <span class="nn">cogent3.util</span> <span class="kn">import</span> <span class="n">parallel</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">parallel</span>
 
 <span class="c1"># the following environment variable is created by PBS on job execution</span>
 <span class="n">PBS_NCPUS</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;PBS_NCPUS&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
@@ -881,7 +881,7 @@
 <span class="n">PBS_NCPUS</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">PBS_NCPUS</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">is_prime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_prime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="c1"># Postprocess the processor MPI rank to check your job got the resources</span>
     <span class="c1"># you requested</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">parallel</span><span class="o">.</span><span class="n">get_rank</span><span class="p">()</span>
@@ -912,7 +912,7 @@
 <span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;World size: </span><span class="si">{</span><span class="n">parallel</span><span class="o">.</span><span class="n">SIZE</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="c1"># Each worker will evaluate 20 prime numbers. This is just to slow the</span>
@@ -1039,7 +1039,7 @@
 
   <p class="copyright">
     
-      © Copyright 2020-2024, cogent3 Team.
+      © Copyright 2020-2025, cogent3 Team.
       <br/>
     
   </p>
