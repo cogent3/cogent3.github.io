@@ -38,6 +38,10 @@ Making Sense from Sequence
 📣 New Features & Announcements
 ===============================
 
+.. dropdown:: 🆕 Cogent3 implements plugin hooks 🔌🪝🎉 
+
+    We have implemented the infrastructure to support hook-style plugins. We have definied a single hook now -- the new type ``Alignment.quick_tree()`` method checks for an external plugin for calculation. There are no implementations available yet, but stay tuned as the developers of `piqtree <https://pypi.org/project/piqtree>`_ will be implementing support for this very soon.
+
 .. dropdown:: 🆕 The release of piqtree 🎉
 
     The `piqtree <https://piqtree.readthedocs.io/>`_ project has made a major release. It now supports parallel execution for some functions.
@@ -61,16 +65,6 @@ Making Sense from Sequence
 .. dropdown:: 🆕 A new tutorial on using non-stationary amino acid models 🧐
 
     A new contribution from Peter Goodman and Andrew Wheeler demonstrates how to specify a non-stationary amino acid substitution model. Check  out their :ref:`tutorial <nonstationary-model-aa-inference>` and `the original paper <https://doi.org/10.1101/2023.02.01.526552>`_. Thanks Peter, Andrew and their colleagues!
-
-.. dropdown:: 🆕 Faster sequence coevolution measures 🚀
-
-    We have completely rewritten all the Mutual Information based coevolution statistic calculators. Single CPU performance is orders of magnitude faster than the old implementation and we now also support parallel execution. The existing ``<alignment>.coevolution()`` method uses these so you don't need to do anything different to use the new algorithms.
-
-.. dropdown:: 🆕 Supporting third-party apps as plugins 🔌
-
-    Third-party developers can deploy their code as cogent3 apps with just a few lines. See the app `demo project <https://github.com/cogent3/app_template>`_ for an example of how easy it is to share your cogent3 apps.
-
-    Please post any questions you have about writing apps or sharing them on `cogent3 discussions <https://github.com/cogent3/cogent3/discussions>`_.
 
 .. the ordering of the index items below is critical since it defines the web site header!
 
