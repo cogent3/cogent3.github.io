@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Alphabets &#8212; cogent3 2025.01.17 documentation</title>
+    <title>Alphabets &#8212; cogent3 2025.03.24 documentation</title>
   
   
   
@@ -42,7 +42,7 @@
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../_static/documentation_options.js?v=21afde67"></script>
+    <script src="../../_static/documentation_options.js?v=9e8b5cf5"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/thebelab-helper.js"></script>
@@ -124,8 +124,8 @@
       
     
     
-    <img src="../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2025.01.17 documentation - Home"/>
-    <img src="../../_static/c3-logo.png" class="logo__image only-dark pst-js-only" alt="cogent3 2025.01.17 documentation - Home"/>
+    <img src="../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2025.03.24 documentation - Home"/>
+    <img src="../../_static/c3-logo.png" class="logo__image only-dark pst-js-only" alt="cogent3 2025.03.24 documentation - Home"/>
   
   
 </a></div>
@@ -736,10 +736,12 @@
 <p><code class="docutils literal notranslate"><span class="pre">MolType</span></code> instances have an <code class="docutils literal notranslate"><span class="pre">Alphabet</span></code>.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">DNA</span><span class="p">,</span> <span class="n">PROTEIN</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_moltype</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">DNA</span><span class="o">.</span><span class="n">alphabet</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">PROTEIN</span><span class="o">.</span><span class="n">alphabet</span><span class="p">)</span>
+<span class="n">dna</span> <span class="o">=</span> <span class="n">get_moltype</span><span class="p">(</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dna</span><span class="o">.</span><span class="n">alphabet</span><span class="p">)</span>
+<span class="n">protein</span> <span class="o">=</span> <span class="n">get_moltype</span><span class="p">(</span><span class="s2">&quot;protein&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">protein</span><span class="o">.</span><span class="n">alphabet</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -750,10 +752,10 @@
 </div>
 </div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">Alphabet</span></code> instances have a <code class="docutils literal notranslate"><span class="pre">MolType</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Alphabet</span></code> instances reference the <code class="docutils literal notranslate"><span class="pre">MolType</span></code> that created them.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">PROTEIN</span><span class="o">.</span><span class="n">alphabet</span><span class="o">.</span><span class="n">moltype</span> <span class="o">==</span> <span class="n">PROTEIN</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dna</span><span class="o">.</span><span class="n">alphabet</span><span class="o">.</span><span class="n">moltype</span> <span class="ow">is</span> <span class="n">dna</span>
 </pre></div>
 </div>
 </div>
@@ -769,9 +771,9 @@
 <p>You can create a tuple alphabet of, for example, dinucleotides or trinucleotides.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dinuc_alphabet</span> <span class="o">=</span> <span class="n">DNA</span><span class="o">.</span><span class="n">alphabet</span><span class="o">.</span><span class="n">get_word_alphabet</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dinuc_alphabet</span> <span class="o">=</span> <span class="n">dna</span><span class="o">.</span><span class="n">alphabet</span><span class="o">.</span><span class="n">get_word_alphabet</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">dinuc_alphabet</span><span class="p">)</span>
-<span class="n">trinuc_alphabet</span> <span class="o">=</span> <span class="n">DNA</span><span class="o">.</span><span class="n">alphabet</span><span class="o">.</span><span class="n">get_word_alphabet</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">trinuc_alphabet</span> <span class="o">=</span> <span class="n">dna</span><span class="o">.</span><span class="n">alphabet</span><span class="o">.</span><span class="n">get_word_alphabet</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">trinuc_alphabet</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -789,7 +791,7 @@
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seq</span> <span class="o">=</span> <span class="s2">&quot;TAGT&quot;</span>
-<span class="n">indices</span> <span class="o">=</span> <span class="n">DNA</span><span class="o">.</span><span class="n">alphabet</span><span class="o">.</span><span class="n">to_indices</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
+<span class="n">indices</span> <span class="o">=</span> <span class="n">dna</span><span class="o">.</span><span class="n">alphabet</span><span class="o">.</span><span class="n">to_indices</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
 <span class="n">indices</span>
 </pre></div>
 </div>
@@ -805,7 +807,7 @@
 <h2>Convert integers to a sequence<a class="headerlink" href="#convert-integers-to-a-sequence" title="Link to this heading">#</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seq</span> <span class="o">=</span> <span class="n">DNA</span><span class="o">.</span><span class="n">alphabet</span><span class="o">.</span><span class="n">from_indices</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seq</span> <span class="o">=</span> <span class="n">dna</span><span class="o">.</span><span class="n">alphabet</span><span class="o">.</span><span class="n">from_indices</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
 <span class="n">seq</span>
 </pre></div>
 </div>
