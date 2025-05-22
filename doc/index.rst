@@ -2,13 +2,31 @@
 Making Sense from Sequence
 ##########################
 
-``cogent3`` is a python library for analysis of biological sequence data. We endeavour to provide a first-class experience within Jupyter notebooks, but the algorithms also support parallel execution on compute systems with 1000's of processors. It be used for...
-
 .. tab-set::
+
+    .. tab-item:: About
+
+        ``cogent3`` is a Python library for the analysis of biological sequence data. We endeavour to provide a first-class experience within Jupyter notebooks, but the algorithms also support parallel execution on compute systems with 1000's of processors.
+
+        Check out the other tabs on this page for installation instructions and highlights of what you can do with ``cogent3``. See the links at the top of the page for an image gallery and detailed user guides.
+
+    .. tab-item:: Installation
+
+        For most uses, we recommend installation with the "extra" dependencies as these add support for visualisation and Jupyter notebooks.
+
+        .. code-block:: shell
+
+            pip install "cogent3[extra]"
+
+        For users on HPC systems, do the vanilla installation.
+
+        .. code-block:: shell
+
+            pip install cogent3
 
     .. tab-item:: Data wrangling
 
-        ``cogent3`` provides an extensive suite of capabilities for manipulating and analysing sequence data. For instance, the ability to `read standard biological data formats <doc/cookbook/manipulating_biological_data.html>`_, manipulate sequences `by their annotations <doc/examples/seq_features.html>`_, to perform multiple sequence alignment (`app docs`_) using any of our substitution models, `phylogenetic reconstruction <doc/examples/index.html#phylogenetic-reconstruction>`_ and tree manipulation, manipulation of `tabular data <doc/cookbook/tables.html>`_, visualisation of phylogenies (`image gallery`_) and much more.
+        ``cogent3`` provides an extensive suite of capabilities for manipulating and analysing sequence data. For instance, the ability to `read standard biological data formats <doc/cookbook/manipulating_biological_data.html>`_, manipulate sequences `by their annotations <doc/examples/seq_features.html>`_, to perform multiple sequence alignment (:ref:`app docs <app-docs>`) using any of our substitution models, `phylogenetic reconstruction <doc/examples/index.html#phylogenetic-reconstruction>`_ and tree manipulation, manipulation of `tabular data <doc/cookbook/tables.html>`_, visualisation of phylogenies (`image gallery`_) and much more.
 
         .. dropdown:: 🎬 Data wrangling with sequence annotations
 
@@ -35,36 +53,30 @@ Making Sense from Sequence
                 :width: 400
 
 
-📣 New Features & Announcements
+🆕 Features & 📣 Announcements
 ===============================
+
+.. dropdown:: 📣 Migration to new type core objects ‼️
+
+    **The first release after July 1st 2025 will remove all of the old type classes!** We are changing the migration strategy from old type to new type ``cogent3`` core classes. While this is a major change, we have been using these ourselves consistently and feel confident that the disruption to users should be small. We strongly advise all users to migrate now and `report any errors <https://github.com/cogent3/cogent3/issues>`_. To do this, add the following statement to the top of your scripts or notebooks.
+
+    .. code-block:: python
+
+        import os
+
+        os.environ["COGENT3_NEW_TYPE"] = "1"
 
 .. dropdown:: 🆕 Cogent3 implements plugin hooks 🔌🪝🎉 
 
-    We have implemented the infrastructure to support hook-style plugins. We have definied a single hook now -- the new type ``Alignment.quick_tree()`` method checks for an external plugin for calculation. There are no implementations available yet, but stay tuned as the developers of `piqtree <https://pypi.org/project/piqtree>`_ will be implementing support for this very soon.
+    We have implemented the infrastructure to support hook-style plugins. We have definied a single hook now -- the new type ``Alignment.quick_tree()`` method checks for an external plugin for calculation. `piqtree <https://pypi.org/project/piqtree>`_  0.5.0 has implemented support for this.
 
-.. dropdown:: 🆕 The release of piqtree 🎉
+.. dropdown:: 🆕 Cogent3 supports plugins for reading, writing, storing sequence data 🔌🎉 
 
-    The `piqtree <https://piqtree.readthedocs.io/>`_ project has made a major release. It now supports parallel execution for some functions.
+    Who doesn't love the myriad of file formats for biological sequences!! Or that sequence collections can now have millions of records!? We now support third-party contributions for reading and writing sequences. We also support alternate storage backends for our sequence collection classes. The `cogent3-h5seqs <https://pypi.org/project/cogent3-h5seqs>`_ project uses HDF5 plus compression for efficient storage of large volumes of sequences. See the docs for an example of how to use :ref:`third-party storage <storage-plugin>`.
 
 .. dropdown:: 🆕 Cogent3 and Plotly blog post 😎
 
     A demo of the combined power of cogent3 and Plotly applied to the `analysis of SARS-COV-2 genomes <https://plotly.com/blog/decoding-genomes-cogent3-plotly/>`_.
-
-.. dropdown:: 🆕 New core data types improve efficiency and flexibility
-
-    The cogent3 development team 👾 have been hard at work modernising the core internals 💪🛠.
-
-    The grand rewrite of alignment classes is ready for use! The new approach unifies the best features of the old classes plus gives us the foundation for major performance improvements in the future (see the next announcement). Try them out by setting ``new_type=True`` in the top level functions ``make_aligned_seqs()`` and ``load_aligned_seqs()``. The new types are not fully integrated into the existing code and can differ in their API relative to the old style classes.
-
-    Please try them out and `give us feedback <https://github.com/cogent3/cogent3/discussions>`_!
-
-.. dropdown:: 🆕 Faster pairwise genetic distance calculations 🚀
-
-    We have completely rewritten a subset of the genetic distance calculators. These are now only available using the new type ``Alignment.distance_matrix()`` method. Single CPU performance is waaay faster 💨 plus they support parallel execution.
-
-.. dropdown:: 🆕 A new tutorial on using non-stationary amino acid models 🧐
-
-    A new contribution from Peter Goodman and Andrew Wheeler demonstrates how to specify a non-stationary amino acid substitution model. Check  out their :ref:`tutorial <nonstationary-model-aa-inference>` and `the original paper <https://doi.org/10.1101/2023.02.01.526552>`_. Thanks Peter, Andrew and their colleagues!
 
 .. the ordering of the index items below is critical since it defines the web site header!
 
@@ -97,5 +109,4 @@ Making Sense from Sequence
     :filter: docname in docnames
     :style: unsrt
 
-.. _`app docs`: doc/app/index.html
 .. _`image gallery`: doc/draw/index.html
