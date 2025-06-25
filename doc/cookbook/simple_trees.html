@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Trees &#8212; cogent3 2025.05.24 documentation</title>
+    <title>Trees &#8212; cogent3 2025.06.25 documentation</title>
   
   
   
@@ -42,7 +42,7 @@
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../_static/documentation_options.js?v=f01fd4a9"></script>
+    <script src="../../_static/documentation_options.js?v=632d149e"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/thebelab-helper.js"></script>
@@ -124,8 +124,8 @@
       
     
     
-    <img src="../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2025.05.24 documentation - Home"/>
-    <img src="../../_static/c3-logo.png" class="logo__image only-dark pst-js-only" alt="cogent3 2025.05.24 documentation - Home"/>
+    <img src="../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2025.06.25 documentation - Home"/>
+    <img src="../../_static/c3-logo.png" class="logo__image only-dark pst-js-only" alt="cogent3 2025.06.25 documentation - Home"/>
   
   
 </a></div>
@@ -738,6 +738,10 @@
 </div>
 </div>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>See the <a class="reference internal" href="../draw/index.html#tree-gallery"><span class="std std-ref">Phylogenetic Trees</span></a> for interactive graphical display of dendrograms.</p>
+</div>
 </section>
 <section id="writing-a-tree-to-a-file">
 <h2>Writing a tree to a file<a class="headerlink" href="#writing-a-tree-to-a-file" title="Link to this heading">#</a></h2>
@@ -754,59 +758,33 @@
 </div>
 </div>
 </section>
-<section id="getting-the-individual-nodes-of-a-tree-by-name">
-<h2>Getting the individual nodes of a tree by name<a class="headerlink" href="#getting-the-individual-nodes-of-a-tree-by-name" title="Link to this heading">#</a></h2>
+<section id="getting-a-dict-nodes-keyed-by-their-name">
+<h2>Getting a <code class="docutils literal notranslate"><span class="pre">dict</span></code> nodes keyed by their name<a class="headerlink" href="#getting-a-dict-nodes-keyed-by-their-name" title="Link to this heading">#</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_tree</span>
 
 <span class="n">tr</span> <span class="o">=</span> <span class="n">load_tree</span><span class="p">(</span><span class="s2">&quot;data/test.tree&quot;</span><span class="p">)</span>
-<span class="n">names</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">get_node_names</span><span class="p">()</span>
-<span class="n">names</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[&#39;root&#39;, &#39;edge.1&#39;, &#39;edge.0&#39;, &#39;Human&#39;]
-</pre></div>
-</div>
-</div>
-</div>
-<div class="jupyter_cell jupyter_container docutils container">
-<div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">names</span><span class="p">[</span><span class="mi">4</span><span class="p">:]</span>
 <span class="n">names_nodes</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">get_nodes_dict</span><span class="p">()</span>
 <span class="n">names_nodes</span><span class="p">[</span><span class="s2">&quot;Human&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>Tree(&quot;Human;&quot;)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="jupyter_cell jupyter_container docutils container">
-<div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tr</span><span class="o">.</span><span class="n">get_node_matching_name</span><span class="p">(</span><span class="s2">&quot;Mouse&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>Tree(&quot;Mouse;&quot;)
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>Tree(&quot;Human&quot;)
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="getting-the-name-of-a-node-or-a-tree">
-<h2>Getting the name of a node (or a tree)<a class="headerlink" href="#getting-the-name-of-a-node-or-a-tree" title="Link to this heading">#</a></h2>
+<section id="getting-the-name-of-a-node">
+<h2>Getting the name of a node<a class="headerlink" href="#getting-the-name-of-a-node" title="Link to this heading">#</a></h2>
+<p>The root node name defaults to <code class="docutils literal notranslate"><span class="pre">&quot;root&quot;</span></code>.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_tree</span>
 
 <span class="n">tr</span> <span class="o">=</span> <span class="n">load_tree</span><span class="p">(</span><span class="s2">&quot;data/test.tree&quot;</span><span class="p">)</span>
-<span class="n">hu</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">get_node_matching_name</span><span class="p">(</span><span class="s2">&quot;Human&quot;</span><span class="p">)</span>
 <span class="n">tr</span><span class="o">.</span><span class="n">name</span>
 </pre></div>
 </div>
@@ -819,7 +797,8 @@
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hu</span><span class="o">.</span><span class="n">name</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hu</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">get_node_matching_name</span><span class="p">(</span><span class="s2">&quot;Human&quot;</span><span class="p">)</span>
+<span class="n">hu</span><span class="o">.</span><span class="n">name</span>
 </pre></div>
 </div>
 </div>
@@ -827,6 +806,16 @@
 <div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>&#39;Human&#39;
 </pre></div>
 </div>
+</div>
+</div>
+<p>You can ensure internal nodes get named</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tr</span><span class="o">.</span><span class="n">name_unnamed_nodes</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
 </div>
 </div>
 </section>
@@ -837,9 +826,7 @@
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_tree</span>
 
 <span class="n">tr</span> <span class="o">=</span> <span class="n">load_tree</span><span class="p">(</span><span class="s2">&quot;data/test.tree&quot;</span><span class="p">)</span>
-<span class="n">nodes</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">get_nodes_dict</span><span class="p">()</span>
-<span class="n">hu</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;Human&quot;</span><span class="p">]</span>
-<span class="nb">type</span><span class="p">(</span><span class="n">hu</span><span class="p">)</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">tr</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -851,7 +838,9 @@
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">tr</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nodes</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">get_nodes_dict</span><span class="p">()</span>
+<span class="n">hu</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">get_node_matching_name</span><span class="p">(</span><span class="s2">&quot;Human&quot;</span><span class="p">)</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">hu</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -864,7 +853,7 @@
 </section>
 <section id="working-with-the-nodes-of-a-tree">
 <h2>Working with the nodes of a tree<a class="headerlink" href="#working-with-the-nodes-of-a-tree" title="Link to this heading">#</a></h2>
-<p>Get all the nodes, tips and edges</p>
+<p>Get all the nodes, tips and edges as a <code class="docutils literal notranslate"><span class="pre">dict</span></code>.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_tree</span>
@@ -878,56 +867,83 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>(&#39;root&#39;, Tree(&quot;(((Human,HowlerMon),Mouse),NineBande,DogFaced);&quot;))
-(&#39;edge.1&#39;, Tree(&quot;((Human,HowlerMon),Mouse);&quot;))
-(&#39;edge.0&#39;, Tree(&quot;(Human,HowlerMon);&quot;))
-(&#39;Human&#39;, Tree(&quot;Human;&quot;))
-(&#39;HowlerMon&#39;, Tree(&quot;HowlerMon;&quot;))
-(&#39;Mouse&#39;, Tree(&quot;Mouse;&quot;))
-(&#39;NineBande&#39;, Tree(&quot;NineBande;&quot;))
-(&#39;DogFaced&#39;, Tree(&quot;DogFaced;&quot;))
+(&#39;edge.1&#39;, Tree(&quot;((Human,HowlerMon),Mouse)&quot;))
+(&#39;edge.0&#39;, Tree(&quot;(Human,HowlerMon)&quot;))
+(&#39;Human&#39;, Tree(&quot;Human&quot;))
+(&#39;HowlerMon&#39;, Tree(&quot;HowlerMon&quot;))
+(&#39;Mouse&#39;, Tree(&quot;Mouse&quot;))
+(&#39;NineBande&#39;, Tree(&quot;NineBande&quot;))
+(&#39;DogFaced&#39;, Tree(&quot;DogFaced&quot;))
 </pre></div>
 </div>
 </div>
 </div>
-<p>only the terminal nodes (tips)</p>
+<p>As a list.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nodes</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">get_edge_vector</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>Only the tip (terminal) nodes as a list.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tips</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">tips</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>Iterate the tip nodes.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">tr</span><span class="o">.</span><span class="n">iter_tips</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>Human:0.0311054096183;
-HowlerMon:0.0415847131449;
-Mouse:0.277353608988;
-NineBande:0.0939768158209;
-DogFaced:0.113211053859;
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>Human
+HowlerMon
+Mouse
+NineBande
+DogFaced
 </pre></div>
 </div>
 </div>
 </div>
-<p>for internal nodes (edges) we can use Newick format to simplify the output</p>
+<p>Get just the internal nodes as a list</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_tree</span>
-
-<span class="n">tr</span> <span class="o">=</span> <span class="n">load_tree</span><span class="p">(</span><span class="s2">&quot;data/test.tree&quot;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">tr</span><span class="o">.</span><span class="n">iter_nontips</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">get_newick</span><span class="p">())</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">non_tips</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">nontips</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>((Human,HowlerMon),Mouse);
-(Human,HowlerMon);
+</div>
+</div>
+<p>or iteratively.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">tr</span><span class="o">.</span><span class="n">iter_nontips</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>edge.1
+edge.0
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="getting-the-path-between-two-tips-or-edges-connecting-edges">
-<h2>Getting the path between two tips or edges (connecting edges)<a class="headerlink" href="#getting-the-path-between-two-tips-or-edges-connecting-edges" title="Link to this heading">#</a></h2>
+<section id="getting-the-path-between-two-tips-or-edges-connecting-nodes">
+<h2>Getting the path between two tips or edges (connecting nodes)<a class="headerlink" href="#getting-the-path-between-two-tips-or-edges-connecting-nodes" title="Link to this heading">#</a></h2>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_tree</span>
@@ -948,23 +964,168 @@ Human
 </div>
 </div>
 </section>
+<section id="get-tip-to-root-distances">
+<h2>Get tip-to-root distances<a class="headerlink" href="#get-tip-to-root-distances" title="Link to this heading">#</a></h2>
+<p>The sum of all lengths on nodes connecting tips to the root node.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_tree</span>
+
+<span class="n">tr</span> <span class="o">=</span> <span class="n">make_tree</span><span class="p">(</span><span class="s2">&quot;(B:3,(C:2,D:4):5);&quot;</span><span class="p">)</span>
+<span class="n">tr</span><span class="o">.</span><span class="n">tip_to_root_distances</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;B&#39;: 3.0, &#39;C&#39;: 7.0, &#39;D&#39;: 9.0}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Can also be done for a subset of tips.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tr</span><span class="o">.</span><span class="n">tip_to_root_distances</span><span class="p">(</span><span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;B&#39;: 3.0, &#39;D&#39;: 9.0}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="get-tip-to-tip-distances">
+<h2>Get tip-to-tip distances<a class="headerlink" href="#get-tip-to-tip-distances" title="Link to this heading">#</a></h2>
+<p>Get a distance matrix between all pairs of tips
+and a list of the tip nodes.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_tree</span>
+
+<span class="n">tr</span> <span class="o">=</span> <span class="n">make_tree</span><span class="p">(</span><span class="s2">&quot;(B:3,(C:2,D:4)F:5)G;&quot;</span><span class="p">)</span>
+<span class="n">dmat</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">tip_to_tip_distances</span><span class="p">()</span>
+<span class="n">dmat</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div class="c3table">
+
+<style>
+.c3table table {margin: 10px 0;}
+.c3table tr:last-child {border-bottom: 1px solid #000;} 
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.25); margin: 10px; font-weight: 600;}
+.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+.c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
+</style>
+
+<table>
+
+<thead class="head_cell">
+<th>names</th><th>B</th><th>C</th><th>D</th>
+</thead>
+<tbody>
+<tr><td class="index"><span class="c3col_left">B</span></td><td><span class="c3col_right">0.0000</span></td><td><span class="c3col_right">10.0000</span></td><td><span class="c3col_right">12.0000</span></td></tr>
+<tr><td class="index"><span class="c3col_left">C</span></td><td><span class="c3col_right">10.0000</span></td><td><span class="c3col_right">0.0000</span></td><td><span class="c3col_right">6.0000</span></td></tr>
+<tr><td class="index"><span class="c3col_left">D</span></td><td><span class="c3col_right">12.0000</span></td><td><span class="c3col_right">6.0000</span></td><td><span class="c3col_right">0.0000</span></td></tr>
+</tbody>
+</table>
+
+</div></div></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">tip_to_tip_distances()</span></code> is an alias for <code class="docutils literal notranslate"><span class="pre">get_distances()</span></code>.</p>
+</div>
+</section>
 <section id="getting-the-distance-between-two-nodes">
 <h2>Getting the distance between two nodes<a class="headerlink" href="#getting-the-distance-between-two-nodes" title="Link to this heading">#</a></h2>
+<p>Via pairwise distances, which returns a <code class="docutils literal notranslate"><span class="pre">DistanceMatrix</span></code> instance.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_tree</span>
 
 <span class="n">tr</span> <span class="o">=</span> <span class="n">load_tree</span><span class="p">(</span><span class="s2">&quot;data/test.tree&quot;</span><span class="p">)</span>
-<span class="n">nodes</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">get_nodes_dict</span><span class="p">()</span>
-<span class="n">hu</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;Human&quot;</span><span class="p">]</span>
-<span class="n">mu</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;Mouse&quot;</span><span class="p">]</span>
-<span class="n">hu</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span>
-<span class="n">hu</span><span class="o">.</span><span class="n">is_tip</span><span class="p">()</span>
+<span class="n">dists</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">get_distances</span><span class="p">(</span><span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Human&quot;</span><span class="p">,</span> <span class="s2">&quot;Mouse&quot;</span><span class="p">])</span>
+<span class="n">dists</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>True
+<div class="output text_html">
+<div class="c3table">
+
+<style>
+.c3table table {margin: 10px 0;}
+.c3table tr:last-child {border-bottom: 1px solid #000;} 
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.25); margin: 10px; font-weight: 600;}
+.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+.c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
+</style>
+
+<table>
+
+<thead class="head_cell">
+<th>names</th><th>Mouse</th><th>Human</th>
+</thead>
+<tbody>
+<tr><td class="index"><span class="c3col_left">Mouse</span></td><td><span class="c3col_right">0.0000</span></td><td><span class="c3col_right">0.3468</span></td></tr>
+<tr><td class="index"><span class="c3col_left">Human</span></td><td><span class="c3col_right">0.3468</span></td><td><span class="c3col_right">0.0000</span></td></tr>
+</tbody>
+</table>
+
+</div></div></div>
+</div>
+<p>Or directly between the node objects.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tr</span> <span class="o">=</span> <span class="n">load_tree</span><span class="p">(</span><span class="s2">&quot;data/test.tree&quot;</span><span class="p">)</span>
+<span class="n">nodes</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">get_nodes_dict</span><span class="p">()</span>
+<span class="n">hu</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;Human&quot;</span><span class="p">]</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;Mouse&quot;</span><span class="p">]</span>
+<span class="n">hu</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>0.3467553610937
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="get-sum-of-all-branch-lengths">
+<h2>Get sum of all branch lengths<a class="headerlink" href="#get-sum-of-all-branch-lengths" title="Link to this heading">#</a></h2>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_tree</span>
+
+<span class="n">tr</span> <span class="o">=</span> <span class="n">make_tree</span><span class="p">(</span><span class="s2">&quot;(B:3,(C:2,D:4)F:5)G;&quot;</span><span class="p">)</span>
+<span class="n">tr</span><span class="o">.</span><span class="n">total_length</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>14.0
 </pre></div>
 </div>
 </div>
@@ -981,24 +1142,12 @@ Human
 <span class="n">hu</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;Human&quot;</span><span class="p">]</span>
 <span class="n">mu</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;Mouse&quot;</span><span class="p">]</span>
 <span class="n">lca</span> <span class="o">=</span> <span class="n">hu</span><span class="o">.</span><span class="n">last_common_ancestor</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span>
-<span class="n">lca</span>
+<span class="n">lca</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">lca</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>Tree(&quot;((Human,HowlerMon),Mouse);&quot;)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="jupyter_cell jupyter_container docutils container">
-<div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">lca</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>cogent3.core.tree.PhyloNode
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>(&#39;edge.1&#39;, Tree(&quot;((Human,HowlerMon),Mouse)&quot;))
 </pre></div>
 </div>
 </div>
@@ -1006,6 +1155,7 @@ Human
 </section>
 <section id="getting-all-the-ancestors-for-a-node">
 <h2>Getting all the ancestors for a node<a class="headerlink" href="#getting-all-the-ancestors-for-a-node" title="Link to this heading">#</a></h2>
+<p>A list of all nodes to the tree root.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_tree</span>
@@ -1052,39 +1202,52 @@ edge.0
 </section>
 <section id="getting-all-the-distances-for-a-tree">
 <h2>Getting all the distances for a tree<a class="headerlink" href="#getting-all-the-distances-for-a-tree" title="Link to this heading">#</a></h2>
+<p>On a <code class="docutils literal notranslate"><span class="pre">TreeNode</span></code>, each branh has a weight of 1 so the distances represent the number of connected nodes. On a <code class="docutils literal notranslate"><span class="pre">PhyloNode</span></code> the measure is the sum of branch lengths.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_tree</span>
 
 <span class="n">tr</span> <span class="o">=</span> <span class="n">load_tree</span><span class="p">(</span><span class="s2">&quot;data/test.tree&quot;</span><span class="p">)</span>
 <span class="n">dists</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">get_distances</span><span class="p">()</span>
+<span class="n">dists</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-</div>
-</div>
-<p>We also show how to select a subset of distances involving just one species.</p>
-<div class="jupyter_cell jupyter_container docutils container">
-<div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">human_dists</span> <span class="o">=</span> <span class="p">[</span><span class="n">names</span> <span class="k">for</span> <span class="n">names</span> <span class="ow">in</span> <span class="n">dists</span> <span class="k">if</span> <span class="s2">&quot;Human&quot;</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span>
-<span class="k">for</span> <span class="n">dist</span> <span class="ow">in</span> <span class="n">human_dists</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">dist</span><span class="p">,</span> <span class="n">dists</span><span class="p">[</span><span class="n">dist</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>(&#39;Human&#39;, &#39;HowlerMon&#39;) 0.0726901227632
-(&#39;HowlerMon&#39;, &#39;Human&#39;) 0.0726901227632
-(&#39;Human&#39;, &#39;Mouse&#39;) 0.3467553610937
-(&#39;Mouse&#39;, &#39;Human&#39;) 0.3467553610937
-(&#39;Human&#39;, &#39;NineBande&#39;) 0.18310641816450002
-(&#39;NineBande&#39;, &#39;Human&#39;) 0.18310641816450002
-(&#39;Human&#39;, &#39;DogFaced&#39;) 0.2023406562026
-(&#39;DogFaced&#39;, &#39;Human&#39;) 0.2023406562026
-</pre></div>
-</div>
-</div>
+<div class="output text_html">
+<div class="c3table">
+
+<style>
+.c3table table {margin: 10px 0;}
+.c3table tr:last-child {border-bottom: 1px solid #000;} 
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.25); margin: 10px; font-weight: 600;}
+.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+.c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
+</style>
+
+<table>
+
+<thead class="head_cell">
+<th>names</th><th>Human</th><th>HowlerMon</th><th>Mouse</th><th>NineBande</th><th>DogFaced</th>
+</thead>
+<tbody>
+<tr><td class="index"><span class="c3col_left">Human</span></td><td><span class="c3col_right">0.0000</span></td><td><span class="c3col_right">0.0727</span></td><td><span class="c3col_right">0.3468</span></td><td><span class="c3col_right">0.1831</span></td><td><span class="c3col_right">0.2023</span></td></tr>
+<tr><td class="index"><span class="c3col_left">HowlerMon</span></td><td><span class="c3col_right">0.0727</span></td><td><span class="c3col_right">0.0000</span></td><td><span class="c3col_right">0.3572</span></td><td><span class="c3col_right">0.1936</span></td><td><span class="c3col_right">0.2128</span></td></tr>
+<tr><td class="index"><span class="c3col_left">Mouse</span></td><td><span class="c3col_right">0.3468</span></td><td><span class="c3col_right">0.3572</span></td><td><span class="c3col_right">0.0000</span></td><td><span class="c3col_right">0.3911</span></td><td><span class="c3col_right">0.4103</span></td></tr>
+<tr><td class="index"><span class="c3col_left">NineBande</span></td><td><span class="c3col_right">0.1831</span></td><td><span class="c3col_right">0.1936</span></td><td><span class="c3col_right">0.3911</span></td><td><span class="c3col_right">0.0000</span></td><td><span class="c3col_right">0.2072</span></td></tr>
+<tr><td class="index"><span class="c3col_left">DogFaced</span></td><td><span class="c3col_right">0.2023</span></td><td><span class="c3col_right">0.2128</span></td><td><span class="c3col_right">0.4103</span></td><td><span class="c3col_right">0.2072</span></td><td><span class="c3col_right">0.0000</span></td></tr>
+</tbody>
+</table>
+
+</div></div></div>
 </div>
 </section>
 <section id="getting-the-two-nodes-that-are-farthest-apart">
@@ -1120,8 +1283,8 @@ edge.0
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>HowlerMon:0.0415847131449;
-NineBande:0.0939768158209;
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>HowlerMon:0.0415847131449
+NineBande:0.0939768158209
 </pre></div>
 </div>
 </div>
@@ -1129,8 +1292,9 @@ NineBande:0.0939768158209;
 </section>
 <section id="rerooting-trees">
 <h2>Rerooting trees<a class="headerlink" href="#rerooting-trees" title="Link to this heading">#</a></h2>
-<section id="at-a-named-node">
-<h3>At a named node<a class="headerlink" href="#at-a-named-node" title="Link to this heading">#</a></h3>
+<section id="reorienting-a-tree-at-a-named-node">
+<h3>Reorienting a tree at a named node<a class="headerlink" href="#reorienting-a-tree-at-a-named-node" title="Link to this heading">#</a></h3>
+<p>The method name is a bit misleading. If <code class="docutils literal notranslate"><span class="pre">tr</span></code> is an unrooted tree (loosely, this is a tree whose root node has &gt; 2 children) then the result is more a re-orientation of the tree rather than true root.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_tree</span>
@@ -1157,6 +1321,7 @@ NineBande:0.0939768158209;
 </section>
 <section id="at-the-midpoint">
 <h3>At the midpoint<a class="headerlink" href="#at-the-midpoint" title="Link to this heading">#</a></h3>
+<p>This does produce a rooted tree.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_tree</span>
@@ -1172,7 +1337,7 @@ NineBande:0.0939768158209;
 -root----|                    /-Human
          |          /edge.0--|
          |         |          \-HowlerMon
-          \edge.0.2|
+          \Mouse-root
                    |          /-NineBande
                     \edge.1--|
                               \-DogFaced
@@ -1180,29 +1345,10 @@ NineBande:0.0939768158209;
 </div>
 </div>
 </div>
-<div class="jupyter_cell jupyter_container docutils container">
-<div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">tr</span><span class="o">.</span><span class="n">ascii_art</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>                              /-Human
-                    /edge.0--|
-          /edge.1--|          \-HowlerMon
-         |         |
-         |          \-------- /-Mouse
--root----|
-         |--NineBande
-         |
-          \-DogFaced
-</pre></div>
-</div>
-</div>
-</div>
 </section>
-<section id="near-a-given-tip">
-<h3>Near a given tip<a class="headerlink" href="#near-a-given-tip" title="Link to this heading">#</a></h3>
+<section id="root-at-a-named-edge">
+<h3>Root at a named edge<a class="headerlink" href="#root-at-a-named-edge" title="Link to this heading">#</a></h3>
+<p>The edge can be either a tip or an internal node.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_tree</span>
@@ -1228,20 +1374,20 @@ NineBande:0.0939768158209;
 </div>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">tr</span><span class="o">.</span><span class="n">rooted_with_tip</span><span class="p">(</span><span class="s2">&quot;Mouse&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">ascii_art</span><span class="p">())</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">tr</span><span class="o">.</span><span class="n">rooted</span><span class="p">(</span><span class="s2">&quot;Mouse&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">ascii_art</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>                    /-Human
-          /edge.0--|
-         |          \-HowlerMon
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>          /-Mouse
          |
--root----|--Mouse
-         |
-         |          /-NineBande
-          \edge.1--|
-                    \-DogFaced
+-root----|                    /-Human
+         |          /edge.0--|
+         |         |          \-HowlerMon
+          \Mouse-root
+                   |          /-NineBande
+                    \edge.1--|
+                              \-DogFaced
 </pre></div>
 </div>
 </div>
@@ -1279,50 +1425,14 @@ NineBande:0.0939768158209;
 </div>
 </div>
 </div>
-</section>
-<section id="xml-format">
-<h3>XML format<a class="headerlink" href="#xml-format" title="Link to this heading">#</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_tree</span>
-
-<span class="n">tr</span> <span class="o">=</span> <span class="n">load_tree</span><span class="p">(</span><span class="s2">&quot;data/test.tree&quot;</span><span class="p">)</span>
-<span class="n">xml</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">get_xml</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">xml</span><span class="o">.</span><span class="n">splitlines</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tr</span><span class="o">.</span><span class="n">get_newick</span><span class="p">(</span><span class="n">with_distances</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">with_node_names</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;?xml version=&quot;1.0&quot;?&gt;
-&lt;clade&gt;
-  &lt;clade&gt;
-     &lt;param&gt;&lt;name&gt;length&lt;/name&gt;&lt;value&gt;0.0197278502379&lt;/value&gt;&lt;/param&gt;
-    &lt;clade&gt;
-       &lt;param&gt;&lt;name&gt;length&lt;/name&gt;&lt;value&gt;0.0382963424874&lt;/value&gt;&lt;/param&gt;
-      &lt;clade&gt;
-         &lt;name&gt;Human&lt;/name&gt;
-         &lt;param&gt;&lt;name&gt;length&lt;/name&gt;&lt;value&gt;0.0311054096183&lt;/value&gt;&lt;/param&gt;
-      &lt;/clade&gt;
-      &lt;clade&gt;
-         &lt;name&gt;HowlerMon&lt;/name&gt;
-         &lt;param&gt;&lt;name&gt;length&lt;/name&gt;&lt;value&gt;0.0415847131449&lt;/value&gt;&lt;/param&gt;
-      &lt;/clade&gt;
-    &lt;/clade&gt;
-    &lt;clade&gt;
-       &lt;name&gt;Mouse&lt;/name&gt;
-       &lt;param&gt;&lt;name&gt;length&lt;/name&gt;&lt;value&gt;0.277353608988&lt;/value&gt;&lt;/param&gt;
-    &lt;/clade&gt;
-  &lt;/clade&gt;
-  &lt;clade&gt;
-     &lt;name&gt;NineBande&lt;/name&gt;
-     &lt;param&gt;&lt;name&gt;length&lt;/name&gt;&lt;value&gt;0.0939768158209&lt;/value&gt;&lt;/param&gt;
-  &lt;/clade&gt;
-  &lt;clade&gt;
-     &lt;name&gt;DogFaced&lt;/name&gt;
-     &lt;param&gt;&lt;name&gt;length&lt;/name&gt;&lt;value&gt;0.113211053859&lt;/value&gt;&lt;/param&gt;
-  &lt;/clade&gt;
-&lt;/clade&gt;
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>&#39;(((Human:0.0311054096183,HowlerMon:0.0415847131449)edge.0:0.0382963424874,Mouse:0.277353608988)edge.1:0.0197278502379,NineBande:0.0939768158209,DogFaced:0.113211053859);&#39;
 </pre></div>
 </div>
 </div>
@@ -1369,13 +1479,13 @@ NineBande:0.0939768158209;
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>(((Human,HowlerMon),Mouse),NineBande,DogFaced);
-((Human,HowlerMon),Mouse);
-(Human,HowlerMon);
-Human;
-HowlerMon;
-Mouse;
-NineBande;
-DogFaced;
+((Human,HowlerMon),Mouse)
+(Human,HowlerMon)
+Human
+HowlerMon
+Mouse
+NineBande
+DogFaced
 </pre></div>
 </div>
 </div>
@@ -1394,13 +1504,13 @@ DogFaced;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>Human;
-HowlerMon;
-(Human,HowlerMon);
-Mouse;
-((Human,HowlerMon),Mouse);
-NineBande;
-DogFaced;
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>Human
+HowlerMon
+(Human,HowlerMon)
+Mouse
+((Human,HowlerMon),Mouse)
+NineBande
+DogFaced
 (((Human,HowlerMon),Mouse),NineBande,DogFaced);
 </pre></div>
 </div>
@@ -1410,32 +1520,67 @@ DogFaced;
 </section>
 <section id="selecting-subtrees">
 <h2>Selecting subtrees<a class="headerlink" href="#selecting-subtrees" title="Link to this heading">#</a></h2>
-<section id="one-way-to-do-it">
-<h3>One way to do it<a class="headerlink" href="#one-way-to-do-it" title="Link to this heading">#</a></h3>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_tree</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_tree</span>
 
-<span class="n">tr</span> <span class="o">=</span> <span class="n">load_tree</span><span class="p">(</span><span class="s2">&quot;data/test.tree&quot;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">tip</span> <span class="ow">in</span> <span class="n">tr</span><span class="o">.</span><span class="n">iter_nontips</span><span class="p">():</span>
-    <span class="n">tip_names</span> <span class="o">=</span> <span class="n">tip</span><span class="o">.</span><span class="n">get_tip_names</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">tip_names</span><span class="p">)</span>
-    <span class="n">sub_tree</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">get_sub_tree</span><span class="p">(</span><span class="n">tip_names</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">sub_tree</span><span class="o">.</span><span class="n">ascii_art</span><span class="p">())</span>
+<span class="n">tr</span> <span class="o">=</span> <span class="n">make_tree</span><span class="p">(</span><span class="s2">&quot;((a,b),((c,d),(e,f),(g,h)));&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tr</span><span class="o">.</span><span class="n">ascii_art</span><span class="p">(</span><span class="n">show_internal</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[&#39;Human&#39;, &#39;HowlerMon&#39;, &#39;Mouse&#39;]
-          /-Human
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>                    /-a
+          /--------|
+         |          \-b
          |
--root----|--HowlerMon
+         |                    /-c
+---------|          /--------|
+         |         |          \-d
+         |         |
+         |         |          /-e
+          \--------|---------|
+                   |          \-f
+                   |
+                   |          /-g
+                    \--------|
+                              \-h
+</pre></div>
+</div>
+</div>
+</div>
+<p>Provide the names of nodes you want the subtree for. The  default behaviour is to force the subtree to have the same number of children at the root as the original tree, in this case 2.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">subtree</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">get_sub_tree</span><span class="p">([</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;e&quot;</span><span class="p">,</span> <span class="s2">&quot;g&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">subtree</span><span class="o">.</span><span class="n">ascii_art</span><span class="p">(</span><span class="n">show_internal</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>          /-c
+---------|
+         |          /-e
+          \--------|
+                    \-g
+</pre></div>
+</div>
+</div>
+</div>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">as_rooted</span></code> argument to ensure the selected subtree topology is as it existed on the original tree.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">subtree</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">get_sub_tree</span><span class="p">([</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;e&quot;</span><span class="p">,</span> <span class="s2">&quot;g&quot;</span><span class="p">],</span> <span class="n">as_rooted</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">subtree</span><span class="o">.</span><span class="n">ascii_art</span><span class="p">(</span><span class="n">show_internal</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>          /-c
          |
-          \-Mouse
-[&#39;Human&#39;, &#39;HowlerMon&#39;]
-          /-Human
--root----|
-          \-HowlerMon
+---------|--e
+         |
+          \-g
 </pre></div>
 </div>
 </div>
@@ -1444,7 +1589,6 @@ DogFaced;
 <div class="cell_output docutils container">
 </div>
 </div>
-</section>
 </section>
 <section id="tree-manipulation-methods">
 <h2>Tree manipulation methods<a class="headerlink" href="#tree-manipulation-methods" title="Link to this heading">#</a></h2>
@@ -1456,20 +1600,20 @@ and branch lengths (if tree is a PhyloNode) to reflect the change.</p>
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_tree</span>
 
-<span class="n">simple_tree_string</span> <span class="o">=</span> <span class="s2">&quot;(B:0.2,(D:0.4)E:0.5)F;&quot;</span>
-<span class="n">simple_tree</span> <span class="o">=</span> <span class="n">make_tree</span><span class="p">(</span><span class="n">simple_tree_string</span><span class="p">)</span>
+<span class="n">simple_tree</span> <span class="o">=</span> <span class="n">make_tree</span><span class="p">(</span><span class="s2">&quot;(B:0.2,(D:0.4)E:0.5);&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">simple_tree</span><span class="o">.</span><span class="n">ascii_art</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>          /-B
--F-------|
+-root----|
           \E------- /-D
 </pre></div>
 </div>
 </div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">prune()</span></code> modifies the tree in place.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simple_tree</span><span class="o">.</span><span class="n">prune</span><span class="p">()</span>
@@ -1479,20 +1623,8 @@ and branch lengths (if tree is a PhyloNode) to reflect the change.</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>          /-B
--F-------|
+-root----|
           \-D
-</pre></div>
-</div>
-</div>
-</div>
-<div class="jupyter_cell jupyter_container docutils container">
-<div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">simple_tree</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>(B:0.2,D:0.9)F;
 </pre></div>
 </div>
 </div>
@@ -1580,10 +1712,10 @@ and branch lengths (if tree is a PhyloNode) to reflect the change.</p>
 <section id="transform-tree-into-a-balanced-tree">
 <h3>Transform tree into a balanced tree<a class="headerlink" href="#transform-tree-into-a-balanced-tree" title="Link to this heading">#</a></h3>
 <p>Using a balanced tree can substantially improve performance of
-likelihood calculations. Note that the resulting tree has a
-different orientation with the effect that specifying clades or
-stems for model parameterisation should be done using the
-“outgroup_name” argument.</p>
+likelihood calculations for time-reversible models. Note that
+the resulting tree has a different orientation with the effect
+that specifying clades or stems for model parameterisation
+should be done using the “outgroup_name” argument.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_tree</span>
@@ -1712,128 +1844,6 @@ Unrooted Robinson Foulds Distance: 4
 </div>
 </div>
 </section>
-<section id="calculate-each-node-s-maximum-distance-to-a-tip">
-<h3>Calculate each node’s maximum distance to a tip<a class="headerlink" href="#calculate-each-node-s-maximum-distance-to-a-tip" title="Link to this heading">#</a></h3>
-<p>Sets each node’s “TipDistance” attribute to be
-the distance from that node to its most distant tip.</p>
-<div class="jupyter_cell jupyter_container docutils container">
-<div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_tree</span>
-
-<span class="n">tr</span> <span class="o">=</span> <span class="n">make_tree</span><span class="p">(</span><span class="s2">&quot;(B:0.2,(C:0.3,D:0.4)F:0.5)G;&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">tr</span><span class="o">.</span><span class="n">ascii_art</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>          /-B
--G-------|
-         |          /-C
-          \F-------|
-                    \-D
-</pre></div>
-</div>
-</div>
-</div>
-<div class="jupyter_cell jupyter_container docutils container">
-<div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tr</span><span class="o">.</span><span class="n">set_tip_distances</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tr</span><span class="o">.</span><span class="n">preorder</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">TipDistance</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>G 0.9
-B 0
-F 0.4
-C 0
-D 0
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="scale-branch-lengths-in-place-to-integers-for-ascii-output">
-<h3>Scale branch lengths in place to integers for ascii output<a class="headerlink" href="#scale-branch-lengths-in-place-to-integers-for-ascii-output" title="Link to this heading">#</a></h3>
-<div class="jupyter_cell jupyter_container docutils container">
-<div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_tree</span>
-
-<span class="n">tr</span> <span class="o">=</span> <span class="n">make_tree</span><span class="p">(</span><span class="s2">&quot;(B:0.2,(C:0.3,D:0.4)F:0.5)G;&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">tr</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>(B:0.2,(C:0.3,D:0.4)F:0.5)G;
-</pre></div>
-</div>
-</div>
-</div>
-<div class="jupyter_cell jupyter_container docutils container">
-<div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tr</span><span class="o">.</span><span class="n">scale_branch_lengths</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">tr</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>(B:22,(C:33,D:44)F:56)G;
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="get-tip-to-tip-distances">
-<h3>Get tip-to-tip distances<a class="headerlink" href="#get-tip-to-tip-distances" title="Link to this heading">#</a></h3>
-<p>Get a distance matrix between all pairs of tips
-and a list of the tip nodes.</p>
-<div class="jupyter_cell jupyter_container docutils container">
-<div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_tree</span>
-
-<span class="n">tr</span> <span class="o">=</span> <span class="n">make_tree</span><span class="p">(</span><span class="s2">&quot;(B:3,(C:2,D:4)F:5)G;&quot;</span><span class="p">)</span>
-<span class="n">d</span><span class="p">,</span> <span class="n">tips</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">tip_to_tip_distances</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tips</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>B [ 0. 10. 12.]
-C [10.  0.  6.]
-D [12.  6.  0.]
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="compare-two-trees-using-tip-to-tip-distance-matrices">
-<h3>Compare two trees using tip-to-tip distance matrices<a class="headerlink" href="#compare-two-trees-using-tip-to-tip-distance-matrices" title="Link to this heading">#</a></h3>
-<p>Score ranges from 0 (minimum distance) to 1 (maximum
-distance). The default is to use Pearson’s correlation,
-in which case a score of 0 means that the Pearson’s
-correlation was perfectly good (1), and a score of 1
-means that the Pearson’s correlation was perfectly bad (-1).</p>
-<p>Note: automatically strips out the names that don’t match.</p>
-<div class="jupyter_cell jupyter_container docutils container">
-<div class="cell_input code_cell docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_tree</span>
-
-<span class="n">tr1</span> <span class="o">=</span> <span class="n">make_tree</span><span class="p">(</span><span class="s2">&quot;(B:2,(C:3,D:4)F:5)G;&quot;</span><span class="p">)</span>
-<span class="n">tr2</span> <span class="o">=</span> <span class="n">make_tree</span><span class="p">(</span><span class="s2">&quot;(C:2,(B:3,D:4)F:5)G;&quot;</span><span class="p">)</span>
-<span class="n">tr1</span><span class="o">.</span><span class="n">compare_by_tip_distances</span><span class="p">(</span><span class="n">tr2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>np.float64(0.08352668213457076)
-</pre></div>
-</div>
-</div>
-</div>
-</section>
 </section>
 </section>
 
@@ -1886,12 +1896,15 @@ means that the Pearson’s correlation was perfectly bad (-1).</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-a-tree-from-a-file-and-visualizing-it-with-ascii-art">Loading a tree from a file and visualizing it with <code class="docutils literal notranslate"><span class="pre">ascii_art()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-a-tree-to-a-file">Writing a tree to a file</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-the-individual-nodes-of-a-tree-by-name">Getting the individual nodes of a tree by name</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-the-name-of-a-node-or-a-tree">Getting the name of a node (or a tree)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-a-dict-nodes-keyed-by-their-name">Getting a <code class="docutils literal notranslate"><span class="pre">dict</span></code> nodes keyed by their name</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-the-name-of-a-node">Getting the name of a node</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-object-type-of-a-tree-and-its-nodes-is-the-same">The object type of a tree and its nodes is the same</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-the-nodes-of-a-tree">Working with the nodes of a tree</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-the-path-between-two-tips-or-edges-connecting-edges">Getting the path between two tips or edges (connecting edges)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-the-path-between-two-tips-or-edges-connecting-nodes">Getting the path between two tips or edges (connecting nodes)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-tip-to-root-distances">Get tip-to-root distances</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-tip-to-tip-distances">Get tip-to-tip distances</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-the-distance-between-two-nodes">Getting the distance between two nodes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-sum-of-all-branch-lengths">Get sum of all branch lengths</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-the-last-common-ancestor-lca-for-two-nodes">Getting the last common ancestor (LCA) for two nodes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-all-the-ancestors-for-a-node">Getting all the ancestors for a node</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-all-the-children-for-a-node">Getting all the children for a node</a></li>
@@ -1899,14 +1912,13 @@ means that the Pearson’s correlation was perfectly bad (-1).</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-the-two-nodes-that-are-farthest-apart">Getting the two nodes that are farthest apart</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-the-nodes-within-a-given-distance">Get the nodes within a given distance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rerooting-trees">Rerooting trees</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#at-a-named-node">At a named node</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reorienting-a-tree-at-a-named-node">Reorienting a tree at a named node</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#at-the-midpoint">At the midpoint</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#near-a-given-tip">Near a given tip</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#root-at-a-named-edge">Root at a named edge</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tree-representations">Tree representations</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#newick-format">Newick format</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#xml-format">XML format</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tree-traversal">Tree traversal</a><ul class="visible nav section-nav flex-column">
@@ -1914,10 +1926,7 @@ means that the Pearson’s correlation was perfectly bad (-1).</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#postorder">Postorder</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-subtrees">Selecting subtrees</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-way-to-do-it">One way to do it</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-subtrees">Selecting subtrees</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tree-manipulation-methods">Tree manipulation methods</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pruning-the-tree">Pruning the tree</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-full-unrooted-copy-of-the-tree">Create a full unrooted copy of the tree</a></li>
@@ -1925,10 +1934,6 @@ means that the Pearson’s correlation was perfectly bad (-1).</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transform-tree-into-a-balanced-tree">Transform tree into a balanced tree</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-two-trees-for-same-topology">Test two trees for same topology</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#measure-topological-distances-between-two-trees">Measure topological distances between two trees</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-each-node-s-maximum-distance-to-a-tip">Calculate each node’s maximum distance to a tip</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scale-branch-lengths-in-place-to-integers-for-ascii-output">Scale branch lengths in place to integers for ascii output</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-tip-to-tip-distances">Get tip-to-tip distances</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-two-trees-using-tip-to-tip-distance-matrices">Compare two trees using tip-to-tip distance matrices</a></li>
 </ul>
 </li>
 </ul>
