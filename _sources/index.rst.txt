@@ -56,15 +56,9 @@ Making Sense from Sequence
 🆕 Features & 📣 Announcements
 ===============================
 
-.. dropdown:: 📣 Migration to new type core objects ‼️
+.. dropdown:: 📣 Migration to new type core objects is complete‼️
 
-    **The first release after July 1st 2025 will remove all of the old type classes!** We are changing the migration strategy from old type to new type ``cogent3`` core classes. While this is a major change, we have been using these ourselves consistently and feel confident that the disruption to users should be small. We strongly advise all users to migrate now and `report any errors <https://github.com/cogent3/cogent3/issues>`_. To do this, add the following statement to the top of your scripts or notebooks.
-
-    .. code-block:: python
-
-        import os
-
-        os.environ["COGENT3_NEW_TYPE"] = "1"
+    The cogent3 team 👾 have completed a long standing goal of modernising the foundations of our core classes. These new types will be faster and more flexible 🎉🚀. Users can expect to see deprecation warnings regarding the use of the ``new_type`` argument and any imports of ``cogent3.core.new_<type>`` modules.
 
 .. dropdown:: 🆕 Cogent3 implements plugin hooks 🔌🪝🎉 
 
