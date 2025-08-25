@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Aligned &#8212; cogent3 2025.07.11 documentation</title>
+    <title>Aligned &#8212; cogent3 2025.08.25 documentation</title>
   
   
   
@@ -42,7 +42,7 @@
   <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../../../_static/documentation_options.js?v=20ca42ef"></script>
+    <script src="../../../../_static/documentation_options.js?v=9b887c12"></script>
     <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/thebelab-helper.js"></script>
@@ -124,8 +124,8 @@
       
     
     
-    <img src="../../../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2025.07.11 documentation - Home"/>
-    <img src="../../../../_static/c3-logo.png" class="logo__image only-dark pst-js-only" alt="cogent3 2025.07.11 documentation - Home"/>
+    <img src="../../../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2025.08.25 documentation - Home"/>
+    <img src="../../../../_static/c3-logo.png" class="logo__image only-dark pst-js-only" alt="cogent3 2025.08.25 documentation - Home"/>
   
   
 </a></div>
@@ -511,6 +511,8 @@
 
 
 
+
+
 <li class="toctree-l3"><a class="reference internal" href="../../../cookbook/DNA_and_RNA_sequences.html">Sequences</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../cookbook/protein_sequences.html">Protein sequences</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../cookbook/alignments.html">Sequence Collections and Alignments</a></li>
@@ -745,7 +747,7 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Aligned.make_feature" title="cogent3.core.alignment.Aligned.make_feature"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_feature</span></code></a>(feature, alignment)</p></td>
 <td><p>returns a feature, not written into annotation_db</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Aligned.parent_coordinates" title="cogent3.core.alignment.Aligned.parent_coordinates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parent_coordinates</span></code></a>([seq_coords])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.Aligned.parent_coordinates" title="cogent3.core.alignment.Aligned.parent_coordinates"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parent_coordinates</span></code></a>([seq_coords, apply_offset])</p></td>
 <td><p>returns seqid, start, stop, strand on the parent sequence</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.Aligned.replace_annotation_db" title="cogent3.core.alignment.Aligned.replace_annotation_db"><code class="xref py py-obj docutils literal notranslate"><span class="pre">replace_annotation_db</span></code></a>(value[, check])</p></td>
@@ -852,12 +854,14 @@ only the first match is used.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cogent3.core.alignment.Aligned.parent_coordinates">
-<span class="sig-name descname"><span class="pre">parent_coordinates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seq_coords</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cogent3.core.alignment.Aligned.parent_coordinates" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">parent_coordinates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seq_coords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apply_offset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cogent3.core.alignment.Aligned.parent_coordinates" title="Link to this definition">#</a></dt>
 <dd><p>returns seqid, start, stop, strand on the parent sequence</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>seq_coords</strong></dt><dd><p>if True, the coordinates for the unaligned sequence</p>
+</dd>
+<dt><strong>apply_offset</strong></dt><dd><p>if True and seq_coords, adds annotation offset from parent</p>
 </dd>
 </dl>
 </dd>
