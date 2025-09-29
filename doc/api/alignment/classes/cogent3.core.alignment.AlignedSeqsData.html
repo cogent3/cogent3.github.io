@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>AlignedSeqsData &#8212; cogent3 2025.09.08 documentation</title>
+    <title>AlignedSeqsData &#8212; cogent3 2025.09.29 documentation</title>
   
   
   
@@ -42,7 +42,7 @@
   <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../../../_static/documentation_options.js?v=3b4b4d31"></script>
+    <script src="../../../../_static/documentation_options.js?v=56ac69a0"></script>
     <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../../_static/thebelab-helper.js"></script>
@@ -124,8 +124,8 @@
       
     
     
-    <img src="../../../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2025.09.08 documentation - Home"/>
-    <img src="../../../../_static/c3-logo.png" class="logo__image only-dark pst-js-only" alt="cogent3 2025.09.08 documentation - Home"/>
+    <img src="../../../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2025.09.29 documentation - Home"/>
+    <img src="../../../../_static/c3-logo.png" class="logo__image only-dark pst-js-only" alt="cogent3 2025.09.29 documentation - Home"/>
   
   
 </a></div>
@@ -762,8 +762,14 @@ gapped or ungapped.</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.AlignedSeqsData.get_gaps" title="cogent3.core.alignment.AlignedSeqsData.get_gaps"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_gaps</span></code></a>(seqid)</p></td>
 <td><p>returns the gap data for seqid</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.AlignedSeqsData.get_positions" title="cogent3.core.alignment.AlignedSeqsData.get_positions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_positions</span></code></a>(names[, start, stop, step])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.AlignedSeqsData.get_hash" title="cogent3.core.alignment.AlignedSeqsData.get_hash"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_hash</span></code></a>(seqid)</p></td>
+<td><p>returns hash of seqid</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.AlignedSeqsData.get_pos_range" title="cogent3.core.alignment.AlignedSeqsData.get_pos_range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_pos_range</span></code></a>(names[, start, stop, step])</p></td>
 <td><p>returns an array of the selected positions for names.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.AlignedSeqsData.get_positions" title="cogent3.core.alignment.AlignedSeqsData.get_positions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_positions</span></code></a>(names, positions)</p></td>
+<td><p>returns alignment positions for names</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.AlignedSeqsData.get_seq_array" title="cogent3.core.alignment.AlignedSeqsData.get_seq_array"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_seq_array</span></code></a>(*, seqid[, start, stop, step])</p></td>
 <td><p>Return ungapped sequence corresponding to seqid as an array of indices.</p></td>
@@ -785,6 +791,9 @@ gapped or ungapped.</p>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.alignment.AlignedSeqsData.to_alphabet" title="cogent3.core.alignment.AlignedSeqsData.to_alphabet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_alphabet</span></code></a>(alphabet[, check_valid])</p></td>
 <td><p>Returns a new AlignedSeqsData object with the same underlying data with a new alphabet.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.alignment.AlignedSeqsData.variable_positions" title="cogent3.core.alignment.AlignedSeqsData.variable_positions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">variable_positions</span></code></a>(names[, start, stop, step])</p></td>
+<td><p>returns absolute indices of positions that have more than one state</p></td>
 </tr>
 </tbody>
 </table>
@@ -914,9 +923,42 @@ start/stop are in alignment coordinates. Includes gaps.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="cogent3.core.alignment.AlignedSeqsData.get_positions">
-<span class="sig-name descname"><span class="pre">get_positions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#cogent3.core.alignment.AlignedSeqsData.get_positions" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="cogent3.core.alignment.AlignedSeqsData.get_hash">
+<span class="sig-name descname"><span class="pre">get_hash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seqid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#cogent3.core.alignment.AlignedSeqsData.get_hash" title="Link to this definition">#</a></dt>
+<dd><p>returns hash of seqid</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cogent3.core.alignment.AlignedSeqsData.get_pos_range">
+<span class="sig-name descname"><span class="pre">get_pos_range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#cogent3.core.alignment.AlignedSeqsData.get_pos_range" title="Link to this definition">#</a></dt>
 <dd><p>returns an array of the selected positions for names.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cogent3.core.alignment.AlignedSeqsData.get_positions">
+<span class="sig-name descname"><span class="pre">get_positions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">positions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">integer</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">uint8</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cogent3.core.alignment.AlignedSeqsData.get_positions" title="Link to this definition">#</a></dt>
+<dd><p>returns alignment positions for names</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>names</strong></dt><dd><p>series of sequence names</p>
+</dd>
+<dt><strong>positions</strong></dt><dd><p>indices lying within self</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>2D numpy.array, oriented by sequence</dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>IndexError if a provided position is negative or</dt><dd></dd>
+<dt>greater then alignment length.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -1032,6 +1074,32 @@ default slice record for the entire sequence.</p>
 with a new alphabet.</p>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="cogent3.core.alignment.AlignedSeqsData.variable_positions">
+<span class="sig-name descname"><span class="pre">variable_positions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#cogent3.core.alignment.AlignedSeqsData.variable_positions" title="Link to this definition">#</a></dt>
+<dd><p>returns absolute indices of positions that have more than one state</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>names</strong></dt><dd><p>selected seqids</p>
+</dd>
+<dt><strong>start</strong></dt><dd><p>absolute start</p>
+</dd>
+<dt><strong>stop</strong></dt><dd><p>absolute stop</p>
+</dd>
+<dt><strong>step</strong></dt><dd><p>step</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>Absolute indices (as distinct from an index relative to start) of</dt><dd></dd>
+<dt>variable positions.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -1095,6 +1163,8 @@ with a new alphabet.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.alignment.AlignedSeqsData.get_gapped_seq_bytes"><code class="docutils literal notranslate"><span class="pre">AlignedSeqsData.get_gapped_seq_bytes()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.alignment.AlignedSeqsData.get_gapped_seq_str"><code class="docutils literal notranslate"><span class="pre">AlignedSeqsData.get_gapped_seq_str()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.alignment.AlignedSeqsData.get_gaps"><code class="docutils literal notranslate"><span class="pre">AlignedSeqsData.get_gaps()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.alignment.AlignedSeqsData.get_hash"><code class="docutils literal notranslate"><span class="pre">AlignedSeqsData.get_hash()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.alignment.AlignedSeqsData.get_pos_range"><code class="docutils literal notranslate"><span class="pre">AlignedSeqsData.get_pos_range()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.alignment.AlignedSeqsData.get_positions"><code class="docutils literal notranslate"><span class="pre">AlignedSeqsData.get_positions()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.alignment.AlignedSeqsData.get_seq_array"><code class="docutils literal notranslate"><span class="pre">AlignedSeqsData.get_seq_array()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.alignment.AlignedSeqsData.get_seq_bytes"><code class="docutils literal notranslate"><span class="pre">AlignedSeqsData.get_seq_bytes()</span></code></a></li>
@@ -1106,6 +1176,7 @@ with a new alphabet.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.alignment.AlignedSeqsData.offset"><code class="docutils literal notranslate"><span class="pre">AlignedSeqsData.offset</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.alignment.AlignedSeqsData.reversed_seqs"><code class="docutils literal notranslate"><span class="pre">AlignedSeqsData.reversed_seqs</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.alignment.AlignedSeqsData.to_alphabet"><code class="docutils literal notranslate"><span class="pre">AlignedSeqsData.to_alphabet()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.alignment.AlignedSeqsData.variable_positions"><code class="docutils literal notranslate"><span class="pre">AlignedSeqsData.variable_positions()</span></code></a></li>
 </ul>
 </li>
 </ul>
