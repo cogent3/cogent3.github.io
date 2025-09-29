@@ -56,13 +56,13 @@ Making Sense from Sequence
 🆕 Features & 📣 Announcements
 ===============================
 
-.. dropdown:: 📣 Migration to new type core objects is complete‼️
+.. dropdown:: 🆕 Third-party tree visualisation demo with iplotx 🎉
 
-    The cogent3 team 👾 have completed a long standing goal of modernising the foundations of our core classes. These new types will be faster and more flexible 🎉🚀. Users can expect to see deprecation warnings regarding the use of the ``new_type`` argument and any imports of ``cogent3.core.new_<type>`` modules.
+    The `iplotx <https://iplotx.readthedocs.io/>`_ team had contributed a demonstration of their tools ability to produce images from `cogent3` tree objects. See :ref:`iplotx-demo`.
 
 .. dropdown:: 🆕 Cogent3 implements plugin hooks 🔌🪝🎉 
 
-    We have implemented the infrastructure to support hook-style plugins. We have definied a single hook now -- the new type ``Alignment.quick_tree()`` method checks for an external plugin for calculation. `piqtree <https://pypi.org/project/piqtree>`_  0.5.0 has implemented support for this.
+    We have implemented the infrastructure to support hook-style plugins. For example, the ``Alignment.quick_tree()`` method checks for an external plugin for calculation. `piqtree <https://pypi.org/project/piqtree>`_ has implemented support for this.
 
 .. dropdown:: 🆕 Cogent3 supports plugins for reading, writing, storing sequence data 🔌🎉 
 
