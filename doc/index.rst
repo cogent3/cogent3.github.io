@@ -56,6 +56,10 @@ Making Sense from Sequence
 🆕 Features & 📣 Announcements
 ===============================
 
+.. dropdown:: 🆕 Improved import performance 🎉
+
+    The ``import cogent3`` statement is now much faster! Previously, this statement would trigger imports of many of our dependencies too. Give it a try and report `any issues <https://github.com/cogent3/cogent3/issues>`_ you encounter.
+
 .. dropdown:: 🆕 Third-party tree visualisation demo with iplotx 🎉
 
     The `iplotx <https://iplotx.readthedocs.io/>`_ team had contributed a demonstration of their tools ability to produce images from `cogent3` tree objects. See :ref:`iplotx-demo`.
