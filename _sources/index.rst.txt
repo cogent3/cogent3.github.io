@@ -60,6 +60,10 @@ Making Sense from Sequence
 
     The ``import cogent3`` statement is now much faster! Previously, this statement would trigger imports of many of our dependencies too. Give it a try and report `any issues <https://github.com/cogent3/cogent3/issues>`_ you encounter.
 
+.. dropdown:: 🆕 A new rust-based plugin for k-mer counting 🎉🚀
+
+    We added a new ``count_kmers()`` method to the ``SequenceCollection`` and ``Sequence`` classes. Then, the developers of `Pykmertools <https://github.com/anuradhawick/kmertools>`_ (with a bit of help from us) have released a ``cogent3-pykmertools`` app which makes their rust-based python module for counting k-mers available as ``seqs.count_kmers(k=k, use_hook="cogent3_pykmertools")``. Install it with ``pip install cogent3-pykmertools`` and give it a try. And add a star to the `Pykmertools <https://github.com/anuradhawick/kmertools>`_ repo!
+
 .. dropdown:: 🆕 Third-party tree visualisation demo with iplotx 🎉
 
     The `iplotx <https://iplotx.readthedocs.io/>`_ team had contributed a demonstration of their tools ability to produce images from `cogent3` tree objects. See :ref:`iplotx-demo`.
