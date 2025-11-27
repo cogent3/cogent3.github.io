@@ -60,7 +60,7 @@ Making Sense from Sequence
 
     The ``import cogent3`` statement is now much faster! Previously, this statement would trigger imports of many of our dependencies too. Give it a try and report `any issues <https://github.com/cogent3/cogent3/issues>`_ you encounter.
 
-.. dropdown:: 🆕 A new rust-based plugin for k-mer counting 🎉🚀
+.. dropdown:: 🆕 A new rust-based plugin for k-mer counting 🔌🪝🚀
 
     We added a new ``count_kmers()`` method to the ``SequenceCollection`` and ``Sequence`` classes. Then, the developers of `Pykmertools <https://github.com/anuradhawick/kmertools>`_ (with a bit of help from us) have released a ``cogent3-pykmertools`` app which makes their rust-based python module for counting k-mers available as ``seqs.count_kmers(k=k, use_hook="cogent3_pykmertools")``. Install it with ``pip install cogent3-pykmertools`` and give it a try. And add a star to the `Pykmertools <https://github.com/anuradhawick/kmertools>`_ repo!
 
@@ -75,10 +75,6 @@ Making Sense from Sequence
 .. dropdown:: 🆕 Cogent3 supports plugins for reading, writing, storing sequence data 🔌🎉 
 
     Who doesn't love the myriad of file formats for biological sequences!! Or that sequence collections can now have millions of records!? We now support third-party contributions for reading and writing sequences. We also support alternate storage backends for our sequence collection classes. The `cogent3-h5seqs <https://pypi.org/project/cogent3-h5seqs>`_ project uses HDF5 plus compression for efficient storage of large volumes of sequences. See the docs for an example of how to use :ref:`third-party storage <storage-plugin>`.
-
-.. dropdown:: 🆕 Cogent3 and Plotly blog post 😎
-
-    A demo of the combined power of cogent3 and Plotly applied to the `analysis of SARS-COV-2 genomes <https://plotly.com/blog/decoding-genomes-cogent3-plotly/>`_.
 
 .. the ordering of the index items below is critical since it defines the web site header!
 
