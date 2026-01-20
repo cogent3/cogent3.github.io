@@ -56,6 +56,14 @@ Making Sense from Sequence
 🆕 Features & 📣 Announcements
 ===============================
 
+.. dropdown:: 🆕 We now support third-party plugins for annotation databases 📚🔌
+
+    If you want to write your own annotation storage backend, `get in touch <https://github.com/cogent3/cogent3/discussions>`_ and we'll give you a hand!
+
+.. dropdown:: 🆕 The ``diverse-seq`` package has been rewritten in rust 🚀!
+
+    The sequence sampling tool `diverse-seq <https://diverse-seq.readthedocs.io>`_, which provides multiple apps for sampling representative sequences, just got faster! The performance critical code has been rewritten in Rust. Give it a try 😀.
+
 .. dropdown:: 🆕 Improved import performance 🎉
 
     The ``import cogent3`` statement is now much faster! Previously, this statement would trigger imports of many of our dependencies too. Give it a try and report `any issues <https://github.com/cogent3/cogent3/issues>`_ you encounter.
