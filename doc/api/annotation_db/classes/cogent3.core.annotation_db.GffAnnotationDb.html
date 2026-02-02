@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>GffAnnotationDb &#8212; cogent3 2026.01.20 documentation</title>
+    <title>GffAnnotationDb &#8212; cogent3 2026.02.02 documentation</title>
   
   
   
@@ -42,7 +42,7 @@
   <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../../../_static/documentation_options.js?v=77b97734"></script>
+    <script src="../../../../_static/documentation_options.js?v=1aec9de1"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../../_static/thebelab-helper.js"></script>
@@ -124,8 +124,8 @@
       
     
     
-    <img src="../../../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2026.01.20 documentation - Home"/>
-    <img src="../../../../_static/c3-logo.png" class="logo__image only-dark pst-js-only" alt="cogent3 2026.01.20 documentation - Home"/>
+    <img src="../../../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2026.02.02 documentation - Home"/>
+    <img src="../../../../_static/c3-logo.png" class="logo__image only-dark pst-js-only" alt="cogent3 2026.02.02 documentation - Home"/>
   
   
 </a></div>
@@ -729,6 +729,8 @@ rows in the gff are merged into a single record.</p>
 <dt><strong>db</strong></dt><dd></dd>
 <dt><a class="reference internal" href="#cogent3.core.annotation_db.GffAnnotationDb.describe" title="cogent3.core.annotation_db.GffAnnotationDb.describe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">describe</span></code></a></dt><dd><p>top level description of the annotation db</p>
 </dd>
+<dt><a class="reference internal" href="#cogent3.core.annotation_db.GffAnnotationDb.schema_version" title="cogent3.core.annotation_db.GffAnnotationDb.schema_version"><code class="xref py py-obj docutils literal notranslate"><span class="pre">schema_version</span></code></a></dt><dd><p>Return the schema version of this database.</p>
+</dd>
 <dt><strong>table_names</strong></dt><dd></dd>
 </dl>
 </dd>
@@ -754,37 +756,40 @@ rows in the gff are merged into a single record.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.annotation_db.GffAnnotationDb.count_distinct" title="cogent3.core.annotation_db.GffAnnotationDb.count_distinct"><code class="xref py py-obj docutils literal notranslate"><span class="pre">count_distinct</span></code></a>(*[, seqid, biotype, name])</p></td>
 <td><p>return table of counts of distinct values</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.annotation_db.GffAnnotationDb.get_feature_children" title="cogent3.core.annotation_db.GffAnnotationDb.get_feature_children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_feature_children</span></code></a>(name[, biotype])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.annotation_db.GffAnnotationDb.from_file" title="cogent3.core.annotation_db.GffAnnotationDb.from_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_file</span></code></a>(path)</p></td>
+<td><p>Load an annotation database from a file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.annotation_db.GffAnnotationDb.get_feature_children" title="cogent3.core.annotation_db.GffAnnotationDb.get_feature_children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_feature_children</span></code></a>(name[, biotype])</p></td>
 <td><p>yields children of name</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.annotation_db.GffAnnotationDb.get_feature_parent" title="cogent3.core.annotation_db.GffAnnotationDb.get_feature_parent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_feature_parent</span></code></a>(name, **kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.annotation_db.GffAnnotationDb.get_feature_parent" title="cogent3.core.annotation_db.GffAnnotationDb.get_feature_parent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_feature_parent</span></code></a>(name, **kwargs)</p></td>
 <td><p>yields parents of name</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.annotation_db.GffAnnotationDb.get_records_matching" title="cogent3.core.annotation_db.GffAnnotationDb.get_records_matching"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_records_matching</span></code></a>(*[, biotype, seqid, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.annotation_db.GffAnnotationDb.get_records_matching" title="cogent3.core.annotation_db.GffAnnotationDb.get_records_matching"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_records_matching</span></code></a>(*[, biotype, seqid, ...])</p></td>
 <td><p>return all fields for matching records</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.annotation_db.GffAnnotationDb.make_indexes" title="cogent3.core.annotation_db.GffAnnotationDb.make_indexes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_indexes</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.annotation_db.GffAnnotationDb.make_indexes" title="cogent3.core.annotation_db.GffAnnotationDb.make_indexes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_indexes</span></code></a>()</p></td>
 <td><p>adds db indexes for core attributes</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.annotation_db.GffAnnotationDb.num_matches" title="cogent3.core.annotation_db.GffAnnotationDb.num_matches"><code class="xref py py-obj docutils literal notranslate"><span class="pre">num_matches</span></code></a>(*[, seqid, biotype, name, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.annotation_db.GffAnnotationDb.num_matches" title="cogent3.core.annotation_db.GffAnnotationDb.num_matches"><code class="xref py py-obj docutils literal notranslate"><span class="pre">num_matches</span></code></a>(*[, seqid, biotype, name, ...])</p></td>
 <td><p>return the number of records matching condition</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.annotation_db.GffAnnotationDb.subset" title="cogent3.core.annotation_db.GffAnnotationDb.subset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subset</span></code></a>(*[, source, biotype, seqid, name, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.annotation_db.GffAnnotationDb.subset" title="cogent3.core.annotation_db.GffAnnotationDb.subset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subset</span></code></a>(*[, source, biotype, seqid, name, ...])</p></td>
 <td><p>returns a new db instance with records matching the provided conditions</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.annotation_db.GffAnnotationDb.to_rich_dict" title="cogent3.core.annotation_db.GffAnnotationDb.to_rich_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_rich_dict</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.annotation_db.GffAnnotationDb.to_rich_dict" title="cogent3.core.annotation_db.GffAnnotationDb.to_rich_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_rich_dict</span></code></a>()</p></td>
 <td><p>returns a dict suitable for json serialisation</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.annotation_db.GffAnnotationDb.union" title="cogent3.core.annotation_db.GffAnnotationDb.union"><code class="xref py py-obj docutils literal notranslate"><span class="pre">union</span></code></a>(annot_db)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.annotation_db.GffAnnotationDb.union" title="cogent3.core.annotation_db.GffAnnotationDb.union"><code class="xref py py-obj docutils literal notranslate"><span class="pre">union</span></code></a>(annot_db)</p></td>
 <td><p>returns a new instance with merged records with other</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.annotation_db.GffAnnotationDb.update" title="cogent3.core.annotation_db.GffAnnotationDb.update"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update</span></code></a>(annot_db[, seqids])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.annotation_db.GffAnnotationDb.update" title="cogent3.core.annotation_db.GffAnnotationDb.update"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update</span></code></a>(annot_db[, seqids])</p></td>
 <td><p>update records with those from an instance of the same type</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.annotation_db.GffAnnotationDb.update_record_spans" title="cogent3.core.annotation_db.GffAnnotationDb.update_record_spans"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_record_spans</span></code></a>(*, name, spans)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.annotation_db.GffAnnotationDb.update_record_spans" title="cogent3.core.annotation_db.GffAnnotationDb.update_record_spans"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_record_spans</span></code></a>(*, name, spans)</p></td>
 <td><p>updates spans attribute of a gff table record if present</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#cogent3.core.annotation_db.GffAnnotationDb.write" title="cogent3.core.annotation_db.GffAnnotationDb.write"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write</span></code></a>(path)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#cogent3.core.annotation_db.GffAnnotationDb.write" title="cogent3.core.annotation_db.GffAnnotationDb.write"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write</span></code></a>(path)</p></td>
 <td><p>writes db as bytes to path</p></td>
 </tr>
 </tbody>
@@ -911,6 +916,34 @@ and counts distinct values for the other fields whose value is True.</p>
 <dd></dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="cogent3.core.annotation_db.GffAnnotationDb.from_file">
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">PathLike</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">PurePath</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#cogent3.core.annotation_db.GffAnnotationDb.from_file" title="Link to this definition">#</a></dt>
+<dd><p>Load an annotation database from a file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>path</strong></dt><dd><p>Path to the saved database file. Must have suffix matching
+the class’s _suffix attribute.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>An instance of the annotation database class with the loaded data.</dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>ValueError</dt><dd><p>If the file suffix doesn’t match the expected suffix for this class.</p>
+</dd>
+<dt>OSError</dt><dd><p>If the file doesn’t exist.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="cogent3.core.annotation_db.GffAnnotationDb.get_feature_children">
 <span class="sig-name descname"><span class="pre">get_feature_children</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biotype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">FeatureDataType</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cogent3.core.annotation_db.GffAnnotationDb.get_feature_children" title="Link to this definition">#</a></dt>
 <dd><p>yields children of name</p>
@@ -943,6 +976,12 @@ and counts distinct values for the other fields whose value is True.</p>
 <dt class="sig sig-object py" id="cogent3.core.annotation_db.GffAnnotationDb.num_matches">
 <span class="sig-name descname"><span class="pre">num_matches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">seqid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">biotype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strand</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attributes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">on_alignment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#cogent3.core.annotation_db.GffAnnotationDb.num_matches" title="Link to this definition">#</a></dt>
 <dd><p>return the number of records matching condition</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="cogent3.core.annotation_db.GffAnnotationDb.schema_version">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">schema_version</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="headerlink" href="#cogent3.core.annotation_db.GffAnnotationDb.schema_version" title="Link to this definition">#</a></dt>
+<dd><p>Return the schema version of this database.</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -1010,6 +1049,21 @@ self</p>
 <dt class="sig sig-object py" id="cogent3.core.annotation_db.GffAnnotationDb.write">
 <span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">PathLike</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">PurePath</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#cogent3.core.annotation_db.GffAnnotationDb.write" title="Link to this definition">#</a></dt>
 <dd><p>writes db as bytes to path</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>path</strong></dt><dd><p>Path to write the database. Must have suffix matching
+the class’s _suffix attribute.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>ValueError</dt><dd><p>If the file suffix doesn’t match the expected suffix for this class.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -1074,12 +1128,14 @@ self</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.annotation_db.GffAnnotationDb.db"><code class="docutils literal notranslate"><span class="pre">GffAnnotationDb.db</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.annotation_db.GffAnnotationDb.describe"><code class="docutils literal notranslate"><span class="pre">GffAnnotationDb.describe</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.annotation_db.GffAnnotationDb.from_dict"><code class="docutils literal notranslate"><span class="pre">GffAnnotationDb.from_dict()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.annotation_db.GffAnnotationDb.from_file"><code class="docutils literal notranslate"><span class="pre">GffAnnotationDb.from_file()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.annotation_db.GffAnnotationDb.get_feature_children"><code class="docutils literal notranslate"><span class="pre">GffAnnotationDb.get_feature_children()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.annotation_db.GffAnnotationDb.get_feature_parent"><code class="docutils literal notranslate"><span class="pre">GffAnnotationDb.get_feature_parent()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.annotation_db.GffAnnotationDb.get_features_matching"><code class="docutils literal notranslate"><span class="pre">GffAnnotationDb.get_features_matching()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.annotation_db.GffAnnotationDb.get_records_matching"><code class="docutils literal notranslate"><span class="pre">GffAnnotationDb.get_records_matching()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.annotation_db.GffAnnotationDb.make_indexes"><code class="docutils literal notranslate"><span class="pre">GffAnnotationDb.make_indexes()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.annotation_db.GffAnnotationDb.num_matches"><code class="docutils literal notranslate"><span class="pre">GffAnnotationDb.num_matches()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.annotation_db.GffAnnotationDb.schema_version"><code class="docutils literal notranslate"><span class="pre">GffAnnotationDb.schema_version</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.annotation_db.GffAnnotationDb.source"><code class="docutils literal notranslate"><span class="pre">GffAnnotationDb.source</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.annotation_db.GffAnnotationDb.subset"><code class="docutils literal notranslate"><span class="pre">GffAnnotationDb.subset()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cogent3.core.annotation_db.GffAnnotationDb.table_names"><code class="docutils literal notranslate"><span class="pre">GffAnnotationDb.table_names</span></code></a></li>

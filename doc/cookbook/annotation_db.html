@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Annotation Databases &#8212; cogent3 2026.01.20 documentation</title>
+    <title>Annotation Databases &#8212; cogent3 2026.02.02 documentation</title>
   
   
   
@@ -42,7 +42,7 @@
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../_static/documentation_options.js?v=77b97734"></script>
+    <script src="../../_static/documentation_options.js?v=1aec9de1"></script>
     <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/thebelab-helper.js"></script>
@@ -124,8 +124,8 @@
       
     
     
-    <img src="../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2026.01.20 documentation - Home"/>
-    <img src="../../_static/c3-logo.png" class="logo__image only-dark pst-js-only" alt="cogent3 2026.01.20 documentation - Home"/>
+    <img src="../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2026.02.02 documentation - Home"/>
+    <img src="../../_static/c3-logo.png" class="logo__image only-dark pst-js-only" alt="cogent3 2026.02.02 documentation - Home"/>
   
   
 </a></div>
@@ -746,8 +746,8 @@
 </div>
 </div>
 </section>
-<section id="how-to-load-an-standalone-annotationdb-from-a-data-file">
-<h2>How to load an standalone <code class="docutils literal notranslate"><span class="pre">AnnotationDb</span></code> from a data file<a class="headerlink" href="#how-to-load-an-standalone-annotationdb-from-a-data-file" title="Link to this heading">#</a></h2>
+<section id="how-to-load-a-standalone-annotationdb-from-a-data-file">
+<h2>How to load a standalone <code class="docutils literal notranslate"><span class="pre">AnnotationDb</span></code> from a data file<a class="headerlink" href="#how-to-load-a-standalone-annotationdb-from-a-data-file" title="Link to this heading">#</a></h2>
 <p>Typically, we want to load a collection of features from a genomic annotation file, such as a GFF or Genbank file. For the following examples, we will use data from the bacterium <em>Mycoplasma genitalium</em>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -829,15 +829,15 @@
 </thead>
 <tbody>
 <tr><td><span class="c3col_left">seqid('NC_000908.2')</span></td><td><span class="c3col_right">1,169</span></td></tr>
-<tr><td><span class="c3col_left">biotype('CDS')</span></td><td><span class="c3col_right">521</span></td></tr>
-<tr><td><span class="c3col_left">biotype('RNase_P_RNA')</span></td><td><span class="c3col_right">1</span></td></tr>
-<tr><td><span class="c3col_left">biotype('SRP_RNA')</span></td><td><span class="c3col_right">1</span></td></tr>
-<tr><td><span class="c3col_left">biotype('exon')</span></td><td><span class="c3col_right">42</span></td></tr>
+<tr><td><span class="c3col_left">biotype('region')</span></td><td><span class="c3col_right">1</span></td></tr>
 <tr><td><span class="c3col_left">biotype('gene')</span></td><td><span class="c3col_right">546</span></td></tr>
+<tr><td><span class="c3col_left">biotype('CDS')</span></td><td><span class="c3col_right">521</span></td></tr>
+<tr><td><span class="c3col_left">biotype('tRNA')</span></td><td><span class="c3col_right">36</span></td></tr>
+<tr><td><span class="c3col_left">biotype('exon')</span></td><td><span class="c3col_right">42</span></td></tr>
 <tr><td><span class="c3col_left">biotype('pseudogene')</span></td><td><span class="c3col_right">17</span></td></tr>
 <tr><td><span class="c3col_left">biotype('rRNA')</span></td><td><span class="c3col_right">3</span></td></tr>
-<tr><td><span class="c3col_left">biotype('region')</span></td><td><span class="c3col_right">1</span></td></tr>
-<tr><td><span class="c3col_left">biotype('tRNA')</span></td><td><span class="c3col_right">36</span></td></tr>
+<tr><td><span class="c3col_left">biotype('SRP_RNA')</span></td><td><span class="c3col_right">1</span></td></tr>
+<tr><td><span class="c3col_left">biotype('RNase_P_RNA')</span></td><td><span class="c3col_right">1</span></td></tr>
 <tr><td><span class="c3col_left">biotype('tmRNA')</span></td><td><span class="c3col_right">1</span></td></tr>
 <tr><td><span class="c3col_left">num_rows('gff')</span></td><td><span class="c3col_right">1,169</span></td></tr>
 <tr><td><span class="c3col_left">num_rows('user')</span></td><td><span class="c3col_right">0</span></td></tr>
@@ -953,17 +953,17 @@
 <h2>How to write an <code class="docutils literal notranslate"><span class="pre">AnnotationDb</span></code> to disk for efficient re-loading<a class="headerlink" href="#how-to-write-an-annotationdb-to-disk-for-efficient-re-loading" title="Link to this heading">#</a></h2>
 <p>In the above examples, all databases indicate that <code class="docutils literal notranslate"><span class="pre">source=&quot;:memory:&quot;</span></code>, i.e. they are in-memory databases. We can write any database to disk using the <code class="docutils literal notranslate"><span class="pre">write()</span></code> method and providing an outpath.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># write to disk</span>
-<span class="n">gb_db</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;data/m-genitalium-database.gbdb&quot;</span><span class="p">)</span>
+<span class="n">gb_db</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;data/m-genitalium-database.c3gbdb&quot;</span><span class="p">)</span>
 
 <span class="c1"># do something</span>
 
 <span class="c1"># re-load from disk</span>
-<span class="n">quick_load_gb_db</span> <span class="o">=</span> <span class="n">GenbankAnnotationDb</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="s2">&quot;data/m-genitalium-database.gbdb&quot;</span><span class="p">)</span>
+<span class="n">quick_load_gb_db</span> <span class="o">=</span> <span class="n">load_annotations</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;data/m-genitalium-database.c3gbdb&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The suffix of the outpath (“.gbdb” in the above example) can be arbitrarily chosen, however, this behaviour may change in the future to only accept registered suffixes! 👀</p>
+<p>The suffix of the outpath (<code class="docutils literal notranslate"><span class="pre">.c3gbdb</span></code> in the above example) is required for a GenBank derived db file. For a GFF3 or GFF file, the suffix must be <code class="docutils literal notranslate"><span class="pre">.c3gffdb</span></code>. For the basic annottaion db it is <a href="#id1"><span class="problematic" id="id2">``</span></a>.c3andb`. 👀</p>
 </div>
 </section>
 <section id="how-to-query-an-annotationdb">
@@ -990,11 +990,11 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[{&#39;seqid&#39;: &#39;NC_000908&#39;,
-  &#39;biotype&#39;: &#39;gene&#39;,
-  &#39;spans&#39;: [(np.int64(170011), np.int64(171529))],
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[{&#39;spans&#39;: [(np.int64(170011), np.int64(171529))],
   &#39;strand&#39;: 1,
   &#39;name&#39;: &#39;MG_RS00775&#39;,
+  &#39;seqid&#39;: &#39;NC_000908&#39;,
+  &#39;biotype&#39;: &#39;gene&#39;,
   &#39;on_alignment&#39;: None}]
 </pre></div>
 </div>
@@ -1013,17 +1013,17 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[{&#39;seqid&#39;: &#39;NC_000908.2&#39;,
-  &#39;biotype&#39;: &#39;pseudogene&#39;,
-  &#39;spans&#39;: [(np.int64(85561), np.int64(86589))],
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[{&#39;spans&#39;: [(np.int64(85561), np.int64(86589))],
   &#39;strand&#39;: 1,
   &#39;name&#39;: &#39;gene-MG_RS02910&#39;,
-  &#39;on_alignment&#39;: None},
- {&#39;seqid&#39;: &#39;NC_000908.2&#39;,
+  &#39;seqid&#39;: &#39;NC_000908.2&#39;,
   &#39;biotype&#39;: &#39;pseudogene&#39;,
-  &#39;spans&#39;: [(np.int64(86784), np.int64(87549))],
+  &#39;on_alignment&#39;: None},
+ {&#39;spans&#39;: [(np.int64(86784), np.int64(87549))],
   &#39;strand&#39;: 1,
   &#39;name&#39;: &#39;gene-MG_RS00385&#39;,
+  &#39;seqid&#39;: &#39;NC_000908.2&#39;,
+  &#39;biotype&#39;: &#39;pseudogene&#39;,
   &#39;on_alignment&#39;: None}]
 </pre></div>
 </div>
@@ -1044,23 +1044,23 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[{&#39;seqid&#39;: &#39;NC_000908.2&#39;,
-  &#39;biotype&#39;: &#39;CDS&#39;,
-  &#39;spans&#39;: [(np.int64(220606), np.int64(221563))],
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[{&#39;spans&#39;: [(np.int64(220606), np.int64(221563))],
   &#39;strand&#39;: 1,
   &#39;name&#39;: &#39;cds-WP_009886005.1&#39;,
-  &#39;on_alignment&#39;: None},
- {&#39;seqid&#39;: &#39;NC_000908.2&#39;,
+  &#39;seqid&#39;: &#39;NC_000908.2&#39;,
   &#39;biotype&#39;: &#39;CDS&#39;,
-  &#39;spans&#39;: [(np.int64(221569), np.int64(225904))],
+  &#39;on_alignment&#39;: None},
+ {&#39;spans&#39;: [(np.int64(221569), np.int64(225904))],
   &#39;strand&#39;: 1,
   &#39;name&#39;: &#39;cds-WP_010869366.1&#39;,
-  &#39;on_alignment&#39;: None},
- {&#39;seqid&#39;: &#39;NC_000908.2&#39;,
+  &#39;seqid&#39;: &#39;NC_000908.2&#39;,
   &#39;biotype&#39;: &#39;CDS&#39;,
-  &#39;spans&#39;: [(np.int64(225914), np.int64(229067))],
+  &#39;on_alignment&#39;: None},
+ {&#39;spans&#39;: [(np.int64(225914), np.int64(229067))],
   &#39;strand&#39;: 1,
   &#39;name&#39;: &#39;cds-WP_041593683.1&#39;,
+  &#39;seqid&#39;: &#39;NC_000908.2&#39;,
+  &#39;biotype&#39;: &#39;CDS&#39;,
   &#39;on_alignment&#39;: None}]
 </pre></div>
 </div>
@@ -1081,10 +1081,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;seqid&#39;: &#39;NC_000908.2&#39;,
- &#39;source&#39;: &#39;Protein Homology&#39;,
- &#39;biotype&#39;: &#39;CDS&#39;,
- &#39;start&#39;: 685,
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>{&#39;start&#39;: 685,
  &#39;stop&#39;: 1828,
  &#39;score&#39;: &#39;.&#39;,
  &#39;strand&#39;: 1,
@@ -1093,7 +1090,10 @@
  &#39;comments&#39;: None,
  &#39;spans&#39;: array([[ 685, 1828]]),
  &#39;name&#39;: &#39;cds-WP_009885562.1&#39;,
- &#39;parent_id&#39;: &#39;gene-MG_RS00005&#39;}
+ &#39;parent_id&#39;: &#39;gene-MG_RS00005&#39;,
+ &#39;seqid&#39;: &#39;NC_000908.2&#39;,
+ &#39;biotype&#39;: &#39;CDS&#39;,
+ &#39;source&#39;: &#39;Protein Homology&#39;}
 </pre></div>
 </div>
 </div>
@@ -1171,11 +1171,11 @@ single copy genes:  547
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[{&#39;seqid&#39;: &#39;NC_000908.2&#39;,
-  &#39;biotype&#39;: &#39;CDS&#39;,
-  &#39;spans&#39;: [(np.int64(9155), np.int64(9920))],
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[{&#39;spans&#39;: [(np.int64(9155), np.int64(9920))],
   &#39;strand&#39;: 1,
   &#39;name&#39;: &#39;cds-WP_009885556.1&#39;,
+  &#39;seqid&#39;: &#39;NC_000908.2&#39;,
+  &#39;biotype&#39;: &#39;CDS&#39;,
   &#39;on_alignment&#39;: None}]
 </pre></div>
 </div>
@@ -1194,11 +1194,11 @@ single copy genes:  547
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[{&#39;seqid&#39;: &#39;NC_000908.2&#39;,
-  &#39;biotype&#39;: &#39;gene&#39;,
-  &#39;spans&#39;: [(np.int64(9155), np.int64(9920))],
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>[{&#39;spans&#39;: [(np.int64(9155), np.int64(9920))],
   &#39;strand&#39;: 1,
   &#39;name&#39;: &#39;gene-MG_RS00035&#39;,
+  &#39;seqid&#39;: &#39;NC_000908.2&#39;,
+  &#39;biotype&#39;: &#39;gene&#39;,
   &#39;on_alignment&#39;: None}]
 </pre></div>
 </div>
@@ -1332,18 +1332,18 @@ single copy genes:  547
 </section>
 <section id="initialise-a-annotationdb-with-another-database">
 <h3>Initialise a <code class="docutils literal notranslate"><span class="pre">AnnotationDb</span></code> with another database<a class="headerlink" href="#initialise-a-annotationdb-with-another-database" title="Link to this heading">#</a></h3>
-<p>You can assign a compatible database to the <code class="docutils literal notranslate"><span class="pre">db</span></code> argument in the <code class="docutils literal notranslate"><span class="pre">AnnotationDb</span></code> constructor. If it’s the same class, its db will be bound to self and directly modified.</p>
+<p>You can assign a compatible database to the <code class="docutils literal notranslate"><span class="pre">db</span></code> argument in the <code class="docutils literal notranslate"><span class="pre">AnnotationDb</span></code> constructor. If it’s the same class, its db will be bound to self and directly modified with any new data you add.</p>
 <div class="jupyter_cell jupyter_container docutils container">
 <div class="cell_input code_cell docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.core.annotation_db</span><span class="w"> </span><span class="kn">import</span> <span class="n">GenbankAnnotationDb</span>
 
-<span class="n">new_gb_db</span> <span class="o">=</span> <span class="n">GenbankAnnotationDb</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="s2">&quot;m-genitalium-database.gbdb&quot;</span><span class="p">,</span> <span class="n">db</span><span class="o">=</span><span class="n">anno_db</span><span class="p">)</span>
+<span class="n">new_gb_db</span> <span class="o">=</span> <span class="n">GenbankAnnotationDb</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="s2">&quot;m-genitalium-database.c3gbdb&quot;</span><span class="p">,</span> <span class="n">db</span><span class="o">=</span><span class="n">anno_db</span><span class="p">)</span>
 <span class="n">new_gb_db</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>GenbankAnnotationDb(seqid=&#39;&lt;multiple seqids&gt;&#39;, source=&#39;m-genitalium-database.gbdb&#39;, namer=None, total_records=1)
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>GenbankAnnotationDb(seqid=&#39;&lt;multiple seqids&gt;&#39;, source=&#39;m-genitalium-database.c3gbdb&#39;, namer=None, total_records=1)
 </pre></div>
 </div>
 </div>
@@ -1389,8 +1389,8 @@ single copy genes:  547
 <th></th><th>count</th>
 </thead>
 <tbody>
-<tr><td><span class="c3col_left">seqid('NC_000908.2')</span></td><td><span class="c3col_right">521</span></td></tr>
-<tr><td><span class="c3col_left">biotype('CDS')</span></td><td><span class="c3col_right">521</span></td></tr>
+<tr><td><span class="c3col_left">seqid(None)</span></td><td><span class="c3col_right">521</span></td></tr>
+<tr><td><span class="c3col_left">biotype(None)</span></td><td><span class="c3col_right">521</span></td></tr>
 <tr><td><span class="c3col_left">num_rows('gff')</span></td><td><span class="c3col_right">521</span></td></tr>
 <tr><td><span class="c3col_left">num_rows('user')</span></td><td><span class="c3col_right">0</span></td></tr>
 </tbody>
@@ -1401,7 +1401,7 @@ single copy genes:  547
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The result is an in-memory database by default. To have this written to disk, assign a path to the source argument, e.g. <code class="docutils literal notranslate"><span class="pre">gff_db.subset(source=&quot;som/path/subset.gff3db&quot;,</span> <span class="pre">biotype=&quot;CDS&quot;)</span></code>.</p>
+<p>The result is an in-memory database by default. To have this written to disk, assign a path to the source argument, e.g. <code class="docutils literal notranslate"><span class="pre">gff_db.subset(source=&quot;some/path/subset.c3gffdb&quot;,</span> <span class="pre">biotype=&quot;CDS&quot;)</span></code>.</p>
 </div>
 </section>
 <section id="how-to-assign-an-annotationdb-to-a-sequence">
@@ -1552,7 +1552,7 @@ single copy genes:  547
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-the-different-types-of-annotationdb">What are the different types of <code class="docutils literal notranslate"><span class="pre">AnnotationDb</span></code>?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-create-a-standalone-basicannotationdb">How to create a standalone <code class="docutils literal notranslate"><span class="pre">BasicAnnotationDb</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-load-an-standalone-annotationdb-from-a-data-file">How to load an standalone <code class="docutils literal notranslate"><span class="pre">AnnotationDb</span></code> from a data file</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-load-a-standalone-annotationdb-from-a-data-file">How to load a standalone <code class="docutils literal notranslate"><span class="pre">AnnotationDb</span></code> from a data file</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-a-gff-file">From a GFF file</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#from-a-genbank-file">From a Genbank file</a></li>
 </ul>
