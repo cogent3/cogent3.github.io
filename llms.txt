@@ -1,0 +1,259 @@
+# cogent3
+
+> cogent3 is a Python library for analysis of genomic sequence data, specialising in non-stationary Markov models for sequence evolution, codon models, and phylogenetic analysis.
+
+cogent3 provides a first-class experience within Jupyter notebooks, with algorithms that also support parallel execution on HPC systems with thousands of processors.
+
+## Installation
+
+```bash
+# Recommended: includes visualisation and Jupyter support
+pip install "cogent3[extra]"
+
+# For HPC systems (minimal dependencies)
+pip install cogent3
+```
+
+Python versions supported: 3.11, 3.12, 3.13, 3.14
+
+## Key Concepts
+
+- **MolType**: Molecular type system defining alphabets for DNA, RNA, PROTEIN, and ASCII. Central to sequence handling.
+- **Sequence**: Core class for individual biological sequences with annotation support.
+- **Alignment**: Collection of aligned sequences (gaps included).
+- **SequenceCollection**: Collection of unaligned sequences.
+- **Tree**: Phylogenetic tree representation with manipulation methods.
+- **Table**: Tabular data structure for statistical results and metadata.
+- **Apps**: Composable workflow applications using functional programming style.
+
+## Documentation Sections
+
+- [Cookbook](https://cogent3.org/doc/cookbook/index.html): How-to guides and code snippets
+- [Tutorials](https://cogent3.org/doc/examples/index.html): Step-by-step examples
+- [Apps Documentation](https://cogent3.org/doc/app/index.html): Composable workflow applications
+- [Image Gallery](https://cogent3.org/doc/draw/index.html): Visualisation examples
+- [API Reference](https://cogent3.org/doc/api/index.html): Complete API documentation
+
+## Common Tasks
+
+### Loading Data
+
+```python
+import cogent3
+
+# Load aligned sequences
+aln = cogent3.load_aligned_seqs("sequences.fasta", moltype="dna")
+
+# Load unaligned sequences
+seqs = cogent3.load_unaligned_seqs("sequences.fasta", moltype="dna")
+
+# Load a phylogenetic tree
+tree = cogent3.load_tree("tree.nwk")
+
+# Load tabular data
+table = cogent3.load_table("data.tsv")
+
+# Load a single sequence
+seq = cogent3.load_seq("sequence.fasta", moltype="dna")
+```
+
+### Creating Data Objects
+
+```python
+# Create a sequence
+seq = cogent3.make_seq("ACGTACGT", moltype="dna")
+
+# Create aligned sequences
+aln = cogent3.make_aligned_seqs(
+    {"Human": "ACGT", "Mouse": "ACGA"},
+    moltype="dna"
+)
+
+# Create unaligned sequences
+seqs = cogent3.make_unaligned_seqs(
+    {"seq1": "ACGT", "seq2": "ACGTAA"},
+    moltype="dna"
+)
+
+# Create a tree
+tree = cogent3.make_tree("(Human,Mouse,Rat);")
+
+# Create a table
+table = cogent3.make_table(
+    header=["name", "value"],
+    data=[["a", 1], ["b", 2]]
+)
+```
+
+### Using Apps (Composable Pipelines)
+
+Apps provide a functional programming interface that can be composed using `+` and are designed to work in batch on many data objects of the same type:
+
+```python
+from cogent3 import get_app, app_help, available_apps, open_data_store
+
+# See available apps
+available_apps()
+
+# Get help for an app
+app_help("progressive_align")
+
+# Create and compose apps into a pipeline
+loader = get_app("load_unaligned", format_name="fasta", moltype="dna")
+aligner = get_app("progressive_align", model="HKY85")
+
+# For writing, you need a data store
+out_dstore = open_data_store("output_dir", mode="w", suffix="fasta")
+writer = get_app("write_seqs", out_dstore, format_name="fasta")
+
+pipeline = loader + aligner + writer
+
+# Apply pipeline to input data
+result = pipeline("input.fasta")
+```
+
+### Sequence Manipulation
+
+```python
+# Translate DNA to protein
+protein = dna_seq.get_translation()
+
+# Get complement/reverse complement
+comp = dna_seq.complement()
+rc = dna_seq.rc()
+
+# Slice sequences
+subseq = seq[10:50]
+
+# Work with annotations (features)
+for feature in seq.get_features(biotype="CDS"):
+    cds_seq = feature.get_slice()
+```
+
+### Alignment
+
+```python
+from cogent3 import get_app
+
+# Pairwise alignment
+aligner = get_app("align_to_ref")
+aligned = aligner(seqs)
+
+# Progressive multiple sequence alignment
+msa_app = get_app("progressive_align", model="HKY85")
+alignment = msa_app(seqs)
+```
+
+### Evolutionary Analysis
+
+```python
+from cogent3 import get_app
+
+# Calculate pairwise distances
+dist_calc = get_app("fast_slow_dist", fast_calc="TN93", moltype="dna")
+dists = dist_calc(alignment)
+
+# Build a quick tree (neighbor-joining) from distances
+tree = dists.quick_tree()
+
+# Fit an evolutionary model
+model_app = get_app("model", "HKY85", tree=tree)
+result = model_app(alignment)
+
+# Test hypotheses (e.g., time-reversible vs non-stationary)
+null = get_app("model", "GTR", tree=tree)
+alt = get_app("model", "GN", tree=tree)  # non-stationary general nucleotide
+hyp = get_app("hypothesis", null, alt)
+result = hyp(alignment)
+```
+
+### Phylogenetic Trees
+
+```python
+# Tree manipulation
+tree = cogent3.make_tree("((Human,Chimp),Mouse);")
+
+# Get tips
+tips = tree.get_tip_names()
+
+# Get tip-to-tip distances
+dists = tree.tip_to_tip_distances()
+
+# Subset tree
+subtree = tree.get_sub_tree(["Human", "Mouse"])
+
+# Root/unroot
+rooted = tree.rooted_with_tip("Mouse")
+```
+
+## Available Models
+
+```python
+# List all available substitution models
+cogent3.available_models()
+
+# Common nucleotide models: JC69, K80, F81, HKY85, GTR
+# Common codon models: MG94HKY, GNC, CNFGTR
+# Protein models: JTT92, WAG01, LG08
+```
+
+## Key Features
+
+1. **Non-stationary Models**: Unique support for non-reversible Markov models that handle varying nucleotide frequencies across lineages.
+
+2. **Codon Models**: Extensive codon model support for detecting natural selection (dN/dS analysis).
+
+3. **Annotations**: Rich support for sequence features (genes, exons, etc.) from GenBank/GFF formats.
+
+4. **Visualisation**: Plotly-based interactive visualisations for trees, alignments, and sequence logos.
+
+5. **Plugin System**: Extensible architecture via stevedore entry points (see below).
+
+6. **Parallel Execution**: Built-in support for parallel processing using loky or MPI.
+
+## Plugin Architecture
+
+cogent3 supports a plugin architecture that allows third-party packages to extend its capabilities. Plugins register automatically on installation and are discovered automatically when cogent3 is used.
+
+### Plugin Types
+
+- **App Plugins** (`cogent3.app`): Add new composable workflow applications. Once installed, apps appear in `available_apps()` and can be used with `get_app()`.
+
+- **Sequence Parser Plugins** (`cogent3.parse.sequence`): Add support for reading new sequence file formats. Parsers are used automatically by `load_aligned_seqs()`, `load_unaligned_seqs()`, etc.
+
+- **Sequence Writer Plugins** (`cogent3.format.sequence`): Add support for writing new sequence file formats. Writers are used by `write_seqs` app.
+
+- **Hook Plugins** (`cogent3.hook`): Provide alternative implementations for specific methods. For example, `piqtree` provides a fast neighbor-joining algorithm for `quick_tree()`.
+
+- **Storage Plugins**: Provide alternative backends for storing large sequence collections (e.g., HDF5-based storage).
+
+- **Annotation Database Plugins**: Provide alternative backends for storing sequence annotations.
+
+### Example Plugins
+
+- `piqtree`: Integrates IQ-TREE for phylogenetic analysis and fast tree building
+- `cogent3-pykmertools`: Rust-based k-mer counting
+- `cogent3-h5seqs`: HDF5-based storage for large sequence collections
+
+### Finding Plugins
+
+Search PyPI for "cogent3" to discover available plugins: https://pypi.org/search/?q=cogent3
+
+## File Formats Supported
+
+- **Sequences**: FASTA, GenBank, EMBL, PHYLIP, NEXUS, and more
+- **Trees**: Newick, NEXUS
+- **Annotations**: GFF, GenBank features
+- **Tables**: TSV, CSV, and custom delimited formats
+
+## Links
+
+- Documentation: https://cogent3.org
+- GitHub: https://github.com/cogent3/cogent3
+- PyPI: https://pypi.org/project/cogent3
+- Discussions: https://github.com/cogent3/cogent3/discussions
+- Issues: https://github.com/cogent3/cogent3/issues
+
+## Citation
+
+If you use cogent3 in your research, please cite the software via Zenodo: https://doi.org/10.5281/zenodo.15067121
