@@ -82,6 +82,7 @@ exclude_patterns = [
 
 html_theme = "pydata_sphinx_theme"
 html_static_path = ["_static"]
+html_extra_path = ["llms.txt"]
 html_css_files = ["custom.css"]
 html_show_sourcelink = False
 sidebar_collapse = False
