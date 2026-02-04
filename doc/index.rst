@@ -56,11 +56,15 @@ Making Sense from Sequence
 🆕 Features & 📣 Announcements
 ===============================
 
-.. dropdown:: 🆕 We now support third-party plugins for annotation databases 📚🔌
+.. dropdown:: 📣 The ``cogent3`` code-sharing site 📚🔌
+
+    Share your ``cogent3`` ecosystem code solutions for others to benefit from your awesomeness 😎. Click the "Code Sharing" link at the top of this page to read more.
+
+.. dropdown:: 📣 We now support third-party plugins for annotation databases 📚🔌
 
     If you want to write your own annotation storage backend, `get in touch <https://github.com/cogent3/cogent3/discussions>`_ and we'll give you a hand!
 
-.. dropdown:: 🆕 The ``diverse-seq`` package has been rewritten in rust 🚀!
+.. dropdown:: 📣 The ``diverse-seq`` package has been rewritten in rust 🚀!
 
     The sequence sampling tool `diverse-seq <https://diverse-seq.readthedocs.io>`_, which provides multiple apps for sampling representative sequences, just got faster! The performance critical code has been rewritten in Rust. Give it a try 😀.
 
@@ -71,10 +75,6 @@ Making Sense from Sequence
 .. dropdown:: 🆕 A new rust-based plugin for k-mer counting 🔌🪝🚀
 
     We added a new ``count_kmers()`` method to the ``SequenceCollection`` and ``Sequence`` classes. Then, the developers of `Pykmertools <https://github.com/anuradhawick/kmertools>`_ (with a bit of help from us) have released a ``cogent3-pykmertools`` app which makes their rust-based python module for counting k-mers available as ``seqs.count_kmers(k=k, use_hook="cogent3_pykmertools")``. Install it with ``pip install cogent3-pykmertools`` and give it a try. And add a star to the `Pykmertools <https://github.com/anuradhawick/kmertools>`_ repo!
-
-.. dropdown:: 🆕 Third-party tree visualisation demo with iplotx 🎉
-
-    The `iplotx <https://iplotx.readthedocs.io/>`_ team had contributed a demonstration of their tools ability to produce images from `cogent3` tree objects. See :ref:`iplotx-demo`.
 
 .. dropdown:: 🆕 Cogent3 implements plugin hooks 🔌🪝🎉 
 
@@ -93,13 +93,14 @@ Making Sense from Sequence
     doc/draw/index
     doc/install
     doc/index
-    doc/community
 
 .. toctree::
     :hidden:
     :maxdepth: 1
 
     doc/licenses
+    codeshare
+    doc/community
     history
     doc/pycogent
     projects
