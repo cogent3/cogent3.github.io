@@ -56,6 +56,10 @@ Making Sense from Sequence
 🆕 Features & 📣 Announcements
 ===============================
 
+.. dropdown:: 🆕 Drawing genome annotations 📚🔌
+
+    The new ``cogent3.draw_annotations()`` function allows drawing genomic features from the annotation database alone. Check out the new section in the Gallery.
+
 .. dropdown:: 📣 The ``cogent3`` code-sharing site 📚🔌
 
     Share your ``cogent3`` ecosystem code solutions for others to benefit from your awesomeness 😎. Click the "Code Sharing" link at the top of this page to read more.
