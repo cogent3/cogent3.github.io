@@ -52,21 +52,21 @@ Making Sense from Sequence
             .. video:: https://user-images.githubusercontent.com/3102996/253849168-a821de1a-1aad-4761-970f-e365f6b3b1cd.mp4
                 :width: 400
 
+    .. tab-item:: Plugin architecture
+
+        ``cogent3`` has a plugin architecture that allows third-party packages to extend its capabilities. Plugins integrate seamlessly -- users access new functionality through familiar ``cogent3`` methods without changing their workflow. Plugins can provide hook-style computation backends (e.g. `piqtree <https://pypi.org/project/piqtree>`_ for phylogenetic inference via ``Alignment.quick_tree()``), rust-based k-mer counting (via `cogent3-pykmertools <https://github.com/anuradhawick/kmertools>`_), new formats for reading and writing sequences, alternate storage backends such as `cogent3-h5seqs <https://pypi.org/project/cogent3-h5seqs>`_ for HDF5-compressed sequence collections (see :ref:`third-party storage <storage-plugin>`_), and custom annotation database backends. Want to write a plugin? `Get in touch <https://github.com/cogent3/cogent3/discussions>`_.
+
 
 🆕 Features & 📣 Announcements
 ===============================
 
-.. dropdown:: 🆕 Drawing genome annotations 📚🔌
+.. dropdown:: 🆕 Drawing genome annotations
 
     The new ``cogent3.draw_annotations()`` function allows drawing genomic features from the annotation database alone. Check out the new section in the Gallery.
 
-.. dropdown:: 📣 The ``cogent3`` code-sharing site 📚🔌
+.. dropdown:: 📣 The ``cogent3`` code-sharing site
 
     Share your ``cogent3`` ecosystem code solutions for others to benefit from your awesomeness 😎. Click the "Code Sharing" link at the top of this page to read more.
-
-.. dropdown:: 📣 We now support third-party plugins for annotation databases 📚🔌
-
-    If you want to write your own annotation storage backend, `get in touch <https://github.com/cogent3/cogent3/discussions>`_ and we'll give you a hand!
 
 .. dropdown:: 📣 The ``diverse-seq`` package has been rewritten in rust 🚀!
 
@@ -75,18 +75,6 @@ Making Sense from Sequence
 .. dropdown:: 🆕 Improved import performance 🎉
 
     The ``import cogent3`` statement is now much faster! Previously, this statement would trigger imports of many of our dependencies too. Give it a try and report `any issues <https://github.com/cogent3/cogent3/issues>`_ you encounter.
-
-.. dropdown:: 🆕 A new rust-based plugin for k-mer counting 🔌🪝🚀
-
-    We added a new ``count_kmers()`` method to the ``SequenceCollection`` and ``Sequence`` classes. Then, the developers of `Pykmertools <https://github.com/anuradhawick/kmertools>`_ (with a bit of help from us) have released a ``cogent3-pykmertools`` app which makes their rust-based python module for counting k-mers available as ``seqs.count_kmers(k=k, use_hook="cogent3_pykmertools")``. Install it with ``pip install cogent3-pykmertools`` and give it a try. And add a star to the `Pykmertools <https://github.com/anuradhawick/kmertools>`_ repo!
-
-.. dropdown:: 🆕 Cogent3 implements plugin hooks 🔌🪝🎉 
-
-    We have implemented the infrastructure to support hook-style plugins. For example, the ``Alignment.quick_tree()`` method checks for an external plugin for calculation. `piqtree <https://pypi.org/project/piqtree>`_ has implemented support for this.
-
-.. dropdown:: 🆕 Cogent3 supports plugins for reading, writing, storing sequence data 🔌🎉 
-
-    Who doesn't love the myriad of file formats for biological sequences!! Or that sequence collections can now have millions of records!? We now support third-party contributions for reading and writing sequences. We also support alternate storage backends for our sequence collection classes. The `cogent3-h5seqs <https://pypi.org/project/cogent3-h5seqs>`_ project uses HDF5 plus compression for efficient storage of large volumes of sequences. See the docs for an example of how to use :ref:`third-party storage <storage-plugin>`.
 
 .. the ordering of the index items below is critical since it defines the web site header!
 
