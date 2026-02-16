@@ -1,0 +1,805 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Annotation DB Features &#8212; cogent3 2026.02.16 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=da3cec82" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/documentation_options.js?v=82525702"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/thebelab-helper.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'doc/draw/annotations/plot_annotation-db';</script>
+    <link rel="icon" href="../../../_static/c3-square.svg"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Sequence logos" href="../aln/plot_aln-seqlogo.html" />
+    <link rel="prev" title="Sequence Features" href="plot_seq-features.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2026.02.16 documentation - Home"/>
+    <img src="../../../_static/c3-logo.png" class="logo__image only-dark pst-js-only" alt="cogent3 2026.02.16 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Image Gallery
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../index.html">
+    User Guides
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../licenses.html">
+    License
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../codeshare.html">
+    Code Sharing
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../community.html">
+    Community
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../history.html">
+    Project History
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../pycogent.html">
+    How does cogent3 relate to PyCogent?
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../projects.html">
+    Projects using cogent3
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../data_file_links.html">
+    Data Files Used in the Documentation
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../genindex.html">
+    Index
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cogent3/cogent3" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Image Gallery
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../index.html">
+    User Guides
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../licenses.html">
+    License
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../codeshare.html">
+    Code Sharing
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../community.html">
+    Community
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../history.html">
+    Project History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../pycogent.html">
+    How does cogent3 relate to PyCogent?
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../projects.html">
+    Projects using cogent3
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../data_file_links.html">
+    Data Files Used in the Documentation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../genindex.html">
+    Index
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cogent3/cogent3" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="plot_seq-features.html">Sequence Features</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Annotation DB Features</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../aln/plot_aln-seqlogo.html">Sequence logos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../aln/plot_aln-info-plot.html">Information analysis of an alignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../aln/plot_aln-gaps-per-seq.html">Counting gaps per sequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../aln/plot_aln-dotplot-3.html">Assess alignment quality via dotplots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../aln/plot_aln-dotplot-2.html">Dotplot with annotated sequences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../aln/plot_aln-dotplot-1.html">Dotplot basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../aln/plot_aln-coevolution.html">Coevolution analysis</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tree/plot_tree-support.html">Showing Bootstrap Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tree/plot_tree-square.html">Square Dendrogram Style</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tree/plot_tree-radial.html">Radial Dendrogram Style</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tree/plot_tree-iplotx.html">Using iplotx with cogent3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tree/plot_tree-circular.html">Circular Dendrogram Style</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tree/plot_tree-angular.html">Angular Dendrogram Style</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Image Gallery</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Annotation DB Features</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
+<section id="annotation-db-features">
+<h1>Annotation DB Features<a class="headerlink" href="#annotation-db-features" title="Link to this heading">#</a></h1>
+<p>Genomic annotations can be visualised directly from an annotation database, without needing a sequence object. This is useful for exploring annotations loaded from GFF or GenBank files.</p>
+<section id="drawing-features-from-an-annotation-database">
+<h2>Drawing features from an annotation database<a class="headerlink" href="#drawing-features-from-an-annotation-database" title="Link to this heading">#</a></h2>
+<p>We load annotations for <em>Caenorhabditis elegans</em> chromosome I from a GFF file.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_annotations</span><span class="p">,</span> <span class="n">draw_annotations</span>
+
+<span class="n">db</span> <span class="o">=</span> <span class="n">load_annotations</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;data/C-elegans-chromosome-I.gff&quot;</span><span class="p">)</span>
+<span class="n">db</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>GffAnnotationDb(source=&#39;:memory:&#39;, total_records=60166)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="drawing-all-features-for-a-region">
+<h2>Drawing all features for a region<a class="headerlink" href="#drawing-all-features-for-a-region" title="Link to this heading">#</a></h2>
+<p>We can draw features for a specific region by providing coordinate bounds.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">draw_annotations</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">seqid</span><span class="o">=</span><span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="n">biotype</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;gene&quot;</span><span class="p">,</span> <span class="s2">&quot;CDS&quot;</span><span class="p">),</span> <span class="n">start</span><span class="o">=</span><span class="mi">25000</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="mi">35000</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">700</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><script type="text/javascript">
+window.PlotlyConfig = {MathJaxConfig: 'local'};
+if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}
+</script>
+<script type="module">import "https://cdn.plot.ly/plotly-3.3.1.min"</script>
+</div><div class="output text_html"><div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script type="text/javascript">if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.3.1.min.js" integrity="sha256-4rD3fugVb/nVJYUv5Ky3v+fYXoouHaBSP20WIJuEiWg=" crossorigin="anonymous"></script>                <div id="fea25b98-90f9-43f3-8d42-26bcfee39349" class="plotly-graph-div" style="height:400px; width:700px;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("fea25b98-90f9-43f3-8d42-26bcfee39349")) {                    Plotly.newPlot(                        "fea25b98-90f9-43f3-8d42-26bcfee39349",                        [{"fill":"toself","fillcolor":"rgba(161,0,0,0.75)","hoverinfo":"text","hoveron":"fills+points","legendgroup":"gene","line":{"color":"rgba(161,0,0,0.75)"},"mode":"lines","name":"gene","showlegend":true,"text":"\u003cb\u003egene:WBGene00022278\u003c\u002fb\u003e\u003cbr\u003ebiotype: gene\u003cbr\u003ecoords: 17483-26781\u003cbr\u003estrand: -","x":{"dtype":"f8","bdata":"AAAAAEAn2kAAAAAAQCfaQGZmZmbWxdJAZmZmZtbF0kAAAAAAwBLRQGZmZmbWxdJAZmZmZtbF0kAAAAAAQCfaQA=="},"y":{"dtype":"f8","bdata":"mpmZmZmZ0T\u002fNzMzMzMzgP83MzMzMzOA\u002fmpmZmZmZ4T+amZmZmZnZPwAAAAAAANA\u002fmpmZmZmZ0T+amZmZmZnRPw=="},"type":"scatter"},{"fill":"toself","fillcolor":"rgba(161,0,0,0.75)","hoverinfo":"text","hoveron":"fills+points","legendgroup":"gene","line":{"color":"rgba(161,0,0,0.75)"},"mode":"lines","name":"gene","showlegend":false,"text":"\u003cb\u003egene:WBGene00022279\u003c\u002fb\u003e\u003cbr\u003ebiotype: gene\u003cbr\u003ecoords: 27588-33150\u003cbr\u003estrand: -","x":{"dtype":"f8","bdata":"AAAAAMAv4EAAAAAAwC\u002fgQGZmZmYWpNxAZmZmZhak3EAAAAAAAPHaQGZmZmYWpNxAZmZmZhak3EAAAAAAwC\u002fgQA=="},"y":{"dtype":"f8","bdata":"mpmZmZmZ0T\u002fNzMzMzMzgP83MzMzMzOA\u002fmpmZmZmZ4T+amZmZmZnZPwAAAAAAANA\u002fmpmZmZmZ0T+amZmZmZnRPw=="},"type":"scatter"},{"fill":"toself","fillcolor":"rgba(0,0,150,0.75)","hoverinfo":"text","hoveron":"fills+points","legendgroup":"CDS","line":{"color":"rgba(0,0,150,0.75)"},"mode":"lines","name":"CDS","showlegend":true,"text":"\u003cb\u003eCDS:Y74C9A.4a.1\u003c\u002fb\u003e\u003cbr\u003ebiotype: CDS\u003cbr\u003ecoords: 17910-17958, 18005-18115, 19014-19241, 20270-20478, 20847-20964, 21012-21139, 24650-24845, 24928-25090, 25272-25472, 26370-26524, 26589-26681, 26732-26778\u003cbr\u003estrand: -","x":[17958.0,17958.0,17912.4,17912.4,17910.0,17912.4,17912.4,17958.0,null,17958.0,18005,null,18005,18005,18115,18115,18005,null,18115,19014,null,19014,19014,19241,19241,19014,null,19241,20270,null,20270,20270,20478,20478,20270,null,20478,20847,null,20847,20847,20964,20964,20847,null,20964,21012,null,21012,21012,21139,21139,21012,null,21139,24650,null,24650,24650,24845,24845,24650,null,24845,24928,null,24928,24928,25090,25090,24928,null,25090,25272,null,25272,25272,25472,25472,25272,null,25472,26370,null,26370,26370,26524,26524,26370,null,26524,26589,null,26589,26589,26681,26681,26589,null,26681,26732,null,26732,26732,26778,26778,26732],"y":[0.8250000000000001,1.0750000000000002,1.0750000000000002,1.1,0.9500000000000001,0.8,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001],"type":"scatter"},{"fill":"toself","fillcolor":"rgba(0,0,150,0.75)","hoverinfo":"text","hoveron":"fills+points","legendgroup":"CDS","line":{"color":"rgba(0,0,150,0.75)"},"mode":"lines","name":"CDS","showlegend":false,"text":"\u003cb\u003eCDS:Y74C9A.4b.1\u003c\u002fb\u003e\u003cbr\u003ebiotype: CDS\u003cbr\u003ecoords: 17910-17958, 18005-18115, 19014-19241, 20270-20478, 20847-20964, 21012-21139, 24650-24845, 24928-25090, 25272-25472, 26370-26524, 26589-26690, 26732-26778\u003cbr\u003estrand: -","x":[17958.0,17958.0,17912.4,17912.4,17910.0,17912.4,17912.4,17958.0,null,17958.0,18005,null,18005,18005,18115,18115,18005,null,18115,19014,null,19014,19014,19241,19241,19014,null,19241,20270,null,20270,20270,20478,20478,20270,null,20478,20847,null,20847,20847,20964,20964,20847,null,20964,21012,null,21012,21012,21139,21139,21012,null,21139,24650,null,24650,24650,24845,24845,24650,null,24845,24928,null,24928,24928,25090,25090,24928,null,25090,25272,null,25272,25272,25472,25472,25272,null,25472,26370,null,26370,26370,26524,26524,26370,null,26524,26589,null,26589,26589,26690,26690,26589,null,26690,26732,null,26732,26732,26778,26778,26732],"y":[0.8250000000000001,1.0750000000000002,1.0750000000000002,1.1,0.9500000000000001,0.8,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001],"type":"scatter"},{"fill":"toself","fillcolor":"rgba(0,0,150,0.75)","hoverinfo":"text","hoveron":"fills+points","legendgroup":"CDS","line":{"color":"rgba(0,0,150,0.75)"},"mode":"lines","name":"CDS","showlegend":false,"text":"\u003cb\u003eCDS:Y74C9A.4c.1\u003c\u002fb\u003e\u003cbr\u003ebiotype: CDS\u003cbr\u003ecoords: 17910-17958, 18005-18115, 19014-19241, 20270-20478, 20847-20964, 21012-21139, 24650-24845, 24928-25090, 25272-25472, 26370-26524, 26589-26643\u003cbr\u003estrand: -","x":[17958.0,17958.0,17912.4,17912.4,17910.0,17912.4,17912.4,17958.0,null,17958.0,18005,null,18005,18005,18115,18115,18005,null,18115,19014,null,19014,19014,19241,19241,19014,null,19241,20270,null,20270,20270,20478,20478,20270,null,20478,20847,null,20847,20847,20964,20964,20847,null,20964,21012,null,21012,21012,21139,21139,21012,null,21139,24650,null,24650,24650,24845,24845,24650,null,24845,24928,null,24928,24928,25090,25090,24928,null,25090,25272,null,25272,25272,25472,25472,25272,null,25472,26370,null,26370,26370,26524,26524,26370,null,26524,26589,null,26589,26589,26643,26643,26589],"y":[0.8250000000000001,1.0750000000000002,1.0750000000000002,1.1,0.9500000000000001,0.8,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001],"type":"scatter"},{"fill":"toself","fillcolor":"rgba(0,0,150,0.75)","hoverinfo":"text","hoveron":"fills+points","legendgroup":"CDS","line":{"color":"rgba(0,0,150,0.75)"},"mode":"lines","name":"CDS","showlegend":false,"text":"\u003cb\u003eCDS:Y74C9A.5.2\u003c\u002fb\u003e\u003cbr\u003ebiotype: CDS\u003cbr\u003ecoords: 28279-28405, 29099-29367, 29768-30424, 31768-32072, 32411-32482\u003cbr\u003estrand: -","x":[28405.0,28405.0,28285.3,28285.3,28279.0,28285.3,28285.3,28405.0,null,28405.0,29099,null,29099,29099,29367,29367,29099,null,29367,29768,null,29768,29768,30424,30424,29768,null,30424,31768,null,31768,31768,32072,32072,31768,null,32072,32411,null,32411,32411,32482,32482,32411],"y":[0.8250000000000001,1.0750000000000002,1.0750000000000002,1.1,0.9500000000000001,0.8,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001],"type":"scatter"},{"fill":"toself","fillcolor":"rgba(0,0,150,0.75)","hoverinfo":"text","hoveron":"fills+points","legendgroup":"CDS","line":{"color":"rgba(0,0,150,0.75)"},"mode":"lines","name":"CDS","showlegend":false,"text":"\u003cb\u003eCDS:Y74C9A.5.1\u003c\u002fb\u003e\u003cbr\u003ebiotype: CDS\u003cbr\u003ecoords: 28279-28405, 29099-29367, 29768-30424, 31768-32072, 32411-32482\u003cbr\u003estrand: -","x":[28405.0,28405.0,28285.3,28285.3,28279.0,28285.3,28285.3,28405.0,null,28405.0,29099,null,29099,29099,29367,29367,29099,null,29367,29768,null,29768,29768,30424,30424,29768,null,30424,31768,null,31768,31768,32072,32072,31768,null,32072,32411,null,32411,32411,32482,32482,32411],"y":[0.8250000000000001,1.0750000000000002,1.0750000000000002,1.1,0.9500000000000001,0.8,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001,null,0.9500000000000001,0.9500000000000001,null,0.8250000000000001,1.0750000000000002,1.0750000000000002,0.8250000000000001,0.8250000000000001],"type":"scatter"}],                        {"autosize":false,"font":{"family":"Balto","size":14},"height":400,"hovermode":"closest","margin":{"b":50,"l":50,"pad":4,"r":50,"t":50},"showlegend":true,"title":{"text":"Annotations: I"},"width":700,"xaxis":{"range":[0,34807],"rangeslider":{"visible":true},"showline":true,"title":{"text":"Range Slider"},"zeroline":false},"yaxis":{"range":[0,1.35],"showline":true,"visible":false,"zeroline":true},"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}}},                        {"responsive": true}                    ).then(function(){
+
+var gd = document.getElementById('fea25b98-90f9-43f3-8d42-26bcfee39349');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };            </script>        </div></div></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This produces the same visual output as <code class="docutils literal notranslate"><span class="pre">seq.get_drawable(biotype=...)</span></code>, but without loading the sequence data.</p>
+</div>
+</section>
+<section id="using-the-range-slider">
+<h2>Using the range slider<a class="headerlink" href="#using-the-range-slider" title="Link to this heading">#</a></h2>
+<p>By default, figures include an interactive range slider below the main plot. Drag the handles or select a region on the slider to zoom into a portion of the sequence. The x-axis label indicates the slider.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Hover over filled shapes to see feature details (name, biotype, coordinates, strand).</p>
+</div>
+</section>
+<section id="filtering-by-biotype">
+<h2>Filtering by biotype<a class="headerlink" href="#filtering-by-biotype" title="Link to this heading">#</a></h2>
+<p>We can select specific feature types to display.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">draw_annotations</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">seqid</span><span class="o">=</span><span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="n">biotype</span><span class="o">=</span><span class="s2">&quot;gene&quot;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">25000</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="mi">35000</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">650</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><script type="text/javascript">
+window.PlotlyConfig = {MathJaxConfig: 'local'};
+if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}
+</script>
+<script type="module">import "https://cdn.plot.ly/plotly-3.3.1.min"</script>
+</div><div class="output text_html"><div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script type="text/javascript">if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.3.1.min.js" integrity="sha256-4rD3fugVb/nVJYUv5Ky3v+fYXoouHaBSP20WIJuEiWg=" crossorigin="anonymous"></script>                <div id="adfcb9e8-577f-4394-b75d-5a8f17a98a15" class="plotly-graph-div" style="height:300px; width:650px;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("adfcb9e8-577f-4394-b75d-5a8f17a98a15")) {                    Plotly.newPlot(                        "adfcb9e8-577f-4394-b75d-5a8f17a98a15",                        [{"fill":"toself","fillcolor":"rgba(161,0,0,0.75)","hoverinfo":"text","hoveron":"fills+points","legendgroup":"gene","line":{"color":"rgba(161,0,0,0.75)"},"mode":"lines","name":"gene","showlegend":true,"text":"\u003cb\u003egene:WBGene00022278\u003c\u002fb\u003e\u003cbr\u003ebiotype: gene\u003cbr\u003ecoords: 17483-26781\u003cbr\u003estrand: -","x":{"dtype":"f8","bdata":"AAAAAEAn2kAAAAAAQCfaQGZmZmbWxdJAZmZmZtbF0kAAAAAAwBLRQGZmZmbWxdJAZmZmZtbF0kAAAAAAQCfaQA=="},"y":{"dtype":"f8","bdata":"mpmZmZmZ0T\u002fNzMzMzMzgP83MzMzMzOA\u002fmpmZmZmZ4T+amZmZmZnZPwAAAAAAANA\u002fmpmZmZmZ0T+amZmZmZnRPw=="},"type":"scatter"},{"fill":"toself","fillcolor":"rgba(161,0,0,0.75)","hoverinfo":"text","hoveron":"fills+points","legendgroup":"gene","line":{"color":"rgba(161,0,0,0.75)"},"mode":"lines","name":"gene","showlegend":false,"text":"\u003cb\u003egene:WBGene00022279\u003c\u002fb\u003e\u003cbr\u003ebiotype: gene\u003cbr\u003ecoords: 27588-33150\u003cbr\u003estrand: -","x":{"dtype":"f8","bdata":"AAAAAMAv4EAAAAAAwC\u002fgQGZmZmYWpNxAZmZmZhak3EAAAAAAAPHaQGZmZmYWpNxAZmZmZhak3EAAAAAAwC\u002fgQA=="},"y":{"dtype":"f8","bdata":"mpmZmZmZ0T\u002fNzMzMzMzgP83MzMzMzOA\u002fmpmZmZmZ4T+amZmZmZnZPwAAAAAAANA\u002fmpmZmZmZ0T+amZmZmZnRPw=="},"type":"scatter"}],                        {"autosize":false,"font":{"family":"Balto","size":14},"height":300,"hovermode":"closest","margin":{"b":50,"l":50,"pad":4,"r":50,"t":50},"showlegend":true,"title":{"text":"Annotations: I"},"width":650,"xaxis":{"range":[0,34807],"rangeslider":{"visible":true},"showline":true,"title":{"text":"Range Slider"},"zeroline":false},"yaxis":{"range":[0,0.8],"showline":true,"visible":false,"zeroline":true},"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}}},                        {"responsive": true}                    ).then(function(){
+
+var gd = document.getElementById('adfcb9e8-577f-4394-b75d-5a8f17a98a15');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };            </script>        </div></div></div>
+</div>
+</section>
+<section id="disabling-the-range-slider-for-static-images">
+<h2>Disabling the range slider for static images<a class="headerlink" href="#disabling-the-range-slider-for-static-images" title="Link to this heading">#</a></h2>
+<p>The range slider is included when saving figures as images. To produce a clean static image, disable the controls with <code class="docutils literal notranslate"><span class="pre">show_controls=False</span></code>.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">draw_annotations</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">seqid</span><span class="o">=</span><span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="n">biotype</span><span class="o">=</span><span class="s2">&quot;gene&quot;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">25000</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="mi">35000</span><span class="p">,</span> <span class="n">show_controls</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">650</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><script type="text/javascript">
+window.PlotlyConfig = {MathJaxConfig: 'local'};
+if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}
+</script>
+<script type="module">import "https://cdn.plot.ly/plotly-3.3.1.min"</script>
+</div><div class="output text_html"><div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script type="text/javascript">if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.3.1.min.js" integrity="sha256-4rD3fugVb/nVJYUv5Ky3v+fYXoouHaBSP20WIJuEiWg=" crossorigin="anonymous"></script>                <div id="9aae057f-bd2e-4d03-b2f0-25cfb93221a2" class="plotly-graph-div" style="height:300px; width:650px;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("9aae057f-bd2e-4d03-b2f0-25cfb93221a2")) {                    Plotly.newPlot(                        "9aae057f-bd2e-4d03-b2f0-25cfb93221a2",                        [{"fill":"toself","fillcolor":"rgba(161,0,0,0.75)","hoverinfo":"text","hoveron":"fills+points","legendgroup":"gene","line":{"color":"rgba(161,0,0,0.75)"},"mode":"lines","name":"gene","showlegend":true,"text":"\u003cb\u003egene:WBGene00022278\u003c\u002fb\u003e\u003cbr\u003ebiotype: gene\u003cbr\u003ecoords: 17483-26781\u003cbr\u003estrand: -","x":{"dtype":"f8","bdata":"AAAAAEAn2kAAAAAAQCfaQGZmZmbWxdJAZmZmZtbF0kAAAAAAwBLRQGZmZmbWxdJAZmZmZtbF0kAAAAAAQCfaQA=="},"y":{"dtype":"f8","bdata":"mpmZmZmZ0T\u002fNzMzMzMzgP83MzMzMzOA\u002fmpmZmZmZ4T+amZmZmZnZPwAAAAAAANA\u002fmpmZmZmZ0T+amZmZmZnRPw=="},"type":"scatter"},{"fill":"toself","fillcolor":"rgba(161,0,0,0.75)","hoverinfo":"text","hoveron":"fills+points","legendgroup":"gene","line":{"color":"rgba(161,0,0,0.75)"},"mode":"lines","name":"gene","showlegend":false,"text":"\u003cb\u003egene:WBGene00022279\u003c\u002fb\u003e\u003cbr\u003ebiotype: gene\u003cbr\u003ecoords: 27588-33150\u003cbr\u003estrand: -","x":{"dtype":"f8","bdata":"AAAAAMAv4EAAAAAAwC\u002fgQGZmZmYWpNxAZmZmZhak3EAAAAAAAPHaQGZmZmYWpNxAZmZmZhak3EAAAAAAwC\u002fgQA=="},"y":{"dtype":"f8","bdata":"mpmZmZmZ0T\u002fNzMzMzMzgP83MzMzMzOA\u002fmpmZmZmZ4T+amZmZmZnZPwAAAAAAANA\u002fmpmZmZmZ0T+amZmZmZnRPw=="},"type":"scatter"}],                        {"autosize":false,"font":{"family":"Balto","size":14},"height":300,"hovermode":"closest","margin":{"b":50,"l":50,"pad":4,"r":50,"t":50},"showlegend":true,"title":{"text":"Annotations: I"},"width":650,"xaxis":{"range":[0,34807],"showline":true,"title":{"text":"I"},"zeroline":false},"yaxis":{"range":[0,0.8],"showline":true,"visible":false,"zeroline":true},"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}}},                        {"responsive": true}                    ).then(function(){
+
+var gd = document.getElementById('9aae057f-bd2e-4d03-b2f0-25cfb93221a2');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };            </script>        </div></div></div>
+</div>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="plot_seq-features.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Sequence Features</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../aln/plot_aln-seqlogo.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Sequence logos</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#drawing-features-from-an-annotation-database">Drawing features from an annotation database</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#drawing-all-features-for-a-region">Drawing all features for a region</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-range-slider">Using the range slider</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering-by-biotype">Filtering by biotype</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#disabling-the-range-slider-for-static-images">Disabling the range slider for static images</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2020-2026, cogent3 Team.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
