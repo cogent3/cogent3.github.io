@@ -60,6 +60,10 @@ Making Sense from Sequence
 🆕 Features & 📣 Announcements
 ===============================
 
+.. dropdown:: 🆕 Automate tracking citations
+
+    We have built a mechanism for defining and tracking citations for apps, making it easier for users to correctly acknowledge app developer efforts. See :ref:`the docs <app_citations>` for how to add a citation to your app and how to cite the apps you use.
+
 .. dropdown:: 🆕 Drawing genome annotations
 
     The new ``cogent3.draw_annotations()`` function allows drawing genomic features from the annotation database alone. Check out the new section in the Gallery.
