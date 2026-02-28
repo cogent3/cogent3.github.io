@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Tabular data &#8212; cogent3 2026.02.16 documentation</title>
+    <title>Tabular data &#8212; cogent3 2026.02.28 documentation</title>
   
   
   
@@ -42,7 +42,7 @@
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../_static/documentation_options.js?v=82525702"></script>
+    <script src="../../_static/documentation_options.js?v=63600015"></script>
     <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/thebelab-helper.js"></script>
@@ -124,8 +124,8 @@
       
     
     
-    <img src="../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2026.02.16 documentation - Home"/>
-    <img src="../../_static/c3-logo.png" class="logo__image only-dark pst-js-only" alt="cogent3 2026.02.16 documentation - Home"/>
+    <img src="../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2026.02.28 documentation - Home"/>
+    <img src="../../_static/c3-logo.png" class="logo__image only-dark pst-js-only" alt="cogent3 2026.02.28 documentation - Home"/>
   
   
 </a></div>
@@ -2620,9 +2620,9 @@ Ratio
 <th>a</th><th>b</th>
 </thead>
 <tbody>
-<tr><td><span class="c3col_right">1</span></td><td><span class="c3col_right">1</span></td></tr>
 <tr><td><span class="c3col_right">4</span></td><td><span class="c3col_right">4</span></td></tr>
 <tr><td><span class="c3col_right">6</span></td><td><span class="c3col_right">6</span></td></tr>
+<tr><td><span class="c3col_right">9</span></td><td><span class="c3col_right">9</span></td></tr>
 </tbody>
 </table>
 <p>Random selection of 3 rows from
@@ -4042,7 +4042,7 @@ Ratio
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>CategoryCounter({(&#39;a&#39;, &#39;c&#39;): 1, (&#39;b&#39;, &#39;c&#39;): 3, (&#39;a&#39;, &#39;d&#39;): 1})
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>CategoryCounter({(&#39;a&#39;, &#39;c&#39;): 1, (&#39;a&#39;, &#39;d&#39;): 1, (&#39;b&#39;, &#39;c&#39;): 3})
 </pre></div>
 </div>
 </div>
@@ -4081,14 +4081,411 @@ Ratio
 </thead>
 <tbody>
 <tr><td><span class="c3col_left">('a', 'c')</span></td><td><span class="c3col_right">1</span></td></tr>
-<tr><td><span class="c3col_left">('b', 'c')</span></td><td><span class="c3col_right">3</span></td></tr>
 <tr><td><span class="c3col_left">('a', 'd')</span></td><td><span class="c3col_right">1</span></td></tr>
+<tr><td><span class="c3col_left">('b', 'c')</span></td><td><span class="c3col_right">3</span></td></tr>
 </tbody>
 </table>
 <p>
 3 rows x 2 columns</p>
 </div></div></div>
 </div>
+</section>
+<section id="grouping-and-aggregating">
+<h2>Grouping and aggregating<a class="headerlink" href="#grouping-and-aggregating" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Table.group_by()</span></code> groups rows by one or more columns, returning a <code class="docutils literal notranslate"><span class="pre">GroupBy</span></code> object for aggregation.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_table</span>
+
+<span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+        <span class="s2">&quot;extra&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">],</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+<span class="n">table</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div class="c3table">
+
+<style>
+.c3table table {margin: 10px 0;}
+.c3table tr:last-child {border-bottom: 1px solid #000;} 
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
+.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+.c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
+</style>
+
+<table>
+
+<thead class="head_cell">
+<th>category</th><th>value</th><th>extra</th>
+</thead>
+<tbody>
+<tr><td><span class="c3col_left">a</span></td><td><span class="c3col_right">1</span></td><td><span class="c3col_right">10</span></td></tr>
+<tr><td><span class="c3col_left">b</span></td><td><span class="c3col_right">2</span></td><td><span class="c3col_right">20</span></td></tr>
+<tr><td><span class="c3col_left">a</span></td><td><span class="c3col_right">3</span></td><td><span class="c3col_right">30</span></td></tr>
+<tr><td><span class="c3col_left">b</span></td><td><span class="c3col_right">4</span></td><td><span class="c3col_right">40</span></td></tr>
+<tr><td><span class="c3col_left">a</span></td><td><span class="c3col_right">5</span></td><td><span class="c3col_right">50</span></td></tr>
+</tbody>
+</table>
+<p>
+5 rows x 3 columns</p>
+</div></div></div>
+</div>
+<section id="aggregating-columns">
+<h3>Aggregating columns<a class="headerlink" href="#aggregating-columns" title="Link to this heading">#</a></h3>
+<p>Each aggregation is a <code class="docutils literal notranslate"><span class="pre">(column,</span> <span class="pre">function)</span></code> tuple. Result columns are
+automatically named <code class="docutils literal notranslate"><span class="pre">&quot;function(column)&quot;</span></code>. Functions can be string names
+that map to <code class="docutils literal notranslate"><span class="pre">numpy</span></code> functions (<code class="docutils literal notranslate"><span class="pre">&quot;sum&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;mean&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;median&quot;</span></code>,
+<code class="docutils literal notranslate"><span class="pre">&quot;min&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;max&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;std&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;var&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;count&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;first&quot;</span></code>,
+<code class="docutils literal notranslate"><span class="pre">&quot;last&quot;</span></code>) or callables. <code class="docutils literal notranslate"><span class="pre">&quot;std&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;var&quot;</span></code> use <code class="docutils literal notranslate"><span class="pre">ddof=1</span></code>
+(unbiased estimators).</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">((</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="s2">&quot;sum&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;extra&quot;</span><span class="p">,</span> <span class="s2">&quot;mean&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div class="c3table">
+
+<style>
+.c3table table {margin: 10px 0;}
+.c3table tr:last-child {border-bottom: 1px solid #000;} 
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
+.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+.c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
+</style>
+
+<table>
+
+<thead class="head_cell">
+<th>category</th><th>sum(value)</th><th>mean(extra)</th>
+</thead>
+<tbody>
+<tr><td><span class="c3col_left">a</span></td><td><span class="c3col_right">9</span></td><td><span class="c3col_right">30.0000</span></td></tr>
+<tr><td><span class="c3col_left">b</span></td><td><span class="c3col_right">6</span></td><td><span class="c3col_right">30.0000</span></td></tr>
+</tbody>
+</table>
+<p>
+2 rows x 3 columns</p>
+</div></div></div>
+</div>
+</section>
+<section id="multiple-aggregations-on-the-same-column">
+<h3>Multiple aggregations on the same column<a class="headerlink" href="#multiple-aggregations-on-the-same-column" title="Link to this heading">#</a></h3>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+    <span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="s2">&quot;sum&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="s2">&quot;mean&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="s2">&quot;std&quot;</span><span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div class="c3table">
+
+<style>
+.c3table table {margin: 10px 0;}
+.c3table tr:last-child {border-bottom: 1px solid #000;} 
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
+.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+.c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
+</style>
+
+<table>
+
+<thead class="head_cell">
+<th>category</th><th>sum(value)</th><th>mean(value)</th><th>std(value)</th>
+</thead>
+<tbody>
+<tr><td><span class="c3col_left">a</span></td><td><span class="c3col_right">9</span></td><td><span class="c3col_right">3.0000</span></td><td><span class="c3col_right">2.0000</span></td></tr>
+<tr><td><span class="c3col_left">b</span></td><td><span class="c3col_right">6</span></td><td><span class="c3col_right">3.0000</span></td><td><span class="c3col_right">1.4142</span></td></tr>
+</tbody>
+</table>
+<p>
+2 rows x 4 columns</p>
+</div></div></div>
+</div>
+</section>
+<section id="using-a-callable-instead-of-a-string-name">
+<h3>Using a callable instead of a string name<a class="headerlink" href="#using-a-callable-instead-of-a-string-name" title="Link to this heading">#</a></h3>
+<p>You can pass any callable as the aggregation function. For example,
+<code class="docutils literal notranslate"><span class="pre">math.fsum</span></code> provides a numerically stable sum that avoids catastrophic
+cancellation, unlike <code class="docutils literal notranslate"><span class="pre">numpy.sum</span></code>.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+
+<span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1e16</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1e16</span><span class="p">],</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+<span class="n">table</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">((</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="s2">&quot;sum&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">fsum</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div class="c3table">
+
+<style>
+.c3table table {margin: 10px 0;}
+.c3table tr:last-child {border-bottom: 1px solid #000;} 
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
+.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+.c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
+</style>
+
+<table>
+
+<thead class="head_cell">
+<th>category</th><th>sum(value)</th><th>fsum(value)</th>
+</thead>
+<tbody>
+<tr><td><span class="c3col_left">a</span></td><td><span class="c3col_right">0.0000</span></td><td><span class="c3col_right">1.0000</span></td></tr>
+</tbody>
+</table>
+<p>
+1 rows x 3 columns</p>
+</div></div></div>
+</div>
+</section>
+<section id="counting-rows-per-group">
+<h3>Counting rows per group<a class="headerlink" href="#counting-rows-per-group" title="Link to this heading">#</a></h3>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div class="c3table">
+
+<style>
+.c3table table {margin: 10px 0;}
+.c3table tr:last-child {border-bottom: 1px solid #000;} 
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
+.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+.c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
+</style>
+
+<table>
+
+<thead class="head_cell">
+<th>category</th><th>count</th>
+</thead>
+<tbody>
+<tr><td><span class="c3col_left">a</span></td><td><span class="c3col_right">3</span></td></tr>
+</tbody>
+</table>
+<p>
+1 rows x 2 columns</p>
+</div></div></div>
+</div>
+</section>
+<section id="convenience-aggregation-methods">
+<h3>Convenience aggregation methods<a class="headerlink" href="#convenience-aggregation-methods" title="Link to this heading">#</a></h3>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s2">&quot;value&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div class="c3table">
+
+<style>
+.c3table table {margin: 10px 0;}
+.c3table tr:last-child {border-bottom: 1px solid #000;} 
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
+.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+.c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
+</style>
+
+<table>
+
+<thead class="head_cell">
+<th>category</th><th>sum(value)</th>
+</thead>
+<tbody>
+<tr><td><span class="c3col_left">a</span></td><td><span class="c3col_right">0.0000</span></td></tr>
+</tbody>
+</table>
+<p>
+1 rows x 2 columns</p>
+</div></div></div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s2">&quot;category&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s2">&quot;value&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div class="c3table">
+
+<style>
+.c3table table {margin: 10px 0;}
+.c3table tr:last-child {border-bottom: 1px solid #000;} 
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
+.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+.c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
+</style>
+
+<table>
+
+<thead class="head_cell">
+<th>category</th><th>mean(value)</th>
+</thead>
+<tbody>
+<tr><td><span class="c3col_left">a</span></td><td><span class="c3col_right">0.0000</span></td></tr>
+</tbody>
+</table>
+<p>
+1 rows x 2 columns</p>
+</div></div></div>
+</div>
+</section>
+<section id="grouping-by-multiple-columns">
+<h3>Grouping by multiple columns<a class="headerlink" href="#grouping-by-multiple-columns" title="Link to this heading">#</a></h3>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">make_table</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;cat&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;sub&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;x&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+<span class="n">table</span><span class="o">.</span><span class="n">group_by</span><span class="p">([</span><span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="s2">&quot;sub&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">((</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="s2">&quot;sum&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div class="c3table">
+
+<style>
+.c3table table {margin: 10px 0;}
+.c3table tr:last-child {border-bottom: 1px solid #000;} 
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
+.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+.c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
+</style>
+
+<table>
+
+<thead class="head_cell">
+<th>cat</th><th>sub</th><th>sum(value)</th>
+</thead>
+<tbody>
+<tr><td><span class="c3col_left">a</span></td><td><span class="c3col_left">x</span></td><td><span class="c3col_right">6</span></td></tr>
+<tr><td><span class="c3col_left">a</span></td><td><span class="c3col_left">y</span></td><td><span class="c3col_right">3</span></td></tr>
+<tr><td><span class="c3col_left">b</span></td><td><span class="c3col_left">x</span></td><td><span class="c3col_right">2</span></td></tr>
+<tr><td><span class="c3col_left">b</span></td><td><span class="c3col_left">y</span></td><td><span class="c3col_right">4</span></td></tr>
+</tbody>
+</table>
+<p>
+4 rows x 3 columns</p>
+</div></div></div>
+</div>
+</section>
+<section id="iterating-over-groups">
+<h3>Iterating over groups<a class="headerlink" href="#iterating-over-groups" title="Link to this heading">#</a></h3>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">sub_table</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="s2">&quot;cat&quot;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;group </span><span class="si">{</span><span class="n">key</span><span class="si">!r}</span><span class="s2">: </span><span class="si">{</span><span class="n">sub_table</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> rows&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>group &#39;a&#39;: 3 rows
+group &#39;b&#39;: 2 rows
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="joining-or-merging-tables">
 <h2>Joining or merging tables<a class="headerlink" href="#joining-or-merging-tables" title="Link to this heading">#</a></h2>
@@ -4714,6 +5111,16 @@ NP_055852 &amp; NonCon &amp; 10933217.7090 \\
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-distinct-values">Getting distinct values</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#counting-occurrences-of-values">Counting occurrences of values</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#counting-unique-values">Counting unique values</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grouping-and-aggregating">Grouping and aggregating</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregating-columns">Aggregating columns</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-aggregations-on-the-same-column">Multiple aggregations on the same column</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-a-callable-instead-of-a-string-name">Using a callable instead of a string name</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#counting-rows-per-group">Counting rows per group</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convenience-aggregation-methods">Convenience aggregation methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grouping-by-multiple-columns">Grouping by multiple columns</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iterating-over-groups">Iterating over groups</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#joining-or-merging-tables">Joining or merging tables</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transpose-a-table">Transpose a table</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specify-markdown-as-the-str-format">Specify markdown as the <code class="docutils literal notranslate"><span class="pre">str()</span></code> format</a></li>

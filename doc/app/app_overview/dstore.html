@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Data stores – collections of data records &#8212; cogent3 2026.02.16 documentation</title>
+    <title>Data stores – collections of data records &#8212; cogent3 2026.02.28 documentation</title>
   
   
   
@@ -42,7 +42,7 @@
   <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
 <link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script src="../../../_static/documentation_options.js?v=82525702"></script>
+    <script src="../../../_static/documentation_options.js?v=63600015"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../_static/thebelab-helper.js"></script>
@@ -124,8 +124,8 @@
       
     
     
-    <img src="../../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2026.02.16 documentation - Home"/>
-    <img src="../../../_static/c3-logo.png" class="logo__image only-dark pst-js-only" alt="cogent3 2026.02.16 documentation - Home"/>
+    <img src="../../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2026.02.28 documentation - Home"/>
+    <img src="../../../_static/c3-logo.png" class="logo__image only-dark pst-js-only" alt="cogent3 2026.02.28 documentation - Home"/>
   
   
 </a></div>
@@ -1062,6 +1062,122 @@ ENSG00000182004.fa
 </div>
 </div>
 </section>
+<section id="citations-attributing-the-tools-that-produced-your-results">
+<span id="data-store-citations"></span><h2>Citations – attributing the tools that produced your results<a class="headerlink" href="#citations-attributing-the-tools-that-produced-your-results" title="Link to this heading">#</a></h2>
+<p>When apps declare citations (see <a class="reference internal" href="../user_function.html#app-citations"><span class="std std-ref">Add a citation to your app so users can acknowledge your work</span></a>), those citations are automatically saved alongside your results when you use <code class="docutils literal notranslate"><span class="pre">apply_to()</span></code>.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">citeable</span><span class="w"> </span><span class="kn">import</span> <span class="n">Software</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_app</span><span class="p">,</span> <span class="n">open_data_store</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.app.composable</span><span class="w"> </span><span class="kn">import</span> <span class="n">define_app</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.app.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">AlignedSeqsType</span>
+
+<span class="n">my_cite</span> <span class="o">=</span> <span class="n">Software</span><span class="p">(</span>
+    <span class="n">author</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Doe, J&quot;</span><span class="p">],</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;My Sequence Filter&quot;</span><span class="p">,</span>
+    <span class="n">year</span><span class="o">=</span><span class="mi">2025</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nd">@define_app</span><span class="p">(</span><span class="n">cite</span><span class="o">=</span><span class="n">my_cite</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">strict_filter</span><span class="p">(</span><span class="n">val</span><span class="p">:</span> <span class="n">AlignedSeqsType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AlignedSeqsType</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">val</span><span class="o">.</span><span class="n">omit_bad_seqs</span><span class="p">()</span>
+
+<span class="n">in_dstore</span> <span class="o">=</span> <span class="n">open_data_store</span><span class="p">(</span><span class="s2">&quot;data/raw.zip&quot;</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;fa&quot;</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">out_dstore</span> <span class="o">=</span> <span class="n">open_data_store</span><span class="p">(</span><span class="s2">&quot;cited_results&quot;</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;fa&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">)</span>
+
+<span class="n">loader</span> <span class="o">=</span> <span class="n">get_app</span><span class="p">(</span><span class="s2">&quot;load_aligned&quot;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">,</span> <span class="n">format_name</span><span class="o">=</span><span class="s2">&quot;fasta&quot;</span><span class="p">)</span>
+<span class="n">writer</span> <span class="o">=</span> <span class="n">get_app</span><span class="p">(</span><span class="s2">&quot;write_seqs&quot;</span><span class="p">,</span> <span class="n">data_store</span><span class="o">=</span><span class="n">out_dstore</span><span class="p">,</span> <span class="n">format_name</span><span class="o">=</span><span class="s2">&quot;fasta&quot;</span><span class="p">)</span>
+<span class="n">process</span> <span class="o">=</span> <span class="n">loader</span> <span class="o">+</span> <span class="n">strict_filter</span><span class="p">()</span> <span class="o">+</span> <span class="n">writer</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">apply_to</span><span class="p">(</span><span class="n">in_dstore</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">summary_citations</span></code> property returns a table of all citations stored in the data store.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="o">.</span><span class="n">summary_citations</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div class="c3table">
+
+<style>
+.c3table table {margin: 10px 0;}
+.c3table tr:last-child {border-bottom: 1px solid #000;} 
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
+.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+.c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
+</style>
+
+<table>
+
+<caption>
+<span class="cell_title">citations</span>
+</caption>
+<thead class="head_cell">
+<th>app</th><th>citation</th>
+</thead>
+<tbody>
+<tr><td><span class="c3col_left">trim_stop_codons</span></td><td><span class="c3col_left">Huttley et al. 2025 {cogent3}: making sense of sequence</span></td></tr>
+<tr><td><span class="c3col_left">strict_filter</span></td><td><span class="c3col_left">Doe 2025 My Sequence Filter</span></td></tr>
+</tbody>
+</table>
+<p>
+2 rows x 2 columns</p>
+</div></div></div>
+</div>
+<p>You can export the citations to a BibTeX file with <code class="docutils literal notranslate"><span class="pre">write_bib()</span></code>.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="o">.</span><span class="n">write_bib</span><span class="p">(</span><span class="s2">&quot;my_analysis.bib&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>@software{cogent3,
+  author    = {Huttley, Gavin and Caley, Katherine and Fotovat, Nabi and Ma, Stephen Ka-Wah and Koh, Moses and Morris, Richard and McArthur, Robert and McDonald, Daniel and Jaya, Fred and Maxwell, Peter and Martini, James and La, Thomas and Lang, Yapeng},
+  title     = {{cogent3}: making sense of sequence},
+  year      = {2025},
+  doi       = {10.5281/zenodo.16519079},
+  url       = {https://cogent3.org},
+}
+
+@software{Doe.2025,
+  author    = {Doe, J},
+  title     = {My Sequence Filter},
+  year      = {2025},
+}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">ReadOnlyDataStoreZipped</span></code> supports reading stored citations but
+not writing them.</p>
+</div>
+</section>
 </section>
 <section id="pulling-it-all-together">
 <h1>Pulling it all together<a class="headerlink" href="#pulling-it-all-together" title="Link to this heading">#</a></h1>
@@ -1111,8 +1227,8 @@ ENSG00000182004.fa
 translate_seqs(moltype=&#39;dna&#39;, gc=1, allow_rc=False, trim_terminal_stop=True) +
 write_db(data_store=DataStoreSqlite(source=/home/runner/work/cogent3.github.io/cogent3.github.io/c3org/doc/doc/translated.sqlitedb,
 mode=Mode.w, limit=None, verbose=False), id_from_source=&lt;function get_unique_id
-at 0x7fe368fae700&gt;, serialiser=to_primitive(convertor=&lt;function as_dict at
-0x7fe36825d800&gt;) + pickle_it())
+at 0x7ff7f0311c60&gt;, serialiser=to_primitive(convertor=&lt;function as_dict at
+0x7ff7cbead580&gt;) + pickle_it())
 </pre></div>
 </div>
 </div>
@@ -1366,6 +1482,7 @@ at 0x7fe368fae700&gt;, serialiser=to_primitive(convertor=&lt;function as_dict at
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-a-writeable-data-store">Making a writeable data store</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datastoresqlite-stores-serialised-data"><code class="docutils literal notranslate"><span class="pre">DataStoreSqlite</span></code> stores serialised data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interrogating-run-logs">Interrogating run logs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citations-attributing-the-tools-that-produced-your-results">Citations – attributing the tools that produced your results</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pulling-it-all-together">Pulling it all together</a><ul class="visible nav section-nav flex-column">
