@@ -11,6 +11,19 @@ def make_nbsphinx_thumbnails():
     return {str(n).split(".")[0]: f"_images/{n.stem}.png" for n in gallery}
 
 
+rst_prolog = """
+.. |scinexus| replace:: `scinexus <https://scinexus.readthedocs.io>`__
+.. |define_app| replace:: `define_app <https://scinexus.readthedocs.io/en/latest/explanation/app-lifecycle.html>`__
+.. |data_store| replace:: `data store <https://scinexus.readthedocs.io/en/latest/howto/use-data-stores.html>`__
+.. |data_member| replace:: `DataMember <https://scinexus.readthedocs.io/en/latest/reference/data-stores.html#scinexus.data_store.DataMember>`__
+.. |not_completed| replace:: `NotCompleted <https://scinexus.readthedocs.io/en/latest/howto/handle-failures.html>`__
+.. |track_failures| replace:: `track failures <https://scinexus.readthedocs.io/en/latest/howto/handle-failures.html>`__
+.. |app_types| replace:: `app types <https://scinexus.readthedocs.io/en/latest/explanation/app-lifecycle.html>`__
+.. |citation| replace:: `citation <https://scinexus.readthedocs.io/en/latest/howto/log-and-cite.html>`__
+.. |citations| replace:: `citations <https://scinexus.readthedocs.io/en/latest/howto/log-and-cite.html>`__
+.. |dstore_cites| replace:: `data store citations <https://scinexus.readthedocs.io/en/latest/howto/log-and-cite.html#extracting-citations-from-a-data-store>`__
+"""
+
 # sphinx_navtree
 today = datetime.date.today()
 year = today.strftime("%Y")
