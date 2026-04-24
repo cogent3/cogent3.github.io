@@ -4,6 +4,8 @@
 
 cogent3 provides a first-class experience within Jupyter notebooks, with algorithms that also support parallel execution on HPC systems with thousands of processors.
 
+cogent3's composable app infrastructure (app composition, data stores, parallel execution, progress tracking) is provided by [scinexus](https://scinexus.readthedocs.io), a standalone package. cogent3 re-exports key scinexus functions (`open_data_store`, `open_`, `set_parallel_backend`) at the top level for convenience.
+
 ## Installation
 
 ```bash
@@ -24,7 +26,7 @@ Python versions supported: 3.11, 3.12, 3.13, 3.14
 - **SequenceCollection**: Collection of unaligned sequences.
 - **Tree**: Phylogenetic tree representation with manipulation methods.
 - **Table**: Tabular data structure for statistical results and metadata.
-- **Apps**: Composable workflow applications using functional programming style.
+- **Apps**: Composable workflow applications using functional programming style, built on the [scinexus](https://scinexus.readthedocs.io) framework.
 
 ## Documentation Sections
 
@@ -87,7 +89,7 @@ table = cogent3.make_table(
 
 ### Using Apps (Composable Pipelines)
 
-Apps provide a functional programming interface that can be composed using `+` and are designed to work in batch on many data objects of the same type:
+Apps provide a functional programming interface that can be composed using `+` and are designed to work in batch on many data objects of the same type. The app framework is provided by [scinexus](https://scinexus.readthedocs.io); cogent3 adds domain-specific apps for alignment, evolutionary modelling, tree building, etc.
 
 ```python
 from cogent3 import get_app, app_help, available_apps, open_data_store
@@ -111,6 +113,18 @@ pipeline = loader + aligner + writer
 # Apply pipeline to input data
 result = pipeline("input.fasta")
 ```
+
+To define custom apps, use `scinexus.define_app` directly:
+
+```python
+from scinexus import define_app
+
+@define_app
+def my_filter(aln: cogent3.Alignment) -> cogent3.Alignment:
+    return aln.omit_gap_pos()
+```
+
+The deprecated import path `cogent3.app.composable` still works but will be removed in 2026.9. Import from `scinexus` instead.
 
 ### Sequence Manipulation
 
@@ -209,7 +223,7 @@ cogent3.available_models()
 
 5. **Plugin System**: Extensible architecture via stevedore entry points (see below).
 
-6. **Parallel Execution**: Built-in support for parallel processing using loky or MPI.
+6. **Parallel Execution**: Built-in support for parallel processing using loky or MPI (via scinexus).
 
 ## Plugin Architecture
 
@@ -246,6 +260,12 @@ Search PyPI for "cogent3" to discover available plugins: https://pypi.org/search
 - **Annotations**: GFF, GenBank features
 - **Tables**: TSV, CSV, and custom delimited formats
 
+## Related Packages
+
+- **scinexus**: The composable app infrastructure underlying cogent3's app system. Provides `define_app`, `NotCompleted`, data stores, type checking, and parallel execution as a standalone package. See https://scinexus.readthedocs.io
+- **piqtree**: IQ-TREE integration for phylogenetic analysis
+- **cogent3-h5seqs**: HDF5-based storage for large sequence collections
+
 ## Links
 
 - Documentation: https://cogent3.org
@@ -253,6 +273,7 @@ Search PyPI for "cogent3" to discover available plugins: https://pypi.org/search
 - PyPI: https://pypi.org/project/cogent3
 - Discussions: https://github.com/cogent3/cogent3/discussions
 - Issues: https://github.com/cogent3/cogent3/issues
+- scinexus: https://github.com/cogent3/scinexus
 
 ## Citation
 

@@ -45,7 +45,7 @@ Making Sense from Sequence
 
     .. tab-item:: Beginner friendly
 
-        You don't have to be an expert in structural programming languages (like Python) to use ``cogent3``! Interactive usage in Jupyter notebooks and a functional programming style interface lowers the barrier to entry. Individuals comfortable with R should find this interface less complex. (See the ``cogent3.app`` documentation.)
+        You don't have to be an expert in structural programming languages (like Python) to use ``cogent3``! Interactive usage in Jupyter notebooks and a functional programming style interface lowers the barrier to entry. Individuals comfortable with R should find this interface less complex. (See the :ref:`app-docs` documentation.)
 
         .. dropdown:: 🎬 Using cogent3 apps
 
@@ -60,9 +60,13 @@ Making Sense from Sequence
 🆕 Features & 📣 Announcements
 ===============================
 
+.. dropdown:: 🆕 |scinexus| is the new home for the cogent3 app infrastructure 🚀‼️
+
+    After 7 years of incubation inside ``cogent3`` we felt it was time that apps left home and were made available to a wider audience of data scientists. There will be zero impact for users of ``cogent3`` -- all our apps and data stores will continue to work. ``scinexus`` is now a requirement for ``cogent3`` and so will always be installed and thus readily accessible for defining your own apps. If you also use some of our utility functions, you may see deprecation warnings telling how to change your code to using ``scinexus`` instead. See |data_store| too.
+
 .. dropdown:: 🆕 Automate tracking citations
 
-    We have built a mechanism for defining and tracking citations for apps, making it easier for users to correctly acknowledge app developer efforts. See :ref:`the docs <app_citations>` for how to add a citation to your app and how to cite the apps you use.
+    We have built a mechanism for defining and tracking citations for apps, making it easier for users to correctly acknowledge app developer efforts. See `the scinexus docs <https://scinexus.readthedocs.io/en/latest/howto/log-and-cite.html>`_ for how to add a citation to your app and how to cite the apps you use.
 
 .. dropdown:: 🆕 Drawing genome annotations
 
