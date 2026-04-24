@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Loading a single sequence from a file &#8212; cogent3 2026.02.28 documentation</title>
+    <title>Loading a single sequence from a file &#8212; cogent3 2026.04.24 documentation</title>
   
   
   
@@ -27,8 +27,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
@@ -37,12 +37,12 @@
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=da3cec82" />
   
   <!-- So that users can add custom icons -->
-  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
 
-    <script src="../../_static/documentation_options.js?v=63600015"></script>
+    <script src="../../_static/documentation_options.js?v=d216a1e1"></script>
     <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/thebelab-helper.js"></script>
@@ -51,6 +51,7 @@
     <script src="../../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'doc/cookbook/loading_sequences';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <link rel="icon" href="../../_static/c3-square.svg"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -59,20 +60,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
-
+  <body data-default-mode="">
   
   
   <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
+  
+  
+  
   
   <dialog id="pst-search-dialog">
     
@@ -98,7 +105,7 @@
 </div>
 
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
 <div class="bd-header__inner bd-page-width">
   <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
     <span class="fa-solid fa-bars"></span>
@@ -124,8 +131,8 @@
       
     
     
-    <img src="../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2026.02.28 documentation - Home"/>
-    <img src="../../_static/c3-logo.png" class="logo__image only-dark pst-js-only" alt="cogent3 2026.02.28 documentation - Home"/>
+    <img src="../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2026.04.24 documentation - Home"/>
+    <img src="../../_static/c3-logo.png" class="logo__image only-dark pst-js-only" alt="cogent3 2026.04.24 documentation - Home"/>
   
   
 </a></div>
@@ -430,7 +437,14 @@
   </div>
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar"><svg class="pst-icon svg-inline--fa" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
+  </svg>
+  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
+  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
+</button></div>
         <div class="sidebar-primary-item">
+
 <nav class="bd-docs-nav bd-links"
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
@@ -442,8 +456,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../app/app_overview/app-get.html">Getting an app</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../app/app_overview/available-apps.html">Displaying installed apps</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../app/app_overview/dstore.html">Data stores – collections of data records</a></li>
-
 <li class="toctree-l3"><a class="reference internal" href="../app/app_overview/not-completed.html">Tracking records that could not be processed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../app/app_overview/user_function.html">Writing your own apps</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../app/index-cookbook.html">App Cookbook</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -507,11 +521,6 @@
 <li class="toctree-l4"><a class="reference internal" href="../app/app_tutorials/evo-natsel_zhang.html"><code class="docutils literal notranslate"><span class="pre">natsel_zhang</span></code> – a branch-site test</a></li>
 </ul>
 </details></li>
-</ul>
-</details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../app/index-custom.html">Custom Apps</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../app/user_function.html">Why write apps?</a></li>
-
 </ul>
 </details></li>
 </ul>
@@ -654,14 +663,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../api/tree/classes/cogent3.core.tree.PhyloNode.html">PhyloNode</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/app/composable/define_app.html">define_app</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/app/io/classes/cogent3.app.io.register_datastore_reader.html">register_datastore_reader</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/app/data_store/classes/cogent3.app.data_store.DataMember.html">DataMember</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/app/data_store/classes/cogent3.app.data_store.DataStoreDirectory.html">DataStoreDirectory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/app/data_store/classes/cogent3.app.data_store.ReadOnlyDataStoreZipped.html">ReadOnlyDataStoreZipped</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/app/sqlite_data_store/classes/cogent3.app.sqlite_data_store.DataStoreSqlite.html">DataStoreSqlite</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/util/deserialise/deserialise_object.html">deserialise_object</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../api/util/deserialise/classes/cogent3.util.deserialise.register_deserialiser.html">register_deserialiser</a></li>
 </ul>
 </details></li>
 </ul>
@@ -976,9 +977,7 @@ DogFaced TGTGGCACAA
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "eb008b12d47141108980ea12dd318211"}
-</script><div class="output text_html"><style>
+<div class="output text_html"><style>
 .c3align table {margin: 10px 0;}
 .c3align td { border: none !important; text-align: left !important; }
 .c3align tr:not(.num_row) td span {margin: 0 2px;}
@@ -996,8 +995,8 @@ DogFaced TGTGGCACAA
 <table>
 <tr class="num_row"><td></td><td><b>0</b></td></tr>
 <tr><td class="label">Orangutan</td><td><span class="A_dna">A</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="C_dna">C</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="C_dna">C</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="C_dna">C</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="C_dna">C</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="C_dna">C</span><span class="C_dna">C</span><span class="C_dna">C</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="T_dna">T</span><span class="C_dna">C</span><span class="C_dna">C</span><span class="T_dna">T</span><span class="G_dna">G</span></td></tr>
-<tr><td class="label">Mouse Lemur</td><td><span class="A_dna">A</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="C_dna">C</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="C_dna">C</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="C_dna">C</span><span class="C_dna">C</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="C_dna">C</span></td></tr>
 <tr><td class="label">NC_000908.2 Mycoplasmoides genitalium G37, complete sequence</td><td><span class="T_dna">T</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="C_dna">C</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="C_dna">C</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="T_dna">T</span></td></tr>
+<tr><td class="label">Mouse Lemur</td><td><span class="A_dna">A</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="C_dna">C</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="C_dna">C</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="C_dna">C</span><span class="C_dna">C</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="C_dna">C</span></td></tr>
 <tr><td class="label">I dna:chromosome chromosome:WBcel235:I:1:15072434:1 REF</td><td><span class="G_dna">G</span><span class="C_dna">C</span><span class="C_dna">C</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="C_dna">C</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="C_dna">C</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="C_dna">C</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="C_dna">C</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="C_dna">C</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="C_dna">C</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="C_dna">C</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="C_dna">C</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="C_dna">C</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="A_dna">A</span></td></tr>
 </table>
 <p><i>4 x {min=150, median=299542.5, max=15072434} dna sequence collection</i></p>
@@ -1509,12 +1508,6 @@ NP_037391.1
 </section>
 
 
-<script type="application/vnd.jupyter.widget-state+json">
-{"state": {"d0f309eed1114cfd911f4495798be8c6": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": "2", "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "3dd32276a384415cbaf1de2ef7c56cb4": {"model_name": "ProgressStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "ProgressStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "bar_color": null, "description_width": ""}}, "117673408f4c430995ad1515c1a5df67": {"model_name": "FloatProgressModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "FloatProgressModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "2.0.0", "_view_name": "ProgressView", "bar_style": "success", "description": "", "description_allow_html": false, "layout": "IPY_MODEL_d0f309eed1114cfd911f4495798be8c6", "max": 1.0, "min": 0.0, "orientation": "horizontal", "style": "IPY_MODEL_3dd32276a384415cbaf1de2ef7c56cb4", "tabbable": null, "tooltip": null, "value": 1.0}}, "ae1fb47065834d6884cc13d9f6eb36e6": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "ce7ef97d47954a4d9c71a21d14ba7c08": {"model_name": "HTMLStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "background": null, "description_width": "", "font_size": null, "text_color": null}}, "e3373eaee86c4e529b85265613aa6368": {"model_name": "HTMLModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "2.0.0", "_view_name": "HTMLView", "description": "", "description_allow_html": false, "layout": "IPY_MODEL_ae1fb47065834d6884cc13d9f6eb36e6", "placeholder": "\u200b", "style": "IPY_MODEL_ce7ef97d47954a4d9c71a21d14ba7c08", "tabbable": null, "tooltip": null, "value": "4/4:\u2007\u2007100%"}}, "0246a8abf82945cc87b204ad73f79f10": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "273c1a76da7149e682772613d6a7e32d": {"model_name": "HTMLStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "background": null, "description_width": "", "font_size": null, "text_color": null}}, "08334237bdab4552ab178157893cd9a2": {"model_name": "HTMLModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "2.0.0", "_view_name": "HTMLView", "description": "", "description_allow_html": false, "layout": "IPY_MODEL_0246a8abf82945cc87b204ad73f79f10", "placeholder": "\u200b", "style": "IPY_MODEL_273c1a76da7149e682772613d6a7e32d", "tabbable": null, "tooltip": null, "value": "00:00&lt;00:00"}}, "f8cb2912481449dc87f585ebf75f6a13": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": "inline-flex", "flex": null, "flex_flow": "row wrap", "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": "100%"}}, "eb008b12d47141108980ea12dd318211": {"model_name": "HBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "HBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "2.0.0", "_view_name": "HBoxView", "box_style": "", "children": ["IPY_MODEL_e3373eaee86c4e529b85265613aa6368", "IPY_MODEL_117673408f4c430995ad1515c1a5df67", "IPY_MODEL_08334237bdab4552ab178157893cd9a2"], "layout": "IPY_MODEL_f8cb2912481449dc87f585ebf75f6a13", "tabbable": null, "tooltip": null}}}, "version_major": 2, "version_minor": 0}
-</script>
-
-
-
                 </article>
               
               
@@ -1559,12 +1552,12 @@ NP_037391.1
     class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="visible nav section-nav flex-column">
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Loading a single sequence from a file</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#directly-use-the-fasta-format-parser-to-load-a-sequence">Directly use the fasta format parser to load a sequence</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#directly-use-the-genbank-format-parser-to-load-a-sequence-and-annotations">Directly use the genbank format parser to load a sequence and annotations</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-sequence-collections-from-a-file-or-url">Loading sequence collections from a file or url</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-sequence-collections-from-a-file-or-url">Loading sequence collections from a file or url</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#directly-use-the-fasta-format-parser-to-load-sequences">Directly use the fasta format parser to load sequences</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-aligned-sequences">Loading aligned sequences</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-unaligned-sequences">Loading unaligned sequences</a></li>
@@ -1574,7 +1567,7 @@ NP_037391.1
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-the-sequence-molecular-type">Specifying the sequence molecular type</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#making-an-alignment-from-standard-python-objects">Making an alignment from standard python objects</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#making-an-alignment-from-standard-python-objects">Making an alignment from standard python objects</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-a-dict-of-strings">From a dict of strings</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-a-dict-of-numpy-arrays">From a dict of numpy arrays</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-a-series-of-strings">From a series of strings</a></li>
@@ -1582,12 +1575,12 @@ NP_037391.1
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#making-a-sequence-collection-from-standard-python-objects">Making a sequence collection from standard python objects</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-sequences-using-format-parsers">Loading sequences using format parsers</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-sequences-using-format-parsers">Loading sequences using format parsers</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-fasta-sequences-from-an-open-file-or-list-of-lines">Loading FASTA sequences from an open file or list of lines</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-overloaded-fasta-sequence-labels">Handling overloaded FASTA sequence labels</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#using-a-third-party-plugin-for-sequence-storage">Using a third-party plugin for sequence storage</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#using-a-third-party-plugin-for-sequence-storage">Using a third-party plugin for sequence storage</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-an-alternate-storage-backend">Selecting an alternate storage backend</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-the-default-storage">Set the default storage</a></li>
 </ul>
@@ -1609,8 +1602,8 @@ NP_037391.1
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="../../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1644,7 +1637,7 @@ NP_037391.1
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.17.1.
 </p></div>
       
     </div>
