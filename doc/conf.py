@@ -1,5 +1,20 @@
 import datetime
+import os
 import pathlib
+import sys
+
+# need to inject cogent3/doc into sys.path and
+# PYTHONPATH for autodoc and nbsphinx to find
+# the modules
+_cogent3_doc = pathlib.Path(__file__).parent / "cogent3" / "doc"
+# for autodoc / Sphinx-side imports
+sys.path.insert(0, str(_cogent3_doc))
+# for nbsphinx/jupyter-sphinx kernel subprocesses, which inherit env vars
+# but not sys.path mutations from this file
+os.environ["PYTHONPATH"] = os.pathsep.join([
+    str(_cogent3_doc),
+    os.environ.get("PYTHONPATH", ""),
+]).rstrip(os.pathsep)
 
 
 def make_nbsphinx_thumbnails():

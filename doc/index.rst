@@ -90,21 +90,21 @@ Making Sense from Sequence
     :hidden:
     :maxdepth: 1
 
-    doc/draw/index
-    doc/install
-    doc/index
+    cogent3/doc/draw/index
+    cogent3/doc/install
+    cogent3/doc/index
 
 .. toctree::
     :hidden:
     :maxdepth: 1
 
-    doc/licenses
+    cogent3/doc/licenses
     codeshare
-    doc/community
+    cogent3/doc/community
     history
-    doc/pycogent
+    cogent3/doc/pycogent
     projects
-    doc/data_file_links
+    cogent3/doc/data_file_links
     genindex
 
 
