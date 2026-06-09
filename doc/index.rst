@@ -60,6 +60,10 @@ Making Sense from Sequence
 🆕 Features & 📣 Announcements
 ===============================
 
+.. dropdown:: 🗞️ Benchmarks shows cogent3 is typically faster than biopython and scikit-bio 🚀
+
+    Kudos to the `cogent3` core devs 👾 — their work redesigning the foundations of `cogent3` is clearly paying off. Two `blog posts <https://gavinhuttley.dev>`_ comparing `cogent3`, `biopython`, and `scikit-bio` show that `cogent3` is faster at parsing raw sequence formats and can be up to 100× faster for genome annotation handling. Even better, it achieves this with much less code 🤩.
+
 .. dropdown:: 🆕 |scinexus| is the new home for the cogent3 app infrastructure 🚀‼️
 
     After 7 years of incubation inside ``cogent3`` we felt it was time that apps left home and were made available to a wider audience of data scientists. There will be zero impact for users of ``cogent3`` -- all our apps and data stores will continue to work. ``scinexus`` is now a requirement for ``cogent3`` and so will always be installed and thus readily accessible for defining your own apps. If you also use some of our utility functions, you may see deprecation warnings telling how to change your code to using ``scinexus`` instead. See |data_store| too.
@@ -79,10 +83,6 @@ Making Sense from Sequence
 .. dropdown:: 📣 The ``diverse-seq`` package has been rewritten in rust 🚀!
 
     The sequence sampling tool `diverse-seq <https://diverse-seq.readthedocs.io>`_, which provides multiple apps for sampling representative sequences, just got faster! The performance critical code has been rewritten in Rust. Give it a try 😀.
-
-.. dropdown:: 🆕 Improved import performance 🎉
-
-    The ``import cogent3`` statement is now much faster! Previously, this statement would trigger imports of many of our dependencies too. Give it a try and report `any issues <https://github.com/cogent3/cogent3/issues>`_ you encounter.
 
 .. the ordering of the index items below is critical since it defines the web site header!
 
