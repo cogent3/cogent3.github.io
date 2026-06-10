@@ -54,7 +54,7 @@ Making Sense from Sequence
 
     .. tab-item:: Plugin architecture
 
-        ``cogent3`` has a plugin architecture that allows third-party packages to extend its capabilities. Plugins integrate seamlessly -- users access new functionality through familiar ``cogent3`` methods without changing their workflow. Plugins can provide hook-style computation backends (e.g. `piqtree <https://pypi.org/project/piqtree>`_ for phylogenetic inference via ``Alignment.quick_tree()``), rust-based k-mer counting (via `cogent3-pykmertools <https://github.com/anuradhawick/kmertools>`_), new formats for reading and writing sequences, alternate storage backends such as `cogent3-h5seqs <https://pypi.org/project/cogent3-h5seqs>`_ for HDF5-compressed sequence collections (see :ref:`third-party storage <storage-plugin>`_), and custom annotation database backends. Want to write a plugin? `Get in touch <https://github.com/cogent3/cogent3/discussions>`_.
+        ``cogent3`` has a plugin architecture that allows third-party packages to extend its capabilities. Plugins integrate seamlessly -- users access new functionality through familiar ``cogent3`` methods without changing their workflow. Plugins can provide hook-style computation backends (e.g. `piqtree <https://pypi.org/project/piqtree>`_ for phylogenetic inference via ``Alignment.quick_tree()``), rust-based k-mer counting (via `cogent3-pykmertools <https://github.com/anuradhawick/kmertools>`_), new formats for reading and writing sequences, alternate storage backends such as `cogent3-h5seqs <https://pypi.org/project/cogent3-h5seqs>`_ for HDF5-compressed sequence collections (see :ref:`third-party storage <storage-plugin>`), and custom annotation database backends. Want to write a plugin? `Get in touch <https://github.com/cogent3/cogent3/discussions>`_.
 
 
 🆕 Features & 📣 Announcements
@@ -62,7 +62,7 @@ Making Sense from Sequence
 
 .. dropdown:: 🗞️ Benchmarks shows cogent3 is typically faster than biopython and scikit-bio 🚀
 
-    Kudos to the `cogent3` core devs 👾 — their work redesigning the foundations of `cogent3` is clearly paying off. Two `blog posts <https://gavinhuttley.dev>`_ comparing `cogent3`, `biopython`, and `scikit-bio` show that `cogent3` is faster at parsing raw sequence formats and can be up to 100× faster for genome annotation handling. Even better, it achieves this with much less code 🤩.
+    Kudos to the `cogent3` core devs 👾 — their work redesigning the foundations of ``cogent3`` is clearly paying off. Two `blog posts <https://gavinhuttley.dev>`_ comparing ``cogent3``, ``biopython``, and ``scikit-bio`` show that ``cogent3`` is faster at parsing raw sequence formats and can be up to 100× faster for genome annotation handling. Even better, it achieves this with much less code 🤩.
 
 .. dropdown:: 🆕 |scinexus| is the new home for the cogent3 app infrastructure 🚀‼️
 
@@ -112,7 +112,7 @@ Making Sense from Sequence
 
 .. rubric:: Citations
 
-.. bibliography:: cogent3.bib
+.. bibliography:: cogent3/doc/cogent3.bib
     :filter: docname in docnames
     :style: unsrt
 
