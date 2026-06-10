@@ -1,0 +1,848 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Assess alignment quality via dotplots &#8212; cogent3 2026.06.10 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=da3cec82" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=0790524f97105ba85085"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085" />
+
+    <script src="../../../../_static/documentation_options.js?v=a6bbb3be"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../../_static/thebelab-helper.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'cogent3/doc/draw/aln/plot_aln-dotplot-3';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="icon" href="../../../../_static/c3-square.svg"/>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Dotplot with annotated sequences" href="plot_aln-dotplot-2.html" />
+    <link rel="prev" title="Counting gaps per sequence" href="plot_aln-gaps-per-seq.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../../../_static/searchtools.js"></script>
+    <script src="../../../../_static/language_data.js"></script>
+    <script src="../../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2026.06.10 documentation - Home"/>
+    <img src="../../../../_static/c3-logo.png" class="logo__image only-dark pst-js-only" alt="cogent3 2026.06.10 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Image Gallery
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../index.html">
+    User Guides
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../licenses.html">
+    License
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../codeshare.html">
+    Code Sharing
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../community.html">
+    Community
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../history.html">
+    Project History
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../pycogent.html">
+    How does cogent3 relate to PyCogent?
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../projects.html">
+    Projects using cogent3
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../data_file_links.html">
+    Data Files Used in the Documentation
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../genindex.html">
+    Index
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cogent3/cogent3" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Image Gallery
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../index.html">
+    User Guides
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../licenses.html">
+    License
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../codeshare.html">
+    Code Sharing
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../community.html">
+    Community
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../history.html">
+    Project History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../pycogent.html">
+    How does cogent3 relate to PyCogent?
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../projects.html">
+    Projects using cogent3
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../data_file_links.html">
+    Data Files Used in the Documentation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../genindex.html">
+    Index
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cogent3/cogent3" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar"><svg class="pst-icon svg-inline--fa" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
+  </svg>
+  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
+  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
+</button></div>
+        <div class="sidebar-primary-item">
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../annotations/plot_seq-features.html">Sequence Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../annotations/plot_annotation-db.html">Annotation DB Features</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="plot_aln-seqlogo.html">Sequence logos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot_aln-info-plot.html">Information analysis of an alignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot_aln-gaps-per-seq.html">Counting gaps per sequence</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Assess alignment quality via dotplots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot_aln-dotplot-2.html">Dotplot with annotated sequences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot_aln-dotplot-1.html">Dotplot basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot_aln-coevolution.html">Coevolution analysis</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tree/plot_tree-support.html">Showing Bootstrap Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tree/plot_tree-square.html">Square Dendrogram Style</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tree/plot_tree-radial.html">Radial Dendrogram Style</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tree/plot_tree-iplotx.html">Using iplotx with cogent3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tree/plot_tree-circular.html">Circular Dendrogram Style</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tree/plot_tree-angular.html">Angular Dendrogram Style</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Image Gallery</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Assess alignment quality via dotplots</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
+<section id="assess-alignment-quality-via-dotplots">
+<h1>Assess alignment quality via dotplots<a class="headerlink" href="#assess-alignment-quality-via-dotplots" title="Link to this heading">#</a></h1>
+<p>The dotplot algorithm within <code class="docutils literal notranslate"><span class="pre">cogent3</span></code> offers a powerful tool to visualise the quality of a sequence alignment, as it shows both the matching segments between two sequences and the path chosen by the alignment algorithm.</p>
+<section id="visualising-an-alignment-with-poor-parameter-choices">
+<h2>Visualising an alignment with poor parameter choices<a class="headerlink" href="#visualising-an-alignment-with-poor-parameter-choices" title="Link to this heading">#</a></h2>
+<p>Let’s begin by importing the functions and loading sequences for this example. Note that although we load aligned sequences, we use the <code class="docutils literal notranslate"><span class="pre">degap</span></code> method to remove all gap characters from the sequences. This produces a set of unaligned sequences, for which we can align with different parameters to demonstrate the use of dotplots to visualise alignment quality.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_aligned_seqs</span><span class="p">,</span> <span class="n">get_app</span>
+
+<span class="n">seqs</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/brca1.fasta&quot;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">degap</span><span class="p">()</span>
+<span class="n">seqs</span> <span class="o">=</span> <span class="n">seqs</span><span class="o">.</span><span class="n">take_seqs</span><span class="p">(</span>
+    <span class="p">[</span><span class="s2">&quot;LeafNose&quot;</span><span class="p">,</span> <span class="s2">&quot;FalseVamp&quot;</span><span class="p">,</span> <span class="s2">&quot;RoundEare&quot;</span><span class="p">,</span> <span class="s2">&quot;Sloth&quot;</span><span class="p">,</span> <span class="s2">&quot;Anteater&quot;</span><span class="p">,</span> <span class="s2">&quot;HairyArma&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>The choice of parameters, such as gap insertion and gap extension parameters, can dramatically impact the quality of an alignment. An example of a <strong>bad choice</strong> of parameters is a high probability of opening a gap, but a low probability of extending a gap.</p>
+<p>Let’s align using such parameters, and take a look at a dotplot between two of the sequences.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aligner</span> <span class="o">=</span> <span class="n">get_app</span><span class="p">(</span><span class="s2">&quot;progressive_align&quot;</span><span class="p">,</span> <span class="s2">&quot;nucleotide&quot;</span><span class="p">,</span> <span class="n">indel_rate</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">indel_length</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">)</span>
+<span class="n">aln</span> <span class="o">=</span> <span class="n">aligner</span><span class="p">(</span><span class="n">seqs</span><span class="p">)</span>
+<span class="n">dp</span> <span class="o">=</span> <span class="n">aln</span><span class="p">[</span><span class="mi">2200</span><span class="p">:</span><span class="mi">2500</span><span class="p">]</span><span class="o">.</span><span class="n">dotplot</span><span class="p">(</span><span class="s2">&quot;HairyArma&quot;</span><span class="p">,</span> <span class="s2">&quot;RoundEare&quot;</span><span class="p">)</span>
+<span class="n">dp</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><script>
+window.PlotlyConfig = {MathJaxConfig: 'local'};
+if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}
+</script>
+<script type="module">import "https://cdn.plot.ly/plotly-3.6.0.min"</script>
+</div><div class="output text_html"><div style="height:586.6141732283464px; width:500px;">            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script>if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.6.0.min.js" integrity="sha256-QaOVwtVY0T02VaHrr6pnoHLCwayMJp4O5n4YyaE3rJk=" crossorigin="anonymous"></script>                <div id="7e91a460-ad52-45c9-a64e-8c10c24aff54" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("7e91a460-ad52-45c9-a64e-8c10c24aff54")) {                    Plotly.newPlot(                        "7e91a460-ad52-45c9-a64e-8c10c24aff54",                        [{"line":{"color":"blue"},"mode":"lines","name":"+ strand","showlegend":true,"x":[0,101,null,89,254,null,22,43,null,61,87,null,92,112,null,147,167,null,150,172,null,220,245],"xaxis":"x","y":[0,101,null,89,254,null,271,292,null,156,182,null,149,169,null,261,281,null,174,196,null,265,290],"yaxis":"y","type":"scatter"},{"line":{"color":"black","dash":"dot"},"mode":"lines","name":"Alignment","showlegend":true,"x":[0.2,108.2,null,109.2,111.2,null,112.2,112.2,null,113.2,115.2,null,116.2,116.2,null,117.2,117.2,null,118.2,123.2,null,124.2,124.2,null,125.2,125.2,null,126.2,126.2,null,127.2,132.2,null,133.2,135.2,null,136.2,138.2,null,139.2,139.2,null,140.2,141.2,null,142.2,142.2,null,143.2,143.2,null,144.2,145.2,null,146.2,146.2,null,147.2,154.2,null,249.2,253.2,null,155.2,173.2,null,222.2,247.2,null,174.2,220.2],"xaxis":"x","y":[0,108,null,113,115,null,117,117,null,119,121,null,127,127,null,130,130,null,132,137,null,140,140,null,143,143,null,145,145,null,148,153,null,155,157,null,159,161,null,165,165,null,170,171,null,174,174,null,176,176,null,178,179,null,182,182,null,191,198,null,293,297,null,200,218,null,267,292,null,220,266],"yaxis":"y","type":"scatter"}],                        {"autosize":false,"font":{"family":"Balto","size":14},"height":586.6141732283464,"hovermode":"closest","margin":{"b":50,"l":50,"pad":4,"r":50,"t":50},"showlegend":true,"title":{"text":"Window=20, Matched ≥ 12\u002f20 & Gap ≤ 0"},"width":500,"xaxis":{"mirror":true,"range":[0,254],"showgrid":false,"showline":true,"title":{"text":"HairyArma"},"visible":true},"yaxis":{"mirror":true,"range":[0,298],"showgrid":false,"showline":true,"title":{"text":"RoundEare"},"visible":true},"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}}},                        {"responsive": true}                    ).then(function(){
+
+var gd = document.getElementById('7e91a460-ad52-45c9-a64e-8c10c24aff54');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };            </script>        </div></div></div>
+</div>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>The dotplot clearly shows the misalignment between the two sequences. Towards the second half of the alignment, there is a section of the alignment path (the dashed line), which does not line up with any matching segments between the sequences (the blue line).</p>
+<p>Taking a closer look at the poorly aligned section, we can see multiple small gaps in many of the sequences. The likelihood of this reflecting the true history of the sequences is low. It requires many indel events in many species and instead is likely to be an artefact of the alignment algorithm.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aln</span><span class="p">[</span><span class="mi">2300</span><span class="p">:</span><span class="mi">2500</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.c3align table {margin: 10px 0;}
+.c3align td { border: none !important; text-align: left !important; }
+.c3align tr:not(.num_row) td span {margin: 0 2px;}
+.c3align tr:nth-child(even) {background: #f7f7f7;}
+.c3align .num_row {background-color:rgba(161, 195, 209, 0.5) !important; border-top: solid 1px black; }
+.c3align .label { font-size: 12pt ; text-align: right !important; color: black !important; padding: 0 4px; display: table-cell !important; font-weight: normal !important; }
+.c3align .T_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: blue; }
+.c3align .C_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.c3align .A_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: #FF0102; }
+.c3align .G_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: green; }
+.c3align .terminal_ambig_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: gray; }
+.c3align .ambig_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: gray; }
+</style>
+<div class="c3align">
+<table>
+<tr class="num_row"><td></td><td><b>0</b></td></tr>
+<tr><td class="label">RoundEare</td><td><span class="C_dna">C</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="T_dna">T</span><span class="C_dna">C</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="C_dna">C</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="C_dna">C</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="T_dna">T</span><span class="C_dna">C</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="C_dna">C</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="C_dna">C</span><span class="A_dna">A</span></td></tr>
+<tr><td class="label">FalseVamp</td><td><span class="T_dna">T</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="A_dna">.</span><span class="A_dna">A</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="G_dna">G</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="C_dna">C</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="A_dna">.</span><span class="T_dna">T</span><span class="T_dna">.</span><span class="T_dna">T</span><span class="A_dna">.</span><span class="T_dna">T</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="C_dna">C</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="C_dna">C</span><span class="T_dna">.</span><span class="A_dna">A</span><span class="A_dna">.</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="A_dna">.</span><span class="ambig_dna">-</span><span class="A_dna">A</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="ambig_dna">-</span><span class="A_dna">.</span></td></tr>
+<tr><td class="label">LeafNose</td><td><span class="T_dna">T</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="A_dna">.</span><span class="A_dna">A</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">A</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">A</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="ambig_dna">N</span><span class="T_dna">T</span><span class="T_dna">.</span><span class="T_dna">T</span><span class="A_dna">.</span><span class="T_dna">T</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="C_dna">C</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="A_dna">A</span><span class="C_dna">C</span><span class="T_dna">.</span><span class="A_dna">A</span><span class="A_dna">.</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="A_dna">.</span><span class="ambig_dna">-</span><span class="A_dna">A</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="ambig_dna">-</span><span class="A_dna">.</span></td></tr>
+<tr><td class="label">HairyArma</td><td><span class="T_dna">T</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="A_dna">.</span><span class="A_dna">A</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="ambig_dna">-</span><span class="C_dna">.</span><span class="ambig_dna">-</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="T_dna">.</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="C_dna">.</span><span class="ambig_dna">-</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="C_dna">C</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="T_dna">.</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="A_dna">.</span><span class="ambig_dna">-</span><span class="T_dna">.</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="T_dna">.</span><span class="A_dna">A</span><span class="A_dna">.</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="A_dna">.</span><span class="ambig_dna">-</span><span class="A_dna">A</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="ambig_dna">-</span><span class="A_dna">.</span></td></tr>
+<tr><td class="label">Anteater</td><td><span class="T_dna">T</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="A_dna">.</span><span class="A_dna">A</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="C_dna">C</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">A</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">A</span><span class="G_dna">.</span><span class="T_dna">T</span><span class="A_dna">.</span><span class="T_dna">T</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="T_dna">T</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="T_dna">T</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="T_dna">.</span><span class="A_dna">A</span><span class="A_dna">.</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="A_dna">.</span><span class="ambig_dna">-</span><span class="A_dna">A</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="ambig_dna">-</span><span class="G_dna">G</span></td></tr>
+<tr><td class="label">Sloth</td><td><span class="T_dna">T</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="A_dna">.</span><span class="A_dna">A</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="C_dna">C</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">A</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">A</span><span class="G_dna">.</span><span class="T_dna">T</span><span class="A_dna">.</span><span class="T_dna">T</span><span class="C_dna">C</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="T_dna">T</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="T_dna">T</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="T_dna">T</span><span class="T_dna">.</span><span class="A_dna">A</span><span class="A_dna">.</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="A_dna">.</span><span class="ambig_dna">-</span><span class="A_dna">A</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="ambig_dna">-</span><span class="A_dna">.</span></td></tr>
+</table>
+<p><i>6 x 200 (truncated to 6 x 60) dna alignment</i></p>
+</div></div></div>
+</div>
+</section>
+<section id="visualising-an-alignment-with-good-parameter-choices">
+<h2>Visualising an alignment with good parameter choices<a class="headerlink" href="#visualising-an-alignment-with-good-parameter-choices" title="Link to this heading">#</a></h2>
+<p>Let’s align the same sequences, but with more biologically realistic parameters. The default parameters for the progressive aligner are a better choice as they have a low probability of opening a gap, but a high probability of extending a gap.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The default parameters (of any program) are not always the best choice, but they are a good starting point for many alignments.</p>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aligner</span> <span class="o">=</span> <span class="n">get_app</span><span class="p">(</span><span class="s2">&quot;progressive_align&quot;</span><span class="p">,</span> <span class="s2">&quot;nucleotide&quot;</span><span class="p">)</span>
+<span class="n">aln</span> <span class="o">=</span> <span class="n">aligner</span><span class="p">(</span><span class="n">seqs</span><span class="p">)</span>
+<span class="n">aln</span><span class="p">[</span><span class="mi">2200</span><span class="p">:</span><span class="mi">2500</span><span class="p">]</span><span class="o">.</span><span class="n">dotplot</span><span class="p">(</span><span class="s2">&quot;HairyArma&quot;</span><span class="p">,</span> <span class="s2">&quot;RoundEare&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><script>
+window.PlotlyConfig = {MathJaxConfig: 'local'};
+if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}
+</script>
+<script type="module">import "https://cdn.plot.ly/plotly-3.6.0.min"</script>
+</div><div class="output text_html"><div style="height:500.0px; width:500px;">            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script>if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.6.0.min.js" integrity="sha256-QaOVwtVY0T02VaHrr6pnoHLCwayMJp4O5n4YyaE3rJk=" crossorigin="anonymous"></script>                <div id="bb27bc12-a12b-4efc-a661-e72b74f445c2" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("bb27bc12-a12b-4efc-a661-e72b74f445c2")) {                    Plotly.newPlot(                        "bb27bc12-a12b-4efc-a661-e72b74f445c2",                        [{"line":{"color":"blue"},"mode":"lines","name":"+ strand","showlegend":true,"x":[0,101,null,89,258,null,61,87,null,236,256,null,92,112,null,150,172],"xaxis":"x","y":[0,101,null,89,258,null,156,182,null,159,179,null,149,169,null,174,196],"yaxis":"y","type":"scatter"},{"line":{"color":"black","dash":"dot"},"mode":"lines","name":"Alignment","showlegend":true,"x":[0.2,127.2,null,135.2,257.2,null,128.2,127.2],"xaxis":"x","y":[0,127,null,135,257,null,135,134],"yaxis":"y","type":"scatter"}],                        {"autosize":false,"font":{"family":"Balto","size":14},"height":500.0,"hovermode":"closest","margin":{"b":50,"l":50,"pad":4,"r":50,"t":50},"showlegend":true,"title":{"text":"Window=20, Matched ≥ 12\u002f20 & Gap ≤ 0"},"width":500,"xaxis":{"mirror":true,"range":[0,258],"showgrid":false,"showline":true,"title":{"text":"HairyArma"},"visible":true},"yaxis":{"mirror":true,"range":[0,258],"showgrid":false,"showline":true,"title":{"text":"RoundEare"},"visible":true},"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}}},                        {"responsive": true}                    ).then(function(){
+
+var gd = document.getElementById('bb27bc12-a12b-4efc-a661-e72b74f445c2');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };            </script>        </div></div></div>
+</div>
+<p>The dotplot shows a much better alignment between the two sequences. The alignment path (the dashed line) now follows the matching segments between the sequences (the blue line).</p>
+<p>Taking a closer look at the same section, we can see a single large gap in two of the sequences. The likelihood of this reflecting the true history of the sequences is much higher than in the previous example, as it requires far fewer independent indel events to explain the alignment.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aln</span><span class="p">[</span><span class="mi">2300</span><span class="p">:</span><span class="mi">2500</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.c3align table {margin: 10px 0;}
+.c3align td { border: none !important; text-align: left !important; }
+.c3align tr:not(.num_row) td span {margin: 0 2px;}
+.c3align tr:nth-child(even) {background: #f7f7f7;}
+.c3align .num_row {background-color:rgba(161, 195, 209, 0.5) !important; border-top: solid 1px black; }
+.c3align .label { font-size: 12pt ; text-align: right !important; color: black !important; padding: 0 4px; display: table-cell !important; font-weight: normal !important; }
+.c3align .T_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: blue; }
+.c3align .C_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.c3align .A_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: #FF0102; }
+.c3align .G_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: green; }
+.c3align .terminal_ambig_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: gray; }
+.c3align .ambig_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: gray; }
+</style>
+<div class="c3align">
+<table>
+<tr class="num_row"><td></td><td><b>0</b></td></tr>
+<tr><td class="label">FalseVamp</td><td><span class="T_dna">T</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="T_dna">T</span><span class="C_dna">C</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="C_dna">C</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="G_dna">G</span></td></tr>
+<tr><td class="label">RoundEare</td><td><span class="C_dna">C</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="C_dna">C</span><span class="A_dna">.</span><span class="G_dna">G</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">A</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="G_dna">G</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="A_dna">.</span><span class="C_dna">C</span><span class="T_dna">.</span><span class="A_dna">A</span><span class="A_dna">.</span><span class="C_dna">C</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span></td></tr>
+<tr><td class="label">LeafNose</td><td><span class="T_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">A</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="ambig_dna">N</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="A_dna">A</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span></td></tr>
+<tr><td class="label">HairyArma</td><td><span class="T_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">A</span><span class="G_dna">.</span><span class="C_dna">C</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">A</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">G</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span><span class="ambig_dna">-</span></td></tr>
+<tr><td class="label">Anteater</td><td><span class="T_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">A</span><span class="G_dna">.</span><span class="C_dna">C</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">A</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">G</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="A_dna">A</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">T</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="G_dna">G</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="G_dna">G</span><span class="G_dna">.</span><span class="G_dna">.</span></td></tr>
+<tr><td class="label">Sloth</td><td><span class="T_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">A</span><span class="G_dna">.</span><span class="C_dna">C</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">A</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">G</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">T</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="G_dna">G</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="T_dna">T</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span></td></tr>
+</table>
+<p><i>6 x 200 (truncated to 6 x 60) dna alignment</i></p>
+</div></div></div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="plot_aln-gaps-per-seq.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Counting gaps per sequence</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="plot_aln-dotplot-2.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Dotplot with annotated sequences</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualising-an-alignment-with-poor-parameter-choices">Visualising an alignment with poor parameter choices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualising-an-alignment-with-good-parameter-choices">Visualising an alignment with good parameter choices</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2020-2026, cogent3 Team.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.18.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

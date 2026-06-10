@@ -1,0 +1,2385 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Evolutionary Analysis Using Likelihood &#8212; cogent3 2026.06.10 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=da3cec82" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=0790524f97105ba85085"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085" />
+
+    <script src="../../../_static/documentation_options.js?v=a6bbb3be"></script>
+    <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../_static/thebelab-helper.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'cogent3/doc/cookbook/evo_modelling';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="icon" href="../../../_static/c3-square.svg"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Useful Utilities" href="useful_utilities.html" />
+    <link rel="prev" title="Building phylogenies" href="building_phylogenies.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../../_static/searchtools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script src="../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2026.06.10 documentation - Home"/>
+    <img src="../../../_static/c3-logo.png" class="logo__image only-dark pst-js-only" alt="cogent3 2026.06.10 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../draw/index.html">
+    Image Gallery
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    User Guides
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../licenses.html">
+    License
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../codeshare.html">
+    Code Sharing
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../community.html">
+    Community
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../history.html">
+    Project History
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../pycogent.html">
+    How does cogent3 relate to PyCogent?
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../projects.html">
+    Projects using cogent3
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../data_file_links.html">
+    Data Files Used in the Documentation
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../genindex.html">
+    Index
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cogent3/cogent3" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../draw/index.html">
+    Image Gallery
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    User Guides
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../licenses.html">
+    License
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../codeshare.html">
+    Code Sharing
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../community.html">
+    Community
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../history.html">
+    Project History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../pycogent.html">
+    How does cogent3 relate to PyCogent?
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../projects.html">
+    Projects using cogent3
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../data_file_links.html">
+    Data Files Used in the Documentation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../genindex.html">
+    Index
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cogent3/cogent3" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar"><svg class="pst-icon svg-inline--fa" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
+  </svg>
+  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
+  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
+</button></div>
+        <div class="sidebar-primary-item">
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../app/index.html">apps</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../app/index-app.html">Overview of apps</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../app/app_overview/app-overview.html">Overview of using apps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../app/app_overview/app-help.html">Getting help on an app</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../app/app_overview/app-get.html">Getting an app</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../app/app_overview/available-apps.html">Displaying installed apps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../app/app_overview/dstore.html">Data stores – collections of data records</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../app/app_overview/not-completed.html">Tracking records that could not be processed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../app/app_overview/user_function.html">Writing your own apps</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../app/index-cookbook.html">App Cookbook</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../app/app_cookbook/index-loaders.html">Loading data</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../app/app_cookbook/load-aligned.html">Loading aligned sequence data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../app/app_cookbook/load-unaligned.html">Loading unaligned sequence data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../app/app_cookbook/load-tabular.html">Loading tabular data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../app/app_cookbook/load-json.html">Loading JSON serialised objects</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../app/app_cookbook/index-align.html">Sequence Alignment</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../app/app_cookbook/align-nucleotide.html">Using a nucleotide model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../app/app_cookbook/align-codon.html">Using a codon model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../app/app_cookbook/align-protein.html">Using a protein model</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../app/app_cookbook/index-sample.html">Filtering data</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../app/app_cookbook/sample-omit-degen.html">Removing degenerate characters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../app/app_cookbook/sample-omit-gap.html">Removing highly gapped positions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../app/app_cookbook/sample-omit-bad.html">Remove problem sequences from an alignment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../app/app_cookbook/sample-omit-duplicated.html">Remove duplicated sequences from an alignment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../app/app_cookbook/sample-min-len.html">Filter sequence collections and alignments by length</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../app/app_cookbook/sample-fixed-len.html">Sample an alignment to a fixed length</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../app/app_cookbook/sample-trim-stops.html">Remove trailing stop codons from sequences in an alignment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../app/app_cookbook/sample-take-pos.html">Sample nucleotides from a given codon position</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../app/app_cookbook/sample-take-seqs.html">Select named sequences from a collection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../app/app_cookbook/sample-take-n-seqs.html">Select <cite>n</cite> sequences from a collection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../app/app_cookbook/sample-concat.html">Concatenating alignments</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../app/app_cookbook/index-writers.html">Writing Data</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../app/app_cookbook/write-seqs.html">Writing sequences and sequence alignments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../app/app_cookbook/write-tabular.html">Writing tabular data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../app/app_cookbook/write-json.html">Writing JSON Serialised Objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../app/app_cookbook/write-db.html">Writing a database to file</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../app/index-tutorials.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../app/app_tutorials/index-evo-model.html">Modelling sequence evolution</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../app/app_tutorials/evo-model.html">Apply a non-stationary nucleotide model to an alignment with 3 sequences</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../app/app_tutorials/evo-model-with-tree.html">Apply a non-stationary nucleotide model to an alignment with a tree</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../app/app_tutorials/evo-model-timehet.html">Specifying a non-stationary model with time-heterogeneous parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../app/app_tutorials/evo-extract-model-stats.html">Extracting maximum likelihood estimates from a <code class="docutils literal notranslate"><span class="pre">model_result</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../app/app_tutorials/evo-ancestral-states.html">Reconstructing ancestral states</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../app/app_tutorials/evo-dt-nuc-model.html">Applying a discrete-time, non-stationary nucleotide model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../app/app_tutorials/evo-tr-nuc-model.html">Applying a time-reversible nucleotide model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../app/app_tutorials/evo-nstat-codon-model.html">Applying GNC, a non-stationary codon model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../app/app_tutorials/evo-tr-codon-model.html">Applying a time-reversible codon model</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../app/app_tutorials/index-evo-hypothesis.html">Testing hypotheses about sequence evolution</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../app/app_tutorials/evo-hypothesis.html">Testing a hypothesis – non-stationary or time-reversible</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../app/app_tutorials/index-evo-natsel.html">Testing for natural selection</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../app/app_tutorials/evo-natsel_neutral.html"><code class="docutils literal notranslate"><span class="pre">natsel_neutral</span></code> – a test for selective neutrality</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../app/app_tutorials/evo-natsel_timehet.html"><code class="docutils literal notranslate"><span class="pre">natsel_timehet</span></code> – a test of branch heterogeneity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../app/app_tutorials/evo-natsel_sitehet.html"><code class="docutils literal notranslate"><span class="pre">natsel_sitehet</span></code> – a test of site heterogeneity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../app/app_tutorials/evo-natsel_zhang.html"><code class="docutils literal notranslate"><span class="pre">natsel_zhang</span></code> – a branch-site test</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Cookbook</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="manipulating_biological_data.html">Manipulating biological data</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="loading_sequences.html">Loading a single sequence from a file</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l3"><a class="reference internal" href="DNA_and_RNA_sequences.html">Sequences</a></li>
+<li class="toctree-l3"><a class="reference internal" href="protein_sequences.html">Protein sequences</a></li>
+<li class="toctree-l3"><a class="reference internal" href="alignments.html">Sequence Collections and Alignments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="features.html">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="annotation_db.html">Annotation Databases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="moltypes.html">Molecular types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="alphabet.html">Alphabets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="what_codes.html">Available genetic codes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="genetic_code.html">Using genetic codes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="simple_trees.html">Trees</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="tables.html">Tabular data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="building_alignments.html">Building alignments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="calc_genetic_distance.html">Genetic distance calculation</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="building_phylogenies.html">Building phylogenies</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Evolutionary Analysis Using Likelihood</a></li>
+<li class="toctree-l2"><a class="reference internal" href="useful_utilities.html">Useful Utilities</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../examples/index.html">Tutorials</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../examples/align_codons_to_protein.html">Map protein alignment gaps to DNA alignment gaps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/period_estimation.html">Estimating periodic signals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/simple.html">The simplest script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/relative_rate.html">Performing a relative rate test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/neutral_test.html">A test of the neutral theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/scope_model_params_on_trees.html">Allowing substitution model parameters to differ between branches</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/codon_models.html">Using codon models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/empirical_protein_models.html">Use an empirical protein substitution model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/testing_multi_loci.html">Likelihood analysis of multiple loci</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/simulate_alignment.html">Simulate an alignment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/parametric_bootstrap.html">Performing a parametric bootstrap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/rate_heterogeneity.html">Analysis of rate heterogeneity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/hmm_par_heterogeneity.html">Evaluate process heterogeneity using a Hidden Markov Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/nonstationary_inference.html">Inferring Amino Acid frequencies with a nonstationary model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/calculate_pairwise_distances.html">Calculate pairwise distances between sequences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/calculate_neigbourjoining_tree.html">Make a neighbor joining tree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/calculate_UPGMA_cluster.html">Make a UPGMA cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/phylo_by_ls.html">Phylogenetic reconstruction by least squares</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../examples/parallel.html">Parallel computations</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api/index.html">API</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_seq.html">load_seq</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_aligned_seqs.html">load_aligned_seqs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_unaligned_seqs.html">load_unaligned_seqs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_delimited.html">load_delimited</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_table.html">load_table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_tree.html">load_tree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/__init__/cogent3.__init__.load_annotations.html">load_annotations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/__init__/cogent3.__init__.open_data_store.html">open_data_store</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/__init__/cogent3.__init__.open_.html">open</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_seq.html">make_seq</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_aligned_seqs.html">make_aligned_seqs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_unaligned_seqs.html">make_unaligned_seqs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_table.html">make_table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/__init__/cogent3.__init__.make_tree.html">make_tree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/__init__/cogent3.__init__.get_code.html">get_code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/__init__/cogent3.__init__.get_moltype.html">get_moltype</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/__init__/cogent3.__init__.get_model.html">get_model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_codes.html">available_codes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_moltypes.html">available_moltypes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_models.html">available_models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/__init__/cogent3.__init__.available_apps.html">available_apps</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../api/annotation/annotation.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">annotation</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/annotation/classes/cogent3.core.annotation.Feature.html">cogent3.core.annotation.Feature</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../api/annotation_db/annotation_db.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">annotation_db</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/annotation_db/classes/cogent3.core.annotation_db.BasicAnnotationDb.html">cogent3.core.annotation_db.BasicAnnotationDb</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/annotation_db/classes/cogent3.core.annotation_db.GffAnnotationDb.html">cogent3.core.annotation_db.GffAnnotationDb</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/annotation_db/classes/cogent3.core.annotation_db.GenbankAnnotationDb.html">cogent3.core.annotation_db.GenbankAnnotationDb</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../api/alignment/alignment.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">alignment</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/alignment/classes/cogent3.core.alignment.SequenceCollection.html">cogent3.core.alignment.SequenceCollection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/alignment/classes/cogent3.core.alignment.Aligned.html">cogent3.core.alignment.Aligned</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/alignment/classes/cogent3.core.alignment.Alignment.html">cogent3.core.alignment.Alignment</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../api/sequence/sequence.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sequence</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/sequence/classes/cogent3.core.sequence.DnaSequence.html">cogent3.core.sequence.DnaSequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/sequence/classes/cogent3.core.sequence.RnaSequence.html">cogent3.core.sequence.RnaSequence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/sequence/classes/cogent3.core.sequence.ProteinSequence.html">cogent3.core.sequence.ProteinSequence</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../api/seq_storage/seq_storage.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">seq_storage</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/seq_storage/classes/cogent3.core.seq_storage.SeqsData.html">cogent3.core.seq_storage.SeqsData</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/seq_storage/classes/cogent3.core.seq_storage.AlignedSeqsData.html">cogent3.core.seq_storage.AlignedSeqsData</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../api/seqview/seqview.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">seqview</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/seqview/classes/cogent3.core.seqview.SeqView.html">cogent3.core.seqview.SeqView</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/seqview/classes/cogent3.core.seqview.SeqDataView.html">cogent3.core.seqview.SeqDataView</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/seqview/classes/cogent3.core.seqview.AlignedDataView.html">cogent3.core.seqview.AlignedDataView</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../api/slice_record/slice_record.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">slice_record</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/slice_record/classes/cogent3.core.slice_record.SliceRecord.html">cogent3.core.slice_record.SliceRecord</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../api/genetic_code/genetic_code.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">genetic_code</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/genetic_code/classes/cogent3.core.genetic_code.GeneticCode.html">cogent3.core.genetic_code.GeneticCode</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../api/moltype/moltype.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">moltype</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/moltype/classes/cogent3.core.moltype.MolType.html">cogent3.core.moltype.MolType</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../api/alphabet/alphabet.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">alphabet</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/alphabet/classes/cogent3.core.alphabet.CharAlphabet.html">cogent3.core.alphabet.CharAlphabet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/alphabet/classes/cogent3.core.alphabet.KmerAlphabet.html">cogent3.core.alphabet.KmerAlphabet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/alphabet/classes/cogent3.core.alphabet.SenseCodonAlphabet.html">cogent3.core.alphabet.SenseCodonAlphabet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/alphabet/classes/cogent3.core.alphabet.PhredEncoding.html">cogent3.core.alphabet.PhredEncoding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/alphabet/classes/cogent3.core.alphabet.bytes_to_array.html">cogent3.core.alphabet.bytes_to_array</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/alphabet/classes/cogent3.core.alphabet.make_qual_converter.html">cogent3.core.alphabet.make_qual_converter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/alphabet/classes/cogent3.core.alphabet.make_text_to_array_converter.html">cogent3.core.alphabet.make_text_to_array_converter</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../api/table/table.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">table</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/table/classes/cogent3.core.table.Table.html">cogent3.core.table.Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/table/classes/cogent3.core.table.Columns.html">cogent3.core.table.Columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/table/classes/cogent3.parse.table.FilteringParser.html">cogent3.parse.table.FilteringParser</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../api/tree/tree.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tree</span></code></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/tree/classes/cogent3.core.tree.PhyloNode.html">cogent3.core.tree.PhyloNode</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">User Guides</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Cookbook</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Evolutionary Analysis Using Likelihood</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
+<section id="evolutionary-analysis-using-likelihood">
+<h1>Evolutionary Analysis Using Likelihood<a class="headerlink" href="#evolutionary-analysis-using-likelihood" title="Link to this heading">#</a></h1>
+<section id="specifying-substitution-models">
+<h2>Specifying substitution models<a class="headerlink" href="#specifying-substitution-models" title="Link to this heading">#</a></h2>
+<section id="the-available-pre-defined-substitution-models">
+<h3>The available pre-defined substitution models<a class="headerlink" href="#the-available-pre-defined-substitution-models" title="Link to this heading">#</a></h3>
+<p>In cases where code takes a substitution model as an argument, you can use the value under “Abbreviation” as a string.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">available_models</span>
+
+<span class="n">available_models</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div class="c3table">
+
+<style>
+.c3table table {margin: 10px 0;}
+.c3table tr:last-child {border-bottom: 1px solid #000;} 
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
+.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+.c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
+</style>
+
+<table>
+
+<caption>
+<span class="cell_title">Specify a model using 'Abbreviation' (case sensitive).</span>
+</caption>
+<thead class="head_cell">
+<th>Model Type</th><th>Abbreviation</th><th>Description</th>
+</thead>
+<tbody>
+<tr><td><span class="c3col_left">nucleotide</span></td><td><span class="c3col_left">BH</span></td><td><span class="c3col_left">Barry and Hartigan Discrete Time substitution model Barry and Hartigan 1987. Biometrics 43: 261–76.</span></td></tr>
+<tr><td><span class="c3col_left">nucleotide</span></td><td><span class="c3col_left">DT</span></td><td><span class="c3col_left">Discrete Time substitution model (non-stationary, non-reversible). motif_length=2 makes this a dinucleotide model, motif_length=3 a trinucleotide model.</span></td></tr>
+<tr><td><span class="c3col_left">nucleotide</span></td><td><span class="c3col_left">GN</span></td><td><span class="c3col_left">General Markov Nucleotide (non-stationary, non-reversible). Kaehler, Yap, Zhang, Huttley, 2015, Sys Biol 64 (2): 281–93</span></td></tr>
+<tr><td><span class="c3col_left">nucleotide</span></td><td><span class="c3col_left">ssGN</span></td><td><span class="c3col_left">strand-symmetric general Markov nucleotide (non-stationary, non-reversible). Kaehler, 2017, Journal of Theoretical Biology 420: 144–51</span></td></tr>
+<tr><td><span class="c3col_left">nucleotide</span></td><td><span class="c3col_left">K80</span></td><td><span class="c3col_left">Kimura 1980</span></td></tr>
+<tr><td><span class="c3col_left">nucleotide</span></td><td><span class="c3col_left">JC69</span></td><td><span class="c3col_left">Jukes and Cantor's 1969 model</span></td></tr>
+<tr><td><span class="c3col_left">nucleotide</span></td><td><span class="c3col_left">GTR</span></td><td><span class="c3col_left">General Time Reversible nucleotide substitution model.</span></td></tr>
+<tr><td><span class="c3col_left">nucleotide</span></td><td><span class="c3col_left">TN93</span></td><td><span class="c3col_left">Tamura and Nei 1993 model</span></td></tr>
+<tr><td><span class="c3col_left">nucleotide</span></td><td><span class="c3col_left">HKY85</span></td><td><span class="c3col_left">Hasegawa, Kishino and Yano 1985 model</span></td></tr>
+<tr><td><span class="c3col_left">nucleotide</span></td><td><span class="c3col_left">F81</span></td><td><span class="c3col_left">Felsenstein's 1981 model</span></td></tr>
+<tr><td><span class="c3col_left">codon</span></td><td><span class="c3col_left">CNFGTR</span></td><td><span class="c3col_left">Conditional nucleotide frequency codon substitution model, GTR variant (with params analagous to the nucleotide GTR model). Yap, Lindsay, Easteal and Huttley, 2010, Mol Biol Evol 27: 726-734</span></td></tr>
+<tr><td><span class="c3col_left">codon</span></td><td><span class="c3col_left">CNFHKY</span></td><td><span class="c3col_left">Conditional nucleotide frequency codon substitution model, HKY variant (with kappa, the ratio of transitions to transversions) Yap, Lindsay, Easteal and Huttley, 2010, Mol Biol Evol 27: 726-734</span></td></tr>
+<tr><td><span class="c3col_left">codon</span></td><td><span class="c3col_left">MG94HKY</span></td><td><span class="c3col_left">Muse and Gaut 1994 codon substitution model, HKY variant (with kappa, the ratio of transitions to transversions) Muse and Gaut, 1994, Mol Biol Evol, 11, 715-24</span></td></tr>
+<tr><td><span class="c3col_left">codon</span></td><td><span class="c3col_left">MG94GTR</span></td><td><span class="c3col_left">Muse and Gaut 1994 codon substitution model, GTR variant (with params analagous to the nucleotide GTR model) Muse and Gaut, 1994, Mol Biol Evol, 11, 715-24</span></td></tr>
+<tr><td><span class="c3col_left">codon</span></td><td><span class="c3col_left">GY94</span></td><td><span class="c3col_left">Goldman and Yang 1994 codon substitution model. N Goldman and Z Yang, 1994, Mol Biol Evol, 11(5):725-36.</span></td></tr>
+<tr><td><span class="c3col_left">codon</span></td><td><span class="c3col_left">Y98</span></td><td><span class="c3col_left">Yang's 1998 substitution model, a derivative of the GY94. Z Yang, 1998, Mol Biol Evol, 15(5):568-73</span></td></tr>
+<tr><td><span class="c3col_left">codon</span></td><td><span class="c3col_left">H04G</span></td><td><span class="c3col_left">Huttley 2004 CpG substitution model. Includes a term for substitutions to or from CpG's. GA Huttley, 2004, Mol Biol Evol, 21(9):1760-8</span></td></tr>
+<tr><td><span class="c3col_left">codon</span></td><td><span class="c3col_left">H04GK</span></td><td><span class="c3col_left">Huttley 2004 CpG substitution model. Includes a term for transition substitutions to or from CpG's. GA Huttley, 2004, Mol Biol Evol, 21(9):1760-8</span></td></tr>
+<tr><td><span class="c3col_left">codon</span></td><td><span class="c3col_left">H04GGK</span></td><td><span class="c3col_left">Huttley 2004 CpG substitution model. Includes a general term for substitutions to or from CpG's and an adjustment for CpG transitions. GA Huttley, 2004, Mol Biol Evol, 21(9):1760-8</span></td></tr>
+<tr><td><span class="c3col_left">codon</span></td><td><span class="c3col_left">GNC</span></td><td><span class="c3col_left">General Nucleotide Codon, a non-reversible codon model. Kaehler, Yap, Huttley, 2017, Gen Biol Evol 9(1): 134–49</span></td></tr>
+<tr><td><span class="c3col_left">protein</span></td><td><span class="c3col_left">DSO78</span></td><td><span class="c3col_left">Dayhoff et al 1978 empirical protein model Dayhoff, MO, Schwartz RM, and Orcutt, BC. 1978 A model of evolutionary change in proteins. Pp. 345-352. Atlas of protein sequence and structure, Vol 5, Suppl. 3. National Biomedical Research Foundation, Washington D. C Matrix imported from PAML dayhoff.dat file</span></td></tr>
+<tr><td><span class="c3col_left">protein</span></td><td><span class="c3col_left">JTT92</span></td><td><span class="c3col_left">Jones, Taylor and Thornton 1992 empirical protein model Jones DT, Taylor WR, Thornton JM. The rapid generation of mutation data matrices from protein sequences. Comput Appl Biosci. 1992 Jun;8(3):275-82. Matrix imported from PAML jones.dat file</span></td></tr>
+<tr><td><span class="c3col_left">protein</span></td><td><span class="c3col_left">AH96</span></td><td><span class="c3col_left">Adachi and Hasegawa 1996 empirical model for mitochondrial proteins. Adachi J, Hasegawa M. Model of amino acid substitution in proteins encoded by mitochondrial DNA. J Mol Evol. 1996 Apr;42(4):459-68. Matrix imported from PAML mtREV24.dat file</span></td></tr>
+<tr><td><span class="c3col_left">protein</span></td><td><span class="c3col_left">AH96_mtmammals</span></td><td><span class="c3col_left">Adachi and Hasegawa 1996 empirical model for mammalian mitochondrial proteins. Adachi J, Hasegawa M. Model of amino acid substitution in proteins encoded by mitochondrial DNA. J Mol Evol. 1996 Apr;42(4):459-68. Matrix imported from PAML mtmam.dat file</span></td></tr>
+<tr><td><span class="c3col_left">protein</span></td><td><span class="c3col_left">WG01</span></td><td><span class="c3col_left">Whelan and Goldman 2001 empirical model for globular proteins. Whelan S, Goldman N. A general empirical model of protein evolution derived from multiple protein families using a maximum-likelihood approach. Mol Biol Evol. 2001 May;18(5):691-9. Matrix imported from PAML wag.dat file</span></td></tr>
+</tbody>
+</table>
+<p>
+25 rows x 3 columns</p>
+</div></div></div>
+</div>
+</section>
+<section id="getting-a-substitution-model-with-get-model">
+<h3>Getting a substitution model with <code class="docutils literal notranslate"><span class="pre">get_model()</span></code><a class="headerlink" href="#getting-a-substitution-model-with-get-model" title="Link to this heading">#</a></h3>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.evolve.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_model</span>
+
+<span class="n">hky</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;HKY85&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hky</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>TimeReversibleNucleotide(name=&#39;HKY85&#39;; params=[&#39;kappa&#39;]; num_motifs=4; motifs=[&#39;T&#39;, &#39;C&#39;, &#39;A&#39;, &#39;G&#39;]))
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="rate-heterogeneity-models">
+<h3>Rate heterogeneity models<a class="headerlink" href="#rate-heterogeneity-models" title="Link to this heading">#</a></h3>
+<p>We illustrate this for the gamma distributed case using examples of the canned models displayed above. Creating rate heterogeneity variants of the canned models can be done by using optional arguments that get passed to the substitution model class.</p>
+<section id="for-nucleotide">
+<h4>For nucleotide<a class="headerlink" href="#for-nucleotide" title="Link to this heading">#</a></h4>
+<p>We specify a general time reversible nucleotide model with gamma distributed rate heterogeneity.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.evolve.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_model</span>
+
+<span class="n">sub_mod</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;GTR&quot;</span><span class="p">,</span> <span class="n">with_rate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">distribution</span><span class="o">=</span><span class="s2">&quot;gamma&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sub_mod</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>TimeReversibleNucleotide(name=&#39;GTR&#39;; params=[&#39;A/C&#39;, &#39;A/G&#39;, &#39;A/T&#39;, &#39;C/G&#39;, &#39;C/T&#39;]; num_motifs=4; motifs=[&#39;T&#39;, &#39;C&#39;, &#39;A&#39;, &#39;G&#39;]))
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="for-codon">
+<h4>For codon<a class="headerlink" href="#for-codon" title="Link to this heading">#</a></h4>
+<p>We specify a conditional nucleotide frequency codon model with nucleotide general time reversible parameters and a parameter for the ratio of nonsynonymous to synonymous substitutions (omega) with gamma distributed rate heterogeneity.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.evolve.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_model</span>
+
+<span class="n">sub_mod</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;CNFGTR&quot;</span><span class="p">,</span> <span class="n">with_rate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">distribution</span><span class="o">=</span><span class="s2">&quot;gamma&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sub_mod</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>TimeReversibleCodon(name=&#39;CNFGTR&#39;; params=[&#39;A/C&#39;, &#39;A/G&#39;, &#39;A/T&#39;, &#39;C/G&#39;, &#39;C/T&#39;, &#39;omega&#39;]; num_motifs=61; motifs=[&#39;TTT&#39;, &#39;TTC&#39;, &#39;TTA&#39;, &#39;TTG&#39;, &#39;TCT&#39;, &#39;TCC&#39;, &#39;TCA&#39;, &#39;TCG&#39;, &#39;TAT&#39;, &#39;TAC&#39;, &#39;TGT&#39;, &#39;TGC&#39;, &#39;TGG&#39;, &#39;CTT&#39;, &#39;CTC&#39;, &#39;CTA&#39;, &#39;CTG&#39;, &#39;CCT&#39;, &#39;CCC&#39;, &#39;CCA&#39;, &#39;CCG&#39;, &#39;CAT&#39;, &#39;CAC&#39;, &#39;CAA&#39;, &#39;CAG&#39;, &#39;CGT&#39;, &#39;CGC&#39;, &#39;CGA&#39;, &#39;CGG&#39;, &#39;ATT&#39;, &#39;ATC&#39;, &#39;ATA&#39;, &#39;ATG&#39;, &#39;ACT&#39;, &#39;ACC&#39;, &#39;ACA&#39;, &#39;ACG&#39;, &#39;AAT&#39;, &#39;AAC&#39;, &#39;AAA&#39;, &#39;AAG&#39;, &#39;AGT&#39;, &#39;AGC&#39;, &#39;AGA&#39;, &#39;AGG&#39;, &#39;GTT&#39;, &#39;GTC&#39;, &#39;GTA&#39;, &#39;GTG&#39;, &#39;GCT&#39;, &#39;GCC&#39;, &#39;GCA&#39;, &#39;GCG&#39;, &#39;GAT&#39;, &#39;GAC&#39;, &#39;GAA&#39;, &#39;GAG&#39;, &#39;GGT&#39;, &#39;GGC&#39;, &#39;GGA&#39;, &#39;GGG&#39;]))
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="for-protein">
+<h4>For protein<a class="headerlink" href="#for-protein" title="Link to this heading">#</a></h4>
+<p>We specify a Jones, Taylor and Thornton 1992 empirical protein substitution model with gamma distributed rate heterogeneity.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.evolve.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_model</span>
+
+<span class="n">sub_mod</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;JTT92&quot;</span><span class="p">,</span> <span class="n">with_rate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">distribution</span><span class="o">=</span><span class="s2">&quot;gamma&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sub_mod</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>Empirical(name=&#39;JTT92&#39;; num_motifs=20; motifs=[&#39;A&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;, &#39;G&#39;, &#39;H&#39;, &#39;I&#39;, &#39;K&#39;, &#39;L&#39;, &#39;M&#39;, &#39;N&#39;, &#39;P&#39;, &#39;Q&#39;, &#39;R&#39;, &#39;S&#39;, &#39;T&#39;, &#39;V&#39;, &#39;W&#39;, &#39;Y&#39;]))
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="making-a-likelihood-function">
+<h2>Making a likelihood function<a class="headerlink" href="#making-a-likelihood-function" title="Link to this heading">#</a></h2>
+<p>You start by specifying a substitution model and use that to construct a likelihood function for a specific tree.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_tree</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.evolve.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_model</span>
+
+<span class="n">sub_mod</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;F81&quot;</span><span class="p">)</span>
+<span class="n">tree</span> <span class="o">=</span> <span class="n">make_tree</span><span class="p">(</span><span class="s2">&quot;(a,b,(c,d))&quot;</span><span class="p">)</span>
+<span class="n">lf</span> <span class="o">=</span> <span class="n">sub_mod</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<section id="providing-an-alignment-to-a-likelihood-function">
+<h3>Providing an alignment to a likelihood function<a class="headerlink" href="#providing-an-alignment-to-a-likelihood-function" title="Link to this heading">#</a></h3>
+<p>You need to load an alignment and then provide it a likelihood function. I construct very simple trees and alignments for this example.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_aligned_seqs</span><span class="p">,</span> <span class="n">make_tree</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.evolve.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_model</span>
+
+<span class="n">sub_mod</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;F81&quot;</span><span class="p">)</span>
+<span class="n">tree</span> <span class="o">=</span> <span class="n">make_tree</span><span class="p">(</span><span class="s2">&quot;(a,b,(c,d))&quot;</span><span class="p">)</span>
+<span class="n">lf</span> <span class="o">=</span> <span class="n">sub_mod</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+<span class="n">aln</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span>
+    <span class="p">[(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;ACGT&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;AC-T&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;ACGT&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;d&quot;</span><span class="p">,</span> <span class="s2">&quot;AC-T&quot;</span><span class="p">)],</span>
+    <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span>
+<span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">set_alignment</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+</section>
+<section id="scoping-parameters-on-trees-time-heterogeneous-models">
+<h3>Scoping parameters on trees – time heterogeneous models<a class="headerlink" href="#scoping-parameters-on-trees-time-heterogeneous-models" title="Link to this heading">#</a></h3>
+<p>For many evolutionary analyses, it’s desirable to allow different branches on a tree to have different values of a parameter. We show this for a simple codon model case here where we want the great apes (the clade that includes human and orangutan) to have a different value of the ratio of nonsynonymous to synonymous substitutions. This parameter is identified in the precanned <code class="docutils literal notranslate"><span class="pre">CNFGTR</span></code> model as <code class="docutils literal notranslate"><span class="pre">omega</span></code>.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_tree</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.evolve.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_model</span>
+
+<span class="n">tree</span> <span class="o">=</span> <span class="n">load_tree</span><span class="p">(</span><span class="s2">&quot;data/primate_brca1.tree&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tree</span><span class="o">.</span><span class="n">ascii_art</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>          /-Galago
+         |
+-root----|--HowlerMon
+         |
+         |          /-Rhesus
+          \edge.3--|
+                   |          /-Orangutan
+                    \edge.2--|
+                             |          /-Gorilla
+                              \edge.1--|
+                                       |          /-Human
+                                        \edge.0--|
+                                                  \-Chimpanzee
+</pre></div>
+</div>
+</div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sm</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;CNFGTR&quot;</span><span class="p">)</span>
+<span class="n">lf</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span>
+    <span class="s2">&quot;omega&quot;</span><span class="p">,</span>
+    <span class="n">tip_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Human&quot;</span><span class="p">,</span> <span class="s2">&quot;Orangutan&quot;</span><span class="p">],</span>
+    <span class="n">outgroup_name</span><span class="o">=</span><span class="s2">&quot;Galago&quot;</span><span class="p">,</span>
+    <span class="n">clade</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">init</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>We’ve set an <em>initial</em> value for this clade so that the edges affected by this rule are evident below.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lf</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><h4>CNFGTR</h4>
+
+<p>number of free parameters = 78</p>
+
+<div class="c3table">
+
+<style>
+.c3table table {margin: 10px 0;}
+.c3table tr:last-child {border-bottom: 1px solid #000;} 
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
+.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+.c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
+</style>
+
+<table>
+
+<caption>
+<span class="cell_title">Global params</span>
+</caption>
+<thead class="head_cell">
+<th>A/C</th><th>A/G</th><th>A/T</th><th>C/G</th><th>C/T</th>
+</thead>
+<tbody>
+<tr><td><span class="c3col_right">1.00</span></td><td><span class="c3col_right">1.00</span></td><td><span class="c3col_right">1.00</span></td><td><span class="c3col_right">1.00</span></td><td><span class="c3col_right">1.00</span></td></tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="c3table">
+
+<style>
+.c3table table {margin: 10px 0;}
+.c3table tr:last-child {border-bottom: 1px solid #000;} 
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
+.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+.c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
+</style>
+
+<table>
+
+<caption>
+<span class="cell_title">Edge params</span>
+</caption>
+<thead class="head_cell">
+<th>edge</th><th>parent</th><th>length</th><th>omega</th>
+</thead>
+<tbody>
+<tr><td><span class="c3col_left">Galago</span></td><td><span class="c3col_left">root</span></td><td><span class="c3col_right">1.00</span></td><td><span class="c3col_right">1.00</span></td></tr>
+<tr><td><span class="c3col_left">HowlerMon</span></td><td><span class="c3col_left">root</span></td><td><span class="c3col_right">1.00</span></td><td><span class="c3col_right">1.00</span></td></tr>
+<tr><td><span class="c3col_left">Rhesus</span></td><td><span class="c3col_left">edge.3</span></td><td><span class="c3col_right">1.00</span></td><td><span class="c3col_right">1.00</span></td></tr>
+<tr><td><span class="c3col_left">Orangutan</span></td><td><span class="c3col_left">edge.2</span></td><td><span class="c3col_right">1.00</span></td><td><span class="c3col_right">0.50</span></td></tr>
+<tr><td><span class="c3col_left">Gorilla</span></td><td><span class="c3col_left">edge.1</span></td><td><span class="c3col_right">1.00</span></td><td><span class="c3col_right">0.50</span></td></tr>
+<tr><td><span class="c3col_left">Human</span></td><td><span class="c3col_left">edge.0</span></td><td><span class="c3col_right">1.00</span></td><td><span class="c3col_right">0.50</span></td></tr>
+<tr><td><span class="c3col_left">Chimpanzee</span></td><td><span class="c3col_left">edge.0</span></td><td><span class="c3col_right">1.00</span></td><td><span class="c3col_right">0.50</span></td></tr>
+<tr><td><span class="c3col_left">edge.0</span></td><td><span class="c3col_left">edge.1</span></td><td><span class="c3col_right">1.00</span></td><td><span class="c3col_right">0.50</span></td></tr>
+<tr><td><span class="c3col_left">edge.1</span></td><td><span class="c3col_left">edge.2</span></td><td><span class="c3col_right">1.00</span></td><td><span class="c3col_right">0.50</span></td></tr>
+<tr><td><span class="c3col_left">edge.2</span></td><td><span class="c3col_left">edge.3</span></td><td><span class="c3col_right">1.00</span></td><td><span class="c3col_right">1.00</span></td></tr>
+<tr><td><span class="c3col_left">edge.3</span></td><td><span class="c3col_left">root</span></td><td><span class="c3col_right">1.00</span></td><td><span class="c3col_right">1.00</span></td></tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="c3table">
+
+<style>
+.c3table table {margin: 10px 0;}
+.c3table tr:last-child {border-bottom: 1px solid #000;} 
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
+.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+.c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
+</style>
+
+<table>
+
+<caption>
+<span class="cell_title">Motif params</span>
+</caption>
+<thead class="head_cell">
+<th>AAA</th><th>AAC</th><th>AAG</th><th>AAT</th><th>ACA</th><th>ACC</th><th>ACG</th><th>ACT</th><th>AGA</th><th>AGC</th><th>AGG</th><th>AGT</th><th>ATA</th>
+</thead>
+<tbody>
+<tr><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td></tr>
+</tbody>
+</table>
+
+<table>
+
+<caption>
+<span class="cell_title">continuation</span>
+</caption>
+<thead class="head_cell">
+<th>ATC</th><th>ATG</th><th>ATT</th><th>CAA</th><th>CAC</th><th>CAG</th><th>CAT</th><th>CCA</th><th>CCC</th><th>CCG</th><th>CCT</th><th>CGA</th><th>CGC</th>
+</thead>
+<tbody>
+<tr><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td></tr>
+</tbody>
+</table>
+
+<table>
+
+<caption>
+<span class="cell_title">continuation</span>
+</caption>
+<thead class="head_cell">
+<th>CGG</th><th>CGT</th><th>CTA</th><th>CTC</th><th>CTG</th><th>CTT</th><th>GAA</th><th>GAC</th><th>GAG</th><th>GAT</th><th>GCA</th><th>GCC</th><th>GCG</th>
+</thead>
+<tbody>
+<tr><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td></tr>
+</tbody>
+</table>
+
+<table>
+
+<caption>
+<span class="cell_title">continuation</span>
+</caption>
+<thead class="head_cell">
+<th>GCT</th><th>GGA</th><th>GGC</th><th>GGG</th><th>GGT</th><th>GTA</th><th>GTC</th><th>GTG</th><th>GTT</th><th>TAC</th><th>TAT</th><th>TCA</th><th>TCC</th>
+</thead>
+<tbody>
+<tr><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td></tr>
+</tbody>
+</table>
+
+<table>
+
+<caption>
+<span class="cell_title">continuation</span>
+</caption>
+<thead class="head_cell">
+<th>TCG</th><th>TCT</th><th>TGC</th><th>TGG</th><th>TGT</th><th>TTA</th><th>TTC</th><th>TTG</th><th>TTT</th>
+</thead>
+<tbody>
+<tr><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td><td><span class="c3col_right">0.02</span></td></tr>
+</tbody>
+</table>
+
+</div></div></div>
+</div>
+<p>A more extensive description of capabilities is in <a class="reference internal" href="../examples/scope_model_params_on_trees.html#scope-params-on-trees"><span class="std std-ref">Allowing substitution model parameters to differ between branches</span></a>.</p>
+</section>
+<section id="specifying-a-parameter-as-constant">
+<h3>Specifying a parameter as constant<a class="headerlink" href="#specifying-a-parameter-as-constant" title="Link to this heading">#</a></h3>
+<p>This means the parameter will not be modified during likelihood maximisation. We show this here by making the <code class="docutils literal notranslate"><span class="pre">omega</span></code> parameter constant at the value 1 – essentially the condition of selective neutrality.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_tree</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.evolve.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_model</span>
+
+<span class="n">tree</span> <span class="o">=</span> <span class="n">load_tree</span><span class="p">(</span><span class="s2">&quot;data/primate_brca1.tree&quot;</span><span class="p">)</span>
+<span class="n">sm</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;CNFGTR&quot;</span><span class="p">)</span>
+<span class="n">lf</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span><span class="s2">&quot;omega&quot;</span><span class="p">,</span> <span class="n">is_constant</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+</section>
+<section id="providing-a-starting-value-for-a-parameter">
+<h3>Providing a starting value for a parameter<a class="headerlink" href="#providing-a-starting-value-for-a-parameter" title="Link to this heading">#</a></h3>
+<p>This can be useful to improve performance, the closer you are to the maximum likelihood estimator the quicker optimisation will be.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_tree</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.evolve.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_model</span>
+
+<span class="n">tree</span> <span class="o">=</span> <span class="n">load_tree</span><span class="p">(</span><span class="s2">&quot;data/primate_brca1.tree&quot;</span><span class="p">)</span>
+<span class="n">sm</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;CNFGTR&quot;</span><span class="p">)</span>
+<span class="n">lf</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span><span class="s2">&quot;omega&quot;</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+</section>
+<section id="setting-parameter-bounds-for-optimisation">
+<h3>Setting parameter bounds for optimisation<a class="headerlink" href="#setting-parameter-bounds-for-optimisation" title="Link to this heading">#</a></h3>
+<p>This can be useful for stopping optimisers from getting stuck in a bad part of parameter space. The following is for <code class="docutils literal notranslate"><span class="pre">omega</span></code> in a codon model. I’m also providing an initial guess for the parameter (<code class="docutils literal notranslate"><span class="pre">init=0.1</span></code>) as well as a lower bound. An initial guess that is close to the maximum likelihood estimate will speed up optimisation.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_tree</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.evolve.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_model</span>
+
+<span class="n">tree</span> <span class="o">=</span> <span class="n">load_tree</span><span class="p">(</span><span class="s2">&quot;data/primate_brca1.tree&quot;</span><span class="p">)</span>
+<span class="n">sm</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;CNFGTR&quot;</span><span class="p">)</span>
+<span class="n">lf</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span><span class="s2">&quot;omega&quot;</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="mf">20.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+</section>
+<section id="setting-an-upper-bound-for-branch-length">
+<h3>Setting an upper bound for branch length<a class="headerlink" href="#setting-an-upper-bound-for-branch-length" title="Link to this heading">#</a></h3>
+<p>If the branch length estimates seem too large, setting just an upper bound can be sensible. This will apply to all edges on the tree.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_tree</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.evolve.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_model</span>
+
+<span class="n">tree</span> <span class="o">=</span> <span class="n">load_tree</span><span class="p">(</span><span class="s2">&quot;data/primate_brca1.tree&quot;</span><span class="p">)</span>
+<span class="n">sm</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;F81&quot;</span><span class="p">)</span>
+<span class="n">lf</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span><span class="s2">&quot;length&quot;</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If, after optimising, the branch lengths equal to the upper value you set then the function has not been fully maximised and you should consider adjusting the boundary again.</p>
+</div>
+</section>
+<section id="specifying-rate-heterogeneity-functions">
+<h3>Specifying rate heterogeneity functions<a class="headerlink" href="#specifying-rate-heterogeneity-functions" title="Link to this heading">#</a></h3>
+<p>We extend the simple gamma distributed rate heterogeneity case for nucleotides from above to construction of the actual likelihood function. We do this for 4 bins and constraint the bin probabilities to be equal.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_tree</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.evolve.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_model</span>
+
+<span class="n">sm</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;GTR&quot;</span><span class="p">,</span> <span class="n">with_rate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">distribution</span><span class="o">=</span><span class="s2">&quot;gamma&quot;</span><span class="p">)</span>
+<span class="n">tree</span> <span class="o">=</span> <span class="n">load_tree</span><span class="p">(</span><span class="s2">&quot;data/primate_brca1.tree&quot;</span><span class="p">)</span>
+<span class="n">lf</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span><span class="s2">&quot;bprobs&quot;</span><span class="p">,</span> <span class="n">is_constant</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>For more detailed discussion of defining and using these models see <a class="reference internal" href="../examples/rate_heterogeneity.html#rate-heterogeneity"><span class="std std-ref">Analysis of rate heterogeneity</span></a>.</p>
+</section>
+<section id="specifying-phylo-hmms">
+<h3>Specifying Phylo-HMMs<a class="headerlink" href="#specifying-phylo-hmms" title="Link to this heading">#</a></h3>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_tree</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.evolve.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_model</span>
+
+<span class="n">sm</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;GTR&quot;</span><span class="p">,</span> <span class="n">with_rate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">distribution</span><span class="o">=</span><span class="s2">&quot;gamma&quot;</span><span class="p">)</span>
+<span class="n">tree</span> <span class="o">=</span> <span class="n">load_tree</span><span class="p">(</span><span class="s2">&quot;data/primate_brca1.tree&quot;</span><span class="p">)</span>
+<span class="n">lf</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sites_independent</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span><span class="s2">&quot;bprobs&quot;</span><span class="p">,</span> <span class="n">is_constant</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>For more detailed discussion of defining and using these models see <a class="reference internal" href="../examples/hmm_par_heterogeneity.html#rate-heterogeneity-hmm"><span class="std std-ref">Evaluate process heterogeneity using a Hidden Markov Model</span></a>.</p>
+</section>
+<section id="fitting-likelihood-functions-choice-of-optimisers">
+<h3>Fitting likelihood functions - Choice of optimisers<a class="headerlink" href="#fitting-likelihood-functions-choice-of-optimisers" title="Link to this heading">#</a></h3>
+<p>There are 2 types of optimiser: simulated annealing, a <em>global</em> optimiser; and Powell, a <em>local</em> optimiser. The simulated annealing method is slow compared to Powell and in general Powell is an adequate choice. I setup a simple nucleotide model to illustrate these.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_aligned_seqs</span><span class="p">,</span> <span class="n">load_tree</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.evolve.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_model</span>
+
+<span class="n">tree</span> <span class="o">=</span> <span class="n">load_tree</span><span class="p">(</span><span class="s2">&quot;data/primate_brca1.tree&quot;</span><span class="p">)</span>
+<span class="n">aln</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/primate_brca1.fasta&quot;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+<span class="n">sm</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;F81&quot;</span><span class="p">)</span>
+<span class="n">lf</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">set_alignment</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>The default is to use Powell. For Powell, it’s recommended to set the <code class="docutils literal notranslate"><span class="pre">max_restarts</span></code> argument since this provides a mechanism for Powell to attempt restarting the optimisation from a slightly different spot which can help in overcoming local maxima.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_restarts</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>We might want to do crude simulated annealing following by more rigorous Powell. To do this we first need to use the global optimiser, setting <code class="docutils literal notranslate"><span class="pre">local=False</span></code> setting a large value for <code class="docutils literal notranslate"><span class="pre">global_tolerance</span></code>.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="n">local</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">global_tolerance</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>Followed by a standard call to <code class="docutils literal notranslate"><span class="pre">optimise()</span></code>.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_restarts</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+</section>
+<section id="how-to-check-your-optimisation-was-successful">
+<h3>How to check your optimisation was successful<a class="headerlink" href="#how-to-check-your-optimisation-was-successful" title="Link to this heading">#</a></h3>
+<p>There is no guarantee that an optimised function has achieved a global maximum. We can, however, be sure that a maximum was achieved by validating that the optimiser stopped because the specified tolerance condition was met, rather than exceeding the maximum number of evaluations. The latter number is set to ensure optimisation doesn’t proceed endlessly. If the optimiser exited because this limit was exceeded you can be sure that the function <strong>has not</strong> been successfully optimised.</p>
+<p>We can monitor this situation using the <code class="docutils literal notranslate"><span class="pre">limit_action</span></code> argument to <code class="docutils literal notranslate"><span class="pre">optimise</span></code>. Providing the value <code class="docutils literal notranslate"><span class="pre">raise</span></code> causes an exception to be raised if this condition occurs, as shown below. Providing <code class="docutils literal notranslate"><span class="pre">warn</span></code> (default) instead will cause a warning message to be printed to screen but execution will continue. The value <code class="docutils literal notranslate"><span class="pre">ignore</span></code> hides any such message.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_aligned_seqs</span><span class="p">,</span> <span class="n">load_tree</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.evolve.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_model</span>
+
+<span class="n">tree</span> <span class="o">=</span> <span class="n">load_tree</span><span class="p">(</span><span class="s2">&quot;data/primate_brca1.tree&quot;</span><span class="p">)</span>
+<span class="n">aln</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/primate_brca1.fasta&quot;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+<span class="n">sm</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;F81&quot;</span><span class="p">)</span>
+<span class="n">lf</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">set_alignment</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">lf</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span>
+        <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">limit_action</span><span class="o">=</span><span class="s2">&quot;raise&quot;</span><span class="p">,</span>
+        <span class="n">max_evaluations</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+        <span class="n">return_calculator</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="k">except</span> <span class="ne">ArithmeticError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>FORCED EXIT from optimiser after 10 evaluations
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We recommend using <code class="docutils literal notranslate"><span class="pre">limit_action='raise'</span></code> and catching the <code class="docutils literal notranslate"><span class="pre">ArithmeticError</span></code> error explicitly (as demonstrated above). You really shouldn’t be using results from such an optimisation run.</p>
+</div>
+</section>
+<section id="overview-of-the-fitted-likelihood-function">
+<h3>Overview of the fitted likelihood function<a class="headerlink" href="#overview-of-the-fitted-likelihood-function" title="Link to this heading">#</a></h3>
+<p>In Jupyter, the likelihood function object presents a representation of the main object features.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_aligned_seqs</span><span class="p">,</span> <span class="n">load_tree</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.evolve.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_model</span>
+
+<span class="n">sm</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;GTR&quot;</span><span class="p">)</span>
+<span class="n">tree</span> <span class="o">=</span> <span class="n">load_tree</span><span class="p">(</span><span class="s2">&quot;data/primate_brca1.tree&quot;</span><span class="p">)</span>
+<span class="n">lf</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+<span class="n">aln</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/primate_brca1.fasta&quot;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">set_alignment</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">lf</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><h4>GTR</h4>
+<p>log-likelihood = -6992.7690</p>
+<p>number of free parameters = 16</p>
+
+<div class="c3table">
+
+<style>
+.c3table table {margin: 10px 0;}
+.c3table tr:last-child {border-bottom: 1px solid #000;} 
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
+.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+.c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
+</style>
+
+<table>
+
+<caption>
+<span class="cell_title">Global params</span>
+</caption>
+<thead class="head_cell">
+<th>A/C</th><th>A/G</th><th>A/T</th><th>C/G</th><th>C/T</th>
+</thead>
+<tbody>
+<tr><td><span class="c3col_right">1.23</span></td><td><span class="c3col_right">5.25</span></td><td><span class="c3col_right">0.96</span></td><td><span class="c3col_right">2.32</span></td><td><span class="c3col_right">5.97</span></td></tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="c3table">
+
+<style>
+.c3table table {margin: 10px 0;}
+.c3table tr:last-child {border-bottom: 1px solid #000;} 
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
+.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+.c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
+</style>
+
+<table>
+
+<caption>
+<span class="cell_title">Edge params</span>
+</caption>
+<thead class="head_cell">
+<th>edge</th><th>parent</th><th>length</th>
+</thead>
+<tbody>
+<tr><td><span class="c3col_left">Galago</span></td><td><span class="c3col_left">root</span></td><td><span class="c3col_right">0.17</span></td></tr>
+<tr><td><span class="c3col_left">HowlerMon</span></td><td><span class="c3col_left">root</span></td><td><span class="c3col_right">0.04</span></td></tr>
+<tr><td><span class="c3col_left">Rhesus</span></td><td><span class="c3col_left">edge.3</span></td><td><span class="c3col_right">0.02</span></td></tr>
+<tr><td><span class="c3col_left">Orangutan</span></td><td><span class="c3col_left">edge.2</span></td><td><span class="c3col_right">0.01</span></td></tr>
+<tr><td><span class="c3col_left">Gorilla</span></td><td><span class="c3col_left">edge.1</span></td><td><span class="c3col_right">0.00</span></td></tr>
+<tr><td><span class="c3col_left">Human</span></td><td><span class="c3col_left">edge.0</span></td><td><span class="c3col_right">0.01</span></td></tr>
+<tr><td><span class="c3col_left">Chimpanzee</span></td><td><span class="c3col_left">edge.0</span></td><td><span class="c3col_right">0.00</span></td></tr>
+<tr><td><span class="c3col_left">edge.0</span></td><td><span class="c3col_left">edge.1</span></td><td><span class="c3col_right">0.00</span></td></tr>
+<tr><td><span class="c3col_left">edge.1</span></td><td><span class="c3col_left">edge.2</span></td><td><span class="c3col_right">0.00</span></td></tr>
+<tr><td><span class="c3col_left">edge.2</span></td><td><span class="c3col_left">edge.3</span></td><td><span class="c3col_right">0.01</span></td></tr>
+<tr><td><span class="c3col_left">edge.3</span></td><td><span class="c3col_left">root</span></td><td><span class="c3col_right">0.01</span></td></tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="c3table">
+
+<style>
+.c3table table {margin: 10px 0;}
+.c3table tr:last-child {border-bottom: 1px solid #000;} 
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
+.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+.c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
+</style>
+
+<table>
+
+<caption>
+<span class="cell_title">Motif params</span>
+</caption>
+<thead class="head_cell">
+<th>A</th><th>C</th><th>G</th><th>T</th>
+</thead>
+<tbody>
+<tr><td><span class="c3col_right">0.38</span></td><td><span class="c3col_right">0.17</span></td><td><span class="c3col_right">0.21</span></td><td><span class="c3col_right">0.24</span></td></tr>
+</tbody>
+</table>
+
+</div></div></div>
+</div>
+<section id="log-likelihood-and-number-of-free-parameters">
+<h4>Log likelihood and number of free parameters<a class="headerlink" href="#log-likelihood-and-number-of-free-parameters" title="Link to this heading">#</a></h4>
+<p>Reusing the optimised <code class="docutils literal notranslate"><span class="pre">lf</span></code> object from above, we can get the log-likelihood and the number of free parameters.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lnL</span> <span class="o">=</span> <span class="n">lf</span><span class="o">.</span><span class="n">lnL</span>
+<span class="n">lnL</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>-6992.768994254282
+</pre></div>
+</div>
+</div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nfp</span> <span class="o">=</span> <span class="n">lf</span><span class="o">.</span><span class="n">nfp</span>
+<span class="n">nfp</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>16
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The number of free parameters (nfp) refers only to the number of parameters that were modifiable by the optimiser. Typically, the degrees-of-freedom of a likelihood ratio test statistic is computed as the difference in nfp between models. This will not be correct for models in which a boundary conditions exist (rate heterogeneity models where a parameter value boundary is set between bins).</p>
+</div>
+</section>
+<section id="aikake-information-criterion">
+<h4>Aikake Information Criterion<a class="headerlink" href="#aikake-information-criterion" title="Link to this heading">#</a></h4>
+<p>Reusing the optimised <code class="docutils literal notranslate"><span class="pre">lf</span></code> object from above.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">get_aic</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>14017.537988508564
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also get the second-order AIC.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">get_aic</span><span class="p">(</span><span class="n">second_order</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>14017.732482609386
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="bayesian-information-criterion">
+<h4>Bayesian Information Criterion<a class="headerlink" href="#bayesian-information-criterion" title="Link to this heading">#</a></h4>
+<p>Reusing the optimised <code class="docutils literal notranslate"><span class="pre">lf</span></code> object from above.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">get_bic</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>np.float64(14112.615784311354)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="getting-maximum-likelihood-estimates">
+<h4>Getting maximum likelihood estimates<a class="headerlink" href="#getting-maximum-likelihood-estimates" title="Link to this heading">#</a></h4>
+<p>Reusing the optimised <code class="docutils literal notranslate"><span class="pre">lf</span></code> object from above.</p>
+<section id="one-at-a-time">
+<h5>One at a time<a class="headerlink" href="#one-at-a-time" title="Link to this heading">#</a></h5>
+<p>We get the statistics out individually. We get the <code class="docutils literal notranslate"><span class="pre">length</span></code> for the Human edge and the exchangeability parameter <code class="docutils literal notranslate"><span class="pre">A/G</span></code>.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a_g</span> <span class="o">=</span> <span class="n">lf</span><span class="o">.</span><span class="n">get_param_value</span><span class="p">(</span><span class="s2">&quot;A/G&quot;</span><span class="p">)</span>
+<span class="n">a_g</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>np.float64(5.2534265033265015)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">human</span> <span class="o">=</span> <span class="n">lf</span><span class="o">.</span><span class="n">get_param_value</span><span class="p">(</span><span class="s2">&quot;length&quot;</span><span class="p">,</span> <span class="s2">&quot;Human&quot;</span><span class="p">)</span>
+<span class="n">human</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>np.float64(0.0060601247104029934)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="just-the-motif-probabilities">
+<h5>Just the motif probabilities<a class="headerlink" href="#just-the-motif-probabilities" title="Link to this heading">#</a></h5>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mprobs</span> <span class="o">=</span> <span class="n">lf</span><span class="o">.</span><span class="n">get_motif_probs</span><span class="p">()</span>
+<span class="n">mprobs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div class="c3table">
+
+<style>
+.c3table table {margin: 10px 0;}
+.c3table tr:last-child {border-bottom: 1px solid #000;} 
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
+.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+.c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
+</style>
+
+<table>
+
+<thead class="head_cell">
+<th>T</th><th>C</th><th>A</th><th>G</th>
+</thead>
+<tbody>
+<tr><td><span class="c3col_right">0.2406</span></td><td><span class="c3col_right">0.1742</span></td><td><span class="c3col_right">0.3757</span></td><td><span class="c3col_right">0.2095</span></td></tr>
+</tbody>
+</table>
+
+</div></div></div>
+</div>
+</section>
+<section id="as-tables">
+<h5>As tables<a class="headerlink" href="#as-tables" title="Link to this heading">#</a></h5>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tables</span> <span class="o">=</span> <span class="n">lf</span><span class="o">.</span><span class="n">get_statistics</span><span class="p">(</span><span class="n">with_motif_probs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">with_titles</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">tables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># just displaying the first</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div class="c3table">
+
+<style>
+.c3table table {margin: 10px 0;}
+.c3table tr:last-child {border-bottom: 1px solid #000;} 
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
+.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+.c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
+</style>
+
+<table>
+
+<caption>
+<span class="cell_title">global params</span>
+</caption>
+<thead class="head_cell">
+<th>A/C</th><th>A/G</th><th>A/T</th><th>C/G</th><th>C/T</th>
+</thead>
+<tbody>
+<tr><td><span class="c3col_right">1.23</span></td><td><span class="c3col_right">5.25</span></td><td><span class="c3col_right">0.96</span></td><td><span class="c3col_right">2.32</span></td><td><span class="c3col_right">5.97</span></td></tr>
+</tbody>
+</table>
+<p>
+1 rows x 5 columns</p>
+</div></div></div>
+</div>
+</section>
+</section>
+</section>
+<section id="testing-hypotheses-using-likelihood-ratio-tests">
+<h3>Testing Hypotheses - Using Likelihood Ratio Tests<a class="headerlink" href="#testing-hypotheses-using-likelihood-ratio-tests" title="Link to this heading">#</a></h3>
+<p>We test the molecular clock hypothesis for human and chimpanzee lineages. The null has these two branches constrained to be equal.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_aligned_seqs</span><span class="p">,</span> <span class="n">load_tree</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.evolve.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_model</span>
+
+<span class="n">tree</span> <span class="o">=</span> <span class="n">load_tree</span><span class="p">(</span><span class="s2">&quot;data/primate_brca1.tree&quot;</span><span class="p">)</span>
+<span class="n">aln</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/primate_brca1.fasta&quot;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+<span class="n">sm</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;F81&quot;</span><span class="p">)</span>
+<span class="n">lf</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">set_alignment</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span>
+    <span class="s2">&quot;length&quot;</span><span class="p">,</span>
+    <span class="n">tip_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Human&quot;</span><span class="p">,</span> <span class="s2">&quot;Chimpanzee&quot;</span><span class="p">],</span>
+    <span class="n">outgroup_name</span><span class="o">=</span><span class="s2">&quot;Galago&quot;</span><span class="p">,</span>
+    <span class="n">clade</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">is_independent</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">set_name</span><span class="p">(</span><span class="s2">&quot;Null Hypothesis&quot;</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">null_lnL</span> <span class="o">=</span> <span class="n">lf</span><span class="o">.</span><span class="n">lnL</span>
+<span class="n">null_nfp</span> <span class="o">=</span> <span class="n">lf</span><span class="o">.</span><span class="n">nfp</span>
+<span class="n">lf</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><h4>Null Hypothesis</h4>
+<p>log-likelihood = -7177.4403</p>
+<p>number of free parameters = 10</p>
+
+<div class="c3table">
+
+<style>
+.c3table table {margin: 10px 0;}
+.c3table tr:last-child {border-bottom: 1px solid #000;} 
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
+.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+.c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
+</style>
+
+<table>
+
+<caption>
+<span class="cell_title">Edge params</span>
+</caption>
+<thead class="head_cell">
+<th>edge</th><th>parent</th><th>length</th>
+</thead>
+<tbody>
+<tr><td><span class="c3col_left">Galago</span></td><td><span class="c3col_left">root</span></td><td><span class="c3col_right">0.17</span></td></tr>
+<tr><td><span class="c3col_left">HowlerMon</span></td><td><span class="c3col_left">root</span></td><td><span class="c3col_right">0.04</span></td></tr>
+<tr><td><span class="c3col_left">Rhesus</span></td><td><span class="c3col_left">edge.3</span></td><td><span class="c3col_right">0.02</span></td></tr>
+<tr><td><span class="c3col_left">Orangutan</span></td><td><span class="c3col_left">edge.2</span></td><td><span class="c3col_right">0.01</span></td></tr>
+<tr><td><span class="c3col_left">Gorilla</span></td><td><span class="c3col_left">edge.1</span></td><td><span class="c3col_right">0.00</span></td></tr>
+<tr><td><span class="c3col_left">Human</span></td><td><span class="c3col_left">edge.0</span></td><td><span class="c3col_right">0.00</span></td></tr>
+<tr><td><span class="c3col_left">Chimpanzee</span></td><td><span class="c3col_left">edge.0</span></td><td><span class="c3col_right">0.00</span></td></tr>
+<tr><td><span class="c3col_left">edge.0</span></td><td><span class="c3col_left">edge.1</span></td><td><span class="c3col_right">0.00</span></td></tr>
+<tr><td><span class="c3col_left">edge.1</span></td><td><span class="c3col_left">edge.2</span></td><td><span class="c3col_right">0.00</span></td></tr>
+<tr><td><span class="c3col_left">edge.2</span></td><td><span class="c3col_left">edge.3</span></td><td><span class="c3col_right">0.01</span></td></tr>
+<tr><td><span class="c3col_left">edge.3</span></td><td><span class="c3col_left">root</span></td><td><span class="c3col_right">0.01</span></td></tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="c3table">
+
+<style>
+.c3table table {margin: 10px 0;}
+.c3table tr:last-child {border-bottom: 1px solid #000;} 
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
+.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+.c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
+</style>
+
+<table>
+
+<caption>
+<span class="cell_title">Motif params</span>
+</caption>
+<thead class="head_cell">
+<th>A</th><th>C</th><th>G</th><th>T</th>
+</thead>
+<tbody>
+<tr><td><span class="c3col_right">0.38</span></td><td><span class="c3col_right">0.17</span></td><td><span class="c3col_right">0.21</span></td><td><span class="c3col_right">0.24</span></td></tr>
+</tbody>
+</table>
+
+</div></div></div>
+</div>
+<p>The alternate allows the human and chimpanzee branches to differ by just setting all lengths to be independent.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span><span class="s2">&quot;length&quot;</span><span class="p">,</span> <span class="n">is_independent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">set_name</span><span class="p">(</span><span class="s2">&quot;Alt Hypothesis&quot;</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">alt_lnL</span> <span class="o">=</span> <span class="n">lf</span><span class="o">.</span><span class="n">lnL</span>
+<span class="n">alt_nfp</span> <span class="o">=</span> <span class="n">lf</span><span class="o">.</span><span class="n">nfp</span>
+<span class="n">lf</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><h4>Alt Hypothesis</h4>
+<p>log-likelihood = -7175.7756</p>
+<p>number of free parameters = 11</p>
+
+<div class="c3table">
+
+<style>
+.c3table table {margin: 10px 0;}
+.c3table tr:last-child {border-bottom: 1px solid #000;} 
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
+.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+.c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
+</style>
+
+<table>
+
+<caption>
+<span class="cell_title">Edge params</span>
+</caption>
+<thead class="head_cell">
+<th>edge</th><th>parent</th><th>length</th>
+</thead>
+<tbody>
+<tr><td><span class="c3col_left">Galago</span></td><td><span class="c3col_left">root</span></td><td><span class="c3col_right">0.17</span></td></tr>
+<tr><td><span class="c3col_left">HowlerMon</span></td><td><span class="c3col_left">root</span></td><td><span class="c3col_right">0.04</span></td></tr>
+<tr><td><span class="c3col_left">Rhesus</span></td><td><span class="c3col_left">edge.3</span></td><td><span class="c3col_right">0.02</span></td></tr>
+<tr><td><span class="c3col_left">Orangutan</span></td><td><span class="c3col_left">edge.2</span></td><td><span class="c3col_right">0.01</span></td></tr>
+<tr><td><span class="c3col_left">Gorilla</span></td><td><span class="c3col_left">edge.1</span></td><td><span class="c3col_right">0.00</span></td></tr>
+<tr><td><span class="c3col_left">Human</span></td><td><span class="c3col_left">edge.0</span></td><td><span class="c3col_right">0.01</span></td></tr>
+<tr><td><span class="c3col_left">Chimpanzee</span></td><td><span class="c3col_left">edge.0</span></td><td><span class="c3col_right">0.00</span></td></tr>
+<tr><td><span class="c3col_left">edge.0</span></td><td><span class="c3col_left">edge.1</span></td><td><span class="c3col_right">0.00</span></td></tr>
+<tr><td><span class="c3col_left">edge.1</span></td><td><span class="c3col_left">edge.2</span></td><td><span class="c3col_right">0.00</span></td></tr>
+<tr><td><span class="c3col_left">edge.2</span></td><td><span class="c3col_left">edge.3</span></td><td><span class="c3col_right">0.01</span></td></tr>
+<tr><td><span class="c3col_left">edge.3</span></td><td><span class="c3col_left">root</span></td><td><span class="c3col_right">0.01</span></td></tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="c3table">
+
+<style>
+.c3table table {margin: 10px 0;}
+.c3table tr:last-child {border-bottom: 1px solid #000;} 
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
+.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+.c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
+</style>
+
+<table>
+
+<caption>
+<span class="cell_title">Motif params</span>
+</caption>
+<thead class="head_cell">
+<th>A</th><th>C</th><th>G</th><th>T</th>
+</thead>
+<tbody>
+<tr><td><span class="c3col_right">0.38</span></td><td><span class="c3col_right">0.17</span></td><td><span class="c3col_right">0.21</span></td><td><span class="c3col_right">0.24</span></td></tr>
+</tbody>
+</table>
+
+</div></div></div>
+</div>
+<p>We import the function for computing the probability of a chi-square test statistic, compute the likelihood ratio test statistic, degrees of freedom and the corresponding probability.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats.distributions</span><span class="w"> </span><span class="kn">import</span> <span class="n">chi2</span>
+
+<span class="n">LR</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">alt_lnL</span> <span class="o">-</span> <span class="n">null_lnL</span><span class="p">)</span>  <span class="c1"># the likelihood ratio statistic</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">alt_nfp</span> <span class="o">-</span> <span class="n">null_nfp</span>  <span class="c1"># the test degrees of freedom</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">chi2</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="n">LR</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;LR=</span><span class="si">{</span><span class="n">LR</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> ; df=</span><span class="si">{</span><span class="n">df</span><span class="si">}</span><span class="s2">; p=</span><span class="si">{</span><span class="n">df</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>LR=3.3294 ; df=1; p=1.0000
+</pre></div>
+</div>
+</div>
+</div>
+<section id="testing-hypotheses-by-parametric-bootstrapping">
+<h4>Testing Hypotheses - By parametric bootstrapping<a class="headerlink" href="#testing-hypotheses-by-parametric-bootstrapping" title="Link to this heading">#</a></h4>
+<p>If we can’t rely on the asymptotic behaviour of the LRT, e.g. due to small alignment length, we can use a parametric bootstrap. Convenience functions for that are described in more detail here <a class="reference internal" href="../examples/parametric_bootstrap.html#parametric-bootstrap"><span class="std std-ref">Performing a parametric bootstrap</span></a>.</p>
+<p>In general, however, this capability derives from the ability of any defined <code class="docutils literal notranslate"><span class="pre">evolve</span></code> likelihood function to simulate an alignment. This property is provided as <code class="docutils literal notranslate"><span class="pre">simulate_alignment</span></code> method on likelihood function objects.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_aligned_seqs</span><span class="p">,</span> <span class="n">load_tree</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.evolve.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_model</span>
+
+<span class="n">tree</span> <span class="o">=</span> <span class="n">load_tree</span><span class="p">(</span><span class="s2">&quot;data/primate_brca1.tree&quot;</span><span class="p">)</span>
+<span class="n">aln</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/primate_brca1.fasta&quot;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+
+<span class="n">sm</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;F81&quot;</span><span class="p">)</span>
+<span class="n">lf</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">set_alignment</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">set_param_rule</span><span class="p">(</span>
+    <span class="s2">&quot;length&quot;</span><span class="p">,</span>
+    <span class="n">tip_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Human&quot;</span><span class="p">,</span> <span class="s2">&quot;Chimpanzee&quot;</span><span class="p">],</span>
+    <span class="n">outgroup_name</span><span class="o">=</span><span class="s2">&quot;Galago&quot;</span><span class="p">,</span>
+    <span class="n">clade</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">is_independent</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">set_name</span><span class="p">(</span><span class="s2">&quot;Null Hypothesis&quot;</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">sim_aln</span> <span class="o">=</span> <span class="n">lf</span><span class="o">.</span><span class="n">simulate_alignment</span><span class="p">()</span>
+<span class="n">sim_aln</span><span class="p">[:</span><span class="mi">60</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.c3align table {margin: 10px 0;}
+.c3align td { border: none !important; text-align: left !important; }
+.c3align tr:not(.num_row) td span {margin: 0 2px;}
+.c3align tr:nth-child(even) {background: #f7f7f7;}
+.c3align .num_row {background-color:rgba(161, 195, 209, 0.5) !important; border-top: solid 1px black; }
+.c3align .label { font-size: 12pt ; text-align: right !important; color: black !important; padding: 0 4px; display: table-cell !important; font-weight: normal !important; }
+.c3align .T_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: blue; }
+.c3align .C_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.c3align .A_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: #FF0102; }
+.c3align .G_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: green; }
+.c3align .terminal_ambig_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: gray; }
+.c3align .ambig_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: gray; }
+</style>
+<div class="c3align">
+<table>
+<tr class="num_row"><td></td><td><b>0</b></td></tr>
+<tr><td class="label">Chimpanzee</td><td><span class="A_dna">A</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="C_dna">C</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="C_dna">C</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="C_dna">C</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="C_dna">C</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="C_dna">C</span><span class="G_dna">G</span></td></tr>
+<tr><td class="label">Galago</td><td><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="T_dna">T</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="T_dna">T</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">G</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="G_dna">G</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="A_dna">A</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">A</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="A_dna">A</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span></td></tr>
+<tr><td class="label">HowlerMon</td><td><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="T_dna">T</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span></td></tr>
+<tr><td class="label">Rhesus</td><td><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">G</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="C_dna">C</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span></td></tr>
+<tr><td class="label">Orangutan</td><td><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span></td></tr>
+<tr><td class="label">Gorilla</td><td><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span></td></tr>
+<tr><td class="label">Human</td><td><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="G_dna">.</span></td></tr>
+</table>
+<p><i>7 x 60 dna alignment</i></p>
+</div></div></div>
+</div>
+</section>
+</section>
+<section id="determining-confidence-intervals-on-mles">
+<h3>Determining confidence intervals on MLEs<a class="headerlink" href="#determining-confidence-intervals-on-mles" title="Link to this heading">#</a></h3>
+<p>The profile method is used to calculate a confidence interval for a named parameter. We show it here for a global substitution model exchangeability parameter (<em>kappa</em>, the ratio of transition to transversion rates) and for an edge specific parameter (just the human branch length).</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_aligned_seqs</span><span class="p">,</span> <span class="n">load_tree</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.evolve.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_model</span>
+
+<span class="n">tree</span> <span class="o">=</span> <span class="n">load_tree</span><span class="p">(</span><span class="s2">&quot;data/primate_brca1.tree&quot;</span><span class="p">)</span>
+<span class="n">aln</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/primate_brca1.fasta&quot;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+<span class="n">sm</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;HKY85&quot;</span><span class="p">)</span>
+<span class="n">lf</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">set_alignment</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">kappa_lo</span><span class="p">,</span> <span class="n">kappa_mle</span><span class="p">,</span> <span class="n">kappa_hi</span> <span class="o">=</span> <span class="n">lf</span><span class="o">.</span><span class="n">get_param_interval</span><span class="p">(</span><span class="s2">&quot;kappa&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;lo=</span><span class="si">{</span><span class="n">kappa_lo</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> ; mle=</span><span class="si">{</span><span class="n">kappa_mle</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> ; hi=</span><span class="si">{</span><span class="n">kappa_hi</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">human_lo</span><span class="p">,</span> <span class="n">human_mle</span><span class="p">,</span> <span class="n">human_hi</span> <span class="o">=</span> <span class="n">lf</span><span class="o">.</span><span class="n">get_param_interval</span><span class="p">(</span><span class="s2">&quot;length&quot;</span><span class="p">,</span> <span class="s2">&quot;Human&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;lo=</span><span class="si">{</span><span class="n">human_lo</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> ; mle=</span><span class="si">{</span><span class="n">human_mle</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> ; hi=</span><span class="si">{</span><span class="n">human_hi</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>lo=3.78 ; mle=4.44 ; hi=5.22
+lo=0.00 ; mle=0.01 ; hi=0.01
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="saving-results">
+<h3>Saving results<a class="headerlink" href="#saving-results" title="Link to this heading">#</a></h3>
+<p>The best approach is to use the json string from the <code class="docutils literal notranslate"><span class="pre">to_json()</span></code> method. The saved data can be later reloaded using <code class="docutils literal notranslate"><span class="pre">cogent3.util.deserialise.deserialise_object()</span></code>. The <code class="docutils literal notranslate"><span class="pre">json</span></code> data contains the alignment, tree topology, substitution model, parameter values, etc..</p>
+<p>To illustrate this, I create a very simple likelihood function. The <code class="docutils literal notranslate"><span class="pre">json</span></code> variable below is just a string that can be saved to disk.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_aligned_seqs</span><span class="p">,</span> <span class="n">load_tree</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.evolve.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_model</span>
+
+<span class="n">aln</span> <span class="o">=</span> <span class="n">make_aligned_seqs</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s2">&quot;ACGG&quot;</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="s2">&quot;ATAG&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;ATGG&quot;</span><span class="p">),</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+<span class="n">tree</span> <span class="o">=</span> <span class="n">make_tree</span><span class="p">(</span><span class="n">tip_names</span><span class="o">=</span><span class="n">aln</span><span class="o">.</span><span class="n">names</span><span class="p">)</span>
+<span class="n">sm</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;F81&quot;</span><span class="p">)</span>
+<span class="n">lf</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">set_alignment</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
+<span class="n">json</span> <span class="o">=</span> <span class="n">lf</span><span class="o">.</span><span class="n">to_json</span><span class="p">()</span>
+<span class="n">json</span><span class="p">[:</span><span class="mi">60</span><span class="p">]</span>  <span class="c1"># just truncating the displayed string</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>&#39;{&quot;model&quot;: {&quot;alphabet&quot;: {&quot;chars&quot;: [&quot;T&quot;, &quot;C&quot;, &quot;A&quot;, &quot;G&quot;], &quot;gap&quot;&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>We deserialise the object from the string.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.util.deserialise</span><span class="w"> </span><span class="kn">import</span> <span class="n">deserialise_object</span>
+
+<span class="n">newlf</span> <span class="o">=</span> <span class="n">deserialise_object</span><span class="p">(</span><span class="n">json</span><span class="p">)</span>
+<span class="n">newlf</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><h4>F81</h4>
+<p>log-likelihood = -14.2727</p>
+<p>number of free parameters = 3</p>
+
+<div class="c3table">
+
+<style>
+.c3table table {margin: 10px 0;}
+.c3table tr:last-child {border-bottom: 1px solid #000;} 
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
+.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+.c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
+</style>
+
+<table>
+
+<caption>
+<span class="cell_title">Edge params</span>
+</caption>
+<thead class="head_cell">
+<th>edge</th><th>parent</th><th>length</th>
+</thead>
+<tbody>
+<tr><td><span class="c3col_left">a</span></td><td><span class="c3col_left">root</span></td><td><span class="c3col_right">1.00</span></td></tr>
+<tr><td><span class="c3col_left">b</span></td><td><span class="c3col_left">root</span></td><td><span class="c3col_right">1.00</span></td></tr>
+<tr><td><span class="c3col_left">c</span></td><td><span class="c3col_left">root</span></td><td><span class="c3col_right">1.00</span></td></tr>
+</tbody>
+</table>
+
+</div>
+
+<div class="c3table">
+
+<style>
+.c3table table {margin: 10px 0;}
+.c3table tr:last-child {border-bottom: 1px solid #000;} 
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.0); margin: 10px; font-weight: 600;}
+.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+.c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
+</style>
+
+<table>
+
+<caption>
+<span class="cell_title">Motif params</span>
+</caption>
+<thead class="head_cell">
+<th>A</th><th>C</th><th>G</th><th>T</th>
+</thead>
+<tbody>
+<tr><td><span class="c3col_right">0.33</span></td><td><span class="c3col_right">0.08</span></td><td><span class="c3col_right">0.42</span></td><td><span class="c3col_right">0.17</span></td></tr>
+</tbody>
+</table>
+
+</div></div></div>
+</div>
+</section>
+<section id="reconstructing-ancestral-sequences">
+<h3>Reconstructing ancestral sequences<a class="headerlink" href="#reconstructing-ancestral-sequences" title="Link to this heading">#</a></h3>
+<p>We first fit a likelihood function.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_aligned_seqs</span><span class="p">,</span> <span class="n">load_tree</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cogent3.evolve.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_model</span>
+
+<span class="n">tree</span> <span class="o">=</span> <span class="n">load_tree</span><span class="p">(</span><span class="s2">&quot;data/primate_brca1.tree&quot;</span><span class="p">)</span>
+<span class="n">aln</span> <span class="o">=</span> <span class="n">load_aligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/primate_brca1.fasta&quot;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+<span class="n">sm</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="s2">&quot;F81&quot;</span><span class="p">)</span>
+<span class="n">lf</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">make_likelihood_function</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">set_alignment</span><span class="p">(</span><span class="n">aln</span><span class="p">)</span>
+<span class="n">lf</span><span class="o">.</span><span class="n">optimise</span><span class="p">(</span><span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>We then get the most likely ancestral sequences.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ancestors</span> <span class="o">=</span> <span class="n">lf</span><span class="o">.</span><span class="n">likely_ancestral_seqs</span><span class="p">()</span>
+<span class="n">ancestors</span><span class="p">[:</span><span class="mi">60</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>
+.c3align table {margin: 10px 0;}
+.c3align td { border: none !important; text-align: left !important; }
+.c3align tr:not(.num_row) td span {margin: 0 2px;}
+.c3align tr:nth-child(even) {background: #f7f7f7;}
+.c3align .num_row {background-color:rgba(161, 195, 209, 0.5) !important; border-top: solid 1px black; }
+.c3align .label { font-size: 12pt ; text-align: right !important; color: black !important; padding: 0 4px; display: table-cell !important; font-weight: normal !important; }
+.c3align .T_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: blue; }
+.c3align .C_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: black; }
+.c3align .A_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: #FF0102; }
+.c3align .G_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: green; }
+.c3align .terminal_ambig_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: gray; }
+.c3align .ambig_dna{font-family: "Lucida Console",monospace !important; font-size: 12pt !important; color: gray; }
+</style>
+<div class="c3align">
+<table>
+<tr class="num_row"><td></td><td><b>0</b></td></tr>
+<tr><td class="label">edge.0</td><td><span class="T_dna">T</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="C_dna">C</span><span class="T_dna">T</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="T_dna">T</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="T_dna">T</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="C_dna">C</span><span class="T_dna">T</span><span class="C_dna">C</span><span class="A_dna">A</span><span class="C_dna">C</span><span class="T_dna">T</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="A_dna">A</span></td></tr>
+<tr><td class="label">edge.1</td><td><span class="T_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span></td></tr>
+<tr><td class="label">edge.2</td><td><span class="T_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span></td></tr>
+<tr><td class="label">edge.3</td><td><span class="T_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="G_dna">G</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span></td></tr>
+<tr><td class="label">root</td><td><span class="T_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="T_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="G_dna">G</span><span class="T_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="C_dna">.</span><span class="A_dna">.</span><span class="C_dna">.</span><span class="T_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span></td></tr>
+</table>
+<p><i>5 x 60 dna alignment</i></p>
+</div></div></div>
+</div>
+<p>Or we can get the posterior probabilities (returned as a <code class="docutils literal notranslate"><span class="pre">DictArray</span></code>) of sequence states at each node.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ancestral_probs</span> <span class="o">=</span> <span class="n">lf</span><span class="o">.</span><span class="n">reconstruct_ancestral_seqs</span><span class="p">()</span>
+<span class="n">ancestral_probs</span><span class="p">[</span><span class="s2">&quot;root&quot;</span><span class="p">][:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<div class="c3table">
+
+<style>
+.c3table table {margin: 10px 0;}
+.c3table tr:last-child {border-bottom: 1px solid #000;} 
+.c3table tr > th {text-align: left; padding: 0 5px;}
+.c3table tr > td {text-align: left; padding: 5px;}
+.c3table tr:nth-child(even) {background: #f7f7f7 !important;}
+.c3table .ellipsis {background: rgba(0, 0, 0, .01);}
+.c3table .index {background: rgba(161, 195, 209, 0.25); margin: 10px; font-weight: 600;}
+.c3table .head_cell {background: rgba(161, 195, 209, 0.75); font-weight: bold; text-align: center;}
+.c3table caption {color: rgb(250, 250, 250); background: rgba(30, 140, 200, 1); padding: 3px; white-space: nowrap; caption-side: top;}
+.c3table .cell_title {font-weight: bold;}
+.c3col_left { text-align: left !important; display: block;}
+.c3col_right { text-align: right !important; display: block;}
+.c3col_center { text-align: center !important; display: block;}
+</style>
+
+<table>
+
+<thead class="head_cell">
+<th></th><th>T</th><th>C</th><th>A</th><th>G</th>
+</thead>
+<tbody>
+<tr><td class="index"><span class="c3col_right">0</span></td><td><span class="c3col_right">0.1816</span></td><td><span class="c3col_right">0.0000</span></td><td><span class="c3col_right">0.0000</span></td><td><span class="c3col_right">0.0000</span></td></tr>
+<tr><td class="index"><span class="c3col_right">1</span></td><td><span class="c3col_right">0.0000</span></td><td><span class="c3col_right">0.0000</span></td><td><span class="c3col_right">0.0000</span></td><td><span class="c3col_right">0.1561</span></td></tr>
+<tr><td class="index"><span class="c3col_right">2</span></td><td><span class="c3col_right">0.1816</span></td><td><span class="c3col_right">0.0000</span></td><td><span class="c3col_right">0.0000</span></td><td><span class="c3col_right">0.0000</span></td></tr>
+<tr><td class="index"><span class="c3col_right">3</span></td><td><span class="c3col_right">0.0000</span></td><td><span class="c3col_right">0.0000</span></td><td><span class="c3col_right">0.0000</span></td><td><span class="c3col_right">0.1561</span></td></tr>
+<tr><td class="index"><span class="c3col_right">4</span></td><td><span class="c3col_right">0.0000</span></td><td><span class="c3col_right">0.0000</span></td><td><span class="c3col_right">0.0000</span></td><td><span class="c3col_right">0.1561</span></td></tr>
+</tbody>
+</table>
+
+</div></div></div>
+</div>
+<hr class="docutils" />
+<p>There’s nothing that improves performance quite like being close to the maximum likelihood values. So using the <code class="docutils literal notranslate"><span class="pre">set_param_rule</span></code> method to provide good starting values can be very useful. As this can be difficult to do one easy way is to build simpler models that are nested within the one you’re interested in. Fitting those models and then relaxing constraints until you’re at the parameterisation of interest can markedly improve optimisation speed.</p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="building_phylogenies.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Building phylogenies</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="useful_utilities.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Useful Utilities</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-substitution-models">Specifying substitution models</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-available-pre-defined-substitution-models">The available pre-defined substitution models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-a-substitution-model-with-get-model">Getting a substitution model with <code class="docutils literal notranslate"><span class="pre">get_model()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rate-heterogeneity-models">Rate heterogeneity models</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#for-nucleotide">For nucleotide</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#for-codon">For codon</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#for-protein">For protein</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-a-likelihood-function">Making a likelihood function</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#providing-an-alignment-to-a-likelihood-function">Providing an alignment to a likelihood function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scoping-parameters-on-trees-time-heterogeneous-models">Scoping parameters on trees – time heterogeneous models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-a-parameter-as-constant">Specifying a parameter as constant</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#providing-a-starting-value-for-a-parameter">Providing a starting value for a parameter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-parameter-bounds-for-optimisation">Setting parameter bounds for optimisation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-an-upper-bound-for-branch-length">Setting an upper bound for branch length</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-rate-heterogeneity-functions">Specifying rate heterogeneity functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#specifying-phylo-hmms">Specifying Phylo-HMMs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-likelihood-functions-choice-of-optimisers">Fitting likelihood functions - Choice of optimisers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-check-your-optimisation-was-successful">How to check your optimisation was successful</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-the-fitted-likelihood-function">Overview of the fitted likelihood function</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#log-likelihood-and-number-of-free-parameters">Log likelihood and number of free parameters</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#aikake-information-criterion">Aikake Information Criterion</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-information-criterion">Bayesian Information Criterion</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-maximum-likelihood-estimates">Getting maximum likelihood estimates</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#one-at-a-time">One at a time</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#just-the-motif-probabilities">Just the motif probabilities</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#as-tables">As tables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-hypotheses-using-likelihood-ratio-tests">Testing Hypotheses - Using Likelihood Ratio Tests</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-hypotheses-by-parametric-bootstrapping">Testing Hypotheses - By parametric bootstrapping</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#determining-confidence-intervals-on-mles">Determining confidence intervals on MLEs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-results">Saving results</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reconstructing-ancestral-sequences">Reconstructing ancestral sequences</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2020-2026, cogent3 Team.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.18.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

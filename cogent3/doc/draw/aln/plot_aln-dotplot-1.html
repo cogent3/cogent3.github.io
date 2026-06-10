@@ -1,0 +1,846 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Dotplot basics &#8212; cogent3 2026.06.10 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=da3cec82" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=0790524f97105ba85085"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085" />
+
+    <script src="../../../../_static/documentation_options.js?v=a6bbb3be"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../../_static/thebelab-helper.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'cogent3/doc/draw/aln/plot_aln-dotplot-1';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="icon" href="../../../../_static/c3-square.svg"/>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Coevolution analysis" href="plot_aln-coevolution.html" />
+    <link rel="prev" title="Dotplot with annotated sequences" href="plot_aln-dotplot-2.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../../../_static/searchtools.js"></script>
+    <script src="../../../../_static/language_data.js"></script>
+    <script src="../../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/c3-logo.png" class="logo__image only-light" alt="cogent3 2026.06.10 documentation - Home"/>
+    <img src="../../../../_static/c3-logo.png" class="logo__image only-dark pst-js-only" alt="cogent3 2026.06.10 documentation - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Image Gallery
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../index.html">
+    User Guides
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../licenses.html">
+    License
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../codeshare.html">
+    Code Sharing
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../community.html">
+    Community
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../history.html">
+    Project History
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../pycogent.html">
+    How does cogent3 relate to PyCogent?
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../projects.html">
+    Projects using cogent3
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../data_file_links.html">
+    Data Files Used in the Documentation
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../../../genindex.html">
+    Index
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cogent3/cogent3" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Image Gallery
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../install.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../index.html">
+    User Guides
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../licenses.html">
+    License
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../codeshare.html">
+    Code Sharing
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../community.html">
+    Community
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../history.html">
+    Project History
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../pycogent.html">
+    How does cogent3 relate to PyCogent?
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../projects.html">
+    Projects using cogent3
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../data_file_links.html">
+    Data Files Used in the Documentation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../genindex.html">
+    Index
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/cogent3/cogent3" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar"><svg class="pst-icon svg-inline--fa" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
+  </svg>
+  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
+  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
+</button></div>
+        <div class="sidebar-primary-item">
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../annotations/plot_seq-features.html">Sequence Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../annotations/plot_annotation-db.html">Annotation DB Features</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="plot_aln-seqlogo.html">Sequence logos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot_aln-info-plot.html">Information analysis of an alignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot_aln-gaps-per-seq.html">Counting gaps per sequence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot_aln-dotplot-3.html">Assess alignment quality via dotplots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot_aln-dotplot-2.html">Dotplot with annotated sequences</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Dotplot basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot_aln-coevolution.html">Coevolution analysis</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tree/plot_tree-support.html">Showing Bootstrap Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tree/plot_tree-square.html">Square Dendrogram Style</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tree/plot_tree-radial.html">Radial Dendrogram Style</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tree/plot_tree-iplotx.html">Using iplotx with cogent3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tree/plot_tree-circular.html">Circular Dendrogram Style</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tree/plot_tree-angular.html">Angular Dendrogram Style</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Image Gallery</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Dotplot basics</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
+<section id="dotplot-basics">
+<h1>Dotplot basics<a class="headerlink" href="#dotplot-basics" title="Link to this heading">#</a></h1>
+<p>A technique (<a class="reference external" href="https://www.ncbi.nlm.nih.gov/pubmed/5456129">Gibbs and McIntyre</a>) for comparing sequences. All <code class="docutils literal notranslate"><span class="pre">cogent3</span></code> sequence collections classes (<code class="docutils literal notranslate"><span class="pre">SequenceCollection</span></code>, <code class="docutils literal notranslate"><span class="pre">Alignment</span></code>) have a dotplot method.</p>
+<p>The method returns a drawable, as demonstrated below between unaligned sequences.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cogent3</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_unaligned_seqs</span>
+
+<span class="n">seqs</span> <span class="o">=</span> <span class="n">load_unaligned_seqs</span><span class="p">(</span><span class="s2">&quot;data/SCA1-cds.fasta&quot;</span><span class="p">,</span> <span class="n">moltype</span><span class="o">=</span><span class="s2">&quot;dna&quot;</span><span class="p">)</span>
+<span class="n">draw</span> <span class="o">=</span> <span class="n">seqs</span><span class="o">.</span><span class="n">dotplot</span><span class="p">()</span>
+<span class="n">draw</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><script>
+window.PlotlyConfig = {MathJaxConfig: 'local'};
+if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}
+</script>
+<script type="module">import "https://cdn.plot.ly/plotly-3.6.0.min"</script>
+</div><div class="output text_html"><div style="height:488.8475836431227px; width:500px;">            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script>if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.6.0.min.js" integrity="sha256-QaOVwtVY0T02VaHrr6pnoHLCwayMJp4O5n4YyaE3rJk=" crossorigin="anonymous"></script>                <div id="53b5f33f-958a-4313-9e60-e654b7d72dc0" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("53b5f33f-958a-4313-9e60-e654b7d72dc0")) {                    Plotly.newPlot(                        "53b5f33f-958a-4313-9e60-e654b7d72dc0",                        [{"line":{"color":"blue"},"mode":"lines","name":"+ strand","showlegend":true,"x":[0,220,null,1682,1769,null,1613,2421,null,1116,1233,null,1331,1769,null,875,1000,null,1282,1769,null,766,1769,null,433,607,null,281,323,null,372,420,null,238,323,null,211,607,null,644,761,null,2254,2276,null,20,40,null,1126,1153,null,2238,2258,null,477,499,null,477,497,null,684,713,null,293,315,null,1551,1572,null,418,438,null,1414,1440,null,86,107,null,2036,2056,null,1581,1602,null,499,525,null,269,289,null,149,172,null,1060,1086,null,2299,2319,null,963,984,null,166,192,null,603,623,null,643,672,null,1666,1690,null,474,494,null,1657,1680,null,293,313,null,935,958,null,1481,1510,null,2131,2153,null,187,208,null,1172,1193,null,1285,1311,null,800,833,null,2277,2298,null,326,346,null,644,667,null,416,437,null,714,738,null,682,702,null,1597,1617,null,1419,1442,null,1161,1183,null,1202,1222,null,733,753,null,1529,1551,null,1953,1973,null,1395,1415,null,794,817,null,1415,1437,null,1334,1354,null,623,644,null,907,930,null,951,975,null,1129,1149,null,1726,1751,null,2228,2248],"xaxis":"x","y":[0,220,null,1622,1709,null,1553,2361,null,1056,1173,null,1271,1709,null,815,940,null,1222,1709,null,706,1709,null,430,604,null,278,320,null,369,417,null,235,320,null,208,604,null,587,704,null,835,857,null,962,982,null,1492,1519,null,1608,1628,null,1247,1269,null,1434,1454,null,46,75,null,59,81,null,724,745,null,1382,1402,null,1378,1404,null,1384,1405,null,647,667,null,764,785,null,258,284,null,504,524,null,469,492,null,1343,1369,null,168,188,null,939,960,null,910,936,null,651,671,null,1077,1106,null,628,652,null,1599,1619,null,469,492,null,86,106,null,1664,1687,null,141,170,null,1542,1564,null,328,349,null,292,313,null,1206,1232,null,1196,1229,null,154,175,null,151,171,null,590,613,null,1320,1341,null,348,372,null,1537,1557,null,1620,1640,null,1167,1190,null,1578,1600,null,527,547,null,1460,1480,null,971,993,null,1657,1677,null,1619,1639,null,1355,1378,null,734,756,null,772,792,null,1602,1623,null,1014,1037,null,1668,1692,null,787,807,null,889,914,null,218,238],"yaxis":"y","type":"scatter"}],                        {"autosize":false,"font":{"family":"Balto","size":14},"height":488.8475836431227,"hovermode":"closest","margin":{"b":50,"l":50,"pad":4,"r":50,"t":50},"showlegend":true,"title":{"text":"Window=20, Matched ≥ 14\u002f20 & Gap ≤ 0"},"width":500,"xaxis":{"mirror":true,"range":[0,2421],"showgrid":false,"showline":true,"title":{"text":"Chimp"},"visible":true},"yaxis":{"mirror":true,"range":[0,2367],"showgrid":false,"showline":true,"title":{"text":"Rat"},"visible":true},"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}}},                        {"responsive": true}                    ).then(function(){
+
+var gd = document.getElementById('53b5f33f-958a-4313-9e60-e654b7d72dc0');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };            </script>        </div></div></div>
+</div>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
+<p>If sequence names are not provided, two randomly chosen sequences are selected (see below). The plot title reflects the parameter values for defining a match. <code class="docutils literal notranslate"><span class="pre">window</span></code> is the size of the sequence segments being compared. <code class="docutils literal notranslate"><span class="pre">threshold</span></code> is the number of exact matches within <code class="docutils literal notranslate"><span class="pre">window</span></code> required for the two sequence segments to be considered a match. <code class="docutils literal notranslate"><span class="pre">gap</span></code> is the size of a gap between adjacent matches before merging.</p>
+<section id="modifying-the-matching-parameters">
+<h2>Modifying the matching parameters<a class="headerlink" href="#modifying-the-matching-parameters" title="Link to this heading">#</a></h2>
+<p>If we set window and threshold to be equal, this is equivalent to an exact match approach.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">draw</span> <span class="o">=</span> <span class="n">seqs</span><span class="o">.</span><span class="n">dotplot</span><span class="p">(</span><span class="n">name1</span><span class="o">=</span><span class="s2">&quot;Human&quot;</span><span class="p">,</span> <span class="n">name2</span><span class="o">=</span><span class="s2">&quot;Mouse&quot;</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">draw</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><script>
+window.PlotlyConfig = {MathJaxConfig: 'local'};
+if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}
+</script>
+<script type="module">import "https://cdn.plot.ly/plotly-3.6.0.min"</script>
+</div><div class="output text_html"><div style="height:490.18404907975463px; width:500px;">            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script>if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.6.0.min.js" integrity="sha256-QaOVwtVY0T02VaHrr6pnoHLCwayMJp4O5n4YyaE3rJk=" crossorigin="anonymous"></script>                <div id="7e4fa281-4265-4917-baf9-5ac354bc23e4" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("7e4fa281-4265-4917-baf9-5ac354bc23e4")) {                    Plotly.newPlot(                        "7e4fa281-4265-4917-baf9-5ac354bc23e4",                        [{"line":{"color":"blue"},"mode":"lines","name":"+ strand","showlegend":true,"x":[0,47,null,51,72,null,78,90,null,96,114,null,117,125,null,132,140,null,186,194,null,206,216,null,593,602,null,714,722,null,11,20,null,1582,1591,null,1581,1604,null,858,866,null,1704,1712,null,1649,1664,null,1744,1760,null,665,674,null,1394,1421,null,1437,1454,null,724,741,null,747,755,null,801,812,null,819,833,null,1299,1319,null,840,854,null,892,902,null,927,936,null,940,950,null,957,965,null,966,974,null,978,989,null,1032,1041,null,1068,1079,null,1080,1094,null,1905,1919,null,1102,1122,null,1128,1136,null,1140,1151,null,1179,1189,null,1212,1220,null,1347,1364,null,1224,1232,null,1242,1250,null,1252,1262,null,1287,1319,null,1320,1328,null,1329,1340,null,1344,1364,null,1368,1376,null,1377,1421,null,1461,1481,null,1489,1499,null,1506,1515,null,1527,1535,null,1536,1553,null,1554,1565,null,1566,1580,null,1611,1625,null,1626,1664,null,1665,1682,null,1719,1743,null,1788,1811,null,1761,1772,null,1824,1838,null,1875,1892,null,12,21,null,1583,1591,null,2270,2278,null,17,25,null,1812,1820,null,304,312,null,1707,1716,null,36,44,null,394,402,null,387,410,null,486,506,null,331,347,null,225,233,null,247,257,null,258,266,null,507,527,null,276,284,null,299,308,null,351,362,null,375,410,null,435,444,null,462,476,null,528,536,null,537,567,null,596,605,null,1580,1588,null,1448,1456,null,261,269,null,717,726,null,70,78,null,77,85,null,93,101,null,94,103,null,1151,1160,null,266,274,null,757,765,null,116,124,null,141,149,null,150,158,null,157,165,null,1362,1371,null,187,195,null,198,206,null,207,215,null,225,233,null,611,620,null,246,256,null,1956,1985,null,641,650,null,2340,2354,null,2055,2075,null,1914,1922,null,2223,2243,null,1932,1955,null,2109,2129,null,1992,2010,null,2011,2030,null,2031,2039,null,2040,2054,null,2076,2099,null,2151,2165,null,2172,2198,null,2209,2243,null,2250,2264,null,2265,2275,null,2276,2288,null,2304,2330,null,2364,2381,null,2382,2390,null,2394,2414,null,2421,2429,null,247,255,null,1962,1971,null,1962,1970,null,269,281,null,275,283,null,275,283,null,858,866,null,859,867,null,1912,1922,null,283,291,null,293,302,null,911,919,null,295,303,null,298,308,null,1704,1712,null,343,351,null,351,359,null,352,360,null,359,367,null,838,848,null,363,372,null,366,374,null,369,377,null,749,758,null,411,419,null,422,432,null,429,439,null,442,450,null,1533,1541,null,477,486,null,484,492,null,499,508,null,502,510,null,513,522,null,515,523,null,519,528,null,539,549,null,1744,1752,null,585,594,null,589,597,null,592,600,null,595,603,null,598,606,null,601,609,null,1925,1933,null,604,612,null,607,615,null,610,618,null,613,621,null,1203,1211,null,616,624,null,634,642,null,637,645,null,640,648,null,643,651,null,646,654,null,649,657,null,652,660,null,655,663,null,658,666,null,661,669,null,664,672,null,667,675,null,587,596,null,590,599,null,599,608,null,602,611,null,605,614,null,608,617,null,1735,1743,null,614,623,null,617,626,null,635,644,null,638,647,null,1639,1647,null,644,653,null,647,656,null,650,659,null,653,662,null,656,665,null,659,668,null,662,671,null,668,690,null,704,716,null,588,596,null,591,599,null,594,602,null,597,605,null,600,608,null,603,611,null,606,614,null,609,617,null,612,620,null,615,623,null,618,626,null,633,641,null,633,641,null,636,644,null,671,680,null,639,647,null,642,650,null,645,653,null,648,656,null,651,659,null,654,662,null,657,665,null,660,668,null,663,671,null,666,674,null,669,677,null,1401,1409,null,670,678,null,671,679,null,1437,1445,null,677,685,null,679,688,null,682,690,null,687,695,null,688,696,null,697,707,null,703,712,null,705,714,null,710,718,null,713,721,null,714,723,null,812,820,null,1507,1516,null,812,821,null,719,727,null,722,733,null,723,733,null,1989,1997,null,764,772,null,780,788,null,790,798,null,793,801,null,806,815,null,826,834,null,831,839,null,845,853,null,853,861,null,908,917,null,916,924,null,932,940,null,937,945,null,939,947,null,941,949,null,982,990,null,1011,1019,null,1012,1027,null,1030,1038,null,1072,1080,null,1081,1089,null,1085,1093,null,1092,1100,null,1163,1171,null,1195,1203,null,1195,1203,null,1679,1688,null,1218,1226,null,1224,1232,null,2055,2063,null,1240,1248,null,1253,1261,null,1258,1266,null,1284,1292,null,1302,1310,null,1322,1330,null,1330,1340,null,1341,1349,null,1345,1353,null,1391,1400,null,1394,1402,null,2288,2296,null,1425,1433,null,1434,1444,null,1834,1842,null,1459,1468,null,1470,1478,null,1472,1482,null,1510,1519,null,1539,1549,null,1549,1559,null,1576,1585,null,1578,1587,null,1666,1674,null,1645,1653,null,2202,2210,null,1661,1669,null,1673,1681,null,1694,1702,null,1702,1710,null,1730,1738,null,1792,1800,null,1751,1759,null,1898,1907,null,1898,1906,null,1818,1828,null,1819,1828,null,2065,2074,null,1880,1888,null,1911,1919,null,1974,1982,null,2116,2124,null,1985,1993,null,1991,1999,null,1992,2000,null,1997,2005,null,2041,2049,null,2057,2065,null,2067,2075,null,2098,2107,null,2103,2111,null,2126,2134,null,2133,2141,null,2142,2150,null,2153,2161,null,2153,2161,null,2218,2226,null,2273,2281,null,2285,2293,null,2364,2372,null,2395,2403,null,2437,2445],"xaxis":"x","y":[0,47,null,51,72,null,78,90,null,96,114,null,117,125,null,132,140,null,186,194,null,206,216,null,593,602,null,714,722,null,1510,1519,null,11,20,null,1509,1532,null,786,794,null,1632,1640,null,1577,1592,null,1672,1688,null,593,602,null,1322,1349,null,1365,1382,null,652,669,null,675,683,null,729,740,null,747,761,null,1227,1247,null,768,782,null,820,830,null,855,864,null,868,878,null,885,893,null,894,902,null,906,917,null,960,969,null,996,1007,null,1008,1022,null,1833,1847,null,1030,1050,null,1056,1064,null,1068,1079,null,1107,1117,null,1140,1148,null,1275,1292,null,1152,1160,null,1170,1178,null,1180,1190,null,1215,1247,null,1248,1256,null,1257,1268,null,1272,1292,null,1296,1304,null,1305,1349,null,1389,1409,null,1417,1427,null,1434,1443,null,1455,1463,null,1464,1481,null,1482,1493,null,1494,1508,null,1539,1553,null,1554,1592,null,1593,1610,null,1647,1671,null,1716,1739,null,1689,1700,null,1752,1766,null,1803,1820,null,1163,1172,null,1163,1171,null,1850,1858,null,2121,2129,null,21,29,null,30,38,null,33,42,null,391,399,null,36,44,null,384,407,null,483,503,null,328,344,null,222,230,null,244,254,null,255,263,null,504,524,null,273,281,null,296,305,null,348,359,null,372,407,null,432,441,null,459,473,null,525,533,null,534,564,null,593,602,null,38,46,null,53,61,null,55,63,null,61,70,null,388,396,null,1781,1789,null,2056,2064,null,1504,1513,null,1505,1514,null,98,106,null,589,597,null,1694,1702,null,450,458,null,1802,1810,null,486,494,null,186,195,null,328,336,null,945,953,null,222,230,null,207,215,null,593,602,null,1913,1923,null,1908,1937,null,593,602,null,2292,2306,null,2007,2027,null,1866,1874,null,2175,2195,null,1884,1907,null,2061,2081,null,1944,1962,null,1963,1982,null,1983,1991,null,1992,2006,null,2028,2051,null,2103,2117,null,2124,2150,null,2161,2195,null,2202,2216,null,2217,2227,null,2228,2240,null,2256,2282,null,2316,2333,null,2334,2342,null,2346,2366,null,2373,2381,null,608,616,null,244,253,null,608,616,null,504,516,null,786,794,null,1378,1386,null,1378,1386,null,273,281,null,273,283,null,1209,1217,null,488,497,null,488,496,null,1615,1623,null,1630,1640,null,297,305,null,1210,1218,null,466,474,null,1475,1483,null,2002,2010,null,2002,2012,null,1584,1593,null,1359,1367,null,759,767,null,375,384,null,1344,1352,null,781,791,null,498,508,null,1212,1220,null,1212,1220,null,1440,1449,null,241,249,null,735,744,null,784,792,null,429,438,null,1667,1675,null,1110,1119,null,1670,1680,null,538,546,null,857,866,null,858,866,null,858,866,null,858,866,null,858,866,null,858,866,null,2182,2190,null,858,866,null,858,866,null,858,866,null,858,866,null,1448,1456,null,858,866,null,858,866,null,858,866,null,858,866,null,858,866,null,858,866,null,858,866,null,858,866,null,858,866,null,858,866,null,858,866,null,858,866,null,858,866,null,593,602,null,593,602,null,593,602,null,593,602,null,593,602,null,593,602,null,1720,1728,null,593,602,null,593,602,null,593,602,null,593,602,null,1594,1602,null,593,602,null,593,602,null,593,602,null,593,602,null,593,602,null,593,602,null,593,602,null,593,615,null,629,641,null,1329,1337,null,1329,1337,null,1329,1337,null,1329,1337,null,1329,1337,null,1329,1337,null,1329,1337,null,1329,1337,null,1329,1337,null,1329,1337,null,1329,1337,null,594,602,null,1329,1337,null,1329,1337,null,1364,1373,null,1329,1337,null,1329,1337,null,1329,1337,null,1329,1337,null,1329,1337,null,1329,1337,null,1329,1337,null,1329,1337,null,1329,1337,null,1329,1337,null,1329,1337,null,594,602,null,1089,1097,null,2211,2219,null,597,605,null,2222,2230,null,183,192,null,243,251,null,694,702,null,1052,1060,null,1458,1468,null,1796,1805,null,1054,1063,null,1211,1219,null,1213,1221,null,1612,1621,null,714,722,null,1409,1418,null,1612,1621,null,1387,1395,null,1023,1034,null,1116,1126,null,658,666,null,1830,1838,null,1253,1261,null,1444,1452,null,737,745,null,642,651,null,1375,1383,null,1234,1242,null,1431,1439,null,585,593,null,816,825,null,40,48,null,65,73,null,611,619,null,2209,2217,null,859,867,null,2296,2304,null,2221,2229,null,1099,1114,null,2389,2397,null,560,568,null,1352,1360,null,728,736,null,1835,1843,null,293,301,null,85,93,null,818,826,null,1139,1148,null,1282,1290,null,2007,2015,null,1152,1160,null,126,134,null,2146,2154,null,2094,2102,null,1461,1469,null,1122,1130,null,1786,1794,null,1402,1412,null,2059,2067,null,2251,2259,null,1935,1944,null,1166,1174,null,1332,1340,null,1436,1444,null,137,147,null,139,147,null,1791,1800,null,985,993,null,722,732,null,1793,1802,null,1815,1825,null,979,989,null,425,434,null,2328,2337,null,1567,1575,null,1114,1122,null,1575,1583,null,2048,2056,null,1059,1067,null,133,141,null,1286,1294,null,496,504,null,1663,1671,null,197,205,null,197,206,null,1679,1687,null,1701,1711,null,2017,2026,null,1702,1711,null,1044,1052,null,2154,2162,null,2068,2076,null,1926,1934,null,1772,1780,null,1386,1394,null,1271,1279,null,679,687,null,2365,2373,null,1748,1756,null,1686,1694,null,1061,1070,null,755,763,null,1294,1302,null,2374,2382,null,128,136,null,1027,1035,null,1119,1127,null,2023,2031,null,842,850,null,651,659,null,359,367,null,2220,2228,null,958,966],"yaxis":"y","type":"scatter"}],                        {"autosize":false,"font":{"family":"Balto","size":14},"height":490.18404907975463,"hovermode":"closest","margin":{"b":50,"l":50,"pad":4,"r":50,"t":50},"showlegend":true,"title":{"text":"Window=8, Matched ≥ 8\u002f8 & Gap ≤ 0"},"width":500,"xaxis":{"mirror":true,"range":[0,2445],"showgrid":false,"showline":true,"title":{"text":"Human"},"visible":true},"yaxis":{"mirror":true,"range":[0,2397],"showgrid":false,"showline":true,"title":{"text":"Mouse"},"visible":true},"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}}},                        {"responsive": true}                    ).then(function(){
+
+var gd = document.getElementById('7e4fa281-4265-4917-baf9-5ac354bc23e4');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };            </script>        </div></div></div>
+</div>
+</section>
+<section id="displaying-dotplot-for-the-reverse-complement">
+<h2>Displaying dotplot for the reverse complement<a class="headerlink" href="#displaying-dotplot-for-the-reverse-complement" title="Link to this heading">#</a></h2>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">draw</span> <span class="o">=</span> <span class="n">seqs</span><span class="o">.</span><span class="n">dotplot</span><span class="p">(</span><span class="n">name1</span><span class="o">=</span><span class="s2">&quot;Human&quot;</span><span class="p">,</span> <span class="n">name2</span><span class="o">=</span><span class="s2">&quot;Mouse&quot;</span><span class="p">,</span> <span class="n">rc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">draw</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><script>
+window.PlotlyConfig = {MathJaxConfig: 'local'};
+if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}
+</script>
+<script type="module">import "https://cdn.plot.ly/plotly-3.6.0.min"</script>
+</div><div class="output text_html"><div style="height:490.18404907975463px; width:500px;">            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script>if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.6.0.min.js" integrity="sha256-QaOVwtVY0T02VaHrr6pnoHLCwayMJp4O5n4YyaE3rJk=" crossorigin="anonymous"></script>                <div id="5a522048-a207-4ffa-98bb-0f626647720f" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("5a522048-a207-4ffa-98bb-0f626647720f")) {                    Plotly.newPlot(                        "5a522048-a207-4ffa-98bb-0f626647720f",                        [{"line":{"color":"blue"},"mode":"lines","name":"+ strand","showlegend":true,"x":[0,131,null,127,221,null,1700,1928,null,1349,1698,null,710,779,null,893,1018,null,1130,1698,null,784,1018,null,1014,1698,null,662,685,null,778,881,null,1953,2445,null,1433,1458,null,1910,2445,null,433,595,null,281,323,null,372,425,null,238,323,null,211,595,null,910,937,null,2331,2352,null,1388,1415,null,29,52,null,1144,1171,null,477,499,null,1433,1470,null,55,75,null,440,463,null,702,732,null,657,732,null,1215,1235,null,1003,1026,null,323,343,null,294,316,null,1569,1590,null,1570,1591,null,718,738,null,1567,1588,null,2273,2293,null,1631,1654,null,564,589,null,1001,1025,null,1373,1395,null,93,113,null,1599,1620,null,1376,1396,null,1609,1629,null,269,289,null,1080,1103,null,2317,2337,null,961,982,null,1455,1476,null,661,683,null,663,690,null,1330,1351,null,1610,1630,null,999,1025,null,293,313,null,953,976,null,179,209,null,1190,1212,null,693,714,null,2192,2212,null,1701,1725,null,731,758,null,1616,1636,null,416,437,null,342,374,null,700,720,null,1180,1200,null,1304,1329,null,751,771,null,697,717,null,1971,1991,null,1198,1219,null,1436,1459,null,1003,1033,null,969,993,null,1690,1712,null,1418,1438,null,2246,2266],"xaxis":"x","y":[0,131,null,127,221,null,1628,1856,null,1277,1626,null,638,707,null,821,946,null,1058,1626,null,712,946,null,942,1626,null,590,613,null,706,809,null,1905,2397,null,1385,1410,null,1862,2397,null,430,592,null,278,320,null,369,422,null,235,320,null,208,592,null,34,61,null,855,876,null,1160,1187,null,127,150,null,1498,1525,null,1253,1275,null,740,777,null,713,733,null,634,657,null,46,76,null,582,657,null,636,656,null,53,76,null,758,778,null,1614,1636,null,730,751,null,1150,1171,null,461,481,null,1615,1636,null,842,862,null,1100,1123,null,1182,1207,null,580,604,null,143,165,null,1848,1868,null,770,791,null,2057,2077,null,1393,1413,null,504,524,null,1351,1374,null,168,188,null,1696,1717,null,1293,1314,null,652,674,null,1085,1112,null,1402,1423,null,130,150,null,629,655,null,86,106,null,1670,1693,null,320,350,null,292,314,null,1916,1937,null,274,294,null,1285,1309,null,347,374,null,646,666,null,1326,1347,null,457,489,null,1543,1563,null,1585,1605,null,1213,1238,null,1466,1486,null,1458,1478,null,1663,1683,null,765,786,null,1172,1195,null,1090,1120,null,1674,1698,null,1621,1643,null,1286,1306,null,218,238],"yaxis":"y","type":"scatter"},{"line":{"color":"red"},"mode":"lines","name":"- strand","showlegend":true,"x":[1717,1744,null,447,467,null,1370,1391,null,396,421,null,262,283,null,1347,1367,null,913,933,null,934,954,null,683,708,null,1433,1453,null,137,166,null,1465,1485,null,1605,1637,null,495,515,null,1868,1891,null,197,218,null,668,689,null,148,168,null,145,169,null,473,497,null,1677,1698,null,1397,1419,null,2091,2111,null,160,181,null,1453,1473,null,2296,2323,null,1962,1982,null,242,264,null,465,493,null,1351,1371,null,500,520,null,570,594,null,754,776,null,868,889,null,2319,2339,null,1488,1508,null,1741,1763,null,1843,1864],"xaxis":"x","y":[1729,1702,null,1829,1809,null,871,850,null,391,366,null,707,686,null,1610,1590,null,1358,1338,null,73,53,null,2291,2266,null,491,471,null,201,172,null,192,172,null,196,164,null,1016,996,null,1265,1242,null,1588,1567,null,2077,2056,null,68,48,null,1625,1601,null,495,471,null,494,473,null,544,522,null,1809,1789,null,1068,1047,null,2284,2264,null,1644,1617,null,1420,1400,null,1014,992,null,101,73,null,2381,2361,null,1427,1407,null,1940,1916,null,87,65,null,1654,1633,null,1948,1928,null,284,264,null,547,525,null,1984,1963],"yaxis":"y","type":"scatter"}],                        {"autosize":false,"font":{"family":"Balto","size":14},"height":490.18404907975463,"hovermode":"closest","margin":{"b":50,"l":50,"pad":4,"r":50,"t":50},"showlegend":true,"title":{"text":"Window=20, Matched ≥ 14\u002f20 & Gap ≤ 0"},"width":500,"xaxis":{"mirror":true,"range":[0,2445],"showgrid":false,"showline":true,"title":{"text":"Human"},"visible":true},"yaxis":{"mirror":true,"range":[0,2397],"showgrid":false,"showline":true,"title":{"text":"Mouse"},"visible":true},"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}}},                        {"responsive": true}                    ).then(function(){
+
+var gd = document.getElementById('5a522048-a207-4ffa-98bb-0f626647720f');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };            </script>        </div></div></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>clicking on an entry in the legend turns it off</p>
+</div>
+</section>
+<section id="setting-plot-attributes">
+<h2>Setting plot attributes<a class="headerlink" href="#setting-plot-attributes" title="Link to this heading">#</a></h2>
+<p>I’ll modify the title and figure width.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">draw</span> <span class="o">=</span> <span class="n">seqs</span><span class="o">.</span><span class="n">dotplot</span><span class="p">(</span><span class="n">name1</span><span class="o">=</span><span class="s2">&quot;Human&quot;</span><span class="p">,</span> <span class="n">name2</span><span class="o">=</span><span class="s2">&quot;Mouse&quot;</span><span class="p">,</span> <span class="n">rc</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;SCA1&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+<span class="n">draw</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><script>
+window.PlotlyConfig = {MathJaxConfig: 'local'};
+if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}
+</script>
+<script type="module">import "https://cdn.plot.ly/plotly-3.6.0.min"</script>
+</div><div class="output text_html"><div style="height:392.14723926380367px; width:400px;">            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script>if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.6.0.min.js" integrity="sha256-QaOVwtVY0T02VaHrr6pnoHLCwayMJp4O5n4YyaE3rJk=" crossorigin="anonymous"></script>                <div id="78911364-6428-4fec-a64b-4b4f82965cb5" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("78911364-6428-4fec-a64b-4b4f82965cb5")) {                    Plotly.newPlot(                        "78911364-6428-4fec-a64b-4b4f82965cb5",                        [{"line":{"color":"blue"},"mode":"lines","name":"+ strand","showlegend":true,"x":[0,131,null,127,221,null,1700,1928,null,1349,1698,null,710,779,null,893,1018,null,1130,1698,null,784,1018,null,1014,1698,null,662,685,null,778,881,null,1953,2445,null,1433,1458,null,1910,2445,null,433,595,null,281,323,null,372,425,null,238,323,null,211,595,null,910,937,null,2331,2352,null,1388,1415,null,29,52,null,1144,1171,null,477,499,null,1433,1470,null,55,75,null,440,463,null,702,732,null,657,732,null,1215,1235,null,1003,1026,null,323,343,null,294,316,null,1569,1590,null,1570,1591,null,718,738,null,1567,1588,null,2273,2293,null,1631,1654,null,564,589,null,1001,1025,null,1373,1395,null,93,113,null,1599,1620,null,1376,1396,null,1609,1629,null,269,289,null,1080,1103,null,2317,2337,null,961,982,null,1455,1476,null,661,683,null,663,690,null,1330,1351,null,1610,1630,null,999,1025,null,293,313,null,953,976,null,179,209,null,1190,1212,null,693,714,null,2192,2212,null,1701,1725,null,731,758,null,1616,1636,null,416,437,null,342,374,null,700,720,null,1180,1200,null,1304,1329,null,751,771,null,697,717,null,1971,1991,null,1198,1219,null,1436,1459,null,1003,1033,null,969,993,null,1690,1712,null,1418,1438,null,2246,2266],"xaxis":"x","y":[0,131,null,127,221,null,1628,1856,null,1277,1626,null,638,707,null,821,946,null,1058,1626,null,712,946,null,942,1626,null,590,613,null,706,809,null,1905,2397,null,1385,1410,null,1862,2397,null,430,592,null,278,320,null,369,422,null,235,320,null,208,592,null,34,61,null,855,876,null,1160,1187,null,127,150,null,1498,1525,null,1253,1275,null,740,777,null,713,733,null,634,657,null,46,76,null,582,657,null,636,656,null,53,76,null,758,778,null,1614,1636,null,730,751,null,1150,1171,null,461,481,null,1615,1636,null,842,862,null,1100,1123,null,1182,1207,null,580,604,null,143,165,null,1848,1868,null,770,791,null,2057,2077,null,1393,1413,null,504,524,null,1351,1374,null,168,188,null,1696,1717,null,1293,1314,null,652,674,null,1085,1112,null,1402,1423,null,130,150,null,629,655,null,86,106,null,1670,1693,null,320,350,null,292,314,null,1916,1937,null,274,294,null,1285,1309,null,347,374,null,646,666,null,1326,1347,null,457,489,null,1543,1563,null,1585,1605,null,1213,1238,null,1466,1486,null,1458,1478,null,1663,1683,null,765,786,null,1172,1195,null,1090,1120,null,1674,1698,null,1621,1643,null,1286,1306,null,218,238],"yaxis":"y","type":"scatter"},{"line":{"color":"red"},"mode":"lines","name":"- strand","showlegend":true,"x":[1717,1744,null,447,467,null,1370,1391,null,396,421,null,262,283,null,1347,1367,null,913,933,null,934,954,null,683,708,null,1433,1453,null,137,166,null,1465,1485,null,1605,1637,null,495,515,null,1868,1891,null,197,218,null,668,689,null,148,168,null,145,169,null,473,497,null,1677,1698,null,1397,1419,null,2091,2111,null,160,181,null,1453,1473,null,2296,2323,null,1962,1982,null,242,264,null,465,493,null,1351,1371,null,500,520,null,570,594,null,754,776,null,868,889,null,2319,2339,null,1488,1508,null,1741,1763,null,1843,1864],"xaxis":"x","y":[1729,1702,null,1829,1809,null,871,850,null,391,366,null,707,686,null,1610,1590,null,1358,1338,null,73,53,null,2291,2266,null,491,471,null,201,172,null,192,172,null,196,164,null,1016,996,null,1265,1242,null,1588,1567,null,2077,2056,null,68,48,null,1625,1601,null,495,471,null,494,473,null,544,522,null,1809,1789,null,1068,1047,null,2284,2264,null,1644,1617,null,1420,1400,null,1014,992,null,101,73,null,2381,2361,null,1427,1407,null,1940,1916,null,87,65,null,1654,1633,null,1948,1928,null,284,264,null,547,525,null,1984,1963],"yaxis":"y","type":"scatter"}],                        {"autosize":false,"font":{"family":"Balto","size":14},"height":392.14723926380367,"hovermode":"closest","margin":{"b":50,"l":50,"pad":4,"r":50,"t":50},"showlegend":true,"title":{"text":"SCA1"},"width":400,"xaxis":{"mirror":true,"range":[0,2445],"showgrid":false,"showline":true,"title":{"text":"Human"},"visible":true},"yaxis":{"mirror":true,"range":[0,2397],"showgrid":false,"showline":true,"title":{"text":"Mouse"},"visible":true},"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}}},                        {"responsive": true}                    ).then(function(){
+
+var gd = document.getElementById('78911364-6428-4fec-a64b-4b4f82965cb5');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };            </script>        </div></div></div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="plot_aln-dotplot-2.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Dotplot with annotated sequences</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="plot_aln-coevolution.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Coevolution analysis</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-the-matching-parameters">Modifying the matching parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#displaying-dotplot-for-the-reverse-complement">Displaying dotplot for the reverse complement</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-plot-attributes">Setting plot attributes</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2020-2026, cogent3 Team.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.18.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
