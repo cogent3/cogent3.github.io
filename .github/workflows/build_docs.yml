@@ -10,26 +10,14 @@ jobs:
     name: Doc Build
     runs-on: 'ubuntu-latest'
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v6
         with:
-           path: c3org
-
-      - uses: actions/checkout@v2
-        with:
-           repository: cogent3/cogent3
-           path: c3src
-           ref: develop
-
-      - shell: bash -l {0}
-        run: |
-          mv c3src/doc c3org/doc/doc
-          cp c3org/doc/doc/set_working_directory.py c3org/doc/.
-          cp c3org/doc/doc/cogent3.bib c3org/doc/.
+          submodules: recursive
 
       - name: Setup python
-        uses: "actions/setup-python@v1"
+        uses: "actions/setup-python@v6"
         with:
-           python-version: "3.12"
+           python-version: "3.14"
 
       - name: "Setup virtualenv and install cogent3[dev]"
         if: startsWith(runner.os, 'macOS') || startsWith(runner.os, 'Linux')
@@ -38,20 +26,20 @@ jobs:
           python -m venv .venv
           source .venv/bin/activate
           python -m pip install --upgrade pip wheel setuptools
-          python -m pip install -r c3org/requirements.txt
+          python -m pip install -r requirements.txt
           python -m pip list
 
       - name: Build docs
         shell: bash -l {0}
-        working-directory: c3org/doc/
+        working-directory: doc/
         run: |
-          source ../../.venv/bin/activate
+          source ../.venv/bin/activate
           export PYDEVD_DISABLE_FILE_VALIDATION=1
           make github
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: c3org/docs
+          publish_dir: docs
           publish_branch: master
