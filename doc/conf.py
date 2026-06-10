@@ -77,7 +77,7 @@ add_module_names = False  # don't include module path to module/func names
 numpydoc_class_members_toctree = False
 html_logo = "_static/c3-logo.png"
 html_favicon = "_static/c3-square.svg"
-bibtex_bibfiles = ["cogent3.bib"]
+bibtex_bibfiles = ["cogent3/doc/cogent3.bib"]
 
 templates_path = ["doc/templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
