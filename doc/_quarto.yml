@@ -1,0 +1,88 @@
+project:
+  type: website
+  output-dir: _site
+  # The doc/cogent3 submodule lives inside this project directory, and quarto
+  # would otherwise treat its markdown as input -- rendering the library docs a
+  # second time into docs/cogent3/. Listing the wrapper pages explicitly is the
+  # only thing keeping that out. Verify with:
+  #   quarto inspect doc | jq '.files.input'
+  render:
+    - index.qmd
+    - codeshare.qmd
+    - projects.qmd
+    - history.qmd
+    - genindex.qmd
+  # llms.txt was shipped verbatim to the site root by sphinx's html_extra_path.
+  # Quarto only copies files it sees referenced from a document, so anything
+  # served as-is has to be named here.
+  resources:
+    - llms.txt
+    - images/
+
+# There is deliberately no `jupyter:` key and no `execute:` block: no page on
+# this site runs code. Adding one would pull in a kernel and a _freeze/ cache
+# for a build that is pure markdown.
+
+# copied out of the cogent3 doc tree by build.sh rather than duplicated under
+# version control, so that C3_DOC stays the single source of truth
+bibliography: cogent3.bib
+
+website:
+  title: "cogent3"
+  favicon: images/c3-square.svg
+  # This navbar is mirrored in the cogent3 repo's doc/_quarto.yml. The two
+  # quarto projects render into docs/ and docs/doc/ respectively, so each
+  # spells the same menu with hrefs relative to its own project root. An entry
+  # added here needs the matching entry there, or the header changes as you
+  # cross the /doc/ boundary.
+  navbar:
+    logo: images/c3-logo.svg
+    logo-alt: "cogent3"
+    search: true
+    left:
+      - text: "Home"
+        href: index.qmd
+      - text: "Apps"
+        href: doc/app/index.html
+      - text: "Cookbook"
+        href: doc/cookbook/index.html
+      - text: "Tutorials"
+        href: doc/examples/index.html
+      - text: "Gallery"
+        href: doc/draw/index.html
+      - text: "API"
+        href: doc/reference/index.html
+      - text: "Install"
+        href: doc/install.html
+    right:
+      # sphinx put everything past the 5th toctree entry behind a dropdown
+      # (header_links_before_dropdown: 5); this menu plays that role, in the
+      # order the two hidden toctrees in the old index.rst defined
+      - text: "About"
+        menu:
+          - text: "User Guides"
+            href: doc/index.html
+          - text: "Code Sharing"
+            href: codeshare.qmd
+          - text: "Community"
+            href: doc/community.html
+          - text: "Project History"
+            href: history.qmd
+          - text: "How cogent3 relates to PyCogent"
+            href: doc/pycogent.html
+          - text: "Projects using cogent3"
+            href: projects.qmd
+          - text: "Data files"
+            href: doc/data_file_links.html
+          - text: "License"
+            href: doc/licenses.html
+    tools:
+      - icon: github
+        href: https://github.com/cogent3/cogent3
+        text: "cogent3 on GitHub"
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 4

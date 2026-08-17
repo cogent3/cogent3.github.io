@@ -1,0 +1,21 @@
+[project]
+name = "cogent3org"
+version = "0"
+description = "the cogent3.org website"
+requires-python = ">=3.11"
+dependencies = []
+
+[tool.uv]
+# nothing to install here, this project is just a quarto site
+package = false
+
+[dependency-groups]
+# a fallback for environments without quarto on PATH. CI uses the SHA-pinned
+# quarto-dev action and build.sh prefers $QUARTO, so both bypass this. The
+# version is pinned because the unified navbar depends on how quarto rewrites
+# hrefs that point outside the project, which is undocumented behaviour.
+#
+# No cogent3, no ipykernel: nothing on the wrapper pages executes code. The
+# library docs that do are built from the cogent3 checkout, using cogent3's own
+# `doc` dependency group.
+doc = ["quarto-cli==1.10.18"]
