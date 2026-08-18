@@ -19,8 +19,9 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          # the cogent3 doc sources come from the doc/cogent3 submodule; build.sh
-          # renders them into docs/doc/
+          # build.sh composes the cogent3 doc tree out of this submodule into the
+          # quarto project and renders the whole site as one project, so the
+          # submodule pin is what fixes the documentation version published here
           submodules: recursive
           persist-credentials: false
 
@@ -33,10 +34,9 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "doc/cogent3/pyproject.toml"
 
-      # pinned to the same version used locally, because the unified navbar
-      # depends on how quarto rewrites hrefs that point outside the project,
-      # which is undocumented behaviour. build.sh prefers $QUARTO over its own
-      # uv dependency group, so this binary is the one that gets used.
+      # pinned so CI renders with the same quarto as local builds. build.sh
+      # prefers $QUARTO over its own uv dependency group, so this is the binary
+      # that gets used and quarto-cli is never installed from PyPI here.
       - uses: quarto-dev/quarto-actions/setup@8a96df13519ee81fd526f2dfca5962811136661b # v2.2.0
         with:
           version: 1.10.18

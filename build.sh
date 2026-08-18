@@ -68,9 +68,14 @@ if ((!skip_compose)); then
   # --copy-links dereferences symlinks: in the submodule doc/data/fastq.txt
   # points into tests/, which would otherwise arrive here as a link with no
   # referent and fail the render when quarto copies resources.
+  # site_libs/ is quarto's own asset dir, gitignored upstream but present in any
+  # checkout whose docs have been built -- as C3_REPO ones usually have. Copying
+  # it in makes the loop below symlink doc/site_libs at it, which shadows the lib
+  # dir this render needs to write, and the site publishes with no js or css.
   rsync -a --copy-links --delete \
     --exclude '_quarto.yml' \
     --exclude '_site/' --exclude '_freeze/' --exclude '.quarto/' \
+    --exclude 'site_libs/' \
     --exclude 'reference/' --exclude 'objects.json' \
     "$C3_DOC/" "$SITE/doc/"
   # The cogent3 pages address files relative to *their* project root -- 75 pages

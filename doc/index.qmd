@@ -59,29 +59,83 @@ You don't have to be an expert in structural programming languages (like Python)
 
 ## 🆕 Features & 📣 Announcements
 
-::: {.callout-note collapse="true" appearance="simple" title="🗞️ Benchmarks shows cogent3 is typically faster than biopython and scikit-bio 🚀"}
+<!-- Announcements rotate through a bootstrap carousel: one item shown in full,
+     nothing behind a click. Adding an announcement means adding a .carousel-item
+     div below AND an indicator button in the raw html block -- the dot count must
+     match the slide count, and exactly one slide carries .active. -->
+
+::::: {#announcements .carousel .slide .border .rounded data-bs-ride="carousel" data-bs-interval="8000" aria-label="Features and announcements"}
+
+:::: {.carousel-inner}
+
+::: {.carousel-item .active}
+### 🗞️ Benchmarks shows cogent3 is typically faster than biopython and scikit-bio 🚀
+
 Kudos to the `cogent3` core devs 👾 — their work redesigning the foundations of `cogent3` is clearly paying off. Two [blog posts](https://gavinhuttley.dev) comparing `cogent3`, `biopython`, and `scikit-bio` show that `cogent3` is faster at parsing raw sequence formats and can be up to 100× faster for genome annotation handling. Even better, it achieves this with much less code 🤩.
 :::
 
-::: {.callout-note collapse="true" appearance="simple" title="🆕 scinexus is the new home for the cogent3 app infrastructure 🚀‼️"}
+::: {.carousel-item}
+### 🆕 scinexus is the new home for the cogent3 app infrastructure 🚀‼️
+
 After 7 years of incubation inside `cogent3` we felt it was time that apps left home and were made available to a wider audience of data scientists. There will be zero impact for users of `cogent3` -- all our apps and data stores will continue to work. [scinexus](https://scinexus.readthedocs.io) is now a requirement for `cogent3` and so will always be installed and thus readily accessible for defining your own apps. If you also use some of our utility functions, you may see deprecation warnings telling how to change your code to using `scinexus` instead. See [data store](https://scinexus.readthedocs.io/en/latest/howto/use-data-stores.html) too.
 :::
 
-::: {.callout-note collapse="true" appearance="simple" title="🆕 Automate tracking citations"}
+::: {.carousel-item}
+### 🆕 Automate tracking citations
+
 We have built a mechanism for defining and tracking citations for apps, making it easier for users to correctly acknowledge app developer efforts. See [the scinexus docs](https://scinexus.readthedocs.io/en/latest/howto/log-and-cite.html) for how to add a citation to your app and how to cite the apps you use.
 :::
 
-::: {.callout-note collapse="true" appearance="simple" title="🆕 Drawing genome annotations"}
+::: {.carousel-item}
+### 🆕 Drawing genome annotations
+
 The new `cogent3.draw_annotations()` function allows drawing genomic features from the annotation database alone. Check out the new section in the Gallery.
 :::
 
-::: {.callout-note collapse="true" appearance="simple" title="📣 The cogent3 code-sharing site"}
+::: {.carousel-item}
+### 📣 The cogent3 code-sharing site
+
 Share your `cogent3` ecosystem code solutions for others to benefit from your awesomeness 😎. Click the "Code Sharing" link at the top of this page to read more.
 :::
 
-::: {.callout-note collapse="true" appearance="simple" title="📣 The diverse-seq package has been rewritten in rust 🚀!"}
+::: {.carousel-item}
+### 📣 The diverse-seq package has been rewritten in rust 🚀!
+
 The sequence sampling tool [diverse-seq](https://diverse-seq.readthedocs.io), which provides multiple apps for sampling representative sequences, just got faster! The performance critical code has been rewritten in Rust. Give it a try 😀.
 :::
+
+::::
+
+```{=html}
+<button class="carousel-control-prev" type="button" data-bs-target="#announcements" data-bs-slide="prev">
+  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+  <span class="visually-hidden">Previous announcement</span>
+</button>
+<button class="carousel-control-next" type="button" data-bs-target="#announcements" data-bs-slide="next">
+  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+  <span class="visually-hidden">Next announcement</span>
+</button>
+<div class="carousel-indicators">
+  <button type="button" data-bs-target="#announcements" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Announcement 1"></button>
+  <button type="button" data-bs-target="#announcements" data-bs-slide-to="1" aria-label="Announcement 2"></button>
+  <button type="button" data-bs-target="#announcements" data-bs-slide-to="2" aria-label="Announcement 3"></button>
+  <button type="button" data-bs-target="#announcements" data-bs-slide-to="3" aria-label="Announcement 4"></button>
+  <button type="button" data-bs-target="#announcements" data-bs-slide-to="4" aria-label="Announcement 5"></button>
+  <button type="button" data-bs-target="#announcements" data-bs-slide-to="5" aria-label="Announcement 6"></button>
+</div>
+<script>
+  // bootstrap drops the slide *transition* under prefers-reduced-motion but keeps
+  // autoplaying, so stop it here. bootstrap.min.js is a plain <head> script, so it
+  // has already run by the time this does.
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    bootstrap.Carousel.getOrCreateInstance(
+      document.getElementById("announcements")
+    ).pause();
+  }
+</script>
+```
+
+:::::
 
 ***
 

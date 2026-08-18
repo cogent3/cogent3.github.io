@@ -9,3 +9,53 @@
   max-height: 52.8px;
   min-height: 33px;
 }
+
+/* The announcements carousel on the landing page. Bootstrap's carousel is built
+   for edge-to-edge images, so the parts below adapt it to a panel of text. */
+
+/* The prev/next controls are absolute overlays spanning 15% of the panel by
+   default, which puts their arrows on top of the text. Narrowing them to the
+   width of the gutter below parks each arrow beside the text instead. */
+#announcements .carousel-control-prev,
+#announcements .carousel-control-next {
+  width: 3rem;
+}
+
+/* Gutters for the arrows and, at the bottom, the indicator dots. The min-height
+   is the tallest announcement (measured: 175px of text) plus that padding, so
+   every slide occupies the same box and the page does not jump on rotation.
+   Raise it if a longer announcement is added; on narrow viewports text wraps
+   further and the panel simply grows past the floor. */
+#announcements .carousel-inner {
+  min-height: 15rem;
+  padding: 1.25rem 3rem 2.5rem;
+}
+
+/* Each slide is the <section> quarto builds around its heading, so it sits at
+   the top of that fixed box and the title stays put as the panel rotates; only
+   the trailing whitespace varies. The title is a slide heading rather than a
+   document section, so it drops to body-adjacent size, loses the leading margin
+   an h3 would bring into the panel, and loses quarto's hover anchor link, which
+   would link to something the reader cannot keep in view. */
+#announcements .carousel-item h3 {
+  font-size: 1.1rem;
+  margin-top: 0;
+}
+
+#announcements .carousel-item .anchorjs-link {
+  display: none;
+}
+
+/* Quarto switches themes by swapping stylesheets and setting a class on <body>;
+   it never sets data-bs-theme, so bootstrap's own dark-mode carousel rules never
+   fire. The default white arrows and dots suit darkly but vanish on cosmo, hence
+   inverting them for light mode only -- bootstrap's .carousel-dark helper is not
+   usable here because it would apply in both themes. */
+body.quarto-light #announcements .carousel-control-prev-icon,
+body.quarto-light #announcements .carousel-control-next-icon {
+  filter: invert(1) grayscale(100);
+}
+
+body.quarto-light #announcements .carousel-indicators [data-bs-target] {
+  background-color: #000;
+}
