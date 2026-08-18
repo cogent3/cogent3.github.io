@@ -1,3 +1,5 @@
+name: Build and deploy cogent3.org
+
 on:
   push:
     branches:
@@ -5,40 +7,48 @@ on:
 
   workflow_dispatch:
 
+permissions: {}
+
 jobs:
-  example-3:
+  build:
     name: Doc Build
     runs-on: 'ubuntu-latest'
+    permissions:
+      # actions-gh-pages pushes the rendered site to the master branch
+      contents: write
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          # build.sh composes the cogent3 doc tree out of this submodule into the
+          # quarto project and renders the whole site as one project, so the
+          # submodule pin is what fixes the documentation version published here
           submodules: recursive
+          persist-credentials: false
 
-      - name: Setup python
-        uses: "actions/setup-python@v6"
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
-           python-version: "3.14"
+          python-version: "3.13"
 
-      - name: "Setup virtualenv and install cogent3[dev]"
-        if: startsWith(runner.os, 'macOS') || startsWith(runner.os, 'Linux')
-        run: |
-          python --version
-          python -m venv .venv
-          source .venv/bin/activate
-          python -m pip install --upgrade pip wheel setuptools
-          python -m pip install -r requirements.txt
-          python -m pip list
+      - uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          enable-cache: true
+          cache-dependency-glob: "doc/cogent3/pyproject.toml"
 
-      - name: Build docs
-        shell: bash -l {0}
-        working-directory: doc/
-        run: |
-          source ../.venv/bin/activate
-          export PYDEVD_DISABLE_FILE_VALIDATION=1
-          make github
+      # pinned so CI renders with the same quarto as local builds. build.sh
+      # prefers $QUARTO over its own uv dependency group, so this is the binary
+      # that gets used and quarto-cli is never installed from PyPI here.
+      - uses: quarto-dev/quarto-actions/setup@8a96df13519ee81fd526f2dfca5962811136661b # v2.2.0
+        with:
+          version: 1.10.18
+
+      - name: Build the site
+        env:
+          QUARTO: quarto
+          PYDEVD_DISABLE_FILE_VALIDATION: "1"
+        run: ./build.sh
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v4
+        uses: peaceiris/actions-gh-pages@329bcc8f12caed2cefe5a5b80781499a6f3b361b # v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: docs
