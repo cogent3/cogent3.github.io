@@ -1,0 +1,3411 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>core.table.table – cogent3</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../images/c3-square.svg" rel="icon" type="image/svg+xml">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-d5382f61a7c05c0e60b360404eaa31c2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-7b86e7e6654ba272f9acdded3611cd60.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-d5382f61a7c05c0e60b360404eaa31c2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../doc/custom.css">
+<link rel="stylesheet" href="../../custom.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../images/c3-logo.svg" alt="cogent3" class="navbar-logo light-content">
+    <img src="../../images/c3-logo.svg" alt="cogent3" class="navbar-logo dark-content">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../../doc/draw/index.html" aria-current="page"> 
+<span class="menu-text">Image Gallery</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../doc/install.html"> 
+<span class="menu-text">Installation</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../doc/index.html"> 
+<span class="menu-text">User Guides</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../doc/licenses.html"> 
+<span class="menu-text">License</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../codeshare.html"> 
+<span class="menu-text">Code Sharing</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-more" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">More</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-more">    
+        <li>
+    <a class="dropdown-item" href="../../doc/community.html">
+ <span class="dropdown-text">Community</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../history.html">
+ <span class="dropdown-text">Project History</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../doc/pycogent.html">
+ <span class="dropdown-text">How does cogent3 relate to PyCogent?</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../projects.html">
+ <span class="dropdown-text">Projects using cogent3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../doc/data_file_links.html">
+ <span class="dropdown-text">Data Files Used in the Documentation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../genindex.html">
+ <span class="dropdown-text">Index</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+    <a href="https://github.com/cogent3/cogent3" title="cogent3 on GitHub" class="quarto-navigation-tool px-1" aria-label="cogent3 on GitHub"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Making Sense from Sequence</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">User Guides</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../doc/app/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Apps</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../doc/app/index-app.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview of apps</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_overview/app-overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview of using apps</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_overview/app-help.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Getting help on an app</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_overview/app-get.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Getting an app</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_overview/available-apps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Displaying installed apps</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_overview/dstore.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data stores – collections of data records</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_overview/not-completed.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tracking records that could not be processed</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_overview/user_function.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Writing your own apps</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../doc/app/index-cookbook.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">App Cookbook</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../doc/app/app_cookbook/index-loaders.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Loading data</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/load-aligned.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Loading aligned sequence data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/load-unaligned.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Loading unaligned sequence data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/load-tabular.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Loading tabular data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/load-json.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Loading JSON serialised objects</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../doc/app/app_cookbook/index-align.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sequence Alignment</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/align-nucleotide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using a nucleotide model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/align-codon.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using a codon model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/align-protein.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using a protein model</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../doc/app/app_cookbook/index-sample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Filtering data</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/sample-omit-degen.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Removing degenerate characters</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/sample-omit-gap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Removing highly gapped positions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/sample-omit-bad.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Remove problem sequences from an alignment</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/sample-omit-duplicated.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Remove duplicated sequences from an alignment</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/sample-min-len.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Filter sequence collections and alignments by length</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/sample-fixed-len.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sample an alignment to a fixed length</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/sample-trim-stops.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Remove trailing stop codons from sequences in an alignment</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/sample-take-pos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sample nucleotides from a given codon position</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/sample-take-seqs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Select named sequences from a collection</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/sample-take-n-seqs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Select <code>n</code> sequences from a collection</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/sample-concat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Concatenating alignments</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../doc/app/app_cookbook/index-writers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Writing Data</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/write-seqs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Writing sequences and sequence alignments</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/write-tabular.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Writing tabular data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/write-json.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Writing JSON Serialised Objects</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/write-db.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Writing a database to file</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../doc/app/index-tutorials.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">App Tutorials</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../doc/app/app_tutorials/index-evo-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Modelling sequence evolution</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_tutorials/evo-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Apply a non-stationary nucleotide model to an alignment with 3 sequences</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_tutorials/evo-model-with-tree.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Apply a non-stationary nucleotide model to an alignment with a tree</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_tutorials/evo-model-timehet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Specifying a non-stationary model with time-heterogeneous parameters</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_tutorials/evo-extract-model-stats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Extracting maximum likelihood estimates from a <code>model_result</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_tutorials/evo-ancestral-states.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reconstructing ancestral states</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_tutorials/evo-dt-nuc-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Applying a discrete-time, non-stationary nucleotide model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_tutorials/evo-tr-nuc-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Applying a time-reversible nucleotide model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_tutorials/evo-nstat-codon-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Applying GNC, a non-stationary codon model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_tutorials/evo-tr-codon-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Applying a time-reversible codon model</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../doc/app/app_tutorials/index-evo-hypothesis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Testing hypotheses about sequence evolution</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_tutorials/evo-hypothesis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Testing a hypothesis – non-stationary or time-reversible</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../doc/app/app_tutorials/index-evo-natsel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Testing for natural selection</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_tutorials/evo-natsel_neutral.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><code>natsel_neutral</code> – a test for selective neutrality</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_tutorials/evo-natsel_timehet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><code>natsel_timehet</code> – a test of branch heterogeneity</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_tutorials/evo-natsel_sitehet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><code>natsel_sitehet</code> – a test of site heterogeneity</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_tutorials/evo-natsel_zhang.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><code>natsel_zhang</code> – a branch-site test</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../doc/cookbook/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cookbook</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../doc/cookbook/manipulating_biological_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Manipulating biological data</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/cookbook/loading_sequences.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Loading a single sequence from a file</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/cookbook/DNA_and_RNA_sequences.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sequences</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/cookbook/protein_sequences.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Protein sequences</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/cookbook/alignments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sequence Collections and Alignments</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/cookbook/features.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Features</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/cookbook/annotation_db.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Annotation Databases</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/cookbook/moltypes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Molecular types</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/cookbook/alphabet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Alphabets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/cookbook/what_codes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Available genetic codes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/cookbook/genetic_code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using genetic codes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/cookbook/simple_trees.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Trees</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/cookbook/tables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tabular data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/cookbook/building_alignments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Building alignments</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/cookbook/calc_genetic_distance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Genetic distance calculation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/cookbook/building_phylogenies.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Building phylogenies</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/cookbook/evo_modelling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Evolutionary Analysis Using Likelihood</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/cookbook/useful_utilities.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Useful Utilities</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../doc/examples/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tutorials</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/examples/align_codons_to_protein.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Map protein alignment gaps to DNA alignment gaps</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/examples/period_estimation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Estimating periodic signals</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/examples/simple.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The simplest script</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/examples/relative_rate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Performing a relative rate test</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/examples/neutral_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A test of the neutral theory</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/examples/scope_model_params_on_trees.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Allowing substitution model parameters to differ between branches</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/examples/codon_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using codon models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/examples/empirical_protein_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Use an empirical protein substitution model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/examples/testing_multi_loci.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Likelihood analysis of multiple loci</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/examples/simulate_alignment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simulate an alignment</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/examples/parametric_bootstrap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Performing a parametric bootstrap</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/examples/rate_heterogeneity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Analysis of rate heterogeneity</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/examples/hmm_par_heterogeneity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Evaluate process heterogeneity using a Hidden Markov Model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/examples/nonstationary_inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Inferring Amino Acid frequencies with a nonstationary model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/examples/calculate_pairwise_distances.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Calculate pairwise distances between sequences</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/examples/calculate_neigbourjoining_tree.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Make a neighbor joining tree</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/examples/calculate_UPGMA_cluster.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Make a UPGMA cluster</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/examples/phylo_by_ls.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Phylogenetic reconstruction by least squares</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/examples/parallel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parallel computations</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../doc/draw/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Image Gallery</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/draw/annotations/plot_seq-features.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sequence Features</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/draw/annotations/plot_annotation-db.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Annotation DB Features</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/draw/aln/plot_aln-seqlogo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sequence logos</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/draw/aln/plot_aln-info-plot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Information analysis of an alignment</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/draw/aln/plot_aln-gaps-per-seq.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Counting gaps per sequence</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/draw/aln/plot_aln-dotplot-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assess alignment quality via dotplots</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/draw/aln/plot_aln-dotplot-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Dotplot with annotated sequences</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/draw/aln/plot_aln-dotplot-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Dotplot basics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/draw/aln/plot_aln-coevolution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Coevolution analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/draw/tree/plot_tree-support.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Showing Bootstrap Support</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/draw/tree/plot_tree-square.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Square Dendrogram Style</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/draw/tree/plot_tree-radial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Radial Dendrogram Style</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/draw/tree/plot_tree-iplotx.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using iplotx with cogent3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/draw/tree/plot_tree-circular.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Circular Dendrogram Style</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/draw/tree/plot_tree-angular.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Angular Dendrogram Style</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/reference/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">API Reference</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../codeshare.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Code Sharing</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Projects using <code>cogent3</code></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../history.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Project History</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../genindex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Index</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#cogent3.core.table.Table" id="toc-cogent3.core.table.Table" class="nav-link active" data-scroll-target="#cogent3.core.table.Table">core.table.Table</a>
+  <ul>
+  <li><a href="#attributes" id="toc-attributes" class="nav-link" data-scroll-target="#attributes">Attributes</a></li>
+  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a>
+  <ul class="collapse">
+  <li><a href="#cogent3.core.table.Table.appended" id="toc-cogent3.core.table.Table.appended" class="nav-link" data-scroll-target="#cogent3.core.table.Table.appended">appended</a>
+  <ul class="collapse">
+  <li><a href="#parameters" id="toc-parameters" class="nav-link" data-scroll-target="#parameters">Parameters</a></li>
+  <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes">Notes</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.table.Table.count" id="toc-cogent3.core.table.Table.count" class="nav-link" data-scroll-target="#cogent3.core.table.Table.count">count</a>
+  <ul class="collapse">
+  <li><a href="#parameters-1" id="toc-parameters-1" class="nav-link" data-scroll-target="#parameters-1">Parameters</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.table.Table.count_unique" id="toc-cogent3.core.table.Table.count_unique" class="nav-link" data-scroll-target="#cogent3.core.table.Table.count_unique">count_unique</a>
+  <ul class="collapse">
+  <li><a href="#parameters-2" id="toc-parameters-2" class="nav-link" data-scroll-target="#parameters-2">Parameters</a></li>
+  <li><a href="#returns" id="toc-returns" class="nav-link" data-scroll-target="#returns">Returns</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.table.Table.cross_join" id="toc-cogent3.core.table.Table.cross_join" class="nav-link" data-scroll-target="#cogent3.core.table.Table.cross_join">cross_join</a>
+  <ul class="collapse">
+  <li><a href="#parameters-3" id="toc-parameters-3" class="nav-link" data-scroll-target="#parameters-3">Parameters</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.table.Table.distinct_values" id="toc-cogent3.core.table.Table.distinct_values" class="nav-link" data-scroll-target="#cogent3.core.table.Table.distinct_values">distinct_values</a></li>
+  <li><a href="#cogent3.core.table.Table.filtered" id="toc-cogent3.core.table.Table.filtered" class="nav-link" data-scroll-target="#cogent3.core.table.Table.filtered">filtered</a>
+  <ul class="collapse">
+  <li><a href="#parameters-4" id="toc-parameters-4" class="nav-link" data-scroll-target="#parameters-4">Parameters</a></li>
+  <li><a href="#notes-1" id="toc-notes-1" class="nav-link" data-scroll-target="#notes-1">Notes</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.table.Table.filtered_by_column" id="toc-cogent3.core.table.Table.filtered_by_column" class="nav-link" data-scroll-target="#cogent3.core.table.Table.filtered_by_column">filtered_by_column</a>
+  <ul class="collapse">
+  <li><a href="#parameters-5" id="toc-parameters-5" class="nav-link" data-scroll-target="#parameters-5">Parameters</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.table.Table.format_column" id="toc-cogent3.core.table.Table.format_column" class="nav-link" data-scroll-target="#cogent3.core.table.Table.format_column">format_column</a>
+  <ul class="collapse">
+  <li><a href="#parameters-6" id="toc-parameters-6" class="nav-link" data-scroll-target="#parameters-6">Parameters</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.table.Table.get_columns" id="toc-cogent3.core.table.Table.get_columns" class="nav-link" data-scroll-target="#cogent3.core.table.Table.get_columns">get_columns</a>
+  <ul class="collapse">
+  <li><a href="#parameters-7" id="toc-parameters-7" class="nav-link" data-scroll-target="#parameters-7">Parameters</a></li>
+  <li><a href="#returns-1" id="toc-returns-1" class="nav-link" data-scroll-target="#returns-1">Returns</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.table.Table.get_row_indices" id="toc-cogent3.core.table.Table.get_row_indices" class="nav-link" data-scroll-target="#cogent3.core.table.Table.get_row_indices">get_row_indices</a></li>
+  <li><a href="#cogent3.core.table.Table.group_by" id="toc-cogent3.core.table.Table.group_by" class="nav-link" data-scroll-target="#cogent3.core.table.Table.group_by">group_by</a>
+  <ul class="collapse">
+  <li><a href="#parameters-8" id="toc-parameters-8" class="nav-link" data-scroll-target="#parameters-8">Parameters</a></li>
+  <li><a href="#returns-2" id="toc-returns-2" class="nav-link" data-scroll-target="#returns-2">Returns</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.table.Table.head" id="toc-cogent3.core.table.Table.head" class="nav-link" data-scroll-target="#cogent3.core.table.Table.head">head</a></li>
+  <li><a href="#cogent3.core.table.Table.inner_join" id="toc-cogent3.core.table.Table.inner_join" class="nav-link" data-scroll-target="#cogent3.core.table.Table.inner_join">inner_join</a>
+  <ul class="collapse">
+  <li><a href="#parameters-9" id="toc-parameters-9" class="nav-link" data-scroll-target="#parameters-9">Parameters</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.table.Table.joined" id="toc-cogent3.core.table.Table.joined" class="nav-link" data-scroll-target="#cogent3.core.table.Table.joined">joined</a></li>
+  <li><a href="#cogent3.core.table.Table.normalized" id="toc-cogent3.core.table.Table.normalized" class="nav-link" data-scroll-target="#cogent3.core.table.Table.normalized">normalized</a>
+  <ul class="collapse">
+  <li><a href="#parameters-10" id="toc-parameters-10" class="nav-link" data-scroll-target="#parameters-10">Parameters</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.table.Table.set_repr_policy" id="toc-cogent3.core.table.Table.set_repr_policy" class="nav-link" data-scroll-target="#cogent3.core.table.Table.set_repr_policy">set_repr_policy</a>
+  <ul class="collapse">
+  <li><a href="#parameters-11" id="toc-parameters-11" class="nav-link" data-scroll-target="#parameters-11">Parameters</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.table.Table.sorted" id="toc-cogent3.core.table.Table.sorted" class="nav-link" data-scroll-target="#cogent3.core.table.Table.sorted">sorted</a>
+  <ul class="collapse">
+  <li><a href="#parameters-12" id="toc-parameters-12" class="nav-link" data-scroll-target="#parameters-12">Parameters</a></li>
+  <li><a href="#notes-2" id="toc-notes-2" class="nav-link" data-scroll-target="#notes-2">Notes</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.table.Table.sum_columns" id="toc-cogent3.core.table.Table.sum_columns" class="nav-link" data-scroll-target="#cogent3.core.table.Table.sum_columns">sum_columns</a>
+  <ul class="collapse">
+  <li><a href="#parameters-13" id="toc-parameters-13" class="nav-link" data-scroll-target="#parameters-13">Parameters</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.table.Table.sum_rows" id="toc-cogent3.core.table.Table.sum_rows" class="nav-link" data-scroll-target="#cogent3.core.table.Table.sum_rows">sum_rows</a>
+  <ul class="collapse">
+  <li><a href="#parameters-14" id="toc-parameters-14" class="nav-link" data-scroll-target="#parameters-14">Parameters</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.table.Table.summed" id="toc-cogent3.core.table.Table.summed" class="nav-link" data-scroll-target="#cogent3.core.table.Table.summed">summed</a>
+  <ul class="collapse">
+  <li><a href="#parameters-15" id="toc-parameters-15" class="nav-link" data-scroll-target="#parameters-15">Parameters</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.table.Table.tail" id="toc-cogent3.core.table.Table.tail" class="nav-link" data-scroll-target="#cogent3.core.table.Table.tail">tail</a></li>
+  <li><a href="#cogent3.core.table.Table.to_categorical" id="toc-cogent3.core.table.Table.to_categorical" class="nav-link" data-scroll-target="#cogent3.core.table.Table.to_categorical">to_categorical</a>
+  <ul class="collapse">
+  <li><a href="#parameters-16" id="toc-parameters-16" class="nav-link" data-scroll-target="#parameters-16">Parameters</a></li>
+  <li><a href="#returns-3" id="toc-returns-3" class="nav-link" data-scroll-target="#returns-3">Returns</a></li>
+  <li><a href="#notes-3" id="toc-notes-3" class="nav-link" data-scroll-target="#notes-3">Notes</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.table.Table.to_csv" id="toc-cogent3.core.table.Table.to_csv" class="nav-link" data-scroll-target="#cogent3.core.table.Table.to_csv">to_csv</a>
+  <ul class="collapse">
+  <li><a href="#parameters-17" id="toc-parameters-17" class="nav-link" data-scroll-target="#parameters-17">Parameters</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.table.Table.to_html" id="toc-cogent3.core.table.Table.to_html" class="nav-link" data-scroll-target="#cogent3.core.table.Table.to_html">to_html</a>
+  <ul class="collapse">
+  <li><a href="#parameters-18" id="toc-parameters-18" class="nav-link" data-scroll-target="#parameters-18">Parameters</a></li>
+  <li><a href="#notes-4" id="toc-notes-4" class="nav-link" data-scroll-target="#notes-4">Notes</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.table.Table.to_latex" id="toc-cogent3.core.table.Table.to_latex" class="nav-link" data-scroll-target="#cogent3.core.table.Table.to_latex">to_latex</a>
+  <ul class="collapse">
+  <li><a href="#parameters-19" id="toc-parameters-19" class="nav-link" data-scroll-target="#parameters-19">Parameters</a></li>
+  <li><a href="#notes-5" id="toc-notes-5" class="nav-link" data-scroll-target="#notes-5">Notes</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.table.Table.to_list" id="toc-cogent3.core.table.Table.to_list" class="nav-link" data-scroll-target="#cogent3.core.table.Table.to_list">to_list</a>
+  <ul class="collapse">
+  <li><a href="#parameters-20" id="toc-parameters-20" class="nav-link" data-scroll-target="#parameters-20">Parameters</a></li>
+  <li><a href="#notes-6" id="toc-notes-6" class="nav-link" data-scroll-target="#notes-6">Notes</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.table.Table.to_markdown" id="toc-cogent3.core.table.Table.to_markdown" class="nav-link" data-scroll-target="#cogent3.core.table.Table.to_markdown">to_markdown</a>
+  <ul class="collapse">
+  <li><a href="#parameters-21" id="toc-parameters-21" class="nav-link" data-scroll-target="#parameters-21">Parameters</a></li>
+  <li><a href="#returns-4" id="toc-returns-4" class="nav-link" data-scroll-target="#returns-4">Returns</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.table.Table.to_pandas" id="toc-cogent3.core.table.Table.to_pandas" class="nav-link" data-scroll-target="#cogent3.core.table.Table.to_pandas">to_pandas</a>
+  <ul class="collapse">
+  <li><a href="#parameters-22" id="toc-parameters-22" class="nav-link" data-scroll-target="#parameters-22">Parameters</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.table.Table.to_plotly" id="toc-cogent3.core.table.Table.to_plotly" class="nav-link" data-scroll-target="#cogent3.core.table.Table.to_plotly">to_plotly</a></li>
+  <li><a href="#cogent3.core.table.Table.to_rst" id="toc-cogent3.core.table.Table.to_rst" class="nav-link" data-scroll-target="#cogent3.core.table.Table.to_rst">to_rst</a>
+  <ul class="collapse">
+  <li><a href="#parameters-23" id="toc-parameters-23" class="nav-link" data-scroll-target="#parameters-23">Parameters</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.table.Table.to_string" id="toc-cogent3.core.table.Table.to_string" class="nav-link" data-scroll-target="#cogent3.core.table.Table.to_string">to_string</a>
+  <ul class="collapse">
+  <li><a href="#parameters-24" id="toc-parameters-24" class="nav-link" data-scroll-target="#parameters-24">Parameters</a></li>
+  <li><a href="#notes-7" id="toc-notes-7" class="nav-link" data-scroll-target="#notes-7">Notes</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.table.Table.to_tsv" id="toc-cogent3.core.table.Table.to_tsv" class="nav-link" data-scroll-target="#cogent3.core.table.Table.to_tsv">to_tsv</a>
+  <ul class="collapse">
+  <li><a href="#parameters-25" id="toc-parameters-25" class="nav-link" data-scroll-target="#parameters-25">Parameters</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.table.Table.transposed" id="toc-cogent3.core.table.Table.transposed" class="nav-link" data-scroll-target="#cogent3.core.table.Table.transposed">transposed</a>
+  <ul class="collapse">
+  <li><a href="#parameters-26" id="toc-parameters-26" class="nav-link" data-scroll-target="#parameters-26">Parameters</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.table.Table.with_new_column" id="toc-cogent3.core.table.Table.with_new_column" class="nav-link" data-scroll-target="#cogent3.core.table.Table.with_new_column">with_new_column</a>
+  <ul class="collapse">
+  <li><a href="#parameters-27" id="toc-parameters-27" class="nav-link" data-scroll-target="#parameters-27">Parameters</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.table.Table.with_new_header" id="toc-cogent3.core.table.Table.with_new_header" class="nav-link" data-scroll-target="#cogent3.core.table.Table.with_new_header">with_new_header</a>
+  <ul class="collapse">
+  <li><a href="#parameters-28" id="toc-parameters-28" class="nav-link" data-scroll-target="#parameters-28">Parameters</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.table.Table.write" id="toc-cogent3.core.table.Table.write" class="nav-link" data-scroll-target="#cogent3.core.table.Table.write">write</a>
+  <ul class="collapse">
+  <li><a href="#parameters-29" id="toc-parameters-29" class="nav-link" data-scroll-target="#parameters-29">Parameters</a></li>
+  <li><a href="#notes-8" id="toc-notes-8" class="nav-link" data-scroll-target="#notes-8">Notes</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+
+<section id="cogent3.core.table.Table" class="level1">
+<h1>core.table.Table</h1>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>core.table.Table(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    header<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    index_name<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">''</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    legend<span class="op">=</span><span class="st">''</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    digits<span class="op">=</span><span class="dv">4</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    space<span class="op">=</span><span class="dv">4</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    max_width<span class="op">=</span><span class="bu">int</span>(<span class="fl">1e+100</span>),</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    column_templates<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    format_name<span class="op">=</span><span class="st">'simple'</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    missing_data<span class="op">=</span><span class="st">''</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">**</span>kwargs,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Tabular data. iter operates over rows. Columns are available as an attribute.</p>
+<section id="attributes" class="level2">
+<h2 class="anchored" data-anchor-id="attributes">Attributes</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="#cogent3.core.table.Table.format">format</a></td>
+<td>the str display format</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.table.Table.index_name">index_name</a></td>
+<td>column name whose values can be used to index table rows</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="methods" class="level2">
+<h2 class="anchored" data-anchor-id="methods">Methods</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="#cogent3.core.table.Table.appended">appended</a></td>
+<td>Concatenates an arbitrary number of tables together</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.table.Table.count">count</a></td>
+<td>Returns number of rows for which the provided callback</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.table.Table.count_unique">count_unique</a></td>
+<td>count occurrences of unique combinations of columns</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.table.Table.cross_join">cross_join</a></td>
+<td>cross join, or full outer join, of self with other</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.table.Table.distinct_values">distinct_values</a></td>
+<td>returns the set of distinct values for the named column(s)</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.table.Table.filtered">filtered</a></td>
+<td>Returns a table with rows satisfying the provided callback function.</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.table.Table.filtered_by_column">filtered_by_column</a></td>
+<td>Returns a table with columns identified by callback</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.table.Table.format_column">format_column</a></td>
+<td>Provide a formatting template for a named column.</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.table.Table.get_columns">get_columns</a></td>
+<td>select columns from self with index_name unless excluded</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.table.Table.get_row_indices">get_row_indices</a></td>
+<td>returns boolean array of callback values given columns</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.table.Table.group_by">group_by</a></td>
+<td>Group table rows by one or more columns.</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.table.Table.head">head</a></td>
+<td>displays top nrows</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.table.Table.inner_join">inner_join</a></td>
+<td>inner join of self with other</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.table.Table.joined">joined</a></td>
+<td>returns a new table containing the join of this table and</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.table.Table.normalized">normalized</a></td>
+<td>returns a table with elements expressed as a fraction according</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.table.Table.set_repr_policy">set_repr_policy</a></td>
+<td>specify policy for repr(self)</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.table.Table.sorted">sorted</a></td>
+<td>Returns a new table sorted according to columns order.</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.table.Table.sum_columns">sum_columns</a></td>
+<td>return sum of indicated columns</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.table.Table.sum_rows">sum_rows</a></td>
+<td>return sum of indicated rows</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.table.Table.summed">summed</a></td>
+<td>returns the sum of numerical values for column(s)/row(s)</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.table.Table.tail">tail</a></td>
+<td>displays bottom nrows</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.table.Table.to_categorical">to_categorical</a></td>
+<td>construct object that can be used for statistical tests</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.table.Table.to_csv">to_csv</a></td>
+<td>return table formatted as comma separated values</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.table.Table.to_html">to_html</a></td>
+<td>construct html table</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.table.Table.to_latex">to_latex</a></td>
+<td>Returns the text a LaTeX table.</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.table.Table.to_list">to_list</a></td>
+<td>Returns raw data as a list</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.table.Table.to_markdown">to_markdown</a></td>
+<td>returns markdown formatted table</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.table.Table.to_pandas">to_pandas</a></td>
+<td>returns pandas DataFrame instance</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.table.Table.to_plotly">to_plotly</a></td>
+<td>returns a Plotly Table</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.table.Table.to_rst">to_rst</a></td>
+<td>returns rst formatted table</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.table.Table.to_string">to_string</a></td>
+<td>Return the table as a formatted string.</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.table.Table.to_tsv">to_tsv</a></td>
+<td>return table formatted as tab separated values</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.table.Table.transposed">transposed</a></td>
+<td>returns the transposed table.</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.table.Table.with_new_column">with_new_column</a></td>
+<td>Returns new table with an additional column, computed using callback.</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.table.Table.with_new_header">with_new_header</a></td>
+<td>returns a new Table with old header labels replaced by new</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.table.Table.write">write</a></td>
+<td>Write table to filename in the specified format.</td>
+</tr>
+</tbody>
+</table>
+<section id="cogent3.core.table.Table.appended" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.table.Table.appended">appended</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>core.table.Table.appended(new_column, <span class="op">*</span>tables, <span class="op">**</span>kwargs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Concatenates an arbitrary number of tables together</p>
+<section id="parameters" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 4%">
+<col style="width: 80%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>new_column</td>
+<td></td>
+<td>provide a heading for the new column, each tables title will be placed in it. If value is false, the result is no additional column.</td>
+<td><em>required</em></td>
+</tr>
+<tr class="even">
+<td>tables</td>
+<td></td>
+<td>series of Table instances</td>
+<td><code>()</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="notes" class="level4 doc-section doc-section-notes">
+<h4 class="doc-section doc-section-notes anchored" data-anchor-id="notes">Notes</h4>
+<p>All tables must have the same columns. If a column dtype differs between tables, dtype for that column in result is determined by numpy.</p>
+</section>
+</section>
+<section id="cogent3.core.table.Table.count" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.table.Table.count">count</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>core.table.Table.count(callback, columns<span class="op">=</span><span class="va">None</span>, <span class="op">**</span>kwargs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Returns number of rows for which the provided callback function returns True when passed row data from columns. Row data is a 1D list if more than one column, raw row[col] value otherwise.</p>
+<section id="parameters-1" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-1">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 4%">
+<col style="width: 81%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>columns</td>
+<td></td>
+<td>the columns whose values determine whether a row is to be included.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>callback</td>
+<td></td>
+<td>Can be a function, which takes the sub by columns and returns True/False, or a string representing valid python code to be evaluated.</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cogent3.core.table.Table.count_unique" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.table.Table.count_unique">count_unique</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>core.table.Table.count_unique(columns<span class="op">=</span><span class="va">None</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>count occurrences of unique combinations of columns</p>
+<section id="parameters-2" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-2">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 9%">
+<col style="width: 68%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>columns</td>
+<td></td>
+<td>name of one or more columns. If None, all columns are used</td>
+<td><code>None</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="returns" class="level4 doc-section doc-section-returns">
+<h4 class="doc-section doc-section-returns anchored" data-anchor-id="returns">Returns</h4>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>CategoryCounter instance</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cogent3.core.table.Table.cross_join" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.table.Table.cross_join">cross_join</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>core.table.Table.cross_join(other, col_prefix<span class="op">=</span><span class="st">'right_'</span>, <span class="op">**</span>kwargs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>cross join, or full outer join, of self with other</p>
+<section id="parameters-3" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-3">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 7%">
+<col style="width: 71%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>other</td>
+<td></td>
+<td>A table object which will be joined with this table. other must have a title.</td>
+<td><em>required</em></td>
+</tr>
+<tr class="even">
+<td>col_prefix</td>
+<td></td>
+<td>ensure <other> columns are unique by prepending col_prefix</other></td>
+<td><code>'right_'</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cogent3.core.table.Table.distinct_values" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.table.Table.distinct_values">distinct_values</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>core.table.Table.distinct_values(columns)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>returns the set of distinct values for the named column(s)</p>
+</section>
+<section id="cogent3.core.table.Table.filtered" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.table.Table.filtered">filtered</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>core.table.Table.filtered(callback, columns<span class="op">=</span><span class="va">None</span>, <span class="op">**</span>kwargs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Returns a table with rows satisfying the provided callback function.</p>
+<section id="parameters-4" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-4">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 5%">
+<col style="width: 80%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>columns</td>
+<td></td>
+<td>the columns whose values determine whether a row is to be included.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>callback</td>
+<td></td>
+<td>Can be a function, which takes rows and returns True/False, or a string representing valid python code to be evaluated.</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="notes-1" class="level4 doc-section doc-section-notes">
+<h4 class="doc-section doc-section-notes anchored" data-anchor-id="notes-1">Notes</h4>
+<p>Row data provided to callback is a 1D list if more than one column, single value (row[col]) otherwise.</p>
+</section>
+</section>
+<section id="cogent3.core.table.Table.filtered_by_column" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.table.Table.filtered_by_column">filtered_by_column</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>core.table.Table.filtered_by_column(callback, <span class="op">**</span>kwargs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Returns a table with columns identified by callback</p>
+<section id="parameters-5" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-5">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 4%">
+<col style="width: 82%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>callback</td>
+<td></td>
+<td>A function which takes the columns delimited by columns and returns True/False, or a string representing valid python code to be evaluated.</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cogent3.core.table.Table.format_column" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.table.Table.format_column">format_column</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>core.table.Table.format_column(column_head, format_template)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Provide a formatting template for a named column.</p>
+<section id="parameters-6" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-6">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 24%">
+<col style="width: 54%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>column_head</td>
+<td>str</td>
+<td>the column label.</td>
+<td><em>required</em></td>
+</tr>
+<tr class="even">
+<td>format_template</td>
+<td>Callable[[typing.Any], str]</td>
+<td>string formatting template or a function that will handle the formatting.</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cogent3.core.table.Table.get_columns" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.table.Table.get_columns">get_columns</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>core.table.Table.get_columns(columns, with_index<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>select columns from self with index_name unless excluded</p>
+<section id="parameters-7" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-7">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 30%">
+<col style="width: 45%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>columns</td>
+<td>string or sequence of strings</td>
+<td>names of columns</td>
+<td><em>required</em></td>
+</tr>
+<tr class="even">
+<td>with_index</td>
+<td>bool</td>
+<td>If index_name is set, includes with columns.</td>
+<td><code>True</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="returns-1" class="level4 doc-section doc-section-returns">
+<h4 class="doc-section doc-section-returns anchored" data-anchor-id="returns-1">Returns</h4>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>Table</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cogent3.core.table.Table.get_row_indices" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.table.Table.get_row_indices">get_row_indices</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>core.table.Table.get_row_indices(callback, columns, negate<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>returns boolean array of callback values given columns</p>
+</section>
+<section id="cogent3.core.table.Table.group_by" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.table.Table.group_by">group_by</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>core.table.Table.group_by(columns)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Group table rows by one or more columns.</p>
+<section id="parameters-8" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-8">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 22%">
+<col style="width: 54%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>columns</td>
+<td>str | list[str]</td>
+<td>column name or list of column names to group by</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="returns-2" class="level4 doc-section doc-section-returns">
+<h4 class="doc-section doc-section-returns anchored" data-anchor-id="returns-2">Returns</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 71%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>GroupBy instance supporting aggregation via <code>.agg()</code>,</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>.count()</code>, <code>.sum()</code>, etc.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cogent3.core.table.Table.head" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.table.Table.head">head</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>core.table.Table.head(nrows<span class="op">=</span><span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>displays top nrows</p>
+</section>
+<section id="cogent3.core.table.Table.inner_join" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.table.Table.inner_join">inner_join</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>core.table.Table.inner_join(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    other,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    columns_self<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    columns_other<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    use_index<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    col_prefix<span class="op">=</span><span class="st">'right_'</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">**</span>kwargs,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>inner join of self with other</p>
+<section id="parameters-9" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-9">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 2%">
+<col style="width: 90%">
+<col style="width: 3%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>other</td>
+<td></td>
+<td>A table object which will be joined with this table. other must have a title.</td>
+<td><em>required</em></td>
+</tr>
+<tr class="even">
+<td>columns_self</td>
+<td></td>
+<td>indices of key columns that will be compared in the join operation. Can be either column index, or a string matching the column header. The order matters, and the dimensions of columns_self and columns_other have to match. A row will be included in the output iff self[row, columns_self]==other[row, columns_other] for all i</td>
+<td><code>None</code></td>
+</tr>
+<tr class="odd">
+<td>columns_other</td>
+<td></td>
+<td>indices of key columns that will be compared in the join operation. Can be either column index, or a string matching the column header. The order matters, and the dimensions of columns_self and columns_other have to match. A row will be included in the output iff self[row, columns_self]==other[row, columns_other] for all i</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>use_index</td>
+<td></td>
+<td>if no columns specified and both self and other have a nominated index_name, this will be used.</td>
+<td><code>True</code></td>
+</tr>
+<tr class="odd">
+<td>col_prefix</td>
+<td></td>
+<td>ensure <other> columns are unique by prepending col_prefix</other></td>
+<td><code>'right_'</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cogent3.core.table.Table.joined" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.table.Table.joined">joined</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>core.table.Table.joined(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    other,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    columns_self<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    columns_other<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    inner_join<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    col_prefix<span class="op">=</span><span class="st">'right_'</span>,</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">**</span>kwargs,</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>returns a new table containing the join of this table and other. See docstring for inner_join, or cross_join</p>
+</section>
+<section id="cogent3.core.table.Table.normalized" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.table.Table.normalized">normalized</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>core.table.Table.normalized(by_row<span class="op">=</span><span class="va">True</span>, denominator_func<span class="op">=</span><span class="va">None</span>, <span class="op">**</span>kwargs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>returns a table with elements expressed as a fraction according to the results from func</p>
+<section id="parameters-10" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-10">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 5%">
+<col style="width: 74%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>by_row</td>
+<td></td>
+<td>normalisation done by row</td>
+<td><code>True</code></td>
+</tr>
+<tr class="even">
+<td>denominator_func</td>
+<td></td>
+<td>a callback function that takes an array and returns a value to be used as the denominator. Default is sum.</td>
+<td><code>None</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cogent3.core.table.Table.set_repr_policy" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.table.Table.set_repr_policy">set_repr_policy</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>core.table.Table.set_repr_policy(</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    head<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    tail<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    random<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    show_shape<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>specify policy for repr(self)</p>
+<section id="parameters-11" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-11">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 8%">
+<col style="width: 65%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>head</td>
+<td>int</td>
+<td>number of top rows to included in represented display</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>tail</td>
+<td>int</td>
+<td>number of bottom rows to included in represented display</td>
+<td><code>None</code></td>
+</tr>
+<tr class="odd">
+<td>random</td>
+<td>int</td>
+<td>number of rows to sample randomly (supercedes head/tail)</td>
+<td><code>0</code></td>
+</tr>
+<tr class="even">
+<td>show_shape</td>
+<td>bool</td>
+<td>boolean to determine if table shape info is displayed</td>
+<td><code>True</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cogent3.core.table.Table.sorted" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.table.Table.sorted">sorted</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>core.table.Table.<span class="bu">sorted</span>(columns<span class="op">=</span><span class="va">None</span>, reverse<span class="op">=</span><span class="va">None</span>, <span class="op">**</span>kwargs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Returns a new table sorted according to columns order.</p>
+<section id="parameters-12" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-12">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 29%">
+<col style="width: 52%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>columns</td>
+<td>Iterable[str] | str | None</td>
+<td>column headings, their order determines the sort order.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>reverse</td>
+<td>Iterable[str] | str | None</td>
+<td>column headings, these columns will be reverse sorted.</td>
+<td><code>None</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="notes-2" class="level4 doc-section doc-section-notes">
+<h4 class="doc-section doc-section-notes anchored" data-anchor-id="notes-2">Notes</h4>
+<p>Either can be provided as just a single string, or a series of strings. If only reverse is provided, that order is used.</p>
+</section>
+</section>
+<section id="cogent3.core.table.Table.sum_columns" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.table.Table.sum_columns">sum_columns</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>core.table.Table.sum_columns(columns<span class="op">=</span><span class="va">None</span>, strict<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>return sum of indicated columns</p>
+<section id="parameters-13" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-13">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 10%">
+<col style="width: 62%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>columns</td>
+<td></td>
+<td>column name(s) or indices</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>strict</td>
+<td></td>
+<td>if False, ignores cells with non column/row.</td>
+<td><code>True</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cogent3.core.table.Table.sum_rows" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.table.Table.sum_rows">sum_rows</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>core.table.Table.sum_rows(indices<span class="op">=</span><span class="va">None</span>, strict<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>return sum of indicated rows</p>
+<section id="parameters-14" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-14">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 10%">
+<col style="width: 64%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>indices</td>
+<td></td>
+<td>row indices</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>strict</td>
+<td></td>
+<td>if False, ignores cells with non numeric values.</td>
+<td><code>True</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cogent3.core.table.Table.summed" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.table.Table.summed">summed</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>core.table.Table.summed(indices<span class="op">=</span><span class="va">None</span>, col_sum<span class="op">=</span><span class="va">True</span>, strict<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>returns the sum of numerical values for column(s)/row(s)</p>
+<section id="parameters-15" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-15">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 7%">
+<col style="width: 74%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>indices</td>
+<td></td>
+<td>column name(s) or indices or row indices</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>col_sum</td>
+<td></td>
+<td>sums values in the indicated column, the default. If False, returns the row sum.</td>
+<td><code>True</code></td>
+</tr>
+<tr class="odd">
+<td>strict</td>
+<td></td>
+<td>if False, ignores cells with non column/row.</td>
+<td><code>True</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cogent3.core.table.Table.tail" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.table.Table.tail">tail</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>core.table.Table.tail(nrows<span class="op">=</span><span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>displays bottom nrows</p>
+</section>
+<section id="cogent3.core.table.Table.to_categorical" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.table.Table.to_categorical">to_categorical</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>core.table.Table.to_categorical(columns<span class="op">=</span><span class="va">None</span>, index_name<span class="op">=</span><span class="va">None</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>construct object that can be used for statistical tests</p>
+<section id="parameters-16" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-16">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 84%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>columns</td>
+<td></td>
+<td>columns to include. These correspond to contingency column labels. The row labels come from values under the index_name column. Defaults to all columns.</td>
+<td><code>None</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="returns-3" class="level4 doc-section doc-section-returns">
+<h4 class="doc-section doc-section-returns anchored" data-anchor-id="returns-3">Returns</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 73%">
+<col style="width: 17%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>CategoryCounts, an object for performing statistical tests on</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>contingency tables.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="notes-3" class="level4 doc-section doc-section-notes">
+<h4 class="doc-section doc-section-notes anchored" data-anchor-id="notes-3">Notes</h4>
+<p>Only applies to cases where an index_name is defined. The selected columns must be int types and represent the counts of corresponding categories.</p>
+</section>
+</section>
+<section id="cogent3.core.table.Table.to_csv" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.table.Table.to_csv">to_csv</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>core.table.Table.to_csv(with_title<span class="op">=</span><span class="va">False</span>, with_legend<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>return table formatted as comma separated values</p>
+<section id="parameters-17" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-17">Parameters</h4>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>with_title</td>
+<td>bool</td>
+<td>include the table title</td>
+<td><code>False</code></td>
+</tr>
+<tr class="even">
+<td>with_legend</td>
+<td>bool</td>
+<td>include table legend</td>
+<td><code>False</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cogent3.core.table.Table.to_html" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.table.Table.to_html">to_html</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>core.table.Table.to_html(column_alignment<span class="op">=</span><span class="va">None</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>construct html table</p>
+<section id="parameters-18" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-18">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 4%">
+<col style="width: 80%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>column_alignment</td>
+<td>dict</td>
+<td>{col_name: alignment character, …} where alignment character can be one of ‘l’, ‘c’, ‘r’. Defaults to ‘r’ for numeric columns, ‘l’ for text columns.</td>
+<td><code>None</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="notes-4" class="level4 doc-section doc-section-notes">
+<h4 class="doc-section doc-section-notes anchored" data-anchor-id="notes-4">Notes</h4>
+<p>Placed within c3table div element, embeds CSS style.</p>
+</section>
+</section>
+<section id="cogent3.core.table.Table.to_latex" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.table.Table.to_latex">to_latex</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>core.table.Table.to_latex(</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    concat_title_legend<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    justify<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    position<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    with_title<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    with_legend<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Returns the text a LaTeX table.</p>
+<section id="parameters-19" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-19">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 10%">
+<col style="width: 64%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>concat_title_legend</td>
+<td>bool</td>
+<td>the table caption is formed by concatenating the table title and legend</td>
+<td><code>True</code></td>
+</tr>
+<tr class="even">
+<td>justify</td>
+<td>str | None</td>
+<td>latex character for column justification (e.g.&nbsp;‘c’), default is right aligned.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="odd">
+<td>label</td>
+<td>str | None</td>
+<td>for cross referencing</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>position</td>
+<td>str | None</td>
+<td>table page position, default is here, top separate page</td>
+<td><code>None</code></td>
+</tr>
+<tr class="odd">
+<td>with_title</td>
+<td>bool</td>
+<td>include the table title</td>
+<td><code>True</code></td>
+</tr>
+<tr class="even">
+<td>with_legend</td>
+<td>bool</td>
+<td>include the table legend</td>
+<td><code>True</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="notes-5" class="level4 doc-section doc-section-notes">
+<h4 class="doc-section doc-section-notes anchored" data-anchor-id="notes-5">Notes</h4>
+The
+<p>command is provided with the caption package. See https://ctan.org/pkg/caption for more details.</p>
+</section>
+</section>
+<section id="cogent3.core.table.Table.to_list" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.table.Table.to_list">to_list</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>core.table.Table.to_list(columns<span class="op">=</span><span class="va">None</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Returns raw data as a list</p>
+<section id="parameters-20" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-20">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 35%">
+<col style="width: 40%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>columns</td>
+<td>str | list[str] | None</td>
+<td>if None, all data are returned</td>
+<td><code>None</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="notes-6" class="level4 doc-section doc-section-notes">
+<h4 class="doc-section doc-section-notes anchored" data-anchor-id="notes-6">Notes</h4>
+<p>If one column, a 1D list is returned.</p>
+</section>
+</section>
+<section id="cogent3.core.table.Table.to_markdown" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.table.Table.to_markdown">to_markdown</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>core.table.Table.to_markdown(space<span class="op">=</span><span class="dv">1</span>, justify<span class="op">=</span><span class="va">None</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>returns markdown formatted table</p>
+<section id="parameters-21" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-21">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 13%">
+<col style="width: 62%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>space</td>
+<td>int</td>
+<td>number of spaces surrounding the cell contents, must be &gt;= 1</td>
+<td><code>1</code></td>
+</tr>
+<tr class="even">
+<td>justify</td>
+<td>str | None</td>
+<td></td>
+<td><code>None</code></td>
+</tr>
+<tr class="odd">
+<td>characters</td>
+<td></td>
+<td></td>
+<td><em>required</em></td>
+</tr>
+<tr class="even">
+<td>center</td>
+<td></td>
+<td></td>
+<td><em>required</em></td>
+</tr>
+<tr class="odd">
+<td>right</td>
+<td></td>
+<td></td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="returns-4" class="level4 doc-section doc-section-returns">
+<h4 class="doc-section doc-section-returns anchored" data-anchor-id="returns-4">Returns</h4>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>str</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cogent3.core.table.Table.to_pandas" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.table.Table.to_pandas">to_pandas</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>core.table.Table.to_pandas(categories<span class="op">=</span><span class="va">None</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>returns pandas DataFrame instance</p>
+<section id="parameters-22" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-22">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 6%">
+<col style="width: 75%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>categories</td>
+<td></td>
+<td>converts these columns to category dtype in the data frame. Note, categories are not ordered.</td>
+<td><code>None</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cogent3.core.table.Table.to_plotly" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.table.Table.to_plotly">to_plotly</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>core.table.Table.to_plotly(width<span class="op">=</span><span class="dv">500</span>, font_size<span class="op">=</span><span class="dv">12</span>, layout<span class="op">=</span><span class="va">None</span>, <span class="op">**</span>kwargs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>returns a Plotly Table</p>
+</section>
+<section id="cogent3.core.table.Table.to_rst" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.table.Table.to_rst">to_rst</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>core.table.Table.to_rst(csv_table<span class="op">=</span><span class="va">False</span>, with_title<span class="op">=</span><span class="va">True</span>, with_legend<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>returns rst formatted table</p>
+<section id="parameters-23" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-23">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 10%">
+<col style="width: 56%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>csv_table</td>
+<td>bool</td>
+<td>use csv-directive, grid table otherwise</td>
+<td><code>False</code></td>
+</tr>
+<tr class="even">
+<td>with_title</td>
+<td>bool</td>
+<td>include the table title</td>
+<td><code>True</code></td>
+</tr>
+<tr class="odd">
+<td>with_legend</td>
+<td>bool</td>
+<td>include the table legend</td>
+<td><code>True</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cogent3.core.table.Table.to_string" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.table.Table.to_string">to_string</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>core.table.Table.to_string(</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    format_name<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    borders<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    sep<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    center<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    concat_title_legend<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    with_title<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>    with_legend<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">**</span>kwargs,</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Return the table as a formatted string.</p>
+<section id="parameters-24" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-24">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 6%">
+<col style="width: 77%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>format_name</td>
+<td>str | None</td>
+<td>possible formats are ‘rest’/‘rst’, ‘markdown’/‘md’, ‘latex’, ‘html’, ‘phylip’, ‘bedgraph’, ‘csv’, ‘tsv’, or ‘simple’ (default).</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>sep</td>
+<td>str | None</td>
+<td>A string separator for delineating columns, e.g.&nbsp;‘,’ or ’ ’. Overrides format.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="odd">
+<td>center</td>
+<td>bool</td>
+<td>content is centered in the column, default is right justified</td>
+<td><code>False</code></td>
+</tr>
+<tr class="even">
+<td>concat_title_legend</td>
+<td>bool</td>
+<td>Concat the title and legend.</td>
+<td><code>True</code></td>
+</tr>
+<tr class="odd">
+<td>with_title</td>
+<td>bool | None</td>
+<td>include the table title. If None, uses each format’s default (shown for simple, rst and latex, omitted for csv and tsv). Ignored by formats without a title.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>with_legend</td>
+<td>bool | None</td>
+<td>include the table legend. If None, uses each format’s default (shown for simple, rst and latex, omitted for csv and tsv). Ignored by formats without a legend.</td>
+<td><code>None</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="notes-7" class="level4 doc-section doc-section-notes">
+<h4 class="doc-section doc-section-notes anchored" data-anchor-id="notes-7">Notes</h4>
+<p>If format is bedgraph, assumes that column headers are chrom, start, end, value. In that order!</p>
+</section>
+</section>
+<section id="cogent3.core.table.Table.to_tsv" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.table.Table.to_tsv">to_tsv</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>core.table.Table.to_tsv(with_title<span class="op">=</span><span class="va">False</span>, with_legend<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>return table formatted as tab separated values</p>
+<section id="parameters-25" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-25">Parameters</h4>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>with_title</td>
+<td>bool</td>
+<td>include the table title</td>
+<td><code>False</code></td>
+</tr>
+<tr class="even">
+<td>with_legend</td>
+<td>bool</td>
+<td>include table legend</td>
+<td><code>False</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cogent3.core.table.Table.transposed" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.table.Table.transposed">transposed</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>core.table.Table.transposed(new_column_name, select_as_header<span class="op">=</span><span class="va">None</span>, <span class="op">**</span>kwargs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>returns the transposed table.</p>
+<section id="parameters-26" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-26">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 6%">
+<col style="width: 70%">
+<col style="width: 9%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>new_column_name</td>
+<td></td>
+<td>the existing header will become a column with this name</td>
+<td><em>required</em></td>
+</tr>
+<tr class="even">
+<td>select_as_header</td>
+<td></td>
+<td>current column name containing data to be used as the header. Defaults to the first column.</td>
+<td><code>None</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cogent3.core.table.Table.with_new_column" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.table.Table.with_new_column">with_new_column</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>core.table.Table.with_new_column(</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    new_column,</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    callback,</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>    dtype<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">**</span>kwargs,</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Returns new table with an additional column, computed using callback.</p>
+<section id="parameters-27" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-27">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 27%">
+<col style="width: 61%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>new_column</td>
+<td>str</td>
+<td>new column heading</td>
+<td><em>required</em></td>
+</tr>
+<tr class="even">
+<td>columns</td>
+<td>str | tuple[str, …] | None</td>
+<td>the columns whose values determine whether a row is to be included.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="odd">
+<td>callback</td>
+<td>typing.Callable[[numpy.ndarray], typing.Iterable] | str</td>
+<td>Can be a function, which takes the subtable by columns and returns True/False, or a string representing valid python code to be evaluated.</td>
+<td><em>required</em></td>
+</tr>
+<tr class="even">
+<td>dtype</td>
+<td>numpy.dtype | None</td>
+<td>numpy type of result</td>
+<td><code>None</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cogent3.core.table.Table.with_new_header" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.table.Table.with_new_header">with_new_header</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>core.table.Table.with_new_header(old, new, <span class="op">**</span>kwargs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>returns a new Table with old header labels replaced by new</p>
+<section id="parameters-28" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-28">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 68%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>old</td>
+<td></td>
+<td>the old column header(s). Can be a string or series of them.</td>
+<td><em>required</em></td>
+</tr>
+<tr class="even">
+<td>new</td>
+<td></td>
+<td>the new column header(s). Can be a string or series of them.</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cogent3.core.table.Table.write" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.table.Table.write">write</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>core.table.Table.write(</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>    filename,</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>    mode<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    writer<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>    format_name<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>    sep<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>    compress<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>    with_title<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>    with_legend<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">**</span>kwargs,</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Write table to filename in the specified format.</p>
+<section id="parameters-29" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-29">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 15%">
+<col style="width: 69%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>mode</td>
+<td>str | None</td>
+<td>file opening mode</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>format_name</td>
+<td>str | None</td>
+<td>Valid formats are those of the to_string method plus pickle. Will try and guess from filename if not specified.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="odd">
+<td>writer</td>
+<td>typing.Callable | None</td>
+<td>a function for formatting the data for output.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>sep</td>
+<td>str | None</td>
+<td>a character delimiter for fields.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="odd">
+<td>compress</td>
+<td>bool | None</td>
+<td>if True, gzips the file and appends .gz to the filename (if not already added).</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>with_title</td>
+<td>bool</td>
+<td>include the table title, ignored by formats without a title</td>
+<td><code>True</code></td>
+</tr>
+<tr class="odd">
+<td>with_legend</td>
+<td>bool</td>
+<td>include the table legend, ignored by formats without a legend</td>
+<td><code>True</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="notes-8" class="level4 doc-section doc-section-notes">
+<h4 class="doc-section doc-section-notes anchored" data-anchor-id="notes-8">Notes</h4>
+<p>If a format is not specified, it attempts to use a filename suffix. Unformatted numerical values are written to file in order to preserve numerical accuracy.</p>
+
+
+</section>
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,3184 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>core.tree.phylonode – cogent3</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../images/c3-square.svg" rel="icon" type="image/svg+xml">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-d5382f61a7c05c0e60b360404eaa31c2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-7b86e7e6654ba272f9acdded3611cd60.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-d5382f61a7c05c0e60b360404eaa31c2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../doc/custom.css">
+<link rel="stylesheet" href="../../custom.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../images/c3-logo.svg" alt="cogent3" class="navbar-logo light-content">
+    <img src="../../images/c3-logo.svg" alt="cogent3" class="navbar-logo dark-content">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../../doc/draw/index.html" aria-current="page"> 
+<span class="menu-text">Image Gallery</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../doc/install.html"> 
+<span class="menu-text">Installation</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../doc/index.html"> 
+<span class="menu-text">User Guides</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../doc/licenses.html"> 
+<span class="menu-text">License</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../codeshare.html"> 
+<span class="menu-text">Code Sharing</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-more" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">More</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-more">    
+        <li>
+    <a class="dropdown-item" href="../../doc/community.html">
+ <span class="dropdown-text">Community</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../history.html">
+ <span class="dropdown-text">Project History</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../doc/pycogent.html">
+ <span class="dropdown-text">How does cogent3 relate to PyCogent?</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../projects.html">
+ <span class="dropdown-text">Projects using cogent3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../doc/data_file_links.html">
+ <span class="dropdown-text">Data Files Used in the Documentation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../genindex.html">
+ <span class="dropdown-text">Index</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+    <a href="https://github.com/cogent3/cogent3" title="cogent3 on GitHub" class="quarto-navigation-tool px-1" aria-label="cogent3 on GitHub"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Making Sense from Sequence</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">User Guides</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../doc/app/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Apps</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../doc/app/index-app.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview of apps</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_overview/app-overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview of using apps</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_overview/app-help.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Getting help on an app</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_overview/app-get.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Getting an app</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_overview/available-apps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Displaying installed apps</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_overview/dstore.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data stores – collections of data records</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_overview/not-completed.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tracking records that could not be processed</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_overview/user_function.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Writing your own apps</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../doc/app/index-cookbook.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">App Cookbook</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../doc/app/app_cookbook/index-loaders.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Loading data</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/load-aligned.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Loading aligned sequence data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/load-unaligned.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Loading unaligned sequence data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/load-tabular.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Loading tabular data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/load-json.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Loading JSON serialised objects</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../doc/app/app_cookbook/index-align.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sequence Alignment</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/align-nucleotide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using a nucleotide model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/align-codon.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using a codon model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/align-protein.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using a protein model</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../doc/app/app_cookbook/index-sample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Filtering data</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/sample-omit-degen.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Removing degenerate characters</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/sample-omit-gap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Removing highly gapped positions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/sample-omit-bad.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Remove problem sequences from an alignment</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/sample-omit-duplicated.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Remove duplicated sequences from an alignment</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/sample-min-len.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Filter sequence collections and alignments by length</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/sample-fixed-len.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sample an alignment to a fixed length</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/sample-trim-stops.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Remove trailing stop codons from sequences in an alignment</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/sample-take-pos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sample nucleotides from a given codon position</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/sample-take-seqs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Select named sequences from a collection</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/sample-take-n-seqs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Select <code>n</code> sequences from a collection</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/sample-concat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Concatenating alignments</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../doc/app/app_cookbook/index-writers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Writing Data</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/write-seqs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Writing sequences and sequence alignments</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/write-tabular.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Writing tabular data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/write-json.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Writing JSON Serialised Objects</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_cookbook/write-db.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Writing a database to file</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../doc/app/index-tutorials.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">App Tutorials</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../doc/app/app_tutorials/index-evo-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Modelling sequence evolution</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_tutorials/evo-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Apply a non-stationary nucleotide model to an alignment with 3 sequences</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_tutorials/evo-model-with-tree.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Apply a non-stationary nucleotide model to an alignment with a tree</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_tutorials/evo-model-timehet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Specifying a non-stationary model with time-heterogeneous parameters</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_tutorials/evo-extract-model-stats.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Extracting maximum likelihood estimates from a <code>model_result</code></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_tutorials/evo-ancestral-states.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Reconstructing ancestral states</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_tutorials/evo-dt-nuc-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Applying a discrete-time, non-stationary nucleotide model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_tutorials/evo-tr-nuc-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Applying a time-reversible nucleotide model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_tutorials/evo-nstat-codon-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Applying GNC, a non-stationary codon model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_tutorials/evo-tr-codon-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Applying a time-reversible codon model</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../doc/app/app_tutorials/index-evo-hypothesis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Testing hypotheses about sequence evolution</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_tutorials/evo-hypothesis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Testing a hypothesis – non-stationary or time-reversible</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../doc/app/app_tutorials/index-evo-natsel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Testing for natural selection</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth3 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_tutorials/evo-natsel_neutral.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><code>natsel_neutral</code> – a test for selective neutrality</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_tutorials/evo-natsel_timehet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><code>natsel_timehet</code> – a test of branch heterogeneity</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_tutorials/evo-natsel_sitehet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><code>natsel_sitehet</code> – a test of site heterogeneity</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/app/app_tutorials/evo-natsel_zhang.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><code>natsel_zhang</code> – a branch-site test</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../doc/cookbook/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cookbook</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../doc/cookbook/manipulating_biological_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Manipulating biological data</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/cookbook/loading_sequences.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Loading a single sequence from a file</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/cookbook/DNA_and_RNA_sequences.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sequences</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/cookbook/protein_sequences.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Protein sequences</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/cookbook/alignments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sequence Collections and Alignments</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/cookbook/features.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Features</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/cookbook/annotation_db.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Annotation Databases</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/cookbook/moltypes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Molecular types</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/cookbook/alphabet.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Alphabets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/cookbook/what_codes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Available genetic codes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/cookbook/genetic_code.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using genetic codes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/cookbook/simple_trees.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Trees</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/cookbook/tables.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tabular data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/cookbook/building_alignments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Building alignments</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/cookbook/calc_genetic_distance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Genetic distance calculation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/cookbook/building_phylogenies.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Building phylogenies</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/cookbook/evo_modelling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Evolutionary Analysis Using Likelihood</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/cookbook/useful_utilities.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Useful Utilities</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../doc/examples/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tutorials</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/examples/align_codons_to_protein.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Map protein alignment gaps to DNA alignment gaps</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/examples/period_estimation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Estimating periodic signals</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/examples/simple.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">The simplest script</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/examples/relative_rate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Performing a relative rate test</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/examples/neutral_test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">A test of the neutral theory</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/examples/scope_model_params_on_trees.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Allowing substitution model parameters to differ between branches</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/examples/codon_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using codon models</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/examples/empirical_protein_models.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Use an empirical protein substitution model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/examples/testing_multi_loci.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Likelihood analysis of multiple loci</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/examples/simulate_alignment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Simulate an alignment</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/examples/parametric_bootstrap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Performing a parametric bootstrap</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/examples/rate_heterogeneity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Analysis of rate heterogeneity</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/examples/hmm_par_heterogeneity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Evaluate process heterogeneity using a Hidden Markov Model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/examples/nonstationary_inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Inferring Amino Acid frequencies with a nonstationary model</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/examples/calculate_pairwise_distances.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Calculate pairwise distances between sequences</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/examples/calculate_neigbourjoining_tree.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Make a neighbor joining tree</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/examples/calculate_UPGMA_cluster.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Make a UPGMA cluster</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/examples/phylo_by_ls.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Phylogenetic reconstruction by least squares</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/examples/parallel.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Parallel computations</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../doc/draw/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Image Gallery</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/draw/annotations/plot_seq-features.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sequence Features</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/draw/annotations/plot_annotation-db.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Annotation DB Features</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/draw/aln/plot_aln-seqlogo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sequence logos</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/draw/aln/plot_aln-info-plot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Information analysis of an alignment</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/draw/aln/plot_aln-gaps-per-seq.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Counting gaps per sequence</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/draw/aln/plot_aln-dotplot-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assess alignment quality via dotplots</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/draw/aln/plot_aln-dotplot-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Dotplot with annotated sequences</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/draw/aln/plot_aln-dotplot-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Dotplot basics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/draw/aln/plot_aln-coevolution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Coevolution analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/draw/tree/plot_tree-support.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Showing Bootstrap Support</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/draw/tree/plot_tree-square.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Square Dendrogram Style</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/draw/tree/plot_tree-radial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Radial Dendrogram Style</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/draw/tree/plot_tree-iplotx.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using iplotx with cogent3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/draw/tree/plot_tree-circular.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Circular Dendrogram Style</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/draw/tree/plot_tree-angular.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Angular Dendrogram Style</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../doc/reference/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">API Reference</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../codeshare.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Code Sharing</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../projects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Projects using <code>cogent3</code></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../history.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Project History</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../genindex.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Index</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#cogent3.core.tree.PhyloNode" id="toc-cogent3.core.tree.PhyloNode" class="nav-link active" data-scroll-target="#cogent3.core.tree.PhyloNode">core.tree.PhyloNode</a>
+  <ul>
+  <li><a href="#attributes" id="toc-attributes" class="nav-link" data-scroll-target="#attributes">Attributes</a></li>
+  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a>
+  <ul class="collapse">
+  <li><a href="#cogent3.core.tree.PhyloNode.ancestors" id="toc-cogent3.core.tree.PhyloNode.ancestors" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.ancestors">ancestors</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.append" id="toc-cogent3.core.tree.PhyloNode.append" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.append">append</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.ascii_art" id="toc-cogent3.core.tree.PhyloNode.ascii_art" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.ascii_art">ascii_art</a>
+  <ul class="collapse">
+  <li><a href="#parameters" id="toc-parameters" class="nav-link" data-scroll-target="#parameters">Parameters</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.balanced" id="toc-cogent3.core.tree.PhyloNode.balanced" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.balanced">balanced</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.bifurcating" id="toc-cogent3.core.tree.PhyloNode.bifurcating" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.bifurcating">bifurcating</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.child_parent_map" id="toc-cogent3.core.tree.PhyloNode.child_parent_map" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.child_parent_map">child_parent_map</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.compare_by_names" id="toc-cogent3.core.tree.PhyloNode.compare_by_names" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.compare_by_names">compare_by_names</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.compare_by_subsets" id="toc-cogent3.core.tree.PhyloNode.compare_by_subsets" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.compare_by_subsets">compare_by_subsets</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.compare_name" id="toc-cogent3.core.tree.PhyloNode.compare_name" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.compare_name">compare_name</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.copy" id="toc-cogent3.core.tree.PhyloNode.copy" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.copy">copy</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.descendant_array" id="toc-cogent3.core.tree.PhyloNode.descendant_array" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.descendant_array">descendant_array</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.distance" id="toc-cogent3.core.tree.PhyloNode.distance" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.distance">distance</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.extend" id="toc-cogent3.core.tree.PhyloNode.extend" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.extend">extend</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.get_connecting_edges" id="toc-cogent3.core.tree.PhyloNode.get_connecting_edges" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.get_connecting_edges">get_connecting_edges</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.get_connecting_node" id="toc-cogent3.core.tree.PhyloNode.get_connecting_node" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.get_connecting_node">get_connecting_node</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.get_edge_names" id="toc-cogent3.core.tree.PhyloNode.get_edge_names" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.get_edge_names">get_edge_names</a>
+  <ul class="collapse">
+  <li><a href="#parameters-1" id="toc-parameters-1" class="nav-link" data-scroll-target="#parameters-1">Parameters</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.get_edge_vector" id="toc-cogent3.core.tree.PhyloNode.get_edge_vector" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.get_edge_vector">get_edge_vector</a>
+  <ul class="collapse">
+  <li><a href="#parameters-2" id="toc-parameters-2" class="nav-link" data-scroll-target="#parameters-2">Parameters</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.get_figure" id="toc-cogent3.core.tree.PhyloNode.get_figure" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.get_figure">get_figure</a>
+  <ul class="collapse">
+  <li><a href="#parameters-3" id="toc-parameters-3" class="nav-link" data-scroll-target="#parameters-3">Parameters</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.get_max_tip_tip_distance" id="toc-cogent3.core.tree.PhyloNode.get_max_tip_tip_distance" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.get_max_tip_tip_distance">get_max_tip_tip_distance</a>
+  <ul class="collapse">
+  <li><a href="#returns" id="toc-returns" class="nav-link" data-scroll-target="#returns">Returns</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.get_newick" id="toc-cogent3.core.tree.PhyloNode.get_newick" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.get_newick">get_newick</a>
+  <ul class="collapse">
+  <li><a href="#parameters-4" id="toc-parameters-4" class="nav-link" data-scroll-target="#parameters-4">Parameters</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.get_node_matching_name" id="toc-cogent3.core.tree.PhyloNode.get_node_matching_name" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.get_node_matching_name">get_node_matching_name</a>
+  <ul class="collapse">
+  <li><a href="#raises" id="toc-raises" class="nav-link" data-scroll-target="#raises">Raises</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.get_node_names" id="toc-cogent3.core.tree.PhyloNode.get_node_names" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.get_node_names">get_node_names</a>
+  <ul class="collapse">
+  <li><a href="#parameters-5" id="toc-parameters-5" class="nav-link" data-scroll-target="#parameters-5">Parameters</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.get_nodes_dict" id="toc-cogent3.core.tree.PhyloNode.get_nodes_dict" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.get_nodes_dict">get_nodes_dict</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.get_param_value" id="toc-cogent3.core.tree.PhyloNode.get_param_value" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.get_param_value">get_param_value</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.get_root" id="toc-cogent3.core.tree.PhyloNode.get_root" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.get_root">get_root</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.get_sub_tree" id="toc-cogent3.core.tree.PhyloNode.get_sub_tree" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.get_sub_tree">get_sub_tree</a>
+  <ul class="collapse">
+  <li><a href="#parameters-6" id="toc-parameters-6" class="nav-link" data-scroll-target="#parameters-6">Parameters</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.get_tip_names" id="toc-cogent3.core.tree.PhyloNode.get_tip_names" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.get_tip_names">get_tip_names</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.index_in_parent" id="toc-cogent3.core.tree.PhyloNode.index_in_parent" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.index_in_parent">index_in_parent</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.insert" id="toc-cogent3.core.tree.PhyloNode.insert" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.insert">insert</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.is_root" id="toc-cogent3.core.tree.PhyloNode.is_root" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.is_root">is_root</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.is_tip" id="toc-cogent3.core.tree.PhyloNode.is_tip" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.is_tip">is_tip</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.isroot" id="toc-cogent3.core.tree.PhyloNode.isroot" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.isroot">isroot</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.istip" id="toc-cogent3.core.tree.PhyloNode.istip" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.istip">istip</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.iter_nontips" id="toc-cogent3.core.tree.PhyloNode.iter_nontips" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.iter_nontips">iter_nontips</a>
+  <ul class="collapse">
+  <li><a href="#parameters-7" id="toc-parameters-7" class="nav-link" data-scroll-target="#parameters-7">Parameters</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.iter_tips" id="toc-cogent3.core.tree.PhyloNode.iter_tips" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.iter_tips">iter_tips</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.ladderise" id="toc-cogent3.core.tree.PhyloNode.ladderise" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.ladderise">ladderise</a>
+  <ul class="collapse">
+  <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes">Notes</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.last_common_ancestor" id="toc-cogent3.core.tree.PhyloNode.last_common_ancestor" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.last_common_ancestor">last_common_ancestor</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.levelorder" id="toc-cogent3.core.tree.PhyloNode.levelorder" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.levelorder">levelorder</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.lin_rajan_moret" id="toc-cogent3.core.tree.PhyloNode.lin_rajan_moret" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.lin_rajan_moret">lin_rajan_moret</a>
+  <ul class="collapse">
+  <li><a href="#notes-1" id="toc-notes-1" class="nav-link" data-scroll-target="#notes-1">Notes</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.lowest_common_ancestor" id="toc-cogent3.core.tree.PhyloNode.lowest_common_ancestor" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.lowest_common_ancestor">lowest_common_ancestor</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.make_tree_array" id="toc-cogent3.core.tree.PhyloNode.make_tree_array" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.make_tree_array">make_tree_array</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.max_tip_tip_distance" id="toc-cogent3.core.tree.PhyloNode.max_tip_tip_distance" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.max_tip_tip_distance">max_tip_tip_distance</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.multifurcating" id="toc-cogent3.core.tree.PhyloNode.multifurcating" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.multifurcating">multifurcating</a>
+  <ul class="collapse">
+  <li><a href="#parameters-8" id="toc-parameters-8" class="nav-link" data-scroll-target="#parameters-8">Parameters</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.name_unnamed_nodes" id="toc-cogent3.core.tree.PhyloNode.name_unnamed_nodes" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.name_unnamed_nodes">name_unnamed_nodes</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.non_tip_children" id="toc-cogent3.core.tree.PhyloNode.non_tip_children" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.non_tip_children">non_tip_children</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.nontips" id="toc-cogent3.core.tree.PhyloNode.nontips" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.nontips">nontips</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.pop" id="toc-cogent3.core.tree.PhyloNode.pop" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.pop">pop</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.postorder" id="toc-cogent3.core.tree.PhyloNode.postorder" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.postorder">postorder</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.pre_and_postorder" id="toc-cogent3.core.tree.PhyloNode.pre_and_postorder" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.pre_and_postorder">pre_and_postorder</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.preorder" id="toc-cogent3.core.tree.PhyloNode.preorder" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.preorder">preorder</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.prune" id="toc-cogent3.core.tree.PhyloNode.prune" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.prune">prune</a>
+  <ul class="collapse">
+  <li><a href="#parameters-9" id="toc-parameters-9" class="nav-link" data-scroll-target="#parameters-9">Parameters</a></li>
+  <li><a href="#notes-2" id="toc-notes-2" class="nav-link" data-scroll-target="#notes-2">Notes</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.reassign_names" id="toc-cogent3.core.tree.PhyloNode.reassign_names" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.reassign_names">reassign_names</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.remove" id="toc-cogent3.core.tree.PhyloNode.remove" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.remove">remove</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.remove_deleted" id="toc-cogent3.core.tree.PhyloNode.remove_deleted" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.remove_deleted">remove_deleted</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.remove_node" id="toc-cogent3.core.tree.PhyloNode.remove_node" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.remove_node">remove_node</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.renamed_nodes" id="toc-cogent3.core.tree.PhyloNode.renamed_nodes" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.renamed_nodes">renamed_nodes</a>
+  <ul class="collapse">
+  <li><a href="#parameters-10" id="toc-parameters-10" class="nav-link" data-scroll-target="#parameters-10">Parameters</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.root_at_midpoint" id="toc-cogent3.core.tree.PhyloNode.root_at_midpoint" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.root_at_midpoint">root_at_midpoint</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.rooted" id="toc-cogent3.core.tree.PhyloNode.rooted" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.rooted">rooted</a>
+  <ul class="collapse">
+  <li><a href="#parameters-11" id="toc-parameters-11" class="nav-link" data-scroll-target="#parameters-11">Parameters</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.rooted_at" id="toc-cogent3.core.tree.PhyloNode.rooted_at" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.rooted_at">rooted_at</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.rooted_with_tip" id="toc-cogent3.core.tree.PhyloNode.rooted_with_tip" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.rooted_with_tip">rooted_with_tip</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.same_shape" id="toc-cogent3.core.tree.PhyloNode.same_shape" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.same_shape">same_shape</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.same_topology" id="toc-cogent3.core.tree.PhyloNode.same_topology" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.same_topology">same_topology</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.separation" id="toc-cogent3.core.tree.PhyloNode.separation" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.separation">separation</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.set_param_value" id="toc-cogent3.core.tree.PhyloNode.set_param_value" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.set_param_value">set_param_value</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.siblings" id="toc-cogent3.core.tree.PhyloNode.siblings" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.siblings">siblings</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.sorted" id="toc-cogent3.core.tree.PhyloNode.sorted" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.sorted">sorted</a>
+  <ul class="collapse">
+  <li><a href="#notes-3" id="toc-notes-3" class="nav-link" data-scroll-target="#notes-3">Notes</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.subset" id="toc-cogent3.core.tree.PhyloNode.subset" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.subset">subset</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.subsets" id="toc-cogent3.core.tree.PhyloNode.subsets" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.subsets">subsets</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.tip_children" id="toc-cogent3.core.tree.PhyloNode.tip_children" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.tip_children">tip_children</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.tip_to_root_distances" id="toc-cogent3.core.tree.PhyloNode.tip_to_root_distances" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.tip_to_root_distances">tip_to_root_distances</a>
+  <ul class="collapse">
+  <li><a href="#parameters-12" id="toc-parameters-12" class="nav-link" data-scroll-target="#parameters-12">Parameters</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.tip_to_tip_distances" id="toc-cogent3.core.tree.PhyloNode.tip_to_tip_distances" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.tip_to_tip_distances">tip_to_tip_distances</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.tips" id="toc-cogent3.core.tree.PhyloNode.tips" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.tips">tips</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.tips_within_distance" id="toc-cogent3.core.tree.PhyloNode.tips_within_distance" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.tips_within_distance">tips_within_distance</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.to_json" id="toc-cogent3.core.tree.PhyloNode.to_json" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.to_json">to_json</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.to_rich_dict" id="toc-cogent3.core.tree.PhyloNode.to_rich_dict" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.to_rich_dict">to_rich_dict</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.total_descending_branch_length" id="toc-cogent3.core.tree.PhyloNode.total_descending_branch_length" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.total_descending_branch_length">total_descending_branch_length</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.total_length" id="toc-cogent3.core.tree.PhyloNode.total_length" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.total_length">total_length</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.tree_distance" id="toc-cogent3.core.tree.PhyloNode.tree_distance" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.tree_distance">tree_distance</a>
+  <ul class="collapse">
+  <li><a href="#parameters-13" id="toc-parameters-13" class="nav-link" data-scroll-target="#parameters-13">Parameters</a></li>
+  <li><a href="#returns-1" id="toc-returns-1" class="nav-link" data-scroll-target="#returns-1">Returns</a></li>
+  <li><a href="#notes-4" id="toc-notes-4" class="nav-link" data-scroll-target="#notes-4">Notes</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.unrooted" id="toc-cogent3.core.tree.PhyloNode.unrooted" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.unrooted">unrooted</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.unrooted_deepcopy" id="toc-cogent3.core.tree.PhyloNode.unrooted_deepcopy" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.unrooted_deepcopy">unrooted_deepcopy</a></li>
+  <li><a href="#cogent3.core.tree.PhyloNode.write" id="toc-cogent3.core.tree.PhyloNode.write" class="nav-link" data-scroll-target="#cogent3.core.tree.PhyloNode.write">write</a>
+  <ul class="collapse">
+  <li><a href="#parameters-14" id="toc-parameters-14" class="nav-link" data-scroll-target="#parameters-14">Parameters</a></li>
+  <li><a href="#notes-5" id="toc-notes-5" class="nav-link" data-scroll-target="#notes-5">Notes</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+
+<section id="cogent3.core.tree.PhyloNode" class="level1">
+<h1>core.tree.PhyloNode</h1>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    name,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    children<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    parent<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    params<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    name_loaded<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    length<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    support<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Store information about a tree node. Mutable.</p>
+<p>Parameters: name: label for the node, assumed to be unique. children: list of the node’s children. parent: parent to this node params: dict containing arbitrary parameters for the node. name_loaded: ?</p>
+<section id="attributes" class="level2">
+<h2 class="anchored" data-anchor-id="attributes">Attributes</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.parent">parent</a></td>
+<td>parent of this node</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="methods" class="level2">
+<h2 class="anchored" data-anchor-id="methods">Methods</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.ancestors">ancestors</a></td>
+<td>Returns all ancestors back to the root.</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.append">append</a></td>
+<td>Appends i to self.children, in-place, cleaning up refs.</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.ascii_art">ascii_art</a></td>
+<td>Returns a string containing an ascii drawing of the tree.</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.balanced">balanced</a></td>
+<td>Tree ‘rooted’ here with no neighbour having &gt; 50% of the edges.</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.bifurcating">bifurcating</a></td>
+<td>Wrap multifurcating with a num of 2</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.child_parent_map">child_parent_map</a></td>
+<td>return dict of {<child name="">: <parent name="">, …}</parent></child></td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.compare_by_names">compare_by_names</a></td>
+<td>Equality test for trees by name</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.compare_by_subsets">compare_by_subsets</a></td>
+<td>Returns fraction of overlapping subsets where self and other differ.</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.compare_name">compare_name</a></td>
+<td>Compares PhyloNode by name</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.copy">copy</a></td>
+<td>Returns a copy of self using an iterative approach</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.descendant_array">descendant_array</a></td>
+<td>Returns numpy array with nodes in rows and descendants in columns.</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.distance">distance</a></td>
+<td>Returns branch length between self and other.</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.extend">extend</a></td>
+<td>Extends self.children by items, in-place, cleaning up refs.</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.get_connecting_edges">get_connecting_edges</a></td>
+<td>returns a list of edges connecting two nodes.</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.get_connecting_node">get_connecting_node</a></td>
+<td>Finds the last common ancestor of the two named edges.</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.get_edge_names">get_edge_names</a></td>
+<td>Return the list of stem and/or sub tree (clade) edge name(s).</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.get_edge_vector">get_edge_vector</a></td>
+<td>Collect the list of edges in postfix order</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.get_figure">get_figure</a></td>
+<td>gets Dendrogram for plotting the phylogeny</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.get_max_tip_tip_distance">get_max_tip_tip_distance</a></td>
+<td>Returns the max tip-to-tip distance between any pair of tips</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.get_newick">get_newick</a></td>
+<td>Return the newick string of node and its descendents</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.get_node_matching_name">get_node_matching_name</a></td>
+<td>find the edge with the name</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.get_node_names">get_node_names</a></td>
+<td>Return a list of edges from this edge - may or may not include self.</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.get_nodes_dict">get_nodes_dict</a></td>
+<td>Returns a dict keyed by node name, value is node</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.get_param_value">get_param_value</a></td>
+<td>returns the parameter value for named edge</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.get_root">get_root</a></td>
+<td>Returns root of the tree self is in.</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.get_sub_tree">get_sub_tree</a></td>
+<td>A new instance of a sub tree that contains all the otus that are</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.get_tip_names">get_tip_names</a></td>
+<td>return the list of the names of all tips contained by this edge</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.index_in_parent">index_in_parent</a></td>
+<td>Returns index of self in parent.</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.insert">insert</a></td>
+<td>Inserts an item at specified position in self.children.</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.is_root">is_root</a></td>
+<td>Returns True if the current is a root, i.e.&nbsp;has no parent.</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.is_tip">is_tip</a></td>
+<td>Returns True if the current node is a tip, i.e.&nbsp;has no children.</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.isroot">isroot</a></td>
+<td>Returns True if root of a tree, i.e.&nbsp;no parent.</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.istip">istip</a></td>
+<td>Returns True if is tip, i.e.&nbsp;no children.</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.iter_nontips">iter_nontips</a></td>
+<td>Iterates over nontips descended from self</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.iter_tips">iter_tips</a></td>
+<td>Iterates over tips descended from self, [] if self is a tip.</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.ladderise">ladderise</a></td>
+<td>Return an equivalent tree nodes using a ladderise sort.</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.last_common_ancestor">last_common_ancestor</a></td>
+<td>Finds last common ancestor of self and other, or None.</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.levelorder">levelorder</a></td>
+<td>Performs levelorder iteration over tree</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.lin_rajan_moret">lin_rajan_moret</a></td>
+<td>return the lin-rajan-moret distance between trees</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.lowest_common_ancestor">lowest_common_ancestor</a></td>
+<td>Lowest common ancestor for a list of tipnames</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.make_tree_array">make_tree_array</a></td>
+<td>Makes an array with nodes in rows and descendants in columns.</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.max_tip_tip_distance">max_tip_tip_distance</a></td>
+<td>returns the max distance between any pair of tips</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.multifurcating">multifurcating</a></td>
+<td>return a new tree with every node having num or few children</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.name_unnamed_nodes">name_unnamed_nodes</a></td>
+<td>sets the Data property of unnamed nodes to an arbitrary value</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.non_tip_children">non_tip_children</a></td>
+<td>Returns direct children in self that have descendants.</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.nontips">nontips</a></td>
+<td>Returns nontips descended from self.</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.pop">pop</a></td>
+<td>Returns and deletes child of self at index (default: -1)</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.postorder">postorder</a></td>
+<td>performs postorder iteration over tree</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.pre_and_postorder">pre_and_postorder</a></td>
+<td>Performs iteration over tree, visiting node before and after.</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.preorder">preorder</a></td>
+<td>Performs preorder iteration over tree.</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.prune">prune</a></td>
+<td>removes nodes with one child</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.reassign_names">reassign_names</a></td>
+<td>Reassigns node names based on a mapping dict</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.remove">remove</a></td>
+<td>Removes node by name instead of identity.</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.remove_deleted">remove_deleted</a></td>
+<td>Removes all nodes where should_delete tests true.</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.remove_node">remove_node</a></td>
+<td>Removes node by identity instead of value.</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.renamed_nodes">renamed_nodes</a></td>
+<td>returns a copy of the tree with nodes renamed according to name_map</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.root_at_midpoint">root_at_midpoint</a></td>
+<td>return a new tree rooted at midpoint of the two tips farthest apart</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.rooted">rooted</a></td>
+<td>Returns a new tree with split at edge_name</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.rooted_at">rooted_at</a></td>
+<td>Return a new tree rooted at the provided node.</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.rooted_with_tip">rooted_with_tip</a></td>
+<td>A new tree with the named tip as one of the root’s children</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.same_shape">same_shape</a></td>
+<td>Ignores lengths and order, so trees should be sorted first</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.same_topology">same_topology</a></td>
+<td>Tests whether two trees have the same topology.</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.separation">separation</a></td>
+<td>Returns number of edges separating self and other.</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.set_param_value">set_param_value</a></td>
+<td>set’s the value for param at named edge</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.siblings">siblings</a></td>
+<td>Returns all nodes that are children of the same parent as self.</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.sorted">sorted</a></td>
+<td>An equivalent tree with tips in sort_order.</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.subset">subset</a></td>
+<td>Returns set of names that descend from specified node</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.subsets">subsets</a></td>
+<td>Returns all sets of names that come from specified node and its kids</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.tip_children">tip_children</a></td>
+<td>Returns direct children of self that are tips.</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.tip_to_root_distances">tip_to_root_distances</a></td>
+<td>returns the cumulative sum of lengths from each tip to the root</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.tip_to_tip_distances">tip_to_tip_distances</a></td>
+<td>Returns distance matrix between all pairs of tips, and a tip order</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.tips">tips</a></td>
+<td>Returns tips descended from self, [] if self is a tip.</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.tips_within_distance">tips_within_distance</a></td>
+<td>Returns tips within specified distance from self</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.to_json">to_json</a></td>
+<td>returns json formatted string {‘newick’: with edges and distances, ‘edge_attributes’: }</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.to_rich_dict">to_rich_dict</a></td>
+<td>returns {‘newick’: with node names,</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.total_descending_branch_length">total_descending_branch_length</a></td>
+<td>Returns total descending branch length from self</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.total_length">total_length</a></td>
+<td>returns the sum of all branch lengths in tree</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.tree_distance">tree_distance</a></td>
+<td>Return the specified tree distance between this and another tree.</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.unrooted">unrooted</a></td>
+<td>A tree with at least 3 children at the root.</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.tree.PhyloNode.unrooted_deepcopy">unrooted_deepcopy</a></td>
+<td>Returns a deepcopy of the tree using unrooted traversal.</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.tree.PhyloNode.write">write</a></td>
+<td>Save the tree to filename</td>
+</tr>
+</tbody>
+</table>
+<section id="cogent3.core.tree.PhyloNode.ancestors" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.ancestors">ancestors</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.ancestors()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Returns all ancestors back to the root.</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.append" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.append">append</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.append(i)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Appends i to self.children, in-place, cleaning up refs.</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.ascii_art" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.ascii_art">ascii_art</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.ascii_art(show_internal<span class="op">=</span><span class="va">True</span>, compact<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Returns a string containing an ascii drawing of the tree.</p>
+<section id="parameters" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters">Parameters</h4>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>show_internal</td>
+<td>bool</td>
+<td>includes internal edge names.</td>
+<td><code>True</code></td>
+</tr>
+<tr class="even">
+<td>compact</td>
+<td>bool</td>
+<td>use exactly one line per tip.</td>
+<td><code>False</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cogent3.core.tree.PhyloNode.balanced" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.balanced">balanced</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.balanced()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Tree ‘rooted’ here with no neighbour having &gt; 50% of the edges.</p>
+<p>Usage: Using a balanced tree can substantially improve performance of the likelihood calculations. Note that the resulting tree has a different orientation with the effect that specifying clades or stems for model parameterisation should be done using the ‘outgroup_name’ argument.</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.bifurcating" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.bifurcating">bifurcating</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.bifurcating(eps<span class="op">=</span><span class="va">None</span>, name_unnamed<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Wrap multifurcating with a num of 2</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.child_parent_map" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.child_parent_map">child_parent_map</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.child_parent_map()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>return dict of {<child name="">: <parent name="">, …}</parent></child></p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.compare_by_names" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.compare_by_names">compare_by_names</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.compare_by_names(other)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Equality test for trees by name</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.compare_by_subsets" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.compare_by_subsets">compare_by_subsets</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.compare_by_subsets(other, exclude_absent_taxa<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Returns fraction of overlapping subsets where self and other differ.</p>
+<p>Other is expected to be a tree object compatible with PhyloNode.</p>
+<p>Note: names present in only one of the two trees will count as mismatches: if you don’t want this behavior, strip out the non-matching tips first.</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.compare_name" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.compare_name">compare_name</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.compare_name(other)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Compares PhyloNode by name</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.copy" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.copy">copy</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.copy(memo<span class="op">=</span><span class="va">None</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Returns a copy of self using an iterative approach</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.descendant_array" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.descendant_array">descendant_array</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.descendant_array(tip_list<span class="op">=</span><span class="va">None</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Returns numpy array with nodes in rows and descendants in columns.</p>
+<p>True indicates that the decendant is a descendant of that node False indicates that it is not</p>
+<p>Also returns a list of nodes in the same order as they are listed in the array.</p>
+<p>tip_list is a list of the names of the tips that will be considered, in the order they will appear as columns in the final array. Internal nodes will appear as rows in preorder traversal order.</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.distance" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.distance">distance</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.distance(other)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Returns branch length between self and other.</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.extend" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.extend">extend</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.extend(items)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Extends self.children by items, in-place, cleaning up refs.</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.get_connecting_edges" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.get_connecting_edges">get_connecting_edges</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.get_connecting_edges(name1, name2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>returns a list of edges connecting two nodes.</p>
+<p>If both are tips, the LCA is excluded from the result.</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.get_connecting_node" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.get_connecting_node">get_connecting_node</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.get_connecting_node(name1, name2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Finds the last common ancestor of the two named edges.</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.get_edge_names" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.get_edge_names">get_edge_names</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.get_edge_names(</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    tip_name_1,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    tip_name_2,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    clade<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    stem<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    outgroup_name<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Return the list of stem and/or sub tree (clade) edge name(s). This is done by finding the common intersection, and then getting the list of names. If the clade traverses the root, then use the outgroup_name argument to ensure valid specification.</p>
+<section id="parameters-1" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-1">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 3%">
+<col style="width: 88%">
+<col style="width: 3%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>tip_name_1</td>
+<td>str</td>
+<td>edge 1/2 names</td>
+<td><em>required</em></td>
+</tr>
+<tr class="even">
+<td>stem</td>
+<td>bool</td>
+<td>whether the name of the clade stem edge is returned.</td>
+<td><code>False</code></td>
+</tr>
+<tr class="odd">
+<td>clade</td>
+<td>bool</td>
+<td>whether the names of the edges within the clade are returned</td>
+<td><code>True</code></td>
+</tr>
+<tr class="even">
+<td>outgroup_name</td>
+<td>str | None</td>
+<td>if provided the calculation is done on a version of the tree re-rooted relative to the provided tip.</td>
+<td><code>None</code></td>
+</tr>
+<tr class="odd">
+<td>Usage</td>
+<td></td>
+<td>The returned list can be used to specify subtrees for special parameterisation. For instance, say you want to allow the primates to have a different value of a particular parameter. In this case, provide the results of this method to the parameter controller method <code>set_param_rule()</code> along with the parameter name etc..</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cogent3.core.tree.PhyloNode.get_edge_vector" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.get_edge_vector">get_edge_vector</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.get_edge_vector(include_root<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Collect the list of edges in postfix order</p>
+<section id="parameters-2" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-2">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 11%">
+<col style="width: 53%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>include_root</td>
+<td>bool</td>
+<td>specifies whether root edge included</td>
+<td><code>True</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cogent3.core.tree.PhyloNode.get_figure" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.get_figure">get_figure</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.get_figure(style<span class="op">=</span><span class="st">'square'</span>, <span class="op">**</span>kwargs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>gets Dendrogram for plotting the phylogeny</p>
+<section id="parameters-3" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-3">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 61%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>style</td>
+<td>string</td>
+<td>‘square’, ‘angular’, ‘radial’ or ‘circular’</td>
+<td><code>'square'</code></td>
+</tr>
+<tr class="even">
+<td>kwargs</td>
+<td>Any</td>
+<td>arguments passed to Dendrogram constructor</td>
+<td><code>{}</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cogent3.core.tree.PhyloNode.get_max_tip_tip_distance" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.get_max_tip_tip_distance">get_max_tip_tip_distance</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.get_max_tip_tip_distance()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Returns the max tip-to-tip distance between any pair of tips</p>
+<section id="returns" class="level4 doc-section doc-section-returns">
+<h4 class="doc-section doc-section-returns anchored" data-anchor-id="returns">Returns</h4>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>(dist, tip_names, internal_node)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cogent3.core.tree.PhyloNode.get_newick" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.get_newick">get_newick</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.get_newick(</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    with_distances<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    semicolon<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    escape_name<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    with_node_names<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    with_root_name<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    with_support<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Return the newick string of node and its descendents</p>
+<section id="parameters-4" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-4">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 3%">
+<col style="width: 84%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>with_distances</td>
+<td>bool</td>
+<td>include value of node length attribute if present.</td>
+<td><code>False</code></td>
+</tr>
+<tr class="even">
+<td>semicolon</td>
+<td>bool</td>
+<td>end tree string with a semicolon</td>
+<td><code>True</code></td>
+</tr>
+<tr class="odd">
+<td>escape_name</td>
+<td>bool</td>
+<td>if any of these characters []’“() are within the nodes name, wrap the name in single quotes</td>
+<td><code>True</code></td>
+</tr>
+<tr class="even">
+<td>with_node_names</td>
+<td>bool</td>
+<td>includes internal node names</td>
+<td><code>False</code></td>
+</tr>
+<tr class="odd">
+<td>with_root_name</td>
+<td>bool</td>
+<td>if True and with_node_names, the root node will have its name included</td>
+<td><code>False</code></td>
+</tr>
+<tr class="even">
+<td>with_support</td>
+<td>bool</td>
+<td>include the value of <code>node.support</code> for every node that has one. Integer-valued supports are written without a trailing <code>.0</code>. The root is only emitted when <code>with_root_name</code> is True.</td>
+<td><code>False</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cogent3.core.tree.PhyloNode.get_node_matching_name" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.get_node_matching_name">get_node_matching_name</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.get_node_matching_name(name)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>find the edge with the name</p>
+<section id="raises" class="level4 doc-section doc-section-raises">
+<h4 class="doc-section doc-section-raises anchored" data-anchor-id="raises">Raises</h4>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>TreeError if no edge with the name is found</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cogent3.core.tree.PhyloNode.get_node_names" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.get_node_names">get_node_names</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.get_node_names(include_self<span class="op">=</span><span class="va">True</span>, tips_only<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Return a list of edges from this edge - may or may not include self. This node (or first connection) will be the first, and then they will be listed in the natural traverse order.</p>
+<section id="parameters-5" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-5">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 11%">
+<col style="width: 52%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>include_self</td>
+<td>bool</td>
+<td>excludes self.name from the result</td>
+<td><code>True</code></td>
+</tr>
+<tr class="even">
+<td>tips_only</td>
+<td>bool</td>
+<td>only tips returned</td>
+<td><code>False</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cogent3.core.tree.PhyloNode.get_nodes_dict" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.get_nodes_dict">get_nodes_dict</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.get_nodes_dict()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Returns a dict keyed by node name, value is node</p>
+<p>Will raise TreeError if non-unique names are encountered</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.get_param_value" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.get_param_value">get_param_value</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.get_param_value(param, edge)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>returns the parameter value for named edge</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.get_root" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.get_root">get_root</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.get_root()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Returns root of the tree self is in.</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.get_sub_tree" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.get_sub_tree">get_sub_tree</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.get_sub_tree(</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    names,</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    ignore_missing<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    tips_only<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    as_rooted<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A new instance of a sub tree that contains all the otus that are listed in name_list.</p>
+<section id="parameters-6" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-6">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 4%">
+<col style="width: 79%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ignore_missing</td>
+<td>bool</td>
+<td>if False, get_sub_tree will raise a ValueError if name_list contains names that aren’t nodes in the tree</td>
+<td><code>False</code></td>
+</tr>
+<tr class="even">
+<td>tips_only</td>
+<td>bool</td>
+<td>only tip names matching name_list are allowed</td>
+<td><code>False</code></td>
+</tr>
+<tr class="odd">
+<td>as_rooted</td>
+<td>bool</td>
+<td>if True, the resulting subtree root will be as resolved. Otherwise, the subtree is coerced to have the same number of children as self.</td>
+<td><code>False</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cogent3.core.tree.PhyloNode.get_tip_names" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.get_tip_names">get_tip_names</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.get_tip_names(include_self<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>return the list of the names of all tips contained by this edge</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.index_in_parent" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.index_in_parent">index_in_parent</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.index_in_parent()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Returns index of self in parent.</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.insert" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.insert">insert</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.insert(index, i)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Inserts an item at specified position in self.children.</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.is_root" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.is_root">is_root</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.is_root()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Returns True if the current is a root, i.e.&nbsp;has no parent.</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.is_tip" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.is_tip">is_tip</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.is_tip()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Returns True if the current node is a tip, i.e.&nbsp;has no children.</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.isroot" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.isroot">isroot</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.isroot()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Returns True if root of a tree, i.e.&nbsp;no parent.</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.istip" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.istip">istip</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.istip()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Returns True if is tip, i.e.&nbsp;no children.</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.iter_nontips" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.iter_nontips">iter_nontips</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.iter_nontips(include_self<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Iterates over nontips descended from self</p>
+<section id="parameters-7" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-7">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 5%">
+<col style="width: 76%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>include_self</td>
+<td>bool</td>
+<td>if True (default is False), will return the current node as part of the list of nontips if it is a nontip.</td>
+<td><code>False</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cogent3.core.tree.PhyloNode.iter_tips" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.iter_tips">iter_tips</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.iter_tips(include_self<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Iterates over tips descended from self, [] if self is a tip.</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.ladderise" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.ladderise">ladderise</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.ladderise()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Return an equivalent tree nodes using a ladderise sort.</p>
+<section id="notes" class="level4 doc-section doc-section-notes">
+<h4 class="doc-section doc-section-notes anchored" data-anchor-id="notes">Notes</h4>
+<p>Children are ordered by their number of descendant tips with ties broken by alphabetical sort of node names.</p>
+</section>
+</section>
+<section id="cogent3.core.tree.PhyloNode.last_common_ancestor" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.last_common_ancestor">last_common_ancestor</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.last_common_ancestor(other)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Finds last common ancestor of self and other, or None.</p>
+<p>Always tests by identity.</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.levelorder" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.levelorder">levelorder</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.levelorder(include_self<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Performs levelorder iteration over tree</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.lin_rajan_moret" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.lin_rajan_moret">lin_rajan_moret</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.lin_rajan_moret(tree2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>return the lin-rajan-moret distance between trees</p>
+<p>float the Lin-Rajan-Moret distance</p>
+<section id="notes-1" class="level4 doc-section doc-section-notes">
+<h4 class="doc-section doc-section-notes anchored" data-anchor-id="notes-1">Notes</h4>
+<p>This is a distance measure that exhibits superior statistical properties compared to Robinson-Foulds. It can only be applied to unrooted trees.</p>
+<p>see: Lin et al.&nbsp;2012 A Metric for Phylogenetic Trees Based on Matching IEEE/ACM Transactions on Computational Biology and Bioinformatics vol.&nbsp;9, no. 4, pp.&nbsp;1014-1022, July-Aug.&nbsp;2012</p>
+</section>
+</section>
+<section id="cogent3.core.tree.PhyloNode.lowest_common_ancestor" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.lowest_common_ancestor">lowest_common_ancestor</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.lowest_common_ancestor(tip_names)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Lowest common ancestor for a list of tipnames</p>
+<p>This should be around O(H sqrt(n)), where H is height and n is the number of tips passed in.</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.make_tree_array" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.make_tree_array">make_tree_array</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.make_tree_array(dec_list<span class="op">=</span><span class="va">None</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Makes an array with nodes in rows and descendants in columns.</p>
+<p>A value of 1 indicates that the decendant is a descendant of that node/ A value of 0 indicates that it is not</p>
+<p>also returns a list of nodes in the same order as they are listed in the array</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.max_tip_tip_distance" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.max_tip_tip_distance">max_tip_tip_distance</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.max_tip_tip_distance()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>returns the max distance between any pair of tips</p>
+<p>Also returns the tip names that it is between as a tuple</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.multifurcating" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.multifurcating">multifurcating</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.multifurcating(num, eps<span class="op">=</span><span class="va">None</span>, name_unnamed<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>return a new tree with every node having num or few children</p>
+<section id="parameters-8" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-8">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 4%">
+<col style="width: 79%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>num</td>
+<td>int</td>
+<td>the number of children a node can have max</td>
+<td><em>required</em></td>
+</tr>
+<tr class="even">
+<td>eps</td>
+<td>float</td>
+<td>default branch length to set if self or constructor is of PhyloNode type a PhyloNode or subclass constructor. If None, uses self</td>
+<td><code>None</code></td>
+</tr>
+<tr class="odd">
+<td>name_unnamed</td>
+<td>bool</td>
+<td>names unnamed nodes</td>
+<td><code>False</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cogent3.core.tree.PhyloNode.name_unnamed_nodes" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.name_unnamed_nodes">name_unnamed_nodes</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.name_unnamed_nodes()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>sets the Data property of unnamed nodes to an arbitrary value</p>
+<p>Internal nodes are often unnamed and so this function assigns a Internal nodes are often unnamed and so this function assigns a value for referencing.</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.non_tip_children" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.non_tip_children">non_tip_children</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.non_tip_children()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Returns direct children in self that have descendants.</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.nontips" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.nontips">nontips</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.nontips(include_self<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Returns nontips descended from self.</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.pop" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.pop">pop</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.pop(index<span class="op">=-</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Returns and deletes child of self at index (default: -1)</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.postorder" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.postorder">postorder</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.postorder(include_self<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>performs postorder iteration over tree</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.pre_and_postorder" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.pre_and_postorder">pre_and_postorder</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.pre_and_postorder(include_self<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Performs iteration over tree, visiting node before and after.</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.preorder" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.preorder">preorder</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.preorder(include_self<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Performs preorder iteration over tree.</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.prune" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.prune">prune</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.prune(keep_root<span class="op">=</span><span class="va">False</span>, params_merge_callback<span class="op">=</span><span class="va">None</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>removes nodes with one child</p>
+<section id="parameters-9" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-9">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 26%">
+<col style="width: 62%">
+<col style="width: 3%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>keep_root</td>
+<td>bool</td>
+<td>If True, a root with a single child is retained.</td>
+<td><code>False</code></td>
+</tr>
+<tr class="even">
+<td>params_merge_callback</td>
+<td>Callable[[dict[str, Any], dict[str, Any]], dict[str, Any]] | None</td>
+<td>How to merge two params dicts when pruning. The first argument is the parent node’s params, the second argument is the child node’s params. It should return the new params dictionary.</td>
+<td><code>None</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="notes-2" class="level4 doc-section doc-section-notes">
+<h4 class="doc-section doc-section-notes anchored" data-anchor-id="notes-2">Notes</h4>
+<p>Mutates the tree in-place. Internal nodes with only one child will be merged (except as specified by keep_root).</p>
+</section>
+</section>
+<section id="cogent3.core.tree.PhyloNode.reassign_names" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.reassign_names">reassign_names</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.reassign_names(mapping, nodes<span class="op">=</span><span class="va">None</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Reassigns node names based on a mapping dict</p>
+<p>mapping : dict, old_name -&gt; new_name nodes : specific nodes for renaming (such as just tips, etc…)</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.remove" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.remove">remove</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.remove(target)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Removes node by name instead of identity.</p>
+<p>Returns True if node was present, False otherwise.</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.remove_deleted" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.remove_deleted">remove_deleted</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.remove_deleted(should_delete)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Removes all nodes where should_delete tests true.</p>
+<p>Internal nodes that have no children as a result of removing deleted are also removed.</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.remove_node" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.remove_node">remove_node</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.remove_node(target)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Removes node by identity instead of value.</p>
+<p>Returns True if node was present, False otherwise.</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.renamed_nodes" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.renamed_nodes">renamed_nodes</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.renamed_nodes(name_map)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>returns a copy of the tree with nodes renamed according to name_map</p>
+<section id="parameters-10" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-10">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 24%">
+<col style="width: 46%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>name_map</td>
+<td>dict[str, str]</td>
+<td>dict of {old_name: new_name, …}</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cogent3.core.tree.PhyloNode.root_at_midpoint" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.root_at_midpoint">root_at_midpoint</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.root_at_midpoint()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>return a new tree rooted at midpoint of the two tips farthest apart</p>
+<p>this fn doesn’t preserve the internal node naming or structure, but does keep tip to tip distances correct. uses unrooted_deepcopy()</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.rooted" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.rooted">rooted</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.rooted(edge_name)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Returns a new tree with split at edge_name</p>
+<section id="parameters-11" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-11">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 5%">
+<col style="width: 77%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>edge_name</td>
+<td>str</td>
+<td>name of the edge to split at. The length of edge_name will be halved. The new tree will have two children.</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cogent3.core.tree.PhyloNode.rooted_at" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.rooted_at">rooted_at</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb60"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.rooted_at(edge_name)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Return a new tree rooted at the provided node.</p>
+<p>Usage: This can be useful for drawing unrooted trees with an orientation that reflects knowledge of the true root location.</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.rooted_with_tip" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.rooted_with_tip">rooted_with_tip</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb61"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.rooted_with_tip(outgroup_name)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A new tree with the named tip as one of the root’s children</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.same_shape" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.same_shape">same_shape</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.same_shape(other)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Ignores lengths and order, so trees should be sorted first</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.same_topology" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.same_topology">same_topology</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.same_topology(other)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Tests whether two trees have the same topology.</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.separation" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.separation">separation</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.separation(other)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Returns number of edges separating self and other.</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.set_param_value" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.set_param_value">set_param_value</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.set_param_value(param, edge, value)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>set’s the value for param at named edge</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.siblings" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.siblings">siblings</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.siblings()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Returns all nodes that are children of the same parent as self.</p>
+<p>Note: excludes self from the list. Dynamically calculated.</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.sorted" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.sorted">sorted</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.<span class="bu">sorted</span>(sort_order<span class="op">=</span><span class="va">None</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>An equivalent tree with tips in sort_order.</p>
+<section id="notes-3" class="level4 doc-section doc-section-notes">
+<h4 class="doc-section doc-section-notes anchored" data-anchor-id="notes-3">Notes</h4>
+<p>If sort_order is not specified then alphabetical order is used. At each node starting from root, the algorithm will try to put the descendant which contains the smallest index tip on the left.</p>
+</section>
+</section>
+<section id="cogent3.core.tree.PhyloNode.subset" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.subset">subset</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.subset()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Returns set of names that descend from specified node</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.subsets" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.subsets">subsets</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb69"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.subsets()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Returns all sets of names that come from specified node and its kids</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.tip_children" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.tip_children">tip_children</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb70"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.tip_children()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Returns direct children of self that are tips.</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.tip_to_root_distances" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.tip_to_root_distances">tip_to_root_distances</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb71"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.tip_to_root_distances(</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>    names<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>    default_length<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>,</span>
+<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a>    node_length<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>returns the cumulative sum of lengths from each tip to the root</p>
+<section id="parameters-12" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-12">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 18%">
+<col style="width: 56%">
+<col style="width: 9%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>names</td>
+<td>list[str] | None</td>
+<td>list of tip names to calculate distances for, defaults to all</td>
+<td><code>None</code></td>
+</tr>
+<tr class="even">
+<td>default_length</td>
+<td>float</td>
+<td>value to use for edges that no length value</td>
+<td><code>1</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cogent3.core.tree.PhyloNode.tip_to_tip_distances" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.tip_to_tip_distances">tip_to_tip_distances</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb72"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.tip_to_tip_distances(names<span class="op">=</span><span class="va">None</span>, default_length<span class="op">=</span><span class="va">None</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Returns distance matrix between all pairs of tips, and a tip order</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.tips" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.tips">tips</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb73"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.tips(include_self<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Returns tips descended from self, [] if self is a tip.</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.tips_within_distance" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.tips_within_distance">tips_within_distance</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb74"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.tips_within_distance(distance)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Returns tips within specified distance from self</p>
+<p>Branch lengths of None will be interpreted as 0</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.to_json" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.to_json">to_json</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb75"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.to_json()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>returns json formatted string {‘newick’: with edges and distances, ‘edge_attributes’: }</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.to_rich_dict" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.to_rich_dict">to_rich_dict</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb76"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.to_rich_dict()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>returns {‘newick’: with node names, ‘edge_attributes’: {‘tip1’: {‘length’: …}, …}}</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.total_descending_branch_length" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.total_descending_branch_length">total_descending_branch_length</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb77"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.total_descending_branch_length()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Returns total descending branch length from self</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.total_length" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.total_length">total_length</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb78"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.total_length()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>returns the sum of all branch lengths in tree</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.tree_distance" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.tree_distance">tree_distance</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb79"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.tree_distance(other, method<span class="op">=</span><span class="va">None</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Return the specified tree distance between this and another tree.</p>
+<p>Defaults to the Lin-Rajan-Moret distance on unrooted trees. Defaults to the Matching Cluster distance on rooted trees.</p>
+<section id="parameters-13" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-13">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 1%">
+<col style="width: 1%">
+<col style="width: 95%">
+<col style="width: 1%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>other</td>
+<td>PhyloNode</td>
+<td>The other tree to calculate the distance between.</td>
+<td><em>required</em></td>
+</tr>
+<tr class="even">
+<td>method</td>
+<td>str | None</td>
+<td>The tree distance metric to use. Options are: “rooted_robinson_foulds”: The Robinson-Foulds distance for rooted trees. “unrooted_robinson_foulds”: The Robinson-Foulds distance for unrooted trees. “matching_cluster”: The Matching Cluster distance for rooted trees. “lin_rajan_moret”: The Lin-Rajan-Moret distance for unrooted trees. “rrf”: An alias for rooted_robinson_foulds. “urf”: An alias for unrooted_robinson_foulds. “mc”: An alias for matching_cluster. “lrm”: An alias for lin_rajan_moret. “rf”: The unrooted/rooted Robinson-Foulds distance for unrooted/rooted trees. “matching”: The Lin-Rajan-Moret/Matching Cluster distance for unrooted/rooted trees. Default is “matching”.</td>
+<td><code>None</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="returns-1" class="level4 doc-section doc-section-returns">
+<h4 class="doc-section doc-section-returns anchored" data-anchor-id="returns-1">Returns</h4>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>int</td>
+<td>the chosen distance between the two trees.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="notes-4" class="level4 doc-section doc-section-notes">
+<h4 class="doc-section doc-section-notes anchored" data-anchor-id="notes-4">Notes</h4>
+<p>The Lin-Rajan-Moret distance [2]_ and Matching Cluster distance [1]<em> display superior statistical properties than the Robinson-Foulds distance [3]</em> on unrooted and rooted trees respectively.</p>
+</section>
+<section id="references" class="level4 doc-section doc-section-references">
+<h4 class="doc-section doc-section-references anchored" data-anchor-id="references">References</h4>
+<p>.. [1] Bogdanowicz, D., &amp; Giaro, K. (2013). On a matching distance between rooted phylogenetic trees. International Journal of Applied Mathematics and Computer Science, 23(3), 669-684. .. [2] Lin et al.&nbsp;2012 A Metric for Phylogenetic Trees Based on Matching IEEE/ACM Transactions on Computational Biology and Bioinformatics vol.&nbsp;9, no. 4, pp.&nbsp;1014-1022, July-Aug.&nbsp;2012 .. [3] Robinson, David F., and Leslie R. Foulds. Comparison of phylogenetic trees. Mathematical biosciences 53.1-2 (1981): 131-147.</p>
+</section>
+</section>
+<section id="cogent3.core.tree.PhyloNode.unrooted" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.unrooted">unrooted</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb80"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.unrooted()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A tree with at least 3 children at the root.</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.unrooted_deepcopy" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.unrooted_deepcopy">unrooted_deepcopy</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb81"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.unrooted_deepcopy(parent<span class="op">=</span><span class="va">None</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Returns a deepcopy of the tree using unrooted traversal.</p>
+<p>Each node is treated as connected to its parent and children. The resulting tree may contain unary internal nodes, which can be cleaned up using <code>prune()</code> afterward.</p>
+</section>
+<section id="cogent3.core.tree.PhyloNode.write" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.tree.PhyloNode.write">write</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb82"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>core.tree.PhyloNode.write(filename, with_distances<span class="op">=</span><span class="va">True</span>, format_name<span class="op">=</span><span class="va">None</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Save the tree to filename</p>
+<section id="parameters-14" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-14">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 12%">
+<col style="width: 74%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>filename</td>
+<td>str | os.PathLike[str]</td>
+<td>path to write the tree to.</td>
+<td><em>required</em></td>
+</tr>
+<tr class="even">
+<td>with_distances</td>
+<td>bool</td>
+<td>whether branch lengths are included in string.</td>
+<td><code>True</code></td>
+</tr>
+<tr class="odd">
+<td>format_name</td>
+<td>str | None</td>
+<td>default is newick, json is alternate. Argument overrides the filename suffix. All attributes are saved in the xml format. Value overrides the file name suffix.</td>
+<td><code>None</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="notes-5" class="level4 doc-section doc-section-notes">
+<h4 class="doc-section doc-section-notes anchored" data-anchor-id="notes-5">Notes</h4>
+<p>Only the cogent3 json and newick tree formats are supported.</p>
+
+
+</section>
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
