@@ -46,6 +46,23 @@
   display: none;
 }
 
+/* Bootstrap's indicators are 30x3px bars; round dots suit a text panel better.
+   The dot is the 10px content box, and the 7px padding around it -- painted only
+   because background-clip is switched to content-box -- keeps the click target at
+   24px square. border-radius 50% resolves to 12px on the 24px border box, less the
+   padding, so the content box is a true circle. Bootstrap's transparent top and
+   bottom borders did the same job for the bar and are dropped, since a radius
+   spanning them would be clamped into an oval. */
+#announcements .carousel-indicators [data-bs-target] {
+  width: 10px;
+  height: 10px;
+  padding: 7px;
+  margin: 0;
+  border: 0;
+  border-radius: 50%;
+  background-clip: content-box;
+}
+
 /* Quarto switches themes by swapping stylesheets and setting a class on <body>;
    it never sets data-bs-theme, so bootstrap's own dark-mode carousel rules never
    fire. The default white arrows and dots suit darkly but vanish on cosmo, hence
