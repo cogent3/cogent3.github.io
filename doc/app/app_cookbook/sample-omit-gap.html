@@ -1197,7 +1197,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>Using the <code>omit_gap_pos</code> app, we can remove position from an alignment which exceed a specified proportions of gaps.</p>
 <p>Let’s create a sample alignment with gaps.</p>
-<div id="d1cb9f8f" class="cell" data-execution_count="1">
+<div id="a6002654" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> make_aligned_seqs</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>aln <span class="op">=</span> make_aligned_seqs({<span class="st">"s1"</span>: <span class="st">"ACGA-GA-CG"</span>, <span class="st">"s2"</span>: <span class="st">"GATGATG-AT"</span>}, moltype<span class="op">=</span><span class="st">"dna"</span>)</span>
@@ -1230,7 +1230,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="removing-highly-gapped-nucleotide-positions" class="level2">
 <h2 class="anchored" data-anchor-id="removing-highly-gapped-nucleotide-positions">Removing highly gapped nucleotide positions</h2>
 <p>Sites with over 99% gaps are excluded by default.</p>
-<div id="73b29be7" class="cell" data-execution_count="2">
+<div id="94873b95" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> get_app</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>omit_gap_pos_app <span class="op">=</span> get_app(<span class="st">"omit_gap_pos"</span>, moltype<span class="op">=</span><span class="st">"dna"</span>)</span>
@@ -1262,7 +1262,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>We can alter the threshold for the allowed fraction of gaps with the <code>allowed_frac</code> argument. Let’s create an app that excludes all aligned sites with over 49% gaps.</p>
-<div id="8f0034f9" class="cell" data-execution_count="3">
+<div id="75778e82" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>omit_gap_pos_app <span class="op">=</span> get_app(<span class="st">"omit_gap_pos"</span>, allowed_frac<span class="op">=</span><span class="fl">0.49</span>, moltype<span class="op">=</span><span class="st">"dna"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> omit_gap_pos_app(aln)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>result</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1295,7 +1295,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="removing-highly-gapped-codon-positions" class="level2">
 <h2 class="anchored" data-anchor-id="removing-highly-gapped-codon-positions">Removing highly gapped codon positions</h2>
 <p>To eliminate any codon columns (where a column is a triple of nucleotides) that contain a gap character, we use the <code>motif_length</code> argument.</p>
-<div id="46e9475d" class="cell" data-execution_count="4">
+<div id="33e12429" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>omit_gap_pos_app <span class="op">=</span> get_app(</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"omit_gap_pos"</span>, allowed_frac<span class="op">=</span><span class="dv">0</span>, motif_length<span class="op">=</span><span class="dv">3</span>, moltype<span class="op">=</span><span class="st">"dna"</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>)</span>

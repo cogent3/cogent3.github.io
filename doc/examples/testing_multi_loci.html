@@ -1189,7 +1189,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>We want to know whether an exchangeability parameter is different between alignments. We will specify a null model, under which each alignment get’s it’s own motif probabilities and all alignments share branch lengths and the exchangeability parameter kappa (the transition / transversion ratio). We’ll split the example alignment into two-pieces.</p>
-<div id="0d9b9a4f" class="cell" data-execution_count="1">
+<div id="fc084b1f" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> load_aligned_seqs, make_table, make_tree</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3.evolve.models <span class="im">import</span> HKY85</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats.distributions <span class="im">import</span> chi2</span>
@@ -1201,14 +1201,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>aln2 <span class="op">=</span> aln[half:]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We provide names for those alignments, then construct the tree, model instances.</p>
-<div id="1b329d98" class="cell" data-execution_count="2">
+<div id="41528cf1" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>loci_names <span class="op">=</span> [<span class="st">"1st-half"</span>, <span class="st">"2nd-half"</span>]</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>loci <span class="op">=</span> [aln1, aln2]</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>tree <span class="op">=</span> make_tree(tip_names<span class="op">=</span>aln.names)</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>mod <span class="op">=</span> HKY85()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>To make a likelihood function with multiple alignments we provide the list of loci names. We can then specify a parameter (other than length) to be the same across the loci (using the imported <code>ALL</code>) or different for each locus (using <code>EACH</code>). We conduct a LR test as before.</p>
-<div id="2ca669bb" class="cell" data-execution_count="3">
+<div id="bec41091" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>lf <span class="op">=</span> mod.make_likelihood_function(tree, loci<span class="op">=</span>loci_names, digits<span class="op">=</span><span class="dv">2</span>, space<span class="op">=</span><span class="dv">3</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>lf.set_param_rule(<span class="st">"length"</span>, is_independent<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>lf.set_param_rule(<span class="st">"kappa"</span>, loci<span class="op">=</span>ALL)</span>
@@ -1280,15 +1280,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr><th>locus</th><th>A</th><th>C</th><th>G</th><th>T</th></tr>
 </thead>
 <tbody>
-<tr><td><span class="c3col_left">2nd-half</span></td><td><span class="c3col_right">0.35</span></td><td><span class="c3col_right">0.19</span></td><td><span class="c3col_right">0.22</span></td><td><span class="c3col_right">0.24</span></td></tr>
 <tr><td><span class="c3col_left">1st-half</span></td><td><span class="c3col_right">0.38</span></td><td><span class="c3col_right">0.18</span></td><td><span class="c3col_right">0.21</span></td><td><span class="c3col_right">0.22</span></td></tr>
+<tr><td><span class="c3col_left">2nd-half</span></td><td><span class="c3col_right">0.35</span></td><td><span class="c3col_right">0.19</span></td><td><span class="c3col_right">0.22</span></td><td><span class="c3col_right">0.24</span></td></tr>
 </tbody>
 </table>
 
 </div>
 </div>
 </div>
-<div id="483e8f36" class="cell" data-execution_count="4">
+<div id="936117a2" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>all_lnL <span class="op">=</span> lf.lnL</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>all_nfp <span class="op">=</span> lf.nfp</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>lf.set_param_rule(<span class="st">"kappa"</span>, loci<span class="op">=</span>EACH)</span>
@@ -1393,22 +1393,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr><th>locus</th><th>A</th><th>C</th><th>G</th><th>T</th></tr>
 </thead>
 <tbody>
-<tr><td><span class="c3col_left">2nd-half</span></td><td><span class="c3col_right">0.35</span></td><td><span class="c3col_right">0.19</span></td><td><span class="c3col_right">0.22</span></td><td><span class="c3col_right">0.24</span></td></tr>
 <tr><td><span class="c3col_left">1st-half</span></td><td><span class="c3col_right">0.38</span></td><td><span class="c3col_right">0.18</span></td><td><span class="c3col_right">0.21</span></td><td><span class="c3col_right">0.22</span></td></tr>
+<tr><td><span class="c3col_left">2nd-half</span></td><td><span class="c3col_right">0.35</span></td><td><span class="c3col_right">0.19</span></td><td><span class="c3col_right">0.22</span></td><td><span class="c3col_right">0.24</span></td></tr>
 </tbody>
 </table>
 
 </div>
 </div>
 </div>
-<div id="0e2963cc" class="cell" data-execution_count="5">
+<div id="5ca581de" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>each_lnL <span class="op">=</span> lf.lnL</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>each_nfp <span class="op">=</span> lf.nfp</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>LR <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> (each_lnL <span class="op">-</span> all_lnL)</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> each_nfp <span class="op">-</span> all_nfp</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Just to pretty up the result display, I’ll print(a table consisting of the test statistics created on the fly.)</p>
-<div id="408e0ff4" class="cell" data-execution_count="6">
+<div id="0e4f8c06" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>make_table(</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    header<span class="op">=</span>[<span class="st">"LR"</span>, <span class="st">"df"</span>, <span class="st">"p"</span>], rows<span class="op">=</span>[[LR, df, chi2.sf(LR, df)]], digits<span class="op">=</span><span class="dv">2</span>, space<span class="op">=</span><span class="dv">3</span>,</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>

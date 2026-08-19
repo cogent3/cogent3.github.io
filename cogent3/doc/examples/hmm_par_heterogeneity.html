@@ -1201,7 +1201,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>To illustrate how to evaluate these hypotheses formally we specify 3 nested hypotheses: (i) Ho: no rate heterogeneity; (ii) Ha(1): two classes of sites - fast and slow, but independent sites; (iii) Ha(2): fast and slowly evolving sites are auto-correlated (meaning a sites class is correlated with that of its’ immediate neighbours).</p>
 <p>It is also possible to apply these models to different types of changes and we illustrate this with a single parameterisation at the end.</p>
 <p>First import standard components necessary for all of the following calculations. As the likelihood ratio tests (LRT) involve nested hypotheses we will employ the chi-square approximation for assessing statistical significance.</p>
-<div id="7e59859e" class="cell" data-execution_count="1">
+<div id="722e867c" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> load_aligned_seqs, load_tree</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3.evolve.substitution_model <span class="im">import</span> (</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    TimeReversibleNucleotide,</span>
@@ -1210,21 +1210,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats.distributions <span class="im">import</span> chi2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Load the alignment and tree.</p>
-<div id="4a5d5746" class="cell" data-execution_count="2">
+<div id="88f7c7a0" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>aln <span class="op">=</span> load_aligned_seqs(<span class="st">"data/long_testseqs.fasta"</span>, moltype<span class="op">=</span><span class="st">"dna"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>tree <span class="op">=</span> load_tree(<span class="st">"data/test.tree"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="model-ho-no-rate-heterogeneity" class="level2">
 <h2 class="anchored" data-anchor-id="model-ho-no-rate-heterogeneity">Model Ho: no rate heterogeneity</h2>
 <p>We define a HKY model of nucleotide substitution, which has a transition parameter. This is defined using the <code>MotifChange</code> class, by specifying a transition as <strong>not</strong> a transversion (<code>~MotifChange('R','Y')</code>).</p>
-<div id="24821359" class="cell" data-execution_count="3">
+<div id="40850821" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>MotifChange <span class="op">=</span> predicate.MotifChange</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>treat_gap <span class="op">=</span> <span class="bu">dict</span>(recode_gaps<span class="op">=</span><span class="va">True</span>, model_gaps<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>kappa <span class="op">=</span> (<span class="op">~</span>MotifChange(<span class="st">"R"</span>, <span class="st">"Y"</span>)).aliased(<span class="st">"kappa"</span>)</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> TimeReversibleNucleotide(predicates<span class="op">=</span>[kappa], <span class="op">**</span>treat_gap)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We specify a null model with no bins, and optimise it.</p>
-<div id="50a87abf" class="cell" data-execution_count="4">
+<div id="af87cfe3" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>lf_one <span class="op">=</span> model.make_likelihood_function(tree, digits<span class="op">=</span><span class="dv">2</span>, space<span class="op">=</span><span class="dv">3</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>lf_one.set_alignment(aln)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>lf_one.optimise(show_progress<span class="op">=</span><span class="va">False</span>)</span>
@@ -1346,7 +1346,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="model-ha1-two-classes-of-gamma-distributed-but-independent-sites" class="level2">
 <h2 class="anchored" data-anchor-id="model-ha1-two-classes-of-gamma-distributed-but-independent-sites">Model Ha(1): two classes of gamma distributed but independent sites</h2>
 <p>Our next hypothesis is that there are two rate classes, or bins, with rates gamma distributed. We will restrict the bin probabilities to be equal.</p>
-<div id="408b903f" class="cell" data-execution_count="5">
+<div id="0b6eb820" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>bin_submod <span class="op">=</span> TimeReversibleNucleotide(</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    predicates<span class="op">=</span>[kappa], ordered_param<span class="op">=</span><span class="st">"rate"</span>, distribution<span class="op">=</span><span class="st">"gamma"</span>, <span class="op">**</span>treat_gap</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -1509,7 +1509,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="model-ha2-fast-and-slowly-evolving-sites-are-auto-correlated" class="level2">
 <h2 class="anchored" data-anchor-id="model-ha2-fast-and-slowly-evolving-sites-are-auto-correlated">Model Ha(2): fast and slowly evolving sites are auto-correlated</h2>
 <p>We then specify a model with switches for changing between site-classes, the HMM part. The setup is almost identical to that for above with the sole difference being setting the <code>sites_independent=False</code>.</p>
-<div id="31624e31" class="cell" data-execution_count="6">
+<div id="b1c49458" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>lf_patches <span class="op">=</span> bin_submod.make_likelihood_function(</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    tree, bins<span class="op">=</span><span class="dv">2</span>, sites_independent<span class="op">=</span><span class="va">False</span>, digits<span class="op">=</span><span class="dv">2</span>, space<span class="op">=</span><span class="dv">3</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -1665,25 +1665,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>We use the following short function to compute the LR test statistic.</p>
-<div id="2634a9a7" class="cell" data-execution_count="7">
+<div id="0bb31f02" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>LR <span class="op">=</span> <span class="kw">lambda</span> alt, null: <span class="dv">2</span> <span class="op">*</span> (alt <span class="op">-</span> null)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We conduct the test between the sequentially nested models.</p>
-<div id="0975998f" class="cell" data-execution_count="8">
+<div id="ba489081" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>lr <span class="op">=</span> LR(lnL_bins, lnL_one)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>lr</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
-<pre><code>22.997883439566067</code></pre>
+<pre><code>22.997883439624275</code></pre>
 </div>
 </div>
-<div id="ef7f1c42" class="cell" data-execution_count="9">
+<div id="abadf5aa" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="sc">%.4f</span><span class="st">"</span> <span class="op">%</span> chi2.sf(lr, df_patches <span class="op">-</span> df_bins))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.0000</code></pre>
 </div>
 </div>
 <p>The stationary bin probabilities are labelled as <code>bprobs</code> and can be obtained as follows.</p>
-<div id="a1146c85" class="cell" data-execution_count="10">
+<div id="dd4d8f07" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>bprobs <span class="op">=</span> lf_patches.get_param_value(<span class="st">"bprobs"</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="sc">%.1f</span><span class="st"> : </span><span class="sc">%.1f</span><span class="st">"</span> <span class="op">%</span> <span class="bu">tuple</span>(bprobs))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -1691,34 +1691,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Of greater interest here (given the model was set up so the bin probabilities were equal, i.e.&nbsp;<code>is_constant=True</code>) are the posterior probabilities as those allow classification of sites. The result is a <code>DictArray</code> class instance, which behaves like a dictionary.</p>
-<div id="2e44085d" class="cell" data-execution_count="11">
+<div id="16b5004d" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>pp <span class="op">=</span> lf_patches.get_bin_probs()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>If we want to know the posterior probability the 21st position belongs to <code>bin0</code>, we can determine it as:</p>
-<div id="50871691" class="cell" data-execution_count="12">
+<div id="36a1b12e" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>pp[<span class="st">"bin0"</span>][<span class="dv">20</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
-<pre><code>np.float64(0.8034881117470164)</code></pre>
+<pre><code>np.float64(0.8034881230010621)</code></pre>
 </div>
 </div>
 </section>
 <section id="a-model-with-patches-of-kappa" class="level2">
 <h2 class="anchored" data-anchor-id="a-model-with-patches-of-kappa">A model with patches of <code>kappa</code></h2>
 <p>In this example we model sequence evolution where there are 2 classes of sites distinguished by their <code>kappa</code> parameters. We need to know what value of <code>kappa</code> to specify the delineation of the bin boundaries. We can determine this from the null model (<code>lf_one</code>). For this use case, we also need to use a <code>numpy.array</code>, so we’ll import that.</p>
-<div id="2184069a" class="cell" data-execution_count="13">
+<div id="53fd29e5" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpy <span class="im">import</span> array</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>single_kappa <span class="op">=</span> lf_one.get_param_value(<span class="st">"kappa"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We then construct the substitution model in a different way to that when evaluating generic rate heterogeneity (above).</p>
-<div id="c41526f5" class="cell" data-execution_count="14">
+<div id="e758770a" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>kappa_bin_submod <span class="op">=</span> TimeReversibleNucleotide(predicates<span class="op">=</span>[kappa], <span class="op">**</span>treat_gap)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>lf_kappa <span class="op">=</span> kappa_bin_submod.make_likelihood_function(</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    tree, bins<span class="op">=</span>[<span class="st">"slow"</span>, <span class="st">"fast"</span>], sites_independent<span class="op">=</span><span class="va">False</span>, digits<span class="op">=</span><span class="dv">1</span>, space<span class="op">=</span><span class="dv">3</span></span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>To improve the likelihood fitting it is desirable to set starting values in the model that result in it’s initial likelihood being that of the null model (or as close as possible). To do this, we’re going to define an arbitrarily small value (<code>epsilon</code>) which we use to provide the starting value to the two bins as slightly smaller/greater than <code>single_kappa</code> for the slow/fast bins respectively. At the same time we set the upper/lower bin boundaries.</p>
-<div id="8c749ec4" class="cell" data-execution_count="15">
+<div id="658a2a79" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>epsilon <span class="op">=</span> <span class="fl">1e-6</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>lf_kappa.set_param_rule(</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    kappa, init<span class="op">=</span>single_kappa <span class="op">-</span> epsilon, upper<span class="op">=</span>single_kappa, <span class="bu">bin</span><span class="op">=</span><span class="st">"slow"</span></span>
@@ -1728,7 +1728,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We then illustrate how to adjust the bin probabilities, here doing it so that one of them is nearly 1, the other nearly 0. This ensures the likelihood will be near identical to that of <code>lf_one</code> and as a result the optimisation step will actually improve fit over the simpler model.</p>
-<div id="a2117a70" class="cell" data-execution_count="16">
+<div id="d89e0552" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>lf_kappa.set_param_rule(<span class="st">"bprobs"</span>, init<span class="op">=</span>array([<span class="fl">1.0</span> <span class="op">-</span> epsilon, <span class="fl">0.0</span> <span class="op">+</span> epsilon]))</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>lf_kappa.set_alignment(aln)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>lf_kappa.optimise(local<span class="op">=</span><span class="va">True</span>, show_progress<span class="op">=</span><span class="va">False</span>)</span>

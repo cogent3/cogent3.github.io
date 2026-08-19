@@ -1199,7 +1199,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>The <code>take_codon_positions</code> app allows you to extract all nucleotides at a given codon position from an alignment.</p>
 <p>Let’s create a sample alignment for our example.</p>
-<div id="b11a7c6d" class="cell" data-execution_count="1">
+<div id="231ae0f3" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> make_aligned_seqs</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>aln <span class="op">=</span> make_aligned_seqs({<span class="st">"s1"</span>: <span class="st">"ACGACGACG"</span>, <span class="st">"s2"</span>: <span class="st">"GATGATGAT"</span>}, moltype<span class="op">=</span><span class="st">"dna"</span>)</span>
@@ -1232,7 +1232,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="extract-the-third-codon-position-from-an-alignment" class="level2">
 <h2 class="anchored" data-anchor-id="extract-the-third-codon-position-from-an-alignment">Extract the third codon position from an alignment</h2>
 <p>We can achieve this by creating the <code>take_codon_positions</code> app with <code>3</code> as a positional argument.</p>
-<div id="b2a0c110" class="cell" data-execution_count="2">
+<div id="d0c5fcce" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> get_app</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>take_pos3 <span class="op">=</span> get_app(<span class="st">"take_codon_positions"</span>, <span class="dv">3</span>, moltype<span class="op">=</span><span class="st">"dna"</span>)</span>
@@ -1267,7 +1267,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="extract-the-first-and-second-codon-positions-from-an-alignment" class="level2">
 <h2 class="anchored" data-anchor-id="extract-the-first-and-second-codon-positions-from-an-alignment">Extract the first and second codon positions from an alignment</h2>
 <p>We can achieve this by creating the <code>take_codon_positions</code> app with <code>1</code> and <code>2</code> as a positional argument.</p>
-<div id="3d5ea169" class="cell" data-execution_count="3">
+<div id="4724dc1d" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> get_app</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>take_pos12 <span class="op">=</span> get_app(<span class="st">"take_codon_positions"</span>, <span class="dv">1</span>, <span class="dv">2</span>, moltype<span class="op">=</span><span class="st">"dna"</span>)</span>
@@ -1302,7 +1302,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="extract-only-the-third-codon-positions-from-four-fold-degenerate-codons" class="level2">
 <h2 class="anchored" data-anchor-id="extract-only-the-third-codon-positions-from-four-fold-degenerate-codons">Extract only the third codon positions from four-fold degenerate codons</h2>
 <p>We can achieve this by creating the <code>take_codon_positions</code> app with the argument <code>fourfold_degenerate=True</code>.</p>
-<div id="fed30dea" class="cell" data-execution_count="4">
+<div id="aadb61e2" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> get_app, make_aligned_seqs</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>aln_ff <span class="op">=</span> make_aligned_seqs({<span class="st">"s1"</span>: <span class="st">"GCAAGCGTTTAT"</span>, <span class="st">"s2"</span>: <span class="st">"GCTTTTGTCAAT"</span>}, moltype<span class="op">=</span><span class="st">"dna"</span>)</span>
@@ -1338,7 +1338,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="create-a-composed-process-which-samples-only-the-third-codon-position" class="level2">
 <h2 class="anchored" data-anchor-id="create-a-composed-process-which-samples-only-the-third-codon-position">Create a composed process which samples only the third codon position</h2>
 <p>Let’s set up a data store containing all the files with the “.fasta” suffix in the data directory, limiting the data store to two members as a minimum example.</p>
-<div id="d964d8b9" class="cell" data-execution_count="6">
+<div id="c5569997" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> open_data_store</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>fasta_seq_dstore <span class="op">=</span> open_data_store(<span class="st">"data"</span>, suffix<span class="op">=</span><span class="st">"fasta"</span>, mode<span class="op">=</span><span class="st">"r"</span>, limit<span class="op">=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1357,7 +1357,7 @@ Note
 <p>Learn the basics of turning apps into composed processes <a href="../../../doc/app/app_overview/app-overview.html">here!</a></p>
 </div>
 </div>
-<div id="2d8d1067" class="cell" data-execution_count="7">
+<div id="48254f30" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> get_app, open_data_store</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>out_dstore <span class="op">=</span> open_data_store(path_to_dir, suffix<span class="op">=</span><span class="st">"fa"</span>, mode<span class="op">=</span><span class="st">"w"</span>)</span>
@@ -1382,7 +1382,7 @@ Tip
 </div>
 </div>
 <p>Now let’s apply <code>process</code> to our data store! This populates <code>out_dstore</code> (which is returned by the <code>.apply_to()</code> call) with the filtered alignments. We can index <code>out_dstore</code> to see individual data members. We could take a closer look using the <code>.read()</code> method on data members.</p>
-<div id="eb4e9398" class="cell" data-execution_count="8">
+<div id="98707d1d" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>out_dstore <span class="op">=</span> process.apply_to(fasta_seq_dstore)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>out_dstore.describe</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="8">

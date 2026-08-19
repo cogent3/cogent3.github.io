@@ -1189,14 +1189,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>A simple example for analyses involving rate heterogeneity among sites. In this case we will simulate an alignment with two rate categories and then try to recover the rates from the alignment.</p>
-<div id="79dd06a1" class="cell" data-execution_count="1">
+<div id="50240d46" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> load_tree, get_app</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3.evolve.substitution_model <span class="im">import</span> TimeReversibleNucleotide</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>concat <span class="op">=</span> get_app(<span class="st">"concat"</span>, moltype<span class="op">=</span><span class="st">"dna"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Make an alignment with equal split between rates 0.6 and 0.2, and then concatenate them to create a new alignment.</p>
-<div id="2427e5eb" class="cell" data-execution_count="2">
+<div id="a0073fa3" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> TimeReversibleNucleotide(equal_motif_probs<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>tree <span class="op">=</span> load_tree(<span class="st">"data/test.tree"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>lf <span class="op">=</span> model.make_likelihood_function(tree)</span>
@@ -1207,7 +1207,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>aln3 <span class="op">=</span> concat([aln1, aln2])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Start from scratch, optimising only rates and the rate probability ratio.</p>
-<div id="943bde63" class="cell" data-execution_count="3">
+<div id="826693ff" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> TimeReversibleNucleotide(</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    equal_motif_probs<span class="op">=</span><span class="va">True</span>, ordered_param<span class="op">=</span><span class="st">"rate"</span>, distribution<span class="op">=</span><span class="st">"free"</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -1216,7 +1216,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>lf.optimise(local<span class="op">=</span><span class="va">True</span>, max_restarts<span class="op">=</span><span class="dv">2</span>, show_progress<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We want to know the bin probabilities and the posterior probabilities.</p>
-<div id="d3a4c511" class="cell" data-execution_count="4">
+<div id="1aeaddbc" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>bprobs <span class="op">=</span> [t <span class="cf">for</span> t <span class="kw">in</span> lf.get_statistics() <span class="cf">if</span> <span class="st">"bin"</span> <span class="kw">in</span> t.title][<span class="dv">0</span>]</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>bprobs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
@@ -1248,8 +1248,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr><th>bin</th><th>bprobs</th><th>rate</th></tr>
 </thead>
 <tbody>
-<tr><td><span class="c3col_left">bin0</span></td><td><span class="c3col_right">0.61</span></td><td><span class="c3col_right">0.54</span></td></tr>
-<tr><td><span class="c3col_left">bin1</span></td><td><span class="c3col_right">0.39</span></td><td><span class="c3col_right">1.73</span></td></tr>
+<tr><td><span class="c3col_left">bin0</span></td><td><span class="c3col_right">0.51</span></td><td><span class="c3col_right">0.49</span></td></tr>
+<tr><td><span class="c3col_left">bin1</span></td><td><span class="c3col_right">0.49</span></td><td><span class="c3col_right">1.53</span></td></tr>
 </tbody>
 </table>
 <p>
@@ -1258,7 +1258,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>We’ll now use a gamma distribution on the sample alignment, specifying the number of bins as 4. We specify that the bins have equal density using the <code>lf.set_param_rule('bprobs', is_constant=True)</code> command.</p>
-<div id="4b6a8217" class="cell" data-execution_count="5">
+<div id="47d33792" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> TimeReversibleNucleotide(</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    equal_motif_probs<span class="op">=</span><span class="va">True</span>, ordered_param<span class="op">=</span><span class="st">"rate"</span>, distribution<span class="op">=</span><span class="st">"gamma"</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>)</span>

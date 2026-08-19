@@ -1218,38 +1218,38 @@ window.Quarto = {
 
 
 <p>From <code>cogent3</code> import all the components we need</p>
-<div id="7cabe826" class="cell" data-execution_count="1">
+<div id="f7642e65" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> load_aligned_seqs, load_tree</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3.evolve.models <span class="im">import</span> get_model</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats.distributions <span class="im">import</span> chi2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Get your alignment and tree.</p>
-<div id="7b6af709" class="cell" data-execution_count="2">
+<div id="641e7a3d" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>aln <span class="op">=</span> load_aligned_seqs(<span class="st">"data/long_testseqs.fasta"</span>, moltype<span class="op">=</span><span class="st">"dna"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> load_tree(filename<span class="op">=</span><span class="st">"data/test.tree"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Create a HKY85 model.</p>
-<div id="67e48de4" class="cell" data-execution_count="3">
+<div id="630986e3" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sm <span class="op">=</span> get_model(<span class="st">"HKY85"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Make the controller object and limit the display precision (to decrease the chance that small differences in estimates cause tests of the documentation to fail).</p>
-<div id="cb6fb1d1" class="cell" data-execution_count="4">
+<div id="38f38486" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>lf <span class="op">=</span> sm.make_likelihood_function(t, digits<span class="op">=</span><span class="dv">2</span>, space<span class="op">=</span><span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Set the local clock for humans &amp; Howler Monkey. This method is just a special interface to the more general <code>set_param_rules()</code> method.</p>
-<div id="3f9dcd95" class="cell" data-execution_count="5">
+<div id="651fd58f" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>lf.set_local_clock(<span class="st">"Human"</span>, <span class="st">"HowlerMon"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Get the likelihood function object this object performs the actual likelihood calculation.</p>
-<div id="e9c6338e" class="cell" data-execution_count="6">
+<div id="9c915488" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>lf.set_alignment(aln)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Optimise the function capturing the return optimised lnL, and parameter value vector.</p>
-<div id="a677bca2" class="cell" data-execution_count="7">
+<div id="242cef4c" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>lf.optimise(show_progress<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>View the resulting maximum-likelihood parameter values.</p>
-<div id="45874658" class="cell" data-execution_count="8">
+<div id="0a9d9ed3" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>lf.set_name(<span class="st">"clock"</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>lf</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
@@ -1364,20 +1364,20 @@ window.Quarto = {
 </div>
 </div>
 <p>We extract the log-likelihood and number of free parameters for later use.</p>
-<div id="0c324bca" class="cell" data-execution_count="9">
+<div id="008605f9" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>null_lnL <span class="op">=</span> lf.get_log_likelihood()</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>null_nfp <span class="op">=</span> lf.get_num_free_params()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Clear the local clock constraint, freeing up the branch lengths.</p>
-<div id="750f0492" class="cell" data-execution_count="10">
+<div id="4e948fdc" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>lf.set_param_rule(<span class="st">"length"</span>, is_independent<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Run the optimiser capturing the return optimised lnL, and parameter value vector.</p>
-<div id="45a25ac8" class="cell" data-execution_count="11">
+<div id="09e0b56a" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>lf.optimise(show_progress<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>View the resulting maximum-likelihood parameter values.</p>
-<div id="d446691a" class="cell" data-execution_count="12">
+<div id="eb74f1c9" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>lf.set_name(<span class="st">"non clock"</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>lf</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
@@ -1492,20 +1492,20 @@ window.Quarto = {
 </div>
 </div>
 <p>These two lnL’s are now used to calculate the likelihood ratio statistic it’s degrees-of-freedom and the probability of observing the LR.</p>
-<div id="25184a98" class="cell" data-execution_count="13">
+<div id="83267f52" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>LR <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> (lf.get_log_likelihood() <span class="op">-</span> null_lnL)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> lf.get_num_free_params() <span class="op">-</span> null_nfp</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>P <span class="op">=</span> chi2.sf(LR, df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Print this and look up a <span class="math inline">\(\chi^2\)</span> with number of edges - 1 degrees of freedom.</p>
-<div id="302f8d50" class="cell" data-execution_count="14">
+<div id="5bcb7d05" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Likelihood ratio statistic = "</span>, LR)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"degrees-of-freedom = "</span>, df)</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"probability = "</span>, P)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Likelihood ratio statistic =  2.707164528550493
+<pre><code>Likelihood ratio statistic =  2.707164528703288
 degrees-of-freedom =  1
-probability =  0.0998984117566886</code></pre>
+probability =  0.09989841174711883</code></pre>
 </div>
 </div>
 

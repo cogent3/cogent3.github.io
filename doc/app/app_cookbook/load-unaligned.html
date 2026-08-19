@@ -1203,7 +1203,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="loading-unaligned-dna-sequences-from-a-single-fasta-file" class="level2">
 <h2 class="anchored" data-anchor-id="loading-unaligned-dna-sequences-from-a-single-fasta-file">Loading unaligned DNA sequences from a single fasta file</h2>
 <p>In this example, we load unaligned DNA sequences from a single fasta file using the <code>load_unaligned</code> app. We specify the molecular type <code>(moltype="protein")</code> and the file format <code>(format_name="fasta")</code>.</p>
-<div id="7fbd4a52" class="cell" data-execution_count="1">
+<div id="64392591" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> get_app</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>load_unaligned_app <span class="op">=</span> get_app(<span class="st">"load_unaligned"</span>, format_name<span class="op">=</span><span class="st">"fasta"</span>, moltype<span class="op">=</span><span class="st">"protein"</span>)</span>
@@ -1259,7 +1259,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="a-data-store-that-identifies-the-files-we-are-interested-in" class="level3">
 <h3 class="anchored" data-anchor-id="a-data-store-that-identifies-the-files-we-are-interested-in">1. A data store that identifies the files we are interested in</h3>
 <p>Here we open a read-only (<code>mode="r"</code>) data store that identifies all fasta files in the data directory, limiting the data store to two members as a minimum example.</p>
-<div id="464dafd6" class="cell" data-execution_count="3">
+<div id="59355bb2" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> get_app, open_data_store</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>fasta_seq_dstore <span class="op">=</span> open_data_store(<span class="st">"data"</span>, suffix<span class="op">=</span><span class="st">"fasta"</span>, mode<span class="op">=</span><span class="st">"r"</span>, limit<span class="op">=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1281,7 +1281,7 @@ Note
 <p>Apps that are “writers” require a data store to write to, learn more about writers <a href="../../../doc/app/app_cookbook/index-writers.html">here!</a>.</p>
 </div>
 </div>
-<div id="516de57a" class="cell" data-execution_count="4">
+<div id="78a53d7f" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>out_dstore <span class="op">=</span> open_data_store(path_to_dir, suffix<span class="op">=</span><span class="st">"tsv"</span>, mode<span class="op">=</span><span class="st">"w"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>load_unaligned_app <span class="op">=</span> get_app(<span class="st">"load_unaligned"</span>, format_name<span class="op">=</span><span class="st">"fasta"</span>, moltype<span class="op">=</span><span class="st">"dna"</span>)</span>
@@ -1304,7 +1304,7 @@ Tip
 </div>
 </div>
 <p>Now we’re good to go! We can apply <code>process</code> to our data store of fasta sequences. <code>result</code> is a data store, which you can index to see individual data members. We can inspect a given data member using the <code>.read()</code> on data members.</p>
-<div id="f6d8844d" class="cell" data-execution_count="5">
+<div id="2ca18415" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> process.apply_to(fasta_seq_dstore)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result[<span class="dv">1</span>].read())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">

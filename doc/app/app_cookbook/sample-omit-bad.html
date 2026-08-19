@@ -1197,7 +1197,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>Using <code>omit_bad_seqs</code> we can eliminate sequences from an <code>Alignment</code> based on their gap fraction and/or the number of gaps they uniquely introduce.</p>
 <p>Let’s create a sample alignment with some gaps.</p>
-<div id="281a66f7" class="cell" data-execution_count="1">
+<div id="bee9edfd" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> make_aligned_seqs</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>aln <span class="op">=</span> make_aligned_seqs(</span>
@@ -1216,7 +1216,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="removing-sequences-with-more-than-x-gaps" class="level2">
 <h2 class="anchored" data-anchor-id="removing-sequences-with-more-than-x-gaps">Removing sequences with more than X% gaps</h2>
 <p>Creating the <code>omit_bad_seqs</code> app with the argument <code>gap_fraction=0.5</code> will omit sequences that contain 50% or more gaps.</p>
-<div id="be0e496f" class="cell" data-execution_count="2">
+<div id="5cbe9615" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> get_app</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>omit_frac_05 <span class="op">=</span> get_app(<span class="st">"omit_bad_seqs"</span>, gap_fraction<span class="op">=</span><span class="fl">0.5</span>)</span>
@@ -1251,7 +1251,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="removing-sequences-that-contribute-many-gaps" class="level2">
 <h2 class="anchored" data-anchor-id="removing-sequences-that-contribute-many-gaps">Removing sequences that contribute many gaps</h2>
 <p>The <code>quantile=0.8</code> argument omits sequences that are ranked above the specified quantile with respect to the number of gaps uniquely introduced into the alignment. In the following example, sequence <code>s6</code> is omitted, as it uniquely introduces gaps in the first two positions of the alignment.</p>
-<div id="1c1dad21" class="cell" data-execution_count="3">
+<div id="332e786f" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> get_app</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>omit_quant_08 <span class="op">=</span> get_app(<span class="st">"omit_bad_seqs"</span>, quantile<span class="op">=</span><span class="fl">0.8</span>)</span>

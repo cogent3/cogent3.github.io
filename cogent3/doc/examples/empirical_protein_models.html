@@ -1189,34 +1189,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>This file contains an example of importing an empirically determined protein substitution matrix such as Dayhoff et al 1978 and using it to create a substitution model. The globin alignment is from the PAML distribution.</p>
-<div id="2013f47e" class="cell" data-execution_count="1">
+<div id="244608fa" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> load_aligned_seqs, make_tree</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3.evolve.substitution_model <span class="im">import</span> EmpiricalProteinMatrix</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3.parse.paml_matrix <span class="im">import</span> PamlMatrixParser</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Make a tree object. In this case from a string.</p>
-<div id="43d4fa33" class="cell" data-execution_count="2">
+<div id="813f6d68" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>treestring <span class="op">=</span> <span class="st">"(((rabbit,rat),human),goat-cow,marsupial);"</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> make_tree(treestring)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Import the alignment, explicitly setting the <code>moltype</code> to be protein</p>
-<div id="3f85264f" class="cell" data-execution_count="3">
+<div id="d9b7f600" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>al <span class="op">=</span> load_aligned_seqs(<span class="st">"data/abglobin_aa.phylip"</span>, moltype<span class="op">=</span><span class="st">"protein"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Open the file that contains the empirical matrix and parse the matrix and frequencies.</p>
-<div id="bdb3b2f2" class="cell" data-execution_count="4">
+<div id="8df3e91f" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>matrix_file <span class="op">=</span> <span class="bu">open</span>(<span class="st">"data/dayhoff.dat"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The <code>PamlMatrixParser</code> will import the matrix and frequency from files designed for Yang’s PAML package. This format is the lower half of the matrix in three letter amino acid name order white space delineated followed by motif frequencies in the same order.</p>
-<div id="9aec3488" class="cell" data-execution_count="5">
+<div id="8e40981e" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>empirical_matrix, empirical_frequencies <span class="op">=</span> PamlMatrixParser(matrix_file)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Create an Empirical Protein Matrix Substitution model object. This will take the unscaled empirical matrix and use it and the motif frequencies to create a scaled Q matrix.</p>
-<div id="e8b4db65" class="cell" data-execution_count="6">
+<div id="d56a37fa" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sm <span class="op">=</span> EmpiricalProteinMatrix(empirical_matrix, empirical_frequencies)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Make a parameter controller, likelihood function object and optimise.</p>
-<div id="c7159ecd" class="cell" data-execution_count="7">
+<div id="8482335b" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>lf <span class="op">=</span> sm.make_likelihood_function(t)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>lf.set_alignment(al)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>lf.optimise(show_progress<span class="op">=</span><span class="va">False</span>)</span>

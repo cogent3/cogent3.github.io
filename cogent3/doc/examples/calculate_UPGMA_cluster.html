@@ -1199,26 +1199,26 @@ Note
 <p>UPGMA should not be used for phylogenetic reconstruction.</p>
 </div>
 </div>
-<div id="779aa5b1" class="cell" data-execution_count="1">
+<div id="9595b13c" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> load_aligned_seqs</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3.cluster.UPGMA <span class="im">import</span> upgma</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3.evolve <span class="im">import</span> distance</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Import a substitution model (or create your own)</p>
-<div id="9ce0e4dc" class="cell" data-execution_count="2">
+<div id="f02724d7" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3.evolve.models <span class="im">import</span> HKY85</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Load the alignment.</p>
-<div id="9c2cedab" class="cell" data-execution_count="3">
+<div id="5e54dc22" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>al <span class="op">=</span> load_aligned_seqs(<span class="st">"data/test.paml"</span>, moltype<span class="op">=</span><span class="st">"dna"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Create a pairwise distances object calculator for the alignment, providing a substitution model instance.</p>
-<div id="336f032f" class="cell" data-execution_count="4">
+<div id="d61ab660" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> distance.EstimateDistances(al, submodel<span class="op">=</span>HKY85())</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>d.run(show_progress<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now use this matrix to build a UPGMA cluster.</p>
-<div id="99296523" class="cell" data-execution_count="5">
+<div id="ea59d781" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mycluster <span class="op">=</span> upgma(d.get_pairwise_distances())</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mycluster.ascii_art())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -1234,7 +1234,7 @@ Note
 </div>
 </div>
 <p>We demonstrate saving this UPGMA cluster to a file.</p>
-<div id="a456b98e" class="cell" data-execution_count="6">
+<div id="ee14f5fd" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mycluster.write(<span class="st">"test_upgma.tree"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 

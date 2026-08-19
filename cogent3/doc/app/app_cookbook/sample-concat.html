@@ -1197,13 +1197,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>The <code>concat</code> app provides a mechanism to concatenate alignments.</p>
-<div id="b64a8fe9" class="cell" data-execution_count="1">
+<div id="cd6f10da" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> get_app</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>concat_alns_app <span class="op">=</span> get_app(<span class="st">"concat"</span>, moltype<span class="op">=</span><span class="st">"dna"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Let’s create sample alignments with matching sequence names to use in the below examples.</p>
-<div id="52f0340d" class="cell" data-execution_count="2">
+<div id="19bef0b8" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> make_aligned_seqs</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>aln1 <span class="op">=</span> make_aligned_seqs({<span class="st">"s1"</span>: <span class="st">"AAA"</span>, <span class="st">"s2"</span>: <span class="st">"CAA"</span>, <span class="st">"s3"</span>: <span class="st">"AAA"</span>}, moltype<span class="op">=</span><span class="st">"dna"</span>)</span>
@@ -1235,7 +1235,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="c1de249a" class="cell" data-execution_count="3">
+<div id="b29a44ea" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>aln2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <style>
@@ -1266,7 +1266,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="how-to-concatenate-alignments" class="level2">
 <h2 class="anchored" data-anchor-id="how-to-concatenate-alignments">How to concatenate alignments</h2>
 <p>By default, sequences without matching names in the corresponding alignment are omitted (<code>intersect=True</code>).</p>
-<div id="bc3fcc7b" class="cell" data-execution_count="4">
+<div id="59dd1e36" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> concat_alns_app([aln1, aln2])</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>result</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
@@ -1288,8 +1288,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <table>
 <tbody><tr class="num_row"><td></td><td><b>0</b></td></tr>
 <tr><td class="label">s1</td><td><span class="A_dna">A</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="G_dna">G</span></td></tr>
-<tr><td class="label">s2</td><td><span class="C_dna">C</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="G_dna">G</span><span class="G_dna">.</span></td></tr>
 <tr><td class="label">s3</td><td><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="G_dna">G</span><span class="T_dna">T</span></td></tr>
+<tr><td class="label">s2</td><td><span class="C_dna">C</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="G_dna">.</span><span class="G_dna">G</span><span class="G_dna">.</span></td></tr>
 </tbody></table>
 <p><i>3 x 6 dna alignment</i></p>
 </div>
@@ -1299,7 +1299,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="how-to-concatenate-alignments-with-missing-sequences" class="level2">
 <h2 class="anchored" data-anchor-id="how-to-concatenate-alignments-with-missing-sequences">How to concatenate alignments with missing sequences</h2>
 <p>By providing the argument <code>intersect=False</code>, the <code>concat</code> app will include missing sequences across alignments. Missing sequences are replaced by a sequence of <code>"?"</code>.</p>
-<div id="b1720a28" class="cell" data-execution_count="5">
+<div id="45470e53" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> make_aligned_seqs, get_app</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>concat_missing <span class="op">=</span> get_app(<span class="st">"concat"</span>, moltype<span class="op">=</span><span class="st">"dna"</span>, intersect<span class="op">=</span><span class="va">False</span>)</span>
@@ -1325,10 +1325,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <table>
 <tbody><tr class="num_row"><td></td><td><b>0</b></td></tr>
 <tr><td class="label">s1</td><td><span class="A_dna">A</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="terminal_ambig_dna">?</span><span class="terminal_ambig_dna">?</span><span class="terminal_ambig_dna">?</span></td></tr>
-<tr><td class="label">s4</td><td><span class="ambig_dna">?</span><span class="ambig_dna">?</span><span class="ambig_dna">?</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="G_dna">G</span></td></tr>
-<tr><td class="label">s2</td><td><span class="C_dna">C</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="terminal_ambig_dna">.</span><span class="terminal_ambig_dna">.</span><span class="terminal_ambig_dna">.</span></td></tr>
-<tr><td class="label">s3</td><td><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="terminal_ambig_dna">.</span><span class="terminal_ambig_dna">.</span><span class="terminal_ambig_dna">.</span></td></tr>
 <tr><td class="label">s5</td><td><span class="ambig_dna">?</span><span class="ambig_dna">?</span><span class="ambig_dna">?</span><span class="G_dna">G</span><span class="G_dna">G</span><span class="G_dna">G</span></td></tr>
+<tr><td class="label">s4</td><td><span class="ambig_dna">?</span><span class="ambig_dna">?</span><span class="ambig_dna">?</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="G_dna">G</span></td></tr>
+<tr><td class="label">s3</td><td><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="terminal_ambig_dna">.</span><span class="terminal_ambig_dna">.</span><span class="terminal_ambig_dna">.</span></td></tr>
+<tr><td class="label">s2</td><td><span class="C_dna">C</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="terminal_ambig_dna">.</span><span class="terminal_ambig_dna">.</span><span class="terminal_ambig_dna">.</span></td></tr>
 </tbody></table>
 <p><i>5 x 6 dna alignment</i></p>
 </div>
@@ -1338,7 +1338,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="how-to-concatenated-alignments-with-a-delimiter-n" class="level2">
 <h2 class="anchored" data-anchor-id="how-to-concatenated-alignments-with-a-delimiter-n">How to concatenated alignments with a delimiter <code>"N"</code></h2>
 <p>You can insert an <code>"N"</code> character in between the concatenated sequences.</p>
-<div id="94521629" class="cell" data-execution_count="6">
+<div id="f2651e26" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> get_app</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>concat_delim <span class="op">=</span> get_app(<span class="st">"concat"</span>, join_seq<span class="op">=</span><span class="st">"N"</span>, moltype<span class="op">=</span><span class="st">"dna"</span>)</span>
@@ -1363,8 +1363,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <table>
 <tbody><tr class="num_row"><td></td><td><b>0</b></td></tr>
 <tr><td class="label">s1</td><td><span class="A_dna">A</span><span class="A_dna">A</span><span class="A_dna">A</span><span class="ambig_dna">N</span><span class="G_dna">G</span><span class="C_dna">C</span><span class="G_dna">G</span></td></tr>
-<tr><td class="label">s2</td><td><span class="C_dna">C</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="ambig_dna">.</span><span class="G_dna">.</span><span class="G_dna">G</span><span class="G_dna">.</span></td></tr>
 <tr><td class="label">s3</td><td><span class="A_dna">.</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="ambig_dna">.</span><span class="G_dna">.</span><span class="G_dna">G</span><span class="T_dna">T</span></td></tr>
+<tr><td class="label">s2</td><td><span class="C_dna">C</span><span class="A_dna">.</span><span class="A_dna">.</span><span class="ambig_dna">.</span><span class="G_dna">.</span><span class="G_dna">G</span><span class="G_dna">.</span></td></tr>
 </tbody></table>
 <p><i>3 x 7 dna alignment</i></p>
 </div>

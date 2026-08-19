@@ -1186,42 +1186,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>An example of how to calculate the pairwise distances for a set of sequences.</p>
-<div id="9f086b85" class="cell" data-execution_count="1">
+<div id="823813f0" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> load_aligned_seqs</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3.evolve <span class="im">import</span> distance</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3.phylo <span class="im">import</span> nj</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Import a substitution model (or create your own)</p>
-<div id="4d3a99e9" class="cell" data-execution_count="2">
+<div id="b8810ee2" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3.evolve.models <span class="im">import</span> get_model</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Load the alignment.</p>
-<div id="e45d397f" class="cell" data-execution_count="3">
+<div id="dcb0d779" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>al <span class="op">=</span> load_aligned_seqs(<span class="st">"data/long_testseqs.fasta"</span>, moltype<span class="op">=</span><span class="st">"dna"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Create a pairwise distances object calculator for the alignment, providing a substitution model instance.</p>
-<div id="e507bf69" class="cell" data-execution_count="4">
+<div id="046ce4b4" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> distance.EstimateDistances(al, submodel<span class="op">=</span>get_model(<span class="st">"HKY85"</span>))</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>d.run(show_progress<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now use this matrix to build a neighbour joining tree.</p>
-<div id="2ad8630c" class="cell" data-execution_count="5">
+<div id="688a7a99" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mytree <span class="op">=</span> nj.nj(d.get_pairwise_distances(), show_progress<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mytree.ascii_art())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                    /-Human
-          /edge.0--|
-         |          \-HowlerMon
+<pre><code>          /-NineBande
          |
--root----|          /-NineBande
-         |-edge.1--|
-         |          \-DogFaced
+         |                    /-HowlerMon
+         |          /edge.0--|
+-root----|-edge.1--|          \-Human
+         |         |
+         |          \-Mouse
          |
-          \-Mouse</code></pre>
+          \-DogFaced</code></pre>
 </div>
 </div>
 <p>We can save this tree to file.</p>
-<div id="cb55461c" class="cell" data-execution_count="6">
+<div id="819c06c3" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mytree.write(<span class="st">"test_nj.tree"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
