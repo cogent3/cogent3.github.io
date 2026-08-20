@@ -1195,23 +1195,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>We will load some pre-computed pairwise distance data. To see how that data was computed see the <a href="../../../cogent3/doc/examples/calculate_pairwise_distances.html">Calculate pairwise distances between sequences</a> example. That data is saved in a format called <code>pickle</code> which is native to python. As per usual, we import the basic components we need.</p>
-<div id="c3a5f76b" class="cell" data-execution_count="2">
+<div id="a283e168" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pickle</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3.phylo <span class="im">import</span> least_squares</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now load the distance data.</p>
-<div id="7aa9ae4d" class="cell" data-execution_count="3">
+<div id="87a44e3a" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"dists_for_phylo.pickle"</span>, <span class="st">"rb"</span>) <span class="im">as</span> f:</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    dists <span class="op">=</span> pickle.load(f)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>If there are extremely small distances, they can cause an error in the least squares calculation. Since such estimates are between extremely closely related sequences we could simply drop all distances for one of the sequences. We won’t do that here, we’ll leave that as exercise.</p>
 <p>We make the ls calculator.</p>
-<div id="a3ef65e1" class="cell" data-execution_count="4">
+<div id="e5321e0f" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ls <span class="op">=</span> least_squares.WLS(dists)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We also add tests that pass in a <code>cogent3.evolve.fast_distance.DistanceMatrix</code> and a pairwise distance dict.</p>
-<div id="2e1770d8" class="cell" data-execution_count="5">
+<div id="831e99ea" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ls_distance_matrix <span class="op">=</span> least_squares.WLS(DistanceMatrix(dists))</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>ls_pairwise_matrix <span class="op">=</span> least_squares.WLS(dists.to_dict())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -1219,7 +1219,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="look-for-the-single-best-tree" class="level2">
 <h2 class="anchored" data-anchor-id="look-for-the-single-best-tree">Look for the single best tree</h2>
 <p>In this use case we are after just 1 tree. We specify up to what taxa size all possible trees for the sample will be computed. Here we are specifying <code>a=5</code>. This means 5 sequences will be picked randomly and all possible trees relating them will be evaluated. <code>k=1</code> means only the best tree will be kept at the end of each such round of evaluation. For every remaining sequence it is grafted onto every possible branch of this tree. The best <code>k</code> results are then taken to the next round, when another sequence is randomly selected for addition. This proceeds until all sequences have been added. The result with following arguments is a single wls score and a single <code>Tree</code> which can be saved etc ..</p>
-<div id="99b09ef6" class="cell" data-execution_count="6">
+<div id="50aa955d" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>score, tree <span class="op">=</span> ls.trex(a<span class="op">=</span><span class="dv">5</span>, k<span class="op">=</span><span class="dv">1</span>, show_progress<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> score <span class="op">&lt;</span> <span class="fl">1e-4</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -1228,24 +1228,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="a-more-rigorous-tree-space-search" class="level2">
 <h2 class="anchored" data-anchor-id="a-more-rigorous-tree-space-search">A more rigorous tree space search</h2>
 <p>We change the settings, so we keep more trees and then look at the distribution of the statistics for the last collection of trees. We could also change <code>a</code> to be larger, but in the current case we just adjust <code>k</code>. We also set the argument <code>return_all=True</code>, the effect of which is to return the complete set of saved trees. These, and their support statistic, can then be inspected.</p>
-<div id="79ce82bb" class="cell" data-execution_count="7">
+<div id="9c2224f0" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>trees <span class="op">=</span> ls.trex(a<span class="op">=</span><span class="dv">5</span>, k<span class="op">=</span><span class="dv">5</span>, return_all<span class="op">=</span><span class="va">True</span>, show_progress<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Remember the sum-of-squares statistic will be smaller for ‘good’ trees. The order of the trees returned is from good to bad. The number of returned <code>trees</code> is the same as the number requested to be retained at each step.</p>
-<div id="72ec1bf1" class="cell" data-execution_count="8">
+<div id="af4399ee" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(trees))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>5</code></pre>
 </div>
 </div>
 <p>Lets inspect the resulting statistics. First, the object <code>trees</code> is a list of <code>(wls, Tree)</code> tuples. We will therefore loop over the list to generate a separate list of just the wls statistics. The following syntax is called a list comprehension - basically just a very succinct <code>for</code> loop.</p>
-<div id="9fdadeaa" class="cell" data-execution_count="9">
+<div id="e8202dc2" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>wls_stats <span class="op">=</span> [tree[<span class="dv">0</span>] <span class="cf">for</span> tree <span class="kw">in</span> trees]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The <code>wls_stats</code> is a list which, if printed, looks like</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>[<span class="fl">1.3308768548934439e-05</span>, <span class="fl">0.0015588630350439783</span>,...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>From this you’ll see that the first 5 results are very similar to each other and would probably reasonably be considered equivalently supported topologies. I’ll just print(the first two of the these trees after balancing them (in order to make their representations as equal as possible).)</p>
-<div id="4a52a465" class="cell" data-execution_count="10">
+<div id="578bad3d" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>t1 <span class="op">=</span> trees[<span class="dv">0</span>][<span class="dv">1</span>].balanced()</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>t2 <span class="op">=</span> trees[<span class="dv">1</span>][<span class="dv">1</span>].balanced()</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(t1.ascii_art())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1261,7 +1261,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
                     \-Human</code></pre>
 </div>
 </div>
-<div id="8602d076" class="cell" data-execution_count="11">
+<div id="8a97fa17" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(t2.ascii_art())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          /-DogFaced
@@ -1280,7 +1280,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="assessing-the-fit-for-a-pre-specified-tree-topology" class="level2">
 <h2 class="anchored" data-anchor-id="assessing-the-fit-for-a-pre-specified-tree-topology">Assessing the fit for a pre-specified tree topology</h2>
 <p>In some instances we may have a tree from the literature or elsewhere whose fit to the data we seek to evaluate. In this case I’m going load a tree as follows.</p>
-<div id="95e8b872" class="cell" data-execution_count="12">
+<div id="ea725950" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> make_tree</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>query_tree <span class="op">=</span> make_tree(</span>
@@ -1288,14 +1288,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We now just use the <code>ls</code> object created above. The following evaluates the query using it’s associated branch lengths, returning only the wls statistic.</p>
-<div id="cfdd7496" class="cell" data-execution_count="13">
+<div id="60f1810b" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>ls.evaluate_tree(query_tree)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <pre><code>np.float64(2.893810286786861)</code></pre>
 </div>
 </div>
 <p>We can also evaluate just the tree’s topology, returning both the wls statistic and the tree with best fit branch lengths.</p>
-<div id="1b9f3d4d" class="cell" data-execution_count="14">
+<div id="8dde7643" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>wls, t <span class="op">=</span> ls.evaluate_topology(query_tree)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="st">"</span><span class="sc">%.4f</span><span class="st">"</span> <span class="op">%</span> wls <span class="op">==</span> <span class="st">"0.0084"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>

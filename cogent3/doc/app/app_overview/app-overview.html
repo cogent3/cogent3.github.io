@@ -1231,7 +1231,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="an-example" class="level2">
 <h2 class="anchored" data-anchor-id="an-example">An example</h2>
 <p>I illustrate the general approach for a simple example – extracting third codon positions. As I’m defining a writer, I also need to define the destination (a directory in this case) where it will write to.</p>
-<div id="debfd092" class="cell" data-execution_count="2">
+<div id="95ddfc6b" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> get_app, open_data_store</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>out_dstore <span class="op">=</span> open_data_store(path_to_dir, suffix<span class="op">=</span><span class="st">"fa"</span>, mode<span class="op">=</span><span class="st">"w"</span>)</span>
@@ -1243,7 +1243,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>There are two ways in which I can apply the three above apps to data:</p>
 <section id="using-apps-sequentially-like-functions" class="level3">
 <h3 class="anchored" data-anchor-id="using-apps-sequentially-like-functions">1. Using apps sequentially like functions</h3>
-<div id="c00f2b30" class="cell" data-execution_count="3">
+<div id="0e6f1ec2" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> loader(<span class="st">"data/primate_brca1.fasta"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>just3rd <span class="op">=</span> cpos3(data)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> writer(just3rd)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1266,7 +1266,7 @@ Note
 <section id="composing-several-apps-into-a-multi-step-process" class="level3">
 <h3 class="anchored" data-anchor-id="composing-several-apps-into-a-multi-step-process">2. Composing several apps into a multi-step “process”</h3>
 <p>We can make this simpler by creating a single composed function.</p>
-<div id="79102b00" class="cell" data-execution_count="4">
+<div id="8d30f8e6" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>process <span class="op">=</span> loader <span class="op">+</span> cpos3 <span class="op">+</span> writer</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> process(<span class="st">"data/primate_brca1.fasta"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -1274,7 +1274,7 @@ Note
 <section id="applying-a-process-to-multiple-data-records" class="level3">
 <h3 class="anchored" data-anchor-id="applying-a-process-to-multiple-data-records">Applying a process to multiple data records</h3>
 <p>To apply a composed function to multiple files requires a <a href="https://scinexus.readthedocs.io/en/latest/howto/use-data-stores.html">data store</a>. Using <code>open_data_store()</code> we identify all data files in a directory that we want to analyse, in the following case, all fasta file in the data directory. <code>process</code> can be then applied to all records in the data store without having to loop.</p>
-<div id="1a192d45" class="cell" data-execution_count="5">
+<div id="2ddcdcb1" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dstore <span class="op">=</span> open_data_store(<span class="st">"data"</span>, suffix<span class="op">=</span><span class="st">"fasta"</span>, mode<span class="op">=</span><span class="st">"r"</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> process.apply_to(dstore)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>

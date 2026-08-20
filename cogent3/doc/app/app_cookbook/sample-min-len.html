@@ -1196,7 +1196,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>Let’s load a collection of globin sequences. Note that we must have a the molecular type specified.</p>
-<div id="f9ce2c4d" class="cell" data-execution_count="1">
+<div id="f7aa2108" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> get_app</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>loader <span class="op">=</span> get_app(<span class="st">"load_unaligned"</span>, moltype<span class="op">=</span><span class="st">"dna"</span>, format_name<span class="op">=</span><span class="st">"fasta"</span>)</span>
@@ -1235,7 +1235,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="remove-sequences-shorter-than-a-minimum-length">Remove sequences shorter than a minimum length</h2>
 <p>Creating the <code>min_length</code> app and providing a positional argument specifying the minimum length allows us to filter an alignment, removing sequences which do not satisfy our threshold.</p>
 <p>For instance, we can remove sequences from the globin alignment which are shorter than 240 amino acids long.</p>
-<div id="d642e86e" class="cell" data-execution_count="2">
+<div id="31e7f958" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> get_app</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>over_240s <span class="op">=</span> get_app(<span class="st">"min_length"</span>, <span class="dv">240</span>)</span>
@@ -1275,7 +1275,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="using-the-min_length-app-to-filter-multiple-alignments">Using the <code>min_length</code> app to filter multiple alignments</h2>
 <p><code>min_length</code> is a useful app to use in data processing pipelines where downstream analysis requires sequences that exceed a given length.</p>
 <p>In the following example, we compose a process that loads alignments and removes aligments less than 300 nucleotides in length, before writing them to a data store. We apply this process to a data store of the fasta files in the data directory. We restrict this data store to two members as a minimum example.</p>
-<div id="573ebb01" class="cell" data-execution_count="4">
+<div id="0afd795d" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> get_app, open_data_store</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>dstore <span class="op">=</span> open_data_store(<span class="st">"data"</span>, suffix<span class="op">=</span><span class="st">"fasta"</span>, limit<span class="op">=</span><span class="dv">2</span>)</span>

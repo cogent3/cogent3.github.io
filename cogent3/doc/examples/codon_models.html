@@ -1230,18 +1230,18 @@ Note
 </ul>
 <p>In the following I will construct GTR variants of i and iv and a HKY variant of iii.</p>
 <p>We import these explicitly from the <code>cogent3.evolve.models</code> module.</p>
-<div id="1bd91484" class="cell" data-execution_count="1">
+<div id="67519263" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3.evolve.models <span class="im">import</span> get_model</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>These are functions and calling them returns the indicated substitution model with default behaviour of recoding gap characters into N’s.</p>
-<div id="41faddb4" class="cell" data-execution_count="2">
+<div id="df4e9495" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>tf <span class="op">=</span> get_model(<span class="st">"GY94"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>nf <span class="op">=</span> get_model(<span class="st">"MG94GTR"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>cnf <span class="op">=</span> get_model(<span class="st">"CNFGTR"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>In the following demonstration I will use only the CNF form (<code>cnf</code>).</p>
 <p>For our example we load a sample alignment and tree as per usual. To reduce the computational overhead for this example we will limit the number of sampled taxa.</p>
-<div id="01ed273f" class="cell" data-execution_count="3">
+<div id="44a30f27" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> load_aligned_seqs, load_tree</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>aln <span class="op">=</span> load_aligned_seqs(<span class="st">"data/primate_brca1.fasta"</span>, moltype<span class="op">=</span><span class="st">"dna"</span>)</span>
@@ -1251,7 +1251,7 @@ Note
 <section id="standard-test-of-neutrality" class="level2">
 <h2 class="anchored" data-anchor-id="standard-test-of-neutrality">Standard test of neutrality</h2>
 <p>We construct a likelihood function and constrain omega parameter (the ratio of nonsynonymous to synonymous substitutions) to equal 1. We also set some display formatting parameters.</p>
-<div id="e528da57" class="cell" data-execution_count="4">
+<div id="3849bf40" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>lf <span class="op">=</span> cnf.make_likelihood_function(tree, digits<span class="op">=</span><span class="dv">2</span>, space<span class="op">=</span><span class="dv">3</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>lf.set_param_rule(<span class="st">"omega"</span>, is_constant<span class="op">=</span><span class="va">True</span>, value<span class="op">=</span><span class="fl">1.0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -1269,7 +1269,7 @@ Note
 <p>I’m going to specify a set of conditions that will be used for all optimiser steps. For those new to python, one can construct a dictionary with the following form <code>{'argument_name': argument_value}</code>, or alternatively <code>dict(argument_name=argument_value)</code>. I’m doing the latter. This dictionary is then passed to functions/methods by prefacing it with <code>**</code>.</p>
 </div>
 </div>
-<div id="2bbd96a7" class="cell" data-execution_count="5">
+<div id="5ba62924" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>optimiser_args <span class="op">=</span> <span class="bu">dict</span>(</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    local<span class="op">=</span><span class="va">True</span>, max_restarts<span class="op">=</span><span class="dv">5</span>, tolerance<span class="op">=</span><span class="fl">1e-8</span>, show_progress<span class="op">=</span><span class="va">False</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -1447,7 +1447,7 @@ Note
 <p>The above function has been fit using the default counting procedure for estimating the motif frequencies, i.e.&nbsp;codon frequencies are estimated as the average of the observed codon frequencies. If you wanted to numerically optimise the motif probabilities, then modify the likelihood function creation line to</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>lf <span class="op">=</span> cnf.make_likelihood_function(tree, optimise_motif_probs<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>We can then free up the omega parameter, but before we do that we’ll store the log-likelihood and number of free parameters for the current model form for reuse later.</p>
-<div id="9f011231" class="cell" data-execution_count="6">
+<div id="10c36ec7" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>neutral_lnL <span class="op">=</span> lf.get_log_likelihood()</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>neutral_nfp <span class="op">=</span> lf.get_num_free_params()</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>lf.set_param_rule(<span class="st">"omega"</span>, is_constant<span class="op">=</span><span class="va">False</span>)</span>
@@ -1623,7 +1623,7 @@ Note
 </div>
 </div>
 <p>We then conduct a likelihood ratio test whether the MLE of omega significantly improves the fit over the constraint it equals 1. We import the convenience function from the <code>cogent3</code> stats module.</p>
-<div id="339fd04e" class="cell" data-execution_count="7">
+<div id="35f7c07b" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats.distributions <span class="im">import</span> chi2</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>LR <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> (non_neutral_lnL <span class="op">-</span> neutral_lnL)</span>
@@ -1634,7 +1634,7 @@ Note
 </div>
 </div>
 <p>Not surprisingly, this is significant. We then ask whether the Human and Chimpanzee edges have a value of omega that is significantly different from the rest of the tree.</p>
-<div id="c86e392e" class="cell" data-execution_count="8">
+<div id="66845949" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>lf.set_param_rule(</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"omega"</span>, tip_names<span class="op">=</span>[<span class="st">"Chimpanzee"</span>, <span class="st">"Human"</span>], outgroup_name<span class="op">=</span><span class="st">"Galago"</span>, clade<span class="op">=</span><span class="va">True</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -1643,7 +1643,7 @@ Note
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>chimp_human_clade_lnL <span class="op">=</span> lf.get_log_likelihood()</span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>chimp_human_clade_nfp <span class="op">=</span> lf.get_num_free_params()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="20b27260" class="cell" data-execution_count="9">
+<div id="a624be46" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>LR <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> (chimp_human_clade_lnL <span class="op">-</span> non_neutral_lnL)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> chimp_human_clade_nfp <span class="op">-</span> non_neutral_nfp</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(chi2.sf(LR, df))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1656,7 +1656,7 @@ Note
 <section id="rate-heterogeneity-model-variants" class="level2">
 <h2 class="anchored" data-anchor-id="rate-heterogeneity-model-variants">Rate-heterogeneity model variants</h2>
 <p>It is also possible to specify rate-heterogeneity variants of these models. In the first instance we’ll create a likelihood function where these rate-classes are global across the entire tree. Because fitting these models can be time consuming I’m going to recreate the non-neutral likelihood function from above first, fit it, and then construct the rate-heterogeneity likelihood function. By doing this I can ensure that the richer model starts with parameter values that produce a log-likelihood the same as the null model, ensuring the subsequent optimisation step improves the likelihood over the null.</p>
-<div id="54a0fbb6" class="cell" data-execution_count="10">
+<div id="9249c559" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>lf <span class="op">=</span> cnf.make_likelihood_function(tree, digits<span class="op">=</span><span class="dv">2</span>, space<span class="op">=</span><span class="dv">3</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>lf.set_alignment(aln)</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>lf.optimise(<span class="op">**</span>optimiser_args)</span>
@@ -1665,33 +1665,33 @@ Note
 </div>
 <p>Now, we have a null model which we know (from having fit it above) has a MLE &lt; 1. We will construct a rate-heterogeneity model with just 2 rate-classes (neutral and adaptive) that are separated by the boundary of omega=1. These rate-classes are specified as discrete bins in Cogent3 and the model configuration steps for a bin or bins are done using the <code>set_param_rule</code> method. To ensure the alternate model starts with a likelihood at least as good as the previous we need to make the probability of the neutral site-class bin ~= 1 (these are referenced by the <code>bprobs</code> parameter type) and assign the null model omega MLE to this class.</p>
 <p>To get all the parameter MLEs (branch lengths, GTR terms, etc ..) into the alternate model we get an annotated tree from the null model which will have these values associated with it.</p>
-<div id="9e0c915d" class="cell" data-execution_count="11">
+<div id="48bb6edf" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>annot_tree <span class="op">=</span> lf.get_annotated_tree()</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>omega_mle <span class="op">=</span> lf.get_param_value(<span class="st">"omega"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We can then construct a new likelihood function, specifying the rate-class properties.</p>
-<div id="36956fe4" class="cell" data-execution_count="12">
+<div id="eaac8bc1" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>rate_lf <span class="op">=</span> cnf.make_likelihood_function(</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    annot_tree, bins<span class="op">=</span>[<span class="st">"neutral"</span>, <span class="st">"adaptive"</span>], digits<span class="op">=</span><span class="dv">2</span>, space<span class="op">=</span><span class="dv">3</span></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We define a very small value (<code>epsilon</code>) that is used to specify the starting values.</p>
-<div id="e20a5c98" class="cell" data-execution_count="13">
+<div id="4b4fe9bd" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>epsilon <span class="op">=</span> <span class="fl">1e-6</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We now provide starting parameter values for <code>omega</code> for the two bins, setting the boundary</p>
-<div id="472f5467" class="cell" data-execution_count="14">
+<div id="02759199" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>rate_lf.set_param_rule(<span class="st">"omega"</span>, <span class="bu">bin</span><span class="op">=</span><span class="st">"neutral"</span>, upper<span class="op">=</span><span class="dv">1</span>, init<span class="op">=</span>omega_mle)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>rate_lf.set_param_rule(</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"omega"</span>, <span class="bu">bin</span><span class="op">=</span><span class="st">"adaptive"</span>, lower<span class="op">=</span><span class="dv">1</span> <span class="op">+</span> epsilon, upper<span class="op">=</span><span class="dv">100</span>, init<span class="op">=</span><span class="dv">1</span> <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> epsilon</span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>and provide the starting values for the bin probabilities (<code>bprobs</code>).</p>
-<div id="3bfc6487" class="cell" data-execution_count="15">
+<div id="cfece5a9" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>rate_lf.set_param_rule(<span class="st">"bprobs"</span>, init<span class="op">=</span>[<span class="dv">1</span> <span class="op">-</span> epsilon, epsilon])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The above statement essentially assigns a probability of nearly 1 to the ‘neutral’ bin. We now set the alignment and fit the model.</p>
-<div id="7ee6fc63" class="cell" data-execution_count="16">
+<div id="7149eaa9" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>rate_lf.set_alignment(aln)</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>rate_lf.optimise(<span class="op">**</span>optimiser_args)</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>rate_lnL <span class="op">=</span> rate_lf.get_log_likelihood()</span>
@@ -1900,14 +1900,14 @@ Note
 </div>
 </div>
 </div>
-<div id="f0271743" class="cell" data-execution_count="17">
+<div id="9633c4e5" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(chi2.sf(LR, df))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0.0008054431261849434</code></pre>
 </div>
 </div>
 <p>We can get the posterior probabilities of site-classifications out of this model as</p>
-<div id="029967d1" class="cell" data-execution_count="18">
+<div id="a2961a69" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>pp <span class="op">=</span> rate_lf.get_bin_probs()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>This is a <code>DictArray</code> class which stores the probabilities as a <code>numpy.array</code>.</p>
@@ -1915,7 +1915,7 @@ Note
 <section id="mixing-branch-and-site-heterogeneity" class="level2">
 <h2 class="anchored" data-anchor-id="mixing-branch-and-site-heterogeneity">Mixing branch and site-heterogeneity</h2>
 <p>The following implements a modification of the approach of Zhang, Nielsen and Yang (Mol Biol Evol, 22:2472–9, 2005). For this model class, there are groups of branches for which all positions are evolving neutrally but some proportion of those neutrally evolving sites change to adaptively evolving on so-called foreground edges. For the current example, we’ll define the Chimpanzee and Human branches as foreground and everything else as background. The following table defines the parameter scopes.</p>
-<div id="bce9f7eb" class="cell" data-execution_count="19">
+<div id="207024db" class="cell" data-execution_count="19">
 <div class="cell-output cell-output-display" data-execution_count="19">
 <pre><code>&lt;IPython.core.display.HTML object&gt;</code></pre>
 </div>
@@ -1934,7 +1934,7 @@ Note
 </div>
 </div>
 <p>After Zhang et al, we first define a null model that has 2 rate classes ‘0’ and ‘1’. We also get all the MLEs out using <code>get_statistics</code>, just printing out the bin parameters table in the current case.</p>
-<div id="edd9a119" class="cell" data-execution_count="20">
+<div id="26ddbd4b" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>rate_lf <span class="op">=</span> cnf.make_likelihood_function(tree, bins<span class="op">=</span>[<span class="st">"0"</span>, <span class="st">"1"</span>], digits<span class="op">=</span><span class="dv">2</span>, space<span class="op">=</span><span class="dv">3</span>)</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>rate_lf.set_param_rule(<span class="st">"omega"</span>, <span class="bu">bin</span><span class="op">=</span><span class="st">"0"</span>, upper<span class="op">=</span><span class="fl">1.0</span> <span class="op">-</span> epsilon, init<span class="op">=</span><span class="dv">1</span> <span class="op">-</span> epsilon)</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>rate_lf.set_param_rule(<span class="st">"omega"</span>, bins<span class="op">=</span><span class="st">"1"</span>, is_constant<span class="op">=</span><span class="va">True</span>, value<span class="op">=</span><span class="fl">1.0</span>)</span>
@@ -1955,7 +1955,7 @@ bin   bprobs   omega
 </div>
 </div>
 <p>We’re also going to use the MLEs from the <code>rate_lf</code> model, since that nests within the more complex branch by rate-class model. This is unfortunately quite ugly compared with just using the annotated tree approach described above. It is currently necessary, however, due to a bug in constructing annotated trees for models with binned parameters.</p>
-<div id="f00245b9" class="cell" data-execution_count="21">
+<div id="39cd85b7" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="bu">globals</span> <span class="op">=</span> [t <span class="cf">for</span> t <span class="kw">in</span> tables <span class="cf">if</span> <span class="st">"global"</span> <span class="kw">in</span> t.title][<span class="dv">0</span>]</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="bu">globals</span> <span class="op">=</span> <span class="bu">dict</span>(<span class="bu">zip</span>(<span class="bu">globals</span>.header, <span class="bu">globals</span>.to_list()[<span class="dv">0</span>]))</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>bin_params <span class="op">=</span> [t <span class="cf">for</span> t <span class="kw">in</span> tables <span class="cf">if</span> <span class="st">"bin"</span> <span class="kw">in</span> t.title][<span class="dv">0</span>]</span>
@@ -1965,23 +1965,23 @@ bin   bprobs   omega
 <span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>lengths <span class="op">=</span> <span class="bu">dict</span>(lengths.to_list([<span class="st">"edge"</span>, <span class="st">"length"</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We now create the more complex model,</p>
-<div id="fadccaa5" class="cell" data-execution_count="22">
+<div id="ec9926a2" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>rate_branch_lf <span class="op">=</span> cnf.make_likelihood_function(</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    tree, bins<span class="op">=</span>[<span class="st">"0"</span>, <span class="st">"1"</span>, <span class="st">"2a"</span>, <span class="st">"2b"</span>], digits<span class="op">=</span><span class="dv">2</span>, space<span class="op">=</span><span class="dv">3</span></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>and set from the nested null model the branch lengths,</p>
-<div id="2f602f46" class="cell" data-execution_count="23">
+<div id="801ed3e4" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> branch, length <span class="kw">in</span> lengths.items():</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    rate_branch_lf.set_param_rule(<span class="st">"length"</span>, edge<span class="op">=</span>branch, init<span class="op">=</span>length)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>GTR term MLES,</p>
-<div id="2db45cc5" class="cell" data-execution_count="24">
+<div id="b55e4290" class="cell" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> param, mle <span class="kw">in</span> <span class="bu">globals</span>.items():</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    rate_branch_lf.set_param_rule(param, init<span class="op">=</span>mle)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>binned parameter values,</p>
-<div id="3776a209" class="cell" data-execution_count="25">
+<div id="0fcba825" class="cell" data-execution_count="25">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>rate_branch_lf.set_param_rule(</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"omega"</span>, bins<span class="op">=</span>[<span class="st">"0"</span>, <span class="st">"2a"</span>], upper<span class="op">=</span><span class="fl">1.0</span>, init<span class="op">=</span>rate_class_omegas[<span class="st">"0"</span>]</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -1999,7 +1999,7 @@ bin   bprobs   omega
 <span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>and the bin probabilities.</p>
-<div id="6c1633ae" class="cell" data-execution_count="26">
+<div id="e1a3fb4b" class="cell" data-execution_count="26">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>rate_branch_lf.set_param_rule(</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"bprobs"</span>,</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    init<span class="op">=</span>[</span>
@@ -2011,7 +2011,7 @@ bin   bprobs   omega
 <span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The result of these steps is to create a rate/branch model with initial parameter values that result in likelihood the same as the null.</p>
-<div id="dd02e596" class="cell" data-execution_count="27">
+<div id="0a1617a2" class="cell" data-execution_count="27">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>rate_branch_lf.set_alignment(aln)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>rate_branch_lf.optimise(<span class="op">**</span>optimiser_args)</span>

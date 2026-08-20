@@ -1199,12 +1199,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="using-a-cogent3-progressive-aligner-for-nucleotides" class="level2">
 <h2 class="anchored" data-anchor-id="using-a-cogent3-progressive-aligner-for-nucleotides">Using a <code>cogent3</code> progressive aligner for nucleotides</h2>
 <p>We load a canned nucleotide substitution model and the progressive aligner <code>tree_align</code> function.</p>
-<div id="e240ed41" class="cell" data-execution_count="1">
+<div id="1c997bad" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> load_unaligned_seqs, make_tree</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3.align.progressive <span class="im">import</span> tree_align</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We first align without providing a guide tree. The <code>tree_align</code> algorithm builds pairwise alignments and estimates the substitution model parameters and pairwise distances. The distances are used to build a neighbour joining tree and the median value of substitution model parameters are provided to the substitution model for the progressive alignment step.</p>
-<div id="81e1baf7" class="cell" data-execution_count="2">
+<div id="120556aa" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>seqs <span class="op">=</span> load_unaligned_seqs(<span class="st">"data/test2.fasta"</span>, moltype<span class="op">=</span><span class="st">"dna"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>aln, tree <span class="op">=</span> tree_align(<span class="st">"HKY85"</span>, seqs, show_progress<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>aln</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1237,7 +1237,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>We then align using a guide tree (pre-estimated) and specifying the ratio of transitions to transversions (kappa).</p>
-<div id="f032a7f2" class="cell" data-execution_count="3">
+<div id="2705581a" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>tree <span class="op">=</span> make_tree(</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"(((NineBande:0.013,Mouse:0.185):0.023,DogFaced:0.046):0.027,Human:0.034,HowlerMon:0.019)"</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -1278,7 +1278,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="using-a-cogent3-progressive-aligner-for-codons" class="level2">
 <h2 class="anchored" data-anchor-id="using-a-cogent3-progressive-aligner-for-codons">Using a <code>cogent3</code> progressive aligner for codons</h2>
 <p>We load a canned codon substitution model and use a pre-defined tree and parameter estimates.</p>
-<div id="28ba4c25" class="cell" data-execution_count="4">
+<div id="1b17ad29" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> load_unaligned_seqs, make_tree</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3.align.progressive <span class="im">import</span> tree_align</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1323,7 +1323,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="converting-gaps-from-aa-seq-alignment-to-nuc-seq-alignment" class="level2">
 <h2 class="anchored" data-anchor-id="converting-gaps-from-aa-seq-alignment-to-nuc-seq-alignment">Converting gaps from aa-seq alignment to nuc seq alignment</h2>
 <p>We load some unaligned DNA sequences and show their translation.</p>
-<div id="de83a58d" class="cell" data-execution_count="5">
+<div id="9a16dd25" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> make_unaligned_seqs</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3.align.progressive <span class="im">import</span> tree_align</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3.evolve.models <span class="im">import</span> get_model</span>
@@ -1367,7 +1367,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="27b05596" class="cell" data-execution_count="6">
+<div id="88fa2f02" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>unaligned_DNA.get_translation()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <style>
@@ -1413,7 +1413,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>We load an alignment of these protein sequences.</p>
-<div id="80a2943e" class="cell" data-execution_count="7">
+<div id="1e7edccb" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> make_aligned_seqs</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>aligned_aa_seqs <span class="op">=</span> [</span>
@@ -1424,7 +1424,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>aligned_aa <span class="op">=</span> make_aligned_seqs(aligned_aa_seqs, moltype<span class="op">=</span><span class="st">"protein"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We then obtain an alignment of the DNA sequences by aligning their translations.</p>
-<div id="f365c64b" class="cell" data-execution_count="8">
+<div id="cef71f37" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>aligned_DNA <span class="op">=</span> aligned_aa.apply_scaled_gaps(unaligned_DNA, aa_to_codon<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>aligned_DNA</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="8">

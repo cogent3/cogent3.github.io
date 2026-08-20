@@ -1196,7 +1196,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>We load some sample data first and select just 3 sequences.</p>
-<div id="036c2341" class="cell" data-execution_count="1">
+<div id="10b2c491" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> get_app</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>loader <span class="op">=</span> get_app(<span class="st">"load_aligned"</span>, format_name<span class="op">=</span><span class="st">"fasta"</span>, moltype<span class="op">=</span><span class="st">"dna"</span>)</span>
@@ -1205,11 +1205,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>aln <span class="op">=</span> process(<span class="st">"data/primate_brca1.fasta"</span>)</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>aln.names</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="1">
-<pre><code>('Human', 'Galago', 'Rhesus')</code></pre>
+<pre><code>('Rhesus', 'Galago', 'Human')</code></pre>
 </div>
 </div>
 <p>We analyses these using the general Markov nucleotide, GN, model. Because we analyse just 3 sequences, there is only one possible unrooted tree, hence it is not required to specify the tree in this instance.</p>
-<div id="269a9532" class="cell" data-execution_count="2">
+<div id="89db92cc" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>gn <span class="op">=</span> get_app(<span class="st">"model"</span>, <span class="st">"GN"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>gn</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
@@ -1220,7 +1220,7 @@ show_progress=False, verbose=False)</code></pre>
 </div>
 </div>
 <p>We apply this to <code>aln</code>.</p>
-<div id="3d1e4ce2" class="cell" data-execution_count="3">
+<div id="34c44ede" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fitted <span class="op">=</span> gn(aln)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(fitted)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
@@ -1232,7 +1232,7 @@ show_progress=False, verbose=False)</code></pre>
 <p>As the output above indicates, <code>fitted</code> is a <code>model_result</code> object.</p>
 <p>This object provides an interface for accessing attributes of a fitted model. The representation display (below), a styled table in a jupyter notebook, presents a summary view with the log-likelihood (<code>lnL</code>), number of free parameters (<code>nfp</code>) and whether all matrices satisfied the identifiability conditions diagonal largest in column (DLC) and a unique mapping of Q to P. (For description of these quantities and why they matter see <a href="https://www.ncbi.nlm.nih.gov/pubmed/?term=8854662">Chang 1996</a> and <a href="https://www.ncbi.nlm.nih.gov/pubmed/25503772">Kaehler et al</a>.)</p>
 <p><code>model_result</code> has dictionary behaviour, hence the <code>key</code> column. This will be demonstrated below.</p>
-<div id="a391ae2e" class="cell" data-execution_count="4">
+<div id="5f290b4c" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fitted</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 
@@ -1271,7 +1271,7 @@ show_progress=False, verbose=False)</code></pre>
 </div>
 </div>
 <p>More detail on the fitted model are available via attributes. For instance, display the maximum likelihood estimates via the likelihood function attribute</p>
-<div id="cc7695a4" class="cell" data-execution_count="5">
+<div id="3f069342" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fitted.lf</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <h4 class="anchored">GN</h4>
@@ -1338,9 +1338,9 @@ show_progress=False, verbose=False)</code></pre>
 <tr><th>edge</th><th>parent</th><th>length</th></tr>
 </thead>
 <tbody>
-<tr><td><span class="c3col_left">Human</span></td><td><span class="c3col_left">root</span></td><td><span class="c3col_right">0.02</span></td></tr>
-<tr><td><span class="c3col_left">Galago</span></td><td><span class="c3col_left">root</span></td><td><span class="c3col_right">0.18</span></td></tr>
 <tr><td><span class="c3col_left">Rhesus</span></td><td><span class="c3col_left">root</span></td><td><span class="c3col_right">0.02</span></td></tr>
+<tr><td><span class="c3col_left">Galago</span></td><td><span class="c3col_left">root</span></td><td><span class="c3col_right">0.18</span></td></tr>
+<tr><td><span class="c3col_left">Human</span></td><td><span class="c3col_left">root</span></td><td><span class="c3col_right">0.02</span></td></tr>
 </tbody>
 </table>
 
@@ -1380,38 +1380,38 @@ show_progress=False, verbose=False)</code></pre>
 </div>
 </div>
 </div>
-<div id="b4b44f93" class="cell" data-execution_count="6">
+<div id="b180d0ca" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fitted.lnL, fitted.nfp</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>(-5964.258307147934, 14)</code></pre>
+<pre><code>(-5964.258307148101, 14)</code></pre>
 </div>
 </div>
-<div id="875a72c1" class="cell" data-execution_count="7">
+<div id="094c2733" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fitted.source</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <pre><code>'primate_brca1'</code></pre>
 </div>
 </div>
 <p>The <code>model_result.tree</code> attribute is an “annotated tree”. Maximum likelihood estimates from the model have been assigned to the tree. Of particular significance, the “length” attribute corresponds to the expected number of substitutions (or ENS). For a non-stationary model, like GN, this can be different to the conventional length (<a href="https://www.ncbi.nlm.nih.gov/pubmed/25503772">Kaehler et al</a>).</p>
-<div id="84fc6571" class="cell" data-execution_count="8">
+<div id="afc400f2" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fitted.tree, fitted.alignment</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
-<pre><code>(Tree("(Human,Galago,Rhesus);"),
- 3 x 2814 dna alignment: Human[TGTGGCACAA...], Galago[TGTGGCAAAA...], Rhesus[TGTGGCACAA...])</code></pre>
+<pre><code>(Tree("(Rhesus,Galago,Human);"),
+ 3 x 2814 dna alignment: Rhesus[TGTGGCACAA...], Galago[TGTGGCAAAA...], Human[TGTGGCACAA...])</code></pre>
 </div>
 </div>
 <p>We can access the sum of all branch lengths. Either as “ENS” or “paralinear” using the <code>total_length()</code> method.</p>
-<div id="1af6dc9f" class="cell" data-execution_count="9">
+<div id="55d07e71" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>fitted.total_length(length_as<span class="op">=</span><span class="st">"paralinear"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
-<pre><code>np.float64(0.9292253192072137)</code></pre>
+<pre><code>np.float64(0.9292252556749809)</code></pre>
 </div>
 </div>
 </section>
 <section id="fitting-a-separate-nucleotide-model-to-each-codon-position" class="level2">
 <h2 class="anchored" data-anchor-id="fitting-a-separate-nucleotide-model-to-each-codon-position">Fitting a separate nucleotide model to each codon position</h2>
 <p>Controlled by setting <code>split_codons=True</code>.</p>
-<div id="3438c7cd" class="cell" data-execution_count="10">
+<div id="d4579535" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>gn <span class="op">=</span> get_app(<span class="st">"model"</span>, <span class="st">"GN"</span>, split_codons<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>fitted <span class="op">=</span> gn(aln)</span>
@@ -1457,7 +1457,7 @@ show_progress=False, verbose=False)</code></pre>
 </div>
 <p>The model fit statistics, <code>lnL</code> and <code>nfp</code> are now sums of the corresponding values from the fits to the individual positions. The <code>DLC</code> and <code>unique_Q</code> are also a summary across all models. These only achieve the value <code>True</code> when all matrices, from all models, satisfy the condition.</p>
 <p>We get access to the likelihood functions of the individual positions via the indicated dict keys.</p>
-<div id="b7b3515a" class="cell" data-execution_count="11">
+<div id="b7467bf1" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>fitted[<span class="dv">3</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <h4 class="anchored">LF id: 3</h4>
@@ -1524,9 +1524,9 @@ show_progress=False, verbose=False)</code></pre>
 <tr><th>edge</th><th>parent</th><th>length</th></tr>
 </thead>
 <tbody>
-<tr><td><span class="c3col_left">Human</span></td><td><span class="c3col_left">root</span></td><td><span class="c3col_right">0.02</span></td></tr>
-<tr><td><span class="c3col_left">Galago</span></td><td><span class="c3col_left">root</span></td><td><span class="c3col_right">0.18</span></td></tr>
 <tr><td><span class="c3col_left">Rhesus</span></td><td><span class="c3col_left">root</span></td><td><span class="c3col_right">0.03</span></td></tr>
+<tr><td><span class="c3col_left">Galago</span></td><td><span class="c3col_left">root</span></td><td><span class="c3col_right">0.18</span></td></tr>
+<tr><td><span class="c3col_left">Human</span></td><td><span class="c3col_left">root</span></td><td><span class="c3col_right">0.02</span></td></tr>
 </tbody>
 </table>
 

@@ -1242,7 +1242,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="how-to-create-a-standalone-basicannotationdb" class="level2">
 <h2 class="anchored" data-anchor-id="how-to-create-a-standalone-basicannotationdb">How to create a standalone <code>BasicAnnotationDb</code></h2>
 <p>Achieved by creating an <code>BasicAnnotationDb</code> instance. This is an empty database to which we can add features.</p>
-<div id="9a83d1bc" class="cell" data-execution_count="1">
+<div id="8ed278e4" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3.core.annotation_db <span class="im">import</span> BasicAnnotationDb</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>anno_db <span class="op">=</span> BasicAnnotationDb()</span>
@@ -1271,7 +1271,7 @@ Note
 <section id="from-a-gff-file" class="level3">
 <h3 class="anchored" data-anchor-id="from-a-gff-file">From a GFF file</h3>
 <p>To load features from a GFF file, we can use the <code>load_annotations</code> function and provide the path to the GFF file. The function automatically determines the file type based on the file extension, and it returns a <code>GffAnnotationDb</code> object.</p>
-<div id="862d367b" class="cell" data-execution_count="2">
+<div id="4563f8b7" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> load_annotations</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>gff_db <span class="op">=</span> load_annotations(path<span class="op">=</span><span class="st">"data/mycoplasma-genitalium.gff"</span>)</span>
@@ -1284,7 +1284,7 @@ Note
 <section id="from-a-genbank-file" class="level3">
 <h3 class="anchored" data-anchor-id="from-a-genbank-file">From a Genbank file</h3>
 <p>To load features from a Genbank file, we can once again use the <code>load_annotations</code> function and provide the path to the Genbank file. The function detects the file type based on the file extension, and it returns a <code>GenbankAnnotationDb</code> object.</p>
-<div id="04b66d42" class="cell" data-execution_count="3">
+<div id="e42b7b4a" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> load_annotations</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>gb_db <span class="op">=</span> load_annotations(path<span class="op">=</span><span class="st">"data/mycoplasma-genitalium.gb"</span>)</span>
@@ -1298,7 +1298,7 @@ Note
 <section id="how-to-generate-a-summary-of-an-annotationdb" class="level2">
 <h2 class="anchored" data-anchor-id="how-to-generate-a-summary-of-an-annotationdb">How to generate a summary of an <code>AnnotationDb</code></h2>
 <p>To generate a summary of an <code>AnnotationDb</code>, we can access the <code>describe</code> attribute of the database. This attribute returns a <code>cogent3.core.table.Table</code> instance that shows the number of records for each seqid, the count for each biotype, and the number of rows in each table (in this example there is a “gff” table with 1,169 rows and an empty “user” table).</p>
-<div id="f4574547" class="cell" data-execution_count="4">
+<div id="b413fcbc" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>summary <span class="op">=</span> gff_db.describe</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
@@ -1352,7 +1352,7 @@ Note
 <h2 class="anchored" data-anchor-id="how-to-add-custom-features-to-an-annotationdb">How to add custom features to an <code>AnnotationDb</code></h2>
 <p>This is achieved via the <code>add_features</code> method and for all three types of <code>AnnotationDb</code> it will be added to the “user” table. The method requires information about the feature, such as its biotype, name, genomic location (spans), and the seqid. The seqid is necessary when linking an <code>AnnotationDb</code> to a <code>Sequence</code> object, see <a href="../../../cogent3/doc/cookbook/annotation_db.html#assign_db_to_seq">How to assign an AnnotationDb to a sequence</a> for more information.</p>
 <p>We can add a feature to the empty <code>BasicAnnotationDb</code> we created above. Now the database has one record!</p>
-<div id="e53b7942" class="cell" data-execution_count="5">
+<div id="1efa072c" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>anno_db.add_feature(</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    seqid<span class="op">=</span><span class="st">"NC_000908"</span>,</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    biotype<span class="op">=</span><span class="st">"gene"</span>,</span>
@@ -1398,7 +1398,7 @@ Note
 </div>
 </div>
 <p>We can also add a feature to our <code>GffAnnotationDb</code> or <code>GenbankAnnotationDb</code>. Below, the previously empty “user” table now has a row count of one, indicating that our feature has been successfully added to the database.</p>
-<div id="58a2f47a" class="cell" data-execution_count="6">
+<div id="a4b931f0" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>gff_db.add_feature(</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    seqid<span class="op">=</span><span class="st">"seq1"</span>,</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    biotype<span class="op">=</span><span class="st">"gene"</span>,</span>
@@ -1479,7 +1479,7 @@ Note
 <h3 class="anchored" data-anchor-id="querying-via-feature-name">Querying via Feature Name</h3>
 <p>To query a database for a feature by its name, provide the name of the feature as an argument to either <code>get_features_matching()</code> or <code>get_records_matching()</code>. Since an <code>AnnotationDb</code> can contain records for more than one sequence, it is best practice to also include the seqid of the sequence of interest.</p>
 <p>For example, querying the <code>GenbankAnnotationDb</code> for the 16s rRNA gene:</p>
-<div id="2e0313f3" class="cell" data-execution_count="7">
+<div id="14b895cf" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>mg_16s <span class="op">=</span> <span class="bu">list</span>(</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    gb_db.get_features_matching(</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>        name<span class="op">=</span><span class="st">"MG_RS00775"</span>, biotype<span class="op">=</span><span class="st">"gene"</span>, seqid<span class="op">=</span><span class="st">"NC_000908"</span></span>
@@ -1500,7 +1500,7 @@ Note
 <h3 class="anchored" data-anchor-id="querying-via-feature-biotype">Querying via Feature Biotype</h3>
 <p>Similarly, <code>get_features_matching()</code> and <code>get_records_matching()</code> can be used to query the database for all features that match a given biotype.</p>
 <p>For example, querying the <code>GffAnnotationDb</code> for all pseudogenes:</p>
-<div id="fee4df1b" class="cell" data-execution_count="8">
+<div id="b1bb2283" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>pseudogenes <span class="op">=</span> <span class="bu">list</span>(gff_db.get_features_matching(biotype<span class="op">=</span><span class="st">"pseudogene"</span>))</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>pseudogenes[:<span class="dv">2</span>]  <span class="co"># showing just the first two</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
@@ -1523,7 +1523,7 @@ Note
 <h3 class="anchored" data-anchor-id="querying-via-region-of-interest">Querying via region of interest</h3>
 <p>We can provide <code>start</code> and <code>end</code> arguments to <code>get_features_matching()</code> and <code>get_records_matching()</code> and all features within the coordinates will be returned.</p>
 <p>For example, the adhesin protein of <em>M. genitalium</em> is organised in an operon between positions 220600 to 229079, so we can query for genes in that region to return all operon genes:</p>
-<div id="1aa4b316" class="cell" data-execution_count="9">
+<div id="b10aea2c" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>operon_cds <span class="op">=</span> <span class="bu">list</span>(</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    gff_db.get_features_matching(start<span class="op">=</span><span class="dv">220600</span>, stop<span class="op">=</span><span class="dv">229067</span>, biotype<span class="op">=</span><span class="st">"CDS"</span>)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -1554,7 +1554,7 @@ Note
 <h3 class="anchored" data-anchor-id="querying-via-the-extended-attributes-field">Querying via the extended attributes field</h3>
 <p>A particularly useful functionality of a <code>GffAnnotationDb</code> is the ability to search the extended attributes field. This allows querying for records that have matches to a specific string provided to the <code>attributes</code> argument within their extended attributes field.</p>
 <p>For example, we can query for all CDS related to replication:</p>
-<div id="e3856807" class="cell" data-execution_count="10">
+<div id="101ab4d9" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>replication_records <span class="op">=</span> <span class="bu">list</span>(</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    gff_db.get_records_matching(attributes<span class="op">=</span><span class="st">"replication"</span>, biotype<span class="op">=</span><span class="st">"CDS"</span>)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -1592,7 +1592,7 @@ Note
 <section id="limiting-the-number-of-returned-records" class="level3">
 <h3 class="anchored" data-anchor-id="limiting-the-number-of-returned-records">Limiting the number of returned records</h3>
 <p>Both <code>get_features_matching()</code> and <code>get_records_matching()</code> accept an optional <code>limit</code> argument that caps the total number of records yielded. This is useful when probing a large database or building previews.</p>
-<div id="3fc3bfb3" class="cell" data-execution_count="11">
+<div id="600dfc82" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>first_two_genes <span class="op">=</span> <span class="bu">list</span>(gff_db.get_features_matching(biotype<span class="op">=</span><span class="st">"gene"</span>, limit<span class="op">=</span><span class="dv">2</span>))</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>first_two_genes</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
@@ -1611,7 +1611,7 @@ Note
 </div>
 </div>
 <p>The same applies to <code>get_records_matching()</code>:</p>
-<div id="c9bf4028" class="cell" data-execution_count="12">
+<div id="38d41c2d" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>first_record <span class="op">=</span> <span class="bu">list</span>(gff_db.get_records_matching(biotype<span class="op">=</span><span class="st">"CDS"</span>, limit<span class="op">=</span><span class="dv">1</span>))</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>first_record</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
@@ -1639,14 +1639,14 @@ Note
 <section id="how-many-unique-genes-are-in-a-given-genome" class="level3">
 <h3 class="anchored" data-anchor-id="how-many-unique-genes-are-in-a-given-genome">How many unique genes are in a given genome?</h3>
 <p><em>Mycoplasma genitalium</em> has the smallest bacterial genome, so the number of genes in the loaded database represents the approximate minimal set of genes required for bacterial life! We can see the total number of genes by using the <code>num_matches()</code> method and specifying the condition we want to be matched is that the biotype is “gene”.</p>
-<div id="ba337665" class="cell" data-execution_count="13">
+<div id="32c8d16a" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>gb_db.num_matches(biotype<span class="op">=</span><span class="st">"gene"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <pre><code>563</code></pre>
 </div>
 </div>
 <p>The count is 563, however, this may include genes with more than one copy. To determine the number of distinct genes we can use the <code>count_distinct()</code> method and specify <code>biotype="gene"</code> and <code>name=True</code> to indicate we are interested in genes with distinct names.</p>
-<div id="ba104ba3" class="cell" data-execution_count="14">
+<div id="657e3e42" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>total_genes <span class="op">=</span> gb_db.count_distinct(biotype<span class="op">=</span><span class="st">"gene"</span>, name<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>single_copy <span class="op">=</span> total_genes[total_genes.columns[<span class="st">"count"</span>] <span class="op">==</span> <span class="dv">1</span>, :]</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(single_copy)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1656,7 +1656,7 @@ Note
 </div>
 <p>The count of unique genes is 561. This means that almost every gene is present only once in the genome, very little redundancy here!</p>
 <p>Just for fun, let’s try this with the GFF database… (downloaded from the exact same source)</p>
-<div id="070ab4ae" class="cell" data-execution_count="15">
+<div id="0fb5573d" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>total_genes <span class="op">=</span> gff_db.num_matches(biotype<span class="op">=</span><span class="st">"gene"</span>)</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"total genes: "</span>, total_genes)</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>genes <span class="op">=</span> gff_db.count_distinct(biotype<span class="op">=</span><span class="st">"gene"</span>, name<span class="op">=</span><span class="va">True</span>)</span>
@@ -1674,7 +1674,7 @@ single copy genes:  547</code></pre>
 <p>To find the “children” of a feature, we can use the <code>get_feature_children()</code> method. A “child” refers to a feature that is nested within or contained by another “parent” feature. For example, a child feature could be an exon contained within a gene or a CDS contained within a transcript.</p>
 <p>This method returns a generator that yields all the child features of the specified feature.</p>
 <p>For example, let’s find the children of “gene-MG_RS00035”:</p>
-<div id="8e9d392f" class="cell" data-execution_count="16">
+<div id="31dce084" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>children <span class="op">=</span> <span class="bu">list</span>(gff_db.get_feature_children(name<span class="op">=</span><span class="st">"gene-MG_RS00035"</span>))</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>children</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="16">
@@ -1691,7 +1691,7 @@ single copy genes:  547</code></pre>
 <h3 class="anchored" data-anchor-id="how-to-find-the-parent-of-a-feature">How to find the “parent” of a Feature</h3>
 <p>To find the “parent” of a feature, we can use the <code>get_feature_parent()</code> method, which achieves the inverse of the above method.</p>
 <p>For example, we can use the “child” we returned above <code>"cds-WP_009885556.1"</code>, to find the original parent gene!</p>
-<div id="496f2279" class="cell" data-execution_count="17">
+<div id="4ec98594" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>parents <span class="op">=</span> <span class="bu">list</span>(gff_db.get_feature_parent(name<span class="op">=</span><span class="st">"cds-WP_009885556.1"</span>))</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>parents</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="17">
@@ -1710,7 +1710,7 @@ single copy genes:  547</code></pre>
 <section id="checking-the-compatibility-of-two-annotationdb-instances" class="level3">
 <h3 class="anchored" data-anchor-id="checking-the-compatibility-of-two-annotationdb-instances">Checking the compatibility of two <code>AnnotationDb</code> instances</h3>
 <p>Combining data requires compatibility of the databases, this can be checked via the <code>compatible()</code> method. Below we check whether a <code>GffAnnotationDb</code> is compatible with a <code>BasicAnnotationDb</code>.</p>
-<div id="48cf270e" class="cell" data-execution_count="18">
+<div id="78647468" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>gff_db.compatible(anno_db)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="18">
 <pre><code>True</code></pre>
@@ -1718,7 +1718,7 @@ single copy genes:  547</code></pre>
 </div>
 <p>The method evaluates to <code>True</code>, indicating that the data of the two databases can be merged.</p>
 <p>What about merging a <code>GffAnnotationDb</code> and <code>GenbankAnnotationDb</code>?</p>
-<div id="ff1bfea0" class="cell" data-execution_count="19">
+<div id="b47c7055" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>gff_db.compatible(gb_db)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="19">
 <pre><code>False</code></pre>
@@ -1729,7 +1729,7 @@ single copy genes:  547</code></pre>
 <section id="taking-the-union-of-two-annotationdb-instances" class="level3">
 <h3 class="anchored" data-anchor-id="taking-the-union-of-two-annotationdb-instances">Taking the union of two <code>AnnotationDb</code> instances</h3>
 <p>The <code>union()</code> method will return a <strong>new instance</strong> with merged records.</p>
-<div id="b8011add" class="cell" data-execution_count="20">
+<div id="68c22d54" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>union_db <span class="op">=</span> gb_db.union(anno_db)</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>union_db.describe[<span class="op">-</span><span class="dv">2</span>:, :]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="20">
@@ -1772,7 +1772,7 @@ single copy genes:  547</code></pre>
 <section id="updating-an-annotationdb-with-the-record-from-another-database" class="level3">
 <h3 class="anchored" data-anchor-id="updating-an-annotationdb-with-the-record-from-another-database">Updating an <code>AnnotationDb</code> with the record from another database</h3>
 <p>The <code>update()</code> method will update records of a given database with another and return the <strong>same instance</strong> of the database.</p>
-<div id="65d7e550" class="cell" data-execution_count="21">
+<div id="d8cd1064" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>gff_db.update(anno_db)</span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>gff_db.describe[<span class="op">-</span><span class="dv">2</span>:, :]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="21">
@@ -1814,7 +1814,7 @@ single copy genes:  547</code></pre>
 <section id="initialise-a-annotationdb-with-another-database" class="level3">
 <h3 class="anchored" data-anchor-id="initialise-a-annotationdb-with-another-database">Initialise a <code>AnnotationDb</code> with another database</h3>
 <p>You can assign a compatible database to the <code>db</code> argument in the <code>AnnotationDb</code> constructor. If it’s the same class, its db will be bound to self and directly modified with any new data you add.</p>
-<div id="987214ae" class="cell" data-execution_count="22">
+<div id="c7de2817" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3.core.annotation_db <span class="im">import</span> GenbankAnnotationDb</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>new_gb_db <span class="op">=</span> GenbankAnnotationDb(source<span class="op">=</span><span class="st">"m-genitalium-database.c3gbdb"</span>, db<span class="op">=</span>anno_db)</span>
@@ -1828,7 +1828,7 @@ single copy genes:  547</code></pre>
 <section id="how-to-get-a-subset-of-an-annotationdb" class="level2">
 <h2 class="anchored" data-anchor-id="how-to-get-a-subset-of-an-annotationdb">How to get a subset of an <code>AnnotationDb</code></h2>
 <p>If you want a subset of a db, use the same arguments as you would for <code>db.get_records_matching()</code>.</p>
-<div id="e58368ae" class="cell" data-execution_count="23">
+<div id="f4e83acf" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> load_annotations</span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>gff_db <span class="op">=</span> load_annotations(path<span class="op">=</span><span class="st">"data/mycoplasma-genitalium.gff"</span>)</span>
@@ -1891,7 +1891,7 @@ Note
 <section id="directly-assign-an-annotationdb-to-a-sequence" class="level3">
 <h3 class="anchored" data-anchor-id="directly-assign-an-annotationdb-to-a-sequence">Directly assign an <code>AnnotationDb</code> to a Sequence</h3>
 <p>Assign the AnnotationDb to the <code>annotation_db</code> attribute of a Sequence</p>
-<div id="795e2bf5" class="cell" data-execution_count="24">
+<div id="d3c9328c" class="cell" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> make_seq</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>seq1 <span class="op">=</span> make_seq(</span>
@@ -1912,7 +1912,7 @@ Note
 <section id="for-a-single-sequence-genbank-file" class="level4">
 <h4 class="anchored" data-anchor-id="for-a-single-sequence-genbank-file">For a single sequence Genbank file</h4>
 <p>Loading a sequence from a Genbank file will automatically create a database instance containing all features present in the file. This database instance will be bound to the <code>Sequence</code> instance via the <code>.annotation_db</code> attribute, accessing this attribute displays a representation of the bound annotations.</p>
-<div id="724c0db8" class="cell" data-execution_count="25">
+<div id="0d71a621" class="cell" data-execution_count="25">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> load_seq</span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>gb_seq <span class="op">=</span> load_seq(<span class="st">"data/mycoplasma-genitalium.gb"</span>)</span>
@@ -1925,7 +1925,7 @@ Note
 <section id="for-a-single-sequence-fasta-file-and-an-associated-gff-annotation-file" class="level4">
 <h4 class="anchored" data-anchor-id="for-a-single-sequence-fasta-file-and-an-associated-gff-annotation-file">For a single sequence FASTA file and an associated GFF annotation file</h4>
 <p>Data can be loaded by providing the path to the gff file to the <code>annotation_path</code> argument of <code>load_seq()</code>.</p>
-<div id="079c66a3" class="cell" data-execution_count="26">
+<div id="b040fbf3" class="cell" data-execution_count="26">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>gff_seq <span class="op">=</span> load_seq(</span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"data/mycoplasma-genitalium.fa"</span>,</span>
 <span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>    annotation_path<span class="op">=</span><span class="st">"data/mycoplasma-genitalium.gff"</span>,</span>
@@ -1949,7 +1949,7 @@ Note
 </div>
 </div>
 <p>In the above example, the sequence name in the fasta file does not match any records in the gff3 file (it is <code>"NC_000908.2 Mycoplasmoides genitalium G37, complete sequence"</code> in the former, and <code>"NC_000908.2"</code> in the latter). However, if you are confident that they are related, then you can use the <code>label_to_name</code> argument of <code>load_seq()</code> to change the sequence name as follows:</p>
-<div id="269f3426" class="cell" data-execution_count="27">
+<div id="cecbf574" class="cell" data-execution_count="27">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>seq <span class="op">=</span> load_seq(</span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"data/mycoplasma-genitalium.fa"</span>,</span>
 <span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>    annotation_path<span class="op">=</span><span class="st">"data/mycoplasma-genitalium.gff"</span>,</span>

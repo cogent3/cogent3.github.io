@@ -1190,7 +1190,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>The <code>omit_duplicated</code> app removes redundant sequences from a sequence collection (aligned or unaligned).</p>
 <p>Let’s create sample data with duplicated sequences.</p>
-<div id="af6005a5" class="cell" data-execution_count="1">
+<div id="9b5ed872" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> make_aligned_seqs</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {</span>
@@ -1231,7 +1231,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Creating the <code>omit_duplicated</code> app with the argument <code>choose="longest"</code> selects the duplicated sequence with the least number of gaps and ambiguous characters. In the above example, only one of <code>c</code> and <code>d</code> will be retained.</p>
-<div id="5faa3fed" class="cell" data-execution_count="2">
+<div id="baa98d9f" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> get_app</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>omit_shorter_duplicate <span class="op">=</span> get_app(<span class="st">"omit_duplicated"</span>, moltype<span class="op">=</span><span class="st">"dna"</span>, choose<span class="op">=</span><span class="st">"longest"</span>)</span>
@@ -1264,7 +1264,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Creating the <code>omit_duplicated</code> app with the argument <code>choose=None</code> means only unique sequences are retained.</p>
-<div id="5c48da38" class="cell" data-execution_count="3">
+<div id="fbe014ff" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> get_app</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>omit_all_duplicates <span class="op">=</span> get_app(<span class="st">"omit_duplicated"</span>, moltype<span class="op">=</span><span class="st">"dna"</span>, choose<span class="op">=</span><span class="va">None</span>)</span>
@@ -1297,7 +1297,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>The <code>mask_degen</code> argument specifies how to treat matches between sequences with degenerate characters.</p>
 <p>Let’s create sample data that has a DNA ambiguity code.</p>
-<div id="651425ed" class="cell" data-execution_count="4">
+<div id="4fe9e731" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> make_aligned_seqs</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>aln <span class="op">=</span> make_aligned_seqs(</span>
@@ -1310,7 +1310,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Since “Y” represents pyrimidines where the site can be either “C” or “T”, s1 indeed matches s2 and one of them will be removed.</p>
-<div id="0c86e078" class="cell" data-execution_count="5">
+<div id="3cc9c17d" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> get_app</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>app_dna <span class="op">=</span> get_app(<span class="st">"omit_duplicated"</span>, mask_degen<span class="op">=</span><span class="va">True</span>, choose<span class="op">=</span><span class="st">"longest"</span>, moltype<span class="op">=</span><span class="st">"dna"</span>)</span>

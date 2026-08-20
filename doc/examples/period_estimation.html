@@ -1224,7 +1224,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="for-numerical-continuous-data">For numerical (continuous) data</h3>
 <p>We first make some sample data. A periodic signal and some noise.</p>
 <p>.. We set a seed for the random number generator so that we can get consistent generation of the same series. This makes the document robust for doctesting.</p>
-<div id="8635eed2" class="cell" data-execution_count="2">
+<div id="84fcf821" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> numpy.arange(<span class="dv">0</span>, <span class="dv">10</span>, <span class="fl">0.1</span>)</span>
@@ -1236,7 +1236,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="discrete-fourier-transform" class="level4">
 <h4 class="anchored" data-anchor-id="discrete-fourier-transform">Discrete Fourier transform</h4>
 <p>We now use the discrete Fourier transform to estimate periodicity in this signal. Given we set the period to equal 10, we expect the maximum power for that index.</p>
-<div id="a3138048" class="cell" data-execution_count="3">
+<div id="94aabd51" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3.maths.period <span class="im">import</span> dft</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>pwr, period <span class="op">=</span> dft(sig)</span>
@@ -1281,7 +1281,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>The power (<code>pwr</code>) is returned as an array of complex numbers, so we convert into real numbers using <code>abs</code>. We then zip the power and corresponding periods and sort to identify the period with maximum signal.</p>
-<div id="92a0cb2a" class="cell" data-execution_count="4">
+<div id="5811556e" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pwr <span class="op">=</span> <span class="bu">abs</span>(pwr)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>max_pwr, max_period <span class="op">=</span> <span class="bu">sorted</span>(<span class="bu">zip</span>(pwr, period))[<span class="op">-</span><span class="dv">1</span>]</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(max_pwr, max_period)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1293,7 +1293,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="auto-correlation" class="level4">
 <h4 class="anchored" data-anchor-id="auto-correlation">Auto-correlation</h4>
 <p>We now use auto-correlation.</p>
-<div id="e654cd31" class="cell" data-execution_count="5">
+<div id="3a2efe3d" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3.maths.period <span class="im">import</span> auto_corr</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>pwr, period <span class="op">=</span> auto_corr(sig)</span>
@@ -1333,7 +1333,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>We then zip the power and corresponding periods and sort to identify the period with maximum signal.</p>
-<div id="f895fa78" class="cell" data-execution_count="6">
+<div id="fcb63c55" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>max_pwr, max_period <span class="op">=</span> <span class="bu">sorted</span>(<span class="bu">zip</span>(pwr, period))[<span class="op">-</span><span class="dv">1</span>]</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(max_pwr, max_period)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -1345,7 +1345,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="for-symbolic-data" class="level3">
 <h3 class="anchored" data-anchor-id="for-symbolic-data">For symbolic data</h3>
 <p>We create a sequence as just a string</p>
-<div id="f903df77" class="cell" data-execution_count="7">
+<div id="90e2c26e" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> (</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ATCGTTGGGACCGGTTCAAGTTTTGGAACTCGCAAGGGGTGAATGGTCTTCGTCTAACGCTGG"</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"GGAACCCTGAATCGTTGTAACGCTGGGGTCTTTAACCGTTCTAATTTAACGCTGGGGGGTTCT"</span></span>
@@ -1353,7 +1353,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We then specify the motifs whose occurrences will be converted into 1, with all other motifs converted into 0. As we might want to do this in batches for many sequences we use a factory function.</p>
-<div id="70008488" class="cell" data-execution_count="8">
+<div id="0cb621db" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3.maths.stats.period <span class="im">import</span> SeqToSymbols</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>seq_to_symbols <span class="op">=</span> SeqToSymbols([<span class="st">"AA"</span>, <span class="st">"TT"</span>, <span class="st">"AT"</span>])</span>
@@ -1371,7 +1371,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>We then estimate the integer discrete Fourier transform for the full data. To do this, we need to pass in the symbols from full conversion of the sequence. The returned values are the powers and periods.</p>
-<div id="1f458aff" class="cell" data-execution_count="9">
+<div id="9810468c" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3.maths.period <span class="im">import</span> ipdft</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>powers, periods <span class="op">=</span> ipdft(symbols)</span>
@@ -1416,7 +1416,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
        7.59541162e+00, 7.41809819e+00, 7.24682812e+00, 7.08217267e+00])</code></pre>
 </div>
 </div>
-<div id="3b0877b2" class="cell" data-execution_count="10">
+<div id="20faaa86" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>periods</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>array([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,
@@ -1434,7 +1434,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>We can also compute the auto-correlation statistic, and the hybrid (which combines IPDFT and auto-correlation).</p>
-<div id="e57f917a" class="cell" data-execution_count="11">
+<div id="b080e80e" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3.maths.period <span class="im">import</span> auto_corr, hybrid</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>powers, periods <span class="op">=</span> auto_corr(symbols)</span>
@@ -1454,7 +1454,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         0.,  0.,  0.,  0.,  0.])</code></pre>
 </div>
 </div>
-<div id="8f256343" class="cell" data-execution_count="12">
+<div id="ad0325c8" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>periods</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
 <pre><code>array([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,
@@ -1471,7 +1471,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
        145, 146, 147, 148, 149])</code></pre>
 </div>
 </div>
-<div id="97cde7cb" class="cell" data-execution_count="13">
+<div id="579e0966" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>powers, periods <span class="op">=</span> hybrid(symbols)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>powers</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
@@ -1514,7 +1514,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
        0.00000000e+00, 0.00000000e+00, 0.00000000e+00, 0.00000000e+00])</code></pre>
 </div>
 </div>
-<div id="0309d28e" class="cell" data-execution_count="14">
+<div id="add9ff57" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>periods</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
 <pre><code>array([  2,   3,   4,   5,   6,   7,   8,   9,  10,  11,  12,  13,  14,
@@ -1538,7 +1538,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="for-numerical-continuous-data-1" class="level3">
 <h3 class="anchored" data-anchor-id="for-numerical-continuous-data-1">For numerical (continuous) data</h3>
 <p>We just use <code>sig</code> created above. The Goertzel algorithm gives the same result as the <code>dft</code>.</p>
-<div id="eb5c1771" class="cell" data-execution_count="15">
+<div id="300b46a2" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3.maths.period <span class="im">import</span> goertzel</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>pwr <span class="op">=</span> goertzel(sig, <span class="dv">10</span>)</span>
@@ -1551,7 +1551,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="for-symbolic-data-1" class="level3">
 <h3 class="anchored" data-anchor-id="for-symbolic-data-1">For symbolic data</h3>
 <p>We use the symbols from the above example. For the <code>ipdft</code>, <code>auto_corr</code> and <code>hybrid</code> functions we just need to identify the array index containing the period of interest and slice the corresponding value from the returned powers. The reported periods start at <code>llim</code>, which defaults to 2, but indexes start at 0, the index for a period-5 is simply 5-<code>llim</code>.</p>
-<div id="32b97efe" class="cell" data-execution_count="16">
+<div id="8ac731f3" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>powers, periods <span class="op">=</span> auto_corr(symbols)</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>llim <span class="op">=</span> <span class="dv">2</span></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>period5 <span class="op">=</span> <span class="dv">5</span> <span class="op">-</span> llim</span>
@@ -1560,14 +1560,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>np.int64(5)</code></pre>
 </div>
 </div>
-<div id="92ace553" class="cell" data-execution_count="17">
+<div id="e998024f" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>powers[period5]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="17">
 <pre><code>np.float64(9.0)</code></pre>
 </div>
 </div>
 <p>For Fourier techniques, we can compute the power for a specific period more efficiently using Goertzel algorithm.</p>
-<div id="35bbff12" class="cell" data-execution_count="18">
+<div id="5ac8101f" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3.maths.period <span class="im">import</span> goertzel</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>period <span class="op">=</span> <span class="dv">4</span></span>
@@ -1581,7 +1581,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>It’s also possible to specify a period to the stand-alone functions. As per the <code>goertzel</code> function, just the power is returned.</p>
-<div id="25e94ece" class="cell" data-execution_count="19">
+<div id="52fe8166" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>power <span class="op">=</span> hybrid(symbols, period<span class="op">=</span>period)</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>power</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="19">
@@ -1595,13 +1595,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="for-numerical-continuous-data-2" class="level3">
 <h3 class="anchored" data-anchor-id="for-numerical-continuous-data-2">For numerical (continuous data)</h3>
 <p>We use the signal provided above. Because significance testing is being done using a resampling approach, we define a calculator which precomputes some values to improve compute performance. For a continuous signal, we’ll use the Goertzel algorithm.</p>
-<div id="95cbe4a8" class="cell" data-execution_count="20">
+<div id="0b6409e3" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3.maths.period <span class="im">import</span> Goertzel</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>goertzel_calc <span class="op">=</span> Goertzel(<span class="bu">len</span>(sig), period<span class="op">=</span><span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Having defined this, we then just pass this calculator to the <code>blockwise_bootstrap</code> function. The other critical settings are the <code>block_size</code> which specifies the size of segments of contiguous sequence positions to use for sampling and <code>num_reps</code> which is the number of permuted replicate sequences to generate.</p>
-<div id="7dc9ba09" class="cell" data-execution_count="21">
+<div id="a2a17cf8" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3.maths.stats.period <span class="im">import</span> blockwise_bootstrap</span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>obs_stat, p <span class="op">=</span> blockwise_bootstrap(</span>
@@ -1620,7 +1620,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="permutation-testing" class="level4">
 <h4 class="anchored" data-anchor-id="permutation-testing">Permutation testing</h4>
 <p>The very notion of permutation testing for periods, applied to a genome, requires the compute performance be as quick as possible. This means providing as much information up front as possible. We have made the implementation flexible by not assuming how the user will convert sequences to symbols. It’s also the case that numerous windows of exactly the same size are being assessed. Accordingly, we use a class to construct a fixed signal length evaluator. We do this for the hybrid metric first.</p>
-<div id="d2845223" class="cell" data-execution_count="22">
+<div id="239b9750" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3.maths.period <span class="im">import</span> Hybrid</span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>hybrid_calculator <span class="op">=</span> Hybrid(<span class="bu">len</span>(s), period<span class="op">=</span><span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1639,13 +1639,13 @@ Note
 </div>
 </div>
 <p>We then construct a seq-to-symbol convertor.</p>
-<div id="5fe6fc66" class="cell" data-execution_count="23">
+<div id="d6514d33" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3.maths.stats.period <span class="im">import</span> SeqToSymbols</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>seq_to_symbols <span class="op">=</span> SeqToSymbols([<span class="st">"AA"</span>, <span class="st">"TT"</span>, <span class="st">"AT"</span>], length<span class="op">=</span><span class="bu">len</span>(s))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The rest is as per the analysis using <code>Goertzel</code> above.</p>
-<div id="2f42685d" class="cell" data-execution_count="24">
+<div id="a0619e14" class="cell" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3.maths.stats.period <span class="im">import</span> blockwise_bootstrap</span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>stat, p <span class="op">=</span> blockwise_bootstrap(</span>
@@ -1661,7 +1661,7 @@ Note
 <pre><code>104.35516278555667</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="24">
-<pre><code>False</code></pre>
+<pre><code>True</code></pre>
 </div>
 </div>
 
