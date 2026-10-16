@@ -21,6 +21,35 @@ If you already cloned without ``--recurse-submodules``:
 
     git submodule update --init --recursive
 
+Building the docs
+=================
+
+Everything goes through ``build.sh`` at the repo root:
+
+.. code-block:: shell
+
+    ./build.sh                             # full build from the pinned submodule
+    C3_REPO=/path/to/cogent3 ./build.sh    # build from your own cogent3 checkout
+    ./build.sh --skip-compose              # reuse the already-copied doc/doc/ tree
+    ./build.sh --skip-quartodoc            # skip regenerating the API reference
+
+The finished site lands in ``docs/``. Don't commit it, because CI rebuilds
+and publishes it.
+
+If you're only changing a page this repo owns, such as ``doc/index.qmd``,
+render that one page instead. It's much faster:
+
+.. code-block:: shell
+
+    quarto render doc/index.qmd    # writes doc/_site/index.html
+    quarto preview doc             # live reload while you edit
+
+Use ``C3_REPO`` to preview cogent3 doc changes that aren't in the submodule
+pin yet.
+
+If you add a new page to the cogent3 docs, you must also add it to the
+sidebar in ``doc/_quarto.yml``. Otherwise the build stops with an error.
+
 Updating the submodule to the latest ``develop``
 ================================================
 
