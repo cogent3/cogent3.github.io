@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.10.19">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -78,14 +78,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b626d73c4c936ccc3cb08be7d45d1df6.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-d779191fb58665fba6013d76b5d4c7b3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-b359af0c6196647c48c2f17a2167ba66.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-d779191fb58665fba6013d76b5d4c7b3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-e5a0d2aa690ade8c2e698914af8d1f82.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-dbeb559b8fbcf47f3ea11594af775d64.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-e5a0d2aa690ade8c2e698914af8d1f82.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -2557,10 +2557,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-11">Parameters</h4>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 6%">
-<col style="width: 3%">
-<col style="width: 84%">
 <col style="width: 5%">
+<col style="width: 3%">
+<col style="width: 86%">
+<col style="width: 4%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -2574,7 +2574,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td>calc</td>
 <td>str</td>
-<td>a pairwise distance calculator name. Presently only ‘pdist’, ‘jc69’, ‘tn93’, ‘hamming’, ‘paralinear’ are supported.</td>
+<td>a pairwise distance calculator name. Presently only ‘pdist’, ‘jc69’, ‘tn93’, ‘hamming’, ‘paralinear’, ‘logdet’ are supported.</td>
 <td><code>'pdist'</code></td>
 </tr>
 <tr class="even">
@@ -2582,6 +2582,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>bool</td>
 <td>If True, sequences for which a pairwise distance could not be calculated are excluded. If False, an ArithmeticError is raised if a distance could not be computed on observed data.</td>
 <td><code>False</code></td>
+</tr>
+<tr class="odd">
+<td>kwargs</td>
+<td>bool</td>
+<td>passed unchanged to the calculator, e.g.&nbsp;include_ambiguity=True (include sites with ambiguity codes) or use_tk_adjustment=True for ‘logdet’. A calculator raises TypeError for keywords it does not accept.</td>
+<td><code>{}</code></td>
 </tr>
 </tbody>
 </table>
@@ -4052,7 +4058,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>    drop_invalid<span class="op">=</span><span class="va">False</span>,</span>
 <span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>    parallel<span class="op">=</span><span class="va">False</span>,</span>
 <span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>    use_hook<span class="op">=</span><span class="va">None</span>,</span>
-<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">**</span>kwargs,</span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Returns a phylogenetic tree.</p>
 <section id="parameters-39" class="level4 doc-section doc-section-parameters">
 <h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-39">Parameters</h4>
@@ -4075,7 +4082,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td>calc</td>
 <td>str</td>
-<td>a pairwise distance calculator or name of one. For options see cogent3.evolve.fast_distance.available_distances</td>
+<td>name of a pairwise distance calculator (case insensitive), one of ‘pdist’, ‘jc69’, ‘tn93’, ‘hamming’, ‘paralinear’, ‘logdet’.</td>
 <td><code>'pdist'</code></td>
 </tr>
 <tr class="even">
@@ -4095,6 +4102,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>str | None</td>
 <td>name of a third-party package that implements the quick_tree hook. If not specified, defaults to the first available hook or the cogent3 quick_tree() app. To force default, set use_hook=“cogent3”.</td>
 <td><code>None</code></td>
+</tr>
+<tr class="odd">
+<td>kwargs</td>
+<td>bool</td>
+<td>passed to the distance calculator, e.g.&nbsp;use_tk_adjustment for ‘logdet’.</td>
+<td><code>{}</code></td>
 </tr>
 </tbody>
 </table>

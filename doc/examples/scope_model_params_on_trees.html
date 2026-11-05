@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.10.19">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -78,14 +78,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b626d73c4c936ccc3cb08be7d45d1df6.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-d779191fb58665fba6013d76b5d4c7b3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-b359af0c6196647c48c2f17a2167ba66.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-d779191fb58665fba6013d76b5d4c7b3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-e5a0d2aa690ade8c2e698914af8d1f82.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-dbeb559b8fbcf47f3ea11594af775d64.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-e5a0d2aa690ade8c2e698914af8d1f82.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -1197,7 +1197,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>A common task concerns assessing how substitution model exchangeability parameters differ between evolutionary lineages. This is most commonly of interest for the case of testing for natural selection. Here I’ll demonstrate the different ways of scoping parameters across trees for the codon model case and how these can be used for evolutionary modelling.</p>
 <p>We start with the standard imports, plus using a canned codon substitution model and then load the sample data set.</p>
-<div id="5d0762b4" class="cell" data-execution_count="1">
+<div id="2826117d" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> load_aligned_seqs, load_tree</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3.evolve.models <span class="im">import</span> MG94HKY</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1205,13 +1205,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>tree <span class="op">=</span> load_tree(<span class="st">"data/test.tree"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We construct the substitution model and likelihood function and set the alignment.</p>
-<div id="df897aec" class="cell" data-execution_count="2">
+<div id="855caf27" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>sm <span class="op">=</span> MG94HKY()</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>lf <span class="op">=</span> sm.make_likelihood_function(tree, digits<span class="op">=</span><span class="dv">2</span>, space<span class="op">=</span><span class="dv">3</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>lf.set_alignment(aln)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>At this point we have a likelihood function with two exchangeability parameters from the substitution model (<code>kappa</code> the transition/transversion ratio; <code>omega</code> the nonsynonymous/synonymous ratio) plus branch lengths for all tree edges. To facilitate subsequent discussion I now display the tree</p>
-<div id="bd385e08" class="cell" data-execution_count="3">
+<div id="fb7aa397" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tree.ascii_art())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                              /-Human
@@ -1236,7 +1236,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="specifying-a-clade" class="level2">
 <h2 class="anchored" data-anchor-id="specifying-a-clade">Specifying a clade</h2>
 <p>I’m going to cause <code>omega</code> to attain a different value for all branches aside from the primate clade and stem (<code>HowlerMon</code>, <code>Human</code>, <code>edge.0</code>).</p>
-<div id="f392460e" class="cell" data-execution_count="4">
+<div id="5bf34150" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>lf.set_param_rule(</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"omega"</span>,</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    tip_names<span class="op">=</span>[<span class="st">"DogFaced"</span>, <span class="st">"Mouse"</span>],</span>
@@ -1374,7 +1374,7 @@ Note
 <p>I need to reset the <code>lf</code> so all edges have the default value again. I’ll show this only for this example, but rest assured I’m doing it for all others too.</p>
 </div>
 </div>
-<div id="b96a3c35" class="cell" data-execution_count="5">
+<div id="3db0910f" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>lf.set_param_rule(<span class="st">"omega"</span>, init<span class="op">=</span><span class="fl">1.0</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>lf.set_param_rule(</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"omega"</span>,</span>
@@ -1500,7 +1500,7 @@ Note
 <section id="specifying-clade-and-stem" class="level2">
 <h2 class="anchored" data-anchor-id="specifying-clade-and-stem">Specifying clade and stem</h2>
 <p>I’ll specify that both the primates and their stem are to be considered.</p>
-<div id="1bca9470" class="cell" data-execution_count="7">
+<div id="903c8142" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>lf.set_param_rule(</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"omega"</span>,</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    tip_names<span class="op">=</span>[<span class="st">"Human"</span>, <span class="st">"HowlerMon"</span>],</span>
@@ -1673,7 +1673,7 @@ Note
 <p>here I’m specifying a constant value for the parameter and so I <strong>must</strong> use the argument <code>value</code> to set it. This not to be confused with the argument <code>init</code> that is used for providing initial (starting) values for fitting.</p>
 </div>
 </div>
-<div id="d24e6a1a" class="cell" data-execution_count="9">
+<div id="41f0e18e" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>lf.set_param_rule(</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"omega"</span>,</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    tip_names<span class="op">=</span>[<span class="st">"Human"</span>, <span class="st">"HowlerMon"</span>],</span>
@@ -1796,7 +1796,7 @@ Note
 </div>
 </div>
 <p>I’ll now free up <code>omega</code> on the primate clade, but making it a single value shared by all primate lineages.</p>
-<div id="e1ce7b30" class="cell" data-execution_count="10">
+<div id="72130c49" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>lf.set_param_rule(</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"omega"</span>,</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    tip_names<span class="op">=</span>[<span class="st">"Human"</span>, <span class="st">"HowlerMon"</span>],</span>
@@ -1918,7 +1918,7 @@ Note
 </div>
 </div>
 <p>Finally I’ll allow all primate edges to have different values of <code>omega</code>.</p>
-<div id="96212bea" class="cell" data-execution_count="11">
+<div id="32ca0e09" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>lf.set_param_rule(</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"omega"</span>,</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    tip_names<span class="op">=</span>[<span class="st">"Human"</span>, <span class="st">"HowlerMon"</span>],</span>
@@ -2040,7 +2040,7 @@ Note
 </div>
 </div>
 <p>We now allow <code>omega</code> to be different on all edges.</p>
-<div id="1b5a8f7e" class="cell" data-execution_count="12">
+<div id="fdd22a34" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>lf.set_param_rule(<span class="st">"omega"</span>, is_independent<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>lf.optimise(local<span class="op">=</span><span class="va">True</span>, show_progress<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>lf</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
