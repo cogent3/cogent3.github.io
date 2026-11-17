@@ -1198,11 +1198,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>We can load aligned sequence data using the <code>load_aligned</code> app. When making the app, you can optionally provide arguments for the molecular type of the sequence and the format of the data.</p>
+<p>We can load aligned sequence data using the <code>load_aligned</code> app. When making the app, you can provide arguments for the molecular type of the sequence and the format of the data.</p>
+<p>If you do not provide <code>format_name</code>, the format is chosen from each file’s suffix, so a <code>.fasta</code> file is read as fasta and a <code>.phylip</code> file as phylip. A file whose suffix does not identify its format, such as <code>.txt</code> or no suffix at all, cannot be loaded unless you provide <code>format_name</code>.</p>
 <section id="loading-aligned-dna-sequences-from-a-single-fasta-file" class="level2">
 <h2 class="anchored" data-anchor-id="loading-aligned-dna-sequences-from-a-single-fasta-file">Loading aligned DNA sequences from a single fasta file</h2>
 <p>Here we load the brca1 gene in bats, providing the molecular type (<code>moltype="dna"</code>) and file format (<code>format_name="fasta"</code>).</p>
-<div id="e6fcdfb9" class="cell" data-execution_count="1">
+<div id="c14bf282" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> get_app</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>load_aligned_app <span class="op">=</span> get_app(<span class="st">"load_aligned"</span>, moltype<span class="op">=</span><span class="st">"dna"</span>, format_name<span class="op">=</span><span class="st">"fasta"</span>)</span>
@@ -1240,7 +1241,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="loading-aligned-protein-sequences-from-a-single-phylip-file" class="level2">
 <h2 class="anchored" data-anchor-id="loading-aligned-protein-sequences-from-a-single-phylip-file">Loading aligned protein sequences from a single phylip file</h2>
 <p>Here we load a globin alignment, providing the molecular type (<code>moltype="protein"</code>) and file format (<code>format_name="phylip"</code>).</p>
-<div id="c57790f4" class="cell" data-execution_count="2">
+<div id="2f4bbbe6" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> get_app</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>load_aligned_app <span class="op">=</span> get_app(<span class="st">"load_aligned"</span>, moltype<span class="op">=</span><span class="st">"protein"</span>, format_name<span class="op">=</span><span class="st">"phylip"</span>)</span>
@@ -1299,7 +1300,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="a-data-store-that-identifies-the-files-we-are-interested-in" class="level3">
 <h3 class="anchored" data-anchor-id="a-data-store-that-identifies-the-files-we-are-interested-in">1. A data store that identifies the files we are interested in</h3>
 <p>Here, we create a data store containing all the files with the “.fasta” suffix in the data directory, limiting the data store to two members as a minimum example.</p>
-<div id="0245e8a6" class="cell" data-execution_count="4">
+<div id="35ffd7a6" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> open_data_store</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>fasta_seq_dstore <span class="op">=</span> open_data_store(<span class="st">"data"</span>, suffix<span class="op">=</span><span class="st">"fasta"</span>, mode<span class="op">=</span><span class="st">"r"</span>, limit<span class="op">=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1321,7 +1322,7 @@ Note
 <p>Apps that are “writers” require a data store to write to, learn more about writers <a href="../../../doc/app/app_cookbook/index-writers.html">here!</a></p>
 </div>
 </div>
-<div id="4e60eb18" class="cell" data-execution_count="5">
+<div id="634a96a7" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> get_app, open_data_store</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>out_dstore <span class="op">=</span> open_data_store(path_to_dir, suffix<span class="op">=</span><span class="st">"fa"</span>, mode<span class="op">=</span><span class="st">"w"</span>)</span>
@@ -1349,7 +1350,7 @@ Tip
 <section id="now-were-good-to-go-we-can-apply-process-to-our-data-store" class="level3">
 <h3 class="anchored" data-anchor-id="now-were-good-to-go-we-can-apply-process-to-our-data-store">Now we’re good to go, we can apply <code>process</code> to our data store!</h3>
 <p><code>result</code> is a data store, which you can index to see individual data members - which are our alignments. We can take a closer look using the <code>.read()</code> method on data members (truncating to 50 characters).</p>
-<div id="e06b1e3c" class="cell" data-execution_count="6">
+<div id="99e26a09" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> process.apply_to(fasta_seq_dstore)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result[<span class="dv">0</span>].read()[:<span class="dv">50</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">

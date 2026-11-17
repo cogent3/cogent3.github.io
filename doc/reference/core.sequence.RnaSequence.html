@@ -1399,7 +1399,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    seq,</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>,</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="va">None</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    info<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    metadata<span class="op">=</span><span class="va">None</span>,</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    annotation_offset<span class="op">=</span><span class="dv">0</span>,</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    annotation_db<span class="op">=</span><span class="va">None</span>,</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1421,6 +1421,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="even">
 <td><a href="#cogent3.core.sequence.RnaSequence.annotation_offset">annotation_offset</a></td>
 <td>The offset between annotation coordinates and sequence coordinates.</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.sequence.RnaSequence.info">info</a></td>
+<td>Deprecated alias of metadata.</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.sequence.RnaSequence.metadata">metadata</a></td>
+<td>The sequence’s metadata, a mutable mapping.</td>
 </tr>
 </tbody>
 </table>
@@ -1757,10 +1765,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters">Parameters</h4>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 13%">
-<col style="width: 25%">
-<col style="width: 50%">
-<col style="width: 11%">
+<col style="width: 8%">
+<col style="width: 16%">
+<col style="width: 68%">
+<col style="width: 7%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1786,7 +1794,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td>spans</td>
 <td>list[tuple[int, int]]</td>
-<td>coordinates for this sequence</td>
+<td>in plus strand coordinates, relative to the start of this sequence. To specify strand, use the strand parameter.</td>
 <td><em>required</em></td>
 </tr>
 <tr class="even">
@@ -1798,7 +1806,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td>strand</td>
 <td>str | None</td>
-<td>‘+’ or ‘-’, defaults to ‘+’</td>
+<td>‘+’ or ‘-’ relative to the plus strand, defaults to ‘+’</td>
 <td><code>None</code></td>
 </tr>
 <tr class="even">
@@ -1819,6 +1827,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="returns" class="level4 doc-section doc-section-returns">
 <h4 class="doc-section doc-section-returns anchored" data-anchor-id="returns">Returns</h4>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 75%">
+<col style="width: 15%">
+</colgroup>
 <thead>
 <tr class="header">
 <th>Name</th>
@@ -1830,6 +1843,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td></td>
 <td>Feature instance</td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Raises ValueError if the sequence was created without a name, or is a</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>slice taken with a step other than 1 or -1.</td>
 <td></td>
 </tr>
 </tbody>
@@ -2011,7 +2034,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="notes-2" class="level4 doc-section doc-section-notes">
 <h4 class="doc-section doc-section-notes anchored" data-anchor-id="notes-2">Notes</h4>
-<p>Only copies annotations for records with seqid equal to self.name</p>
+<p>Only copies annotations for records with seqid equal to the name the sequence was created with, which differs from self.name after a rename.</p>
 </section>
 </section>
 <section id="cogent3.core.sequence.RnaSequence.count" class="level3">
@@ -2846,10 +2869,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-17">Parameters</h4>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 17%">
-<col style="width: 10%">
-<col style="width: 57%">
-<col style="width: 14%">
+<col style="width: 3%">
+<col style="width: 1%">
+<col style="width: 92%">
+<col style="width: 2%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -2863,7 +2886,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td>apply_offset</td>
 <td>bool</td>
-<td>if True, adds annotation offset from parent</td>
+<td>if True, adds the offset stored by the collection holding this sequence. A collection stores only the positions selected by the sequence’s view, and records separately where those positions started on the original. For example a[2:8] reports start 2 on its own. In a collection, only those 6 positions are stored, with 2 recorded as the offset, so it reports start 0 unless apply_offset is True.</td>
 <td><code>False</code></td>
 </tr>
 </tbody>
@@ -3329,6 +3352,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h4 class="doc-section doc-section-notes anchored" data-anchor-id="notes-20">Notes</h4>
 <p>This method cannot convert between nucleic acids and proteins. Use get_translation() for that.</p>
 <p>When applied to a sequence in a SequenceCollection, the resulting sequence will no longer be part of the collection.</p>
+<p>The result has no annotations if self is a slice taken with a step other than 1 or -1, or is reversed and either self or moltype is not nucleic, since its features cannot be placed on the result.</p>
 </section>
 </section>
 <section id="cogent3.core.sequence.RnaSequence.to_phylip" class="level3">
@@ -3448,16 +3472,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="cogent3.core.sequence.RnaSequence.write" class="level3">
 <h3 class="anchored" data-anchor-id="cogent3.core.sequence.RnaSequence.write">write</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb77"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>core.sequence.RnaSequence.write(filename, format_name<span class="op">=</span><span class="va">None</span>, <span class="op">**</span>kwargs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb77"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>core.sequence.RnaSequence.write(</span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>    filename,</span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>    format_name<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>,</span>
+<span id="cb77-5"><a href="#cb77-5" aria-hidden="true" tabindex="-1"></a>    warn_unsaved_metadata<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb77-6"><a href="#cb77-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">**</span>kwargs,</span>
+<span id="cb77-7"><a href="#cb77-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Write the sequence to a file.</p>
 <section id="parameters-28" class="level4 doc-section doc-section-parameters">
 <h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-28">Parameters</h4>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 58%">
-<col style="width: 13%">
+<col style="width: 17%">
+<col style="width: 10%">
+<col style="width: 62%">
+<col style="width: 9%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -3481,6 +3511,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td><code>None</code></td>
 </tr>
 <tr class="odd">
+<td>warn_unsaved_metadata</td>
+<td>bool</td>
+<td>if True, emit a UserWarning when the format cannot save the sequence’s metadata</td>
+<td><code>False</code></td>
+</tr>
+<tr class="even">
 <td>**kwargs</td>
 <td>Any</td>
 <td>additional arguments passed to the format writer</td>

@@ -1200,7 +1200,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="fast-pairwise-distance-estimation" class="level2">
 <h2 class="anchored" data-anchor-id="fast-pairwise-distance-estimation">Fast pairwise distance estimation</h2>
 <p>For a limited number of evolutionary models a fast implementation is available.</p>
-<div id="44966dfb" class="cell" data-execution_count="1">
+<div id="b3c0c63f" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> available_distances</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>available_distances()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1250,7 +1250,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="computing-genetic-distances-using-the-alignment-object" class="level2">
 <h2 class="anchored" data-anchor-id="computing-genetic-distances-using-the-alignment-object">Computing genetic distances using the <code>Alignment</code> object</h2>
 <p>Abbreviations listed from <code>available_distances()</code> can be used as values for the <code>distance_matrix(calc=&lt;abbreviation&gt;)</code>.</p>
-<div id="734e85a6" class="cell" data-execution_count="2">
+<div id="6ef79c04" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> load_aligned_seqs</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>aln <span class="op">=</span> load_aligned_seqs(<span class="st">"data/primate_brca1.fasta"</span>, moltype<span class="op">=</span><span class="st">"dna"</span>)</span>
@@ -1299,7 +1299,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="including-ambiguity-codes" class="level2">
 <h2 class="anchored" data-anchor-id="including-ambiguity-codes">Including ambiguity codes</h2>
 <p>By default, a site where either sequence has an ambiguity code, such as <code>R</code> (A or G), is excluded. Here the sequences differ only at the last site, so all the distances are 0.</p>
-<div id="cb304165" class="cell" data-execution_count="3">
+<div id="53bbb8c2" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> make_aligned_seqs</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>aln <span class="op">=</span> make_aligned_seqs(</span>
@@ -1343,7 +1343,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Setting <code>include_ambiguity=True</code> includes those sites, for <code>hamming</code>, <code>pdist</code>, <code>jc69</code>, <code>tn93</code>, <code>logdet</code> and <code>paralinear</code>. Each code is weighted by how often the bases it represents occur in the alignment. In this alignment C occurs 7 times and T 6 times, so <code>Y</code> (C or T) counts as 7/13 C and 6/13 T. Against the <code>C</code> in <code>s1</code> it is 6/13 of a difference, giving a proportion of (6/13) / 10 = 0.046 differences. <code>R</code> against <code>C</code> is a whole difference whichever base <code>R</code> stands for.</p>
-<div id="6ef8dbf8" class="cell" data-execution_count="4">
+<div id="51f7c5bf" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>aln.distance_matrix(calc<span class="op">=</span><span class="st">"pdist"</span>, include_ambiguity<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 
@@ -1381,7 +1381,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>The same code in both sequences counts as a match. Gaps, and codes that represent every base such as <code>N</code>, are still excluded.</p>
-<div id="534f3b87" class="cell" data-execution_count="5">
+<div id="b09d5664" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>aln.distance_matrix(calc<span class="op">=</span><span class="st">"tn93"</span>, include_ambiguity<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 
@@ -1434,17 +1434,17 @@ Note
 </section>
 <section id="using-the-distance-calculator-directly" class="level2">
 <h2 class="anchored" data-anchor-id="using-the-distance-calculator-directly">Using the distance calculator directly</h2>
-<div id="5f1b99fe" class="cell" data-execution_count="6">
+<div id="71a22438" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> get_distance_calculator, load_aligned_seqs</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>aln <span class="op">=</span> load_aligned_seqs(<span class="st">"data/primate_brca1.fasta"</span>, moltype<span class="op">=</span><span class="st">"dna"</span>)</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>dist_calc <span class="op">=</span> get_distance_calculator(<span class="st">"tn93"</span>, alignment<span class="op">=</span>aln)</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>dist_calc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>&lt;cogent3.evolve.fast_distance.TN93Pair at 0x74f7a4483a10&gt;</code></pre>
+<pre><code>&lt;cogent3.evolve.fast_distance.TN93Pair at 0x7923d5f04ad0&gt;</code></pre>
 </div>
 </div>
-<div id="39a94cbf" class="cell" data-execution_count="7">
+<div id="fa7c9e12" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>dist_calc.run(show_progress<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>dists <span class="op">=</span> dist_calc.get_pairwise_distances()</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>dists</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1488,7 +1488,7 @@ Note
 </div>
 </div>
 <p>The distance calculation object can provide more information, for instance, the standard errors.</p>
-<div id="7d23e700" class="cell" data-execution_count="8">
+<div id="32fa676a" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>dist_calc.stderr</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 
@@ -1538,7 +1538,7 @@ Note
 <h2 class="anchored" data-anchor-id="likelihood-based-pairwise-distance-estimation">Likelihood based pairwise distance estimation</h2>
 <p>The standard <code>cogent3</code> likelihood function can also be used to estimate distances. Because these require numerical optimisation they can be significantly slower than the fast estimation approach above.</p>
 <p>The following will use the F81 nucleotide substitution model and perform numerical optimisation.</p>
-<div id="a25a1270" class="cell" data-execution_count="9">
+<div id="f1e98bf4" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> get_model, load_aligned_seqs</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3.evolve <span class="im">import</span> distance</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1590,7 +1590,7 @@ Note
 <section id="get-the-names-of-sequences-with-max-pairwise-distance" class="level1">
 <h1>Get the names of sequences with max pairwise distance</h1>
 <p>Given a <code>DistanceMatrix</code> object, finding the sequences that have the maximum pairwise distance is achieved through the <code>max_pair</code> method.</p>
-<div id="d0b54ba5" class="cell" data-execution_count="10">
+<div id="eb137394" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> load_aligned_seqs</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>aln <span class="op">=</span> load_aligned_seqs(<span class="st">"data/primate_brca1.fasta"</span>, moltype<span class="op">=</span><span class="st">"dna"</span>)</span>
@@ -1601,7 +1601,7 @@ Note
 </div>
 </div>
 <p>To find the maximum distance, index the <code>DistanceMatrix</code> with the result of <code>max_pair</code>.</p>
-<div id="64e05d01" class="cell" data-execution_count="11">
+<div id="2931bd0e" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>dists[dists.max_pair()]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <pre><code>np.float64(0.21548371016979218)</code></pre>
@@ -1624,7 +1624,7 @@ Note
 <p>As the distance between a sequence and itself is zero, and this is not informative, <code>min_pair</code> will return the smallest distance not on the diagonal.</p>
 </div>
 </div>
-<div id="41329919" class="cell" data-execution_count="12">
+<div id="8550d1e1" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cogent3 <span class="im">import</span> load_aligned_seqs</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>aln <span class="op">=</span> load_aligned_seqs(<span class="st">"data/primate_brca1.fasta"</span>, moltype<span class="op">=</span><span class="st">"dna"</span>)</span>
@@ -1635,7 +1635,7 @@ Note
 </div>
 </div>
 <p>To find the minimum distance, index the <code>DistanceMatrix</code> with the result of <code>min_pair</code>.</p>
-<div id="3a1fd372" class="cell" data-execution_count="13">
+<div id="2072848c" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>dists[dists.min_pair()]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <pre><code>np.float64(0.005354191176593304)</code></pre>

@@ -1183,7 +1183,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>,</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    moltype,</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    label_to_name<span class="op">=</span><span class="va">None</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    info<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    metadata<span class="op">=</span><span class="va">None</span>,</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    source<span class="op">=</span><span class="va">None</span>,</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    annotation_db<span class="op">=</span><span class="va">None</span>,</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    offset<span class="op">=</span><span class="va">None</span>,</span>
@@ -1231,15 +1231,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td><code>None</code></td>
 </tr>
 <tr class="even">
-<td>info</td>
-<td>dict[str, Any] | None</td>
-<td>a dict from which to make an info object</td>
+<td>metadata</td>
+<td>Mapping[str, Any] | None</td>
+<td>values for the collection’s metadata. A plain mapping is copied, a MetaData is passed to the collection as it is</td>
 <td><code>None</code></td>
 </tr>
 <tr class="odd">
 <td>source</td>
 <td>PathType | None</td>
-<td>origins of this data, defaults to ‘unknown’. Converted to a string and added to info[“source”].</td>
+<td>origins of this data. Converted to a string and stored as metadata[“source”], replacing any source in metadata.</td>
 <td><code>None</code></td>
 </tr>
 <tr class="even">

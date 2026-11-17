@@ -1175,6 +1175,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#cogent3.core.alignment.SequenceCollection.add_seqs" id="toc-cogent3.core.alignment.SequenceCollection.add_seqs" class="nav-link" data-scroll-target="#cogent3.core.alignment.SequenceCollection.add_seqs">add_seqs</a>
   <ul class="collapse">
   <li><a href="#parameters-1" id="toc-parameters-1" class="nav-link" data-scroll-target="#parameters-1">Parameters</a></li>
+  <li><a href="#raises" id="toc-raises" class="nav-link" data-scroll-target="#raises">Raises</a></li>
   </ul></li>
   <li><a href="#cogent3.core.alignment.SequenceCollection.apply_pssm" id="toc-cogent3.core.alignment.SequenceCollection.apply_pssm" class="nav-link" data-scroll-target="#cogent3.core.alignment.SequenceCollection.apply_pssm">apply_pssm</a>
   <ul class="collapse">
@@ -1282,6 +1283,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#returns-6" id="toc-returns-6" class="nav-link" data-scroll-target="#returns-6">Returns</a></li>
   <li><a href="#notes-14" id="toc-notes-14" class="nav-link" data-scroll-target="#notes-14">Notes</a></li>
   </ul></li>
+  <li><a href="#cogent3.core.alignment.SequenceCollection.metadata_to_save" id="toc-cogent3.core.alignment.SequenceCollection.metadata_to_save" class="nav-link" data-scroll-target="#cogent3.core.alignment.SequenceCollection.metadata_to_save">metadata_to_save</a></li>
   <li><a href="#cogent3.core.alignment.SequenceCollection.pad_seqs" id="toc-cogent3.core.alignment.SequenceCollection.pad_seqs" class="nav-link" data-scroll-target="#cogent3.core.alignment.SequenceCollection.pad_seqs">pad_seqs</a>
   <ul class="collapse">
   <li><a href="#parameters-21" id="toc-parameters-21" class="nav-link" data-scroll-target="#parameters-21">Parameters</a></li>
@@ -1294,7 +1296,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#cogent3.core.alignment.SequenceCollection.renamed_seqs" id="toc-cogent3.core.alignment.SequenceCollection.renamed_seqs" class="nav-link" data-scroll-target="#cogent3.core.alignment.SequenceCollection.renamed_seqs">renamed_seqs</a>
   <ul class="collapse">
   <li><a href="#parameters-23" id="toc-parameters-23" class="nav-link" data-scroll-target="#parameters-23">Parameters</a></li>
-  <li><a href="#raises" id="toc-raises" class="nav-link" data-scroll-target="#raises">Raises</a></li>
+  <li><a href="#raises-1" id="toc-raises-1" class="nav-link" data-scroll-target="#raises-1">Raises</a></li>
   <li><a href="#notes-15" id="toc-notes-15" class="nav-link" data-scroll-target="#notes-15">Notes</a></li>
   </ul></li>
   <li><a href="#cogent3.core.alignment.SequenceCollection.replace_annotation_db" id="toc-cogent3.core.alignment.SequenceCollection.replace_annotation_db" class="nav-link" data-scroll-target="#cogent3.core.alignment.SequenceCollection.replace_annotation_db">replace_annotation_db</a>
@@ -1370,12 +1372,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection(</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    seqs_data,</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    moltype,</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    info<span class="op">=</span><span class="va">None</span>,</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    source<span class="op">=</span><span class="va">None</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    annotation_db<span class="op">=</span><span class="va">None</span>,</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    name_map<span class="op">=</span><span class="va">None</span>,</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    is_reversed<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    metadata<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    annotation_db<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    name_map<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    is_reversed<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>A container of unaligned sequences.</p>
 <section id="notes" class="level2 doc-section doc-section-notes">
 <h2 class="doc-section doc-section-notes anchored" data-anchor-id="notes">Notes</h2>
@@ -1394,6 +1395,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td><a href="#cogent3.core.alignment.SequenceCollection.annotation_db">annotation_db</a></td>
 <td>the annotation database for the collection</td>
+</tr>
+<tr class="even">
+<td><a href="#cogent3.core.alignment.SequenceCollection.info">info</a></td>
+<td>Deprecated alias of metadata.</td>
+</tr>
+<tr class="odd">
+<td><a href="#cogent3.core.alignment.SequenceCollection.metadata">metadata</a></td>
+<td>The collection’s metadata, a mutable mapping.</td>
 </tr>
 <tr class="even">
 <td><a href="#cogent3.core.alignment.SequenceCollection.modified">modified</a></td>
@@ -1416,6 +1425,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>iterable of sequences in the collection</td>
 </tr>
 <tr class="odd">
+<td><a href="#cogent3.core.alignment.SequenceCollection.source">source</a></td>
+<td>Where the data came from, <code>metadata["source"]</code>, or None if absent.</td>
+</tr>
+<tr class="even">
 <td><a href="#cogent3.core.alignment.SequenceCollection.storage">storage</a></td>
 <td>the unaligned sequence storage instance of the collection</td>
 </tr>
@@ -1478,7 +1491,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td><a href="#cogent3.core.alignment.SequenceCollection.drop_duplicated_seqs">drop_duplicated_seqs</a></td>
-<td>returns self without duplicated sequences</td>
+<td>returns a copy of self without duplicated sequences</td>
 </tr>
 <tr class="odd">
 <td><a href="#cogent3.core.alignment.SequenceCollection.duplicated_seqs">duplicated_seqs</a></td>
@@ -1545,82 +1558,86 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>create a feature on named sequence, or on the collection itself</td>
 </tr>
 <tr class="odd">
+<td><a href="#cogent3.core.alignment.SequenceCollection.metadata_to_save">metadata_to_save</a></td>
+<td>Return the metadata that writing this collection saves.</td>
+</tr>
+<tr class="even">
 <td><a href="#cogent3.core.alignment.SequenceCollection.pad_seqs">pad_seqs</a></td>
 <td>Returns copy in which sequences are padded with the gap character to same length.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="#cogent3.core.alignment.SequenceCollection.probs_per_seq">probs_per_seq</a></td>
 <td>return frequency array of motifs per sequence</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="#cogent3.core.alignment.SequenceCollection.rc">rc</a></td>
 <td>Returns the reverse complement of all sequences in the collection.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="#cogent3.core.alignment.SequenceCollection.renamed_seqs">renamed_seqs</a></td>
 <td>Returns new collection with renamed sequences.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="#cogent3.core.alignment.SequenceCollection.replace_annotation_db">replace_annotation_db</a></td>
 <td>public interface to assigning the annotation_db</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="#cogent3.core.alignment.SequenceCollection.reverse_complement">reverse_complement</a></td>
 <td>Returns the reverse complement of all sequences in the collection.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="#cogent3.core.alignment.SequenceCollection.set_repr_policy">set_repr_policy</a></td>
 <td>specify policy for repr(self)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="#cogent3.core.alignment.SequenceCollection.strand_symmetry">strand_symmetry</a></td>
 <td>returns dict of strand symmetry test results per seq</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="#cogent3.core.alignment.SequenceCollection.take_seqs">take_seqs</a></td>
 <td>Returns new collection containing only specified seqs.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="#cogent3.core.alignment.SequenceCollection.take_seqs_if">take_seqs_if</a></td>
 <td>Returns new collection containing seqs where f(seq) is True.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="#cogent3.core.alignment.SequenceCollection.to_dict">to_dict</a></td>
 <td>Return a dictionary of sequences.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="#cogent3.core.alignment.SequenceCollection.to_dna">to_dna</a></td>
 <td>returns copy of self as a collection of DNA moltype seqs</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="#cogent3.core.alignment.SequenceCollection.to_fasta">to_fasta</a></td>
 <td>Return collection in Fasta format.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="#cogent3.core.alignment.SequenceCollection.to_html">to_html</a></td>
 <td>returns html with embedded styles for sequence colouring</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="#cogent3.core.alignment.SequenceCollection.to_json">to_json</a></td>
 <td>returns json formatted string</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="#cogent3.core.alignment.SequenceCollection.to_moltype">to_moltype</a></td>
 <td>returns copy of self with changed moltype</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="#cogent3.core.alignment.SequenceCollection.to_rich_dict">to_rich_dict</a></td>
 <td>returns a json serialisable dict</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="#cogent3.core.alignment.SequenceCollection.to_rna">to_rna</a></td>
 <td>returns copy of self as a collection of RNA moltype seqs</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="#cogent3.core.alignment.SequenceCollection.trim_stop_codons">trim_stop_codons</a></td>
 <td>Removes any terminal stop codons from the sequences</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="#cogent3.core.alignment.SequenceCollection.write">write</a></td>
 <td>Write the sequences to a file, preserving order of sequences.</td>
 </tr>
@@ -1717,16 +1734,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="cogent3.core.alignment.SequenceCollection.add_seqs" class="level3">
 <h3 class="anchored" data-anchor-id="cogent3.core.alignment.SequenceCollection.add_seqs">add_seqs</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.add_seqs(seqs, <span class="op">**</span>kwargs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.add_seqs(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    seqs,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    force_unique_keys<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    with_metadata<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    as_displayed<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Returns new collection with additional sequences.</p>
 <section id="parameters-1" class="level4 doc-section doc-section-parameters">
 <h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-1">Parameters</h4>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 9%">
-<col style="width: 55%">
-<col style="width: 20%">
-<col style="width: 13%">
+<col style="width: 6%">
+<col style="width: 17%">
+<col style="width: 72%">
+<col style="width: 4%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1739,9 +1762,61 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td>seqs</td>
-<td>dict[str, str | bytes | NumpyIntArrayType]</td>
-<td>sequences to add</td>
+<td>Mapping[str, str | bytes | NumpyIntArrayType]</td>
+<td>{name: sequence, …} where a name is a str and a sequence is a str, bytes or a numpy array of alphabet indices with the collection’s dtype</td>
 <td><em>required</em></td>
+</tr>
+<tr class="even">
+<td>force_unique_keys</td>
+<td>bool</td>
+<td>if True, raises ValueError if any name already exists in the collection or its storage. If False, existing sequences with those names are overwritten.</td>
+<td><code>True</code></td>
+</tr>
+<tr class="odd">
+<td>with_metadata</td>
+<td>bool</td>
+<td>if False, the result has no metadata</td>
+<td><code>True</code></td>
+</tr>
+<tr class="even">
+<td>as_displayed</td>
+<td>bool</td>
+<td>only affects a reversed collection. If True, the new sequences read as given, in the orientation of the existing ones. If False, they are stored as given and so read reversed (reverse complemented for DNA and RNA).</td>
+<td><code>True</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="raises" class="level4 doc-section doc-section-raises">
+<h4 class="doc-section doc-section-raises anchored" data-anchor-id="raises">Raises</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 3%">
+<col style="width: 7%">
+<col style="width: 88%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>TypeError</td>
+<td>if seqs is not a mapping, a name is not a str, a sequence is not a str, bytes or numpy array, or an array’s dtype differs from the collection’s</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>ValueError</td>
+<td>if a name already exists and force_unique_keys is True, an array is not 1-dimensional, the collection is a sliced alignment, or the sequences are not the same length as an alignment</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>AlphabetError</td>
+<td>if a sequence contains characters or indices invalid for the collection’s alphabet</td>
 </tr>
 </tbody>
 </table>
@@ -2078,7 +2153,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="cogent3.core.alignment.SequenceCollection.degap" class="level3">
 <h3 class="anchored" data-anchor-id="cogent3.core.alignment.SequenceCollection.degap">degap</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.degap(storage_backend<span class="op">=</span><span class="va">None</span>, <span class="op">**</span>kwargs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.degap(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    storage_backend<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    with_metadata<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">**</span>kwargs,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>returns collection sequences without gaps or missing characters.</p>
 <section id="parameters-7" class="level4 doc-section doc-section-parameters">
 <h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-7">Parameters</h4>
@@ -2105,6 +2185,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td><code>None</code></td>
 </tr>
 <tr class="even">
+<td>with_metadata</td>
+<td>bool</td>
+<td>if False, the result has no metadata</td>
+<td><code>True</code></td>
+</tr>
+<tr class="odd">
 <td>kwargs</td>
 <td>Any</td>
 <td>keyword arguments for the storage driver</td>
@@ -2305,7 +2391,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="cogent3.core.alignment.SequenceCollection.drop_duplicated_seqs" class="level3">
 <h3 class="anchored" data-anchor-id="cogent3.core.alignment.SequenceCollection.drop_duplicated_seqs">drop_duplicated_seqs</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.drop_duplicated_seqs()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>returns self without duplicated sequences</p>
+<p>returns a copy of self without duplicated sequences</p>
 <section id="notes-7" class="level4 doc-section doc-section-notes">
 <h4 class="doc-section doc-section-notes anchored" data-anchor-id="notes-7">Notes</h4>
 <p>Retains the first sequence of each duplicte group.</p>
@@ -2738,8 +2824,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    incomplete_ok<span class="op">=</span><span class="va">False</span>,</span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    include_stop<span class="op">=</span><span class="va">False</span>,</span>
 <span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    trim_stop<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">**</span>kwargs,</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>,</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    with_metadata<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">**</span>kwargs,</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>translate sequences from nucleic acid to protein</p>
 <section id="parameters-17" class="level4 doc-section doc-section-parameters">
 <h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-17">Parameters</h4>
@@ -2784,6 +2872,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td><code>True</code></td>
 </tr>
 <tr class="odd">
+<td>with_metadata</td>
+<td>bool</td>
+<td>if False, the result has no metadata</td>
+<td><code>True</code></td>
+</tr>
+<tr class="even">
 <td>kwargs</td>
 <td>Any</td>
 <td>related to construction of the resulting object</td>
@@ -2956,17 +3050,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>To get a feature AND add it to annotation_db, use add_feature().</p>
 </section>
 </section>
+<section id="cogent3.core.alignment.SequenceCollection.metadata_to_save" class="level3">
+<h3 class="anchored" data-anchor-id="cogent3.core.alignment.SequenceCollection.metadata_to_save">metadata_to_save</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.metadata_to_save()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Return the metadata that writing this collection saves.</p>
+<p>This is <code>metadata.to_dict()</code>, except when the collection is an unchanged copy of its storage and its source names the storage’s file. Then the saved source is the one that file records, or the file itself if it records none, so the source always names the original data. A path-like source is saved as a string.</p>
+</section>
 <section id="cogent3.core.alignment.SequenceCollection.pad_seqs" class="level3">
 <h3 class="anchored" data-anchor-id="cogent3.core.alignment.SequenceCollection.pad_seqs">pad_seqs</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.pad_seqs(pad_length<span class="op">=</span><span class="va">None</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.pad_seqs(</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    pad_length<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>,</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    with_metadata<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Returns copy in which sequences are padded with the gap character to same length.</p>
 <section id="parameters-21" class="level4 doc-section doc-section-parameters">
 <h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-21">Parameters</h4>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 7%">
+<col style="width: 9%">
 <col style="width: 8%">
-<col style="width: 77%">
+<col style="width: 75%">
 <col style="width: 6%">
 </colgroup>
 <thead>
@@ -2984,19 +3088,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>Length all sequences are to be padded to. Will pad to max sequence length if pad_length is None or less than max length.</td>
 <td><code>None</code></td>
 </tr>
+<tr class="even">
+<td>with_metadata</td>
+<td>bool</td>
+<td>if False, the result has no metadata</td>
+<td><code>True</code></td>
+</tr>
 </tbody>
 </table>
 </section>
 </section>
 <section id="cogent3.core.alignment.SequenceCollection.probs_per_seq" class="level3">
 <h3 class="anchored" data-anchor-id="cogent3.core.alignment.SequenceCollection.probs_per_seq">probs_per_seq</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.probs_per_seq(</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    motif_length<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    include_ambiguity<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    allow_gap<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    exclude_unobserved<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    warn<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.probs_per_seq(</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    motif_length<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    include_ambiguity<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    allow_gap<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    exclude_unobserved<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    warn<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>return frequency array of motifs per sequence</p>
 <section id="parameters-22" class="level4 doc-section doc-section-parameters">
 <h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-22">Parameters</h4>
@@ -3052,12 +3162,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="cogent3.core.alignment.SequenceCollection.rc" class="level3">
 <h3 class="anchored" data-anchor-id="cogent3.core.alignment.SequenceCollection.rc">rc</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.rc()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.rc()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Returns the reverse complement of all sequences in the collection. A synonym for reverse_complement.</p>
+<p>Raises MolTypeError if the moltype is not DNA or RNA.</p>
 </section>
 <section id="cogent3.core.alignment.SequenceCollection.renamed_seqs" class="level3">
 <h3 class="anchored" data-anchor-id="cogent3.core.alignment.SequenceCollection.renamed_seqs">renamed_seqs</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.renamed_seqs(renamer)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.renamed_seqs(renamer)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Returns new collection with renamed sequences.</p>
 <section id="parameters-23" class="level4 doc-section doc-section-parameters">
 <h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-23">Parameters</h4>
@@ -3086,8 +3197,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 </section>
-<section id="raises" class="level4 doc-section doc-section-raises">
-<h4 class="doc-section doc-section-raises anchored" data-anchor-id="raises">Raises</h4>
+<section id="raises-1" class="level4 doc-section doc-section-raises">
+<h4 class="doc-section doc-section-raises anchored" data-anchor-id="raises-1">Raises</h4>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 11%">
@@ -3117,7 +3228,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="cogent3.core.alignment.SequenceCollection.replace_annotation_db" class="level3">
 <h3 class="anchored" data-anchor-id="cogent3.core.alignment.SequenceCollection.replace_annotation_db">replace_annotation_db</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.replace_annotation_db(value, check<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.replace_annotation_db(value, check<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>public interface to assigning the annotation_db</p>
 <section id="parameters-24" class="level4 doc-section doc-section-parameters">
 <h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-24">Parameters</h4>
@@ -3159,17 +3270,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="cogent3.core.alignment.SequenceCollection.reverse_complement" class="level3">
 <h3 class="anchored" data-anchor-id="cogent3.core.alignment.SequenceCollection.reverse_complement">reverse_complement</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.reverse_complement()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.reverse_complement()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Returns the reverse complement of all sequences in the collection. A synonym for rc.</p>
 </section>
 <section id="cogent3.core.alignment.SequenceCollection.set_repr_policy" class="level3">
 <h3 class="anchored" data-anchor-id="cogent3.core.alignment.SequenceCollection.set_repr_policy">set_repr_policy</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.set_repr_policy(</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    num_seqs<span class="op">=</span><span class="va">None</span>,</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    num_pos<span class="op">=</span><span class="va">None</span>,</span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>    ref_name<span class="op">=</span><span class="va">None</span>,</span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>    wrap<span class="op">=</span><span class="va">None</span>,</span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.set_repr_policy(</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>    num_seqs<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>    num_pos<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    ref_name<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>    wrap<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>specify policy for repr(self)</p>
 <section id="parameters-25" class="level4 doc-section doc-section-parameters">
 <h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-25">Parameters</h4>
@@ -3223,17 +3334,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="cogent3.core.alignment.SequenceCollection.strand_symmetry" class="level3">
 <h3 class="anchored" data-anchor-id="cogent3.core.alignment.SequenceCollection.strand_symmetry">strand_symmetry</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.strand_symmetry(motif_length<span class="op">=</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.strand_symmetry(motif_length<span class="op">=</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>returns dict of strand symmetry test results per seq</p>
 </section>
 <section id="cogent3.core.alignment.SequenceCollection.take_seqs" class="level3">
 <h3 class="anchored" data-anchor-id="cogent3.core.alignment.SequenceCollection.take_seqs">take_seqs</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.take_seqs(</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>    names,</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    negate<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>    copy_annotations<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">**</span>kwargs,</span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.take_seqs(</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    names,</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    negate<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>    copy_annotations<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">**</span>kwargs,</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Returns new collection containing only specified seqs.</p>
 <section id="parameters-26" class="level4 doc-section doc-section-parameters">
 <h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-26">Parameters</h4>
@@ -3283,7 +3394,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="cogent3.core.alignment.SequenceCollection.take_seqs_if" class="level3">
 <h3 class="anchored" data-anchor-id="cogent3.core.alignment.SequenceCollection.take_seqs_if">take_seqs_if</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.take_seqs_if(f, negate<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.take_seqs_if(f, negate<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Returns new collection containing seqs where f(seq) is True.</p>
 <section id="parameters-27" class="level4 doc-section doc-section-parameters">
 <h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-27">Parameters</h4>
@@ -3325,7 +3436,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="cogent3.core.alignment.SequenceCollection.to_dict" class="level3">
 <h3 class="anchored" data-anchor-id="cogent3.core.alignment.SequenceCollection.to_dict">to_dict</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.to_dict(as_array<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.to_dict(as_array<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Return a dictionary of sequences.</p>
 <section id="parameters-28" class="level4 doc-section doc-section-parameters">
 <h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-28">Parameters</h4>
@@ -3357,12 +3468,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="cogent3.core.alignment.SequenceCollection.to_dna" class="level3">
 <h3 class="anchored" data-anchor-id="cogent3.core.alignment.SequenceCollection.to_dna">to_dna</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.to_dna()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.to_dna(with_metadata<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>returns copy of self as a collection of DNA moltype seqs</p>
 </section>
 <section id="cogent3.core.alignment.SequenceCollection.to_fasta" class="level3">
 <h3 class="anchored" data-anchor-id="cogent3.core.alignment.SequenceCollection.to_fasta">to_fasta</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.to_fasta(block_size<span class="op">=</span><span class="dv">60</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.to_fasta(block_size<span class="op">=</span><span class="dv">60</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Return collection in Fasta format.</p>
 <section id="parameters-29" class="level4 doc-section doc-section-parameters">
 <h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-29">Parameters</h4>
@@ -3413,15 +3524,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="cogent3.core.alignment.SequenceCollection.to_html" class="level3">
 <h3 class="anchored" data-anchor-id="cogent3.core.alignment.SequenceCollection.to_html">to_html</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.to_html(</span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>    name_order<span class="op">=</span><span class="va">None</span>,</span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>    wrap<span class="op">=</span><span class="dv">60</span>,</span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>    limit<span class="op">=</span><span class="va">None</span>,</span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>    colors<span class="op">=</span><span class="va">None</span>,</span>
-<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>    font_size<span class="op">=</span><span class="dv">12</span>,</span>
-<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>    font_family<span class="op">=</span><span class="st">'Lucida Console'</span>,</span>
-<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">**</span>kwargs,</span>
-<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.to_html(</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    name_order<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>    wrap<span class="op">=</span><span class="dv">60</span>,</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>    limit<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>    colors<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>    font_size<span class="op">=</span><span class="dv">12</span>,</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>    font_family<span class="op">=</span><span class="st">'Lucida Console'</span>,</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">**</span>kwargs,</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>returns html with embedded styles for sequence colouring</p>
 <section id="parameters-30" class="level4 doc-section doc-section-parameters">
 <h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-30">Parameters</h4>
@@ -3494,21 +3605,21 @@ HTML(seq_col.to_html())</code></pre>
 </section>
 <section id="cogent3.core.alignment.SequenceCollection.to_json" class="level3">
 <h3 class="anchored" data-anchor-id="cogent3.core.alignment.SequenceCollection.to_json">to_json</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.to_json()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.to_json()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>returns json formatted string</p>
 </section>
 <section id="cogent3.core.alignment.SequenceCollection.to_moltype" class="level3">
 <h3 class="anchored" data-anchor-id="cogent3.core.alignment.SequenceCollection.to_moltype">to_moltype</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.to_moltype(moltype)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.to_moltype(moltype, <span class="op">*</span>, with_metadata<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>returns copy of self with changed moltype</p>
 <section id="parameters-31" class="level4 doc-section doc-section-parameters">
 <h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-31">Parameters</h4>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 11%">
-<col style="width: 13%">
-<col style="width: 59%">
-<col style="width: 15%">
+<col style="width: 18%">
+<col style="width: 12%">
+<col style="width: 54%">
+<col style="width: 14%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -3525,6 +3636,12 @@ HTML(seq_col.to_html())</code></pre>
 <td>name of the new moltype, e.g, ‘dna’, ‘rna’.</td>
 <td><em>required</em></td>
 </tr>
+<tr class="even">
+<td>with_metadata</td>
+<td>bool</td>
+<td>if False, the result has no metadata</td>
+<td><code>True</code></td>
+</tr>
 </tbody>
 </table>
 </section>
@@ -3535,7 +3652,7 @@ HTML(seq_col.to_html())</code></pre>
 </section>
 <section id="cogent3.core.alignment.SequenceCollection.to_rich_dict" class="level3">
 <h3 class="anchored" data-anchor-id="cogent3.core.alignment.SequenceCollection.to_rich_dict">to_rich_dict</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.to_rich_dict()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.to_rich_dict()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>returns a json serialisable dict</p>
 <section id="notes-20" class="level4 doc-section doc-section-notes">
 <h4 class="doc-section doc-section-notes anchored" data-anchor-id="notes-20">Notes</h4>
@@ -3544,20 +3661,26 @@ HTML(seq_col.to_html())</code></pre>
 </section>
 <section id="cogent3.core.alignment.SequenceCollection.to_rna" class="level3">
 <h3 class="anchored" data-anchor-id="cogent3.core.alignment.SequenceCollection.to_rna">to_rna</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.to_rna()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.to_rna(with_metadata<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>returns copy of self as a collection of RNA moltype seqs</p>
 </section>
 <section id="cogent3.core.alignment.SequenceCollection.trim_stop_codons" class="level3">
 <h3 class="anchored" data-anchor-id="cogent3.core.alignment.SequenceCollection.trim_stop_codons">trim_stop_codons</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.trim_stop_codons(gc<span class="op">=</span><span class="dv">1</span>, strict<span class="op">=</span><span class="va">False</span>, <span class="op">**</span>kwargs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.trim_stop_codons(</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>    gc<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>    strict<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>,</span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>    with_metadata<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">**</span>kwargs,</span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Removes any terminal stop codons from the sequences</p>
 <section id="parameters-32" class="level4 doc-section doc-section-parameters">
 <h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-32">Parameters</h4>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 5%">
-<col style="width: 13%">
-<col style="width: 73%">
+<col style="width: 10%">
+<col style="width: 12%">
+<col style="width: 69%">
 <col style="width: 7%">
 </colgroup>
 <thead>
@@ -3581,17 +3704,35 @@ HTML(seq_col.to_html())</code></pre>
 <td>If True, raises an exception if a seq length not divisible by 3</td>
 <td><code>False</code></td>
 </tr>
+<tr class="odd">
+<td>with_metadata</td>
+<td>bool</td>
+<td>if False, the result has no metadata</td>
+<td><code>True</code></td>
+</tr>
 </tbody>
 </table>
 </section>
 </section>
 <section id="cogent3.core.alignment.SequenceCollection.write" class="level3">
 <h3 class="anchored" data-anchor-id="cogent3.core.alignment.SequenceCollection.write">write</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.write(filename, format_name<span class="op">=</span><span class="va">None</span>, <span class="op">**</span>kwargs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>core.alignment.SequenceCollection.write(</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>    filename,</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>    format_name<span class="op">=</span><span class="va">None</span>,</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">*</span>,</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>    warn_unsaved_metadata<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">**</span>kwargs,</span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Write the sequences to a file, preserving order of sequences.</p>
 <section id="parameters-33" class="level4 doc-section doc-section-parameters">
 <h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-33">Parameters</h4>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 9%">
+<col style="width: 63%">
+<col style="width: 9%">
+</colgroup>
 <thead>
 <tr class="header">
 <th>Name</th>
@@ -3612,6 +3753,12 @@ HTML(seq_col.to_html())</code></pre>
 <td>str | None</td>
 <td>format of the sequence file</td>
 <td><code>None</code></td>
+</tr>
+<tr class="odd">
+<td>warn_unsaved_metadata</td>
+<td>bool</td>
+<td>if True, emit a UserWarning when the format cannot save the collection’s metadata</td>
+<td><code>False</code></td>
 </tr>
 </tbody>
 </table>
