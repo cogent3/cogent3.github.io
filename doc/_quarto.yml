@@ -7,11 +7,12 @@ project:
   type: website
   output-dir: _site
   # build.sh copies the cogent3 doc tree into doc/ (gitignored, regenerated
-  # every build) and leaves the doc/cogent3 submodule alone, so the render list
-  # names what to build rather than excluding what not to.
+  # every build) and leaves the doc/cogent3 submodule alone. Patterns without a
+  # leading slash match at any depth, so the submodule must be excluded.
   render:
     - "*.qmd"
     - "doc/**/*.qmd"
+    - "!/cogent3/"
   # Code cells run with the working directory set to this project root, which is
   # what lets the cogent3 pages say "data/brca1-bats.fasta" from any depth.
   # build.sh symlinks data -> doc/data so that resolves while the files still
